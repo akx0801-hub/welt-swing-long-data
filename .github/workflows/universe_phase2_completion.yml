@@ -1,0 +1,97 @@
+name: Welt-Swing Universe Phase2 Completion
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  complete_universe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install 'pandas>=2.2,<3' 'requests>=2.32,<3' 'beautifulsoup4>=4.12,<5' 'lxml>=5,<7' 'openpyxl>=3.1,<4'
+
+      - name: Gefrorenen 1535er Ausgangspunkt prüfen
+        run: |
+          test -f universe/research_partial_1535.csv
+          python - <<'PY'
+          import pandas as pd
+          p = 'universe/research_partial_1535.csv'
+          x = pd.read_csv(p, keep_default_na=False, dtype=str)
+          assert len(x) == 1535, len(x)
+          assert not x['WS_ID'].duplicated().any()
+          assert (x['Primary_Ticker'] == 'NA').any(), 'Ticker NA was not preserved'
+          print('BASE_1535_OK')
+          PY
+
+      - name: Alle noch fehlenden Universe-Segmente einsammeln
+        run: |
+          python scripts/build_universe_phase2_complete.py \
+            --base universe/research_partial_1535.csv \
+            --out universe/Welt-Swing-Universe-Master-Phase2-v0.3.csv \
+            --xlsx universe/Welt-Swing-Universe-Master-Phase2-v0.3.xlsx \
+            --manifest universe/phase2_completion_manifest_v0.3.json \
+            --audit universe/source_audit_phase2_v0.3.csv \
+            --snapshots-dir universe/source_snapshots_v0.3
+
+      - name: Ergebnis-Gates prüfen
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('universe/phase2_completion_manifest_v0.3.json')
+          x = json.loads(p.read_text(encoding='utf-8'))
+          print('STATUS', x['status'])
+          print('ROWS', x['deduplicated_rows'])
+          print('SEGMENTS', len(x['segments_present']), '/', len(x['segments_expected']))
+          print('COUNTS', x['segment_counts'])
+          if x['status'] != 'COMPLETE_SOURCE_SUPERSET':
+              raise SystemExit('Universe source-superset is not complete; inspect source audit.')
+          if x['p0_run'] or x['productive_trading_authority'] or x['alpha_vantage_allowed']:
+              raise SystemExit('Governance invariant violated.')
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add universe/Welt-Swing-Universe-Master-Phase2-v0.3.csv \
+                  universe/Welt-Swing-Universe-Master-Phase2-v0.3.xlsx \
+                  universe/phase2_completion_manifest_v0.3.json \
+                  universe/source_audit_phase2_v0.3.csv \
+                  universe/source_snapshots_v0.3/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Complete Welt-Swing Phase2 source universe"
+            git push
+          fi
+
+      - name: Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-universe-phase2-completion-${{ github.run_number }}
+          path: |
+            universe/Welt-Swing-Universe-Master-Phase2-v0.3.csv
+            universe/Welt-Swing-Universe-Master-Phase2-v0.3.xlsx
+            universe/phase2_completion_manifest_v0.3.json
+            universe/source_audit_phase2_v0.3.csv
+            universe/source_snapshots_v0.3/
+          retention-days: 14
