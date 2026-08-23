@@ -1,0 +1,148 @@
+name: Welt-Swing Identity Provider Remediation v0.2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install 'openpyxl>=3.1,<4'
+
+      - name: Schutzregel - kein Preis-/History-Lauf
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          p = Path('scripts/identity_provider_remediation_v0_2.py')
+          tree = ast.parse(p.read_text(encoding='utf-8'))
+          forbidden = []
+
+          for node in ast.walk(tree):
+              if not isinstance(node, ast.Call):
+                  continue
+              fn = node.func
+              if isinstance(fn, ast.Attribute) and fn.attr in {'download', 'history'}:
+                  forbidden.append((fn.attr, getattr(node, 'lineno', None)))
+
+          if forbidden:
+              raise SystemExit(f'Forbidden price/history calls found: {forbidden}')
+          print('NO_PRICE_HISTORY_CALLS_OK')
+          PY
+
+      - name: Offline-Selbsttest
+        run: python scripts/identity_provider_remediation_v0_2.py --self-test
+
+      - name: v0.1 Audit-Ausgangsdaten prüfen
+        run: |
+          test -f universe/Welt-Swing-Universe-Master-Audited-v0.4.csv
+          test -f output_identity_audit/mapping_audit_v0.1.csv
+          test -f output_identity_audit/search_cache_snapshot_v0.1.jsonl
+          python - <<'PY'
+          import pandas as pd
+
+          m = pd.read_csv(
+              'universe/Welt-Swing-Universe-Master-Audited-v0.4.csv',
+              keep_default_na=False,
+              dtype=str,
+          )
+          a = pd.read_csv(
+              'output_identity_audit/mapping_audit_v0.1.csv',
+              keep_default_na=False,
+              dtype=str,
+          )
+          assert len(m) == 3664, len(m)
+          assert len(a) == 3664, len(a)
+          assert not m['WS_ID'].duplicated().any()
+          assert m['Primary_Universe_Index'].nunique() == 14
+          print('AUDIT_V01_INPUTS_OK')
+          PY
+
+      - name: Remediation-Search-Cache wiederherstellen
+        uses: actions/cache@v4
+        with:
+          path: runtime_cache/identity_remediation_search_v0.2.jsonl
+          key: identity-remediation-v02-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            identity-remediation-v02-${{ runner.os }}-
+
+      - name: One-shot Remediation v0.2
+        run: |
+          python scripts/identity_provider_remediation_v0_2.py \
+            --config config/identity_provider_remediation_v0.2.json
+
+      - name: Remediation-Gates prüfen
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path('output_identity_remediation/summary_v0.2.json')
+          x = json.loads(p.read_text(encoding='utf-8'))
+
+          print('RUN_STATUS', x['run_status'])
+          print('ROWS', x['rows'])
+          print('MAPPED', x['provider_mapped'], x['provider_mapping_pct'])
+          print('UNRESOLVED', x['provider_unresolved'])
+          print('REVIEW', x['review_queue_rows'])
+          print('SAME_VENUE_DUP_REVIEW', x['same_venue_duplicate_review_rows'])
+          print('CROSS_LISTINGS_NON_BLOCKING', x['cross_listing_rows_non_blocking'])
+          print('CHANGED', x['changed_rows'])
+          print('NEW_SEARCH_QUERIES', x['new_search_queries_used'])
+
+          assert x['rows'] == 3664
+          assert x['productive_trading_authority'] is False
+          assert x['p0_run'] is False
+          assert x['alpha_vantage_allowed'] is False
+          assert x['price_run_allowed_after_this_step'] is False
+          assert x['run_status'] in {
+              'REMEDIATION_COMPLETE',
+              'REMEDIATION_COMPLETE_WITH_REVIEW_QUEUE',
+          }
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add universe/Welt-Swing-Universe-Master-Remediated-v0.5.csv \
+                  universe/Welt-Swing-Universe-Master-Remediated-v0.5.xlsx \
+                  output_identity_remediation/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Run identity provider remediation v0.2"
+            git push
+          fi
+
+      - name: Remediation-Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-identity-provider-remediation-v02-${{ github.run_number }}
+          path: |
+            universe/Welt-Swing-Universe-Master-Remediated-v0.5.csv
+            universe/Welt-Swing-Universe-Master-Remediated-v0.5.xlsx
+            output_identity_remediation/
+            runtime_cache/identity_remediation_search_v0.2.jsonl
+          retention-days: 14
