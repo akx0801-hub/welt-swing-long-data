@@ -1,0 +1,133 @@
+name: Welt-Swing Full Identity Provider Audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install 'openpyxl>=3.1,<4'
+
+      - name: Schutzregel - kein Preis-/History-Lauf
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          p = Path('scripts/full_identity_provider_audit.py')
+          tree = ast.parse(p.read_text(encoding='utf-8'))
+          forbidden = []
+
+          for node in ast.walk(tree):
+              if not isinstance(node, ast.Call):
+                  continue
+              fn = node.func
+              if isinstance(fn, ast.Attribute) and fn.attr in {'download', 'history'}:
+                  forbidden.append((fn.attr, getattr(node, 'lineno', None)))
+
+          if forbidden:
+              raise SystemExit(f'Forbidden price/history calls found: {forbidden}')
+          print('NO_PRICE_HISTORY_CALLS_OK')
+          PY
+
+      - name: Offline-Selbsttest
+        run: python scripts/full_identity_provider_audit.py --self-test
+
+      - name: Vollständigen 3664er Source-Master prüfen
+        run: |
+          test -f universe/Welt-Swing-Universe-Master-Phase2-v0.3.csv
+          test -f output_research_1535/errors.csv
+          test -f config/yahoo_symbol_overrides.csv
+          python - <<'PY'
+          import pandas as pd
+          p = 'universe/Welt-Swing-Universe-Master-Phase2-v0.3.csv'
+          x = pd.read_csv(p, keep_default_na=False, dtype=str)
+          assert len(x) == 3664, len(x)
+          assert not x['WS_ID'].duplicated().any()
+          assert x['Primary_Universe_Index'].nunique() == 14
+          print('SOURCE_MASTER_3664_14_SEGMENTS_OK')
+          PY
+
+      - name: Search-Cache wiederherstellen
+        uses: actions/cache@v4
+        with:
+          path: runtime_cache/identity_audit_search_v0.1.jsonl
+          key: identity-audit-search-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            identity-audit-search-${{ runner.os }}-
+
+      - name: Full Identity + Provider Mapping Audit
+        run: |
+          python scripts/full_identity_provider_audit.py \
+            --config config/full_identity_provider_audit_v0.1.json
+
+      - name: Audit-Gates prüfen
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('output_identity_audit/summary_v0.1.json')
+          x = json.loads(p.read_text(encoding='utf-8'))
+          print('RUN_STATUS', x['run_status'])
+          print('ROWS', x['rows'])
+          print('MAPPED', x['provider_mapped'], x['provider_mapping_pct'])
+          print('UNRESOLVED', x['provider_unresolved'])
+          print('REVIEW', x['review_queue_rows'])
+          print('SEARCH_QUERIES', x['search_queries_used_this_run'])
+          assert x['rows'] == 3664
+          assert x['identity_audit_executed_for_all_rows'] is True
+          assert x['productive_trading_authority'] is False
+          assert x['p0_run'] is False
+          assert x['alpha_vantage_allowed'] is False
+          assert x['price_run_allowed_after_this_step'] is False
+          assert x['run_status'] in {
+              'AUDIT_COMPLETE',
+              'AUDIT_COMPLETE_WITH_REVIEW_QUEUE',
+          }
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add universe/Welt-Swing-Universe-Master-Audited-v0.4.csv \
+                  universe/Welt-Swing-Universe-Master-Audited-v0.4.xlsx \
+                  output_identity_audit/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Run full identity and provider mapping audit"
+            git push
+          fi
+
+      - name: Audit-Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-full-identity-provider-audit-${{ github.run_number }}
+          path: |
+            universe/Welt-Swing-Universe-Master-Audited-v0.4.csv
+            universe/Welt-Swing-Universe-Master-Audited-v0.4.xlsx
+            output_identity_audit/
+            runtime_cache/identity_audit_search_v0.1.jsonl
+          retention-days: 14
