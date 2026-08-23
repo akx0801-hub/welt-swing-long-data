@@ -1,0 +1,32 @@
+{
+  "schema": "WELT_SWING_LONG_RESEARCH_PARTIAL_1535_V0_1",
+  "source_master": "universe/Welt-Swing-Universe-Master-v2.0.xlsx",
+  "source_master_rows": 1535,
+  "rows": 1535,
+  "selection": "All 1535 rows from the frozen current r6 seven-segment master snapshot; no price/news/liquidity/setup/quality/ranking/P0 selection.",
+  "scope": "RESEARCH_PARTIAL",
+  "universe_complete": false,
+  "scope_note": "Current source coverage is seven imported primary-index segments; this is not the final U3K and 3000 is a cap/target, not a denominator.",
+  "segments": [
+    "EU_STOXX600",
+    "CA_TSX",
+    "JP_N225",
+    "HK_HSI",
+    "CN_CSI300",
+    "IN_NIFTY50",
+    "TW_TW50"
+  ],
+  "counts": {
+    "CA_TSX": 217,
+    "CN_CSI300": 300,
+    "EU_STOXX600": 600,
+    "HK_HSI": 93,
+    "IN_NIFTY50": 50,
+    "JP_N225": 225,
+    "TW_TW50": 50
+  },
+  "research_csv_sha256": "f590eeeb60962aea5e688cde0877dc61fda37066df22e9f75748ac187cafaf3c",
+  "productive": false,
+  "p0_run": false,
+  "alpha_vantage_allowed": false
+}

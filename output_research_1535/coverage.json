@@ -1,0 +1,75 @@
+{
+  "schema": "WELT_SWING_LONG_FREE_DATA_COVERAGE_V0_1",
+  "generated_utc": "2026-08-23T20:31:19.162779+00:00",
+  "runtime_mode": "INITIAL",
+  "run_status": "PARTIAL",
+  "data_source": "YFINANCE_FREE",
+  "alpha_vantage_allowed": false,
+  "productive_trading_authority": false,
+  "universe_file": "universe/research_partial_1535.csv",
+  "universe_count": 1535,
+  "mapped_count": 1534,
+  "mapping_coverage_pct": 99.9349,
+  "ready_count": 1287,
+  "price_ready_coverage_pct": 83.8436,
+  "status_counts": {
+    "READY": 1287,
+    "DOWNLOAD_FAILED": 239,
+    "WARMUP": 4,
+    "QUARANTINE": 4,
+    "MAPPING_PENDING": 1
+  },
+  "features_rows": 1287,
+  "p0_status": "NOT_RUN_PARAMETERS_NOT_YET_PROMOTED",
+  "run_result": {
+    "mode": "INITIAL",
+    "source": "YFINANCE_FREE",
+    "productive": false,
+    "universe_count": 1535,
+    "mapped_count": 1534,
+    "unmapped_count": 1,
+    "symbol_resets": 0,
+    "rescue_attempted": 239,
+    "repair_candidates": 4,
+    "repair_attempted": 4,
+    "missing_symbols": 239,
+    "cache_counts": {
+      "price_rows": 638959,
+      "states": 1535,
+      "ready": 1287,
+      "batches": 37
+    },
+    "mapping_status_counts": {
+      "DERIVED_RULE": 907,
+      "DERIVED_RULE_NORMALIZED": 618,
+      "PROJECT_OVERRIDE": 9,
+      "MISSING_PRIMARY_TICKER": 1
+    },
+    "config": {
+      "batch_size": 50,
+      "threads": true,
+      "timeout_seconds": 15.0,
+      "initial_period": "2y",
+      "interval": "1d",
+      "overlap_calendar_days": 14,
+      "min_valid_bars": 252,
+      "ready_unique_bars": 260,
+      "stale_calendar_days": 10,
+      "max_identical_retries": 1,
+      "retry_sleep_seconds": 2.0,
+      "pause_between_batches_seconds": 1.0,
+      "repair_anomalies": true,
+      "repair_batch_size": 25,
+      "suspicious_abs_return": 0.5,
+      "zero_volume_warning_share": 0.2
+    },
+    "run_hash": "77de943a1cc951eb3cf1b7a30ee4507c4d42092ba2b22048d8ca8648bdc735cf"
+  },
+  "notes": [
+    "Universe identity remains independent of Yahoo symbol mapping.",
+    "Raw OHLCV is cached; features_latest uses split-only technical normalization.",
+    "No paid provider or API key is used.",
+    "No Alpha Vantage adapter or fallback exists.",
+    "P0 candidate filtering is intentionally not executed in this starter package."
+  ]
+}
