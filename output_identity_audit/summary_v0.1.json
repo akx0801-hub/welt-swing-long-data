@@ -1,0 +1,127 @@
+{
+  "schema": "WELT_SWING_FULL_IDENTITY_PROVIDER_AUDIT_V0_1",
+  "generated_utc": "2026-08-23T21:49:55.953470+00:00",
+  "run_status": "AUDIT_COMPLETE_WITH_REVIEW_QUEUE",
+  "source_master": "universe/Welt-Swing-Universe-Master-Phase2-v0.3.csv",
+  "source_master_sha256": "1eeb0cf79ec62b05a9162a53f0d0ca97f69e1720134ab75033518228da386409",
+  "rows": 3664,
+  "provider_mapped": 3491,
+  "provider_mapping_pct": 95.2784,
+  "provider_unresolved": 173,
+  "review_queue_rows": 286,
+  "duplicate_review_rows": 101,
+  "search_queries_used_this_run": 301,
+  "search_query_budget": 500,
+  "mapping_status_counts": {
+    "DERIVED_RULE": 1469,
+    "DERIVED_RULE_NORMALIZED": 379,
+    "PROJECT_OVERRIDE": 9,
+    "SEARCH_AMBIGUOUS": 123,
+    "SEARCH_HIGH_CONFIDENCE": 128,
+    "SEARCH_NO_QUOTES": 50,
+    "US_SOURCE_DIRECT": 1506
+  },
+  "segment_mapping": {
+    "AU_ASX200": {
+      "rows": 200,
+      "mapped": 200,
+      "mapped_pct": 100.0,
+      "review": 28
+    },
+    "BR_IBRX100": {
+      "rows": 99,
+      "mapped": 99,
+      "mapped_pct": 100.0,
+      "review": 0
+    },
+    "CA_TSX": {
+      "rows": 217,
+      "mapped": 216,
+      "mapped_pct": 99.5392,
+      "review": 4
+    },
+    "CN_CSI300": {
+      "rows": 300,
+      "mapped": 300,
+      "mapped_pct": 100.0,
+      "review": 9
+    },
+    "EU_STOXX600": {
+      "rows": 600,
+      "mapped": 468,
+      "mapped_pct": 78.0,
+      "review": 140
+    },
+    "HK_HSI": {
+      "rows": 93,
+      "mapped": 93,
+      "mapped_pct": 100.0,
+      "review": 10
+    },
+    "IN_NIFTY50": {
+      "rows": 50,
+      "mapped": 50,
+      "mapped_pct": 100.0,
+      "review": 0
+    },
+    "JP_N225": {
+      "rows": 225,
+      "mapped": 225,
+      "mapped_pct": 100.0,
+      "review": 2
+    },
+    "KR_KOSPI200": {
+      "rows": 200,
+      "mapped": 200,
+      "mapped_pct": 100.0,
+      "review": 8
+    },
+    "MX_IPC": {
+      "rows": 34,
+      "mapped": 14,
+      "mapped_pct": 41.1765,
+      "review": 20
+    },
+    "NZ_NZX50": {
+      "rows": 50,
+      "mapped": 50,
+      "mapped_pct": 100.0,
+      "review": 15
+    },
+    "TW_TW50": {
+      "rows": 50,
+      "mapped": 50,
+      "mapped_pct": 100.0,
+      "review": 0
+    },
+    "US_SP1500": {
+      "rows": 1506,
+      "mapped": 1506,
+      "mapped_pct": 100.0,
+      "review": 10
+    },
+    "ZA_TOP40": {
+      "rows": 40,
+      "mapped": 20,
+      "mapped_pct": 50.0,
+      "review": 40
+    }
+  },
+  "identity_audit_executed_for_all_rows": true,
+  "identity_fully_resolved": false,
+  "provider_mapping_complete": false,
+  "price_run_allowed_after_this_step": false,
+  "productive_trading_authority": false,
+  "p0_run": false,
+  "alpha_vantage_allowed": false,
+  "notes": [
+    "No OHLCV/history download is performed by this audit.",
+    "Existing project overrides and frozen deterministic MIC rules are reused.",
+    "Known DOWNLOAD_FAILED/MAPPING_PENDING names from the 1535 diagnostic run are targeted for Yahoo Search remediation.",
+    "New US S&P 1500 source tickers are mapped directly for Yahoo syntax; exact US primary MIC remains identity metadata pending.",
+    "Name-only JSE source identities are eligible for targeted Yahoo Search; no ticker is invented.",
+    "Ambiguous search results remain in Review_Queue and are not auto-promoted.",
+    "Possible duplicates are never auto-merged.",
+    "P0 and productive trading remain disabled."
+  ]
+}
