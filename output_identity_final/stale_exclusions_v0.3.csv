@@ -1,0 +1,2 @@
+WS_ID,Name,Reason,Action
+WS:SRC:ZA_TOP40:8096AB44770BB485,MultiChoice,DELISTED_TAKEOVER_SOURCE_STALE,Active=False; excluded from active provider denominator

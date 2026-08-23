@@ -1,0 +1,57 @@
+{
+  "schema": "WELT_SWING_IDENTITY_PROVIDER_FINAL_REMEDIATION_V0_3",
+  "generated_utc": "2026-08-23T22:26:07.399298+00:00",
+  "run_status": "FINAL_REMEDIATION_COMPLETE_WITH_REVIEW_QUEUE",
+  "master_rows": 3664,
+  "target_review_input_rows": 121,
+  "target_resolved_provider_rows": 112,
+  "target_stale_excluded_rows": 1,
+  "target_unresolved_rows": 8,
+  "active_rows": 3663,
+  "active_provider_mapped": 3655,
+  "active_provider_unresolved": 8,
+  "active_provider_mapping_pct": 99.7816,
+  "new_search_queries_used": 360,
+  "new_search_query_budget": 450,
+  "target_status_counts": {
+    "CURATED_CANDIDATE_NOT_YAHOO_VERIFIED": 8,
+    "CURATED_CANDIDATE_YAHOO_SEARCH_VERIFIED": 112,
+    "SOURCE_STALE_DELISTED_EXCLUDED": 1
+  },
+  "target_segment_counts": {
+    "EU_STOXX600": {
+      "target_rows": 97,
+      "resolved": 90,
+      "stale_excluded": 0,
+      "unresolved": 7
+    },
+    "MX_IPC": {
+      "target_rows": 6,
+      "resolved": 5,
+      "stale_excluded": 0,
+      "unresolved": 1
+    },
+    "ZA_TOP40": {
+      "target_rows": 18,
+      "resolved": 17,
+      "stale_excluded": 1,
+      "unresolved": 0
+    }
+  },
+  "price_run_candidate_coverage_ready": true,
+  "price_run_allowed_after_this_step": false,
+  "productive_trading_authority": false,
+  "p0_run": false,
+  "alpha_vantage_allowed": false,
+  "notes": [
+    "No price/history/OHLCV call is performed.",
+    "All 121 v0.2 review rows are explicitly covered by a candidate or stale-exclusion decision.",
+    "Curated candidates are normally promoted only when Yahoo Search returns the exact equity symbol.",
+    "A small PUBLIC_REFERENCE_CONFIRMED set may be promoted from independent public/issuer evidence when Yahoo Search omits the exact candidate.",
+    "Octave Stockholm SDR is represented by the documented 1:1 Nasdaq Class B underlying OCTV and is flagged as an alternate underlying mapping.",
+    "MultiChoice is marked stale/delisted rather than assigned a fabricated live provider symbol.",
+    "No canonical WS_ID is changed in this step.",
+    "Production override registry is not modified automatically.",
+    "P0 and productive trading remain disabled."
+  ]
+}
