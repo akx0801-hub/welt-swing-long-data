@@ -1,0 +1,52 @@
+{
+  "schema": "WELT_SWING_NON_READY_DIAGNOSTIC_V0_1",
+  "generated_utc": "2026-08-23T23:32:20.127707+00:00",
+  "run_status": "NON_READY_DIAGNOSTIC_COMPLETE",
+  "source_universe_count": 3663,
+  "source_ready_count": 3578,
+  "source_non_ready_count": 85,
+  "source_status_counts": {
+    "QUARANTINE": 55,
+    "WARMUP": 20,
+    "DOWNLOAD_FAILED": 9,
+    "STALE": 1
+  },
+  "diagnostic_rows": 85,
+  "classification_counts": {
+    "SUSPICIOUS_RETURN_RESEARCH_REQUIRED": 27,
+    "LIKELY_ISOLATED_INVALID_BARS_FILTERABLE": 23,
+    "ACCEPT_WARMUP_SHORT_HISTORY": 20,
+    "NO_DATA_PROVIDER_OR_SOURCE_REVIEW": 9,
+    "INVALID_BAR_QUARANTINE_REVIEW": 5,
+    "STALE_PROVIDER_OR_SOURCE_REVIEW": 1
+  },
+  "recommended_action_counts": {
+    "TARGETED_EVENT_RESEARCH_KEEP_QUARANTINE": 27,
+    "QA_POLICY_REVIEW_FOR_FILTERED_READY": 23,
+    "KEEP_WARMUP_NO_REPAIR": 20,
+    "TARGETED_SYMBOL_AND_LISTING_EVIDENCE": 9,
+    "KEEP_QUARANTINE_PENDING_BAR_ANALYSIS": 5,
+    "VERIFY_CURRENT_LISTING_OR_PROVIDER_SYMBOL": 1
+  },
+  "invalid_bar_event_rows": 65,
+  "suspicious_return_event_rows": 48,
+  "failed_or_stale_search_rows": 10,
+  "failed_or_stale_exact_equity_search_hits": 1,
+  "sqlite_price_rows_observed": 1811872,
+  "price_history_calls_performed": false,
+  "provider_search_only_for_download_failed_and_stale": true,
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "automatic_status_promotions": 0,
+  "notes": [
+    "This pass diagnoses the 85 non-READY rows only.",
+    "No yfinance price/history/download call is made.",
+    "No cache status is changed and no security is promoted to READY automatically.",
+    "WARMUP can be accepted as short-history coverage without pretending it has 260 bars.",
+    "Isolated invalid-bar cases are only flagged as candidates for a later QA-policy review.",
+    "Suspicious returns remain quarantined until corporate-action/event evidence is checked.",
+    "DOWNLOAD_FAILED and STALE rows receive Yahoo Search diagnostics only; listing/source evidence remains a separate step.",
+    "P0 remains off."
+  ]
+}
