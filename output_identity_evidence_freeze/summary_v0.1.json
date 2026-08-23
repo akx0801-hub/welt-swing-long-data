@@ -1,0 +1,33 @@
+{
+  "schema": "WELT_SWING_FINAL_8_EVIDENCE_FREEZE_V0_1",
+  "generated_utc": "2026-08-23T22:37:59.124457+00:00",
+  "run_status": "EVIDENCE_FREEZE_COMPLETE",
+  "master_rows": 3664,
+  "active_rows": 3663,
+  "active_provider_mapped": 3663,
+  "active_provider_unresolved": 0,
+  "active_provider_mapping_pct": 100.0,
+  "evidence_rows_frozen": 8,
+  "evidence_status_counts": {
+    "CORPORATE_ACTION_CORRECTION_CONFIRMED": 1,
+    "CORRECTED_CANDIDATE_AND_PROVIDER_CONFIRMED": 1,
+    "IDENTITY_AND_PROVIDER_CONFIRMED": 5,
+    "PUBLIC_MARKET_IDENTITY_AND_PROVIDER_CONVENTION_FROZEN": 1
+  },
+  "corrected_candidate_rows": 2,
+  "price_run_candidate_coverage_ready": true,
+  "price_run_allowed_after_this_step": false,
+  "productive_trading_authority": false,
+  "p0_run": false,
+  "alpha_vantage_allowed": false,
+  "notes": [
+    "No price/history/OHLCV call is performed.",
+    "Exactly the eight v0.3 review rows are frozen.",
+    "Epiroc candidate corrected from EPIR-A.ST to EPI-A.ST.",
+    "Roche candidate corrected from obsolete ROG.SW to current ROP.SW after the March 2026 corporate action.",
+    "ALFA ALFAA.MX is an explicit public-evidence provider override because Yahoo Search omitted the exact result.",
+    "No canonical WS_ID is changed.",
+    "P0 and productive trading remain disabled.",
+    "A full price run remains a separate explicit release step."
+  ]
+}
