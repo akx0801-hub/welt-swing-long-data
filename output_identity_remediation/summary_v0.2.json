@@ -1,0 +1,145 @@
+{
+  "schema": "WELT_SWING_IDENTITY_PROVIDER_REMEDIATION_V0_2",
+  "generated_utc": "2026-08-23T22:05:16.127170+00:00",
+  "run_status": "REMEDIATION_COMPLETE_WITH_REVIEW_QUEUE",
+  "rows": 3664,
+  "provider_mapped": 3543,
+  "provider_mapping_pct": 96.6976,
+  "provider_unresolved": 121,
+  "review_queue_rows": 121,
+  "same_venue_duplicate_review_rows": 0,
+  "cross_listing_rows_non_blocking": 83,
+  "changed_rows": 91,
+  "new_search_queries_used": 158,
+  "new_search_query_budget": 500,
+  "mapping_status_counts": {
+    "DERIVED_RULE": 1469,
+    "DERIVED_RULE_NORMALIZED": 379,
+    "EXPECTED_MARKET_VERIFIED_EU": 35,
+    "JSE_MULTI_SECURITY_REVIEW": 4,
+    "JSE_NO_UNIQUE_MARKET_EQUITY": 14,
+    "MARKET_RULE_VERIFIED_CA_NA": 1,
+    "MARKET_RULE_VERIFIED_MX": 15,
+    "PROJECT_OVERRIDE": 9,
+    "SEARCH_AMBIGUOUS": 60,
+    "SEARCH_HIGH_CONFIDENCE": 107,
+    "SEARCH_NO_QUOTES": 43,
+    "SECOND_PASS_REVALIDATED_JSE": 22,
+    "US_SOURCE_DIRECT": 1506
+  },
+  "segment_mapping": {
+    "AU_ASX200": {
+      "rows": 200,
+      "mapped": 200,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "BR_IBRX100": {
+      "rows": 99,
+      "mapped": 99,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "CA_TSX": {
+      "rows": 217,
+      "mapped": 217,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 1
+    },
+    "CN_CSI300": {
+      "rows": 300,
+      "mapped": 300,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "EU_STOXX600": {
+      "rows": 600,
+      "mapped": 503,
+      "mapped_pct": 83.8333,
+      "review": 97,
+      "changed": 35
+    },
+    "HK_HSI": {
+      "rows": 93,
+      "mapped": 93,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "IN_NIFTY50": {
+      "rows": 50,
+      "mapped": 50,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "JP_N225": {
+      "rows": 225,
+      "mapped": 225,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "KR_KOSPI200": {
+      "rows": 200,
+      "mapped": 200,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "MX_IPC": {
+      "rows": 34,
+      "mapped": 28,
+      "mapped_pct": 82.3529,
+      "review": 6,
+      "changed": 15
+    },
+    "NZ_NZX50": {
+      "rows": 50,
+      "mapped": 50,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "TW_TW50": {
+      "rows": 50,
+      "mapped": 50,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "US_SP1500": {
+      "rows": 1506,
+      "mapped": 1506,
+      "mapped_pct": 100.0,
+      "review": 0,
+      "changed": 0
+    },
+    "ZA_TOP40": {
+      "rows": 40,
+      "mapped": 22,
+      "mapped_pct": 55.0,
+      "review": 18,
+      "changed": 40
+    }
+  },
+  "price_run_allowed_after_this_step": false,
+  "productive_trading_authority": false,
+  "p0_run": false,
+  "alpha_vantage_allowed": false,
+  "notes": [
+    "No price/history/OHLCV call is performed.",
+    "TSX ticker NA is deterministically restored as NA.TO.",
+    "Mexico class notation is normalized only when Yahoo Search verifies the compact exact symbol or a unique expected-market candidate.",
+    "European v0.1 ambiguous results are rescored after filtering to the expected Yahoo market suffix.",
+    "All 40 JSE rows are revalidated; provisional v0.1 JSE mappings are demoted if multiple same-market securities remain possible.",
+    "Expected cross-listings are non-blocking and are not merged.",
+    "Only same-venue duplicate/share-class ambiguity remains duplicate-review blocking.",
+    "Generated provider overrides are proposals; the production override registry is not modified by this workflow.",
+    "P0 and productive trading remain disabled."
+  ]
+}
