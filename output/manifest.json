@@ -1,13 +1,13 @@
 {
   "schema": "WELT_SWING_LONG_FREE_DATA_MANIFEST_V0_1",
-  "generated_utc": "2026-08-23T17:42:45.863914+00:00",
+  "generated_utc": "2026-08-23T18:01:50.698265+00:00",
   "files": {
-    "universe/smoke_universe.csv": "a339e88976d2fd33540ccbbf5217dc3eac821d76ff144ee2cac01d5d2fd739ee",
-    "output/mapping_audit.csv": "2050af27f2b52eec4e9fe0f432f45f539f3349cb89747655d54874bf5872fec4",
-    "output/cache_status.csv": "d04a6956003aa6650b4e3880beb3631ed4f3cb5bdfd0612638f9dcfa62f89046",
-    "output/errors.csv": "c763ef213325aaaad5aa2a8a567c23807b5f962c53b0e922286ffbab9baa3175",
-    "output/batch_log_latest.csv": "cfa71b672ee7d2382b210b3335a3ddb7737720ae09f29d4fe7518ca160fa19b0",
-    "output/features_latest.csv": "2b020a2650e77acc7d696b11f55d9faafb317f86169c6d110005a6147882f497",
-    "output/coverage.json": "cf5245186a70dcc42d24feb95731ee98f36ac1b8225de55ff55d1b2865abf8ab"
+    "universe/smoke_universe.csv": "35b78f1883ffbde439259157717102174f9373b8cdfe52f9f6820f94e326b109",
+    "output/mapping_audit.csv": "e45bc05c5301c48e3730c13346fdf667b10e489898c8962f784b985fddfab1fc",
+    "output/cache_status.csv": "8eb1373187b5d376a89b51eca206f2cfbb16d722357b335c24d1c0fb189094d9",
+    "output/errors.csv": "01655e02837e864dd11017f68123f1df8cbf90043ec24898a6ca58a59bcc4169",
+    "output/batch_log_latest.csv": "19af2e7539725253edef1b961e2a859043e0568b490c0aa4f676979af13d3259",
+    "output/features_latest.csv": "d908a246144ae5d108748d8b83c70f51bd7b8f8a5a25221650b3cbe9b3330b46",
+    "output/coverage.json": "05f71c38ab42a672b68a8382d23b26c238249f5af96f793d28d28d3719a0560c"
   }
 }

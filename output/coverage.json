@@ -1,6 +1,6 @@
 {
   "schema": "WELT_SWING_LONG_FREE_DATA_COVERAGE_V0_1",
-  "generated_utc": "2026-08-23T17:42:45.863672+00:00",
+  "generated_utc": "2026-08-23T18:01:50.697969+00:00",
   "runtime_mode": "INCREMENTAL",
   "run_status": "PARTIAL",
   "data_source": "YFINANCE_FREE",
@@ -10,14 +10,13 @@
   "universe_count": 37,
   "mapped_count": 37,
   "mapping_coverage_pct": 100.0,
-  "ready_count": 34,
-  "price_ready_coverage_pct": 91.8919,
+  "ready_count": 36,
+  "price_ready_coverage_pct": 97.2973,
   "status_counts": {
-    "READY": 34,
-    "QUARANTINE": 2,
-    "DOWNLOAD_FAILED": 1
+    "READY": 36,
+    "QUARANTINE": 1
   },
-  "features_rows": 34,
+  "features_rows": 36,
   "p0_status": "NOT_RUN_PARAMETERS_NOT_YET_PROMOTED",
   "run_result": {
     "mode": "INCREMENTAL",
@@ -26,15 +25,15 @@
     "universe_count": 37,
     "initial_names": 1,
     "update_names": 36,
-    "rescue_attempted": 1,
-    "repair_candidates": 2,
-    "repair_attempted": 2,
-    "missing_symbols": 1,
+    "rescue_attempted": 0,
+    "repair_candidates": 1,
+    "repair_attempted": 1,
+    "missing_symbols": 0,
     "cache_counts": {
-      "price_rows": 18054,
+      "price_rows": 18554,
       "states": 37,
-      "ready": 34,
-      "batches": 16
+      "ready": 36,
+      "batches": 22
     },
     "config": {
       "batch_size": 10,
@@ -54,7 +53,7 @@
       "suspicious_abs_return": 0.5,
       "zero_volume_warning_share": 0.2
     },
-    "run_hash": "017d688acaf5afecc56773b0d52bdca8a56cdd879eba8205e16fe9f907a3d382"
+    "run_hash": "76bacc61f8898a04cb8fbd6a6ff9ff8f6d6907262c5b25ae4294dc45e7157f93"
   },
   "notes": [
     "Universe identity remains independent of Yahoo symbol mapping.",
