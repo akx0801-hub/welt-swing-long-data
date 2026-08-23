@@ -1,0 +1,12 @@
+{
+  "audited_master_file": "universe/Welt-Swing-Universe-Master-Audited-v0.4.csv",
+  "audit_v1_file": "output_identity_audit/mapping_audit_v0.1.csv",
+  "seed_search_cache": "output_identity_audit/search_cache_snapshot_v0.1.jsonl",
+  "runtime_search_cache": "runtime_cache/identity_remediation_search_v0.2.jsonl",
+  "output_dir": "output_identity_remediation",
+  "remediated_master_csv": "universe/Welt-Swing-Universe-Master-Remediated-v0.5.csv",
+  "remediated_master_xlsx": "universe/Welt-Swing-Universe-Master-Remediated-v0.5.xlsx",
+  "max_new_search_queries": 500,
+  "search_max_results": 12,
+  "search_pause_seconds": 0.12
+}
