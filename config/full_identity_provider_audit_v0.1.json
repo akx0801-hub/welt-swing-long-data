@@ -1,0 +1,15 @@
+{
+  "master_file": "universe/Welt-Swing-Universe-Master-Phase2-v0.3.csv",
+  "prior_errors_file": "output_research_1535/errors.csv",
+  "override_file": "config/yahoo_symbol_overrides.csv",
+  "output_dir": "output_identity_audit",
+  "search_cache": "runtime_cache/identity_audit_search_v0.1.jsonl",
+  "audited_master_csv": "universe/Welt-Swing-Universe-Master-Audited-v0.4.csv",
+  "audited_master_xlsx": "universe/Welt-Swing-Universe-Master-Audited-v0.4.xlsx",
+  "max_search_queries": 500,
+  "search_max_results": 8,
+  "search_pause_seconds": 0.15,
+  "accept_score": 0.82,
+  "accept_margin": 0.12,
+  "name_similarity_floor": 0.68
+}
