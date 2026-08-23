@@ -1,6 +1,6 @@
 {
   "schema": "WELT_SWING_LONG_FREE_DATA_COVERAGE_V0_1",
-  "generated_utc": "2026-08-23T17:30:21.011339+00:00",
+  "generated_utc": "2026-08-23T17:42:45.863672+00:00",
   "runtime_mode": "INCREMENTAL",
   "run_status": "PARTIAL",
   "data_source": "YFINANCE_FREE",
@@ -26,12 +26,15 @@
     "universe_count": 37,
     "initial_names": 1,
     "update_names": 36,
+    "rescue_attempted": 1,
+    "repair_candidates": 2,
+    "repair_attempted": 2,
     "missing_symbols": 1,
     "cache_counts": {
       "price_rows": 18054,
       "states": 37,
       "ready": 34,
-      "batches": 9
+      "batches": 16
     },
     "config": {
       "batch_size": 10,
@@ -51,7 +54,7 @@
       "suspicious_abs_return": 0.5,
       "zero_volume_warning_share": 0.2
     },
-    "run_hash": "19937b4e5d451664e77bd5126780a3c3cfed36068e55c8ff13d31cddde6ad88c"
+    "run_hash": "017d688acaf5afecc56773b0d52bdca8a56cdd879eba8205e16fe9f907a3d382"
   },
   "notes": [
     "Universe identity remains independent of Yahoo symbol mapping.",
