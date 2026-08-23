@@ -53,8 +53,23 @@ def test_multiindex_parser():
     ok("yfinance MultiIndex parser")
 
 
+
+def test_cross_market_union_placeholders():
+    idx = pd.date_range("2026-01-01", periods=5)
+    df = pd.DataFrame({
+        "open":[10,np.nan,np.nan,11,12],
+        "high":[11,np.nan,np.nan,12,13],
+        "low":[9,np.nan,np.nan,10,11],
+        "close":[10.5,np.nan,np.nan,11.5,12.5],
+        "volume":[100,np.nan,np.nan,120,130],
+    }, index=idx)
+    out = normalize_symbol_frame(df)
+    assert len(out) == 3, len(out)
+    assert out[["open","high","low","close"]].notna().all(axis=1).all()
+    ok("cross-market union placeholder rows removed")
+
 def main():
-    test_mapping(); test_split_adjustment(); test_multiindex_parser()
+    test_mapping(); test_split_adjustment(); test_multiindex_parser(); test_cross_market_union_placeholders()
     print("SELF_TEST_RESULT=PASS")
 
 

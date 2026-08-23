@@ -394,6 +394,15 @@ def normalize_symbol_frame(df: pd.DataFrame) -> pd.DataFrame:
         if c not in x.columns:
             x[c] = np.nan if c not in {"dividends","stock_splits","repaired"} else 0.0
         x[c] = pd.to_numeric(x[c], errors="coerce")
+
+    # yfinance multi-ticker downloads align all symbols in a batch to the union
+    # of trading dates. For cross-market batches this creates placeholder rows
+    # with OHLC all NaN on another market's trading day. These are not bars and
+    # must not be counted as invalid OHLC. Keep rows with at least one OHLC value
+    # so genuinely incomplete bars still fail QA below.
+    ohlc = ["open", "high", "low", "close"]
+    x = x.loc[~x[ohlc].isna().all(axis=1)].copy()
+
     x["repaired"] = x["repaired"].fillna(0).astype(float)
     return x[["open","high","low","close","adj_close","volume","dividends","stock_splits","repaired"]]
 
