@@ -1,0 +1,171 @@
+name: Welt-Swing Full 3663 Price Data Run
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  full_3663_price_data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Python-Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install 'openpyxl>=3.1,<4'
+
+      - name: Offline-Selbsttest
+        run: python scripts/self_test.py
+
+      - name: Evidence-Freeze Release-Gate
+        run: |
+          test -f output_identity_evidence_freeze/summary_v0.1.json
+          test -f universe/Welt-Swing-Universe-Master-EvidenceFrozen-v0.7.csv
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path('output_identity_evidence_freeze/summary_v0.1.json')
+          x = json.loads(p.read_text(encoding='utf-8'))
+
+          assert x['run_status'] == 'EVIDENCE_FREEZE_COMPLETE'
+          assert x['master_rows'] == 3664
+          assert x['active_rows'] == 3663
+          assert x['active_provider_mapped'] == 3663
+          assert x['active_provider_unresolved'] == 0
+          assert x['active_provider_mapping_pct'] == 100.0
+          assert x['price_run_candidate_coverage_ready'] is True
+          assert x['p0_run'] is False
+          assert x['alpha_vantage_allowed'] is False
+
+          print('FULL_3663_PRICE_RELEASE_GATE_PASS')
+          PY
+
+      - name: Aktives 3663er Price-Universe bauen
+        run: |
+          python scripts/build_full_price_universe_3663.py \
+            universe/Welt-Swing-Universe-Master-EvidenceFrozen-v0.7.csv \
+            --out universe/full_price_universe_3663.csv \
+            --manifest universe/full_price_universe_3663_manifest.json
+
+      - name: 3663er Universe-Gate
+        run: |
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+
+          u = pd.read_csv(
+              'universe/full_price_universe_3663.csv',
+              keep_default_na=False,
+              dtype=str,
+          )
+          m = json.loads(
+              Path('universe/full_price_universe_3663_manifest.json')
+              .read_text(encoding='utf-8')
+          )
+
+          assert len(u) == 3663
+          assert not u['WS_ID'].duplicated().any()
+          assert u['Active'].astype(str).str.lower().eq('true').all()
+          assert u['Yahoo_Symbol'].astype(str).str.strip().ne('').all()
+          assert m['rows'] == 3663
+          assert m['yahoo_symbol_nonblank'] == 3663
+          assert m['p0_run'] is False
+          assert m['alpha_vantage_allowed'] is False
+
+          print(
+              'FULL_3663_UNIVERSE_GATE_PASS',
+              'segments=', len(m['segments']),
+              'provider_duplicate_rows=', m['provider_symbol_duplicate_rows']
+          )
+          PY
+
+      - name: Full-3663 Price Cache wiederherstellen
+        uses: actions/cache@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            full-3663-price-${{ runner.os }}-
+
+      - name: Vollständigen 3663er yfinance Datenlauf starten
+        run: |
+          python scripts/run_update.py \
+            --config config/run_config_full_3663.json
+
+      - name: Datenlauf-Strukturgates prüfen
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path('output_full_3663/coverage.json')
+          if not p.exists():
+              raise SystemExit('coverage.json missing')
+
+          x = json.loads(p.read_text(encoding='utf-8'))
+
+          print('RUN_STATUS', x['run_status'])
+          print('RUNTIME_MODE', x['runtime_mode'])
+          print('UNIVERSE', x['universe_count'])
+          print('MAPPED', x['mapped_count'], x['mapping_coverage_pct'])
+          print('READY', x['ready_count'], x['price_ready_coverage_pct'])
+          print('STATUS_COUNTS', x['status_counts'])
+          print('FEATURES', x['features_rows'])
+
+          assert x['data_source'] == 'YFINANCE_FREE'
+          assert x['alpha_vantage_allowed'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['universe_count'] == 3663
+          assert x['mapped_count'] == 3663
+          assert x['mapping_coverage_pct'] == 100.0
+          assert x['p0_status'] == 'NOT_RUN_PARAMETERS_NOT_YET_PROMOTED'
+          assert x['run_status'] in {'COMPLETE', 'PARTIAL'}
+
+          print('FULL_3663_DATA_STRUCTURE_GATE_PASS')
+          PY
+
+      - name: Full-3663 Ergebnisdateien speichern
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add universe/full_price_universe_3663.csv \
+                  universe/full_price_universe_3663_manifest.json \
+                  output_full_3663/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu speichern."
+          else
+            git commit -m "Run full 3663 price data collection"
+            git push
+          fi
+
+      - name: Full-3663 Ergebnisse und SQLite sichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-full-3663-price-data-${{ github.run_number }}
+          path: |
+            output_full_3663/
+            universe/full_price_universe_3663.csv
+            universe/full_price_universe_3663_manifest.json
+            runtime_cache/full_3663_prices.sqlite
+          retention-days: 14
+
+      - name: Laufstatus final prüfen
+        run: |
+          python scripts/assert_run_status.py output_full_3663/coverage.json
