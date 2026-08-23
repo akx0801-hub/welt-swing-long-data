@@ -1,0 +1,12 @@
+{
+  "as_of_date": "2026-08-24",
+  "minimum_expected_cached_price_rows": 1800000,
+  "ready_unique_bars": 260,
+  "stale_calendar_days": 10,
+  "suspicious_abs_return": 0.5,
+  "split_window_rows": 1,
+  "isolated_invalid_bar_max_count": 2,
+  "isolated_invalid_bar_max_share": 0.01,
+  "search_max_results": 10,
+  "search_pause_seconds": 0.15
+}
