@@ -155,6 +155,7 @@ SOURCES = {
         "url": "https://en.wikipedia.org/wiki/FTSE/JSE_Top_40_Index",
         "min_rows": 35,
         "max_rows": 50,
+        "allow_name_only": True,
     },
 }
 
@@ -293,6 +294,50 @@ def choose_component_table(
     return scored[0][1].copy()
 
 
+
+def choose_name_only_component_table(
+    tables: list[pd.DataFrame],
+    min_rows: int,
+    max_rows: int,
+) -> pd.DataFrame:
+    scored = []
+    for t in tables:
+        if not (min_rows <= len(t) <= max_rows):
+            continue
+        ncol = find_col(t, NAME_ALIASES)
+        if not ncol:
+            continue
+        # Prefer the table closest to the nominal middle of the expected range.
+        midpoint = (min_rows + max_rows) / 2
+        score = 10 - abs(len(t) - midpoint) / max(1, midpoint)
+        scored.append((score, t))
+    if not scored:
+        sizes = sorted({len(t) for t in tables})
+        raise RuntimeError(
+            f"no name-only component table in expected range {min_rows}-{max_rows}; "
+            f"table sizes={sizes[:30]}"
+        )
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return scored[0][1].copy()
+
+
+def name_only_table_to_pairs(df: pd.DataFrame) -> list[tuple[str, str]]:
+    ncol = find_col(df, NAME_ALIASES)
+    if not ncol:
+        raise RuntimeError(f"name column not found in {list(df.columns)}")
+
+    pairs = []
+    for _, row in df.iterrows():
+        name = clean_name(row.get(ncol, ""))
+        if not name:
+            continue
+        # This is deliberately NOT a ticker. It is only a deterministic internal
+        # source-identity key until the one-shot identity/provider audit resolves
+        # the real JSE ticker.
+        key = "SRCNAME:" + hashlib.sha256(name.casefold().encode("utf-8")).hexdigest()[:16]
+        pairs.append((key, name))
+    return dedupe_pairs(pairs)
+
 def clean_symbol(v: object) -> str:
     if v is None:
         return ""
@@ -404,9 +449,17 @@ def extract_pairs(source_id: str) -> tuple[list[tuple[str, str]], dict]:
         pairs = parse_tradingview(html, cfg["tv_prefix"], cfg["tv_index_symbol"])
     else:
         tables = read_html_tables(html)
-        table = choose_component_table(tables, cfg["min_rows"], cfg["max_rows"])
-        transform = normalize_korean_code if cfg["segment"] == "KR_KOSPI200" else None
-        pairs = table_to_pairs(table, symbol_transform=transform)
+        try:
+            table = choose_component_table(tables, cfg["min_rows"], cfg["max_rows"])
+            transform = normalize_korean_code if cfg["segment"] == "KR_KOSPI200" else None
+            pairs = table_to_pairs(table, symbol_transform=transform)
+        except RuntimeError:
+            if not cfg.get("allow_name_only", False):
+                raise
+            table = choose_name_only_component_table(
+                tables, cfg["min_rows"], cfg["max_rows"]
+            )
+            pairs = name_only_table_to_pairs(table)
 
     count = len(pairs)
     ok = cfg["min_rows"] <= count <= cfg["max_rows"]
@@ -475,13 +528,20 @@ def new_rows_from_pairs(
     rows = []
     for ticker, name in pairs:
         tags = segment if not subtag else f"{segment};{subtag}"
+        name_only = str(ticker).startswith("SRCNAME:")
+        ws_id = (
+            f"WS:SRC:{segment}:{str(ticker).split(':', 1)[1]}"
+            if name_only
+            else make_ws_id(segment, ticker)
+        )
+        primary_ticker = "" if name_only else ticker
         rows.append({
-            "WS_ID": make_ws_id(segment, ticker),
+            "WS_ID": ws_id,
             "Name": name,
             "ISIN": "",
             "Instrument_Type": "UNVERIFIED_EQUITY_SECURITY",
             "Country": meta["country"],
-            "Primary_Ticker": ticker,
+            "Primary_Ticker": primary_ticker,
             "Primary_Exchange": meta["exchange"],
             "Primary_MIC": meta["mic"],
             "Primary_Currency": meta["currency"],
@@ -497,7 +557,14 @@ def new_rows_from_pairs(
             "Source_AsOf": now[:10],
             "Last_Validated": now,
             "Share_Class": "",
-            "Notes": f"Source-superset capture; source={source_url}; identity/provider mapping pending",
+            "Notes": (
+                f"Source-superset capture; source={source_url}; "
+                + (
+                    "name-only source identity; real primary ticker pending one-shot audit"
+                    if name_only
+                    else "identity/provider mapping pending"
+                )
+            ),
         })
     return pd.DataFrame(rows)
 
