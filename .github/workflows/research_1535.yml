@@ -1,0 +1,80 @@
+name: Welt-Swing Research 1535
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  research_1535:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Python-Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install 'openpyxl>=3.1,<4'
+
+      - name: Offline-Selbsttest
+        run: python scripts/self_test.py
+
+      - name: Aktuellen r6 1535 Research-Snapshot bauen
+        run: |
+          test -f universe/Welt-Swing-Universe-Master-v2.0.xlsx
+          python scripts/build_research_partial_1535.py \
+            universe/Welt-Swing-Universe-Master-v2.0.xlsx \
+            --out universe/research_partial_1535.csv \
+            --manifest universe/research_partial_1535_manifest.json \
+            --require-master-rows 1535
+
+      - name: Research-1535 Price Cache wiederherstellen
+        uses: actions/cache@v4
+        with:
+          path: runtime_cache/research_1535_prices.sqlite
+          key: research-1535-price-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            research-1535-price-${{ runner.os }}-
+
+      - name: Research-1535 yfinance Datenlauf starten
+        run: python scripts/run_update.py --config config/run_config_research_1535.json
+
+      - name: Research-1535 Ergebnisdateien speichern
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add universe/research_partial_1535.csv \
+                  universe/research_partial_1535_manifest.json \
+                  output_research_1535/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu speichern."
+          else
+            git commit -m "Update Welt-Swing Research 1535 data"
+            git push
+          fi
+
+      - name: Research-1535 Ergebnisse als Action-Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-research-1535-output-${{ github.run_number }}
+          path: |
+            output_research_1535/
+            universe/research_partial_1535.csv
+            universe/research_partial_1535_manifest.json
+          retention-days: 7
+
+      - name: Research-1535 Laufstatus prüfen
+        run: python scripts/assert_run_status.py output_research_1535/coverage.json
