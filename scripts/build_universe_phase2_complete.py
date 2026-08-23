@@ -586,6 +586,32 @@ def main() -> int:
     if base["WS_ID"].astype(str).duplicated().any():
         raise SystemExit("Base contains duplicate WS_ID")
 
+    # Repair one known legacy-import artifact from the already frozen 1535 CSV:
+    # pandas read_excel interpreted the legitimate TSX ticker "NA" (National Bank
+    # of Canada) as a missing value before that CSV was created. The canonical
+    # WS_ID still preserves the ticker unambiguously as WS:XTSE:NA.
+    na_ws = base["WS_ID"].astype(str).eq("WS:XTSE:NA")
+    if int(na_ws.sum()) != 1:
+        raise SystemExit(
+            f"Expected exactly one WS:XTSE:NA row in frozen base, found {int(na_ws.sum())}"
+        )
+    na_ticker = base.loc[na_ws, "Primary_Ticker"].astype(str).iloc[0].strip()
+    if na_ticker == "":
+        base.loc[na_ws, "Primary_Ticker"] = "NA"
+        if "Notes" in base.columns:
+            current_note = str(base.loc[na_ws, "Notes"].iloc[0]).strip()
+            repair_note = "LEGACY_IMPORT_REPAIR: Primary_Ticker restored from WS_ID WS:XTSE:NA"
+            base.loc[na_ws, "Notes"] = (
+                f"{current_note}; {repair_note}" if current_note else repair_note
+            )
+    elif na_ticker != "NA":
+        raise SystemExit(
+            f"Unexpected Primary_Ticker for WS:XTSE:NA: {na_ticker!r}"
+        )
+
+    if str(base.loc[na_ws, "Primary_Ticker"].iloc[0]).strip() != "NA":
+        raise SystemExit("Ticker NA repair failed")
+
     base_segments = set(base["Primary_Universe_Index"].astype(str))
     missing_base = [s for s in BASE_SEGMENTS if s not in base_segments]
     if missing_base:
