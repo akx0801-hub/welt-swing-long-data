@@ -1,0 +1,14 @@
+source_id,segment,url,fetch_utc,count,min_expected,max_expected,status,error
+US_SP500,US_SP1500,https://en.wikipedia.org/wiki/List_of_S%26P_500_companies,2026-08-23T21:30:39.456289+00:00,503,490,515,PASS,
+US_SP400,US_SP1500,https://en.wikipedia.org/wiki/List_of_S%26P_400_companies,2026-08-23T21:30:39.793942+00:00,400,390,415,PASS,
+US_SP600,US_SP1500,https://en.wikipedia.org/wiki/List_of_S%26P_600_companies,2026-08-23T21:30:40.125853+00:00,603,585,620,PASS,
+KR_KOSPI200_WIKI,KR_KOSPI200,https://en.wikipedia.org/wiki/KOSPI_200,2026-08-23T21:30:40.322589+00:00,200,185,215,PASS,
+AU_ASX200_WIKI,AU_ASX200,https://en.wikipedia.org/wiki/S%26P/ASX_200,2026-08-23T21:30:40.508394+00:00,200,185,220,PASS,
+NZ_NZX50_TV,NZ_NZX50,https://www.tradingview.com/symbols/NZX-NZ50G/components/,2026-08-23T21:30:40.911773+00:00,0,45,60,FAIL,NZ_NZX50_TV: count 0 outside 45-60
+NZ_NZX50_WIKI,NZ_NZX50,https://en.wikipedia.org/wiki/S%26P/NZX_50,2026-08-23T21:30:41.119856+00:00,50,45,60,PASS,
+MX_IPC_TV,MX_IPC,https://www.tradingview.com/symbols/BMV-ME/components/,2026-08-23T21:30:41.463676+00:00,0,30,45,FAIL,MX_IPC_TV: count 0 outside 30-45
+MX_IPC_WIKI,MX_IPC,https://en.wikipedia.org/wiki/Indice_de_Precios_y_Cotizaciones,2026-08-23T21:30:41.619175+00:00,34,30,45,PASS,
+BR_IBRX100_OBM,BR_IBRX100,https://obm.com.br/indices/IBXX,2026-08-23T21:30:44.353198+00:00,0,90,110,FAIL,no component table in expected range 90-110; table sizes=[20]
+BR_IBRX100_DDM,BR_IBRX100,https://www.dadosdemercado.com.br/b3/ibxx,2026-08-23T21:30:44.679160+00:00,99,90,110,PASS,
+ZA_TOP40_TV,ZA_TOP40,https://www.tradingview.com/symbols/JSE-J200/components/,2026-08-23T21:30:45.089583+00:00,0,35,50,FAIL,ZA_TOP40_TV: count 0 outside 35-50
+ZA_TOP40_WIKI,ZA_TOP40,https://en.wikipedia.org/wiki/FTSE/JSE_Top_40_Index,2026-08-23T21:30:45.298735+00:00,40,35,50,PASS,
