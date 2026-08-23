@@ -1,13 +1,13 @@
 {
   "schema": "WELT_SWING_LONG_FREE_DATA_MANIFEST_V0_1",
-  "generated_utc": "2026-08-23T19:41:41.840996+00:00",
+  "generated_utc": "2026-08-23T20:06:48.258013+00:00",
   "files": {
     "universe/g3_pilot_210.csv": "0f2a1ee3dde160fbc03cad0ad3f76b29cd333eaf6102eb26f64569300e3e7d00",
-    "output_g3/mapping_audit.csv": "f81fc95d9e8f2fe67acf04cabae799ef135475b258dd5da2cd4ab06dce9c6e19",
-    "output_g3/cache_status.csv": "2087e42f589759cf2014310d6d87fcaf4f2b1fd7940dbddddc5ba03bb79809ab",
-    "output_g3/errors.csv": "909964cdbfdaa60d187e53f0830d02f3e7963d35dcd1764589939ea4a4128165",
-    "output_g3/batch_log_latest.csv": "3632c74ebc977733fefd1cfd06d153441b414d69a7a89c0fac37d4ecddbaf527",
-    "output_g3/features_latest.csv": "02eede66623d808c36f07fbf2f39ac5cfc0ef913fd00f6b4a2d8beb84791a94d",
-    "output_g3/coverage.json": "f26d11e2b55bf526f0f4fba709b8108d1523658e402cb86c7279ae6322cac0ab"
+    "output_g3/mapping_audit.csv": "023f902ef6b747650dcd46837d6c15b3abab06485beacd086a33dcb42e935083",
+    "output_g3/cache_status.csv": "ec92a8339086bc607b9b09d36c479d39ddad13b6eae4f33fb0f6d0feff942492",
+    "output_g3/errors.csv": "ed7c2b800d5c375ac5e25d8e67ea7e3b604b6f70d384e29bde45438583901a79",
+    "output_g3/batch_log_latest.csv": "a8dd767f8385ccddc46c5ae1420cc0cc26287bf114d9f7ad309941dc54b23398",
+    "output_g3/features_latest.csv": "5b20929274cef5db40abd0e1a942ce0fd9cd228d2e0757b23c65c93ef6ccc74b",
+    "output_g3/coverage.json": "ca978551cb8af2934816b77b9ca2ea0eba246e5edb4c55e72e37c25ff9e30314"
   }
 }
