@@ -1,0 +1,11 @@
+{
+  "mode": "auto",
+  "universe_file": "universe/research_partial_1535.csv",
+  "db_path": "runtime_cache/research_1535_prices.sqlite",
+  "output_dir": "output_research_1535",
+  "batch_size": 50,
+  "initial_period": "2y",
+  "overlap_calendar_days": 14,
+  "pause_between_batches_seconds": 1.0,
+  "repair_anomalies": true
+}
