@@ -1,0 +1,168 @@
+name: Welt-Swing Non-READY Diagnostic v0.1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Schutzregel - keine Price/History Downloads
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          p = Path('scripts/diagnose_non_ready_85.py')
+          tree = ast.parse(p.read_text(encoding='utf-8'))
+          forbidden = []
+          for node in ast.walk(tree):
+              if not isinstance(node, ast.Call):
+                  continue
+              fn = node.func
+              if isinstance(fn, ast.Attribute) and fn.attr in {
+                  'download', 'history', 'get_history_metadata'
+              }:
+                  forbidden.append((fn.attr, getattr(node, 'lineno', None)))
+          if forbidden:
+              raise SystemExit(f'Forbidden price/history calls found: {forbidden}')
+          print('NON_READY_DIAGNOSTIC_NO_PRICE_HISTORY_CALLS_OK')
+          PY
+
+      - name: Offline-Selbsttest
+        run: python scripts/diagnose_non_ready_85.py --self-test
+
+      - name: 85er Input-Gate
+        run: |
+          test -f output_full_3663/errors.csv
+          test -f output_full_3663/coverage.json
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+
+          e = pd.read_csv(
+              'output_full_3663/errors.csv',
+              keep_default_na=False,
+              dtype=str,
+          )
+          c = json.loads(
+              Path('output_full_3663/coverage.json').read_text(encoding='utf-8')
+          )
+
+          assert c['universe_count'] == 3663
+          assert c['ready_count'] == 3578
+          assert len(e) == 85
+          counts = e['status'].value_counts().to_dict()
+          assert counts.get('QUARANTINE', 0) == 55
+          assert counts.get('WARMUP', 0) == 20
+          assert counts.get('DOWNLOAD_FAILED', 0) == 9
+          assert counts.get('STALE', 0) == 1
+          assert c['p0_status'] == 'NOT_RUN_PARAMETERS_NOT_YET_PROMOTED'
+          assert c['alpha_vantage_allowed'] is False
+          print('NON_READY_85_INPUT_GATE_PASS', counts)
+          PY
+
+      - name: Full-3663 SQLite Cache wiederherstellen
+        uses: actions/cache@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-diagnostic-${{ github.run_id }}
+          restore-keys: |
+            full-3663-price-${{ runner.os }}-
+
+      - name: SQLite-Restore prüfen
+        run: |
+          test -f runtime_cache/full_3663_prices.sqlite
+          python - <<'PY'
+          import sqlite3
+          p = 'runtime_cache/full_3663_prices.sqlite'
+          con = sqlite3.connect(p)
+          try:
+              n = con.execute('SELECT COUNT(*) FROM price_daily').fetchone()[0]
+              s = con.execute('SELECT COUNT(*) FROM cache_state').fetchone()[0]
+          finally:
+              con.close()
+          print('RESTORED_PRICE_ROWS', n)
+          print('RESTORED_STATES', s)
+          assert n >= 1800000
+          assert s == 3663
+          PY
+
+      - name: Non-READY Diagnostic ausführen
+        run: |
+          python scripts/diagnose_non_ready_85.py \
+            --config config/non_ready_diagnostic_v0.1.json
+
+      - name: Diagnostic-Gates prüfen
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          x = json.loads(
+              Path('output_non_ready_diagnostic/summary_v0.1.json')
+              .read_text(encoding='utf-8')
+          )
+
+          print('RUN_STATUS', x['run_status'])
+          print('CLASSIFICATIONS', x['classification_counts'])
+          print('ACTIONS', x['recommended_action_counts'])
+          print('INVALID_EVENTS', x['invalid_bar_event_rows'])
+          print('SUSPICIOUS_EVENTS', x['suspicious_return_event_rows'])
+          print('SEARCH_ROWS', x['failed_or_stale_search_rows'])
+          print('EXACT_SEARCH_HITS', x['failed_or_stale_exact_equity_search_hits'])
+
+          assert x['run_status'] == 'NON_READY_DIAGNOSTIC_COMPLETE'
+          assert x['source_universe_count'] == 3663
+          assert x['source_ready_count'] == 3578
+          assert x['source_non_ready_count'] == 85
+          assert x['diagnostic_rows'] == 85
+          assert x['failed_or_stale_search_rows'] == 10
+          assert x['price_history_calls_performed'] is False
+          assert x['automatic_status_promotions'] == 0
+          assert x['p0_run'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_non_ready_diagnostic/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Diagnose full 3663 non-ready rows"
+            git push
+          fi
+
+      - name: Diagnostic-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-non-ready-diagnostic-${{ github.run_number }}
+          path: |
+            output_non_ready_diagnostic/
+          retention-days: 14
