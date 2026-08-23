@@ -1,0 +1,29 @@
+{
+  "schema": "WELT_SWING_LONG_G3_PILOT_V0_2",
+  "source_master": "universe/Welt-Swing-Universe-Master-v2.0.xlsx",
+  "source_master_rows": 1535,
+  "selection": "30 per imported segment; SHA256(WS_ID) ascending; deterministic; no price/news/quality selection",
+  "segments": [
+    "EU_STOXX600",
+    "CA_TSX",
+    "JP_N225",
+    "HK_HSI",
+    "CN_CSI300",
+    "IN_NIFTY50",
+    "TW_TW50"
+  ],
+  "per_segment": 30,
+  "rows": 210,
+  "counts": {
+    "CA_TSX": 30,
+    "CN_CSI300": 30,
+    "EU_STOXX600": 30,
+    "HK_HSI": 30,
+    "IN_NIFTY50": 30,
+    "JP_N225": 30,
+    "TW_TW50": 30
+  },
+  "pilot_sha256": "0f2a1ee3dde160fbc03cad0ad3f76b29cd333eaf6102eb26f64569300e3e7d00",
+  "productive": false,
+  "p0_run": false
+}

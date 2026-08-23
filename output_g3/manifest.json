@@ -1,0 +1,13 @@
+{
+  "schema": "WELT_SWING_LONG_FREE_DATA_MANIFEST_V0_1",
+  "generated_utc": "2026-08-23T19:25:36.707039+00:00",
+  "files": {
+    "universe/g3_pilot_210.csv": "0f2a1ee3dde160fbc03cad0ad3f76b29cd333eaf6102eb26f64569300e3e7d00",
+    "output_g3/mapping_audit.csv": "d1fca8bfbd15e1034a375417c88ae8bd0f99fd65a3f81fae4da9c668a7ae6f5c",
+    "output_g3/cache_status.csv": "63c85224d3856bd07a90ad7b7e997bd7126828c031e9282602e032cd8c7f1b1e",
+    "output_g3/errors.csv": "2a0e1bebf902a36b58592c4d21e1be68ecad2255c708d28e2fb440bc45054aba",
+    "output_g3/batch_log_latest.csv": "22656d02a273da72869dc770a8a490eabad5cadbd6f978ce21ae94ceb742fd7d",
+    "output_g3/features_latest.csv": "72e1473189d6213351fa582ecc415744d8876f194bd62d7b4ad2313c2d48981e",
+    "output_g3/coverage.json": "d58e2d7a3ef360d1899cc878974f68d6c70fe5778435a44e81a55d527002cc23"
+  }
+}
