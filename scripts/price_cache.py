@@ -283,6 +283,23 @@ class SQLitePriceCache:
             except Exception: pass
         return out
 
+    def load_price_frame(self, ws_id: str) -> pd.DataFrame:
+        """Return the complete cached history for one canonical security.
+
+        Incremental downloads contain only the overlap window. QA must evaluate
+        the complete persisted series, never just the freshly downloaded slice.
+        """
+        q = """
+        SELECT day,open,high,low,close,adj_close,volume,dividends,stock_splits,repaired
+        FROM price_daily WHERE ws_id=? ORDER BY day
+        """
+        x = pd.read_sql_query(q, self.conn, params=[ws_id])
+        if x.empty:
+            return pd.DataFrame()
+        x["day"] = pd.to_datetime(x["day"], errors="coerce")
+        x = x.dropna(subset=["day"]).set_index("day")
+        return x
+
     def counts(self) -> dict[str, int]:
         return {
             "price_rows": int(self.conn.execute("SELECT COUNT(*) FROM price_daily").fetchone()[0]),
@@ -412,7 +429,12 @@ def qa_symbol_frame(df: pd.DataFrame, *, config: FreeDataConfig, as_of: date | N
     unique_bars = int(len(x))
     finite_ohlc = x[["open","high","low","close"]].replace([np.inf,-np.inf], np.nan).notna().all(axis=1)
     positive = (x[["open","high","low","close"]] > 0).all(axis=1)
-    relation = (x["high"] >= x[["open","close","low"]].max(axis=1)) & (x["low"] <= x[["open","close","high"]].min(axis=1))
+    # Some Yahoo daily feeds (notably selected auction-driven markets) can report
+    # an Open print marginally outside the day's High/Low range. For Swing-Long
+    # technical features H/L/C consistency is the hard requirement; Open remains
+    # required, finite and positive, but an Open-outside-range observation is a
+    # warning rather than a full-security quarantine.
+    relation = (x["high"] >= x["low"]) & (x["close"] <= x["high"]) & (x["close"] >= x["low"])
     valid = finite_ohlc & positive & relation
     valid_bars = int(valid.sum())
     invalid_rows = int((~valid).sum())
@@ -524,25 +546,53 @@ class YFinancePriceCacheRunner:
 
         frames=split_download_frame(raw,symbols)
         price_rows_buffer=[]
-        state_buffer=[]
+        received_rows=[]
+        missing_rows=[]
         for _,r in batch.iterrows():
             sym=r.Yahoo_Symbol; ws=r.WS_ID
             if sym not in frames or frames[sym].empty:
+                missing_rows.append(r)
+                missing.append(sym)
+                continue
+            x=normalize_symbol_frame(frames[sym])
+            price_rows_buffer.extend(self._rows_for_db(ws,sym,x,fetched))
+            received_rows.append(r)
+            received.append(sym)
+
+        # Persist the overlap/new bars first. Cache-state QA below MUST use the
+        # full persisted history; otherwise every incremental run would assess
+        # only ~10 overlap bars and incorrectly downgrade READY -> WARMUP.
+        self.cache.upsert_price_rows(price_rows_buffer)
+
+        state_buffer=[]
+        for r in received_rows:
+            sym=r.Yahoo_Symbol; ws=r.WS_ID
+            full_x=self.cache.load_price_frame(ws)
+            qa=qa_symbol_frame(full_x,config=self.config,as_of=as_of)
+            state_buffer.append({"ws_id":ws,"yahoo_symbol":sym,"mapping_status":r.Yahoo_Mapping_Status,
+                   "last_fetch_utc":fetched,"batch_id":batch_id,"last_error":None,**{k:v for k,v in qa.items() if k!="warning_zero_volume"}})
+            if (not repair_pass and self.config.repair_anomalies and qa["reason_code"]=="SUSPICIOUS_RETURN_NEEDS_REPAIR"):
+                repair_candidates.append(sym)
+
+        # A transient missing symbol in an incremental multi-ticker response must
+        # not erase a previously valid cache. Keep the cached series and derive
+        # its status from the full history. Only names with no cached history at
+        # all become DOWNLOAD_FAILED.
+        for r in missing_rows:
+            sym=r.Yahoo_Symbol; ws=r.WS_ID
+            full_x=self.cache.load_price_frame(ws)
+            if not full_x.empty:
+                qa=qa_symbol_frame(full_x,config=self.config,as_of=as_of)
+                state_buffer.append({"ws_id":ws,"yahoo_symbol":sym,"mapping_status":r.Yahoo_Mapping_Status,
+                    "last_fetch_utc":fetched,"batch_id":batch_id,"last_error":"NO_DATA_IN_BATCH",
+                    **{k:v for k,v in qa.items() if k!="warning_zero_volume"}})
+            else:
                 state_buffer.append({
                     "ws_id":ws,"yahoo_symbol":sym,"mapping_status":r.Yahoo_Mapping_Status,
                     "status":"DOWNLOAD_FAILED","reason_code":"NO_DATA_IN_BATCH","unique_bars":0,"valid_bars":0,
                     "repaired_rows":0,"suspicious_returns":0,"zero_volume_share":None,"first_bar_date":None,"last_bar_date":None,
-                    "last_fetch_utc":fetched,"batch_id":batch_id,"last_error":None,
-                }); missing.append(sym); continue
-            x=normalize_symbol_frame(frames[sym])
-            qa=qa_symbol_frame(x,config=self.config,as_of=as_of)
-            price_rows_buffer.extend(self._rows_for_db(ws,sym,x,fetched))
-            state_buffer.append({"ws_id":ws,"yahoo_symbol":sym,"mapping_status":r.Yahoo_Mapping_Status,
-                   "last_fetch_utc":fetched,"batch_id":batch_id,"last_error":None,**{k:v for k,v in qa.items() if k!="warning_zero_volume"}})
-            received.append(sym)
-            if (not repair_pass and self.config.repair_anomalies and qa["reason_code"]=="SUSPICIOUS_RETURN_NEEDS_REPAIR"):
-                repair_candidates.append(sym)
-        self.cache.upsert_price_rows(price_rows_buffer)
+                    "last_fetch_utc":fetched,"batch_id":batch_id,"last_error":"NO_DATA_IN_BATCH",
+                })
         self.cache.upsert_states(state_buffer)
         self.cache.log_batch({"batch_id":batch_id,"source_id":SOURCE_ID,"started_utc":started,"finished_utc":fetched,
                               "symbol_count":len(symbols),"received_count":len(received),"missing_count":len(missing),"retry_count":retries,
