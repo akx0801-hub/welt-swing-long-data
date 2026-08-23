@@ -1,0 +1,11 @@
+{
+  "mode": "auto",
+  "universe_file": "universe/g3_pilot_210.csv",
+  "db_path": "runtime_cache/g3_pilot_210_prices.sqlite",
+  "output_dir": "output_g3",
+  "batch_size": 30,
+  "initial_period": "2y",
+  "overlap_calendar_days": 14,
+  "pause_between_batches_seconds": 0.5,
+  "repair_anomalies": true
+}
