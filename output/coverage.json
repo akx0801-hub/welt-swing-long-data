@@ -1,8 +1,8 @@
 {
   "schema": "WELT_SWING_LONG_FREE_DATA_COVERAGE_V0_1",
-  "generated_utc": "2026-08-23T15:52:02.236876+00:00",
+  "generated_utc": "2026-08-23T16:10:03.916169+00:00",
   "runtime_mode": "INITIAL",
-  "run_status": "FAILED",
+  "run_status": "PARTIAL",
   "data_source": "YFINANCE_FREE",
   "alpha_vantage_allowed": false,
   "productive_trading_authority": false,
@@ -10,12 +10,14 @@
   "universe_count": 37,
   "mapped_count": 37,
   "mapping_coverage_pct": 100.0,
-  "ready_count": 0,
-  "price_ready_coverage_pct": 0.0,
+  "ready_count": 32,
+  "price_ready_coverage_pct": 86.4865,
   "status_counts": {
-    "QUARANTINE": 37
+    "READY": 32,
+    "QUARANTINE": 4,
+    "DOWNLOAD_FAILED": 1
   },
-  "features_rows": 0,
+  "features_rows": 32,
   "p0_status": "NOT_RUN_PARAMETERS_NOT_YET_PROMOTED",
   "run_result": {
     "mode": "INITIAL",
@@ -28,9 +30,9 @@
     "repair_attempted": 0,
     "missing_symbols": 0,
     "cache_counts": {
-      "price_rows": 19232,
+      "price_rows": 18054,
       "states": 37,
-      "ready": 0,
+      "ready": 32,
       "batches": 4
     },
     "mapping_status_counts": {
@@ -54,7 +56,7 @@
       "suspicious_abs_return": 0.5,
       "zero_volume_warning_share": 0.2
     },
-    "run_hash": "6b3acf4668c4a0088edf5ac40cf0889206909230183a21bfe77fa4ed7a69d956"
+    "run_hash": "fbe8169afd42cb1826dbf35bba5cc82c4aed2848d89bd4765efd6f6bb6e67f8a"
   },
   "notes": [
     "Universe identity remains independent of Yahoo symbol mapping.",
