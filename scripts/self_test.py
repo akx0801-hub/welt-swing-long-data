@@ -140,6 +140,103 @@ def test_incremental_qa_uses_full_persisted_history():
     ok("incremental QA uses full persisted cache, not overlap slice")
 
 
+
+def test_missing_symbol_gets_bounded_rescue_batch():
+    good = _good_frame()
+    calls = []
+
+    def fake_download(**kwargs):
+        symbols = list(kwargs.get("tickers") or [])
+        repair = bool(kwargs.get("repair", False))
+        calls.append((tuple(symbols), repair, "period" in kwargs))
+        # First bulk call omits BBB. Rescue call for BBB returns valid history.
+        cols = []
+        frames = []
+        if symbols == ["AAA", "BBB"]:
+            src_syms = ["AAA"]
+        else:
+            src_syms = symbols
+        if not src_syms:
+            return pd.DataFrame()
+        arrays = []
+        tuples = []
+        for sym in src_syms:
+            for col, series in [
+                ("Open", good["open"]), ("High", good["high"]), ("Low", good["low"]),
+                ("Close", good["close"]), ("Adj Close", good["adj_close"]),
+                ("Volume", good["volume"]), ("Dividends", good["dividends"]),
+                ("Stock Splits", good["stock_splits"]),
+            ]:
+                tuples.append((sym, col))
+                arrays.append(series.to_numpy())
+        data = np.column_stack(arrays)
+        return pd.DataFrame(data, index=good.index, columns=pd.MultiIndex.from_tuples(tuples))
+
+    universe = pd.DataFrame([
+        {"WS_ID":"TEST:AAA","Primary_Ticker":"AAA","Primary_MIC":"XNAS","Yahoo_Symbol":"AAA"},
+        {"WS_ID":"TEST:BBB","Primary_Ticker":"BBB","Primary_MIC":"XNAS","Yahoo_Symbol":"BBB"},
+    ])
+    with tempfile.TemporaryDirectory() as td:
+        cache = SQLitePriceCache(Path(td)/"px.sqlite")
+        try:
+            cfg = FreeDataConfig(batch_size=10, pause_between_batches_seconds=0)
+            runner = YFinancePriceCacheRunner(cache,YFinanceBatchClient(config=cfg,download_func=fake_download),config=cfg)
+            result = runner.run_initial(universe, as_of=good.index[-1].date())
+            states = pd.read_sql_query("SELECT ws_id,status FROM cache_state ORDER BY ws_id",cache.conn)
+            assert states["status"].tolist() == ["READY","READY"], states.to_dict("records")
+            assert int(result["rescue_attempted"]) == 1, result
+            assert int(result["missing_symbols"]) == 0, result
+            # One bulk call plus one rescue batch; not per-security fallback.
+            assert len(calls) == 2, calls
+        finally:
+            cache.close()
+    ok("missing symbol gets one bounded rescue batch")
+
+
+def test_invalid_ohlc_triggers_targeted_full_history_repair():
+    good = _good_frame()
+    bad = good.copy()
+    # One genuinely impossible H/L/C row.
+    bad.iloc[20, bad.columns.get_loc("low")] = bad.iloc[20]["high"] + 5.0
+    calls = []
+
+    def fake_download(**kwargs):
+        symbols = list(kwargs.get("tickers") or [])
+        repair = bool(kwargs.get("repair", False))
+        calls.append((tuple(symbols), repair, "period" in kwargs))
+        src = good if repair else bad
+        sym = symbols[0]
+        tuples=[]; arrays=[]
+        for col, series in [
+            ("Open", src["open"]), ("High", src["high"]), ("Low", src["low"]),
+            ("Close", src["close"]), ("Adj Close", src["adj_close"]),
+            ("Volume", src["volume"]), ("Dividends", src["dividends"]),
+            ("Stock Splits", src["stock_splits"]),
+        ]:
+            tuples.append((sym,col)); arrays.append(series.to_numpy())
+        return pd.DataFrame(
+            np.column_stack(arrays), index=src.index,
+            columns=pd.MultiIndex.from_tuples(tuples)
+        )
+
+    universe = pd.DataFrame([{
+        "WS_ID":"TEST:CCC","Primary_Ticker":"CCC","Primary_MIC":"XNAS","Yahoo_Symbol":"CCC"
+    }])
+    with tempfile.TemporaryDirectory() as td:
+        cache = SQLitePriceCache(Path(td)/"px.sqlite")
+        try:
+            cfg = FreeDataConfig(batch_size=10, pause_between_batches_seconds=0, repair_anomalies=True)
+            runner = YFinancePriceCacheRunner(cache,YFinanceBatchClient(config=cfg,download_func=fake_download),config=cfg)
+            result = runner.run_initial(universe, as_of=good.index[-1].date())
+            state = pd.read_sql_query("SELECT status,reason_code FROM cache_state WHERE ws_id='TEST:CCC'",cache.conn).iloc[0]
+            assert state.status == "READY", state.to_dict()
+            assert int(result["repair_candidates"]) == 1, result
+            assert int(result["repair_attempted"]) == 1, result
+            assert any(repair for _,repair,_ in calls), calls
+        finally:
+            cache.close()
+    ok("invalid OHLC triggers targeted full-history yfinance repair")
+
 def main():
     test_mapping()
     test_split_adjustment()
@@ -148,6 +245,8 @@ def main():
     test_open_outside_range_is_not_hard_fail()
     test_impossible_hlc_still_quarantines()
     test_incremental_qa_uses_full_persisted_history()
+    test_missing_symbol_gets_bounded_rescue_batch()
+    test_invalid_ohlc_triggers_targeted_full_history_repair()
     print("SELF_TEST_RESULT=PASS")
 
 

@@ -571,7 +571,11 @@ class YFinancePriceCacheRunner:
             qa=qa_symbol_frame(full_x,config=self.config,as_of=as_of)
             state_buffer.append({"ws_id":ws,"yahoo_symbol":sym,"mapping_status":r.Yahoo_Mapping_Status,
                    "last_fetch_utc":fetched,"batch_id":batch_id,"last_error":None,**{k:v for k,v in qa.items() if k!="warning_zero_volume"}})
-            if (not repair_pass and self.config.repair_anomalies and qa["reason_code"]=="SUSPICIOUS_RETURN_NEEDS_REPAIR"):
+            if (
+                not repair_pass
+                and self.config.repair_anomalies
+                and qa["reason_code"] in {"SUSPICIOUS_RETURN_NEEDS_REPAIR", "INVALID_OHLC_OR_VOLUME"}
+            ):
                 repair_candidates.append(sym)
 
         # A transient missing symbol in an incremental multi-ticker response must
@@ -599,6 +603,70 @@ class YFinancePriceCacheRunner:
                               "repair_pass":int(repair_pass),"status":"SUCCESS" if not missing else "PARTIAL","error_text":None})
         self.cache.conn.commit(); return repair_candidates,missing
 
+    def _rescue_missing_symbols(
+        self,
+        mapped: pd.DataFrame,
+        missing_symbols: Sequence[str],
+        *,
+        as_of: date | None = None,
+    ) -> tuple[list[str], list[str], int]:
+        """One bounded rescue pass for symbols omitted by normal bulk responses.
+
+        This is deliberately NOT a per-security fallback architecture. All names
+        missing after the normal bulk pass are regrouped into rescue batches and
+        fetched once with a full 2y period. The normal one-retry ceiling inside
+        _download_with_retry still applies.
+        """
+        wanted = sorted(set(str(s) for s in missing_symbols if s))
+        if not wanted:
+            return [], [], 0
+        rescue_df = mapped[mapped["Yahoo_Symbol"].isin(wanted)].copy()
+        repair_syms: list[str] = []
+        still_missing: list[str] = []
+        attempted = 0
+        for b in _chunks(list(rescue_df.index), self.config.batch_size):
+            rb = rescue_df.loc[b]
+            attempted += len(rb)
+            r, m = self._process_batch(
+                rb,
+                period=self.config.initial_period,
+                start=None,
+                end=None,
+                repair_pass=False,
+                as_of=as_of,
+            )
+            repair_syms.extend(r)
+            still_missing.extend(m)
+            if self.config.pause_between_batches_seconds:
+                time.sleep(self.config.pause_between_batches_seconds)
+        return repair_syms, still_missing, attempted
+
+    def _run_targeted_repair(
+        self,
+        mapped: pd.DataFrame,
+        repair_symbols: Sequence[str],
+        *,
+        as_of: date | None = None,
+    ) -> int:
+        """Full-history repair=True only for QA-flagged survivors."""
+        wanted = sorted(set(str(s) for s in repair_symbols if s))
+        if not wanted:
+            return 0
+        repair_df = mapped[mapped["Yahoo_Symbol"].isin(wanted)].copy()
+        attempted = 0
+        for b in _chunks(list(repair_df.index), self.config.repair_batch_size):
+            rb = repair_df.loc[b]
+            attempted += len(rb)
+            self._process_batch(
+                rb,
+                period=self.config.initial_period,
+                start=None,
+                end=None,
+                repair_pass=True,
+                as_of=as_of,
+            )
+        return attempted
+
     def run_initial(self, universe: pd.DataFrame, *, as_of: date | None=None) -> dict[str,Any]:
         mapping=build_yahoo_symbol_map(universe)
         mapped=mapping[mapping["Yahoo_Symbol"].notna()].copy()
@@ -610,27 +678,36 @@ class YFinancePriceCacheRunner:
                 "repaired_rows":0,"suspicious_returns":0,"zero_volume_share":None,"first_bar_date":None,"last_bar_date":None,
                 "last_fetch_utc":_utc_now(),"batch_id":None,"last_error":None,
             })
-        repair_syms=[]; missing=[]
+
+        repair_syms: list[str] = []
+        missing: list[str] = []
         for b in _chunks(list(mapped.index), self.config.batch_size):
             rb=mapped.loc[b]
-            r,m=self._process_batch(rb,period=self.config.initial_period,start=None,end=None,repair_pass=False,as_of=as_of)
+            r,m=self._process_batch(
+                rb,period=self.config.initial_period,start=None,end=None,
+                repair_pass=False,as_of=as_of
+            )
             repair_syms.extend(r); missing.extend(m)
-            if self.config.pause_between_batches_seconds: time.sleep(self.config.pause_between_batches_seconds)
+            if self.config.pause_between_batches_seconds:
+                time.sleep(self.config.pause_between_batches_seconds)
 
-        # Targeted repair only for anomaly candidates. No full-universe repair pass.
-        repaired_attempted=0
-        if repair_syms:
-            repair_df=mapped[mapped["Yahoo_Symbol"].isin(sorted(set(repair_syms)))].copy()
-            for b in _chunks(list(repair_df.index),self.config.repair_batch_size):
-                rb=repair_df.loc[b]; repaired_attempted += len(rb)
-                self._process_batch(rb,period=self.config.initial_period,start=None,end=None,repair_pass=True,as_of=as_of)
+        # One bounded rescue pass for symbols omitted by otherwise valid bulk batches.
+        rescue_repairs, missing_after_rescue, rescue_attempted = self._rescue_missing_symbols(
+            mapped, missing, as_of=as_of
+        )
+        repair_syms.extend(rescue_repairs)
+
+        # Targeted yfinance repair=True for both suspicious returns and isolated
+        # invalid OHLC/volume findings. Full history is re-fetched only for those names.
+        repaired_attempted = self._run_targeted_repair(mapped, repair_syms, as_of=as_of)
 
         self.cache.conn.commit()
         result={
             "mode":"INITIAL","source":SOURCE_ID,"productive":False,
             "universe_count":int(len(universe)),"mapped_count":int(len(mapped)),"unmapped_count":int(len(unmapped)),
+            "rescue_attempted":int(rescue_attempted),
             "repair_candidates":int(len(set(repair_syms))),"repair_attempted":int(repaired_attempted),
-            "missing_symbols":int(len(set(missing))),"cache_counts":self.cache.counts(),
+            "missing_symbols":int(len(set(missing_after_rescue))),"cache_counts":self.cache.counts(),
             "mapping_status_counts":mapping["Yahoo_Mapping_Status"].value_counts(dropna=False).to_dict(),
             "config":asdict(self.config),
         }
@@ -644,22 +721,53 @@ class YFinancePriceCacheRunner:
         initial_idx=[]; update_idx=[]
         for idx,r in mapped.iterrows():
             (update_idx if r.WS_ID in dates else initial_idx).append(idx)
-        missing=[]
+
+        missing: list[str] = []
+        repair_syms: list[str] = []
+
         # Never force single-ticker calls: new names still go through initial bulk batches.
         if initial_idx:
             for b in _chunks(initial_idx,self.config.batch_size):
-                _,m=self._process_batch(mapped.loc[b],period=self.config.initial_period,start=None,end=None,repair_pass=False,as_of=as_of); missing.extend(m)
+                r,m=self._process_batch(
+                    mapped.loc[b],period=self.config.initial_period,start=None,end=None,
+                    repair_pass=False,as_of=as_of
+                )
+                repair_syms.extend(r); missing.extend(m)
+
         # Cached names: each batch uses the earliest overlap start, safe but slightly redundant.
         for b in _chunks(update_idx,self.config.batch_size):
             rb=mapped.loc[b]
             starts=[dates[ws]-timedelta(days=self.config.overlap_calendar_days) for ws in rb["WS_ID"]]
             start=min(starts)
-            _,m=self._process_batch(rb,period=None,start=start,end=end + timedelta(days=1),repair_pass=False,as_of=as_of); missing.extend(m)
+            r,m=self._process_batch(
+                rb,period=None,start=start,end=end + timedelta(days=1),
+                repair_pass=False,as_of=as_of
+            )
+            repair_syms.extend(r); missing.extend(m)
+
+        # Missing names are regrouped into at most normal-size rescue batches, never
+        # expanded into one request per U3K constituent.
+        rescue_repairs, missing_after_rescue, rescue_attempted = self._rescue_missing_symbols(
+            mapped, missing, as_of=as_of
+        )
+        repair_syms.extend(rescue_repairs)
+
+        # Full-history repair pass only for names actually flagged by QA.
+        repaired_attempted = self._run_targeted_repair(mapped, repair_syms, as_of=as_of)
+
         self.cache.conn.commit()
-        result={"mode":"INCREMENTAL","source":SOURCE_ID,"productive":False,"universe_count":int(len(universe)),
-                "initial_names":len(initial_idx),"update_names":len(update_idx),"missing_symbols":len(set(missing)),
-                "cache_counts":self.cache.counts(),"config":asdict(self.config)}
-        result["run_hash"]=_canonical_hash(result); return result
+        result={
+            "mode":"INCREMENTAL","source":SOURCE_ID,"productive":False,
+            "universe_count":int(len(universe)),
+            "initial_names":len(initial_idx),"update_names":len(update_idx),
+            "rescue_attempted":int(rescue_attempted),
+            "repair_candidates":int(len(set(repair_syms))),
+            "repair_attempted":int(repaired_attempted),
+            "missing_symbols":int(len(set(missing_after_rescue))),
+            "cache_counts":self.cache.counts(),"config":asdict(self.config)
+        }
+        result["run_hash"]=_canonical_hash(result)
+        return result
 
 
 def save_manifest(payload: Mapping[str,Any], path: str|Path) -> None:
