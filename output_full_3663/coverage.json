@@ -1,0 +1,73 @@
+{
+  "schema": "WELT_SWING_LONG_FREE_DATA_COVERAGE_V0_1",
+  "generated_utc": "2026-08-23T23:07:09.152176+00:00",
+  "runtime_mode": "INITIAL",
+  "run_status": "PARTIAL",
+  "data_source": "YFINANCE_FREE",
+  "alpha_vantage_allowed": false,
+  "productive_trading_authority": false,
+  "universe_file": "universe/full_price_universe_3663.csv",
+  "universe_count": 3663,
+  "mapped_count": 3663,
+  "mapping_coverage_pct": 100.0,
+  "ready_count": 3578,
+  "price_ready_coverage_pct": 97.6795,
+  "status_counts": {
+    "READY": 3578,
+    "QUARANTINE": 55,
+    "WARMUP": 20,
+    "DOWNLOAD_FAILED": 9,
+    "STALE": 1
+  },
+  "features_rows": 3578,
+  "p0_status": "NOT_RUN_PARAMETERS_NOT_YET_PROMOTED",
+  "run_result": {
+    "mode": "INITIAL",
+    "source": "YFINANCE_FREE",
+    "productive": false,
+    "universe_count": 3663,
+    "mapped_count": 3663,
+    "unmapped_count": 0,
+    "symbol_resets": 0,
+    "rescue_attempted": 9,
+    "repair_candidates": 55,
+    "repair_attempted": 55,
+    "missing_symbols": 9,
+    "cache_counts": {
+      "price_rows": 1811872,
+      "states": 3663,
+      "ready": 3578,
+      "batches": 41
+    },
+    "mapping_status_counts": {
+      "EXPLICIT": 3654,
+      "PROJECT_OVERRIDE": 9
+    },
+    "config": {
+      "batch_size": 100,
+      "threads": true,
+      "timeout_seconds": 15.0,
+      "initial_period": "2y",
+      "interval": "1d",
+      "overlap_calendar_days": 14,
+      "min_valid_bars": 252,
+      "ready_unique_bars": 260,
+      "stale_calendar_days": 10,
+      "max_identical_retries": 1,
+      "retry_sleep_seconds": 2.0,
+      "pause_between_batches_seconds": 1.0,
+      "repair_anomalies": true,
+      "repair_batch_size": 25,
+      "suspicious_abs_return": 0.5,
+      "zero_volume_warning_share": 0.2
+    },
+    "run_hash": "f51a572280e2f7abec2f6b0beeca24f1b1ded865f4169303d51a2bcd2242bebf"
+  },
+  "notes": [
+    "Universe identity remains independent of Yahoo symbol mapping.",
+    "Raw OHLCV is cached; features_latest uses split-only technical normalization.",
+    "No paid provider or API key is used.",
+    "No Alpha Vantage adapter or fallback exists.",
+    "P0 candidate filtering is intentionally not executed in this starter package."
+  ]
+}

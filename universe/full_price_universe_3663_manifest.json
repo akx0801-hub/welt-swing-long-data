@@ -1,0 +1,72 @@
+{
+  "schema": "WELT_SWING_FULL_PRICE_UNIVERSE_3663_V0_1",
+  "source_master": "universe/Welt-Swing-Universe-Master-EvidenceFrozen-v0.7.csv",
+  "source_master_sha256": "0763fc9bc2c975d4d36f8c384f323efead88a54bc5d2b7f130c3725291fb6f3e",
+  "source_rows": 3664,
+  "active_rows": 3663,
+  "inactive_rows": 1,
+  "inactive_ws_ids": [
+    "WS:SRC:ZA_TOP40:8096AB44770BB485"
+  ],
+  "rows": 3663,
+  "selection": "All Active=True rows from the evidence-frozen v0.7 master. No price, liquidity, setup, quality, ranking, news, P0 or trading filter.",
+  "scope": "FULL_SOURCE_SUPERSET_PRICE_DATA_RUN",
+  "segments": [
+    "AU_ASX200",
+    "BR_IBRX100",
+    "CA_TSX",
+    "CN_CSI300",
+    "EU_STOXX600",
+    "HK_HSI",
+    "IN_NIFTY50",
+    "JP_N225",
+    "KR_KOSPI200",
+    "MX_IPC",
+    "NZ_NZX50",
+    "TW_TW50",
+    "US_SP1500",
+    "ZA_TOP40"
+  ],
+  "segment_counts": {
+    "AU_ASX200": 200,
+    "BR_IBRX100": 99,
+    "CA_TSX": 217,
+    "CN_CSI300": 300,
+    "EU_STOXX600": 600,
+    "HK_HSI": 93,
+    "IN_NIFTY50": 50,
+    "JP_N225": 225,
+    "KR_KOSPI200": 200,
+    "MX_IPC": 34,
+    "NZ_NZX50": 50,
+    "TW_TW50": 50,
+    "US_SP1500": 1506,
+    "ZA_TOP40": 39
+  },
+  "yahoo_symbol_nonblank": 3663,
+  "provider_symbol_duplicate_rows": 0,
+  "provider_symbol_duplicate_symbols": [],
+  "mapping_status_counts": {
+    "CURATED_CANDIDATE_YAHOO_SEARCH_VERIFIED": 112,
+    "DERIVED_RULE": 1469,
+    "DERIVED_RULE_NORMALIZED": 379,
+    "EVIDENCE_FROZEN_OVERRIDE": 8,
+    "EXPECTED_MARKET_VERIFIED_EU": 35,
+    "MARKET_RULE_VERIFIED_CA_NA": 1,
+    "MARKET_RULE_VERIFIED_MX": 15,
+    "PROJECT_OVERRIDE": 9,
+    "SEARCH_HIGH_CONFIDENCE": 107,
+    "SECOND_PASS_REVALIDATED_JSE": 22,
+    "US_SOURCE_DIRECT": 1506
+  },
+  "output_csv_sha256": "74488d6c7e23cf86daa2c2c64386d4e973130eda232d358a42d0c61802212044",
+  "productive_trading_authority": false,
+  "p0_run": false,
+  "alpha_vantage_allowed": false,
+  "notes": [
+    "This is a data-collection release, not a trading-authority release.",
+    "Canonical identity remains WS_ID/MIC/source identity; Yahoo_Symbol is provider mapping only.",
+    "MultiChoice stale/delisted source row remains inactive and is excluded from the 3663 active denominator.",
+    "P0 parameters remain unpromoted and P0 is not executed."
+  ]
+}
