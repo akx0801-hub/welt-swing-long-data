@@ -1,0 +1,11 @@
+{
+  "mode": "auto",
+  "universe_file": "universe/full_price_universe_3663.csv",
+  "db_path": "runtime_cache/full_3663_prices.sqlite",
+  "output_dir": "output_full_3663",
+  "batch_size": 100,
+  "initial_period": "2y",
+  "overlap_calendar_days": 14,
+  "pause_between_batches_seconds": 1.0,
+  "repair_anomalies": true
+}
