@@ -41,6 +41,11 @@ SOURCE_ID = "YFINANCE_FREE"
 ALPHA_VANTAGE_ALLOWED = False
 PRODUCTIVE = False
 
+# Optional project-level Yahoo symbol overrides. This is a provider-symbol layer only;
+# it never changes canonical WS_ID / ISIN / MIC identity.
+DEFAULT_YAHOO_OVERRIDE_FILE = Path("config/yahoo_symbol_overrides.csv")
+YAHOO_SYMBOL_SENTINELS = {"", "UNMAPPED", "PENDING", "NA", "N/A", "NONE", "NULL"}
+
 
 class FreeDataContractError(RuntimeError):
     pass
@@ -181,20 +186,54 @@ def derive_yahoo_symbol(primary_ticker: str, primary_mic: str) -> tuple[str | No
     return f"{base}{suffix}", status
 
 
-def build_yahoo_symbol_map(universe: pd.DataFrame) -> pd.DataFrame:
+def load_yahoo_symbol_overrides(path: str | Path | None = None) -> dict[str, str]:
+    """Load a small audited provider-symbol override layer.
+
+    The override file is optional. It must contain WS_ID and Yahoo_Symbol.
+    Canonical identity remains in the universe master; this file only fixes provider syntax.
+    """
+    p = Path(path) if path is not None else DEFAULT_YAHOO_OVERRIDE_FILE
+    if not p.exists():
+        return {}
+    df = pd.read_csv(p)
+    required = {"WS_ID", "Yahoo_Symbol"}
+    missing = required - set(df.columns)
+    if missing:
+        raise FreeDataContractError(f"Yahoo override file missing required columns: {sorted(missing)}")
+    if df["WS_ID"].astype(str).duplicated().any():
+        dupes = df.loc[df["WS_ID"].astype(str).duplicated(keep=False), "WS_ID"].astype(str).tolist()
+        raise FreeDataContractError(f"Duplicate WS_ID in Yahoo override file: {sorted(set(dupes))}")
+    out: dict[str, str] = {}
+    for _, r in df.iterrows():
+        ws = _clean_text(r.get("WS_ID"))
+        sym = _clean_text(r.get("Yahoo_Symbol"))
+        if not ws or not sym or sym.upper() in YAHOO_SYMBOL_SENTINELS:
+            raise FreeDataContractError(f"Invalid Yahoo override row for WS_ID={ws!r}")
+        out[ws] = sym
+    return out
+
+
+def build_yahoo_symbol_map(universe: pd.DataFrame, *, override_path: str | Path | None = None) -> pd.DataFrame:
     required = {"WS_ID", "Primary_Ticker", "Primary_MIC"}
     missing = required - set(universe.columns)
     if missing:
         raise FreeDataContractError(f"Universe missing required columns: {sorted(missing)}")
+    overrides = load_yahoo_symbol_overrides(override_path)
     rows: list[dict[str, Any]] = []
     for _, r in universe.iterrows():
+        ws_id = str(r["WS_ID"])
+        override = _clean_text(overrides.get(ws_id))
         explicit = _clean_text(r.get("Yahoo_Symbol"))
-        if explicit:
+        if explicit.upper() in YAHOO_SYMBOL_SENTINELS:
+            explicit = ""
+        if override:
+            symbol, status = override, "PROJECT_OVERRIDE"
+        elif explicit:
             symbol, status = explicit, "EXPLICIT"
         else:
             symbol, status = derive_yahoo_symbol(r.get("Primary_Ticker"), r.get("Primary_MIC"))
         rows.append({
-            "WS_ID": str(r["WS_ID"]),
+            "WS_ID": ws_id,
             "Yahoo_Symbol": symbol,
             "Yahoo_Mapping_Status": status,
             "Primary_Ticker": _clean_text(r.get("Primary_Ticker")),
@@ -314,6 +353,31 @@ class SQLitePriceCache:
             try: out[ws]=date.fromisoformat(d)
             except Exception: pass
         return out
+
+    def reset_changed_symbols(self, mapping: pd.DataFrame) -> list[dict[str, str]]:
+        """Purge cached history when a WS_ID is remapped to a different Yahoo symbol.
+
+        Mixing bars from two provider symbols under one canonical WS_ID is forbidden.
+        The security is reloaded as INITIAL on the same run after this reset.
+        """
+        if mapping.empty:
+            return []
+        current = {
+            str(ws): (None if sym is None else str(sym))
+            for ws, sym in self.conn.execute("SELECT ws_id,yahoo_symbol FROM cache_state").fetchall()
+        }
+        changed: list[dict[str, str]] = []
+        for _, r in mapping.iterrows():
+            ws = str(r["WS_ID"])
+            new_sym = _clean_text(r.get("Yahoo_Symbol"))
+            old_sym = _clean_text(current.get(ws))
+            if old_sym and new_sym and old_sym != new_sym:
+                self.conn.execute("DELETE FROM price_daily WHERE ws_id=?", (ws,))
+                self.conn.execute("DELETE FROM cache_state WHERE ws_id=?", (ws,))
+                changed.append({"WS_ID": ws, "old_symbol": old_sym, "new_symbol": new_sym})
+        if changed:
+            self.conn.commit()
+        return changed
 
     def load_price_frame(self, ws_id: str) -> pd.DataFrame:
         """Return the complete cached history for one canonical security.
@@ -606,6 +670,13 @@ class YFinancePriceCacheRunner:
                 missing.append(sym)
                 continue
             x=normalize_symbol_frame(frames[sym])
+            # Some yfinance batch responses contain a symbol frame whose rows are
+            # only union-calendar placeholders. After normalization that is NO DATA
+            # and must enter the bounded rescue pass instead of counting as received.
+            if x.empty:
+                missing_rows.append(r)
+                missing.append(sym)
+                continue
             price_rows_buffer.extend(self._rows_for_db(ws,sym,x,fetched))
             received_rows.append(r)
             received.append(sym)
@@ -720,6 +791,7 @@ class YFinancePriceCacheRunner:
 
     def run_initial(self, universe: pd.DataFrame, *, as_of: date | None=None) -> dict[str,Any]:
         mapping=build_yahoo_symbol_map(universe)
+        symbol_resets=self.cache.reset_changed_symbols(mapping)
         mapped=mapping[mapping["Yahoo_Symbol"].notna()].copy()
         unmapped=mapping[mapping["Yahoo_Symbol"].isna()].copy()
         for _,r in unmapped.iterrows():
@@ -756,6 +828,7 @@ class YFinancePriceCacheRunner:
         result={
             "mode":"INITIAL","source":SOURCE_ID,"productive":False,
             "universe_count":int(len(universe)),"mapped_count":int(len(mapped)),"unmapped_count":int(len(unmapped)),
+            "symbol_resets":int(len(symbol_resets)),
             "rescue_attempted":int(rescue_attempted),
             "repair_candidates":int(len(set(repair_syms))),"repair_attempted":int(repaired_attempted),
             "missing_symbols":int(len(set(missing_after_rescue))),"cache_counts":self.cache.counts(),
@@ -767,6 +840,7 @@ class YFinancePriceCacheRunner:
 
     def run_incremental(self, universe: pd.DataFrame, *, end: date, as_of: date | None=None) -> dict[str,Any]:
         mapping=build_yahoo_symbol_map(universe)
+        symbol_resets=self.cache.reset_changed_symbols(mapping)
         mapped=mapping[mapping["Yahoo_Symbol"].notna()].copy()
         dates=self.cache.last_bar_dates(mapped["WS_ID"].tolist())
         initial_idx=[]; update_idx=[]
@@ -810,6 +884,7 @@ class YFinancePriceCacheRunner:
         result={
             "mode":"INCREMENTAL","source":SOURCE_ID,"productive":False,
             "universe_count":int(len(universe)),
+            "symbol_resets":int(len(symbol_resets)),
             "initial_names":len(initial_idx),"update_names":len(update_idx),
             "rescue_attempted":int(rescue_attempted),
             "repair_candidates":int(len(set(repair_syms))),

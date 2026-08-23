@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 from price_cache import (
-    derive_yahoo_symbol, split_download_frame, normalize_symbol_frame,
+    derive_yahoo_symbol, build_yahoo_symbol_map, split_download_frame, normalize_symbol_frame,
     qa_symbol_frame, FreeDataConfig, SQLitePriceCache, YFinanceBatchClient,
     YFinancePriceCacheRunner,
 )
@@ -39,6 +39,100 @@ def test_mapping():
         got,status = derive_yahoo_symbol(t,mic)
         assert got == exp, (t,mic,got,exp,status)
     ok("mapping rules")
+
+
+def test_project_override_layer_and_sentinel_handling():
+    universe = pd.DataFrame([
+        {"WS_ID":"WS:XETR:MRCG.DE","Primary_Ticker":"MRCG.DE","Primary_MIC":"XETR","Yahoo_Symbol":"UNMAPPED"},
+        {"WS_ID":"TEST:SAP","Primary_Ticker":"SAP","Primary_MIC":"XETR","Yahoo_Symbol":"PENDING"},
+    ])
+    with tempfile.TemporaryDirectory() as td:
+        override = Path(td)/"yahoo_symbol_overrides.csv"
+        pd.DataFrame([
+            {"WS_ID":"WS:XETR:MRCG.DE","Yahoo_Symbol":"MRK.DE"},
+        ]).to_csv(override,index=False)
+        out = build_yahoo_symbol_map(universe, override_path=override).set_index("WS_ID")
+        assert out.loc["WS:XETR:MRCG.DE","Yahoo_Symbol"] == "MRK.DE", out.to_dict("index")
+        assert out.loc["WS:XETR:MRCG.DE","Yahoo_Mapping_Status"] == "PROJECT_OVERRIDE", out.to_dict("index")
+        assert out.loc["TEST:SAP","Yahoo_Symbol"] == "SAP.DE", out.to_dict("index")
+        assert out.loc["TEST:SAP","Yahoo_Mapping_Status"] == "DERIVED_RULE", out.to_dict("index")
+    ok("project override layer + UNMAPPED/PENDING sentinel handling")
+
+
+def test_symbol_change_purges_cached_history():
+    with tempfile.TemporaryDirectory() as td:
+        cache = SQLitePriceCache(Path(td)/"px.sqlite")
+        try:
+            fetched="2026-08-23T00:00:00+00:00"
+            cache.upsert_price_rows([(
+                "WS:TEST","OLD.L","2026-08-20",10.0,11.0,9.0,10.5,10.5,1000.0,0.0,0.0,0,
+                "YFINANCE_FREE",fetched
+            )])
+            cache.upsert_state({
+                "ws_id":"WS:TEST","yahoo_symbol":"OLD.L","mapping_status":"DERIVED_RULE",
+                "status":"READY","reason_code":None,"unique_bars":1,"valid_bars":1,
+                "repaired_rows":0,"suspicious_returns":0,"zero_volume_share":0.0,
+                "first_bar_date":"2026-08-20","last_bar_date":"2026-08-20",
+                "last_fetch_utc":fetched,"batch_id":"T","last_error":None,
+            })
+            cache.conn.commit()
+            mapping=pd.DataFrame([{"WS_ID":"WS:TEST","Yahoo_Symbol":"NEW.L"}])
+            changed=cache.reset_changed_symbols(mapping)
+            assert len(changed)==1 and changed[0]["old_symbol"]=="OLD.L" and changed[0]["new_symbol"]=="NEW.L", changed
+            assert cache.load_price_frame("WS:TEST").empty
+            n=cache.conn.execute("SELECT COUNT(*) FROM cache_state WHERE ws_id='WS:TEST'").fetchone()[0]
+            assert n==0, n
+        finally:
+            cache.close()
+    ok("provider symbol change purges old WS_ID price history")
+
+
+def test_normalized_empty_frame_enters_bounded_rescue():
+    good = _good_frame()
+    calls=[]
+
+    def fake_download(**kwargs):
+        symbols=list(kwargs.get("tickers") or [])
+        calls.append(tuple(symbols))
+        if symbols == ["AAA","BBB"]:
+            idx=good.index
+            tuples=[]; arrays=[]
+            for sym in symbols:
+                for col, series in [
+                    ("Open",good["open"]),("High",good["high"]),("Low",good["low"]),
+                    ("Close",good["close"]),("Adj Close",good["adj_close"]),
+                    ("Volume",good["volume"]),("Dividends",good["dividends"]),("Stock Splits",good["stock_splits"]),
+                ]:
+                    tuples.append((sym,col))
+                    arrays.append(series.to_numpy() if sym=="AAA" else np.full(len(idx),np.nan))
+            return pd.DataFrame(np.column_stack(arrays),index=idx,columns=pd.MultiIndex.from_tuples(tuples))
+        sym=symbols[0]
+        tuples=[]; arrays=[]
+        for col, series in [
+            ("Open",good["open"]),("High",good["high"]),("Low",good["low"]),
+            ("Close",good["close"]),("Adj Close",good["adj_close"]),
+            ("Volume",good["volume"]),("Dividends",good["dividends"]),("Stock Splits",good["stock_splits"]),
+        ]:
+            tuples.append((sym,col)); arrays.append(series.to_numpy())
+        return pd.DataFrame(np.column_stack(arrays),index=good.index,columns=pd.MultiIndex.from_tuples(tuples))
+
+    universe=pd.DataFrame([
+        {"WS_ID":"TEST:AAA","Primary_Ticker":"AAA","Primary_MIC":"XNAS","Yahoo_Symbol":"AAA"},
+        {"WS_ID":"TEST:BBB","Primary_Ticker":"BBB","Primary_MIC":"XNAS","Yahoo_Symbol":"BBB"},
+    ])
+    with tempfile.TemporaryDirectory() as td:
+        cache=SQLitePriceCache(Path(td)/"px.sqlite")
+        try:
+            cfg=FreeDataConfig(batch_size=10,pause_between_batches_seconds=0)
+            runner=YFinancePriceCacheRunner(cache,YFinanceBatchClient(config=cfg,download_func=fake_download),config=cfg)
+            result=runner.run_initial(universe,as_of=good.index[-1].date())
+            states=pd.read_sql_query("SELECT ws_id,status FROM cache_state ORDER BY ws_id",cache.conn)
+            assert states["status"].tolist()==["READY","READY"],states.to_dict("records")
+            assert int(result["rescue_attempted"])==1,result
+            assert len(calls)==2,calls
+        finally:
+            cache.close()
+    ok("post-normalization empty frame enters bounded rescue")
 
 
 def test_split_adjustment():
@@ -301,6 +395,9 @@ def test_feature_builder_excludes_isolated_invalid_bar():
 
 def main():
     test_mapping()
+    test_project_override_layer_and_sentinel_handling()
+    test_symbol_change_purges_cached_history()
+    test_normalized_empty_frame_enters_bounded_rescue()
     test_split_adjustment()
     test_multiindex_parser()
     test_cross_market_union_placeholders()
