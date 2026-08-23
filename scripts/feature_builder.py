@@ -7,6 +7,20 @@ import pandas as pd
 import numpy as np
 
 
+
+def technical_valid_mask_for_features(df: pd.DataFrame) -> pd.Series:
+    """Mirror price-cache hard bar validity; preserve raw cache, exclude bad bars from features."""
+    o = pd.to_numeric(df["open"], errors="coerce")
+    h = pd.to_numeric(df["high"], errors="coerce")
+    l = pd.to_numeric(df["low"], errors="coerce")
+    c = pd.to_numeric(df["close"], errors="coerce")
+    v = pd.to_numeric(df["volume"], errors="coerce")
+    finite = pd.concat([o,h,l,c], axis=1).replace([np.inf,-np.inf], np.nan).notna().all(axis=1)
+    positive = (pd.concat([o,h,l,c], axis=1) > 0).all(axis=1)
+    relation = (h >= l) & (c <= h) & (c >= l)
+    nonnegative_volume = ~((v < 0) & v.notna())
+    return finite & positive & relation & nonnegative_volume
+
 def split_adjust_technical(df: pd.DataFrame) -> pd.DataFrame:
     """Create a split-only adjusted technical series.
 
@@ -64,6 +78,13 @@ def build_features(db_path: str | Path, universe_csv: str | Path) -> pd.DataFram
 
     rows: list[dict] = []
     for ws_id, g in px.groupby("ws_id", sort=False):
+        g = g.sort_values("day").copy()
+        raw_bars = int(len(g))
+        valid_mask = technical_valid_mask_for_features(g)
+        g = g.loc[valid_mask].copy()
+        excluded_invalid_bars = raw_bars - int(len(g))
+        if g.empty:
+            continue
         g = split_adjust_technical(g)
         c = pd.to_numeric(g["close_tech"], errors="coerce")
         h = pd.to_numeric(g["high_tech"], errors="coerce")
@@ -97,6 +118,9 @@ def build_features(db_path: str | Path, universe_csv: str | Path) -> pd.DataFram
             "Yahoo_Symbol": str(g["yahoo_symbol"].iloc[-1]),
             "AsOf": str(g["day"].iloc[-1]),
             "Bars": int(len(g)),
+            "Bars_Raw": raw_bars,
+            "Bars_Used": int(len(g)),
+            "Excluded_Invalid_Bars": excluded_invalid_bars,
             "Close_Raw": float(pd.to_numeric(g["close"], errors="coerce").iloc[-1]),
             "Close_Tech": last_close,
             "EMA20": last_ema20,

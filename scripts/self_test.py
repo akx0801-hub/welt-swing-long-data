@@ -12,7 +12,7 @@ from price_cache import (
     qa_symbol_frame, FreeDataConfig, SQLitePriceCache, YFinanceBatchClient,
     YFinancePriceCacheRunner,
 )
-from feature_builder import split_adjust_technical
+from feature_builder import split_adjust_technical, build_features
 
 
 def ok(name):
@@ -96,12 +96,23 @@ def test_open_outside_range_is_not_hard_fail():
     ok("open outside H/L is not a whole-security quarantine")
 
 
-def test_impossible_hlc_still_quarantines():
+def test_one_isolated_invalid_bar_is_excluded_not_security_quarantined():
     df = _good_frame()
     df.iloc[40, df.columns.get_loc("low")] = df.iloc[40]["high"] + 5.0
     qa = qa_symbol_frame(df, config=FreeDataConfig(), as_of=df.index[-1].date())
+    assert qa["status"] == "READY", qa
+    assert qa["reason_code"] == "ISOLATED_INVALID_BAR_EXCLUDED", qa
+    assert qa["unique_bars"] == 270 and qa["valid_bars"] == 269, qa
+    ok("one isolated invalid bar is excluded while deep series stays READY")
+
+
+def test_two_invalid_bars_still_quarantine():
+    df = _good_frame()
+    for i in (40, 80):
+        df.iloc[i, df.columns.get_loc("low")] = df.iloc[i]["high"] + 5.0
+    qa = qa_symbol_frame(df, config=FreeDataConfig(), as_of=df.index[-1].date())
     assert qa["status"] == "QUARANTINE", qa
-    ok("impossible H/L/C still quarantines")
+    ok("two invalid bars still quarantine")
 
 
 def test_incremental_qa_uses_full_persisted_history():
@@ -196,8 +207,10 @@ def test_missing_symbol_gets_bounded_rescue_batch():
 def test_invalid_ohlc_triggers_targeted_full_history_repair():
     good = _good_frame()
     bad = good.copy()
-    # One genuinely impossible H/L/C row.
-    bad.iloc[20, bad.columns.get_loc("low")] = bad.iloc[20]["high"] + 5.0
+    # Two genuinely impossible H/L/C rows: beyond isolated-bar tolerance,
+    # therefore targeted repair must still trigger.
+    for i in (20, 40):
+        bad.iloc[i, bad.columns.get_loc("low")] = bad.iloc[i]["high"] + 5.0
     calls = []
 
     def fake_download(**kwargs):
@@ -237,16 +250,60 @@ def test_invalid_ohlc_triggers_targeted_full_history_repair():
             cache.close()
     ok("invalid OHLC triggers targeted full-history yfinance repair")
 
+
+def test_feature_builder_excludes_isolated_invalid_bar():
+    good = _good_frame()
+    with tempfile.TemporaryDirectory() as td:
+        db = Path(td)/"px.sqlite"
+        universe_csv = Path(td)/"universe.csv"
+        cache = SQLitePriceCache(db)
+        try:
+            rows=[]
+            fetched="2026-08-23T00:00:00+00:00"
+            for day, r in good.iterrows():
+                low=float(r["low"])
+                if day == good.index[40]:
+                    low=float(r["high"])+5.0
+                rows.append((
+                    "TEST:AAA","AAA",day.date().isoformat(),
+                    float(r["open"]),float(r["high"]),low,float(r["close"]),
+                    float(r["adj_close"]),float(r["volume"]),0.0,0.0,0,
+                    "YFINANCE_FREE",fetched
+                ))
+            cache.upsert_price_rows(rows)
+            qa=qa_symbol_frame(cache.load_price_frame("TEST:AAA"),config=FreeDataConfig(),as_of=good.index[-1].date())
+            cache.upsert_state({
+                "ws_id":"TEST:AAA","yahoo_symbol":"AAA","mapping_status":"EXPLICIT",
+                "last_fetch_utc":fetched,"batch_id":"T","last_error":None,
+                **{k:v for k,v in qa.items() if k!="warning_zero_volume"}
+            })
+            cache.conn.commit()
+        finally:
+            cache.close()
+        pd.DataFrame([{
+            "WS_ID":"TEST:AAA","Name":"AAA","Primary_Ticker":"AAA","Primary_MIC":"XNAS",
+            "Primary_Currency":"USD"
+        }]).to_csv(universe_csv,index=False)
+        feat=build_features(db,universe_csv)
+        assert len(feat)==1, feat
+        row=feat.iloc[0]
+        assert int(row["Bars_Raw"])==270, row.to_dict()
+        assert int(row["Bars_Used"])==269, row.to_dict()
+        assert int(row["Excluded_Invalid_Bars"])==1, row.to_dict()
+    ok("feature builder excludes isolated invalid bar from technical series")
+
 def main():
     test_mapping()
     test_split_adjustment()
     test_multiindex_parser()
     test_cross_market_union_placeholders()
     test_open_outside_range_is_not_hard_fail()
-    test_impossible_hlc_still_quarantines()
+    test_one_isolated_invalid_bar_is_excluded_not_security_quarantined()
+    test_two_invalid_bars_still_quarantine()
     test_incremental_qa_uses_full_persisted_history()
     test_missing_symbol_gets_bounded_rescue_batch()
     test_invalid_ohlc_triggers_targeted_full_history_repair()
+    test_feature_builder_excludes_isolated_invalid_bar()
     print("SELF_TEST_RESULT=PASS")
 
 

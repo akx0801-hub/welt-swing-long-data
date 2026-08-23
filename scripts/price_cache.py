@@ -424,42 +424,59 @@ def normalize_symbol_frame(df: pd.DataFrame) -> pd.DataFrame:
     return x[["open","high","low","close","adj_close","volume","dividends","stock_splits","repaired"]]
 
 
+def technical_valid_mask(df: pd.DataFrame) -> pd.Series:
+    """Hard-valid daily bars for technical calculations.
+
+    Open must be finite/positive, but may lie marginally outside H/L on some Yahoo
+    auction-market feeds. High/Low/Close must be internally consistent. Negative
+    volume is invalid; missing volume is tolerated because price-only technical
+    features can still be computed.
+    """
+    x = normalize_symbol_frame(df)
+    finite_ohlc = x[["open","high","low","close"]].replace([np.inf,-np.inf], np.nan).notna().all(axis=1)
+    positive = (x[["open","high","low","close"]] > 0).all(axis=1)
+    relation = (x["high"] >= x["low"]) & (x["close"] <= x["high"]) & (x["close"] >= x["low"])
+    nonnegative_volume = ~((x["volume"] < 0) & x["volume"].notna())
+    return finite_ohlc & positive & relation & nonnegative_volume
+
+
 def qa_symbol_frame(df: pd.DataFrame, *, config: FreeDataConfig, as_of: date | None = None) -> dict[str, Any]:
     x = normalize_symbol_frame(df)
     unique_bars = int(len(x))
-    finite_ohlc = x[["open","high","low","close"]].replace([np.inf,-np.inf], np.nan).notna().all(axis=1)
-    positive = (x[["open","high","low","close"]] > 0).all(axis=1)
-    # Some Yahoo daily feeds (notably selected auction-driven markets) can report
-    # an Open print marginally outside the day's High/Low range. For Swing-Long
-    # technical features H/L/C consistency is the hard requirement; Open remains
-    # required, finite and positive, but an Open-outside-range observation is a
-    # warning rather than a full-security quarantine.
-    relation = (x["high"] >= x["low"]) & (x["close"] <= x["high"]) & (x["close"] >= x["low"])
-    valid = finite_ohlc & positive & relation
-    valid_bars = int(valid.sum())
-    invalid_rows = int((~valid).sum())
+    valid = technical_valid_mask(x) if unique_bars else pd.Series(dtype=bool)
+    valid_bars = int(valid.sum()) if unique_bars else 0
+    invalid_rows = int((~valid).sum()) if unique_bars else 0
 
-    vol = x["volume"]
-    invalid_volume = int(((vol < 0) & vol.notna()).sum())
-    zero_volume_share = float(((vol == 0) & vol.notna()).sum() / max(1, vol.notna().sum()))
-    repaired_rows = int((x["repaired"].fillna(0) != 0).sum())
+    # One isolated malformed historical bar does not invalidate an otherwise
+    # deep, liquid two-year series. It remains preserved in RAW cache for audit,
+    # but downstream technical features must exclude it. Two or more malformed
+    # bars still quarantine the whole security unless a later repair succeeds.
+    isolated_invalid_bar = (
+        invalid_rows == 1
+        and valid_bars >= config.ready_unique_bars
+    )
 
-    ret = x["close"].pct_change(fill_method=None).abs()
-    # split action on current/adjacent day suppresses a raw >50% anomaly flag.
-    split = x["stock_splits"].fillna(0).abs() > 0
-    split_near = split | split.shift(1, fill_value=False) | split.shift(-1, fill_value=False)
-    suspicious_returns = int(((ret > config.suspicious_abs_return) & ~split_near).sum())
+    xv = x.loc[valid].copy() if unique_bars else x.copy()
 
-    first_bar = x.index.min().date().isoformat() if unique_bars else None
-    last_bar = x.index.max().date().isoformat() if unique_bars else None
+    vol = xv["volume"] if not xv.empty else pd.Series(dtype=float)
+    zero_volume_share = float(((vol == 0) & vol.notna()).sum() / max(1, vol.notna().sum())) if len(vol) else 0.0
+    repaired_rows = int((xv["repaired"].fillna(0) != 0).sum()) if not xv.empty else 0
+
+    ret = xv["close"].pct_change(fill_method=None).abs() if not xv.empty else pd.Series(dtype=float)
+    split = xv["stock_splits"].fillna(0).abs() > 0 if not xv.empty else pd.Series(dtype=bool)
+    split_near = split | split.shift(1, fill_value=False) | split.shift(-1, fill_value=False) if not xv.empty else split
+    suspicious_returns = int(((ret > config.suspicious_abs_return) & ~split_near).sum()) if not xv.empty else 0
+
+    first_bar = xv.index.min().date().isoformat() if valid_bars else None
+    last_bar = xv.index.max().date().isoformat() if valid_bars else None
     stale = False
-    if unique_bars and as_of is not None:
-        stale = (as_of - x.index.max().date()).days > config.stale_calendar_days
+    if valid_bars and as_of is not None:
+        stale = (as_of - xv.index.max().date()).days > config.stale_calendar_days
 
     reason = None
     if unique_bars == 0:
         status, reason = "DOWNLOAD_FAILED", "NO_DATA"
-    elif invalid_rows > 0 or invalid_volume > 0:
+    elif invalid_rows > 0 and not isolated_invalid_bar:
         status, reason = "QUARANTINE", "INVALID_OHLC_OR_VOLUME"
     elif suspicious_returns > 0:
         status, reason = "QUARANTINE", "SUSPICIOUS_RETURN_NEEDS_REPAIR"
@@ -467,6 +484,8 @@ def qa_symbol_frame(df: pd.DataFrame, *, config: FreeDataConfig, as_of: date | N
         status, reason = "STALE", "LAST_BAR_TOO_OLD"
     elif unique_bars >= config.ready_unique_bars and valid_bars >= config.min_valid_bars:
         status = "READY"
+        if isolated_invalid_bar:
+            reason = "ISOLATED_INVALID_BAR_EXCLUDED"
     else:
         status, reason = "WARMUP", "INSUFFICIENT_HISTORY"
 
