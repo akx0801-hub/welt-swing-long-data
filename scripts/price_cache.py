@@ -103,7 +103,19 @@ MIC_SUFFIX_RULES: dict[str, str] = {
     "XPAR": ".PA", "XETR": ".DE", "XLON": ".L", "XSWX": ".SW",
     "XAMS": ".AS", "XMIL": ".MI", "XMAD": ".MC", "XBRU": ".BR",
     "XSTO": ".ST", "XCSE": ".CO", "XHEL": ".HE", "XOSL": ".OL",
-    "XLIS": ".LS", "XWBO": ".VI", "XDUB": ".IR",
+    "XLIS": ".LS", "XWBO": ".VI", "XDUB": ".IR", "XWAR": ".WA",
+}
+
+# Source-universe tickers may already carry venue/RIC-style suffixes.  These are
+# syntax hints only, never identity evidence.  We strip only suffixes that are
+# deterministic for the stated MIC, then re-apply Yahoo's venue suffix.
+MIC_INPUT_SUFFIXES: dict[str, tuple[str, ...]] = {
+    "XPAR": (".PA",), "XETR": (".DE",), "XLON": (".L",),
+    "XSWX": (".S", ".SW"), "XAMS": (".AS",), "XMIL": (".MI",),
+    "XMAD": (".MC",), "XBRU": (".BR",), "XSTO": (".ST",),
+    "XCSE": (".CO",), "XHEL": (".HE",), "XOSL": (".OL",),
+    "XLIS": (".LS",), "XWBO": (".VI",), "XDUB": (".I", ".IR"),
+    "XWAR": (".WA",),
 }
 
 
@@ -116,8 +128,11 @@ def _clean_text(v: Any) -> str:
 def derive_yahoo_symbol(primary_ticker: str, primary_mic: str) -> tuple[str | None, str]:
     """Return (candidate symbol, mapping_status).
 
-    Conservative by design: punctuation-heavy tickers are not transformed because
-    Yahoo share-class conventions vary by venue. Those require explicit overrides.
+    The universe may store a primary ticker in venue/RIC-style form (for example
+    LGEN.L, VZN.S or HEIN.AS).  For known MIC/suffix pairs we normalize that syntax
+    before applying Yahoo's venue suffix.  This remains a *candidate* mapping only:
+    actual price availability/QA is what validates the candidate.  Ambiguous
+    punctuation is still left for explicit overrides.
     """
     ticker = _clean_text(primary_ticker)
     mic = _clean_text(primary_mic).upper()
@@ -129,7 +144,21 @@ def derive_yahoo_symbol(primary_ticker: str, primary_mic: str) -> tuple[str | No
         return None, "EXPLICIT_OVERRIDE_REQUIRED"
 
     suffix = MIC_SUFFIX_RULES[mic]
-    base = ticker.upper()
+    base = ticker
+    normalized = False
+
+    # Strip only a MIC-compatible source suffix.  Longest first avoids .S matching
+    # the tail of .SW on Swiss symbols.
+    for src_suffix in sorted(MIC_INPUT_SUFFIXES.get(mic, ()), key=len, reverse=True):
+        if base.upper().endswith(src_suffix.upper()):
+            base = base[:-len(src_suffix)]
+            normalized = True
+            break
+
+    base = base.upper()
+    if not base:
+        return None, "EXPLICIT_OVERRIDE_REQUIRED"
+
     if mic == "XHKG":
         # Yahoo convention for numeric HK codes: 0700.HK, 9988.HK.
         if not base.isdigit():
@@ -139,14 +168,17 @@ def derive_yahoo_symbol(primary_ticker: str, primary_mic: str) -> tuple[str | No
         if not base.isdigit():
             return None, "EXPLICIT_OVERRIDE_REQUIRED"
         base = base.zfill(6)
-    elif mic in {"XNYS", "XNAS", "XASE"} and "." in base:
-        # Common Yahoo convention for US share classes, e.g. BRK-B.
+    elif mic in {"XNYS", "XNAS", "XASE", "XTSE", "XTSX"} and "." in base:
+        # Yahoo uses hyphens for common US/Canadian share classes, e.g. BRK-B,
+        # TECK-B.TO.  This is deterministic syntax normalization, not identity repair.
         base = base.replace(".", "-")
+        normalized = True
     elif "." in base:
-        # Do not guess punctuation transformation on non-US venues.
+        # Any punctuation left after stripping the known venue suffix is ambiguous.
         return None, "EXPLICIT_OVERRIDE_REQUIRED"
 
-    return f"{base}{suffix}", "DERIVED_RULE"
+    status = "DERIVED_RULE_NORMALIZED" if normalized else "DERIVED_RULE"
+    return f"{base}{suffix}", status
 
 
 def build_yahoo_symbol_map(universe: pd.DataFrame) -> pd.DataFrame:

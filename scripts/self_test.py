@@ -27,6 +27,13 @@ def test_mapping():
         ("700","XHKG","0700.HK"),
         ("BHP","XASX","BHP.AX"),
         ("RELIANCE","XNSE","RELIANCE.NS"),
+        # G3 mapping-regression cases from the r6 primary-universe master.
+        ("LGEN.L","XLON","LGEN.L"),
+        ("VZN.S","XSWX","VZN.SW"),
+        ("ISS.CO","XCSE","ISS.CO"),
+        ("HEIN.AS","XAMS","HEIN.AS"),
+        ("INGP.WA","XWAR","INGP.WA"),
+        ("TECK.B","XTSE","TECK-B.TO"),
     ]
     for t,mic,exp in cases:
         got,status = derive_yahoo_symbol(t,mic)
