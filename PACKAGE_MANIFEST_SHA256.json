@@ -1,0 +1,23 @@
+{
+  "schema": "WELT_SWING_LONG_GITHUB_STARTER_V0_1",
+  "files": {
+    ".gitignore": "f7421c8d487b823950d001a04df5ed851cc8e535c606a50b90ce834de5faded4",
+    "README.md": "08edc9dd11bd16e6fda96f1221ec5ab4c708ff0580a0a921d654fb8ecd8a1757",
+    "README_ANDROID.md": "a25acab92cafbfce5e37afc5da1b92cddd4ca5152cbf79ee9b99faaec55b8664",
+    "SECURITY_PUBLIC_REPO.md": "de2f5b3dc86dce800eb23255f77caf3e77ebfe0130964384ebaf36bb6ecff66d",
+    "WORKFLOW_TO_COPY.txt": "bf9c2473c5c8291bf14534fa450b39636b683b80e0877ecc1bb29acbb7741112",
+    "config/run_config.json": "6f6cdcdf0c63e69cc499f38ffd5bca4149cbe469f210afc9c21817a51fcf43f8",
+    "config/run_config_FULL_TEMPLATE.json": "2bf7b71366e45d968e7e57d1b6ccd8b4b68b89a4ef37d4015f4f76f80888c2d1",
+    "output/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "requirements.txt": "b379447ee957b288577e16b7e646a4c69c46ac4108c53eaba85fd00a21c764b7",
+    "runtime_cache/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/assert_run_status.py": "a47ee064039971d6e11704fd25945ef986a7f5eaf0eda90e46ddc0b8f22e8083",
+    "scripts/feature_builder.py": "13e2c5d654790f71f7ecb45c00c33c7a9cb6cd59466d0c39d7b43f19002724a4",
+    "scripts/price_cache.py": "dd4be2bf740593a08b67c37c0066e435d81652465b44c88fe22195a9ca7be0b3",
+    "scripts/run_update.py": "ba9b1306bf25ac08309c662698a2f6dae5c3c73fd95f717fde119dd4d3b8c70e",
+    "scripts/self_test.py": "d774efbe66e2abc0faf6c2d17cbd5618c44acaa00494271a26f9f053583721ec",
+    "scripts/split_normalizer_legacy_reference.py": "1c2ef36d5fd2ec57c238e0053cfa9e2f4dae781162bc3164149f31bf9b952ca8",
+    "universe/smoke_universe.csv": "a339e88976d2fd33540ccbbf5217dc3eac821d76ff144ee2cac01d5d2fd739ee",
+    "universe/u3k_master.csv": "98161373fbd4c7378c8402b813b8d5dd3fb11995c8d2e0e71cd1913ab3689357"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "mode": "auto",
+  "universe_file": "universe/u3k_master.csv",
+  "db_path": "runtime_cache/market_prices.sqlite",
+  "output_dir": "output",
+  "batch_size": 50,
+  "initial_period": "2y",
+  "overlap_calendar_days": 14,
+  "pause_between_batches_seconds": 0.5,
+  "repair_anomalies": true
+}

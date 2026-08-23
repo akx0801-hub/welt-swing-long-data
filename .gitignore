@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+runtime_cache/*.sqlite
+runtime_cache/*.sqlite-shm
+runtime_cache/*.sqlite-wal

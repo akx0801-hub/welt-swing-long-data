@@ -1,0 +1,13 @@
+{
+  "schema": "WELT_SWING_LONG_FREE_DATA_MANIFEST_V0_1",
+  "generated_utc": "2026-08-23T15:52:02.237092+00:00",
+  "files": {
+    "universe/smoke_universe.csv": "a339e88976d2fd33540ccbbf5217dc3eac821d76ff144ee2cac01d5d2fd739ee",
+    "output/mapping_audit.csv": "2050af27f2b52eec4e9fe0f432f45f539f3349cb89747655d54874bf5872fec4",
+    "output/cache_status.csv": "e84cadeab8f6f43db4aea073c78d85c9e117efc4c315b862e512b9cb980cd3f9",
+    "output/errors.csv": "e84cadeab8f6f43db4aea073c78d85c9e117efc4c315b862e512b9cb980cd3f9",
+    "output/batch_log_latest.csv": "8d585a9f8213e8608373519d6e5c5bf825179dd6ce8ba765d27c9e32988f08ab",
+    "output/features_latest.csv": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "output/coverage.json": "ad5655d5b92dce5533189aa5e40cd5644c397b9b5f3361396012e9e5fb2779b0"
+  }
+}
