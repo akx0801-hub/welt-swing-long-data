@@ -1,8 +1,8 @@
 {
   "schema": "WELT_SWING_LONG_FREE_DATA_COVERAGE_V0_1",
-  "generated_utc": "2026-08-23T16:10:03.916169+00:00",
-  "runtime_mode": "INITIAL",
-  "run_status": "PARTIAL",
+  "generated_utc": "2026-08-23T16:40:23.232109+00:00",
+  "runtime_mode": "INCREMENTAL",
+  "run_status": "FAILED",
   "data_source": "YFINANCE_FREE",
   "alpha_vantage_allowed": false,
   "productive_trading_authority": false,
@@ -10,33 +10,28 @@
   "universe_count": 37,
   "mapped_count": 37,
   "mapping_coverage_pct": 100.0,
-  "ready_count": 32,
-  "price_ready_coverage_pct": 86.4865,
+  "ready_count": 0,
+  "price_ready_coverage_pct": 0.0,
   "status_counts": {
-    "READY": 32,
-    "QUARANTINE": 4,
-    "DOWNLOAD_FAILED": 1
+    "WARMUP": 35,
+    "DOWNLOAD_FAILED": 1,
+    "QUARANTINE": 1
   },
-  "features_rows": 32,
+  "features_rows": 0,
   "p0_status": "NOT_RUN_PARAMETERS_NOT_YET_PROMOTED",
   "run_result": {
-    "mode": "INITIAL",
+    "mode": "INCREMENTAL",
     "source": "YFINANCE_FREE",
     "productive": false,
     "universe_count": 37,
-    "mapped_count": 37,
-    "unmapped_count": 0,
-    "repair_candidates": 0,
-    "repair_attempted": 0,
-    "missing_symbols": 0,
+    "initial_names": 1,
+    "update_names": 36,
+    "missing_symbols": 1,
     "cache_counts": {
       "price_rows": 18054,
       "states": 37,
-      "ready": 32,
-      "batches": 4
-    },
-    "mapping_status_counts": {
-      "EXPLICIT": 37
+      "ready": 0,
+      "batches": 9
     },
     "config": {
       "batch_size": 10,
@@ -56,7 +51,7 @@
       "suspicious_abs_return": 0.5,
       "zero_volume_warning_share": 0.2
     },
-    "run_hash": "fbe8169afd42cb1826dbf35bba5cc82c4aed2848d89bd4765efd6f6bb6e67f8a"
+    "run_hash": "2f07ec9c3da5562d17490cfafb9be9051286b6c5b61fa99d58f119d43dfab246"
   },
   "notes": [
     "Universe identity remains independent of Yahoo symbol mapping.",
