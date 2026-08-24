@@ -1,0 +1,73 @@
+{
+  "schema": "WELT_SWING_PRIMARY_MARKET_BUNDLE_PROBE_V0_9",
+  "generated_utc": "2026-08-24T12:38:57.259150+00:00",
+  "run_status": "PRIMARY_MARKET_BUNDLE_PROBE_V0_9_COMPLETE",
+  "source_manual_rows_v0_8": 667,
+  "remaining_manual_rows_v0_9": 667,
+  "strict_candidates_v0_8": 2020,
+  "strict_candidates_v0_9": 2020,
+  "strict_freeze_allowed": false,
+  "markets_probed": 6,
+  "segment_rows": {
+    "CA_TSX": 105,
+    "EU_STOXX600": 365,
+    "HK_HSI": 82,
+    "KR_KOSPI200": 92,
+    "MX_IPC": 6,
+    "ZA_TOP40": 17
+  },
+  "external_reference_requests": 6,
+  "max_external_reference_requests": 6,
+  "request_bound_respected": true,
+  "hkex_reference_probe": {
+    "status": "PARSED",
+    "header_row_zero_based": 2,
+    "reference_rows": 17825,
+    "reference_columns": [
+      "Stock Code",
+      "Name of Securities",
+      "Category",
+      "Sub-Category",
+      "Board Lot",
+      "ISIN",
+      "Expiry Date",
+      "Subject to Stamp Duty",
+      "Shortsell Eligible",
+      "CAS Eligible",
+      "VCM Eligible",
+      "Admitted to CCASS",
+      "Debt Securities Board Lot (Nominal)",
+      "Debt Securities Investor Type",
+      "POS Eligible",
+      "Spread Table\n1 = Part A\n3 = Part B\n5 = Part D\n4 & 6 = Part E",
+      "Trading Currency",
+      "RMB Counter"
+    ],
+    "stock_code_column": "Stock Code",
+    "target_rows": 82,
+    "matched_rows": 82,
+    "coverage": 1.0
+  },
+  "krx_reference_probe": {
+    "status": "REQUEST_ERROR",
+    "target_rows": 92,
+    "error": "HTTPError: 400 Client Error: Bad Request for url: https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd"
+  },
+  "discovered_bulk_links": 21,
+  "decisions_changed": 0,
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "price_downloads_performed": false,
+  "fx_downloads_performed": false,
+  "web_calls_per_security": false,
+  "canonical_master_mutated": false,
+  "notes": [
+    "v0.9 probes only the 667 unresolved v0.8 rows, grouped into six remaining markets.",
+    "Exactly one configured official/bourse-level request is attempted per market; no per-security requests are made.",
+    "HKEX and KRX responses are matched to the frozen target queue when machine-readable reference data is returned.",
+    "Canada, Europe, Mexico and South Africa are capability probes only in v0.9; no positive instrument inference is made from issuer/index membership.",
+    "No v0.8 PASS/FAIL decision is changed and the Strict candidate count remains frozen at 2020.",
+    "The next classification stage may use only security-specific fields whose semantics are documented by an official primary-market source."
+  ]
+}
