@@ -1,0 +1,28 @@
+{
+  "schema": "WELT_SWING_INSTRUMENT_RESOLUTION_V0_6",
+  "generated_utc": "2026-08-24T07:37:26.995311+00:00",
+  "run_status": "INSTRUMENT_RESOLUTION_V0_6_COMPLETE_WITH_REMAINING_REVIEW",
+  "source_review_rows": 2113,
+  "auto_pass_rows": 1332,
+  "auto_fail_rows": 3,
+  "manual_review_rows": 778,
+  "us_sp1500_group_pass_rows": 1332,
+  "existing_explicit_pass_rows_v0_5": 597,
+  "strict_candidate_rows_v0_6": 1929,
+  "strict_freeze_allowed": false,
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "price_downloads_performed": false,
+  "fx_downloads_performed": false,
+  "web_calls_per_security": false,
+  "notes": [
+    "Only the frozen v0.5 2,113-row instrument review queue is processed.",
+    "US_SP1500 is the only blanket PASS segment in v0.6 because current official S&P U.S. index-family evidence is accepted as group-level common-equity evidence.",
+    "Canada is explicitly not blanket-passed because the S&P/TSX Composite includes common stocks and income trust units.",
+    "Australia, Mexico, New Zealand, Europe, Hong Kong, Korea, South Africa and Brazil remain targeted-review segments unless a clear disallowed security token yields an automatic FAIL.",
+    "No canonical master mutation occurs in v0.6; decisions are stored as an overlay.",
+    "No U3K freeze is emitted while manual instrument review remains non-zero.",
+    "P0 remains off."
+  ]
+}
