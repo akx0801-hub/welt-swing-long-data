@@ -1,0 +1,32 @@
+{
+  "schema": "WELT_SWING_SP_TSX_SEMANTICS_REMEDIATION_V0_15",
+  "generated_utc": "2026-08-24T16:25:04.167693+00:00",
+  "run_status": "SP_TSX_SEMANTICS_REMEDIATION_V0_15_COMPLETE_WITH_SOURCE_BLOCK",
+  "source_manual_rows_v0_14": 650,
+  "ca_target_rows": 105,
+  "methodology_article_validated": false,
+  "localized_methodology_pdf_validated": false,
+  "strict_candidates_v0_14": 2037,
+  "strict_candidates_v0_15": 2037,
+  "remaining_manual_rows_v0_15": 650,
+  "decisions_changed": 0,
+  "external_reference_requests": 2,
+  "max_external_reference_requests": 2,
+  "request_bound_respected": true,
+  "strict_freeze_allowed": false,
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "price_downloads_performed": false,
+  "fx_downloads_performed": false,
+  "web_calls_per_security": false,
+  "canonical_master_mutated": false,
+  "notes": [
+    "v0.15 is evidence-only and makes zero instrument decisions.",
+    "It remediates the S&P/TSX semantics source block observed in v0.14.",
+    "The public S&P methodology article must validate the common-stock/income-trust relationship.",
+    "A localized official S&P methodology PDF path is probed for the explicit exclusion list.",
+    "The frozen 650-row queue and 2,037 strict candidates are preserved.",
+    "No per-security request is made; P0 remains off."
+  ]
+}
