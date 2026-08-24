@@ -1,0 +1,24 @@
+{
+  "schema": "WELT_SWING_INSTRUMENT_RESOLUTION_JSE_CONFIG_V0_12",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_11": "output_instrument_resolution_v0_11/summary_v0.11.json",
+  "source_manual_queue_v0_11": "output_instrument_resolution_v0_11/instrument_manual_review_queue_v0.11.csv",
+  "source_full_eligibility_v0_10": "output_instrument_resolution_v0_10/eligibility_after_instrument_v0.10.csv",
+  "source_strict_candidates_v0_10": "output_instrument_resolution_v0_10/strict_u3k_candidate_after_instrument_v0.10.csv",
+  "output_dir": "output_instrument_resolution_v0_12",
+  "expected_source_manual_rows": 667,
+  "expected_source_strict_candidates": 2020,
+  "expected_za_target_rows": 17,
+  "request_timeout_seconds": 45,
+  "max_external_reference_requests": 2,
+  "jse_source": {
+    "name": "JSE Equities ISIN Downloadable Files",
+    "folder_url": "https://clientportal.jse.co.za/downloadable-files?RequestNode=%2FISIN%2FEquities",
+    "record_structure_url": "https://www.jse.co.za/sites/default/files/media/documents/2020-11/ISIN%20Equities%20Record%20Structure.pdf",
+    "instrument_type_reference_url": "https://clientportal.jse.co.za/Content/JSE%20Technology%20Document%20Items/Volume%2009%20-%20JSE%20Reference%20Data%20Management%20v%202.06.pdf",
+    "nna_instrument_description_url": "https://nna.jse.co.za/Help/new_-_procedure_to_request_a_new_isin.htm"
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
