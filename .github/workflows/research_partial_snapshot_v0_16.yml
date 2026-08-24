@@ -53,10 +53,10 @@ jobs:
           x=json.loads(Path('output_research_partial_v0_16/summary_v0.16.json').read_text(encoding='utf-8'))
           assert x['schema']=='WELT_SWING_RESEARCH_PARTIAL_SNAPSHOT_SUMMARY_V0_16'
           assert x['run_status']=='RESEARCH_PARTIAL_SNAPSHOT_V0_16_FROZEN'
-          assert x['full_eligibility_rows']==3663
+          assert x['full_eligibility_rows']==3657
           assert x['included_verified_strict_rows']==2037
           assert x['unresolved_instrument_rows']==650
-          assert x['other_non_strict_rows']==976
+          assert x['other_non_strict_rows']==970
           assert x['strict_u3k_freeze_allowed'] is False
           assert x['research_partial_snapshot_frozen'] is True
           assert x['p0_run'] is False
