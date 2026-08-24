@@ -1,0 +1,100 @@
+name: Welt-Swing Research Partial Snapshot v0.16
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/research_partial_snapshot_v0.16.json'
+
+permissions:
+  contents: write
+
+jobs:
+  freeze_research_partial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: python scripts/freeze_research_partial_v0_16.py --self-test
+
+      - name: Frozen-Input-Gates
+        run: |
+          test "$(git hash-object output_instrument_resolution_v0_15/summary_v0.15.json)" = "5fea6a35bd03c68dcfcf0f60159d04308e0db4db"
+          test "$(git hash-object output_instrument_resolution_v0_15/instrument_manual_review_queue_v0.15.csv)" = "e9d9983ca00e0f4b30b8d519e17268641a0d0004"
+          test "$(git hash-object output_instrument_resolution_v0_14/strict_u3k_candidate_after_instrument_v0.14.csv)" = "05761491a9571acb618c838c4a621a72b5a1f7fd"
+          test "$(git hash-object output_instrument_resolution_v0_14/eligibility_after_instrument_v0.14.csv)" = "ae34a081a6e0dd6730f6bc604955b715a1dfdf62"
+
+      - name: RESEARCH_PARTIAL Snapshot einfrieren
+        run: |
+          python scripts/freeze_research_partial_v0_16.py             --config config/research_partial_snapshot_v0.16.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+
+          x=json.loads(Path('output_research_partial_v0_16/summary_v0.16.json').read_text(encoding='utf-8'))
+          assert x['schema']=='WELT_SWING_RESEARCH_PARTIAL_SNAPSHOT_SUMMARY_V0_16'
+          assert x['run_status']=='RESEARCH_PARTIAL_SNAPSHOT_V0_16_FROZEN'
+          assert x['full_eligibility_rows']==3657
+          assert x['included_verified_strict_rows']==2037
+          assert x['unresolved_instrument_rows']==650
+          assert x['other_non_strict_rows']==970
+          assert x['strict_u3k_freeze_allowed'] is False
+          assert x['research_partial_snapshot_frozen'] is True
+          assert x['p0_run'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+
+          p=pd.read_csv('output_research_partial_v0_16/research_partial_universe_v0.16.csv',
+                        keep_default_na=False,dtype=str)
+          m=pd.read_csv('output_research_partial_v0_16/missing_instrument_coverage_v0.16.csv',
+                        keep_default_na=False,dtype=str)
+          assert len(p)==2037
+          assert len(m)==650
+          assert p['WS_ID'].is_unique and m['WS_ID'].is_unique
+          assert not (set(p['WS_ID']) & set(m['WS_ID']))
+
+          ck=json.loads(Path('output_research_partial_v0_16/stage_checkpoint_v0.16.json').read_text(encoding='utf-8'))
+          assert ck['stage_id']=='RESEARCH_PARTIAL_SNAPSHOT'
+          assert ck['status']=='PARTIAL'
+          assert ck['next_stage']=='P0_RESEARCH_PARTIAL_PARAMETER_FREEZE_AND_DRY_RUN'
+          print('RESEARCH_PARTIAL_SNAPSHOT_V0_16_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_research_partial_v0_16/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Freeze research-partial snapshot v0.16"
+            git push
+          fi
+
+      - name: Audit-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-research-partial-v0.16-${{ github.run_number }}
+          path: output_research_partial_v0_16/
+          retention-days: 14
