@@ -1,0 +1,27 @@
+{
+  "schema": "WELT_SWING_TARGETED_REFRESH_6_CONFIG_V0_3",
+  "source_master": "universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv",
+  "source_queue": "output_non_ready_remediation/targeted_refresh_queue_v0.2.csv",
+  "source_cache": "runtime_cache/full_3663_prices.sqlite",
+  "work_cache": "runtime_cache/full_3663_prices_targeted_work.sqlite",
+  "output_dir": "output_targeted_refresh_6",
+  "initial_period": "2y",
+  "batch_size": 6,
+  "repair_anomalies": true,
+  "pause_between_batches_seconds": 0.0,
+  "expected_targets": {
+    "WS:XASX:XYX": "XYZ.AX",
+    "WS:XMEX:ALFAA": "SIGMAFA.MX",
+    "WS:XNZE:GMT": "GNZ.NZ",
+    "WS:US:IESC": "IESC",
+    "WS:SRC:ZA_TOP40:3CA42D3A25639D8E": "SOL.JO",
+    "WS:US:MNST": "MNST"
+  },
+  "hard_failure_statuses": [
+    "DOWNLOAD_FAILED",
+    "MAPPING_PENDING"
+  ],
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
