@@ -1,0 +1,106 @@
+{
+  "schema": "WELT_SWING_PRIMARY_MARKET_BUNDLE_PROBE_CONFIG_V0_9",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_8": "output_instrument_resolution_v0_8/summary_v0.8.json",
+  "source_manual_queue_v0_8": "output_instrument_resolution_v0_8/instrument_manual_review_queue_v0.8.csv",
+  "output_dir": "output_instrument_resolution_v0_9",
+  "expected_source_manual_rows": 667,
+  "expected_strict_candidates_v0_8": 2020,
+  "expected_segment_rows": {
+    "CA_TSX": 105,
+    "EU_STOXX600": 365,
+    "HK_HSI": 82,
+    "KR_KOSPI200": 92,
+    "MX_IPC": 6,
+    "ZA_TOP40": 17
+  },
+  "request_timeout_seconds": 45,
+  "max_external_reference_requests": 6,
+  "max_discovered_links_per_market": 20,
+  "sources": [
+    {
+      "market": "CA_TSX",
+      "name": "TMX TSX Listed Company Directory",
+      "method": "GET",
+      "url": "https://www.tsx.com/en/listings/listing-with-us/listed-company-directory",
+      "link_keywords": [
+        "download",
+        "full list",
+        ".csv",
+        ".xls",
+        ".xlsx"
+      ]
+    },
+    {
+      "market": "EU_STOXX600",
+      "name": "STOXX Europe 600 Data / Reference Data",
+      "method": "GET",
+      "url": "https://www.stoxx.com/data-index-details?symbol=SXXR",
+      "link_keywords": [
+        "component",
+        "reference",
+        "composition",
+        "download",
+        ".csv"
+      ]
+    },
+    {
+      "market": "HK_HSI",
+      "name": "HKEX Full List of Securities",
+      "method": "GET",
+      "url": "https://www.hkex.com.hk/eng/services/trading/securities/securitieslists/ListOfSecurities.xlsx",
+      "link_keywords": []
+    },
+    {
+      "market": "KR_KOSPI200",
+      "name": "KRX Data Marketplace All Stock Basic Information",
+      "method": "POST",
+      "url": "https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd",
+      "headers": {
+        "Referer": "https://data.krx.co.kr/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201020201",
+        "Origin": "https://data.krx.co.kr",
+        "X-Requested-With": "XMLHttpRequest",
+        "Accept": "application/json, text/javascript, */*; q=0.01"
+      },
+      "data": {
+        "bld": "dbms/MDC/STAT/standard/MDCSTAT01901",
+        "locale": "ko_KR",
+        "mktId": "ALL",
+        "share": "1",
+        "csvxls_isNo": "false"
+      },
+      "link_keywords": []
+    },
+    {
+      "market": "MX_IPC",
+      "name": "BMV Empresas Listadas",
+      "method": "GET",
+      "url": "https://www.bmv.com.mx/es/empresas-listadas",
+      "link_keywords": [
+        "download",
+        "descarg",
+        ".csv",
+        ".xls",
+        ".xlsx",
+        "excel"
+      ]
+    },
+    {
+      "market": "ZA_TOP40",
+      "name": "JSE Reference Data Discovery",
+      "method": "GET",
+      "url": "https://clientportal.jse.co.za/communication/jse-service-hotlines",
+      "link_keywords": [
+        "reference data",
+        "instrument",
+        ".csv",
+        ".xls",
+        ".xlsx",
+        "download"
+      ]
+    }
+  ],
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
