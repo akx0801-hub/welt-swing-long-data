@@ -1,0 +1,141 @@
+name: Welt-Swing P0 Research Partial Integrity Fix v0.18
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/p0_research_partial_integrity_fix_v0.18.json'
+
+permissions:
+  contents: write
+
+jobs:
+  p0_research_partial_integrity_fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest inklusive NaN-Join-Regression
+        run: python scripts/p0_research_partial_integrity_fix_v0_18.py --self-test
+
+      - name: Frozen-Input-Gates v0.16 v0.17 und Price-Cache
+        run: |
+          test "$(git hash-object output_research_partial_v0_16/summary_v0.16.json)" = "f9bf162397f7cfeed046e0dc88ada206213d5d25"
+          test "$(git hash-object output_research_partial_v0_16/snapshot_manifest_v0.16.json)" = "41816cf19e5872bfb439a0b535dc9bb018fed058"
+          test "$(git hash-object output_research_partial_v0_16/stage_checkpoint_v0.16.json)" = "694c5f30d0cd1af6d1b88550bdffb74e5eddb394"
+          test "$(git hash-object output_research_partial_v0_16/research_partial_universe_v0.16.csv)" = "c587dea52375e4b9f4fc73635dda11dc39d5b784"
+          test "$(git hash-object output_full_3663/features_latest.csv)" = "468d60ced74ce3d0c3427b4e0646e258b7161c31"
+          test "$(git hash-object output_full_3663/manifest.json)" = "f400c4241937b4a5c8cd4d99df6499d37226f21c"
+          test "$(git hash-object output_p0_research_partial_v0_17/summary_v0.17.json)" = "2962afa68e40486319dda158d9199fab54932e82"
+          test "$(git hash-object output_p0_research_partial_v0_17/p0_dry_run_observations_v0.17.csv)" = "c9a562a7103f4cd3b86ec83b09b56e3b3eae1175"
+
+      - name: v0.18 Integrity-Fix ausführen
+        run: |
+          python scripts/p0_research_partial_integrity_fix_v0_18.py \
+            --config config/p0_research_partial_integrity_fix_v0.18.json
+
+      - name: Ergebnis-Gates v0.18
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path('output_p0_research_partial_v0_18')
+          required = [
+              'summary_v0.18.json',
+              'stage_checkpoint_v0.18.json',
+              'integrity_fix_manifest_v0.18.json',
+              'integrity_counts_v0.18.csv',
+              'p0_integrity_observations_v0.18.csv',
+              'p0_feature_quarantine_v0.18.csv',
+              'p0_integrity_reason_counts_v0.18.csv',
+          ]
+          for name in required:
+              assert (out / name).is_file(), name
+
+          s = json.loads((out / 'summary_v0.18.json').read_text())
+          assert s['schema'] == 'WELT_SWING_P0_RESEARCH_PARTIAL_INTEGRITY_FIX_V0_18'
+          assert s['run_status'] == 'P0_RESEARCH_PARTIAL_INTEGRITY_FIX_V0_18_COMPLETE'
+          assert s['partial_rows'] == 2037
+          assert s['v0_17_reported_feature_matched_rows'] == 2037
+          assert 2035 <= s['feature_row_matched_rows_v0_18'] <= 2037
+          assert 2035 <= s['asof_valid_rows_v0_18'] <= 2037
+          assert s['core_feature_complete_rows_v0_18'] == 2035
+          assert s['persistent_feature_usable_rows_v0_18'] == 2035
+          assert s['quarantine_rows_v0_18'] == 2
+          assert s['prior_v0_17_data_error_rows'] == 2
+          assert s['p0_survivor_rows'] == 0 and s['decisions_changed'] == 0
+          assert s['p0_run'] is False and s['p0_dry_run'] is True
+          assert s['p0_qualification_automation_activated'] is False
+          assert s['validated_automated_p0_run'] is False and s['automated_p0_ready'] is False
+          assert s['strict_u3k_frozen'] is False and s['full_scan_claim'] is False
+          assert s['research_partial_mode'] is True and s['productive_trading_authority'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert s['price_downloads_performed'] is False and s['fx_downloads_performed'] is False
+          assert s['web_calls_per_security'] is False and s['external_reference_requests'] == 0
+          assert s['canonical_master_mutated'] is False
+          assert s['historical_v0_17_artifacts_mutated'] is False
+          assert s['next_stage'] == 'P0_FEATURE_AUGMENTATION_AND_PARAMETER_VALIDATION'
+
+          o = pd.read_csv(out / 'p0_integrity_observations_v0.18.csv', keep_default_na=False, dtype=str)
+          q = pd.read_csv(out / 'p0_feature_quarantine_v0.18.csv', keep_default_na=False, dtype=str)
+          rc = pd.read_csv(out / 'p0_integrity_reason_counts_v0.18.csv', keep_default_na=False, dtype=str)
+          assert len(o) == 2037 and o['WS_ID'].is_unique
+          assert len(q) == 2 and q['WS_ID'].is_unique
+          assert q['QuarantineReason_v0_18'].str.strip().ne('').all()
+          allowed = {'UNMATCHED_FEATURE_ROW','ASOF_MISSING','ASOF_SENTINEL','ASOF_INVALID_DATETIME','CORE_FEATURE_INCOMPLETE'}
+          assert set(q['QuarantineReason_v0_18']).issubset(allowed)
+          assert int(o['PersistentFeatureUsable_v0_18'].str.lower().eq('true').sum()) == 2035
+          assert int(o['IntegrityStatus_v0_18'].eq('QUARANTINED').sum()) == 2
+          assert o['P0QualificationAllowed_v0_18'].str.lower().eq('false').all()
+          assert o['P0Survivor_v0_18'].str.lower().eq('false').all()
+          assert o['TradingDecisionAllowed_v0_18'].str.lower().eq('false').all()
+          assert o['P0ObservationOnly_v0_18'].str.lower().eq('true').all()
+          assert set(q['WS_ID']) == set(o.loc[o['PriorV017DataError_v0_18'].str.lower().eq('true'), 'WS_ID'])
+          assert int(pd.to_numeric(rc['Rows']).sum()) == 2
+
+          m = json.loads((out / 'integrity_fix_manifest_v0.18.json').read_text())
+          assert m['historical_v0_17_artifacts_mutated'] is False
+          assert m['canonical_master_mutated'] is False
+          assert m['network_requests_performed'] is False
+          assert m['alpha_vantage_allowed'] is False
+
+          ck = json.loads((out / 'stage_checkpoint_v0.18.json').read_text())
+          assert ck['stage_id'] == 'P0_RESEARCH_PARTIAL_INTEGRITY_FIX'
+          assert ck['status'] == 'PARTIAL'
+          assert ck['input_count'] == 2037 and ck['checked_count'] == 2037
+          assert ck['usable_count'] == 2035 and ck['quarantine_count'] == 2
+          assert ck['p0_survivor_count'] == 0 and ck['decisions_changed'] == 0
+          assert ck['validated_automated_p0_run'] is False
+          print('P0_RESEARCH_PARTIAL_INTEGRITY_FIX_V0_18_RESULT_GATES_PASS')
+          PY
+
+      - name: Nur v0.18-Ausgaben committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_p0_research_partial_v0_18/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Fix P0 research-partial integrity accounting v0.18"
+            git push
+          fi
+
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-p0-research-partial-integrity-v0.18-${{ github.run_number }}
+          path: output_p0_research_partial_v0_18/
+          retention-days: 14
