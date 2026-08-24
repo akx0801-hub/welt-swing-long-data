@@ -1,0 +1,2 @@
+Source_Name,Source_URL,Method,HTTP_Status,Content_Type,Bytes,SHA256,Probe_Status,Target_Rows,Matched_Rows,PASS_Rows,FAIL_Rows,Unresolved_Rows,Error
+KRX Data Marketplace All Stock Basic Information,https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd,POST,400,text/html; charset=utf-8,6,377b375adcc04b5ba5998c978372401a4c6327ccc218e17e383f72861085cb95,REQUEST_ERROR,92,0,0,0,92,HTTPError: 400 Client Error: Bad Request for url: https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd
