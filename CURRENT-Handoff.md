@@ -49,10 +49,10 @@ The master spec explicitly permits `RESEARCH_PARTIAL` when a valid full Strict U
 v0.16 does NOT create `SWING_U3K_FROZEN`.
 
 It freezes only the currently verified strict subset:
-- full eligibility rows: 3,663
+- full eligibility rows: 3,657
 - included verified strict rows: 2,037
 - instrument-unresolved excluded rows: 650
-- other non-strict rows: 976
+- other non-strict rows: 970
 
 P0 is not run in v0.16.
 
@@ -68,3 +68,19 @@ Any later candidate claim must be limited to the verified coverage and must neve
 3. Read the newest summary and stage checkpoint.
 4. Confirm `main` HEAD.
 5. Resume from the smallest valid stage.
+
+
+## v0.16 Fix 1
+
+Der erste v0.16-Run erreichte die Frozen-Input-Gates erfolgreich und scheiterte am Count-Gate:
+
+`Full eligibility rows 3657 != expected 3663`
+
+Korrigierte Ebenentrennung:
+- Raw Price Universe: **3.663**
+- konsumierte Instrument-/Eligibility-Tabelle: **3.657**
+- Verified Strict: **2.037**
+- Instrument Unresolved: **650**
+- Other Non-Strict: **970**
+
+Keine Änderung an Frozen-Input-Blobs, Eligibility-Regeln, Alpha-Vantage-Verbot, P0-Status oder produktiver Authority.
