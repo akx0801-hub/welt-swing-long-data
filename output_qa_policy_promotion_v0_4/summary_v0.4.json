@@ -1,0 +1,40 @@
+{
+  "schema": "WELT_SWING_QA_FILTERED_BAR_POLICY_PROMOTION_V0_4",
+  "generated_utc": "2026-08-24T06:28:50.709420+00:00",
+  "run_status": "QA_FILTERED_BAR_POLICY_PROMOTION_V0_4_COMPLETE",
+  "as_of_date": "2026-08-24",
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "price_downloads_performed": false,
+  "core_git_blob_current": "454a1036e02c8ea73504921163aad1438a7e9f9d",
+  "core_sha256_current": "7573d285bc698ddca2429f6d970e821d21cd8ec49c3dae99d629d14997d785f8",
+  "requalification": {
+    "status_counts_after": {
+      "READY": 3602,
+      "QUARANTINE": 34,
+      "WARMUP": 20,
+      "STALE": 1
+    },
+    "ready_before": 3582,
+    "promotions": 20,
+    "reason_refinements": 3,
+    "ready_after": 3602,
+    "feature_rows": 3602,
+    "inactive_state_rows_removed": 6,
+    "price_rows_retained": 1813378,
+    "state_rows_after": 3657,
+    "residual_non_ready_rows": 55
+  },
+  "notes": [
+    "The promoted core policy accepts at most two isolated invalid bars only when they are <=1% of the series and at least 260 valid bars remain.",
+    "Suspicious returns override filtered-bar eligibility and remain quarantined.",
+    "Staleness overrides filtered-bar eligibility and remains STALE.",
+    "Raw malformed price rows are retained; feature_builder excludes them from technical calculations.",
+    "Exactly 20 previously shadow-tested rows are promoted from QUARANTINE/INVALID_OHLC_OR_VOLUME to READY/FILTERED_INVALID_BARS_EXCLUDED.",
+    "AB InBev, Sanlam and Vodacom remain QUARANTINE; only their reason code is refined from INVALID_OHLC_OR_VOLUME to SUSPICIOUS_RETURN_NEEDS_REPAIR.",
+    "Six delisted/retired cache_state rows are removed so operational state coverage aligns to the 3,657 active remediated universe; their historical price_daily rows are retained for audit.",
+    "No price/history download occurs in this workflow.",
+    "P0 remains off."
+  ]
+}

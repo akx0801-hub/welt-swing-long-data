@@ -69,6 +69,11 @@ class FreeDataConfig:
     overlap_calendar_days: int = 14
     min_valid_bars: int = 252
     ready_unique_bars: int = 260
+    # Promoted QA v0.4 policy: raw malformed bars stay in cache, but up to two
+    # isolated invalid bars may be excluded from technical calculations when
+    # they are <=1% of the series and at least 260 valid bars remain.
+    max_filterable_invalid_bars: int = 2
+    max_filterable_invalid_share: float = 0.01
     stale_calendar_days: int = 10
     max_identical_retries: int = 1
     retry_sleep_seconds: float = 2.0
@@ -83,6 +88,10 @@ class FreeDataConfig:
             raise ValueError("batch_size out of range")
         if self.min_valid_bars <= 0 or self.ready_unique_bars < self.min_valid_bars:
             raise ValueError("invalid bar thresholds")
+        if not (0 <= self.max_filterable_invalid_bars <= 10):
+            raise ValueError("max_filterable_invalid_bars out of range")
+        if not (0.0 <= self.max_filterable_invalid_share <= 0.05):
+            raise ValueError("max_filterable_invalid_share out of range")
         if self.max_identical_retries not in (0, 1):
             raise ValueError("A1 contract permits at most one identical retry")
 
@@ -543,12 +552,24 @@ def qa_symbol_frame(df: pd.DataFrame, *, config: FreeDataConfig, as_of: date | N
     valid_bars = int(valid.sum()) if unique_bars else 0
     invalid_rows = int((~valid).sum()) if unique_bars else 0
 
-    # One isolated malformed historical bar does not invalidate an otherwise
-    # deep, liquid two-year series. It remains preserved in RAW cache for audit,
-    # but downstream technical features must exclude it. Two or more malformed
-    # bars still quarantine the whole security unless a later repair succeeds.
-    isolated_invalid_bar = (
-        invalid_rows == 1
+    # Promoted QA v0.4 policy.
+    #
+    # Raw malformed bars are NEVER deleted here. Downstream technical features
+    # already exclude bars failing technical_valid_mask(). A security may remain
+    # eligible after filtering only when:
+    #   - 1..max_filterable_invalid_bars invalid bars are present,
+    #   - those rows are <= max_filterable_invalid_share of the raw series,
+    #   - at least ready_unique_bars valid observations remain.
+    #
+    # Suspicious returns and staleness are checked below and still override
+    # filtered-bar eligibility. This prevents the three overlapping ZA scale
+    # anomaly cases from being promoted simply because they have only two bad bars.
+    invalid_share = (
+        float(invalid_rows / unique_bars) if unique_bars else 0.0
+    )
+    filterable_invalid_bars = (
+        0 < invalid_rows <= config.max_filterable_invalid_bars
+        and invalid_share <= config.max_filterable_invalid_share
         and valid_bars >= config.ready_unique_bars
     )
 
@@ -572,7 +593,7 @@ def qa_symbol_frame(df: pd.DataFrame, *, config: FreeDataConfig, as_of: date | N
     reason = None
     if unique_bars == 0:
         status, reason = "DOWNLOAD_FAILED", "NO_DATA"
-    elif invalid_rows > 0 and not isolated_invalid_bar:
+    elif invalid_rows > 0 and not filterable_invalid_bars:
         status, reason = "QUARANTINE", "INVALID_OHLC_OR_VOLUME"
     elif suspicious_returns > 0:
         status, reason = "QUARANTINE", "SUSPICIOUS_RETURN_NEEDS_REPAIR"
@@ -580,8 +601,10 @@ def qa_symbol_frame(df: pd.DataFrame, *, config: FreeDataConfig, as_of: date | N
         status, reason = "STALE", "LAST_BAR_TOO_OLD"
     elif unique_bars >= config.ready_unique_bars and valid_bars >= config.min_valid_bars:
         status = "READY"
-        if isolated_invalid_bar:
+        if invalid_rows == 1:
             reason = "ISOLATED_INVALID_BAR_EXCLUDED"
+        elif invalid_rows > 1:
+            reason = "FILTERED_INVALID_BARS_EXCLUDED"
     else:
         status, reason = "WARMUP", "INSUFFICIENT_HISTORY"
 
