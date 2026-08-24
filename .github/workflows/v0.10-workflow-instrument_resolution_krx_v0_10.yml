@@ -1,0 +1,139 @@
+name: Welt-Swing Instrument Resolution KRX v0.10
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/instrument_resolution_krx_v0.10.json'
+
+permissions:
+  contents: write
+
+jobs:
+  resolve_krx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install requests
+
+      - name: Offline-Selbsttest
+        run: python scripts/classify_instruments_krx_v0_10.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          test -f output_instrument_resolution_v0_9/summary_v0.9.json
+          test -f output_instrument_resolution_v0_9/instrument_manual_review_queue_v0.9.csv
+          test -f output_instrument_resolution_v0_8/eligibility_after_instrument_v0.8.csv
+          test -f output_instrument_resolution_v0_8/strict_u3k_candidate_after_instrument_v0.8.csv
+
+          test "$(git hash-object output_instrument_resolution_v0_9/summary_v0.9.json)" = "55f074a37578691527f4eabed896acabb941fc35"
+          test "$(git hash-object output_instrument_resolution_v0_9/instrument_manual_review_queue_v0.9.csv)" = "4a2f08620df7ea710ae72725955298819aabb18b"
+          test "$(git hash-object output_instrument_resolution_v0_8/eligibility_after_instrument_v0.8.csv)" = "a8e2a0593c00b69e3b6df9c471afbfc67f468a95"
+          test "$(git hash-object output_instrument_resolution_v0_8/strict_u3k_candidate_after_instrument_v0.8.csv)" = "1a2b249b90739e001789662dc42b0bac15d906a9"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          s = json.loads(Path('output_instrument_resolution_v0_9/summary_v0.9.json').read_text(encoding='utf-8'))
+          q = pd.read_csv('output_instrument_resolution_v0_9/instrument_manual_review_queue_v0.9.csv',
+                          keep_default_na=False, dtype=str)
+          f = pd.read_csv('output_instrument_resolution_v0_8/eligibility_after_instrument_v0.8.csv',
+                          keep_default_na=False, dtype=str)
+
+          assert s['schema'] == 'WELT_SWING_PRIMARY_MARKET_BUNDLE_PROBE_V0_9'
+          assert s['run_status'] == 'PRIMARY_MARKET_BUNDLE_PROBE_V0_9_COMPLETE'
+          assert s['remaining_manual_rows_v0_9'] == 667
+          assert s['strict_candidates_v0_9'] == 2020
+          assert s['p0_run'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert len(q) == 667
+          assert (q['Primary_Universe_Index'] == 'KR_KOSPI200').sum() == 92
+          assert f['WS_ID'].duplicated().sum() == 0
+          print('INSTRUMENT_RESOLUTION_KRX_V0_10_INPUT_GATE_PASS')
+          PY
+
+      - name: KRX Bulk-Referenz laden und klassifizieren
+        run: |
+          python scripts/classify_instruments_krx_v0_10.py \
+            --config config/instrument_resolution_krx_v0.10.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          x = json.loads(Path('output_instrument_resolution_v0_10/summary_v0.10.json').read_text(encoding='utf-8'))
+          print(json.dumps(x, indent=2, ensure_ascii=False))
+
+          assert x['schema'] == 'WELT_SWING_INSTRUMENT_RESOLUTION_KRX_V0_10'
+          assert x['run_status'] in {
+              'INSTRUMENT_RESOLUTION_KRX_V0_10_COMPLETE_WITH_REMAINING_REVIEW',
+              'INSTRUMENT_RESOLUTION_KRX_V0_10_COMPLETE_WITH_SOURCE_BLOCK',
+          }
+          assert x['source_manual_rows_v0_9'] == 667
+          assert x['krx_target_rows'] == 92
+          assert 0 <= x['krx_matched_rows'] <= 92
+          assert 0 <= x['krx_pass_rows'] <= 92
+          assert 0 <= x['krx_fail_rows'] <= 92
+          assert x['krx_pass_rows'] + x['krx_fail_rows'] + x['krx_unresolved_rows'] == 92
+          assert x['remaining_manual_rows_v0_10'] == 667 - x['krx_pass_rows'] - x['krx_fail_rows']
+          assert x['strict_candidates_v0_9'] == 2020
+          assert x['strict_candidates_v0_10'] == 2020 + x['krx_pass_rows']
+          assert x['strict_freeze_allowed'] is False
+          assert x['external_reference_requests'] == 1
+          assert x['p0_run'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+          assert x['price_downloads_performed'] is False
+          assert x['fx_downloads_performed'] is False
+          assert x['web_calls_per_security'] is False
+          assert x['canonical_master_mutated'] is False
+
+          q = pd.read_csv('output_instrument_resolution_v0_10/instrument_manual_review_queue_v0.10.csv',
+                          keep_default_na=False, dtype=str)
+          s = pd.read_csv('output_instrument_resolution_v0_10/strict_u3k_candidate_after_instrument_v0.10.csv',
+                          keep_default_na=False, dtype=str)
+          assert len(q) == x['remaining_manual_rows_v0_10']
+          assert len(s) == x['strict_candidates_v0_10']
+          print('INSTRUMENT_RESOLUTION_KRX_V0_10_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_instrument_resolution_v0_10/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Resolve KRX stock-kind instruments v0.10"
+            git push
+          fi
+
+      - name: Audit-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-instrument-resolution-krx-v0.10-${{ github.run_number }}
+          path: output_instrument_resolution_v0_10/
+          retention-days: 14
