@@ -1,0 +1,20 @@
+{
+  "schema": "WELT_SWING_STAGE_CHECKPOINT_V0_16",
+  "run_id": "WS-LONG-RESEARCH-PARTIAL-2026-08-24-v0.16",
+  "stage_id": "RESEARCH_PARTIAL_SNAPSHOT",
+  "stage_version": "v0.16",
+  "start": "2026-08-24T18:54:41.277404+00:00",
+  "end": "2026-08-24T18:54:41.287738+00:00",
+  "input_hash": "2e3337a6a73e22c20f329d94061c2238ee49cc1f0167dc7a1da7dd1ece97371a",
+  "parameter_hash": "81f677ca7a3c3aa2b8e74261ac494459e3f242f50d05adb2bfa42fab50f59fee",
+  "output_hash": "5da6861e331ad2f5fe10ed9544b95bada72bdeaa3f3377f23654970086d00395",
+  "input_count": 3657,
+  "checked_count": 3657,
+  "pass_count": 2037,
+  "fail_count": 970,
+  "data_error_count": 0,
+  "quarantine_count": 650,
+  "status": "PARTIAL",
+  "failed_source": "INSTRUMENT_RESOLUTION_BLOCKED_MARKETS",
+  "next_stage": "P0_RESEARCH_PARTIAL_PARAMETER_FREEZE_AND_DRY_RUN"
+}

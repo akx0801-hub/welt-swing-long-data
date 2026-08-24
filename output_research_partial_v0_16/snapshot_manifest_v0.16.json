@@ -1,0 +1,51 @@
+{
+  "schema": "WELT_SWING_RESEARCH_PARTIAL_SNAPSHOT_V0_16",
+  "generated_utc": "2026-08-24T18:54:41.277404+00:00",
+  "snapshot_id": "WS-LONG-RESEARCH-PARTIAL-2026-08-24-v0.16",
+  "mode": "RESEARCH_PARTIAL",
+  "as_of_date": "2026-08-24",
+  "authority": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "full_scan_claim": false,
+  "strict_u3k_frozen": false,
+  "research_partial_snapshot_frozen": true,
+  "input_full_eligibility_rows": 3657,
+  "included_verified_strict_rows": 2037,
+  "excluded_unresolved_instrument_rows": 650,
+  "other_non_strict_rows": 970,
+  "verified_strict_coverage_pct_of_full": 55.7014,
+  "instrument_unresolved_pct_of_full": 17.7741,
+  "missing_segments": {
+    "EU_STOXX600": 365,
+    "CA_TSX": 105,
+    "KR_KOSPI200": 92,
+    "HK_HSI": 82,
+    "MX_IPC": 6
+  },
+  "input_hashes_sha256": {
+    "summary_v0_15": "56226c06dcfb3512d018f5d08809073d0eaba712e5253e118f44fcb1b5216d20",
+    "strict_candidates_v0_14": "9b8645b936d3851faeffda6a85eb372174a79da48eb7460e61668b9790a14be4",
+    "full_eligibility_v0_14": "a352ff219bad1358e2102d6a80ab55975f039a5025a7aebcfd416202ec8f4d24",
+    "manual_queue_v0_15": "ff0030b0ed8f2cde7814550755026b3c03dcb6e470b0ed252dcaffbf0a781a82"
+  },
+  "output_hashes_sha256": {
+    "research_partial_universe_v0.16.csv": "ee7b2de380f44a0778f23b925bf6df31060700dad0298ee55489813b47d68ee6",
+    "missing_instrument_coverage_v0.16.csv": "19c9c1e5ad70c0c6b09d951404b6489ac2c3ad435d61032834f9894ee641ffc5",
+    "coverage_by_segment_v0.16.csv": "435a41123d72991d614c2ad9633d10dfb439c6b8d209a4010ae206636b1ca2e9",
+    "missing_segments_v0.16.csv": "86ca5146df106e2d168c231dc4b32017192dbb7e329fc7ca8ef115e0177d88ce"
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "strict_u3k_freeze_allowed": false,
+  "research_partial_allowed": true,
+  "next_stage": "P0_RESEARCH_PARTIAL_PARAMETER_FREEZE_AND_DRY_RUN",
+  "required_result_wording": "bester verifizierter Kandidat innerhalb der tatsächlich geprüften Coverage",
+  "forbidden_result_wording": "weltweit bester Kandidat",
+  "notes": [
+    "This is not SWING_U3K_FROZEN and must never be presented as a complete global universe.",
+    "The master specification explicitly permits RESEARCH_PARTIAL when a valid full Strict Universe is not available.",
+    "The 650 instrument-unresolved rows remain outside this partial snapshot and remain NOT_VERIFIED.",
+    "All 2,037 included rows are the currently verified strict subset carried from v0.14/v0.15.",
+    "P0 is intentionally not run in v0.16; this stage only freezes the auditable partial input snapshot."
+  ]
+}

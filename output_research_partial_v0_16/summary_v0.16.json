@@ -1,0 +1,16 @@
+{
+  "schema": "WELT_SWING_RESEARCH_PARTIAL_SNAPSHOT_SUMMARY_V0_16",
+  "generated_utc": "2026-08-24T18:54:41.287882+00:00",
+  "run_status": "RESEARCH_PARTIAL_SNAPSHOT_V0_16_FROZEN",
+  "full_eligibility_rows": 3657,
+  "included_verified_strict_rows": 2037,
+  "unresolved_instrument_rows": 650,
+  "other_non_strict_rows": 970,
+  "verified_strict_coverage_pct_of_full": 55.7014,
+  "strict_u3k_freeze_allowed": false,
+  "research_partial_snapshot_frozen": true,
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "next_stage": "P0_RESEARCH_PARTIAL_PARAMETER_FREEZE_AND_DRY_RUN"
+}
