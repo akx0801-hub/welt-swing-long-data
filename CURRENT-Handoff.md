@@ -1,6 +1,6 @@
 # WELT-SWING LONG DEV — CURRENT HANDOFF
 
-**Updated:** 2026-08-24 15:32 CEST  
+**Updated:** 2026-08-24 16:04 CEST  
 **Status:** DEV / RESEARCH / SHADOW — NOT PRODUCTIVE
 
 ## Authority
@@ -17,37 +17,41 @@ Welt-Swing v7.2 remains unchanged and alone productive-authoritative for real Sw
 
 Latest completed technical checkpoint:
 
-**KRX Stock-Kind Instrument Resolution v0.10**
+**JSE Equities ISIN Bulk Probe v0.11**
 
-Repo HEAD after v0.10 output commit:
+Repo HEAD after v0.11 output commit:
 
-`6f23b314d538b8d7e8bb5d8be68b2b714c714fff`
+`30a2c260b6246de7c7d13e8eae0d4503822bb40c`
 
 Commit:
 
-`Resolve KRX stock-kind instruments v0.10`
+`Probe JSE equities ISIN bulk source v0.11`
 
-## Confirmed v0.10 result
+## Confirmed v0.11 result
 
-- run status: `INSTRUMENT_RESOLUTION_KRX_V0_10_COMPLETE_WITH_SOURCE_BLOCK`
-- KRX target rows: **92**
-- KRX HTTP status: **400**
-- KRX reference rows: **0**
-- KRX matched: **0**
-- new PASS: **0**
-- new FAIL: **0**
-- unresolved KR: **92**
-- manual-review rows remain: **667**
-- strict candidates remain: **2.020**
+- run status: `JSE_ISIN_BULK_PROBE_V0_11_COMPLETE_WITH_EVIDENCE`
+- source manual rows: **667**
+- ZA_TOP40 target rows: **17**
+- strict candidates: **2,020**
+- remaining manual rows: **667**
+- decisions changed: **0**
+- JSE folder HTTP: **200**
+- JSE ZIP HTTP: **200**
+- exactly one `isinfull_e.zip` link discovered
+- exactly one archive member parsed
+- external reference requests: **2 / 2**
 - strict freeze: **false**
 - P0: **false**
-- external reference requests: **1**
 - no per-security requests
 - no price/FX downloads
 - Alpha Vantage forbidden
 - canonical master unchanged
 
-Remaining segments:
+The current archive member is `isinfull_e`; v0.11 recorded 4,070,331 uncompressed bytes and cp1252 text samples.
+
+The sample contains an explicit fixed-width instrument-type area, e.g. `ETF`, followed by a JSE alpha code. This is consistent with JSE's separately published Instrument Type semantics, but v0.11 deliberately made no classification.
+
+## Remaining review queue
 
 | Segment | Rows |
 |---|---:|
@@ -59,37 +63,36 @@ Remaining segments:
 | ZA_TOP40 | 17 |
 | **Total** | **667** |
 
-## KRX access conclusion
+## Source blocks already established
 
-The anonymous KRX Data Marketplace bulk POST remains blocked with HTTP 400.
+### Korea / KRX
+Anonymous Data Marketplace bulk POST remains HTTP 400. No further blind retries in the current free/no-credential route.
 
-Current official KRX pages expose login/registration and the official KRX OPEN API requires login plus an approved authentication key. The anonymous route should not be retried repeatedly in the current free/no-credential DEV path.
-
-KR_KOSPI200 remains source-blocked / NOT_VERIFIED until an allowed official bulk route is available.
+### South Africa / JSE
+The public Equities ISIN bulk file is reachable. This is now the active remediation lane.
 
 ## Next step
 
-**v0.11 — JSE Equities ISIN Bulk Probe**
+**v0.12 — JSE Instrument Resolution**
 
-Target: **17** remaining `ZA_TOP40` rows.
+v0.12 re-downloads the same official JSE bulk source under the same bounded two-request rule and validates the complete fixed-width record structure before reading any Instrument Type.
 
-Official JSE Client Portal exposes an Equities ISIN downloadable-files folder containing `isinfull_e.zip`.
+Only after structural validation:
 
-v0.11 is evidence-only:
+- exact JSE alpha-code matches are used,
+- `Aord`, `Bord`, `Nord`, `Ordinary` are strict PASS,
+- clearly non-ordinary types such as `DepRec`, `ETF`, `LU`, `PS`, `UT`, `PL`, debentures/warrants/options are strict FAIL,
+- generic or unknown types remain `NOT_VERIFIED`.
 
-- max 2 official JSE requests,
-- no per-security requests,
-- zero eligibility decisions,
-- inspect archive structure/fields,
-- preserve 667 review rows and 2.020 strict candidates.
+The 17 ZA rows currently have blank `Primary_Ticker`; the frozen `.JO` symbol is used only as a lookup key and must exact-match the official JSE Alpha Code.
 
-If the ZIP is reproducibly obtained and its fields have documented instrument-type semantics, a later v0.12 classifier can be built. Otherwise ZA remains source-blocked.
+If source, layout, identity match, or type semantics are not deterministic, the row remains unresolved.
 
 ## Resume rule
 
 1. Read this file.
 2. Read the master spec.
-3. Read newest `summary_v0.x.json`.
+3. Read the newest `summary_v0.x.json`.
 4. Confirm current `main` HEAD.
 5. Resume from the smallest valid next stage.
 
