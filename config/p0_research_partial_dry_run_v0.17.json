@@ -1,0 +1,21 @@
+{
+  "schema": "WELT_SWING_P0_RESEARCH_PARTIAL_DRY_RUN_CONFIG_V0_17",
+  "as_of_date": "2026-08-24",
+  "run_id": "WS-LONG-P0-RESEARCH-PARTIAL-DRYRUN-2026-08-24-v0.17",
+  "source_summary_v0_16": "output_research_partial_v0_16/summary_v0.16.json",
+  "source_manifest_v0_16": "output_research_partial_v0_16/snapshot_manifest_v0.16.json",
+  "source_checkpoint_v0_16": "output_research_partial_v0_16/stage_checkpoint_v0.16.json",
+  "source_partial_universe_v0_16": "output_research_partial_v0_16/research_partial_universe_v0.16.csv",
+  "source_features_full_3663": "output_full_3663/features_latest.csv",
+  "source_price_manifest": "output_full_3663/manifest.json",
+  "source_price_coverage": "output_full_3663/coverage.json",
+  "output_dir": "output_p0_research_partial_v0_17",
+  "expected_partial_rows": 2037,
+  "expected_partial_sha256": "ee7b2de380f44a0778f23b925bf6df31060700dad0298ee55489813b47d68ee6",
+  "expected_feature_sha256": "eaf01b0368f48d252fc59fb20e1592af5b7f4a031211b99dc6753a2c7b8c1d0a",
+  "p0_run": false,
+  "p0_dry_run": true,
+  "validated_automated_p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
