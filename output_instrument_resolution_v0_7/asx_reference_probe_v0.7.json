@@ -1,0 +1,25 @@
+{
+  "status": "PARSED_MATCHES_AVAILABLE",
+  "url": "https://www.asx.com.au/content/dam/asx/issuers/ISIN.xls",
+  "download_attempts": 1,
+  "auto_classification_enabled": false,
+  "target_rows": 63,
+  "target_unique_codes": 63,
+  "http_status": 200,
+  "download_bytes": 1985024,
+  "sha256": "eb2a547ef207ecdb7a0e55f917af93a85426d265496504a3022e4eb8fbd9ccf4",
+  "content_type": "application/vnd.ms-excel",
+  "sheet_count": 1,
+  "best_sheet": "ISIN",
+  "best_code_column": "ASX code",
+  "best_code_matches": 63,
+  "matched_rows": 63,
+  "matched_unique_target_codes": 63,
+  "target_coverage": 1.0,
+  "official_columns": [
+    "ASX code",
+    "Company name",
+    "Security type",
+    "ISIN code"
+  ]
+}
