@@ -1,0 +1,183 @@
+name: Welt-Swing Targeted Refresh 6 v0.3
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  targeted_refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: python scripts/targeted_refresh_6_v0_3.py --self-test
+
+      - name: Remediation-Input-Gate
+        run: |
+          test -f universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv
+          test -f output_non_ready_remediation/targeted_refresh_queue_v0.2.csv
+          test -f output_non_ready_remediation/summary_v0.2.json
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+
+          s = json.loads(
+              Path('output_non_ready_remediation/summary_v0.2.json')
+              .read_text(encoding='utf-8')
+          )
+          q = pd.read_csv(
+              'output_non_ready_remediation/targeted_refresh_queue_v0.2.csv',
+              keep_default_na=False,
+              dtype=str,
+          )
+          expected = {
+              'WS:XASX:XYX': 'XYZ.AX',
+              'WS:XMEX:ALFAA': 'SIGMAFA.MX',
+              'WS:XNZE:GMT': 'GNZ.NZ',
+              'WS:US:IESC': 'IESC',
+              'WS:SRC:ZA_TOP40:3CA42D3A25639D8E': 'SOL.JO',
+              'WS:US:MNST': 'MNST',
+          }
+          got = dict(zip(q['WS_ID'].astype(str), q['Yahoo_Symbol'].astype(str)))
+
+          assert s['run_status'] == 'NON_READY_REMEDIATION_V0_2_COMPLETE'
+          assert s['active_rows_after_evidence_remediation'] == 3657
+          assert s['targeted_refresh_queue_rows'] == 6
+          assert s['p0_run'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert got == expected
+          print('TARGETED_REFRESH_6_INPUT_GATE_PASS')
+          PY
+
+      - name: Full-3663 SQLite Cache wiederherstellen
+        uses: actions/cache/restore@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-targeted-${{ github.run_id }}
+          restore-keys: |
+            full-3663-price-${{ runner.os }}-
+
+      - name: SQLite-Restore prüfen
+        run: |
+          test -f runtime_cache/full_3663_prices.sqlite
+          python - <<'PY'
+          import sqlite3
+          con = sqlite3.connect('runtime_cache/full_3663_prices.sqlite')
+          try:
+              n = con.execute('SELECT COUNT(*) FROM price_daily').fetchone()[0]
+              s = con.execute('SELECT COUNT(*) FROM cache_state').fetchone()[0]
+          finally:
+              con.close()
+          print('RESTORED_PRICE_ROWS', n)
+          print('RESTORED_STATES', s)
+          assert n >= 1800000
+          assert s == 3663
+          PY
+
+      - name: Sechs Titel gezielt 2 Jahre neu laden
+        run: |
+          python scripts/targeted_refresh_6_v0_3.py \
+            --config config/targeted_refresh_6_v0.3.json
+
+      - name: Refresh-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          x = json.loads(
+              Path('output_targeted_refresh_6/summary_v0.3.json')
+              .read_text(encoding='utf-8')
+          )
+          print('RUN_STATUS', x['run_status'])
+          print('STATUS_COUNTS', x['status_counts'])
+          print('READY', x['ready_count'])
+          print('FEATURE_ROWS', x['target_feature_rows'])
+          print('HARD_FAILURES', x['hard_failure_rows'])
+          print('CACHE_PROMOTION_RECOMMENDED', x['cache_promotion_recommended'])
+
+          assert x['run_status'] == 'TARGETED_REFRESH_6_COMPLETE'
+          assert x['target_rows'] == 6
+          assert x['data_source'] == 'YFINANCE_FREE'
+          assert x['p0_run'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+          assert x['target_feature_rows'] == x['ready_count']
+          PY
+
+      - name: Work-Cache nur ohne Hard Failure übernehmen
+        run: |
+          python - <<'PY'
+          import json
+          import shutil
+          from pathlib import Path
+
+          s = json.loads(
+              Path('output_targeted_refresh_6/summary_v0.3.json')
+              .read_text(encoding='utf-8')
+          )
+          src = Path('runtime_cache/full_3663_prices_targeted_work.sqlite')
+          dst = Path('runtime_cache/full_3663_prices.sqlite')
+          if s['cache_promotion_recommended']:
+              if not src.exists():
+                  raise SystemExit('work cache missing')
+              shutil.copy2(src, dst)
+              Path('output_targeted_refresh_6/cache_promotion_status.txt').write_text(
+                  'PROMOTED_WORK_CACHE_TO_MAIN\n', encoding='utf-8'
+              )
+              print('TARGETED_WORK_CACHE_PROMOTED')
+          else:
+              Path('output_targeted_refresh_6/cache_promotion_status.txt').write_text(
+                  'NOT_PROMOTED_HARD_FAILURE\n', encoding='utf-8'
+              )
+              print('TARGETED_WORK_CACHE_NOT_PROMOTED')
+          PY
+
+      - name: Main-Cache sichern
+        if: success()
+        uses: actions/cache/save@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-${{ github.run_id }}
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_targeted_refresh_6/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Run targeted six-security price refresh v0.3"
+            git push
+          fi
+
+      - name: Targeted-Refresh Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-targeted-refresh-6-v0.3-${{ github.run_number }}
+          path: |
+            output_targeted_refresh_6/
+            runtime_cache/full_3663_prices_targeted_work.sqlite
+          retention-days: 14
