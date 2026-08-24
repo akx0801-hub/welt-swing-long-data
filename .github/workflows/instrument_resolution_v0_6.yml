@@ -1,0 +1,108 @@
+name: Welt-Swing Instrument Resolution v0.6
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  instrument_resolution:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: python scripts/classify_instruments_v0_6.py --self-test
+
+      - name: Input-Gates
+        run: |
+          test -f output_u3k_liquidity_fx_v0_5/summary_v0.5.json
+          test -f output_u3k_liquidity_fx_v0_5/eligibility_rows_v0.5.csv
+          test -f output_u3k_liquidity_fx_v0_5/instrument_review_queue_v0.5.csv
+          test -f config/instrument_resolution_rules_v0.6.json
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          s = json.loads(Path('output_u3k_liquidity_fx_v0_5/summary_v0.5.json').read_text(encoding='utf-8'))
+          q = pd.read_csv('output_u3k_liquidity_fx_v0_5/instrument_review_queue_v0.5.csv', keep_default_na=False)
+
+          assert s['run_status'] == 'U3K_LIQUIDITY_FX_AUDIT_COMPLETE_WITH_BLOCKERS'
+          assert s['instrument_review_queue_rows'] == 2113
+          assert s['strict_eligible_rows'] == 597
+          assert s['p0_run'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert len(q) == 2113
+          assert (q['Primary_Universe_Index'] == 'US_SP1500').sum() == 1332
+          assert q['Instrument_Gate'].eq('NOT_VERIFIED').all()
+          assert q['Cache_Status'].eq('READY').all()
+          assert q['Liquidity_Gate'].eq('PASS').all()
+          print('INSTRUMENT_RESOLUTION_V0_6_INPUT_GATE_PASS')
+          PY
+
+      - name: Instrumente gruppenweise klassifizieren
+        run: |
+          python scripts/classify_instruments_v0_6.py \
+            --config config/instrument_resolution_rules_v0.6.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          x = json.loads(Path('output_instrument_resolution_v0_6/summary_v0.6.json').read_text(encoding='utf-8'))
+          print(json.dumps(x, indent=2, ensure_ascii=False))
+
+          assert x['source_review_rows'] == 2113
+          assert x['us_sp1500_group_pass_rows'] == 1332
+          assert x['auto_pass_rows'] >= 1332
+          assert x['manual_review_rows'] > 0
+          assert x['strict_freeze_allowed'] is False
+          assert x['strict_candidate_rows_v0_6'] >= 597
+          assert x['p0_run'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+          assert x['price_downloads_performed'] is False
+          assert x['fx_downloads_performed'] is False
+          assert x['web_calls_per_security'] is False
+          print('INSTRUMENT_RESOLUTION_V0_6_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_instrument_resolution_v0_6/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Resolve instrument eligibility group rules v0.6"
+            git push
+          fi
+
+      - name: Audit-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-instrument-resolution-v0.6-${{ github.run_number }}
+          path: output_instrument_resolution_v0_6/
+          retention-days: 14
