@@ -1,0 +1,187 @@
+name: Welt-Swing U3K Liquidity FX Eligibility Audit v0.5
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  u3k_liquidity_fx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install 'openpyxl>=3.1,<4'
+
+      - name: Offline-Selbsttest
+        run: python scripts/build_u3k_liquidity_fx_audit_v0_5.py --self-test
+
+      - name: Input-Gates
+        run: |
+          test -f universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv
+          test -f output_qa_policy_promotion_v0_4/summary_v0.4.json
+          test -f output_qa_policy_promotion_v0_4/promotion_status.txt
+          test -f scripts/price_cache.py
+
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+
+          s = json.loads(
+              Path('output_qa_policy_promotion_v0_4/summary_v0.4.json')
+              .read_text(encoding='utf-8')
+          )
+          p = Path(
+              'output_qa_policy_promotion_v0_4/promotion_status.txt'
+          ).read_text(encoding='utf-8').strip()
+          m = pd.read_csv(
+              'universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv',
+              keep_default_na=False,
+              dtype=str,
+          )
+          active = m['Active'].astype(str).str.lower().eq('true')
+
+          assert s['run_status'] == 'QA_FILTERED_BAR_POLICY_PROMOTION_V0_4_COMPLETE'
+          assert s['requalification']['ready_after'] == 3602
+          assert s['requalification']['state_rows_after'] == 3657
+          assert s['p0_run'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert p == 'PROMOTED_QA_V0_4_CORE_AND_CACHE'
+          assert len(m) == 3664
+          assert active.sum() == 3657
+          print('U3K_LIQUIDITY_FX_INPUT_GATE_PASS')
+          PY
+
+      - name: Promoteten QA-v0.4 Main-Cache wiederherstellen
+        uses: actions/cache/restore@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-u3k-v05-${{ github.run_id }}
+          restore-keys: |
+            full-3663-price-${{ runner.os }}-qa-v04-
+            full-3663-price-${{ runner.os }}-
+
+      - name: Cache-Restore prüfen
+        run: |
+          test -f runtime_cache/full_3663_prices.sqlite
+          python - <<'PY'
+          import sqlite3
+
+          con = sqlite3.connect('runtime_cache/full_3663_prices.sqlite')
+          try:
+              states = con.execute('SELECT COUNT(*) FROM cache_state').fetchone()[0]
+              ready = con.execute(
+                  "SELECT COUNT(*) FROM cache_state WHERE status='READY'"
+              ).fetchone()[0]
+              quarantine = con.execute(
+                  "SELECT COUNT(*) FROM cache_state WHERE status='QUARANTINE'"
+              ).fetchone()[0]
+              warmup = con.execute(
+                  "SELECT COUNT(*) FROM cache_state WHERE status='WARMUP'"
+              ).fetchone()[0]
+              stale = con.execute(
+                  "SELECT COUNT(*) FROM cache_state WHERE status='STALE'"
+              ).fetchone()[0]
+          finally:
+              con.close()
+
+          print('STATES', states)
+          print('READY', ready, 'QUARANTINE', quarantine, 'WARMUP', warmup, 'STALE', stale)
+          assert states == 3657
+          assert ready == 3602
+          assert quarantine == 34
+          assert warmup == 20
+          assert stale == 1
+          print('U3K_LIQUIDITY_FX_CACHE_GATE_PASS')
+          PY
+
+      - name: U3K Liquidität und EOD-FX auditieren
+        run: |
+          python scripts/build_u3k_liquidity_fx_audit_v0_5.py \
+            --config config/u3k_liquidity_fx_v0.5.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          x = json.loads(
+              Path('output_u3k_liquidity_fx_v0_5/summary_v0.5.json')
+              .read_text(encoding='utf-8')
+          )
+
+          print('RUN_STATUS', x['run_status'])
+          print('ACTIVE', x['active_master_rows'])
+          print('READY', x['ready_rows'])
+          print('STANDARD_LIQUIDITY_READY', x['standard_liquidity_ready_rows'])
+          print('INSTRUMENT_REVIEW', x['instrument_review_queue_rows'])
+          print('LOW_LIQ_EXCEPTION', x['low_liquidity_exception_pool_rows'])
+          print('STRICT_ELIGIBLE', x['strict_eligible_rows'])
+          print('STRICT_FREEZE_ALLOWED', x['strict_freeze_allowed'])
+          print('STRICT_FROZEN_ROWS', x['strict_frozen_rows'])
+          print('FX_UNRESOLVED', x['fx']['unresolved'])
+
+          assert x['active_master_rows'] == 3657
+          assert x['cache_state_rows'] == 3657
+          assert x['ready_rows'] == 3602
+          assert x['stock_price_downloads_performed'] is False
+          assert x['fx_downloads_performed'] is True
+          assert x['p0_run'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+          assert x['run_status'] in {
+              'U3K_LIQUIDITY_FX_AUDIT_COMPLETE_STRICT_FREEZE_ALLOWED',
+              'U3K_LIQUIDITY_FX_AUDIT_COMPLETE_WITH_BLOCKERS',
+          }
+          if x['strict_freeze_allowed']:
+              assert x['strict_frozen_rows'] <= 3000
+          else:
+              assert x['strict_frozen_rows'] == 0
+
+          print('U3K_LIQUIDITY_FX_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_u3k_liquidity_fx_v0_5/ \
+                  universe/SWING_U3K_PROVISIONAL_LIQUIDITY_POOL_v0.5.csv \
+                  universe/SWING_U3K_FROZEN_v0.5.csv \
+                  universe/SWING_U3K_Eligibility_Audit_v0.5.xlsx
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Audit U3K liquidity and EOD FX eligibility v0.5"
+            git push
+          fi
+
+      - name: Audit-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-u3k-liquidity-fx-v0.5-${{ github.run_number }}
+          path: |
+            output_u3k_liquidity_fx_v0_5/
+            universe/SWING_U3K_PROVISIONAL_LIQUIDITY_POOL_v0.5.csv
+            universe/SWING_U3K_FROZEN_v0.5.csv
+            universe/SWING_U3K_Eligibility_Audit_v0.5.xlsx
+          retention-days: 14
