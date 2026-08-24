@@ -1,0 +1,7 @@
+Lane,Locally_Measurable_Now,Available_Inputs,Missing_or_Not_Promoted,Automated_P0_Decision_v0_17
+BREAKOUT_COMPRESSION_VCP,PARTIAL,EMA50;SMA200;High20;High60;High252;ATR14;R20;R60;Range20,validated pivot/base/VCP detector; current RVOL; climax detector; validated run-up threshold,NOT_ALLOWED
+PULLBACK_RETEST,PARTIAL,EMA20;EMA50;SMA200;Dist_EMA20;Dist_EMA50;Low20;Low60;R20;R60,former-breakout-zone detector; horizontal support detector; controlled-pullback sequence,NOT_ALLOWED
+RECLAIM,PARTIAL,Close;EMA20;EMA50;R5;R20;Low20,multi-day reclaim/crossing sequence; higher-low detector; confirmation logic,NOT_ALLOWED
+QUIET_STRENGTH_RELATIVE_STRENGTH,PARTIAL,R20;R60;EMA20;EMA50;SMA200,20d/60d home-market RS; sector RS; validated excess-momentum rule,NOT_ALLOWED
+POST_EVENT_DRIFT,PARTIAL,R5;R20;R60;High20;Low20;Range20,impulse/held-level/tight-consolidation sequence; current RVOL,NOT_ALLOWED
+CONTROLLED_MEAN_REVERSION,PARTIAL,R20;R60;EMA20;EMA50;SMA200;Low20;Low60;ATR14,stabilization sequence; falling-knife acceleration detector; definable invalidation,NOT_ALLOWED

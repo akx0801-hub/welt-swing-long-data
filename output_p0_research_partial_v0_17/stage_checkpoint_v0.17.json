@@ -1,0 +1,16 @@
+{
+  "schema": "WELT_SWING_STAGE_CHECKPOINT_V0_17",
+  "run_id": "WS-LONG-P0-RESEARCH-PARTIAL-DRYRUN-2026-08-24-v0.17",
+  "stage_id": "P0_RESEARCH_PARTIAL_PARAMETER_FREEZE_AND_DRY_RUN",
+  "stage_version": "v0.17",
+  "status": "PARTIAL",
+  "input_count": 2037,
+  "checked_count": 2037,
+  "pass_count": 0,
+  "fail_count": 0,
+  "data_error_count": 2,
+  "quarantine_count": 0,
+  "p0_survivor_count": 0,
+  "validated_automated_p0_run": false,
+  "next_stage": "P0_FEATURE_AUGMENTATION_AND_PARAMETER_VALIDATION"
+}

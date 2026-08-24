@@ -1,0 +1,31 @@
+{
+  "schema": "WELT_SWING_P0_CAPABILITY_AUDIT_V0_17",
+  "partial_rows": 2037,
+  "feature_matched_rows": 2037,
+  "core_feature_complete_rows": 2035,
+  "data_error_rows": 2,
+  "available_local_capabilities": [
+    "EMA20/EMA50/SMA200",
+    "ATR14",
+    "R5/R20/R60",
+    "20/60/252d highs",
+    "20/60d lows",
+    "EMA/high distances",
+    "Range20",
+    "MedianVolume20",
+    "MedianTurnover20"
+  ],
+  "missing_or_unpromoted_for_validated_automated_p0": [
+    "validated algorithmic P0 lane thresholds",
+    "base/pivot/VCP detector",
+    "multi-day pullback/retest/reclaim/higher-low features",
+    "current RVOL",
+    "validated climax detector",
+    "20/60d RS versus home market and sector",
+    "post-impulse hold/drift features",
+    "mean-reversion stabilization detector",
+    "globally synchronized current AsOf"
+  ],
+  "automated_p0_ready": false,
+  "qualitative_structural_dev_possible": true
+}
