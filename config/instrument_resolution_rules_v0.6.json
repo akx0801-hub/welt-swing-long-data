@@ -1,0 +1,171 @@
+{
+  "schema": "WELT_SWING_INSTRUMENT_RESOLUTION_RULES_V0_6",
+  "as_of_date": "2026-08-24",
+  "source_summary": "output_u3k_liquidity_fx_v0_5/summary_v0.5.json",
+  "source_eligibility": "output_u3k_liquidity_fx_v0_5/eligibility_rows_v0.5.csv",
+  "source_review_queue": "output_u3k_liquidity_fx_v0_5/instrument_review_queue_v0.5.csv",
+  "output_dir": "output_instrument_resolution_v0_6",
+  "expected_review_rows": 2113,
+  "expected_existing_explicit_pass_rows": 597,
+  "expected_us_sp1500_review_rows": 1332,
+  "group_rules": {
+    "US_SP1500": {
+      "decision": "PASS",
+      "resolved_instrument_type": "COMMON_STOCK_BY_INDEX_ELIGIBILITY",
+      "reason": "OFFICIAL_SPDJI_US_INDEX_FAMILY_COMMON_EQUITIES",
+      "evidence_url": "https://www.spglobal.com/spdji/en/methodology/article/sp-us-indices-methodology/",
+      "evidence_note": "S&P U.S. Indices methodology describes the family as U.S.-domiciled stocks and the Total Market Index as all eligible U.S. common equities; S&P 500, 400 and 600 are members of the same U.S. index family. For the frozen S&P Composite 1500 constituent set this is accepted as group-level common-equity evidence in DEV v0.6.",
+      "governance": "AUTO_PASS_GROUP_RULE"
+    },
+    "AU_ASX200": {
+      "decision": "NOT_VERIFIED",
+      "reason": "MIXED_SECURITY_STRUCTURES_REIT_STAPLED_POSSIBLE",
+      "evidence_url": "https://www.spglobal.com/spdji/en/indices/equity/sp-asx-200/",
+      "evidence_note": "Official S&P page calls constituents index-eligible stocks, but official index announcements also identify REIT constituents. Group-level ordinary-share PASS is therefore not allowed.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    },
+    "CA_TSX": {
+      "decision": "NOT_VERIFIED",
+      "reason": "COMPOSITE_INCLUDES_COMMON_STOCKS_AND_INCOME_TRUST_UNITS",
+      "evidence_url": "https://www.spglobal.com/spdji/en/methodology/article/sp-tsx-canadian-indices-methodology/",
+      "evidence_note": "Official methodology explicitly states that the S&P/TSX Composite includes common stocks and income trust units. No group-wide PASS.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    },
+    "MX_IPC": {
+      "decision": "NOT_VERIFIED",
+      "reason": "MIXED_SHARE_CERTIFICATE_STRUCTURES_CPO_PRESENT",
+      "evidence_url": "https://www.spglobal.com/spdji/en/indices/equity/sp-bmv-ipc/",
+      "evidence_note": "Official current constituent presentation includes CPO securities, so IPC membership alone does not prove an ordinary-share instrument.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    },
+    "NZ_NZX50": {
+      "decision": "NOT_VERIFIED",
+      "reason": "ELIGIBLE_STOCK_WORDING_INSUFFICIENT_FOR_STRICT_ORDINARY_SHARE_PROOF",
+      "evidence_url": "https://www.spglobal.com/spdji/en/indices/equity/sp-nzx-50-index/",
+      "evidence_note": "Official page describes eligible stocks, but v0.6 requires positive ordinary/common-share proof before strict PASS.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    },
+    "EU_STOXX600": {
+      "decision": "NOT_VERIFIED",
+      "reason": "CURRENT_OFFICIAL_EVIDENCE_NOT_YET_SECURITY_TYPE_SPECIFIC",
+      "evidence_url": "https://www.stoxx.com/rulebook",
+      "evidence_note": "Current official rulebook access is retained as evidence, but v0.6 does not infer ordinary-share status for every constituent from index membership alone.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    },
+    "HK_HSI": {
+      "decision": "NOT_VERIFIED",
+      "reason": "CURRENT_OFFICIAL_EVIDENCE_NOT_YET_SECURITY_TYPE_SPECIFIC",
+      "evidence_url": "https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_hsie.pdf",
+      "evidence_note": "Current HSI methodology evidence is not used as a blanket ordinary-share proof in v0.6.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    },
+    "KR_KOSPI200": {
+      "decision": "NOT_VERIFIED",
+      "reason": "KRX_CALLS_CONSTITUENTS_STOCKS_BUT_COMMON_VS_PREFERRED_NOT_PROVEN",
+      "evidence_url": "https://global.krx.co.kr/contents/GLB/02/0202/0202010101/GLB0202010101.jsp",
+      "evidence_note": "KRX describes KOSPI 200 as a blue-chip stock index, but v0.6 does not elevate this to common-share proof without a security-level or explicit eligibility rule.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    },
+    "ZA_TOP40": {
+      "decision": "NOT_VERIFIED",
+      "reason": "CURRENT_OFFICIAL_EVIDENCE_NOT_YET_SECURITY_TYPE_SPECIFIC",
+      "evidence_url": "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-jse-africa-index-series-ground-rules.pdf",
+      "evidence_note": "FTSE/JSE ground rules are retained, but no blanket common/ordinary-share PASS is made in v0.6.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    },
+    "BR_IBRX100": {
+      "decision": "NOT_VERIFIED",
+      "reason": "NO_NEW_GROUP_RULE_IN_V0_6",
+      "evidence_url": "",
+      "evidence_note": "No new group-level instrument decision is made in v0.6.",
+      "governance": "TARGETED_REVIEW_REQUIRED"
+    }
+  },
+  "auto_fail_rules": [
+    {
+      "id": "CLEAR_FUND_ETF_PREFERRED_DERIVATIVE_TOKEN",
+      "segments": [
+        "*"
+      ],
+      "fields": [
+        "Name",
+        "Instrument_Type",
+        "Primary_Ticker",
+        "Yahoo_Symbol"
+      ],
+      "regex": "(?i)(^|[^A-Z0-9])(ETF|EXCHANGE[ -]?TRADED FUND|PREFERRED|PREFERENCE|WARRANTS?|RIGHTS?|DEPOSITARY RECEIPT|ADR|GDR)([^A-Z0-9]|$)",
+      "decision": "FAIL",
+      "resolved_instrument_type": "DISALLOWED_INSTRUMENT_TOKEN"
+    },
+    {
+      "id": "CANADA_TRUST_UNIT_TOKEN",
+      "segments": [
+        "CA_TSX"
+      ],
+      "fields": [
+        "Name",
+        "Primary_Ticker",
+        "Yahoo_Symbol"
+      ],
+      "regex": "(?i)(REIT|INCOME TRUST|TRUST UNITS?|[-.]UN(?:[.-]|$))",
+      "decision": "FAIL",
+      "resolved_instrument_type": "UNIT_OR_TRUST_UNIT"
+    },
+    {
+      "id": "AUSTRALIA_REIT_UNIT_TOKEN",
+      "segments": [
+        "AU_ASX200"
+      ],
+      "fields": [
+        "Name",
+        "Instrument_Type"
+      ],
+      "regex": "(?i)(REIT|TRUST UNITS?|STAPLED SECURITY|STAPLED SECURITIES)",
+      "decision": "FAIL",
+      "resolved_instrument_type": "UNIT_OR_STAPLED_SECURITY"
+    },
+    {
+      "id": "MEXICO_CERTIFICATE_OR_FIBRA_TOKEN",
+      "segments": [
+        "MX_IPC"
+      ],
+      "fields": [
+        "Name",
+        "Primary_Ticker",
+        "Yahoo_Symbol"
+      ],
+      "regex": "(?i)(CPO|FIBRA)",
+      "decision": "FAIL",
+      "resolved_instrument_type": "CERTIFICATE_OR_FIBRA"
+    },
+    {
+      "id": "HK_REIT_UNIT_TOKEN",
+      "segments": [
+        "HK_HSI"
+      ],
+      "fields": [
+        "Name",
+        "Instrument_Type"
+      ],
+      "regex": "(?i)(REIT|TRUST UNITS?)",
+      "decision": "FAIL",
+      "resolved_instrument_type": "UNIT_OR_REIT_UNIT"
+    },
+    {
+      "id": "NZ_TRUST_UNIT_TOKEN",
+      "segments": [
+        "NZ_NZX50"
+      ],
+      "fields": [
+        "Name",
+        "Instrument_Type"
+      ],
+      "regex": "(?i)(PROPERTY TRUST|TRUST UNITS?|LISTED PROPERTY FUND)",
+      "decision": "FAIL",
+      "resolved_instrument_type": "UNIT_OR_TRUST_UNIT"
+    }
+  ],
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
