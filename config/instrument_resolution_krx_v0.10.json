@@ -1,0 +1,25 @@
+{
+  "schema": "WELT_SWING_INSTRUMENT_RESOLUTION_KRX_CONFIG_V0_10",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_9": "output_instrument_resolution_v0_9/summary_v0.9.json",
+  "source_manual_queue_v0_9": "output_instrument_resolution_v0_9/instrument_manual_review_queue_v0.9.csv",
+  "source_full_eligibility_v0_8": "output_instrument_resolution_v0_8/eligibility_after_instrument_v0.8.csv",
+  "output_dir": "output_instrument_resolution_v0_10",
+  "expected_source_manual_rows": 667,
+  "expected_source_strict_candidates": 2020,
+  "expected_kr_target_rows": 92,
+  "request_timeout_seconds": 45,
+  "krx_source": {
+    "name": "KRX Data Marketplace All Stock Basic Information",
+    "method": "POST",
+    "url": "https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd",
+    "evidence_url": "https://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd",
+    "data": {
+      "bld": "dbms/MDC/STAT/standard/MDCSTAT01901",
+      "mktId": "STK"
+    }
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
