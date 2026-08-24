@@ -1,0 +1,121 @@
+name: Welt-Swing Instrument Resolution ASX v0.8
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  resolve_asx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: python scripts/classify_instruments_asx_v0_8.py --self-test
+
+      - name: Frozen-v0.7-Input-Gates
+        run: |
+          test -f output_instrument_resolution_v0_7/summary_v0.7.json
+          test -f output_instrument_resolution_v0_7/instrument_manual_review_queue_v0.7.csv
+          test -f output_instrument_resolution_v0_7/eligibility_after_instrument_v0.7.csv
+          test -f output_instrument_resolution_v0_7/asx_reference_matches_v0.7.csv
+
+          test "$(git hash-object output_instrument_resolution_v0_7/summary_v0.7.json)" = "d35a55ca593f951997aa8ffa0f6f5248da60414e"
+          test "$(git hash-object output_instrument_resolution_v0_7/instrument_manual_review_queue_v0.7.csv)" = "c7ff2b54cfd3e3d17887c68d98b66ec69aa4d88d"
+          test "$(git hash-object output_instrument_resolution_v0_7/eligibility_after_instrument_v0.7.csv)" = "a0e61448bc010e530cd5d9e1aac1ee840e236dcd"
+          test "$(git hash-object output_instrument_resolution_v0_7/asx_reference_matches_v0.7.csv)" = "9517a0cefa30b13c6816ad1135a0805120936ea5"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          s = json.loads(Path('output_instrument_resolution_v0_7/summary_v0.7.json').read_text(encoding='utf-8'))
+          q = pd.read_csv('output_instrument_resolution_v0_7/instrument_manual_review_queue_v0.7.csv', keep_default_na=False, dtype=str)
+          r = pd.read_csv('output_instrument_resolution_v0_7/asx_reference_matches_v0.7.csv', keep_default_na=False, dtype=str)
+
+          assert s['schema'] == 'WELT_SWING_INSTRUMENT_RESOLUTION_PRIMARY_MARKET_V0_7'
+          assert s['remaining_manual_review_rows'] == 730
+          assert s['strict_candidates_v0_7'] == 1967
+          assert s['asx_reference_probe']['target_coverage'] == 1.0
+          assert len(q) == 730
+          assert (q['Primary_Universe_Index'] == 'AU_ASX200').sum() == 63
+          assert len(r) == 63
+          assert r['Security type'].astype(str).str.strip().ne('').all()
+          assert s['p0_run'] is False
+          assert s['alpha_vantage_allowed'] is False
+          print('INSTRUMENT_RESOLUTION_ASX_V0_8_INPUT_GATE_PASS')
+          PY
+
+      - name: ASX Security-Type klassifizieren
+        run: |
+          python scripts/classify_instruments_asx_v0_8.py \
+            --config config/instrument_resolution_asx_v0.8.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          x = json.loads(Path('output_instrument_resolution_v0_8/summary_v0.8.json').read_text(encoding='utf-8'))
+          print(json.dumps(x, indent=2, ensure_ascii=False))
+
+          assert x['run_status'] == 'INSTRUMENT_RESOLUTION_ASX_V0_8_COMPLETE_WITH_REMAINING_REVIEW'
+          assert x['source_manual_rows_v0_7'] == 730
+          assert x['australia_source_rows'] == 63
+          assert x['asx_reference_rows'] == 63
+          assert x['asx_reference_coverage'] == 1.0
+          assert x['asx_pass_rows'] == 53
+          assert x['asx_fail_rows'] == 10
+          assert x['asx_unresolved_rows'] == 0
+          assert x['remaining_manual_rows'] == 667
+          assert x['strict_candidates_v0_7'] == 1967
+          assert x['strict_candidates_v0_8'] == 2020
+          assert x['strict_freeze_allowed'] is False
+          assert x['p0_run'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+          assert x['price_downloads_performed'] is False
+          assert x['fx_downloads_performed'] is False
+          assert x['web_calls_per_security'] is False
+          assert x['external_reference_requests'] == 0
+          print('INSTRUMENT_RESOLUTION_ASX_V0_8_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_instrument_resolution_v0_8/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Resolve ASX instrument security types v0.8"
+            git push
+          fi
+
+      - name: Audit-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-instrument-resolution-asx-v0.8-${{ github.run_number }}
+          path: output_instrument_resolution_v0_8/
+          retention-days: 14
