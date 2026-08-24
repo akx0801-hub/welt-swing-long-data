@@ -1,0 +1,25 @@
+{
+  "schema": "WELT_SWING_TMX_SYMBOL_SEMANTICS_PROBE_CONFIG_V0_13",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_12": "output_instrument_resolution_v0_12/summary_v0.12.json",
+  "source_manual_queue_v0_12": "output_instrument_resolution_v0_12/instrument_manual_review_queue_v0.12.csv",
+  "output_dir": "output_instrument_resolution_v0_13",
+  "expected_source_manual_rows": 650,
+  "expected_source_strict_candidates": 2037,
+  "expected_ca_target_rows": 105,
+  "request_timeout_seconds": 45,
+  "max_external_reference_requests": 3,
+  "tmx_sources": {
+    "moc_eligible": {
+      "name": "TMX TSX/TSXV MOC Eligible Stocks",
+      "url": "https://www.tsx.com/en/trading/market-data-and-statistics/market-statistics-and-reports/tsx-tsxv-moc-eligible-stocks"
+    },
+    "symbol_suffix_notice": {
+      "name": "TMX Notice to Issuers - Four Character Stock Symbol Reservations",
+      "url": "https://www.tsx.com/en/resource/1311"
+    }
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
