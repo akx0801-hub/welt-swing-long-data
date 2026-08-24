@@ -1,0 +1,16 @@
+{
+  "schema": "WELT_SWING_RESEARCH_PARTIAL_SNAPSHOT_CONFIG_V0_16",
+  "as_of_date": "2026-08-24",
+  "snapshot_id": "WS-LONG-RESEARCH-PARTIAL-2026-08-24-v0.16",
+  "source_summary_v0_15": "output_instrument_resolution_v0_15/summary_v0.15.json",
+  "source_manual_queue_v0_15": "output_instrument_resolution_v0_15/instrument_manual_review_queue_v0.15.csv",
+  "source_strict_candidates_v0_14": "output_instrument_resolution_v0_14/strict_u3k_candidate_after_instrument_v0.14.csv",
+  "source_full_eligibility_v0_14": "output_instrument_resolution_v0_14/eligibility_after_instrument_v0.14.csv",
+  "output_dir": "output_research_partial_v0_16",
+  "expected_full_eligibility_rows": 3657,
+  "expected_strict_candidates": 2037,
+  "expected_unresolved_instrument_rows": 650,
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
