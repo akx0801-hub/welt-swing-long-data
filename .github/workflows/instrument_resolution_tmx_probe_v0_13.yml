@@ -1,0 +1,80 @@
+name: Welt-Swing TMX Symbol Semantics Probe v0.13
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/instrument_resolution_tmx_probe_v0.13.json'
+
+permissions:
+  contents: write
+
+jobs:
+  probe_tmx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install requests
+      - name: Offline-Selbsttest
+        run: python scripts/probe_tmx_symbol_semantics_v0_13.py --self-test
+      - name: Frozen-v0.12-Input-Gates
+        shell: bash
+        run: |
+          test "$(git hash-object output_instrument_resolution_v0_12/summary_v0.12.json)" = "7e04a6fd6bb15fc4d0fff624d6c132dd849e3865"
+          test "$(git hash-object output_instrument_resolution_v0_12/instrument_manual_review_queue_v0.12.csv)" = "e9d9983ca00e0f4b30b8d519e17268641a0d0004"
+          test "$(git hash-object output_instrument_resolution_v0_12/eligibility_after_instrument_v0.12.csv)" = "a909953a5c20cb1eb440eaa76199c062034a562a"
+          test "$(git hash-object output_instrument_resolution_v0_12/strict_u3k_candidate_after_instrument_v0.12.csv)" = "886aec164b6b5956b256fe6167467aa83dac4f37"
+          python - <<'PY'
+          import json, pandas as pd
+          from pathlib import Path
+          s=json.loads(Path('output_instrument_resolution_v0_12/summary_v0.12.json').read_text(encoding='utf-8'))
+          q=pd.read_csv('output_instrument_resolution_v0_12/instrument_manual_review_queue_v0.12.csv',keep_default_na=False,dtype=str)
+          assert s['run_status']=='INSTRUMENT_RESOLUTION_JSE_V0_12_COMPLETE_WITH_REMAINING_REVIEW'
+          assert s['remaining_manual_rows_v0_12']==650 and s['strict_candidates_v0_12']==2037
+          assert s['jse_pass_rows']==17 and s['jse_unresolved_rows']==0 and s['record_layout_validated'] is True
+          assert s['p0_run'] is False and s['alpha_vantage_allowed'] is False
+          assert len(q)==650 and (q['Primary_Universe_Index']=='CA_TSX').sum()==105
+          print('TMX_SYMBOL_SEMANTICS_PROBE_V0_13_INPUT_GATE_PASS')
+          PY
+      - name: TMX Bulk-Evidenz prüfen
+        run: python scripts/probe_tmx_symbol_semantics_v0_13.py --config config/instrument_resolution_tmx_probe_v0.13.json
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json, pandas as pd
+          from pathlib import Path
+          x=json.loads(Path('output_instrument_resolution_v0_13/summary_v0.13.json').read_text(encoding='utf-8'))
+          assert x['source_manual_rows_v0_12']==650 and x['ca_target_rows']==105
+          assert x['strict_candidates_v0_13']==2037 and x['remaining_manual_rows_v0_13']==650
+          assert x['decisions_changed']==0 and x['request_bound_respected'] is True
+          assert x['p0_run'] is False and x['productive_trading_authority'] is False and x['alpha_vantage_allowed'] is False
+          assert x['web_calls_per_security'] is False and x['canonical_master_mutated'] is False
+          q=pd.read_csv('output_instrument_resolution_v0_13/instrument_manual_review_queue_v0.13.csv',keep_default_na=False,dtype=str)
+          assert len(q)==650
+          print('TMX_SYMBOL_SEMANTICS_PROBE_V0_13_RESULT_GATES_PASS')
+          PY
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_instrument_resolution_v0_13/
+          if git diff --cached --quiet; then echo "Keine Änderungen."; else git commit -m "Probe TMX symbol semantics v0.13" && git push; fi
+      - name: Audit-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-tmx-symbol-semantics-probe-v0.13-${{ github.run_number }}
+          path: output_instrument_resolution_v0_13/
+          retention-days: 14
