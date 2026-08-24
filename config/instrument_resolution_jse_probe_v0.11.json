@@ -1,0 +1,20 @@
+{
+  "schema": "WELT_SWING_JSE_ISIN_BULK_PROBE_CONFIG_V0_11",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_10": "output_instrument_resolution_v0_10/summary_v0.10.json",
+  "source_manual_queue_v0_10": "output_instrument_resolution_v0_10/instrument_manual_review_queue_v0.10.csv",
+  "output_dir": "output_instrument_resolution_v0_11",
+  "expected_source_manual_rows": 667,
+  "expected_source_strict_candidates": 2020,
+  "expected_za_target_rows": 17,
+  "request_timeout_seconds": 45,
+  "max_external_reference_requests": 2,
+  "jse_source": {
+    "name": "JSE Equities ISIN Downloadable Files",
+    "folder_url": "https://clientportal.jse.co.za/downloadable-files?RequestNode=%2FISIN%2FEquities",
+    "expected_filename": "isinfull_e.zip"
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
