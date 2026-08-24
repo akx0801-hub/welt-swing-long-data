@@ -1,0 +1,126 @@
+name: Welt-Swing Instrument Resolution Primary Market v0.7
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  instrument_resolution_primary_market:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install 'requests>=2.32,<3' 'xlrd>=2.0,<3'
+
+      - name: Offline-Selbsttest
+        run: python scripts/classify_instruments_primary_market_v0_7.py --self-test
+
+      - name: Input-Gates
+        run: |
+          test -f output_instrument_resolution_v0_6/summary_v0.6.json
+          test -f output_instrument_resolution_v0_6/eligibility_after_instrument_v0.6.csv
+          test -f output_instrument_resolution_v0_6/instrument_manual_review_queue_v0.6.csv
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          s = json.loads(
+              Path('output_instrument_resolution_v0_6/summary_v0.6.json')
+              .read_text(encoding='utf-8')
+          )
+          q = pd.read_csv(
+              'output_instrument_resolution_v0_6/instrument_manual_review_queue_v0.6.csv',
+              keep_default_na=False
+          )
+
+          assert s['run_status'] == 'INSTRUMENT_RESOLUTION_V0_6_COMPLETE_WITH_REMAINING_REVIEW'
+          assert s['manual_review_rows'] == 778
+          assert s['strict_candidate_rows_v0_6'] == 1929
+          assert s['p0_run'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert len(q) == 778
+          assert (q['Primary_Universe_Index'] == 'BR_IBRX100').sum() == 48
+          assert (q['Primary_Universe_Index'] == 'AU_ASX200').sum() == 63
+          print('INSTRUMENT_RESOLUTION_PRIMARY_MARKET_V0_7_INPUT_GATE_PASS')
+          PY
+
+      - name: B3 exakt auflösen und ASX-Referenz einmalig prüfen
+        run: |
+          python scripts/classify_instruments_primary_market_v0_7.py \
+            --config config/instrument_resolution_primary_market_v0.7.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          x = json.loads(
+              Path('output_instrument_resolution_v0_7/summary_v0.7.json')
+              .read_text(encoding='utf-8')
+          )
+          print(json.dumps(x, indent=2, ensure_ascii=False))
+
+          assert x['source_manual_rows_v0_6'] == 778
+          assert x['brazil_source_rows'] == 48
+          assert x['brazil_pass_rows'] + x['brazil_fail_rows'] == 48
+          assert x['brazil_unresolved_rows'] == 0
+          assert x['remaining_manual_review_rows'] == 730
+          assert x['strict_candidates_v0_7'] >= 1929
+          assert x['strict_freeze_allowed'] is False
+          assert x['p0_run'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+          assert x['price_downloads_performed'] is False
+          assert x['fx_downloads_performed'] is False
+          assert x['web_calls_per_security'] is False
+          assert x['external_reference_requests'] == 1
+          assert x['asx_reference_probe']['status'] in {
+              'PARSED_MATCHES_AVAILABLE',
+              'PARSED_NO_CODE_COLUMN_MATCH',
+              'DOWNLOAD_FAILED',
+              'PARSE_FAILED',
+          }
+          print('INSTRUMENT_RESOLUTION_PRIMARY_MARKET_V0_7_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_instrument_resolution_v0_7/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Resolve B3 instrument types and probe ASX reference data v0.7"
+            git push
+          fi
+
+      - name: Audit-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-instrument-resolution-v0.7-${{ github.run_number }}
+          path: |
+            output_instrument_resolution_v0_7/
+            runtime_reference/asx_isin_v0_7.xls
+          if-no-files-found: ignore
+          retention-days: 14
