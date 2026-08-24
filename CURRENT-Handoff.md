@@ -1,52 +1,26 @@
 # WELT-SWING LONG DEV — CURRENT HANDOFF
 
-**Updated:** 2026-08-24 16:24 CEST  
+**Updated:** 2026-08-24 17:46 CEST  
 **Status:** DEV / RESEARCH / SHADOW — NOT PRODUCTIVE
 
-## Authority
 Authoritative DEV master specification: `docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md`
 
-Welt-Swing v7.2 remains unchanged and alone productive-authoritative.
+Latest completed checkpoint: **TMX Symbol Semantics Probe v0.13**  
+Repo HEAD: `b4d9501eb430e38ca1ad81ddd7580234cdb49fd6`
 
-## Current checkpoint
-Latest completed technical checkpoint: **JSE Instrument Resolution v0.12**
-
-Repo HEAD: `e4356be2336630c7f0dafa73d99ffa60dbcd4df8`
-
-Confirmed v0.12:
-- JSE reference rows: **14,589**
-- ZA targets: **17**
-- exact matches: **17**
-- PASS: **17**
-- FAIL: **0**
-- unresolved ZA: **0**
-- record layout validated: **true**
-- remaining manual rows: **650**
-- strict candidates: **2,037**
-- strict freeze: **false**
-- P0: **false**
+Confirmed v0.13:
+- Canada targets 105
+- exact current TMX symbol matches 105/105
+- suffix patterns: 98 `NO_DOT_SUFFIX`, 7 `DOT_CLASS_LIKE`
+- decisions changed 0
+- remaining manual rows 650
+- strict candidates 2,037
+- strict freeze false
+- P0 false
 - Alpha Vantage forbidden
 
-Remaining:
-- CA_TSX 105
-- EU_STOXX600 365
-- HK_HSI 82
-- KR_KOSPI200 92
-- MX_IPC 6
+Remaining before v0.14: CA 105, EU 365, HK 82, KR 92, MX 6.
 
-## Next step
-**v0.13 — TMX Symbol Semantics Probe**
+Next: **v0.14 — TMX Instrument Resolution**. It revalidates S&P/TSX Composite eligibility semantics and TMX Policy 5.8 root/suffix semantics before any classification. If either source validation fails, zero new decisions. No per-security requests.
 
-Evidence-only for Canada:
-- max 3 official TMX requests
-- no per-security requests
-- current bulk symbol confirmation
-- suffix-pattern distribution for the 105 frozen targets
-- capture formal TMX suffix semantics if accessible
-- zero eligibility decisions
-- preserve 650 review rows and 2,037 strict candidates
-
-A later v0.14 classifier is allowed only if official evidence deterministically separates common/ordinary shares from units/preferreds/other structures.
-
-## Resume rule
-Read this file, then the master spec, then newest summary, confirm `main` HEAD, resume from the smallest valid next stage.
+Resume: read this file, master spec, newest summary, confirm `main` HEAD, then continue from the smallest valid stage.
