@@ -1,0 +1,39 @@
+{
+  "schema": "WELT_SWING_INSTRUMENT_RESOLUTION_ASX_V0_8",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_7": "output_instrument_resolution_v0_7/summary_v0.7.json",
+  "source_manual_queue_v0_7": "output_instrument_resolution_v0_7/instrument_manual_review_queue_v0.7.csv",
+  "source_full_eligibility_v0_7": "output_instrument_resolution_v0_7/eligibility_after_instrument_v0.7.csv",
+  "source_asx_reference_matches_v0_7": "output_instrument_resolution_v0_7/asx_reference_matches_v0.7.csv",
+  "output_dir": "output_instrument_resolution_v0_8",
+  "expected_source_manual_rows": 730,
+  "expected_source_strict_candidates": 1967,
+  "expected_asx_rows": 63,
+  "expected_asx_reference_rows": 63,
+  "expected_asx_pass_rows": 53,
+  "expected_asx_fail_rows": 10,
+  "expected_remaining_manual_rows": 667,
+  "expected_strict_candidates_v0_8": 2020,
+  "frozen_git_blobs": {
+    "summary_v0_7": "d35a55ca593f951997aa8ffa0f6f5248da60414e",
+    "manual_queue_v0_7": "c7ff2b54cfd3e3d17887c68d98b66ec69aa4d88d",
+    "full_eligibility_v0_7": "a0e61448bc010e530cd5d9e1aac1ee840e236dcd",
+    "asx_reference_matches_v0_7": "9517a0cefa30b13c6816ad1135a0805120936ea5"
+  },
+  "asx_rules": {
+    "pass_exact_security_types": [
+      "ORDINARY FULLY PAID"
+    ],
+    "fail_contains_tokens": [
+      "STAPLED",
+      "ORDINARY/UNITS",
+      "CDI ",
+      "CHESS DEPOSITARY INTERESTS"
+    ],
+    "reference_url": "https://www.asx.com.au/content/dam/asx/issuers/ISIN.xls",
+    "reference_description": "Official ASX ISIN directory; Security type column; frozen 63/63 target coverage from v0.7."
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
