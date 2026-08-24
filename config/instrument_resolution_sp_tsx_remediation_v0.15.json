@@ -1,0 +1,32 @@
+{
+  "schema": "WELT_SWING_SP_TSX_SEMANTICS_REMEDIATION_CONFIG_V0_15",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_14": "output_instrument_resolution_v0_14/summary_v0.14.json",
+  "source_manual_queue_v0_14": "output_instrument_resolution_v0_14/instrument_manual_review_queue_v0.14.csv",
+  "output_dir": "output_instrument_resolution_v0_15",
+  "request_timeout_seconds": 45,
+  "official_sources": {
+    "methodology_article": {
+      "name": "S&P/TSX Canadian Indices Methodology Article",
+      "url": "https://www.spglobal.com/spdji/en/methodology/article/sp-tsx-canadian-indices-methodology/",
+      "required_phrases": [
+        "includes common stocks and income trust units",
+        "contains all of the income trust constituents from its parent index"
+      ]
+    },
+    "localized_methodology_pdf": {
+      "name": "S&P/TSX Canadian Indices Methodology PDF Localized Path",
+      "url": "https://www.spglobal.com/spdji/pt/documents/methodologies/methodology-sp-tsx-canadian-indices.pdf",
+      "required_phrases": [
+        "preferred shares",
+        "exchangeable shares",
+        "warrants",
+        "installment receipts",
+        "usd-denominated securities"
+      ]
+    }
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
