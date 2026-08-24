@@ -1,6 +1,6 @@
 # WELT-SWING LONG DEV — CURRENT HANDOFF
 
-**Updated:** 2026-08-24 15:07 CEST  
+**Updated:** 2026-08-24 15:32 CEST  
 **Status:** DEV / RESEARCH / SHADOW — NOT PRODUCTIVE
 
 ## Authority
@@ -15,22 +15,37 @@ Welt-Swing v7.2 remains unchanged and alone productive-authoritative for real Sw
 
 ## Current repo checkpoint
 
-Latest completed technical checkpoint: **Primary-Market Bundle Probe v0.9**
+Latest completed technical checkpoint:
 
-Confirmed v0.9 state:
+**KRX Stock-Kind Instrument Resolution v0.10**
 
-- run status: `PRIMARY_MARKET_BUNDLE_PROBE_V0_9_COMPLETE`
-- manual-review rows: **667**
-- strict candidates: **2.020**
+Repo HEAD after v0.10 output commit:
+
+`6f23b314d538b8d7e8bb5d8be68b2b714c714fff`
+
+Commit:
+
+`Resolve KRX stock-kind instruments v0.10`
+
+## Confirmed v0.10 result
+
+- run status: `INSTRUMENT_RESOLUTION_KRX_V0_10_COMPLETE_WITH_SOURCE_BLOCK`
+- KRX target rows: **92**
+- KRX HTTP status: **400**
+- KRX reference rows: **0**
+- KRX matched: **0**
+- new PASS: **0**
+- new FAIL: **0**
+- unresolved KR: **92**
+- manual-review rows remain: **667**
+- strict candidates remain: **2.020**
 - strict freeze: **false**
 - P0: **false**
-- six official/bourse-level requests, request bound respected
-- decisions changed: **0**
-- HKEX: **82/82 exact matches**
-- KRX: HTTP 400 source block
-- CA/MX/ZA: official pages reachable, no strict security-type inference yet
-- EU/STOXX: TLS/certificate failure in GitHub runner
-- Alpha Vantage: forbidden
+- external reference requests: **1**
+- no per-security requests
+- no price/FX downloads
+- Alpha Vantage forbidden
+- canonical master unchanged
 
 Remaining segments:
 
@@ -44,26 +59,38 @@ Remaining segments:
 | ZA_TOP40 | 17 |
 | **Total** | **667** |
 
+## KRX access conclusion
+
+The anonymous KRX Data Marketplace bulk POST remains blocked with HTTP 400.
+
+Current official KRX pages expose login/registration and the official KRX OPEN API requires login plus an approved authentication key. The anonymous route should not be retried repeatedly in the current free/no-credential DEV path.
+
+KR_KOSPI200 remains source-blocked / NOT_VERIFIED until an allowed official bulk route is available.
+
 ## Next step
 
-**v0.10 — KRX Stock-Kind Instrument Resolution**
+**v0.11 — JSE Equities ISIN Bulk Probe**
 
-Goal: remediate the KRX request and deterministically classify only the 92 frozen KOSPI200 target rows from official `SECUGRP_NM` and `KIND_STKCERT_TP_NM`.
+Target: **17** remaining `ZA_TOP40` rows.
 
-Strict PASS only for exact KRX code match + `주권` + `보통주`.
+Official JSE Client Portal exposes an Equities ISIN downloadable-files folder containing `isinfull_e.zip`.
 
-Preferred labels containing `우선주` are strict FAIL.
+v0.11 is evidence-only:
 
-Everything else remains NOT_VERIFIED.
+- max 2 official JSE requests,
+- no per-security requests,
+- zero eligibility decisions,
+- inspect archive structure/fields,
+- preserve 667 review rows and 2.020 strict candidates.
 
-No per-security requests. One official KRX bulk POST maximum. If source access remains blocked, zero new decisions and the run completes fail-closed.
+If the ZIP is reproducibly obtained and its fields have documented instrument-type semantics, a later v0.12 classifier can be built. Otherwise ZA remains source-blocked.
 
 ## Resume rule
 
 1. Read this file.
 2. Read the master spec.
-3. Read the newest `summary_v0.x.json`.
-4. Confirm `main` HEAD.
+3. Read newest `summary_v0.x.json`.
+4. Confirm current `main` HEAD.
 5. Resume from the smallest valid next stage.
 
-No obsolete workflow may be run to regress the frozen state.
+Never regress to an obsolete instrument-resolution workflow.
