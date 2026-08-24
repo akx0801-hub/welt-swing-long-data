@@ -1,0 +1,83 @@
+{
+  "schema": "WELT_SWING_TARGETED_REFRESH_6_V0_3",
+  "generated_utc": "2026-08-24T05:16:44.496468+00:00",
+  "run_status": "TARGETED_REFRESH_6_COMPLETE",
+  "target_rows": 6,
+  "target_symbols": {
+    "WS:XASX:XYX": "XYZ.AX",
+    "WS:XMEX:ALFAA": "SIGMAFA.MX",
+    "WS:XNZE:GMT": "GNZ.NZ",
+    "WS:US:IESC": "IESC",
+    "WS:SRC:ZA_TOP40:3CA42D3A25639D8E": "SOL.JO",
+    "WS:US:MNST": "MNST"
+  },
+  "refresh_mode": "FULL_2Y_TARGETED",
+  "data_source": "YFINANCE_FREE",
+  "source_cache_rows_before": 1811872,
+  "source_cache_states_before": 3663,
+  "work_cache_rows_after": 1813378,
+  "work_cache_states_after": 3663,
+  "status_counts": {
+    "READY": 4,
+    "STALE": 1,
+    "QUARANTINE": 1
+  },
+  "ready_count": 4,
+  "target_feature_rows": 4,
+  "hard_failure_rows": 0,
+  "hard_failure_ws_ids": [],
+  "cache_promotion_recommended": true,
+  "run_result": {
+    "mode": "INITIAL",
+    "source": "YFINANCE_FREE",
+    "productive": false,
+    "universe_count": 6,
+    "mapped_count": 6,
+    "unmapped_count": 0,
+    "symbol_resets": 0,
+    "rescue_attempted": 0,
+    "repair_candidates": 1,
+    "repair_attempted": 1,
+    "missing_symbols": 0,
+    "cache_counts": {
+      "price_rows": 1813378,
+      "states": 3663,
+      "ready": 3582,
+      "batches": 43
+    },
+    "mapping_status_counts": {
+      "EXPLICIT": 6
+    },
+    "config": {
+      "batch_size": 6,
+      "threads": true,
+      "timeout_seconds": 15.0,
+      "initial_period": "2y",
+      "interval": "1d",
+      "overlap_calendar_days": 14,
+      "min_valid_bars": 252,
+      "ready_unique_bars": 260,
+      "stale_calendar_days": 10,
+      "max_identical_retries": 1,
+      "retry_sleep_seconds": 2.0,
+      "pause_between_batches_seconds": 0.0,
+      "repair_anomalies": true,
+      "repair_batch_size": 25,
+      "suspicious_abs_return": 0.5,
+      "zero_volume_warning_share": 0.2
+    },
+    "run_hash": "adf7e1cc7968b0daf5951bd2845bdc12c3625130e6d39c905b2b1c0e6e5efc4e"
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "notes": [
+    "Only the six frozen targeted-refresh securities are downloaded.",
+    "The source cache is copied first; destructive purge/reload occurs only in the work cache.",
+    "All six target histories are purged in the work copy before a fresh 2y batch download, preventing old/new provider-symbol history mixing.",
+    "The standard bounded rescue and targeted repair=True logic remains active.",
+    "WARMUP, QUARANTINE and STALE are legitimate diagnostic outcomes and do not by themselves block cache promotion.",
+    "DOWNLOAD_FAILED or MAPPING_PENDING blocks promotion of the work cache.",
+    "No P0, ranking, news, P1-P5 or productive trading action is run."
+  ]
+}

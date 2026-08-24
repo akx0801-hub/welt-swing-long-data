@@ -1,0 +1,7 @@
+WS_ID,Name,Yahoo_Symbol,Reason,Refresh_Mode,Evidence_URL
+WS:SRC:ZA_TOP40:3CA42D3A25639D8E,Sasol,SOL.JO,WRONG_SHARE_CLASS_CORRECTED,FULL_2Y_TARGETED,https://www.sasol.com/sites/default/files/2026-02/Interim%20Financial%20Statements%20for%20the%206%20months%20ended%2031%20December%202025.pdf
+WS:US:IESC,IES Holdings,IESC,CURRENT_LISTING_PROVIDER_REFRESH_REQUIRED,FULL_2Y_TARGETED,https://www.sec.gov/Archives/edgar/data/1048268/000104826826000131/iesc-20260731.htm
+WS:US:MNST,Monster Beverage,MNST,CONFIRMED_SPLIT_RELATED_PROVIDER_MIX,FULL_2Y_TARGETED,https://investors.monsterbevcorp.com/news-releases/news-release-details/monster-beverage-declares-two-one-stock-split
+WS:XASX:XYX,"Block, Inc.",XYZ.AX,SOURCE_TICKER_CORRECTED,FULL_2Y_TARGETED,https://www.asx.com.au/markets/market-resources/asx-codes-and-descriptors/asx-code-changes
+WS:XMEX:ALFAA,Sigma Foods (formerly ALFA),SIGMAFA.MX,ISSUER_NAME_AND_TICKER_CHANGE,FULL_2Y_TARGETED,https://bmv.com.mx/en/issuers/maintenanceinformation/ALFA-5052-CGEN_CAPIT
+WS:XNZE:GMT,Goodman NZ (formerly Goodman Property Trust),GNZ.NZ,CORPORATE_ACTION_SUCCESSOR_SAME_ISIN,FULL_2Y_TARGETED,https://www.nzx.com/announcements/469920

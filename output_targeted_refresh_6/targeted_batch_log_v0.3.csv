@@ -1,0 +1,3 @@
+batch_id,source_id,started_utc,finished_utc,symbol_count,received_count,missing_count,retry_count,repair_pass,status,error_text
+YF-20260824T051644267374-95fa10b2-R,YFINANCE_FREE,2026-08-24T05:16:44+00:00,2026-08-24T05:16:44+00:00,1,0,1,0,1,PARTIAL,
+YF-20260824T051641575605-ce0b7bc5,YFINANCE_FREE,2026-08-24T05:16:41+00:00,2026-08-24T05:16:43+00:00,6,6,0,0,0,SUCCESS,
