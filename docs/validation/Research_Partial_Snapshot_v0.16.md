@@ -22,10 +22,10 @@ v0.16 friert deshalb **nicht** `SWING_U3K_FROZEN` ein. Es friert ausschließlich
 
 ## Eingefrorener Ausgangszustand
 
-- Full Eligibility rows: **3.663**
+- Full Eligibility rows: **3.657**
 - aktuell verifizierte Strict Candidates: **2.037**
 - weiterhin instrumentseitig unresolved: **650**
-- übrige Non-Strict-Rows: **976**
+- übrige Non-Strict-Rows: **970**
 - P0: **nicht gelaufen**
 
 Fehlende Instrument-Segmente:
