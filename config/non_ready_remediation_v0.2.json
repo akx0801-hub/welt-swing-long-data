@@ -1,0 +1,186 @@
+{
+  "schema": "WELT_SWING_NON_READY_REMEDIATION_CONFIG_V0_2",
+  "as_of_date": "2026-08-24",
+  "source_master": "universe/Welt-Swing-Universe-Master-EvidenceFrozen-v0.7.csv",
+  "source_diagnostic": "output_non_ready_diagnostic/non_ready_diagnostic_rows_v0.1.csv",
+  "source_suspicious_events": "output_non_ready_diagnostic/suspicious_return_events_v0.1.csv",
+  "source_invalid_events": "output_non_ready_diagnostic/invalid_bar_events_v0.1.csv",
+  "source_features": "output_full_3663/features_latest.csv",
+  "sqlite_db": "runtime_cache/full_3663_prices.sqlite",
+  "output_dir": "output_non_ready_remediation",
+  "remediated_master_csv": "universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv",
+  "remediated_master_xlsx": "universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.xlsx",
+  "qa_policy": {
+    "max_filterable_invalid_bars": 2,
+    "max_filterable_invalid_share": 0.01,
+    "minimum_valid_bars": 260,
+    "stale_calendar_days": 10,
+    "suspicious_abs_return": 0.5
+  },
+  "expected": {
+    "source_master_rows": 3664,
+    "source_active_rows": 3663,
+    "source_ready_rows": 3578,
+    "source_non_ready_rows": 85,
+    "filterable_invalid_candidates": 23,
+    "shadow_filtered_ready_expected": 20,
+    "warmup_rows": 20,
+    "listing_review_rows": 10,
+    "delisted_or_retired_exclusions": 6,
+    "provider_or_successor_remaps": 4,
+    "current_symbol_refresh_only": 1,
+    "active_rows_after_evidence_remediation": 3657,
+    "targeted_refresh_queue_rows": 6
+  },
+  "listing_evidence": [
+    {
+      "WS_ID": "WS:XASX:IFL",
+      "Name": "Insignia Financial",
+      "Action": "EXCLUDE_INACTIVE",
+      "Old_Yahoo_Symbol": "IFL.AX",
+      "New_Yahoo_Symbol": "",
+      "Current_Exchange_Ticker": "",
+      "Remediation_Status": "DELISTED_ACQUIRED",
+      "Effective_Date": "2026-04-29",
+      "Evidence_URL": "https://www.asx.com.au/asx/v2/statistics/announcements.do?asxCode=IFL&by=asxCode&timeframe=Y&year=2026",
+      "Evidence_Note": "ASX reports Insignia Financial removed from the official list on 29 Apr 2026 after scheme implementation."
+    },
+    {
+      "WS_ID": "WS:XASX:NSR",
+      "Name": "National Storage REIT",
+      "Action": "EXCLUDE_INACTIVE",
+      "Old_Yahoo_Symbol": "NSR.AX",
+      "New_Yahoo_Symbol": "",
+      "Current_Exchange_Ticker": "",
+      "Remediation_Status": "DELISTED_ACQUIRED",
+      "Effective_Date": "2026-05-12",
+      "Evidence_URL": "https://www.asx.com.au/asx/v2/statistics/announcements.do?by=issuerId&issuerId=8068&timeframe=Y&year=2026",
+      "Evidence_Note": "ASX reports National Storage REIT removed from the official list on 12 May 2026 after implementation of the schemes."
+    },
+    {
+      "WS_ID": "WS:XASX:XYX",
+      "Name": "Block, Inc.",
+      "Action": "REMAP_ACTIVE",
+      "Old_Yahoo_Symbol": "XYX.AX",
+      "New_Yahoo_Symbol": "XYZ.AX",
+      "Current_Exchange_Ticker": "XYZ",
+      "Remediation_Status": "SOURCE_TICKER_CORRECTED",
+      "Effective_Date": "2025-01-22",
+      "Evidence_URL": "https://www.asx.com.au/markets/market-resources/asx-codes-and-descriptors/asx-code-changes",
+      "Provider_Evidence_URL": "https://uk.finance.yahoo.com/quote/XYZ.AX/",
+      "Evidence_Note": "ASX code table records Block code change to XYZ; provider exposes the ASX listing as XYZ.AX."
+    },
+    {
+      "WS_ID": "WS:XMEX:ALFAA",
+      "Name": "Sigma Foods (formerly ALFA)",
+      "Action": "REMAP_ACTIVE",
+      "Old_Yahoo_Symbol": "ALFAA.MX",
+      "New_Yahoo_Symbol": "SIGMAFA.MX",
+      "Current_Exchange_Ticker": "SIGMAF A",
+      "Remediation_Status": "ISSUER_NAME_AND_TICKER_CHANGE",
+      "Effective_Date": "2025-12-17",
+      "Evidence_URL": "https://bmv.com.mx/en/issuers/maintenanceinformation/ALFA-5052-CGEN_CAPIT",
+      "Provider_Evidence_URL": "https://es.finance.yahoo.com/quote/SIGMAFA.MX/",
+      "Evidence_Note": "BMV records ticker change ALFA to SIGMAF effective 17 Dec 2025 after issuer name change; provider symbol is SIGMAFA.MX."
+    },
+    {
+      "WS_ID": "WS:XMEX:ELEKTRA",
+      "Name": "Grupo Elektra",
+      "Action": "EXCLUDE_INACTIVE",
+      "Old_Yahoo_Symbol": "ELEKTRA.MX",
+      "New_Yahoo_Symbol": "",
+      "Current_Exchange_Ticker": "",
+      "Remediation_Status": "LISTING_REGISTRATION_CANCELLED",
+      "Effective_Date": "2026-04-23",
+      "Evidence_URL": "https://www.grupoelektra.com.mx/es/historia-de-la-accion",
+      "Evidence_Note": "Issuer history states the registration of the ELEKTRA shares in the Mexican National Securities Registry was cancelled in April 2026."
+    },
+    {
+      "WS_ID": "WS:XNZE:ARV",
+      "Name": "Arvida Group Limited",
+      "Action": "EXCLUDE_INACTIVE",
+      "Old_Yahoo_Symbol": "ARV.NZ",
+      "New_Yahoo_Symbol": "",
+      "Current_Exchange_Ticker": "",
+      "Remediation_Status": "EQUITY_DELISTED_ACQUIRED",
+      "Effective_Date": "2024-11-20",
+      "Evidence_URL": "https://www.nzx.com/announcements/442214",
+      "Evidence_Note": "NZX scheme implementation: Arvida equity ceased quotation following acquisition by Stonepeak."
+    },
+    {
+      "WS_ID": "WS:XNZE:GMT",
+      "Name": "Goodman NZ (formerly Goodman Property Trust)",
+      "Action": "REMAP_ACTIVE",
+      "Old_Yahoo_Symbol": "GMT.NZ",
+      "New_Yahoo_Symbol": "GNZ.NZ",
+      "Current_Exchange_Ticker": "GNZ",
+      "Remediation_Status": "CORPORATE_ACTION_SUCCESSOR_SAME_ISIN",
+      "Effective_Date": "2026-04-07",
+      "Evidence_URL": "https://www.nzx.com/announcements/469920",
+      "Provider_Evidence_URL": "https://nz.finance.yahoo.com/quote/GNZ.NZ/",
+      "Evidence_Note": "NZX confirms completion of the corporatised/stapled Goodman NZ structure and ticker GNZ; the security identity was carried through the transaction."
+    },
+    {
+      "WS_ID": "WS:XNZE:MNW",
+      "Name": "Manawa Energy Limited",
+      "Action": "EXCLUDE_INACTIVE",
+      "Old_Yahoo_Symbol": "MNW.NZ",
+      "New_Yahoo_Symbol": "",
+      "Current_Exchange_Ticker": "",
+      "Remediation_Status": "EQUITY_DELISTED_ACQUIRED",
+      "Effective_Date": "2025-07-11",
+      "Evidence_URL": "https://www.nzx.com/announcements/454513",
+      "Evidence_Note": "NZX advised Manawa equity would cease quotation following the Contact Energy scheme."
+    },
+    {
+      "WS_ID": "WS:US:CWEN.A",
+      "Name": "Clearway Energy, Inc. Class A",
+      "Action": "EXCLUDE_INACTIVE",
+      "Old_Yahoo_Symbol": "CWEN-A",
+      "New_Yahoo_Symbol": "",
+      "Current_Exchange_Ticker": "",
+      "Remediation_Status": "CLASS_A_CONVERTED_INTO_EXISTING_CLASS_C_ROW",
+      "Effective_Date": "2026-05-01",
+      "Evidence_URL": "https://www.sec.gov/Archives/edgar/data/1567683/000110465926053557/tm2613249d1_8k.htm",
+      "Evidence_Note": "Each Class A share converted one-for-one into Class C on 1 May 2026. The frozen universe already contains the separate active Class C row WS:US:CWEN, so the retired Class A row is inactivated rather than remapped onto a duplicate provider symbol."
+    },
+    {
+      "WS_ID": "WS:US:IESC",
+      "Name": "IES Holdings",
+      "Action": "KEEP_ACTIVE_REFRESH",
+      "Old_Yahoo_Symbol": "IESC",
+      "New_Yahoo_Symbol": "IESC",
+      "Current_Exchange_Ticker": "IESC",
+      "Remediation_Status": "CURRENT_LISTING_PROVIDER_REFRESH_REQUIRED",
+      "Effective_Date": "2026-08-24",
+      "Evidence_URL": "https://www.sec.gov/Archives/edgar/data/1048268/000104826826000131/iesc-20260731.htm",
+      "Provider_Evidence_URL": "https://finance.yahoo.com/quote/IESC/",
+      "Evidence_Note": "IESC remains current. IES announced a 2-for-1 split with distribution after trading on 21 Aug 2026; refresh stale cache rather than delist/remap."
+    }
+  ],
+  "additional_mapping_corrections": [
+    {
+      "WS_ID": "WS:SRC:ZA_TOP40:3CA42D3A25639D8E",
+      "Name": "Sasol",
+      "Action": "REMAP_ACTIVE",
+      "Old_Yahoo_Symbol": "SOLBE1.JO",
+      "New_Yahoo_Symbol": "SOL.JO",
+      "Current_Exchange_Ticker": "SOL",
+      "Remediation_Status": "WRONG_SHARE_CLASS_CORRECTED",
+      "Effective_Date": "2026-08-24",
+      "Evidence_URL": "https://www.sasol.com/sites/default/files/2026-02/Interim%20Financial%20Statements%20for%20the%206%20months%20ended%2031%20December%202025.pdf",
+      "Provider_Evidence_URL": "https://de.finance.yahoo.com/quote/SOL.JO/",
+      "Evidence_Note": "Sasol distinguishes JSE ordinary share SOL from separate BEE ordinary share SOLBE1. The Top-40 target is the ordinary SOL share."
+    }
+  ],
+  "event_evidence": [
+    {
+      "WS_ID": "WS:US:MNST",
+      "Name": "Monster Beverage",
+      "Classification": "CONFIRMED_SPLIT_RELATED_PROVIDER_MIX",
+      "Action": "TARGETED_FULL_REFRESH_AFTER_SPLIT",
+      "Evidence_URL": "https://investors.monsterbevcorp.com/news-releases/news-release-details/monster-beverage-declares-two-one-stock-split",
+      "Evidence_Note": "Monster announced a 2-for-1 split with split-adjusted trading from 11 Aug 2026. Cached raw closes show alternating approximately 2x/0.5x levels, so refresh rather than treat them as genuine market moves."
+    }
+  ]
+}
