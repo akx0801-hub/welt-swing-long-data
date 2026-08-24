@@ -1,0 +1,300 @@
+name: Welt-Swing QA Filtered-Bar Policy Promotion v0.4
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  promote_qa_policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Promotion-Skript Selbsttest
+        run: python scripts/promote_qa_filtered_policy_v0_4.py --self-test
+
+      - name: Input-Gates
+        run: |
+          test -f scripts/price_cache.py
+          test -f scripts/feature_builder.py
+          test -f universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv
+          test -f output_non_ready_remediation/summary_v0.2.json
+          test -f output_targeted_refresh_6/summary_v0.3.json
+          test -f output_targeted_refresh_6/cache_promotion_status.txt
+
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+
+          r = json.loads(
+              Path('output_non_ready_remediation/summary_v0.2.json')
+              .read_text(encoding='utf-8')
+          )
+          t = json.loads(
+              Path('output_targeted_refresh_6/summary_v0.3.json')
+              .read_text(encoding='utf-8')
+          )
+          m = pd.read_csv(
+              'universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv',
+              keep_default_na=False,
+              dtype=str,
+          )
+          p = Path('output_targeted_refresh_6/cache_promotion_status.txt').read_text(
+              encoding='utf-8'
+          ).strip()
+
+          assert r['run_status'] == 'NON_READY_REMEDIATION_V0_2_COMPLETE'
+          assert r['shadow_filtered_ready_candidates'] == 20
+          assert r['active_rows_after_evidence_remediation'] == 3657
+
+          assert t['run_status'] == 'TARGETED_REFRESH_6_COMPLETE'
+          assert t['ready_count'] == 4
+          assert t['hard_failure_rows'] == 0
+          assert t['cache_promotion_recommended'] is True
+          assert p == 'PROMOTED_WORK_CACHE_TO_MAIN'
+
+          active = m['Active'].astype(str).str.lower().eq('true')
+          assert len(m) == 3664
+          assert active.sum() == 3657
+          assert not m.loc[active, 'Yahoo_Symbol'].astype(str).str.strip().eq('').any()
+          assert not m.loc[active, 'Yahoo_Symbol'].astype(str).duplicated().any()
+
+          print('QA_POLICY_PROMOTION_INPUT_GATES_PASS')
+          PY
+
+      - name: Aktuellen Core-Blob prüfen
+        run: |
+          got="$(git hash-object scripts/price_cache.py)"
+          echo "PRICE_CACHE_GIT_BLOB=$got"
+          test "$got" = "52b53ba95da595af5221afbf4cb21b14bcc12def"
+
+      - name: Gefilterte-Bar-Regel lokal in Core patchen
+        run: |
+          python scripts/promote_qa_filtered_policy_v0_4.py --patch-core
+
+      - name: Gepatchten Core synthetisch prüfen
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          import pandas as pd
+
+          sys.path.insert(0, str(Path('scripts').resolve()))
+          from price_cache import FreeDataConfig, qa_symbol_frame
+
+          cfg = FreeDataConfig()
+          assert cfg.max_filterable_invalid_bars == 2
+          assert abs(cfg.max_filterable_invalid_share - 0.01) < 1e-12
+
+          idx = pd.date_range('2025-01-01', periods=300, freq='B')
+          x = pd.DataFrame({
+              'open': 100.0,
+              'high': 102.0,
+              'low': 98.0,
+              'close': 100.0,
+              'adj_close': 100.0,
+              'volume': 1000.0,
+              'dividends': 0.0,
+              'stock_splits': 0.0,
+              'repaired': 0.0,
+          }, index=idx)
+
+          x2 = x.copy()
+          x2.iloc[10, x2.columns.get_loc('high')] = 90.0
+          x2.iloc[11, x2.columns.get_loc('high')] = 90.0
+          q2 = qa_symbol_frame(x2, config=cfg, as_of=idx[-1].date())
+          assert q2['status'] == 'READY'
+          assert q2['reason_code'] == 'FILTERED_INVALID_BARS_EXCLUDED'
+
+          x3 = x2.copy()
+          x3.iloc[12, x3.columns.get_loc('high')] = 90.0
+          q3 = qa_symbol_frame(x3, config=cfg, as_of=idx[-1].date())
+          assert q3['status'] == 'QUARANTINE'
+          assert q3['reason_code'] == 'INVALID_OHLC_OR_VOLUME'
+
+          xs = x2.copy()
+          xs.iloc[150, xs.columns.get_loc('open')] = 200.0
+          xs.iloc[150, xs.columns.get_loc('high')] = 204.0
+          xs.iloc[150, xs.columns.get_loc('low')] = 196.0
+          xs.iloc[150, xs.columns.get_loc('close')] = 200.0
+          xs.iloc[150, xs.columns.get_loc('adj_close')] = 200.0
+          qs = qa_symbol_frame(xs, config=cfg, as_of=idx[-1].date())
+          assert qs['status'] == 'QUARANTINE'
+          assert qs['reason_code'] == 'SUSPICIOUS_RETURN_NEEDS_REPAIR'
+
+          print('QA_FILTERED_BAR_CORE_SYNTHETIC_TEST_PASS')
+          PY
+
+      - name: Post-Targeted Main-Cache wiederherstellen
+        uses: actions/cache/restore@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-qa-v04-${{ github.run_id }}
+          restore-keys: |
+            full-3663-price-${{ runner.os }}-
+
+      - name: Cache-Restore Gate
+        run: |
+          test -f runtime_cache/full_3663_prices.sqlite
+          python - <<'PY'
+          import sqlite3
+
+          con = sqlite3.connect('runtime_cache/full_3663_prices.sqlite')
+          try:
+              states = con.execute('SELECT COUNT(*) FROM cache_state').fetchone()[0]
+              ready = con.execute(
+                  "SELECT COUNT(*) FROM cache_state WHERE status='READY'"
+              ).fetchone()[0]
+              targeted = dict(
+                  con.execute(
+                      """
+                      SELECT ws_id, yahoo_symbol || '|' || status
+                      FROM cache_state
+                      WHERE ws_id IN (
+                        'WS:XASX:XYX',
+                        'WS:XMEX:ALFAA',
+                        'WS:XNZE:GMT',
+                        'WS:SRC:ZA_TOP40:3CA42D3A25639D8E',
+                        'WS:US:IESC',
+                        'WS:US:MNST'
+                      )
+                      """
+                  ).fetchall()
+              )
+          finally:
+              con.close()
+
+          print('RESTORED_STATES', states)
+          print('RESTORED_READY', ready)
+          print('TARGETED_STATE', targeted)
+
+          assert states == 3663
+          assert ready == 3582
+          assert targeted['WS:XASX:XYX'] == 'XYZ.AX|READY'
+          assert targeted['WS:XMEX:ALFAA'] == 'SIGMAFA.MX|READY'
+          assert targeted['WS:XNZE:GMT'] == 'GNZ.NZ|READY'
+          assert targeted['WS:SRC:ZA_TOP40:3CA42D3A25639D8E'] == 'SOL.JO|READY'
+          assert targeted['WS:US:IESC'] == 'IESC|STALE'
+          assert targeted['WS:US:MNST'] == 'MNST|QUARANTINE'
+          print('POST_TARGETED_CACHE_RESTORE_PASS')
+          PY
+
+      - name: Aktive 3.657 lokal requalifizieren
+        run: |
+          python scripts/promote_qa_filtered_policy_v0_4.py --requalify
+
+      - name: Exakte Promotion-Gates
+        run: |
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+
+          x = json.loads(
+              Path('output_qa_policy_promotion_v0_4/summary_v0.4.json')
+              .read_text(encoding='utf-8')
+          )
+          p = pd.read_csv(
+              'output_qa_policy_promotion_v0_4/qa_filtered_promotions_v0.4.csv',
+              keep_default_na=False,
+          )
+          r = pd.read_csv(
+              'output_qa_policy_promotion_v0_4/residual_non_ready_v0.4.csv',
+              keep_default_na=False,
+          )
+          f = pd.read_csv(
+              'output_qa_policy_promotion_v0_4/features_active_v0.4.csv',
+              keep_default_na=False,
+          )
+
+          print('RUN_STATUS', x['run_status'])
+          print('REQUALIFICATION', x['requalification'])
+
+          assert x['run_status'] == 'QA_FILTERED_BAR_POLICY_PROMOTION_V0_4_COMPLETE'
+          assert x['p0_run'] is False
+          assert x['price_downloads_performed'] is False
+          assert x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False
+
+          q = x['requalification']
+          assert q['ready_before'] == 3582
+          assert q['promotions'] == 20
+          assert q['ready_after'] == 3602
+          assert q['feature_rows'] == 3602
+          assert q['inactive_state_rows_removed'] == 6
+          assert q['state_rows_after'] == 3657
+          assert q['residual_non_ready_rows'] == 55
+          assert q['status_counts_after'] == {
+              'READY': 3602,
+              'QUARANTINE': 34,
+              'WARMUP': 20,
+              'STALE': 1,
+          }
+
+          assert len(p) == 20
+          assert (p['Status_Before'] == 'QUARANTINE').all()
+          assert (p['Reason_Before'] == 'INVALID_OHLC_OR_VOLUME').all()
+          assert (p['Status_After'] == 'READY').all()
+          assert (p['Reason_After'] == 'FILTERED_INVALID_BARS_EXCLUDED').all()
+
+          assert len(f) == 3602
+          assert f['WS_ID'].astype(str).nunique() == 3602
+          assert len(r) == 55
+
+          print('QA_FILTERED_BAR_POLICY_PROMOTION_GATES_PASS')
+          PY
+
+      - name: Gepatchten Core und Work-Cache übernehmen
+        run: |
+          cp runtime_cache/full_3663_prices_qa_v04_work.sqlite \
+             runtime_cache/full_3663_prices.sqlite
+          echo "PROMOTED_QA_V0_4_CORE_AND_CACHE" \
+             > output_qa_policy_promotion_v0_4/promotion_status.txt
+
+      - name: Promoteten Main-Cache sichern
+        uses: actions/cache/save@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-qa-v04-${{ github.run_id }}
+
+      - name: Core + Ergebnisse committen
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/price_cache.py \
+                  output_qa_policy_promotion_v0_4/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Promote filtered invalid-bar QA policy v0.4"
+            git push
+          fi
+
+      - name: Promotion-Artefakt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-qa-policy-promotion-v0.4-${{ github.run_number }}
+          path: |
+            output_qa_policy_promotion_v0_4/
+            runtime_cache/full_3663_prices_qa_v04_work.sqlite
+          retention-days: 14
