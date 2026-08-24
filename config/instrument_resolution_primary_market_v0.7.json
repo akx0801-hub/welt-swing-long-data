@@ -1,0 +1,77 @@
+{
+  "schema": "WELT_SWING_INSTRUMENT_RESOLUTION_PRIMARY_MARKET_V0_7",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_6": "output_instrument_resolution_v0_6/summary_v0.6.json",
+  "source_eligibility_v0_6": "output_instrument_resolution_v0_6/eligibility_after_instrument_v0.6.csv",
+  "source_manual_queue_v0_6": "output_instrument_resolution_v0_6/instrument_manual_review_queue_v0.6.csv",
+  "output_dir": "output_instrument_resolution_v0_7",
+  "expected_source_manual_rows": 778,
+  "expected_brazil_rows": 48,
+  "expected_australia_rows": 63,
+  "expected_strict_candidates_v0_6": 1929,
+  "b3": {
+    "segment": "BR_IBRX100",
+    "official_manual_url": "https://sistemasweb.b3.com.br/normativos/MPODENEGOCIACAO20260525.pdf",
+    "rule_effective_reference": "B3 Trading Operational Procedures Manual, May 2026",
+    "suffix_rules": {
+      "1": [
+        "FAIL",
+        "SUBSCRIPTION_RIGHT_COMMON"
+      ],
+      "2": [
+        "FAIL",
+        "SUBSCRIPTION_RIGHT_PREFERRED"
+      ],
+      "3": [
+        "PASS",
+        "ORDINARY_SHARE"
+      ],
+      "4": [
+        "FAIL",
+        "PREFERRED_SHARE"
+      ],
+      "5": [
+        "FAIL",
+        "PREFERRED_SHARE_CLASS_A"
+      ],
+      "6": [
+        "FAIL",
+        "PREFERRED_SHARE_CLASS_B"
+      ],
+      "7": [
+        "FAIL",
+        "PREFERRED_SHARE_CLASS_C"
+      ],
+      "8": [
+        "FAIL",
+        "PREFERRED_SHARE_CLASS_D"
+      ],
+      "9": [
+        "FAIL",
+        "SUBSCRIPTION_RECEIPT_COMMON"
+      ],
+      "10": [
+        "FAIL",
+        "SUBSCRIPTION_RECEIPT_PREFERRED"
+      ]
+    },
+    "other_asset_suffix_min": 11,
+    "other_asset_suffix_max": 30,
+    "bdr_suffix_min": 31,
+    "bdr_suffix_max": 40
+  },
+  "asx_probe": {
+    "segment": "AU_ASX200",
+    "official_isin_page": "https://www.asx.com.au/markets/market-resources/isin-services",
+    "official_isin_xls": "https://www.asx.com.au/content/dam/asx/issuers/ISIN.xls",
+    "official_methodology_url": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-asx-australian-indices.pdf",
+    "download_timeout_seconds": 30,
+    "max_download_bytes": 25000000,
+    "runtime_raw_path": "runtime_reference/asx_isin_v0_7.xls",
+    "auto_classification_enabled": false,
+    "reason": "ASX 200 methodology permits ordinary and preferred equity and includes REITs; index membership alone is not strict ordinary-share proof. v0.7 downloads the official monthly ISIN directory once and audits its schema/match coverage before any instrument promotion."
+  },
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
