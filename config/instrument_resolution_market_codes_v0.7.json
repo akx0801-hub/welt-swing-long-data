@@ -1,0 +1,64 @@
+{
+  "schema": "WELT_SWING_INSTRUMENT_RESOLUTION_MARKET_CODES_V0_7",
+  "as_of_date": "2026-08-24",
+  "source_summary_v0_6": "output_instrument_resolution_v0_6/summary_v0.6.json",
+  "source_manual_queue_v0_6": "output_instrument_resolution_v0_6/instrument_manual_review_queue_v0.6.csv",
+  "source_full_eligibility_v0_6": "output_instrument_resolution_v0_6/eligibility_after_instrument_v0.6.csv",
+  "output_dir": "output_instrument_resolution_v0_7",
+  "expected_source_manual_rows": 778,
+  "expected_brazil_rows": 48,
+  "brazil_rules": {
+    "ordinary_regex": "^[A-Z]{4}3$",
+    "preferred_regex": "^[A-Z]{4}[45678]$",
+    "unit_regex": "^[A-Z]{4}11$",
+    "evidence_b3_stocks": "https://www.b3.com.br/en_us/products-and-services/trading/equities/stocks.htm",
+    "evidence_b3_units": "https://www.b3.com.br/en_us/products-and-services/trading/equities/securities-deposit-certificate-units.htm",
+    "evidence_ibrx100": "https://www.b3.com.br/data/files/A5/61/8B/BB/E6D947102255C247AC094EA8/IBXX-Metodologia-en-us__Modelo_Novo_.pdf"
+  },
+  "high_precision_fail_rules": [
+    {
+      "id": "CA_EXPLICIT_TRUST_UNIT",
+      "segments": [
+        "CA_TSX"
+      ],
+      "fields": [
+        "Name",
+        "Primary_Ticker",
+        "Yahoo_Symbol"
+      ],
+      "regex": "(?i)((REIT|INCOME TRUST|REAL ESTATE INVESTMENT TRUST).*(\\.UN|-UN\\.TO)|((\\.UN|-UN\\.TO).*(REIT|INCOME TRUST|REAL ESTATE INVESTMENT TRUST)))",
+      "resolved_type": "INCOME_TRUST_UNIT_OR_REIT_UNIT",
+      "evidence_url": "https://www.spglobal.com/spdji/en/methodology/article/sp-tsx-canadian-indices-methodology/",
+      "evidence_note": "S&P/TSX Composite officially includes common stocks and income trust units; only explicit unit/trust cases are auto-failed in v0.7."
+    },
+    {
+      "id": "AU_EXPLICIT_REIT_OR_PROPERTY_TRUST",
+      "segments": [
+        "AU_ASX200"
+      ],
+      "fields": [
+        "Name"
+      ],
+      "regex": "(?i)(\\bREIT\\b|PROPERTY TRUST)",
+      "resolved_type": "REIT_OR_PROPERTY_TRUST",
+      "evidence_url": "https://www.asx.com.au/content/dam/asx/investors/investment-tools-and-resources/understanding-asx-investment-products-for-advisers.pdf",
+      "evidence_note": "ASX explains that most A-REITs are stapled securities combining shares and trust units."
+    },
+    {
+      "id": "HK_EXPLICIT_REIT",
+      "segments": [
+        "HK_HSI"
+      ],
+      "fields": [
+        "Name"
+      ],
+      "regex": "(?i)\\bREIT\\b",
+      "resolved_type": "REIT_UNIT",
+      "evidence_url": "https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/methodologies/IM_reite.pdf",
+      "evidence_note": "Hang Seng maintains a REIT index whose universe is REIT constituents of the Hang Seng Composite."
+    }
+  ],
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
