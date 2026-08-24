@@ -1,0 +1,11 @@
+Metric,Rows
+partial_rows,2037
+v0_17_reported_feature_matched_rows,2037
+feature_row_matched_rows_v0_18,2035
+asof_valid_rows_v0_18,2035
+core_feature_complete_rows_v0_18,2035
+persistent_feature_usable_rows_v0_18,2035
+quarantine_rows_v0_18,2
+prior_v0_17_data_error_rows,2
+p0_survivor_rows_v0_18,0
+decisions_changed_v0_18,0

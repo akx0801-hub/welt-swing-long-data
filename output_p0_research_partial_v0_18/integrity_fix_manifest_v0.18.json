@@ -1,0 +1,22 @@
+{
+  "schema": "WELT_SWING_P0_INTEGRITY_FIX_MANIFEST_V0_18",
+  "generated_utc": "2026-08-24T20:46:22.954214+00:00",
+  "run_id": "WS-LONG-P0-RESEARCH-PARTIAL-INTEGRITY-FIX-2026-08-24-v0.18",
+  "historical_v0_17_artifacts_mutated": false,
+  "canonical_master_mutated": false,
+  "network_requests_performed": false,
+  "price_downloads_performed": false,
+  "fx_downloads_performed": false,
+  "web_calls_per_security": false,
+  "alpha_vantage_allowed": false,
+  "source_hashes": {
+    "partial_universe_sha256": "ee7b2de380f44a0778f23b925bf6df31060700dad0298ee55489813b47d68ee6",
+    "features_latest_sha256": "eaf01b0368f48d252fc59fb20e1592af5b7f4a031211b99dc6753a2c7b8c1d0a",
+    "v0_17_summary_sha256": "abfffad5e57c994369683e422a21d644ae6982fb7a992d76931336248aee7426",
+    "v0_17_observations_sha256": "f4b8b3241a0deec17b749cd9834c06fe8c80738302eefbd00c29ec52824cc748"
+  },
+  "integrity_fix": {
+    "v0_17_defect": "post-merge missing AsOf could become string 'nan' under astype(str), while feature_matched_rows was reported as len(left_join_result)",
+    "v0_18_rule": "feature row match is measured by merge indicator; AsOf is fail-closed; P0-usable also requires complete persisted core numeric features"
+  }
+}

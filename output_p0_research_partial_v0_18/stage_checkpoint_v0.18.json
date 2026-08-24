@@ -1,0 +1,15 @@
+{
+  "schema": "WELT_SWING_STAGE_CHECKPOINT_V0_18",
+  "run_id": "WS-LONG-P0-RESEARCH-PARTIAL-INTEGRITY-FIX-2026-08-24-v0.18",
+  "stage_id": "P0_RESEARCH_PARTIAL_INTEGRITY_FIX",
+  "stage_version": "v0.18",
+  "status": "PARTIAL",
+  "input_count": 2037,
+  "checked_count": 2037,
+  "usable_count": 2035,
+  "quarantine_count": 2,
+  "p0_survivor_count": 0,
+  "decisions_changed": 0,
+  "validated_automated_p0_run": false,
+  "next_stage": "P0_FEATURE_AUGMENTATION_AND_PARAMETER_VALIDATION"
+}
