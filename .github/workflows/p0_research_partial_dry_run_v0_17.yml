@@ -1,0 +1,80 @@
+name: Welt-Swing P0 Research Partial Dry Run v0.17
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/p0_research_partial_dry_run_v0.17.json'
+
+permissions:
+  contents: write
+
+jobs:
+  p0_research_partial_dry_run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Offline-Selbsttest
+        run: python scripts/p0_research_partial_dry_run_v0_17.py --self-test
+      - name: Frozen-v0.16-und-Price-Input-Gates
+        run: |
+          test "$(git hash-object output_research_partial_v0_16/summary_v0.16.json)" = "f9bf162397f7cfeed046e0dc88ada206213d5d25"
+          test "$(git hash-object output_research_partial_v0_16/snapshot_manifest_v0.16.json)" = "41816cf19e5872bfb439a0b535dc9bb018fed058"
+          test "$(git hash-object output_research_partial_v0_16/stage_checkpoint_v0.16.json)" = "694c5f30d0cd1af6d1b88550bdffb74e5eddb394"
+          test "$(git hash-object output_research_partial_v0_16/research_partial_universe_v0.16.csv)" = "c587dea52375e4b9f4fc73635dda11dc39d5b784"
+          test "$(git hash-object output_full_3663/features_latest.csv)" = "468d60ced74ce3d0c3427b4e0646e258b7161c31"
+          test "$(git hash-object output_full_3663/manifest.json)" = "f400c4241937b4a5c8cd4d99df6499d37226f21c"
+      - name: P0 Parameter-Freeze und Dry Run
+        run: |
+          python scripts/p0_research_partial_dry_run_v0_17.py \
+            --config config/p0_research_partial_dry_run_v0.17.json
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json,pandas as pd
+          from pathlib import Path
+          x=json.loads(Path('output_p0_research_partial_v0_17/summary_v0.17.json').read_text())
+          assert x['schema']=='WELT_SWING_P0_RESEARCH_PARTIAL_DRY_RUN_V0_17'
+          assert x['run_status']=='P0_RESEARCH_PARTIAL_DRY_RUN_V0_17_COMPLETE_NOT_AUTOMATION_READY'
+          assert x['partial_rows']==2037 and x['feature_matched_rows']==2037
+          assert 0 <= x['core_feature_complete_rows'] <= 2037
+          assert x['p0_pass_rows']==0 and x['p0_fail_no_price_setup_rows']==0 and x['p0_multi_lane_rows']==0
+          assert x['p0_run'] is False and x['p0_dry_run'] is True
+          assert x['validated_automated_p0_run'] is False and x['automated_p0_ready'] is False
+          assert x['strict_u3k_frozen'] is False and x['full_scan_claim'] is False
+          assert x['research_partial_mode'] is True and x['productive_trading_authority'] is False
+          assert x['alpha_vantage_allowed'] is False and x['web_calls_per_security'] is False
+          assert x['external_reference_requests']==0
+          o=pd.read_csv('output_p0_research_partial_v0_17/p0_dry_run_observations_v0.17.csv',keep_default_na=False,dtype=str)
+          lanes=pd.read_csv('output_p0_research_partial_v0_17/p0_lane_capability_matrix_v0.17.csv',keep_default_na=False,dtype=str)
+          assert len(o)==2037 and len(lanes)==6 and o['WS_ID'].is_unique
+          assert o['P0_PASS_v0_17'].str.lower().eq('false').all()
+          p=json.loads(Path('output_p0_research_partial_v0_17/p0_parameter_registry_v0.17.json').read_text())
+          assert p['automation_validation_status']=='NOT_VALIDATED' and p['p0_numeric_pass_thresholds']==[]
+          ck=json.loads(Path('output_p0_research_partial_v0_17/stage_checkpoint_v0.17.json').read_text())
+          assert ck['stage_id']=='P0_RESEARCH_PARTIAL_PARAMETER_FREEZE_AND_DRY_RUN'
+          assert ck['validated_automated_p0_run'] is False
+          assert ck['next_stage']=='P0_FEATURE_AUGMENTATION_AND_PARAMETER_VALIDATION'
+          print('P0_RESEARCH_PARTIAL_DRY_RUN_V0_17_RESULT_GATES_PASS')
+          PY
+      - name: Ergebnisse committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_p0_research_partial_v0_17/
+          if git diff --cached --quiet; then echo "Keine Änderungen."; else git commit -m "Audit P0 research-partial readiness v0.17" && git push; fi
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-p0-research-partial-v0.17-${{ github.run_number }}
+          path: output_p0_research_partial_v0_17/
+          retention-days: 14
