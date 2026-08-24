@@ -1,0 +1,106 @@
+WS_ID,Name,TMX_Target_Symbol,TMX_Suffix_Pattern,TMX_Current_Symbol_Present
+WS:XTSE:AAUC,Allied Gold Corporation,AAUC,NO_DOT_SUFFIX,True
+WS:XTSE:ABX,Barrick Mining Corporation,ABX,NO_DOT_SUFFIX,True
+WS:XTSE:AC,Air Canada Voting and Variable Voting Shares,AC,NO_DOT_SUFFIX,True
+WS:XTSE:AEM,Agnico Eagle Mines Limited,AEM,NO_DOT_SUFFIX,True
+WS:XTSE:AG,First Majestic Silver Corp.,AG,NO_DOT_SUFFIX,True
+WS:XTSE:AGI,Alamos Gold Inc.,AGI,NO_DOT_SUFFIX,True
+WS:XTSE:ALA,AltaGas Ltd.,ALA,NO_DOT_SUFFIX,True
+WS:XTSE:ARX,ARC Resources Ltd.,ARX,NO_DOT_SUFFIX,True
+WS:XTSE:ATD,Alimentation Couche-Tard Inc.,ATD,NO_DOT_SUFFIX,True
+WS:XTSE:ATRL,AtkinsRéalis Group Inc.,ATRL,NO_DOT_SUFFIX,True
+WS:XTSE:ATZ,Aritzia Inc. Subordinate Voting Shares,ATZ,NO_DOT_SUFFIX,True
+WS:XTSE:AYA,Aya Gold & Silver Inc.,AYA,NO_DOT_SUFFIX,True
+WS:XTSE:BAM,Brookfield Asset Management Ltd. Class A Limited Voting Shares,BAM,NO_DOT_SUFFIX,True
+WS:XTSE:BB,BlackBerry Limited,BB,NO_DOT_SUFFIX,True
+WS:XTSE:BBD.B,Bombardier Inc. Class B Subordinate Voting Shares,BBD.B,DOT_CLASS_LIKE,True
+WS:XTSE:BCE,BCE Inc.,BCE,NO_DOT_SUFFIX,True
+WS:XTSE:BMO,Bank of Montreal,BMO,NO_DOT_SUFFIX,True
+WS:XTSE:BN,Brookfield Corporation Class A Limited Voting Shares,BN,NO_DOT_SUFFIX,True
+WS:XTSE:BNS,Bank of Nova Scotia (The),BNS,NO_DOT_SUFFIX,True
+WS:XTSE:BTO,B2Gold Corp.,BTO,NO_DOT_SUFFIX,True
+WS:XTSE:CAE,CAE Inc.,CAE,NO_DOT_SUFFIX,True
+WS:XTSE:CCL.B,CCL Industries Inc. Unlimited Class B Non-Voting Shares,CCL.B,DOT_CLASS_LIKE,True
+WS:XTSE:CCO,Cameco Corporation,CCO,NO_DOT_SUFFIX,True
+WS:XTSE:CLS,Celestica Inc.,CLS,NO_DOT_SUFFIX,True
+WS:XTSE:CM,Canadian Imperial Bank Of Commerce,CM,NO_DOT_SUFFIX,True
+WS:XTSE:CNQ,Canadian Natural Resources Limited,CNQ,NO_DOT_SUFFIX,True
+WS:XTSE:CNR,Canadian National Railway Company,CNR,NO_DOT_SUFFIX,True
+WS:XTSE:CP,Canadian Pacific Kansas City Limited,CP,NO_DOT_SUFFIX,True
+WS:XTSE:CPX,Capital Power Corporation,CPX,NO_DOT_SUFFIX,True
+WS:XTSE:CS,Capstone Copper Corp.,CS,NO_DOT_SUFFIX,True
+WS:XTSE:CSU,Constellation Software Inc.,CSU,NO_DOT_SUFFIX,True
+WS:XTSE:CTC.A,Canadian Tire Corporation Limited Class A Non-Voting Shares,CTC.A,DOT_CLASS_LIKE,True
+WS:XTSE:CU,Canadian Utilities Limited Class A Non-Voting Shares,CU,NO_DOT_SUFFIX,True
+WS:XTSE:CVE,Cenovus Energy Inc.,CVE,NO_DOT_SUFFIX,True
+WS:XTSE:DOL,Dollarama Inc.,DOL,NO_DOT_SUFFIX,True
+WS:XTSE:DPM,DPM Metals Inc.,DPM,NO_DOT_SUFFIX,True
+WS:XTSE:DSG,Descartes Systems Group Inc. (The),DSG,NO_DOT_SUFFIX,True
+WS:XTSE:DSV,Discovery Mining Ltd.,DSV,NO_DOT_SUFFIX,True
+WS:XTSE:EFX,Enerflex Ltd.,EFX,NO_DOT_SUFFIX,True
+WS:XTSE:ELD,Eldorado Gold Corporation,ELD,NO_DOT_SUFFIX,True
+WS:XTSE:EMA,Emera Incorporated,EMA,NO_DOT_SUFFIX,True
+WS:XTSE:ENB,Enbridge Inc.,ENB,NO_DOT_SUFFIX,True
+WS:XTSE:EQX,Equinox Gold Corp.,EQX,NO_DOT_SUFFIX,True
+WS:XTSE:FFH,Fairfax Financial Holdings Limited Subordinate Voting Shares,FFH,NO_DOT_SUFFIX,True
+WS:XTSE:FM,First Quantum Minerals Ltd.,FM,NO_DOT_SUFFIX,True
+WS:XTSE:FNV,Franco-Nevada Corporation,FNV,NO_DOT_SUFFIX,True
+WS:XTSE:FSV,FirstService Corporation,FSV,NO_DOT_SUFFIX,True
+WS:XTSE:FTS,Fortis Inc.,FTS,NO_DOT_SUFFIX,True
+WS:XTSE:FTT,Finning International Inc.,FTT,NO_DOT_SUFFIX,True
+WS:XTSE:GFL,GFL Environmental Inc. subordinate voting shares,GFL,NO_DOT_SUFFIX,True
+WS:XTSE:GIB.A,CGI Inc. Class A Subordinate Voting Shares,GIB.A,DOT_CLASS_LIKE,True
+WS:XTSE:GIL,Gildan Activewear Inc.,GIL,NO_DOT_SUFFIX,True
+WS:XTSE:GMIN,G Mining Ventures Corp.,GMIN,NO_DOT_SUFFIX,True
+WS:XTSE:GWO,Great-West Lifeco Inc.,GWO,NO_DOT_SUFFIX,True
+WS:XTSE:H,Hydro One Limited,H,NO_DOT_SUFFIX,True
+WS:XTSE:HBM,Hudbay Minerals Inc.,HBM,NO_DOT_SUFFIX,True
+WS:XTSE:IAG,iA Financial Corporation Inc.,IAG,NO_DOT_SUFFIX,True
+WS:XTSE:IFC,Intact Financial Corporation,IFC,NO_DOT_SUFFIX,True
+WS:XTSE:IGM,IGM Financial Inc.,IGM,NO_DOT_SUFFIX,True
+WS:XTSE:IMG,IAMGOLD Corporation,IMG,NO_DOT_SUFFIX,True
+WS:XTSE:IMO,Imperial Oil Limited,IMO,NO_DOT_SUFFIX,True
+WS:XTSE:IVN,Ivanhoe Mines Ltd.,IVN,NO_DOT_SUFFIX,True
+WS:XTSE:K,Kinross Gold Corporation,K,NO_DOT_SUFFIX,True
+WS:XTSE:KEY,Keyera Corp.,KEY,NO_DOT_SUFFIX,True
+WS:XTSE:L,Loblaw Companies Limited,L,NO_DOT_SUFFIX,True
+WS:XTSE:LUG,Lundin Gold Inc.,LUG,NO_DOT_SUFFIX,True
+WS:XTSE:LUN,Lundin Mining Corporation,LUN,NO_DOT_SUFFIX,True
+WS:XTSE:MDA,MDA Space Ltd.,MDA,NO_DOT_SUFFIX,True
+WS:XTSE:MFC,Manulife Financial Corporation,MFC,NO_DOT_SUFFIX,True
+WS:XTSE:MG,Magna International Inc.,MG,NO_DOT_SUFFIX,True
+WS:XTSE:MRU,Metro Inc.,MRU,NO_DOT_SUFFIX,True
+WS:XTSE:NA,National Bank of Canada,NA,NO_DOT_SUFFIX,True
+WS:XTSE:NTR,Nutrien Ltd.,NTR,NO_DOT_SUFFIX,True
+WS:XTSE:OGC,OceanaGold Corporation,OGC,NO_DOT_SUFFIX,True
+WS:XTSE:OTEX,Open Text Corporation,OTEX,NO_DOT_SUFFIX,True
+WS:XTSE:PAAS,Pan American Silver Corp.,PAAS,NO_DOT_SUFFIX,True
+WS:XTSE:PBH,Premium Brands Holdings Corporation,PBH,NO_DOT_SUFFIX,True
+WS:XTSE:POW,Power Corporation of Canada Subordinate Voting Shares,POW,NO_DOT_SUFFIX,True
+WS:XTSE:PPL,Pembina Pipeline Corporation,PPL,NO_DOT_SUFFIX,True
+WS:XTSE:QBR.B,Quebecor Inc. Class B Subordinate Voting Shares,QBR.B,DOT_CLASS_LIKE,True
+WS:XTSE:QSR,Restaurant Brands International Inc.,QSR,NO_DOT_SUFFIX,True
+WS:XTSE:RBA,RB Global Inc.,RBA,NO_DOT_SUFFIX,True
+WS:XTSE:RCI.B,Rogers Communications Inc. Class B Non-voting Shares,RCI.B,DOT_CLASS_LIKE,True
+WS:XTSE:RY,Royal Bank of Canada,RY,NO_DOT_SUFFIX,True
+WS:XTSE:SAP,Saputo Inc.,SAP,NO_DOT_SUFFIX,True
+WS:XTSE:SHOP,Shopify Inc. Class A Subordinate Voting Shares,SHOP,NO_DOT_SUFFIX,True
+WS:XTSE:SLF,Sun Life Financial Inc.,SLF,NO_DOT_SUFFIX,True
+WS:XTSE:SOBO,South Bow Corporation,SOBO,NO_DOT_SUFFIX,True
+WS:XTSE:STN,Stantec Inc.,STN,NO_DOT_SUFFIX,True
+WS:XTSE:SU,Suncor Energy Inc.,SU,NO_DOT_SUFFIX,True
+WS:XTSE:T,TELUS Corporation,T,NO_DOT_SUFFIX,True
+WS:XTSE:TA,TransAlta Corporation,TA,NO_DOT_SUFFIX,True
+WS:XTSE:TD,Toronto-Dominion Bank (The),TD,NO_DOT_SUFFIX,True
+WS:XTSE:TECK.B,Teck Resources Limited Class B Subordinate Voting Shares,TECK.B,DOT_CLASS_LIKE,True
+WS:XTSE:TFII,TFI International Inc.,TFII,NO_DOT_SUFFIX,True
+WS:XTSE:TIH,Toromont Industries Ltd.,TIH,NO_DOT_SUFFIX,True
+WS:XTSE:TOU,Tourmaline Oil Corp.,TOU,NO_DOT_SUFFIX,True
+WS:XTSE:TRI,Thomson Reuters Corporation,TRI,NO_DOT_SUFFIX,True
+WS:XTSE:TRP,TC Energy Corporation,TRP,NO_DOT_SUFFIX,True
+WS:XTSE:TXG,Torex Gold Resources Inc.,TXG,NO_DOT_SUFFIX,True
+WS:XTSE:WCN,Waste Connections Inc.,WCN,NO_DOT_SUFFIX,True
+WS:XTSE:WCP,Whitecap Resources Inc.,WCP,NO_DOT_SUFFIX,True
+WS:XTSE:WPM,Wheaton Precious Metals Corp.,WPM,NO_DOT_SUFFIX,True
+WS:XTSE:WSP,WSP Global Inc.,WSP,NO_DOT_SUFFIX,True
+WS:XTSE:X,TMX Group Limited,X,NO_DOT_SUFFIX,True

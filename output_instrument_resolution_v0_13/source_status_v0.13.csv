@@ -1,0 +1,4 @@
+Source,URL,HTTP_Status,Content_Type,Bytes,SHA256,Status,Error,Discovered_Download_URL,Encoding
+TMX_MOC_PAGE,https://www.tsx.com/en/trading/market-data-and-statistics/market-statistics-and-reports/tsx-tsxv-moc-eligible-stocks,200,text/html; charset=UTF-8,64025,dc9aafd44bf3533ef2bb9b02bb794c6209f9f9751d36d4b3f8b27b6ce6ad3278,HTTP_OK,,https://www.tsx.com/files/trading/moc-eligible-stocks.txt,
+TMX_MOC_SYMBOL_DOWNLOAD,https://www.tsx.com/files/trading/moc-eligible-stocks.txt,200,text/plain; charset=UTF-8,37521,c35cd6557a83f9fc88cf847d8046890426f7a3b2550a669c10cb79bec2c95a4c,HTTP_OK,,,utf-8-sig
+TMX_SYMBOL_SUFFIX_NOTICE,https://www.tsx.com/en/resource/1311,200,application/pdf,29553,c139d4bce23b434b21f09dab34095489df32ca68abc165386710dd993aa1a81c,HTTP_OK,,,
