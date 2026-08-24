@@ -1,30 +1,70 @@
 # WELT-SWING LONG DEV — CURRENT HANDOFF
 
-**Updated:** 2026-08-24 18:09 CEST  
+**Updated:** 2026-08-24 18:32 CEST  
 **Status:** DEV / RESEARCH / SHADOW — NOT PRODUCTIVE
 
-Authoritative DEV master specification: `docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md`
+## Authority
 
-Latest completed checkpoint: **TMX Instrument Resolution v0.14**  
-Repo HEAD: `5307a1071d10cee896b958c0434b05427752db15`
+Authoritative DEV master specification:
+`docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md`
 
-v0.14 result:
-- run status: `INSTRUMENT_RESOLUTION_TMX_V0_14_COMPLETE_WITH_SOURCE_BLOCK`
-- Canada targets: 105
-- official semantics validated: false
-- new PASS: 0
-- new FAIL: 0
-- unresolved Canada: 105
+Welt-Swing v7.2 remains the sole productive Swing authority until explicit validated promotion.
+
+## Latest completed checkpoint
+
+**S&P/TSX Semantics Remediation v0.15**
+
+Repo HEAD after v0.15 output commit:
+`b6ff0bacce934ff108293b330d91dba46a39be66`
+
+v0.15 result:
+- run status: `SP_TSX_SEMANTICS_REMEDIATION_V0_15_COMPLETE_WITH_SOURCE_BLOCK`
+- public S&P methodology article: HTTP 403 in GitHub runner
+- localized official S&P methodology PDF: HTTP 403
+- Canada decisions: 0
 - remaining manual rows: 650
 - strict candidates: 2,037
-- strict freeze false
-- P0 false
+- strict freeze: false
+- P0: false
 - Alpha Vantage forbidden
 
-Source detail:
-- TMX Policy 5.8: HTTP 200, semantics validated.
-- direct English S&P/TSX methodology PDF: HTTP 403 in GitHub runner.
+## Current unresolved instrument segments
 
-Next step: **v0.15 — S&P/TSX Semantics Remediation**, evidence-only. Probe the public methodology HTML page plus an official localized PDF path. Zero eligibility decisions. If enough official semantics materializes, build a separate Canada classifier next.
+- EU_STOXX600: 365
+- CA_TSX: 105
+- KR_KOSPI200: 92
+- HK_HSI: 82
+- MX_IPC: 6
+- total: 650
 
-Resume: read this file, master spec, newest summary, confirm `main` HEAD, then continue from the smallest valid stage.
+The source circuit-breaker principle now applies to repeated S&P/TSX access attempts in this development path. Do not keep retrying equivalent blocked URLs without a materially different approved route.
+
+## Next step
+
+**v0.16 — RESEARCH_PARTIAL Snapshot Freeze**
+
+Reason:
+The master spec explicitly permits `RESEARCH_PARTIAL` when a valid full Strict Universe is not available, provided coverage is explicit.
+
+v0.16 does NOT create `SWING_U3K_FROZEN`.
+
+It freezes only the currently verified strict subset:
+- full eligibility rows: 3,663
+- included verified strict rows: 2,037
+- instrument-unresolved excluded rows: 650
+- other non-strict rows: 976
+
+P0 is not run in v0.16.
+
+After v0.16, the next stage is:
+`P0_RESEARCH_PARTIAL_PARAMETER_FREEZE_AND_DRY_RUN`.
+
+Any later candidate claim must be limited to the verified coverage and must never be presented as the globally best candidate.
+
+## Resume rule
+
+1. Read this file.
+2. Read the master spec.
+3. Read the newest summary and stage checkpoint.
+4. Confirm `main` HEAD.
+5. Resume from the smallest valid stage.
