@@ -1,0 +1,60 @@
+name: Welt-Swing SP TSX Semantics Remediation v0.15
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/instrument_resolution_sp_tsx_remediation_v0.15.json'
+permissions:
+  contents: write
+jobs:
+  remediate_sp_tsx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install requests pypdf
+      - name: Offline-Selbsttest
+        run: python scripts/probe_sp_tsx_semantics_v0_15.py --self-test
+      - name: Frozen-v0.14-Gates
+        run: |
+          test "$(git hash-object output_instrument_resolution_v0_14/summary_v0.14.json)" = "98e460a0a9e70d7232b805623b4fcba180679dd0"
+          test "$(git hash-object output_instrument_resolution_v0_14/instrument_manual_review_queue_v0.14.csv)" = "e9d9983ca00e0f4b30b8d519e17268641a0d0004"
+          test "$(git hash-object output_instrument_resolution_v0_14/strict_u3k_candidate_after_instrument_v0.14.csv)" = "05761491a9571acb618c838c4a621a72b5a1f7fd"
+      - name: S&P TSX Semantik remediaten
+        run: python scripts/probe_sp_tsx_semantics_v0_15.py --config config/instrument_resolution_sp_tsx_remediation_v0.15.json
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json,pandas as pd
+          from pathlib import Path
+          x=json.loads(Path('output_instrument_resolution_v0_15/summary_v0.15.json').read_text())
+          assert x['schema']=='WELT_SWING_SP_TSX_SEMANTICS_REMEDIATION_V0_15'
+          assert x['source_manual_rows_v0_14']==650 and x['ca_target_rows']==105
+          assert x['strict_candidates_v0_15']==2037 and x['remaining_manual_rows_v0_15']==650
+          assert x['decisions_changed']==0 and x['external_reference_requests']==2
+          assert x['request_bound_respected'] is True and x['strict_freeze_allowed'] is False
+          assert x['p0_run'] is False and x['alpha_vantage_allowed'] is False
+          q=pd.read_csv('output_instrument_resolution_v0_15/instrument_manual_review_queue_v0.15.csv')
+          assert len(q)==650
+          print('SP_TSX_SEMANTICS_REMEDIATION_V0_15_RESULT_GATES_PASS')
+          PY
+      - name: Ergebnisse committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_instrument_resolution_v0_15/
+          if git diff --cached --quiet; then echo "Keine Änderungen."; else git commit -m "Remediate SP TSX semantics v0.15" && git push; fi
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-sp-tsx-semantics-v0.15-${{ github.run_number }}
+          path: output_instrument_resolution_v0_15/
+          retention-days: 14
