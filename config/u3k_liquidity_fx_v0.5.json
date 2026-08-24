@@ -1,0 +1,60 @@
+{
+  "schema": "WELT_SWING_U3K_LIQUIDITY_FX_CONFIG_V0_5",
+  "as_of_date": "2026-08-24",
+  "fx_completed_cutoff_date": "2026-08-23",
+  "source_master": "universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv",
+  "source_cache": "runtime_cache/full_3663_prices.sqlite",
+  "output_dir": "output_u3k_liquidity_fx_v0_5",
+  "provisional_pool_csv": "universe/SWING_U3K_PROVISIONAL_LIQUIDITY_POOL_v0.5.csv",
+  "strict_frozen_csv": "universe/SWING_U3K_FROZEN_v0.5.csv",
+  "audit_xlsx": "universe/SWING_U3K_Eligibility_Audit_v0.5.xlsx",
+  "expected_active_rows": 3657,
+  "expected_ready_rows": 3602,
+  "u3k_cap": 3000,
+  "liquidity": {
+    "standard_pass_eur": 15000000.0,
+    "preferred_eur": 20000000.0,
+    "exception_floor_eur": 5000000.0,
+    "minimum_usable_sessions_20": 18
+  },
+  "history": {
+    "minimum_unique_bars": 260,
+    "minimum_valid_bars": 252
+  },
+  "instrument_pass_values": [
+    "COMMON_STOCK",
+    "ORDINARY_SHARE",
+    "COMMON_SHARE"
+  ],
+  "instrument_fail_tokens": [
+    "PREFERRED",
+    "PREFERENCE",
+    "ETF",
+    "FUND",
+    "UNIT",
+    "WARRANT",
+    "RIGHT",
+    "DERIVATIVE",
+    "BOND",
+    "NOTE",
+    "DEBT"
+  ],
+  "quote_scale_by_mic": {
+    "XLON": 0.01,
+    "XJSE": 0.01
+  },
+  "currency_aliases": {
+    "GBX": "GBP",
+    "GBPENCE": "GBP",
+    "GBP_PENCE": "GBP",
+    "GBP": "GBP",
+    "ZAC": "ZAR",
+    "ZAR_CENTS": "ZAR"
+  },
+  "fx_period": "6mo",
+  "fx_batch_threads": true,
+  "free_float_market_cap_policy": "QA_ONLY_NOT_HARD_GATE; tertiary U3K cap key only if reliably available",
+  "p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false
+}
