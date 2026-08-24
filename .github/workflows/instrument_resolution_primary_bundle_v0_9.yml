@@ -1,0 +1,142 @@
+name: Welt-Swing Primary Market Bundle Probe v0.9
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'config/instrument_resolution_primary_bundle_v0.9.json'
+
+permissions:
+  contents: write
+
+jobs:
+  primary_market_bundle_probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install 'requests>=2.32,<3' 'openpyxl>=3.1,<4'
+
+      - name: Offline-Selbsttest
+        run: python scripts/probe_instruments_primary_bundle_v0_9.py --self-test
+
+      - name: Frozen-v0.8-Gates
+        run: |
+          test "$(git hash-object output_instrument_resolution_v0_8/summary_v0.8.json)" = "040e72d394868aee37e08be0077d2cdb89a51c31"
+          test "$(git hash-object output_instrument_resolution_v0_8/instrument_manual_review_queue_v0.8.csv)" = "4a2f08620df7ea710ae72725955298819aabb18b"
+          test "$(git hash-object output_instrument_resolution_v0_8/eligibility_after_instrument_v0.8.csv)" = "a8e2a0593c00b69e3b6df9c471afbfc67f468a95"
+          test "$(git hash-object output_instrument_resolution_v0_8/strict_u3k_candidate_after_instrument_v0.8.csv)" = "1a2b249b90739e001789662dc42b0bac15d906a9"
+          test "$(git hash-object output_instrument_resolution_v0_8/remaining_review_by_segment_v0.8.csv)" = "ed830b942fcda04cf5cdb010dfa8672bd321acd1"
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          s = json.loads(Path('output_instrument_resolution_v0_8/summary_v0.8.json').read_text())
+          q = pd.read_csv('output_instrument_resolution_v0_8/instrument_manual_review_queue_v0.8.csv', keep_default_na=False)
+
+          expected = {
+              'CA_TSX': 105,
+              'EU_STOXX600': 365,
+              'HK_HSI': 82,
+              'KR_KOSPI200': 92,
+              'MX_IPC': 6,
+              'ZA_TOP40': 17,
+          }
+
+          assert s['run_status'] == 'INSTRUMENT_RESOLUTION_ASX_V0_8_COMPLETE_WITH_REMAINING_REVIEW'
+          assert s['remaining_manual_rows'] == 667
+          assert s['strict_candidates_v0_8'] == 2020
+          assert s['strict_freeze_allowed'] is False
+          assert s['p0_run'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert len(q) == 667
+          assert q['WS_ID'].is_unique
+          assert q.groupby('Primary_Universe_Index').size().to_dict() == expected
+          print('PRIMARY_MARKET_BUNDLE_V0_9_INPUT_GATE_PASS')
+          PY
+
+      - name: Sechs Primärmarktquellen gebündelt prüfen
+        run: |
+          python scripts/probe_instruments_primary_bundle_v0_9.py             --config config/instrument_resolution_primary_bundle_v0.9.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path('output_instrument_resolution_v0_9')
+          required = [
+              'summary_v0.9.json',
+              'source_probe_status_v0.9.csv',
+              'target_counts_v0.9.csv',
+              'instrument_manual_review_queue_v0.9.csv',
+              'hkex_reference_matches_v0.9.csv',
+              'krx_reference_matches_v0.9.csv',
+              'discovered_bulk_links_v0.9.csv',
+          ]
+          for name in required:
+              assert (out / name).exists(), name
+
+          s = json.loads((out / 'summary_v0.9.json').read_text())
+          q = pd.read_csv(out / 'instrument_manual_review_queue_v0.9.csv', keep_default_na=False)
+          probes = pd.read_csv(out / 'source_probe_status_v0.9.csv', keep_default_na=False)
+
+          assert s['schema'] == 'WELT_SWING_PRIMARY_MARKET_BUNDLE_PROBE_V0_9'
+          assert s['run_status'] == 'PRIMARY_MARKET_BUNDLE_PROBE_V0_9_COMPLETE'
+          assert s['source_manual_rows_v0_8'] == 667
+          assert s['remaining_manual_rows_v0_9'] == 667
+          assert s['strict_candidates_v0_8'] == 2020
+          assert s['strict_candidates_v0_9'] == 2020
+          assert s['decisions_changed'] == 0
+          assert s['markets_probed'] == 6
+          assert s['request_bound_respected'] is True
+          assert s['external_reference_requests'] <= 6
+          assert s['strict_freeze_allowed'] is False
+          assert s['p0_run'] is False
+          assert s['productive_trading_authority'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert s['price_downloads_performed'] is False
+          assert s['fx_downloads_performed'] is False
+          assert s['web_calls_per_security'] is False
+          assert s['canonical_master_mutated'] is False
+          assert len(q) == 667
+          assert len(probes) == 6
+          print(json.dumps(s, indent=2, ensure_ascii=False))
+          print('PRIMARY_MARKET_BUNDLE_V0_9_RESULT_GATE_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_instrument_resolution_v0_9
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Probe six primary-market reference sources v0.9"
+            git push
+          fi
+
+      - name: Artefakt hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: instrument-resolution-primary-bundle-v0.9
+          path: output_instrument_resolution_v0_9/
