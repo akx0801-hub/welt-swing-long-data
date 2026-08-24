@@ -1,0 +1,2 @@
+Page_URL,Page_HTTP_Status,ZIP_URL,ZIP_HTTP_Status,ZIP_SHA256,Probe_Status,Error
+https://clientportal.jse.co.za/downloadable-files?RequestNode=%2FISIN%2FEquities,200,https://clientportal.jse.co.za/_layouts/15/DownloadHandler.ashx?FileName=/ISIN/Equities/isinfull_e.zip,200,128ee26a554db97d85cb7db73f70abc6b99b348817c7d915abd2cf5259e10442,JSE_REFERENCE_PARSED,
