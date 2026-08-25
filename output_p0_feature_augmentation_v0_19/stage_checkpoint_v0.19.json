@@ -1,0 +1,17 @@
+{
+  "schema": "WELT_SWING_STAGE_CHECKPOINT_V0_19",
+  "run_id": "WS-LONG-P0-FEATURE-AUGMENTATION-2026-08-24-v0.19",
+  "stage_id": "P0_FEATURE_AUGMENTATION_AND_PARAMETER_VALIDATION",
+  "stage_version": "v0.19",
+  "status": "PARTIAL",
+  "input_count": 2037,
+  "checked_count": 2037,
+  "augmented_count": 2037,
+  "quarantine_count": 0,
+  "pass_count": 0,
+  "fail_count": 0,
+  "p0_survivor_count": 0,
+  "validated_automated_p0_run": false,
+  "automated_p0_ready": false,
+  "next_stage": "P0_RELATIVE_STRENGTH_AUGMENTATION_AND_LANE_PARAMETER_VALIDATION"
+}

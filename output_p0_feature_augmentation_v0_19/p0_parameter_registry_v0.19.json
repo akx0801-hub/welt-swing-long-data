@@ -1,0 +1,38 @@
+{
+  "schema": "WELT_SWING_P0_PARAMETER_REGISTRY_V0_19",
+  "validation_status": "HYPOTHESIS_ONLY_NOT_VALIDATED",
+  "p0_numeric_pass_thresholds": [],
+  "explicit_master_spec_numbers_not_promoted_to_p0_pass": [
+    {
+      "name": "later_breakout_entry_distance",
+      "value": "about <=1 ATR over pivot",
+      "use": "LATER_STAGE_REFERENCE_ONLY_NOT_P0_PASS"
+    },
+    {
+      "name": "later_breakout_rvol_confirmation",
+      "value": "about >=1.3",
+      "use": "LATER_A_CONFIRMATION_ONLY_NOT_P0_PASS"
+    },
+    {
+      "name": "later_climax_range_warning",
+      "value": "about >2 ATR daily range with extreme volume and weak close",
+      "use": "LATER_STAGE_REFERENCE_ONLY_NOT_P0_PASS"
+    },
+    {
+      "name": "runup_warning_20d",
+      "value": 0.18,
+      "use": "WARNING_ONLY_NOT_AUTOMATIC_EXCLUSION"
+    },
+    {
+      "name": "runup_warning_60d",
+      "value": 0.3,
+      "use": "WARNING_ONLY_NOT_AUTOMATIC_EXCLUSION"
+    }
+  ],
+  "policy": [
+    "No numeric P0 PASS threshold is invented in v0.19.",
+    "Observed feature distributions are evidence for later parameter validation, not eligibility rules.",
+    "Home-market and sector relative-strength fields remain explicitly NOT_IMPLEMENTED_V0_19.",
+    "A future automated P0 requires separately versioned and validated lane logic before activation."
+  ]
+}

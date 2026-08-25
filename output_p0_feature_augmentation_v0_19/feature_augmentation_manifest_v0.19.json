@@ -1,0 +1,76 @@
+{
+  "schema": "WELT_SWING_P0_FEATURE_AUGMENTATION_MANIFEST_V0_19",
+  "generated_utc": "2026-08-25T04:45:31.012157+00:00",
+  "source_data": "YFINANCE_FREE",
+  "alpha_vantage_allowed": false,
+  "runtime_sqlite_committed": false,
+  "fixed_closed_bar_window": true,
+  "request_start": "2025-05-01",
+  "request_end_exclusive": "2026-08-24",
+  "closed_bar_reference_date": "2026-08-21",
+  "batch_size": 100,
+  "yf_download_batch_invocations": 21,
+  "network_http_request_count_measured": false,
+  "files": {
+    "output_p0_feature_augmentation_v0_19/p0_asof_distribution_v0.19.csv": {
+      "sha256": "27ae956ee2e9db82f4470f051ef2548dbfe27c2ee62b577829f4406bd60113d5",
+      "git_blob_sha": "cc9b1965648ff6d3036264cdb89855636b4cc588",
+      "bytes": 39
+    },
+    "output_p0_feature_augmentation_v0_19/p0_feature_augmented_v0.19.csv": {
+      "sha256": "454e05bf397deabb23d738ee099300d0c07cdd107d7d6dc9ec1214ca4e393453",
+      "git_blob_sha": "3503cf3e1c3325321e251767c75845ab9d4531b8",
+      "bytes": 2639461
+    },
+    "output_p0_feature_augmentation_v0_19/p0_feature_distribution_v0.19.csv": {
+      "sha256": "6fbc38d025272f99f0b982a41cb03967a0d6acfccd247bbc46970991bfc34c29",
+      "git_blob_sha": "fe12fa2d4d3c5f283d201131a3be106004b3829b",
+      "bytes": 9011
+    },
+    "output_p0_feature_augmentation_v0_19/p0_feature_quarantine_v0.19.csv": {
+      "sha256": "d3d00b615789ca7a5f9f49af4d4447928696b23ea233b2fcab7b936a41767885",
+      "git_blob_sha": "de4fe9e43d05c94d42d16cd68e5327c540adfcd4",
+      "bytes": 29
+    },
+    "output_p0_feature_augmentation_v0_19/p0_lane_feature_capability_v0.19.csv": {
+      "sha256": "1b20ecff512f8cb306c27e40a7ec1cff50b60324d1372d4ea53dbd70b96e0bda",
+      "git_blob_sha": "f61187cc5157c36b4d1b49f7f6d11ba13e8f1d70",
+      "bytes": 1596
+    },
+    "output_p0_feature_augmentation_v0_19/p0_parameter_registry_v0.19.json": {
+      "sha256": "7abd8c0dec8c5599e06cadc34a1e6b8387e26757f5e93ff70554744417c7b6fd",
+      "git_blob_sha": "c1213945101f28f34c6cc56973b1707b926582a5",
+      "bytes": 1326
+    },
+    "output_p0_feature_augmentation_v0_19/price_cache_state_v0.19.csv": {
+      "sha256": "0a9e74b090bc9248d15c7a17e826015b6ba3ebfd749d8bed0d5e9c730a1e1d13",
+      "git_blob_sha": "57e458082f284e72559d5092fe082143c4b0ee7d",
+      "bytes": 272983
+    },
+    "output_p0_feature_augmentation_v0_19/recovered_prior_quarantine_v0.19.csv": {
+      "sha256": "5fc1126d1fe99069c97911151922d14303921e2eef93da1b15b056b875afe0bc",
+      "git_blob_sha": "240f51be9b22652de2680efbc3d644df51069cc7",
+      "bytes": 407
+    },
+    "output_p0_feature_augmentation_v0_19/stage_checkpoint_v0.19.json": {
+      "sha256": "58ec12573db97a8ae379eaf8ba0cf99a1703aa23ca0cbaa0babc70ab3871f72a",
+      "git_blob_sha": "aa2227c2a913a4d74085501315b754ed262490f8",
+      "bytes": 549
+    },
+    "output_p0_feature_augmentation_v0_19/summary_v0.19.json": {
+      "sha256": "fefafdd333940b17ebe675804aedf77f674926341793c8ac08ab7841fe234201",
+      "git_blob_sha": "baf966513e51ba3b16947e632dd2a66c5b406420",
+      "bytes": 2201
+    },
+    "output_p0_feature_augmentation_v0_19/yahoo_symbol_map_v0.19.csv": {
+      "sha256": "da23779dc46a98d95a001fc087dcfe28bd2509970b313cf61256fbb7122413a4",
+      "git_blob_sha": "e9bc179290f4dd59fcb26450ddaec04504a79963",
+      "bytes": 77870
+    },
+    "output_p0_feature_augmentation_v0_19/yfinance_batch_log_v0.19.csv": {
+      "sha256": "615fe88022e4aea06b81d40a140b8e8e5ce4404953b18f26cd0fde5ca3e8574d",
+      "git_blob_sha": "2a9dd3549e97c14bf1f7aa05c1eac793c8d5a54e",
+      "bytes": 2709
+    }
+  }
+}
