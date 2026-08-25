@@ -1,0 +1,38 @@
+{
+  "schema": "WELT_SWING_P0_LANE_PARAMETER_REGISTRY_V0_20",
+  "generated_utc": "2026-08-25T05:23:01.014922+00:00",
+  "validation_status": "PARTIAL_SEMANTIC_VALIDATION_ONLY",
+  "p0_numeric_pass_thresholds": [],
+  "master_semantic_conditions_recorded": [
+    {
+      "lane": "QUIET_STRENGTH_RELATIVE_STRENGTH",
+      "condition": "HomeMarket_RS20_Excess_v0_20 > 0 AND HomeMarket_RS60_Excess_v0_20 > 0",
+      "basis": "Master explicitly requests positive 20-/60-day relative strength",
+      "effect": "RS_COMPONENT_ONLY_NOT_LANE_PASS"
+    }
+  ],
+  "home_market_rs_reference": {
+    "status": "DEV_INTERNAL_MARKET_GROUP_AVAILABLE_FOR_EARLY_DISCOVERY",
+    "method": "LEAVE_ONE_OUT_PRIMARY_UNIVERSE_COHORT_MEDIAN",
+    "official_index_benchmark_claim": false
+  },
+  "sector_rs": {
+    "status": "RS_NOT_VERIFIED_NO_SECTOR_METADATA",
+    "blocking_for_full_sector_rs_validation": true
+  },
+  "remaining_unvalidated_lane_logic": {
+    "BREAKOUT_COMPRESSION_VCP": "validated pivot/base/VCP detector; validated lane thresholds",
+    "PULLBACK_RETEST": "former-breakout-zone detector; horizontal support detector; validated controlled-pullback sequence",
+    "RECLAIM": "validated multi-day reclaim/confirmation rule",
+    "QUIET_STRENGTH_RELATIVE_STRENGTH": "20d/60d home-market RS; sector RS; validated excess-momentum rule",
+    "POST_EVENT_DRIFT": "event identity/time; validated impulse/hold/drift thresholds",
+    "CONTROLLED_MEAN_REVERSION": "validated stabilization sequence; validated falling-knife detector; definable invalidation rule"
+  },
+  "policy": [
+    "No descriptive quantile is promoted to a P0 PASS threshold.",
+    "Positive 20/60 home-market RS is recorded only as an explicit semantic component of Lane 4.",
+    "Relative strength is not an entry trigger and is not sufficient for a lane decision.",
+    "AsOf-mismatched securities are fail-closed as RS_NOT_VERIFIED for synchronized cohort RS.",
+    "Sector RS remains not verified until sector metadata is frozen and auditable."
+  ]
+}

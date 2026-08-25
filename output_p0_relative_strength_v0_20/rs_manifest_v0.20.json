@@ -1,0 +1,41 @@
+{
+  "schema": "WELT_SWING_P0_RS_AUGMENTATION_MANIFEST_V0_20",
+  "generated_utc": "2026-08-25T05:23:01.015904+00:00",
+  "external_requests": 0,
+  "data_source": "FROZEN_V0_19_LOCAL_FEATURES_ONLY",
+  "alpha_vantage_allowed": false,
+  "files": {
+    "home_market_cohort_rs_reference_v0.20.csv": {
+      "sha256": "92d4b924ac81413e7fb4dced76321a5d5cd911000323746e6cf7d7049179b92f",
+      "bytes": 1598
+    },
+    "lane_parameter_evidence_v0.20.csv": {
+      "sha256": "3d91597908800b452c68097acaa880e3f051182ad090023f72a1cf2e87b6b897",
+      "bytes": 7704
+    },
+    "p0_lane_parameter_registry_v0.20.json": {
+      "sha256": "0a701984c9bc7d1d5bcf3d6c07804e9e84f689b927ac0a2b521ddc80f0cf53cc",
+      "bytes": 2003
+    },
+    "p0_rs_asof_audit_v0.20.csv": {
+      "sha256": "a7bef84185b91e0dbe3408df222c4b9467a901f87321b75f612a0320dffb525d",
+      "bytes": 315
+    },
+    "p0_rs_augmented_v0.20.csv": {
+      "sha256": "f7bb35497f0be78adb39844283e0917816e966a216fc48cea39ea50c99ed5bf3",
+      "bytes": 3311939
+    },
+    "sector_rs_status_v0.20.csv": {
+      "sha256": "c0185690842401ef8377e3e56214d48434fea66db4c5597326aab0bfc8f2349a",
+      "bytes": 753
+    },
+    "stage_checkpoint_v0.20.json": {
+      "sha256": "cf363859e6809f9e33fbda597a80863ef38290c76601e47465bb49c3527b7ca7",
+      "bytes": 584
+    },
+    "summary_v0.20.json": {
+      "sha256": "7c234bafd3115bb704a8cf854424ad9efb3dbfbaaeccba2372fccfec75e58d22",
+      "bytes": 1437
+    }
+  }
+}

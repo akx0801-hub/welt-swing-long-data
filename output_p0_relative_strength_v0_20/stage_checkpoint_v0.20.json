@@ -1,0 +1,18 @@
+{
+  "schema": "WELT_SWING_STAGE_CHECKPOINT_V0_20",
+  "run_id": "WS-LONG-P0-RS-AUGMENTATION-2026-08-21-v0.20",
+  "stage_id": "P0_RELATIVE_STRENGTH_AUGMENTATION_AND_LANE_PARAMETER_VALIDATION",
+  "stage_version": "v0.20",
+  "status": "PARTIAL",
+  "input_count": 2037,
+  "checked_count": 2037,
+  "home_market_rs_count": 2036,
+  "rs_not_verified_count": 1,
+  "sector_rs_count": 0,
+  "pass_count": 0,
+  "fail_count": 0,
+  "p0_survivor_count": 0,
+  "validated_automated_p0_run": false,
+  "automated_p0_ready": false,
+  "next_stage": "P0_LANE_PARAMETER_SHADOW_VALIDATION_AND_SECTOR_RS_PREP"
+}

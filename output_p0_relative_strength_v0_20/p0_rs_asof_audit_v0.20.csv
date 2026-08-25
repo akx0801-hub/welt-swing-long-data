@@ -1,0 +1,2 @@
+WS_ID,Name,Country,Primary_Universe_Index,Yahoo_Symbol_v0_19,AsOf,RS_Reference_AsOf_v0_20,RS_AsOf_Lag_Calendar_Days_v0_20,RS_AsOf_Status_v0_20,Audit_Conclusion_v0_20
+WS:US:WBS,Webster Bank,,US_SP1500,WBS,2026-08-20,2026-08-21,1,RS_NOT_VERIFIED_ASOF_MISMATCH,EXCLUDE_FROM_SYNCHRONIZED_RS_REFERENCE_NO_REASON_GUESSED
