@@ -1,0 +1,164 @@
+name: Welt-Swing P0 Feature Augmentation v0.19
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/p0_feature_augmentation_v0.19.json'
+
+permissions:
+  contents: write
+
+jobs:
+  p0_feature_augmentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: |
+          python -m py_compile scripts/p0_feature_augmentation_v0_19.py
+          python scripts/p0_feature_augmentation_v0_19.py --self-test
+
+      - name: Frozen-v0.18-und-Free-Data-Input-Gates
+        run: |
+          test "$(git hash-object output_p0_research_partial_v0_18/summary_v0.18.json)" = "87202b4fa1a08f949521b9739f9ee44135355838"
+          test "$(git hash-object output_p0_research_partial_v0_18/p0_feature_quarantine_v0.18.csv)" = "2bc561cada6bf315c01c40d9d17413db95014695"
+          test "$(git hash-object output_research_partial_v0_16/research_partial_universe_v0.16.csv)" = "c587dea52375e4b9f4fc73635dda11dc39d5b784"
+          test "$(git hash-object scripts/price_cache.py)" = "454a1036e02c8ea73504921163aad1438a7e9f9d"
+          test "$(git hash-object scripts/feature_builder.py)" = "f6e14fedaa874bc89b6d33f51d6730e175c2b60e"
+          test "$(git hash-object config/yahoo_symbol_overrides.csv)" = "7a0947392b7efba96861d39cc6d44721378a0a84"
+          test "$(git hash-object requirements.txt)" = "0e23356ba8a981c7f6d17a3f611409046f4e0655"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('output_p0_research_partial_v0_18/summary_v0.18.json').read_text())
+          assert x['run_status']=='P0_RESEARCH_PARTIAL_INTEGRITY_FIX_V0_18_COMPLETE'
+          assert x['partial_rows']==2037
+          assert x['persistent_feature_usable_rows_v0_18']==2035
+          assert x['quarantine_rows_v0_18']==2
+          assert x['quarantine_reason_counts']=={'UNMATCHED_FEATURE_ROW':2}
+          assert x['p0_run'] is False and x['validated_automated_p0_run'] is False
+          assert x['alpha_vantage_allowed'] is False and x['productive_trading_authority'] is False
+          print('V0_18_FROZEN_INPUT_GATES_PASS')
+          PY
+
+      - name: P0 Feature Augmentation mit geschlossenem Bar-Fenster
+        run: |
+          rm -rf runtime_cache/p0_feature_augmentation_v0_19.sqlite*
+          rm -rf output_p0_feature_augmentation_v0_19
+          python scripts/p0_feature_augmentation_v0_19.py \
+            --config config/p0_feature_augmentation_v0.19.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out=Path('output_p0_feature_augmentation_v0_19')
+          s=json.loads((out/'summary_v0.19.json').read_text())
+          assert s['schema']=='WELT_SWING_P0_FEATURE_AUGMENTATION_V0_19'
+          assert s['run_status'] in {
+              'P0_FEATURE_AUGMENTATION_V0_19_COMPLETE',
+              'P0_FEATURE_AUGMENTATION_V0_19_COMPLETE_WITH_PARTIAL_COVERAGE',
+              'P0_FEATURE_AUGMENTATION_V0_19_COMPLETE_WITH_SOURCE_BLOCK',
+          }
+          assert s['input_rows']==2037
+          assert s['augmented_feature_rows'] + s['feature_quarantine_rows'] == 2037
+          assert s['prior_v0_18_quarantine_rows']==2
+          assert 0 <= s['recovered_prior_quarantine_rows'] <= 2
+          assert s['recovered_prior_quarantine_rows'] + s['still_quarantined_prior_rows'] == 2
+          assert s['request_start']=='2025-05-01'
+          assert s['request_end_exclusive']=='2026-08-24'
+          assert s['closed_bar_reference_date']=='2026-08-21'
+          assert s['batch_size']==100
+          assert s['yf_download_batch_invocations'] >= s['normal_batch_invocations']
+          assert s['network_http_request_count_measured'] is False
+          assert s['web_calls_per_security'] is False
+          assert s['data_source']=='YFINANCE_FREE'
+          assert s['price_downloads_performed'] is True
+          assert s['fx_downloads_performed'] is False
+          assert s['news_downloads_performed'] is False
+          assert s['fundamentals_downloaded'] is False
+          assert s['scalable_execution_checked'] is False
+          assert s['p0_run'] is False and s['p0_survivor_rows']==0
+          assert s['p0_lane_decisions_made'] is False
+          assert s['validated_automated_p0_run'] is False and s['automated_p0_ready'] is False
+          assert s['parameter_validation_status']=='HYPOTHESIS_ONLY_NOT_VALIDATED'
+          assert s['p0_numeric_pass_threshold_count']==0
+          assert s['home_market_rs_status']=='NOT_IMPLEMENTED_V0_19'
+          assert s['sector_rs_status']=='NOT_IMPLEMENTED_V0_19'
+          assert s['strict_u3k_frozen'] is False and s['full_scan_claim'] is False
+          assert s['research_partial_mode'] is True and s['productive_trading_authority'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert s['canonical_master_mutated'] is False
+          assert s['historical_v0_18_artifacts_mutated'] is False
+
+          aug=pd.read_csv(out/'p0_feature_augmented_v0.19.csv',keep_default_na=False,dtype=str)
+          q=pd.read_csv(out/'p0_feature_quarantine_v0.19.csv',keep_default_na=False,dtype=str)
+          assert len(aug)==s['augmented_feature_rows']
+          assert len(q)==s['feature_quarantine_rows']
+          if len(aug): assert aug['WS_ID'].is_unique
+          if len(q): assert q['WS_ID'].is_unique
+          assert set(aug['WS_ID']).isdisjoint(set(q['WS_ID']))
+          assert len(set(aug['WS_ID']) | set(q['WS_ID']))==2037
+          if len(aug):
+              asof=pd.to_datetime(aug['AsOf'],errors='raise')
+              assert (asof < pd.Timestamp('2026-08-24')).all()
+              assert aug['HomeMarket_RS_Status'].eq('NOT_IMPLEMENTED_V0_19').all()
+              assert aug['Sector_RS_Status'].eq('NOT_IMPLEMENTED_V0_19').all()
+              assert aug['Core_Feature_Complete_v0_19'].str.lower().eq('true').all()
+
+          recovered=pd.read_csv(out/'recovered_prior_quarantine_v0.19.csv',keep_default_na=False,dtype=str)
+          prior={'WS:SRC:ZA_TOP40:C46C9A1E2438665A','WS:SRC:ZA_TOP40:3CA42D3A25639D8E'}
+          assert set(recovered['WS_ID']).issubset(prior)
+          assert len(recovered)==s['recovered_prior_quarantine_rows']
+
+          lanes=pd.read_csv(out/'p0_lane_feature_capability_v0.19.csv',keep_default_na=False,dtype=str)
+          assert len(lanes)==6
+          assert lanes['Automated_P0_Decision_v0_19'].eq('NOT_ALLOWED').all()
+          params=json.loads((out/'p0_parameter_registry_v0.19.json').read_text())
+          assert params['validation_status']=='HYPOTHESIS_ONLY_NOT_VALIDATED'
+          assert params['p0_numeric_pass_thresholds']==[]
+          ck=json.loads((out/'stage_checkpoint_v0.19.json').read_text())
+          assert ck['stage_id']=='P0_FEATURE_AUGMENTATION_AND_PARAMETER_VALIDATION'
+          assert ck['input_count']==2037 and ck['checked_count']==2037
+          assert ck['pass_count']==0 and ck['fail_count']==0 and ck['p0_survivor_count']==0
+          assert ck['validated_automated_p0_run'] is False and ck['automated_p0_ready'] is False
+          m=json.loads((out/'feature_augmentation_manifest_v0.19.json').read_text())
+          assert m['source_data']=='YFINANCE_FREE' and m['alpha_vantage_allowed'] is False
+          assert m['runtime_sqlite_committed'] is False and m['fixed_closed_bar_window'] is True
+          print('P0_FEATURE_AUGMENTATION_V0_19_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_p0_feature_augmentation_v0_19/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Augment P0 research-partial features v0.19"
+            git push
+          fi
+
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-p0-feature-augmentation-v0.19-${{ github.run_number }}
+          path: output_p0_feature_augmentation_v0_19/
+          retention-days: 14
