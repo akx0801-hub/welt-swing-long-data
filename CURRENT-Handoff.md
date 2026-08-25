@@ -1,51 +1,95 @@
 # WELT-SWING LONG DEV — CURRENT HANDOFF
 
-**Updated:** 2026-08-24 20:54 CEST  
+**Updated:** 2026-08-24 22:46 CEST  
 **Status:** DEV / RESEARCH / SHADOW — NOT PRODUCTIVE
 
 ## Authority
 
-Authoritative DEV master specification: `docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md`
+Authoritative DEV master specification: `docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md`.
 
-Welt-Swing v7.2 remains the sole productive Swing authority until explicit validated promotion.
+Welt-Swing v7.2 remains unchanged and is the sole productive Swing authority until an explicit validated promotion. This handoff does not alter productive trade rules.
 
-## Latest completed checkpoint
+## Latest completed checkpoint — v0.18
 
-**RESEARCH_PARTIAL Snapshot v0.16**
+Current main after the GitHub-Actions v0.18 output commit:
 
-Current main after GitHub-Actions output commit: `063702001d2b2c48c7bdfb9c0ad0a876d2d9e674`
+`9aa3c51f157708c63e07827912435478f42e21d0` — `Fix P0 research-partial integrity accounting v0.18`
 
-Confirmed v0.16:
-- `RESEARCH_PARTIAL_SNAPSHOT_V0_16_FROZEN`
-- Full Eligibility: **3,657**
-- Included Verified Strict: **2,037**
-- Instrument unresolved: **650**
-- Other Non-Strict: **970**
-- Verified Strict Coverage: **55.7014%**
-- Strict U3K frozen: false
-- RESEARCH_PARTIAL frozen: true
-- P0 run: false
-- productive authority: false
-- Alpha Vantage: false
+Verified v0.18:
 
-Unresolved segments: EU 365, CA 105, KR 92, HK 82, MX 6.
+- schema: `WELT_SWING_P0_RESEARCH_PARTIAL_INTEGRITY_FIX_V0_18`;
+- run status: `P0_RESEARCH_PARTIAL_INTEGRITY_FIX_V0_18_COMPLETE`;
+- frozen research-partial rows: **2,037**;
+- v0.17 historically reported feature matches: 2,037;
+- actual feature-row matches after merge-indicator correction: **2,035**;
+- valid AsOf rows: **2,035**;
+- complete core feature rows: **2,035**;
+- persistent feature usable rows: **2,035**;
+- quarantine rows: **2**;
+- quarantine reason: `UNMATCHED_FEATURE_ROW` for both;
+- P0 survivors: 0;
+- P0 run: false;
+- validated automated P0 run: false;
+- automated P0 ready: false;
+- strict U3K frozen: false;
+- full-scan claim: false;
+- productive authority: false;
+- Alpha Vantage: false;
+- v0.17 history mutated: false.
 
-The former `-1` duplicates from the v0.16 fix have been removed; canonical paths are active.
+The two real v0.18 quarantine identities are:
 
-## Price/feature state
+1. Anglo American — `WS:SRC:ZA_TOP40:C46C9A1E2438665A` — XJSE / ZAR;
+2. Sasol — `WS:SRC:ZA_TOP40:3CA42D3A25639D8E` — XJSE / ZAR.
 
-`output_full_3663`: raw universe 3,663; READY 3,578; features 3,578; YFINANCE_FREE; P0 status `NOT_RUN_PARAMETERS_NOT_YET_PROMOTED`.
+v0.18 corrected accounting only. It did not retroactively fabricate feature rows for these securities.
 
-Persisted features include EMA20/EMA50/SMA200, ATR14, R5/R20/R60, rolling highs/lows, distances, Range20 and median volume/turnover.
+## Current research-partial coverage
 
-## Next step
+The authoritative partial snapshot remains v0.16 with **2,037 Included Verified Strict** securities. This is not a frozen full U3K and cannot support a `weltweit bester Kandidat` claim.
 
-**v0.17 — P0 RESEARCH_PARTIAL Parameter Freeze & Dry Run**
+Allowed later wording remains:
 
-No survivor screen yet. It validates exact feature linkage for 2,037 rows, freezes the six-lane capability/parameter state, records missing automation capabilities, and invents no P0 pass threshold.
+`bester verifizierter Kandidat innerhalb der tatsächlich geprüften Coverage`.
 
-Expected next stage: `P0_FEATURE_AUGMENTATION_AND_PARAMETER_VALIDATION`.
+## Next implementation checkpoint — v0.19
 
-Allowed later result wording: `bester verifizierter Kandidat innerhalb der tatsächlich geprüften Coverage`.
+**`P0_FEATURE_AUGMENTATION_AND_PARAMETER_VALIDATION`**
 
-Forbidden: `weltweit bester Kandidat`.
+v0.19 is prepared as a bounded feature-augmentation run over all 2,037 research-partial identities.
+
+Key controls:
+
+- yfinance/Yahoo only; Alpha Vantage prohibited;
+- audited `price_cache.py` batch primitive;
+- fixed daily-bar request window `2025-05-01` to end-exclusive `2026-08-24`;
+- closed-bar reference `2026-08-21`, excluding the 2026-08-24 session;
+- batch size 100, at most one identical retry and one regrouped rescue wave;
+- no per-security symbol-search/web-lookup architecture;
+- no FX, news, fundamentals, Scalable execution or sizing;
+- runtime SQLite cache is not committed;
+- no P0 PASS/FAIL lane decisions and no P0 survivors;
+- no invented numeric P0 PASS thresholds;
+- home-market and sector RS remain explicitly `NOT_IMPLEMENTED_V0_19`.
+
+The run will also test whether Anglo American and Sasol can be recovered from fresh fixed-window acquisition. Any recovery is a new v0.19 observation; v0.18 remains unchanged.
+
+## Expected v0.19 evidence
+
+The run writes:
+
+- `p0_feature_augmented_v0.19.csv`;
+- `p0_feature_quarantine_v0.19.csv`;
+- `recovered_prior_quarantine_v0.19.csv`;
+- `yahoo_symbol_map_v0.19.csv`;
+- `price_cache_state_v0.19.csv`;
+- `yfinance_batch_log_v0.19.csv`;
+- `p0_feature_distribution_v0.19.csv`;
+- `p0_asof_distribution_v0.19.csv`;
+- `p0_lane_feature_capability_v0.19.csv`;
+- `p0_parameter_registry_v0.19.json`;
+- `stage_checkpoint_v0.19.json`;
+- `summary_v0.19.json`;
+- `feature_augmentation_manifest_v0.19.json`.
+
+A successful augmentation still does **not** make automated P0 ready. The next planned scope is `P0_RELATIVE_STRENGTH_AUGMENTATION_AND_LANE_PARAMETER_VALIDATION`.
