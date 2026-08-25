@@ -1,0 +1,138 @@
+name: Welt-Swing P0 Relative Strength Augmentation v0.20
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/p0_relative_strength_augmentation_v0.20.json'
+
+permissions:
+  contents: write
+
+jobs:
+  p0_relative_strength_augmentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: |
+          python -m py_compile scripts/p0_relative_strength_augmentation_v0_20.py
+          python scripts/p0_relative_strength_augmentation_v0_20.py --self-test
+
+      - name: Frozen-v0.19-Input-Gates
+        run: |
+          test "$(git hash-object output_p0_feature_augmentation_v0_19/summary_v0.19.json)" = "baf966513e51ba3b16947e632dd2a66c5b406420"
+          test "$(git hash-object output_p0_feature_augmentation_v0_19/p0_feature_augmented_v0.19.csv)" = "3503cf3e1c3325321e251767c75845ab9d4531b8"
+          test "$(git hash-object output_p0_feature_augmentation_v0_19/p0_asof_distribution_v0.19.csv)" = "cc9b1965648ff6d3036264cdb89855636b4cc588"
+          test "$(git hash-object output_p0_feature_augmentation_v0_19/p0_lane_feature_capability_v0.19.csv)" = "f61187cc5157c36b4d1b49f7f6d11ba13e8f1d70"
+          test "$(git hash-object output_p0_feature_augmentation_v0_19/p0_parameter_registry_v0.19.json)" = "c1213945101f28f34c6cc56973b1707b926582a5"
+          test "$(git hash-object output_p0_feature_augmentation_v0_19/stage_checkpoint_v0.19.json)" = "aa2227c2a913a4d74085501315b754ed262490f8"
+
+      - name: Relative-Strength-Augmentation und Parameter-Evidenz
+        run: |
+          rm -rf output_p0_relative_strength_v0_20
+          python scripts/p0_relative_strength_augmentation_v0_20.py             --config config/p0_relative_strength_augmentation_v0.20.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out=Path('output_p0_relative_strength_v0_20')
+          s=json.loads((out/'summary_v0.20.json').read_text(encoding='utf-8'))
+
+          assert s['schema']=='WELT_SWING_P0_RELATIVE_STRENGTH_AUGMENTATION_V0_20'
+          assert s['run_status']=='P0_RELATIVE_STRENGTH_AUGMENTATION_V0_20_COMPLETE_WITH_ASOF_EXCEPTION'
+          assert s['input_rows']==2037
+          assert s['asof_synchronized_rows']==2036
+          assert s['asof_mismatch_rows']==1
+          assert s['asof_mismatch_ws_ids']==['WS:US:WBS']
+          assert s['home_market_rs_rows']==2036
+          assert s['home_market_rs_official_benchmark_claim'] is False
+          assert s['sector_rs_rows']==0
+          assert s['sector_rs_status']=='RS_NOT_VERIFIED_NO_SECTOR_METADATA'
+          assert s['parameter_validation_status']=='PARTIAL_SEMANTIC_VALIDATION_ONLY'
+          assert s['p0_numeric_pass_threshold_count']==0
+          assert s['p0_run'] is False
+          assert s['p0_survivor_rows']==0
+          assert s['p0_lane_decisions_made'] is False
+          assert s['validated_automated_p0_run'] is False
+          assert s['automated_p0_ready'] is False
+          assert s['strict_u3k_frozen'] is False
+          assert s['full_scan_claim'] is False
+          assert s['research_partial_mode'] is True
+          assert s['productive_trading_authority'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert s['external_requests']==0
+          assert s['web_calls_per_security'] is False
+
+          rs=pd.read_csv(out/'p0_rs_augmented_v0.20.csv', keep_default_na=False)
+          assert len(rs)==2037 and rs['WS_ID'].astype(str).is_unique
+          assert rs['P0_PASS_v0_20'].astype(str).str.lower().eq('false').all()
+          assert rs['P0_FAIL_v0_20'].astype(str).str.lower().eq('false').all()
+          assert rs['P0_Lane_Decision_v0_20'].eq('NOT_ALLOWED_PARAMETER_SET_NOT_VALIDATED').all()
+
+          audit=pd.read_csv(out/'p0_rs_asof_audit_v0.20.csv', keep_default_na=False)
+          assert len(audit)==1
+          assert audit.iloc[0]['WS_ID']=='WS:US:WBS'
+          assert audit.iloc[0]['Name']=='Webster Bank'
+          assert audit.iloc[0]['AsOf']=='2026-08-20'
+          assert audit.iloc[0]['RS_Reference_AsOf_v0_20']=='2026-08-21'
+          assert audit.iloc[0]['RS_AsOf_Status_v0_20']=='RS_NOT_VERIFIED_ASOF_MISMATCH'
+
+          cohorts=pd.read_csv(out/'home_market_cohort_rs_reference_v0.20.csv', keep_default_na=False)
+          assert set(cohorts['Primary_Universe_Index'])=={
+              'AU_ASX200','BR_IBRX100','CN_CSI300','IN_NIFTY50',
+              'JP_N225','TW_TW50','US_SP1500','ZA_TOP40'
+          }
+          assert int(cohorts['Synchronized_Rows'].sum())==2036
+
+          reg=json.loads((out/'p0_lane_parameter_registry_v0.20.json').read_text())
+          assert reg['validation_status']=='PARTIAL_SEMANTIC_VALIDATION_ONLY'
+          assert reg['p0_numeric_pass_thresholds']==[]
+          assert reg['sector_rs']['status']=='RS_NOT_VERIFIED_NO_SECTOR_METADATA'
+          assert reg['home_market_rs_reference']['official_index_benchmark_claim'] is False
+
+          ck=json.loads((out/'stage_checkpoint_v0.20.json').read_text())
+          assert ck['stage_id']=='P0_RELATIVE_STRENGTH_AUGMENTATION_AND_LANE_PARAMETER_VALIDATION'
+          assert ck['input_count']==2037 and ck['checked_count']==2037
+          assert ck['home_market_rs_count']==2036 and ck['rs_not_verified_count']==1
+          assert ck['pass_count']==0 and ck['fail_count']==0 and ck['p0_survivor_count']==0
+          assert ck['validated_automated_p0_run'] is False and ck['automated_p0_ready'] is False
+
+          print('P0_RELATIVE_STRENGTH_AUGMENTATION_V0_20_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_p0_relative_strength_v0_20/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Augment P0 relative strength v0.20"
+            git push
+          fi
+
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-p0-relative-strength-v0.20-${{ github.run_number }}
+          path: output_p0_relative_strength_v0_20/
+          retention-days: 14
