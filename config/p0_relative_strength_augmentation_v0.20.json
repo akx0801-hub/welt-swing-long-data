@@ -1,0 +1,39 @@
+{
+  "schema": "WELT_SWING_P0_RELATIVE_STRENGTH_AUGMENTATION_CONFIG_V0_20",
+  "as_of_date": "2026-08-21",
+  "run_id": "WS-LONG-P0-RS-AUGMENTATION-2026-08-21-v0.20",
+  "source_summary_v0_19": "output_p0_feature_augmentation_v0_19/summary_v0.19.json",
+  "source_augmented_v0_19": "output_p0_feature_augmentation_v0_19/p0_feature_augmented_v0.19.csv",
+  "source_asof_distribution_v0_19": "output_p0_feature_augmentation_v0_19/p0_asof_distribution_v0.19.csv",
+  "source_lane_capability_v0_19": "output_p0_feature_augmentation_v0_19/p0_lane_feature_capability_v0.19.csv",
+  "source_parameter_registry_v0_19": "output_p0_feature_augmentation_v0_19/p0_parameter_registry_v0.19.json",
+  "source_checkpoint_v0_19": "output_p0_feature_augmentation_v0_19/stage_checkpoint_v0.19.json",
+  "output_dir": "output_p0_relative_strength_v0_20",
+  "expected_input_rows": 2037,
+  "closed_bar_reference_date": "2026-08-21",
+  "expected_asof_mismatch_ws_ids": [
+    "WS:US:WBS"
+  ],
+  "expected_sha256": {
+    "summary_v0_19": "fefafdd333940b17ebe675804aedf77f674926341793c8ac08ab7841fe234201",
+    "augmented_v0_19": "454e05bf397deabb23d738ee099300d0c07cdd107d7d6dc9ec1214ca4e393453",
+    "asof_distribution_v0_19": "27ae956ee2e9db82f4470f051ef2548dbfe27c2ee62b577829f4406bd60113d5",
+    "lane_capability_v0_19": "1b20ecff512f8cb306c27e40a7ec1cff50b60324d1372d4ea53dbd70b96e0bda",
+    "parameter_registry_v0_19": "7abd8c0dec8c5599e06cadc34a1e6b8387e26757f5e93ff70554744417c7b6fd",
+    "checkpoint_v0_19": "58ec12573db97a8ae379eaf8ba0cf99a1703aa23ca0cbaa0babc70ab3871f72a"
+  },
+  "frozen_git_blob_shas": {
+    "output_p0_feature_augmentation_v0_19/summary_v0.19.json": "baf966513e51ba3b16947e632dd2a66c5b406420",
+    "output_p0_feature_augmentation_v0_19/p0_feature_augmented_v0.19.csv": "3503cf3e1c3325321e251767c75845ab9d4531b8",
+    "output_p0_feature_augmentation_v0_19/p0_asof_distribution_v0.19.csv": "cc9b1965648ff6d3036264cdb89855636b4cc588",
+    "output_p0_feature_augmentation_v0_19/p0_lane_feature_capability_v0.19.csv": "f61187cc5157c36b4d1b49f7f6d11ba13e8f1d70",
+    "output_p0_feature_augmentation_v0_19/p0_parameter_registry_v0.19.json": "c1213945101f28f34c6cc56973b1707b926582a5",
+    "output_p0_feature_augmentation_v0_19/stage_checkpoint_v0.19.json": "aa2227c2a913a4d74085501315b754ed262490f8"
+  },
+  "p0_run": false,
+  "validated_automated_p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "external_requests": 0,
+  "web_calls_per_security": false
+}
