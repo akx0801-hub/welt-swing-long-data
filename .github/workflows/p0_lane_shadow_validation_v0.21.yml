@@ -1,0 +1,188 @@
+name: Welt-Swing P0 Lane Shadow Validation v0.21
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/p0_lane_shadow_validation_v0.21.json'
+
+permissions:
+  contents: write
+
+jobs:
+  p0_lane_shadow_validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: |
+          python -m py_compile scripts/p0_lane_shadow_validation_v0_21.py
+          python scripts/p0_lane_shadow_validation_v0_21.py --self-test
+
+      - name: Frozen-v0.20-Input-Gates
+        run: |
+          test "$(git hash-object output_p0_relative_strength_v0_20/summary_v0.20.json)" = "2c1535e57eee9c601e4cd55f6f6aae61cde12cf6"
+          test "$(git hash-object output_p0_relative_strength_v0_20/p0_rs_augmented_v0.20.csv)" = "c774f3471f2118d24eca56ac74d48233ba61e6a0"
+          test "$(git hash-object output_p0_relative_strength_v0_20/p0_rs_asof_audit_v0.20.csv)" = "e1f5e457ab7281eece0435706ae821d2d205a842"
+          test "$(git hash-object output_p0_relative_strength_v0_20/p0_lane_parameter_registry_v0.20.json)" = "6c8dd82fea5e6038fbbc5e99585bf30c3c4cba49"
+          test "$(git hash-object output_p0_relative_strength_v0_20/sector_rs_status_v0.20.csv)" = "8c682b33a43d2ef587c8af86ebc047bfc874d4ee"
+          test "$(git hash-object output_p0_relative_strength_v0_20/stage_checkpoint_v0.20.json)" = "57791b111ca1e3601f8694a1321932a7d66b8599"
+          test "$(git hash-object output_p0_relative_strength_v0_20/rs_manifest_v0.20.json)" = "122fa440a58fdc0852ed113a6d64e6e5011d7d9f"
+
+      - name: Lane Shadow Validation und Sector-RS-Prep
+        run: |
+          rm -rf output_p0_lane_shadow_validation_v0_21
+          python scripts/p0_lane_shadow_validation_v0_21.py \
+            --config config/p0_lane_shadow_validation_v0.21.json
+
+      - name: Ergebnis-Gates
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path('output_p0_lane_shadow_validation_v0_21')
+          s = json.loads((out/'summary_v0.21.json').read_text(encoding='utf-8'))
+
+          assert s['schema'] == 'WELT_SWING_P0_LANE_PARAMETER_SHADOW_VALIDATION_V0_21'
+          assert s['run_status'] == 'P0_LANE_PARAMETER_SHADOW_VALIDATION_V0_21_COMPLETE_WITH_SECTOR_RS_BLOCK'
+          assert s['input_rows'] == 2037
+          assert s['asof_synchronized_rows'] == 2036
+          assert s['asof_mismatch_rows'] == 1
+          assert s['asof_mismatch_ws_ids'] == ['WS:US:WBS']
+          assert s['home_market_rs_rows'] == 2036
+          assert s['lane4_home_market_rs_both_positive_rows'] == 706
+          assert s['raw_sector_metadata_columns_detected'] == []
+          assert s['sector_metadata_ready'] is False
+          assert s['sector_rs_rows'] == 0
+          assert s['sector_rs_status'] == 'RS_NOT_VERIFIED_NO_FROZEN_SECTOR_METADATA'
+          assert s['shadow_component_count'] == 15
+          assert s['shadow_component_status_model'] == 'TRI_STATE_VERIFIED_TRUE_VERIFIED_FALSE_NOT_VERIFIED'
+          assert s['asof_mismatch_fail_closed_all_dynamic_components'] is True
+          assert s['lane_count'] == 6
+          assert s['parameter_validation_status'] == 'SHADOW_COMPONENT_VALIDATION_ONLY'
+          assert s['p0_numeric_pass_threshold_count'] == 0
+          assert s['p0_run'] is False
+          assert s['p0_lane_decisions_made'] is False
+          assert s['p0_survivor_rows'] == 0
+          assert s['validated_automated_p0_run'] is False
+          assert s['automated_p0_ready'] is False
+          assert s['strict_u3k_frozen'] is False
+          assert s['full_scan_claim'] is False
+          assert s['research_partial_mode'] is True
+          assert s['productive_trading_authority'] is False
+          assert s['alpha_vantage_allowed'] is False
+          assert s['external_requests'] == 0
+          assert s['web_calls_per_security'] is False
+
+          obs = pd.read_csv(out/'p0_shadow_component_observations_v0.21.csv', keep_default_na=False)
+          assert len(obs) == 2037 and obs['WS_ID'].astype(str).is_unique
+          assert obs['P0_PASS_v0_21'].astype(str).str.lower().eq('false').all()
+          assert obs['P0_FAIL_v0_21'].astype(str).str.lower().eq('false').all()
+          assert obs['P0_Shadow_Lane_Decision_v0_21'].eq('NOT_ALLOWED_COMPONENT_EVIDENCE_ONLY').all()
+          wbs = obs.loc[obs['WS_ID'].eq('WS:US:WBS')].iloc[0]
+          status_cols = [c for c in obs.columns if c.startswith('Shadow_') and c.endswith('_Status_v0_21')]
+          assert len(status_cols) == 15
+          assert all(wbs[c] == 'NOT_VERIFIED_ASOF_MISMATCH' for c in status_cols)
+
+          counts = pd.read_csv(out/'p0_shadow_component_counts_v0.21.csv', keep_default_na=False)
+          assert len(counts) == 15
+          for _, r in counts.iterrows():
+              assert int(r['Verified_True_Rows']) + int(r['Verified_False_Rows']) + int(r['Not_Verified_Rows']) == 2037
+              assert int(r['AsOf_Mismatch_Rows']) == 1
+
+          matrix = pd.read_csv(out/'p0_lane_shadow_validation_matrix_v0.21.csv', keep_default_na=False)
+          assert len(matrix) == 6
+          assert matrix['Automated_P0_Decision_v0_21'].eq('NOT_ALLOWED').all()
+          lane4 = matrix.loc[matrix['Lane'].eq('QUIET_STRENGTH_RELATIVE_STRENGTH')].iloc[0]
+          assert 'Sector RS' in lane4['Still_Unvalidated_or_Missing_v0_21']
+          assert '20d/60d home-market RS' not in lane4['Still_Unvalidated_or_Missing_v0_21']
+
+          inv = pd.read_csv(out/'sector_metadata_inventory_v0.21.csv', keep_default_na=False)
+          assert len(inv) == 1
+          assert int(inv.iloc[0]['Detected_Raw_Sector_Metadata_Column_Count']) == 0
+
+          contract = json.loads((out/'sector_metadata_contract_v0.21.json').read_text())
+          assert contract['status'] == 'PREPARED_NOT_POPULATED'
+          assert contract['sector_rs_ready'] is False
+          assert contract['required_identity_key'] == 'WS_ID'
+          assert 'Alpha Vantage' in contract['prohibited_methods']
+
+          reg = json.loads((out/'p0_lane_parameter_registry_v0.21.json').read_text())
+          assert reg['validation_status'] == 'SHADOW_COMPONENT_VALIDATION_ONLY'
+          assert reg['p0_numeric_pass_thresholds'] == []
+          assert reg['promoted_lane_pass_rules'] == []
+          assert reg['sector_rs']['ready'] is False
+          assert reg['shadow_evidence_audit']['tri_state_status'] is True
+          assert reg['shadow_evidence_audit']['asof_mismatch_fail_closed_for_all_dynamic_components'] is True
+
+          ck = json.loads((out/'stage_checkpoint_v0.21.json').read_text())
+          assert ck['stage_id'] == 'P0_LANE_PARAMETER_SHADOW_VALIDATION_AND_SECTOR_RS_PREP'
+          assert ck['input_count'] == 2037 and ck['checked_count'] == 2037
+          assert ck['pass_count'] == 0 and ck['fail_count'] == 0 and ck['p0_survivor_count'] == 0
+          assert ck['data_error_count'] == 0 and ck['quarantine_count'] == 0
+          assert ck['status'] == 'PARTIAL'
+          for field in ['start','end','input_hash','parameter_hash','output_hash','failed_source','next_stage']:
+              assert ck[field]
+          assert ck['next_stage'] == 'P0_SECTOR_METADATA_BULK_SOURCE_PROBE_AND_SHADOW_RULE_TEST_DESIGN'
+
+          manifest = json.loads((out/'shadow_manifest_v0.21.json').read_text())
+          assert manifest['external_requests'] == 0
+          assert manifest['alpha_vantage_allowed'] is False
+          assert manifest['input_hash'] == ck['input_hash']
+          assert manifest['parameter_hash'] == ck['parameter_hash']
+          assert manifest['evidence_output_hash'] == ck['output_hash']
+          required = {
+              'p0_shadow_component_observations_v0.21.csv',
+              'p0_shadow_component_counts_v0.21.csv',
+              'p0_lane_shadow_validation_matrix_v0.21.csv',
+              'sector_metadata_inventory_v0.21.csv',
+              'sector_metadata_contract_v0.21.json',
+              'p0_lane_parameter_registry_v0.21.json',
+              'summary_v0.21.json',
+              'stage_checkpoint_v0.21.json',
+          }
+          assert required.issubset(set(manifest['files']))
+          for name, meta in manifest['files'].items():
+              p = out/name
+              assert p.exists()
+              h = hashlib.sha256(p.read_bytes()).hexdigest()
+              assert h == meta['sha256']
+              assert p.stat().st_size == int(meta['bytes'])
+
+          print('P0_LANE_PARAMETER_SHADOW_VALIDATION_V0_21_RESULT_GATES_PASS')
+          PY
+
+      - name: Ergebnisse committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_p0_lane_shadow_validation_v0_21/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "Validate P0 lane shadow components v0.21"
+            git push
+          fi
+
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: welt-swing-p0-lane-shadow-v0.21-${{ github.run_number }}
+          path: output_p0_lane_shadow_validation_v0_21/
+          retention-days: 14
