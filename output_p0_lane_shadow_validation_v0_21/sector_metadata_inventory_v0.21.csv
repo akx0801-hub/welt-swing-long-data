@@ -1,0 +1,2 @@
+Input_File,Rows,Detected_Raw_Sector_Metadata_Column_Count,Detected_Raw_Sector_Metadata_Columns,Sector_Metadata_Usable_v0_21,Sector_RS_Status_v0_21
+output_p0_relative_strength_v0_20/p0_rs_augmented_v0.20.csv,2037,0,,False,RS_NOT_VERIFIED_NO_FROZEN_SECTOR_METADATA

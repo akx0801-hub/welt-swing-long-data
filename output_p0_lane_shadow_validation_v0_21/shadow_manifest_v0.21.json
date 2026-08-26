@@ -1,0 +1,44 @@
+{
+  "schema": "WELT_SWING_P0_SHADOW_VALIDATION_MANIFEST_V0_21",
+  "generated_utc": "2026-08-26T18:38:13.990461+00:00",
+  "data_source": "FROZEN_V0_20_LOCAL_OUTPUTS_ONLY",
+  "input_hash": "e2d41f6ff308c5df4535582ad6246c8960f0a84e18ec53891c8ac8165d11ec75",
+  "parameter_hash": "d8266cf7baa8a6f0c29897a2f7e6d1858286efea724062d13287fe33adac318c",
+  "evidence_output_hash": "e27e547bc8a03712cd9ff649fbf6875a0cd8adca84865e9b9224bfddb293f45a",
+  "external_requests": 0,
+  "alpha_vantage_allowed": false,
+  "files": {
+    "p0_lane_parameter_registry_v0.21.json": {
+      "sha256": "c5eaf2d17265f3b17f32b8dc8711c5035908f6d240b4a9e085f633be6af7c5d6",
+      "bytes": 1918
+    },
+    "p0_lane_shadow_validation_matrix_v0.21.csv": {
+      "sha256": "7b25b710f11188d5bfcbaf826b4d0c4e2942203f9dac61bf7986a8fcb01e6354",
+      "bytes": 1553
+    },
+    "p0_shadow_component_counts_v0.21.csv": {
+      "sha256": "d6be94859f3fa45378bcde2c4ab54a0016dc5e9df4771fd209fde44826fd58a7",
+      "bytes": 1509
+    },
+    "p0_shadow_component_observations_v0.21.csv": {
+      "sha256": "e3720cb23c9de64649adf02decde0b61476af7d8f6e63d7604307317163439ac",
+      "bytes": 869755
+    },
+    "sector_metadata_contract_v0.21.json": {
+      "sha256": "fef445fd1f8237bbe226b699d07b3330823999b708699ea3dd6dcf33515323ee",
+      "bytes": 1238
+    },
+    "sector_metadata_inventory_v0.21.csv": {
+      "sha256": "de5de177fdc109e72add315026cfceed706a5e67ea0adf20c7a28faa6061db15",
+      "bytes": 263
+    },
+    "stage_checkpoint_v0.21.json": {
+      "sha256": "f40cdc95150bab1cd59fa5f9f9d9f017c48abb4a7ae09f608081c29f340ddbc8",
+      "bytes": 1067
+    },
+    "summary_v0.21.json": {
+      "sha256": "465a82ab19fe59c0d1862e34c2c3f2a6b2f1c59daede7c1ee87228dbc9cca4f0",
+      "bytes": 1562
+    }
+  }
+}

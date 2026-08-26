@@ -1,0 +1,7 @@
+Lane,Semantically_Measurable_Components_v0_21,Still_Unvalidated_or_Missing_v0_21,Shadow_Validation_Status_v0_21,Automated_P0_Decision_v0_21
+BREAKOUT_COMPRESSION_VCP,Range5<Range20 relation; TRMean5<TRMean20 relation; close/EMA/SMA context; High20/High60/High252 distances available,pivot/base/VCP detector; breakout pivot identity; validated lane thresholds,COMPONENT_EVIDENCE_ONLY,NOT_ALLOWED
+PULLBACK_RETEST,higher-low proxy; close/EMA/SMA context; ATR distances to recent lows,former-breakout-zone detector; horizontal-support identity; validated controlled-pullback sequence,COMPONENT_EVIDENCE_ONLY,NOT_ALLOWED
+RECLAIM,cross timing fields; close/EMA context; higher-low proxy,validated recency definition; multi-day reclaim/confirmation rule,COMPONENT_EVIDENCE_ONLY,NOT_ALLOWED
+QUIET_STRENGTH_RELATIVE_STRENGTH,20d/60d internal Home-Market-RS; positive-RS component; EMA slopes; range/TR compression relations; absolute return structure,Sector RS; validated vertical-momentum-excess definition; validated coupling to breakout/pullback/retest/reclaim/drift,HOME_MARKET_RS_COMPONENT_AVAILABLE_SECTOR_BLOCKED,NOT_ALLOWED
+POST_EVENT_DRIFT,impulse timing/return proxy; post-impulse hold/latest relations; RVOL,event identity/time; validated impulse definition; validated hold/drift thresholds,COMPONENT_EVIDENCE_ONLY,NOT_ALLOWED
+CONTROLLED_MEAN_REVERSION,higher-low proxy; EMA slopes; ATR distances; short/long volatility relations,validated stabilization sequence; falling-knife detector; definable invalidation rule,COMPONENT_EVIDENCE_ONLY,NOT_ALLOWED

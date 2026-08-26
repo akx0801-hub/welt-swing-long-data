@@ -1,0 +1,38 @@
+{
+  "schema": "WELT_SWING_SECTOR_METADATA_CONTRACT_V0_21",
+  "generated_utc": "2026-08-26T18:38:13.919846+00:00",
+  "status": "PREPARED_NOT_POPULATED",
+  "required_identity_key": "WS_ID",
+  "required_fields": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Code",
+    "Sector_Name",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "Mapping_Status"
+  ],
+  "accepted_source_classes": [
+    "official index administrator bulk constituent/reference data",
+    "official primary exchange bulk reference data",
+    "official security registry bulk reference data",
+    "other explicitly approved bulk reference source after provenance review"
+  ],
+  "prohibited_methods": [
+    "per-security web lookup fanout",
+    "name-based guessed sector mapping",
+    "silent taxonomy mixing without crosswalk",
+    "unversioned sector labels",
+    "Alpha Vantage"
+  ],
+  "mapping_requirements": [
+    "deterministic WS_ID linkage",
+    "taxonomy and source provenance recorded",
+    "as-of/version recorded",
+    "ambiguous mappings fail closed",
+    "sector peer group must be large enough for a reliable reference or RS_NOT_VERIFIED"
+  ],
+  "current_frozen_input_sector_metadata_columns": [],
+  "sector_rs_ready": false
+}
