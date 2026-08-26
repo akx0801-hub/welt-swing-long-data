@@ -1,0 +1,39 @@
+{
+  "schema": "WELT_SWING_P0_LANE_PARAMETER_SHADOW_VALIDATION_CONFIG_V0_21",
+  "as_of_date": "2026-08-21",
+  "run_id": "WS-LONG-P0-LANE-SHADOW-2026-08-21-v0.21",
+  "source_summary_v0_20": "output_p0_relative_strength_v0_20/summary_v0.20.json",
+  "source_rs_augmented_v0_20": "output_p0_relative_strength_v0_20/p0_rs_augmented_v0.20.csv",
+  "source_asof_audit_v0_20": "output_p0_relative_strength_v0_20/p0_rs_asof_audit_v0.20.csv",
+  "source_parameter_registry_v0_20": "output_p0_relative_strength_v0_20/p0_lane_parameter_registry_v0.20.json",
+  "source_sector_status_v0_20": "output_p0_relative_strength_v0_20/sector_rs_status_v0.20.csv",
+  "source_checkpoint_v0_20": "output_p0_relative_strength_v0_20/stage_checkpoint_v0.20.json",
+  "source_manifest_v0_20": "output_p0_relative_strength_v0_20/rs_manifest_v0.20.json",
+  "output_dir": "output_p0_lane_shadow_validation_v0_21",
+  "expected_input_rows": 2037,
+  "expected_lane4_rs_both_positive_rows": 706,
+  "expected_sha256": {
+    "summary": "7c234bafd3115bb704a8cf854424ad9efb3dbfbaaeccba2372fccfec75e58d22",
+    "rs_augmented": "f7bb35497f0be78adb39844283e0917816e966a216fc48cea39ea50c99ed5bf3",
+    "asof_audit": "a7bef84185b91e0dbe3408df222c4b9467a901f87321b75f612a0320dffb525d",
+    "registry": "0a701984c9bc7d1d5bcf3d6c07804e9e84f689b927ac0a2b521ddc80f0cf53cc",
+    "sector_status": "c0185690842401ef8377e3e56214d48434fea66db4c5597326aab0bfc8f2349a",
+    "checkpoint": "cf363859e6809f9e33fbda597a80863ef38290c76601e47465bb49c3527b7ca7"
+  },
+  "frozen_git_blob_shas": {
+    "output_p0_relative_strength_v0_20/summary_v0.20.json": "2c1535e57eee9c601e4cd55f6f6aae61cde12cf6",
+    "output_p0_relative_strength_v0_20/p0_rs_augmented_v0.20.csv": "c774f3471f2118d24eca56ac74d48233ba61e6a0",
+    "output_p0_relative_strength_v0_20/p0_rs_asof_audit_v0.20.csv": "e1f5e457ab7281eece0435706ae821d2d205a842",
+    "output_p0_relative_strength_v0_20/p0_lane_parameter_registry_v0.20.json": "6c8dd82fea5e6038fbbc5e99585bf30c3c4cba49",
+    "output_p0_relative_strength_v0_20/sector_rs_status_v0.20.csv": "8c682b33a43d2ef587c8af86ebc047bfc874d4ee",
+    "output_p0_relative_strength_v0_20/stage_checkpoint_v0.20.json": "57791b111ca1e3601f8694a1321932a7d66b8599",
+    "output_p0_relative_strength_v0_20/rs_manifest_v0.20.json": "122fa440a58fdc0852ed113a6d64e6e5011d7d9f"
+  },
+  "p0_run": false,
+  "p0_lane_decisions_made": false,
+  "validated_automated_p0_run": false,
+  "productive_trading_authority": false,
+  "alpha_vantage_allowed": false,
+  "external_requests": 0,
+  "web_calls_per_security": false
+}
