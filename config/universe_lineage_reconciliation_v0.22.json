@@ -1,0 +1,55 @@
+{
+  "schema": "WELT_SWING_UNIVERSE_LINEAGE_RECONCILIATION_CONFIG_V0_22",
+  "run_id": "WS-LONG-UNIVERSE-LINEAGE-2026-08-26-v0.22",
+  "output_dir": "output_universe_lineage_v0_22",
+  "inputs": {
+    "phase2_manifest": "universe/phase2_completion_manifest_v0.3.json",
+    "full_price_manifest": "universe/full_price_universe_3663_manifest.json",
+    "full_price_universe": "universe/full_price_universe_3663.csv",
+    "v014_full_eligibility": "output_instrument_resolution_v0_14/eligibility_after_instrument_v0.14.csv",
+    "v014_strict_candidates": "output_instrument_resolution_v0_14/strict_u3k_candidate_after_instrument_v0.14.csv",
+    "v015_manual_queue": "output_instrument_resolution_v0_15/instrument_manual_review_queue_v0.15.csv",
+    "v016_research_partial": "output_research_partial_v0_16/research_partial_universe_v0.16.csv",
+    "v016_coverage": "output_research_partial_v0_16/coverage_by_segment_v0.16.csv",
+    "v016_summary": "output_research_partial_v0_16/summary_v0.16.json",
+    "v016_manifest": "output_research_partial_v0_16/snapshot_manifest_v0.16.json",
+    "v021_summary": "output_p0_lane_shadow_validation_v0_21/summary_v0.21.json"
+  },
+  "expected_counts": {
+    "source_superset_rows": 3664,
+    "active_source_rows": 3663,
+    "full_eligibility_rows": 3657,
+    "strict_rows": 2037,
+    "unresolved_rows": 650,
+    "other_non_strict_rows": 970,
+    "active_absent_from_full_eligibility": 6,
+    "research_partial_rows": 2037,
+    "eu_active_rows": 600,
+    "eu_strict_rows": 0,
+    "eu_unresolved_rows": 365,
+    "eu_other_non_strict_rows": 235,
+    "us_active_rows": 1506,
+    "us_full_eligibility_rows": 1505,
+    "us_strict_rows": 1332,
+    "us_unresolved_rows": 0
+  },
+  "expected_sha256": {
+    "full_price_universe": "74488d6c7e23cf86daa2c2c64386d4e973130eda232d358a42d0c61802212044",
+    "v014_full_eligibility": "a352ff219bad1358e2102d6a80ab55975f039a5025a7aebcfd416202ec8f4d24",
+    "v014_strict_candidates": "9b8645b936d3851faeffda6a85eb372174a79da48eb7460e61668b9790a14be4",
+    "v015_manual_queue": "ff0030b0ed8f2cde7814550755026b3c03dcb6e470b0ed252dcaffbf0a781a82",
+    "v016_research_partial": "ee7b2de380f44a0778f23b925bf6df31060700dad0298ee55489813b47d68ee6",
+    "v016_coverage": "435a41123d72991d614c2ad9633d10dfb439c6b8d209a4010ae206636b1ca2e9"
+  },
+  "governance": {
+    "offline_only": true,
+    "external_requests": 0,
+    "alpha_vantage_allowed": false,
+    "price_downloads_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_run_allowed": false,
+    "productive_trading_authority": false,
+    "canonical_mutation_allowed": false,
+    "reason_inference_without_evidence_allowed": false
+  }
+}
