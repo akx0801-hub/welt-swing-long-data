@@ -1,0 +1,173 @@
+name: Welt-Swing Universe Lineage Reconciliation v0.22
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/universe_lineage_reconciliation_v0.22.json"
+
+permissions:
+  contents: write
+
+jobs:
+  universe_lineage_reconciliation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: |
+          python -m py_compile scripts/universe_lineage_reconciliation_v0_22.py
+          python scripts/universe_lineage_reconciliation_v0_22.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+
+          check_blob "universe/phase2_completion_manifest_v0.3.json" "ac1f4865e7f7b11327627b43945fd65b6f91e1ad"
+          check_blob "universe/full_price_universe_3663_manifest.json" "d6d7f3f9a0f2b456ffa8c014389d04980eaf15b0"
+          check_blob "universe/full_price_universe_3663.csv" "f155c06c26e0a552e9d5f555a3d95f05645ed4ec"
+          check_blob "output_instrument_resolution_v0_14/eligibility_after_instrument_v0.14.csv" "ae34a081a6e0dd6730f6bc604955b715a1dfdf62"
+          check_blob "output_instrument_resolution_v0_14/strict_u3k_candidate_after_instrument_v0.14.csv" "05761491a9571acb618c838c4a621a72b5a1f7fd"
+          check_blob "output_instrument_resolution_v0_15/instrument_manual_review_queue_v0.15.csv" "e9d9983ca00e0f4b30b8d519e17268641a0d0004"
+          check_blob "output_research_partial_v0_16/research_partial_universe_v0.16.csv" "c587dea52375e4b9f4fc73635dda11dc39d5b784"
+          check_blob "output_research_partial_v0_16/coverage_by_segment_v0.16.csv" "7dc0ccf84e2267eb119fc12937c067ab52c66696"
+          check_blob "output_research_partial_v0_16/summary_v0.16.json" "f9bf162397f7cfeed046e0dc88ada206213d5d25"
+          check_blob "output_research_partial_v0_16/snapshot_manifest_v0.16.json" "41816cf19e5872bfb439a0b535dc9bb018fed058"
+          check_blob "output_p0_lane_shadow_validation_v0_21/summary_v0.21.json" "22c2dc66917a14732683ac3014156ebc5ac50caf"
+
+      - name: Universe-Lineage und Coverage-Gate
+        run: |
+          python scripts/universe_lineage_reconciliation_v0_22.py \
+            --config config/universe_lineage_reconciliation_v0.22.json
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import pandas as pd
+          from pathlib import Path
+
+          out = Path("output_universe_lineage_v0_22")
+          s = json.loads((out/"summary_v0.22.json").read_text())
+          c = json.loads((out/"stage_checkpoint_v0.22.json").read_text())
+          m = json.loads((out/"manifest_v0.22.json").read_text())
+          seg = pd.read_csv(out/"universe_lineage_segment_reconciliation_v0.22.csv")
+          rows = pd.read_csv(out/"universe_lineage_row_reconciliation_v0.22.csv")
+          gaps = pd.read_csv(out/"universe_gap_classification_v0.22.csv")
+
+          assert s["run_status"] == "UNIVERSE_LINEAGE_RECONCILIATION_V0_22_COMPLETE"
+          assert s["source_superset_rows"] == 3664
+          assert s["active_source_rows"] == 3663
+          assert s["full_eligibility_rows_v0_14"] == 3657
+          assert s["research_partial_rows_v0_16"] == 2037
+          assert s["instrument_unresolved_rows_v0_15"] == 650
+          assert s["other_non_strict_rows"] == 970
+          assert s["active_absent_from_full_eligibility_rows"] == 6
+          assert s["segments_in_active_source"] == 14
+          assert s["segments_in_research_partial"] == 8
+          assert s["global_p0_coverage_gate"] == "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert s["lineage_accounting_complete"] is True
+          assert s["unattributed_gap_reason_rows"] == 976
+          assert s["p0_run"] is False
+          assert s["p0_lane_decisions_made"] is False
+          assert s["p0_survivor_rows"] == 0
+          assert s["sector_rs_performed"] is False
+          assert s["price_downloads_performed"] is False
+          assert s["external_requests"] == 0
+          assert s["alpha_vantage_allowed"] is False
+          assert s["productive_trading_authority"] is False
+
+          eu = s["eu_stoxx600"]
+          assert eu["active_source_rows"] == 600
+          assert eu["full_eligibility_rows"] == 600
+          assert eu["research_partial_strict_rows"] == 0
+          assert eu["instrument_unresolved_rows"] == 365
+          assert eu["other_non_strict_rows"] == 235
+          assert eu["active_absent_from_full_eligibility"] == 0
+
+          us = s["us_sp1500"]
+          assert us["active_source_rows"] == 1506
+          assert us["full_eligibility_rows"] == 1505
+          assert us["research_partial_strict_rows"] == 1332
+          assert us["instrument_unresolved_rows"] == 0
+          assert us["other_non_strict_rows"] == 173
+          assert us["active_absent_from_full_eligibility"] == 1
+
+          assert len(rows) == 3663
+          assert len(seg) == 14
+          assert seg["Lineage_Accounting_OK"].astype(str).str.lower().eq("true").all()
+          assert not (rows["Lineage_Class_v0_22"] == "LINEAGE_ERROR").any()
+          assert rows["Lineage_Class_v0_22"].value_counts().to_dict() == {
+              "INCLUDED_RESEARCH_PARTIAL_VERIFIED_STRICT": 2037,
+              "EXCLUDED_OTHER_NON_STRICT_REASON_NOT_CLASSIFIED_V0_22": 970,
+              "EXCLUDED_INSTRUMENT_TYPE_NOT_YET_STRICTLY_VERIFIED": 650,
+              "ABSENT_FROM_V0_14_FULL_ELIGIBILITY_REASON_NOT_CLASSIFIED_V0_22": 6,
+          }
+
+          assert c["status"] == "SUCCESS"
+          assert c["input_count"] == 3663
+          assert c["checked_count"] == 3663
+          assert c["pass_count"] == 3663
+          assert c["fail_count"] == 0
+          assert c["data_error_count"] == 0
+          assert c["quarantine_count"] == 0
+          assert c["coverage_gate_status"] == "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert c["next_stage"] == "UNIVERSE_GAP_ROOT_CAUSE_AUDIT_AND_REMEDIATION_PLAN"
+
+          required = {
+              "universe_lineage_row_reconciliation_v0.22.csv",
+              "universe_lineage_segment_reconciliation_v0.22.csv",
+              "universe_gap_classification_v0.22.csv",
+              "lineage_source_registry_v0.22.json",
+              "summary_v0.22.json",
+              "stage_checkpoint_v0.22.json",
+          }
+          assert required.issubset(set(m["files"]))
+          assert m["external_requests"] == 0
+          assert m["alpha_vantage_allowed"] is False
+
+          print("UNIVERSE_LINEAGE_RECONCILIATION_V0_22_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_universe_lineage_v0_22
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Reconcile universe lineage and coverage v0.22"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: universe-lineage-v0.22
+          path: output_universe_lineage_v0_22/
