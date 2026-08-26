@@ -1,0 +1,48 @@
+{
+  "schema": "WELT_SWING_UNIVERSE_LINEAGE_SOURCE_REGISTRY_V0_22",
+  "generated_utc": "2026-08-26T19:54:59.417413+00:00",
+  "stages": [
+    {
+      "stage": "PHASE2_SOURCE_SUPERSET",
+      "rows": 3664,
+      "segments": 14,
+      "status": "COMPLETE_SOURCE_SUPERSET",
+      "file": "universe/phase2_completion_manifest_v0.3.json"
+    },
+    {
+      "stage": "ACTIVE_FULL_PRICE_UNIVERSE",
+      "rows": 3663,
+      "segments": 14,
+      "status": "ACTIVE_SOURCE_UNIVERSE",
+      "file": "universe/full_price_universe_3663.csv"
+    },
+    {
+      "stage": "V0_14_FULL_ELIGIBILITY",
+      "rows": 3657,
+      "segments": 14,
+      "status": "FROZEN_HISTORICAL_ELIGIBILITY_INPUT",
+      "file": "output_instrument_resolution_v0_14/eligibility_after_instrument_v0.14.csv"
+    },
+    {
+      "stage": "V0_16_RESEARCH_PARTIAL_STRICT",
+      "rows": 2037,
+      "segments": 8,
+      "status": "RESEARCH_PARTIAL_SNAPSHOT_V0_16_FROZEN",
+      "file": "output_research_partial_v0_16/research_partial_universe_v0.16.csv"
+    },
+    {
+      "stage": "V0_21_P0_SHADOW_INPUT",
+      "rows": 2037,
+      "synchronized_rows": 2036,
+      "status": "P0_LANE_PARAMETER_SHADOW_VALIDATION_V0_21_COMPLETE_WITH_SECTOR_RS_BLOCK",
+      "file": "output_p0_lane_shadow_validation_v0_21/summary_v0.21.json"
+    }
+  ],
+  "lineage_conclusion": "The canonical source universe already contains Europe and the US. Europe is absent from the frozen 2,037-row research/P0 path because none of its 600 active rows was in the verified strict subset at v0.16; 365 were explicitly instrument-unresolved and 235 were other non-strict rows whose exact reason is not attributed by v0.22. US has 1,506 active source rows and 1,332 verified strict rows at v0.16; v0.21 has 2,036 synchronized rows globally because WS:US:WBS remains the one AsOf mismatch.",
+  "policy": [
+    "No source universe is mutated by v0.22.",
+    "No gap reason is inferred beyond frozen evidence.",
+    "OTHER_NON_STRICT remains reason-not-attributed until a dedicated root-cause audit.",
+    "No price download, Sector RS, P0 decision, threshold promotion or trading decision is performed."
+  ]
+}

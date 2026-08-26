@@ -1,0 +1,22 @@
+{
+  "schema": "WELT_SWING_STAGE_CHECKPOINT_V0_22",
+  "run_id": "WS-LONG-UNIVERSE-LINEAGE-2026-08-26-v0.22",
+  "stage_id": "UNIVERSE_LINEAGE_RECONCILIATION_AND_COVERAGE_GATE",
+  "stage_version": "v0.22",
+  "start": "2026-08-26T19:54:59.219725+00:00",
+  "end": "2026-08-26T19:54:59.432374+00:00",
+  "input_hash": "bbe75beef2dd729807dd42b6af3c43682ebb74bc2d6f67fae092ee1058aff29a",
+  "parameter_hash": "710e86bebeb024a8c6b0c7e776398f34a6c7b9ab3dafd84231d1d0248adc0887",
+  "output_hash": "a3778fcd87e1ff28ab747bbee54f4ea9419e1ec9640e11a49c9ab44c80dc2281",
+  "input_count": 3663,
+  "checked_count": 3663,
+  "pass_count": 3663,
+  "fail_count": 0,
+  "data_error_count": 0,
+  "quarantine_count": 0,
+  "status": "SUCCESS",
+  "failed_source": null,
+  "coverage_gate_status": "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT",
+  "research_partial_count": 2037,
+  "next_stage": "UNIVERSE_GAP_ROOT_CAUSE_AUDIT_AND_REMEDIATION_PLAN"
+}
