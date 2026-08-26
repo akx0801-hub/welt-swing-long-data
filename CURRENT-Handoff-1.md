@@ -1,187 +1,180 @@
 # WELT-SWING LONG DEV — CURRENT HANDOFF
 
-**Updated:** 2026-08-24 14:39 CEST  
+**Updated:** 2026-08-26 20:56 CEST  
 **Status:** DEV / RESEARCH / SHADOW — NOT PRODUCTIVE
 
-## 1. Authoritative specification
+## Authority
 
-Authoritative DEV master specification:
-
+Authoritative DEV master:
 `docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md`
 
-Secured original DOCX currently present in the repository:
+Welt-Swing v7.2 remains unchanged and solely authoritative for productive Swing decisions.
 
-`docs/spec/Welt-Swing-Long-DEV-v0.1-2026-08-23-1.docx`
+## Latest completed checkpoint — v0.21
 
-Specification version: **WELT-SWING LONG DEV v0.1**  
-Specification freeze date: **2026-08-23**
+Stage:
+`P0_LANE_PARAMETER_SHADOW_VALIDATION_AND_SECTOR_RS_PREP`
 
-Rules:
-- Read the master specification before continuing development.
-- Do not reconstruct the specification from memory when the source artifact is available.
-- Do not silently modify v0.1; material rule changes require a new spec version plus validation/promotion.
-- Repo implementation versions such as v0.8/v0.9/v0.10 are not prompt/specification versions.
-- Welt-Swing v7.2 remains unchanged and alone productive-authoritative for real Swing decisions until explicit later promotion.
-- `ALPHA_VANTAGE_ALLOWED = FALSE`.
+Current main result commit:
+`f60de5beaa5a801b6a74022fc9027e2620d98bfa`
 
-## 2. Current repository checkpoint
+Commit:
+`Validate P0 lane shadow components v0.21`
 
-Repository: `akx0801-hub/welt-swing-long-data`  
-Branch: `main`  
-Current HEAD: `0a73453a34a65f6fa5167b25d3c2a3e30dc615a4`  
-Commit: `Probe six primary-market reference sources v0.9`
+Trigger commit:
+`cbf40f8775fd13d5f3001de1e474e3d9cab92500`
 
-Latest completed technical checkpoint:
+GitHub Actions run:
+- workflow: `Welt-Swing P0 Lane Shadow Validation v0.21`
+- run id: `33000737232`
+- result: `success`
+- run attempt: 1
+- all execution and result-gate steps passed
+- outputs were committed and an artifact was uploaded
 
-**Primary-Market Bundle Probe v0.9**
-
-Authoritative v0.9 evidence:
-- `docs/validation/Instrument_Resolution_Primary_Bundle_v0.9.md`
-- `output_instrument_resolution_v0_9/summary_v0.9.json`
-- `output_instrument_resolution_v0_9/source_probe_status_v0.9.csv`
-- `output_instrument_resolution_v0_9/hkex_reference_matches_v0.9.csv`
-- `output_instrument_resolution_v0_9/krx_reference_matches_v0.9.csv`
-- `output_instrument_resolution_v0_9/discovered_bulk_links_v0.9.csv`
-
-## 3. Confirmed v0.9 result
+## Confirmed v0.21 result
 
 Run status:
+`P0_LANE_PARAMETER_SHADOW_VALIDATION_V0_21_COMPLETE_WITH_SECTOR_RS_BLOCK`
 
-`PRIMARY_MARKET_BUNDLE_PROBE_V0_9_COMPLETE`
+Confirmed:
+- input rows: 2,037
+- checked rows: 2,037
+- AsOf synchronized rows: 2,036
+- AsOf mismatch rows: 1
+- mismatch identity: Webster Bank `WS:US:WBS`
+- Home-Market-RS rows: 2,036
+- Lane-4 positive Home-Market-RS20 AND RS60 component rows: 706
+- shadow components: 15
+- lanes represented: 6
+- raw frozen sector metadata columns detected: 0
+- Sector-RS rows: 0
+- Sector-RS status: `RS_NOT_VERIFIED_NO_FROZEN_SECTOR_METADATA`
+- data errors: 0
+- quarantine: 0
+- P0 PASS decisions: 0
+- P0 FAIL decisions: 0
+- P0 survivors: 0
+- automated P0 run: false
+- automated P0 ready: false
+- numeric P0 pass thresholds: 0
+- strict U3K frozen: false
+- full-scan claim: false
+- external requests: 0
+- per-security web calls: false
+- Alpha Vantage allowed: false
+- canonical DEV master mutated: false
+- historical v0.20 artifacts mutated: false
 
-Frozen invariants preserved:
-- source manual rows from v0.8: **667**
-- remaining manual rows v0.9: **667**
-- strict candidates v0.8: **2,020**
-- strict candidates v0.9: **2,020**
-- decisions changed: **0**
-- strict freeze allowed: **false**
-- P0 run: **false**
-- productive trading authority: **false**
-- Alpha Vantage allowed: **false**
-- price downloads performed: **false**
-- FX downloads performed: **false**
-- per-security web calls: **false**
-- canonical master mutated: **false**
+The stage checkpoint status is `PARTIAL` only because Sector RS is still blocked by missing frozen sector metadata. This is an expected fail-closed research state, not a failed GitHub Actions execution.
 
-Request governance:
-- markets probed: **6**
-- external reference requests: **6**
-- configured maximum: **6**
-- request bound respected: **true**
+## v0.21 audit hashes
 
-Remaining review queue:
-- CA_TSX: **105**
-- EU_STOXX600: **365**
-- HK_HSI: **82**
-- KR_KOSPI200: **92**
-- MX_IPC: **6**
-- ZA_TOP40: **17**
-- total: **667**
+Input hash:
+`e2d41f6ff308c5df4535582ad6246c8960f0a84e18ec53891c8ac8165d11ec75`
 
-## 4. Source-by-source v0.9 evidence
+Parameter hash:
+`d8266cf7baa8a6f0c29897a2f7e6d1858286efea724062d13287fe33adac318c`
 
-### Hong Kong / HKEX — usable evidence acquired
+Output hash:
+`e27e547bc8a03712cd9ff649fbf6875a0cd8adca84865e9b9224bfddb293f45a`
 
-Official HKEX Full List of Securities:
-- HTTP 200
-- XLSX parsed successfully
-- reference rows: **17,825**
-- HSI target rows: **82**
-- matched rows: **82**
-- coverage: **100%**
+## Shadow component evidence
 
-Important classification boundary:
-- HKEX `Category = Equity` / `Sub-Category = Equity Securities (Main Board)` is not by itself sufficient to prove ordinary/common share, because HKEX officially defines equity securities as including both ordinary and preference shares.
-- Therefore v0.9 correctly made no PASS decision from this field alone.
+v0.21 separates:
+- `VERIFIED_TRUE`
+- `VERIFIED_FALSE`
+- `NOT_VERIFIED`
 
-### Korea / KRX — request route needs remediation
+The known Webster Bank AsOf mismatch is fail-closed for all dynamic Shadow observations.
 
-Official KRX Data Marketplace bulk POST:
-- target rows: **92**
-- HTTP status: **400**
-- parse not attempted
-- no KRX rows matched in v0.9
+Selected verified-true counts:
+- Close > EMA20: 933
+- Close > EMA50: 1,066
+- Close > SMA200: 1,284
+- EMA20 slope > 0: 937
+- EMA50 slope > 0: 1,201
+- R20 > 0: 1,098
+- R60 > 0: 1,210
+- Range5 < Range20: 2,002
+- TR mean 5 < TR mean 20: 1,554
+- Higher-Low-10 proxy: 1,310
+- Post-Impulse minimum held impulse close: 317
+- Post-Impulse latest > impulse close: 659
+- Home-Market-RS20 > 0: 1,018
+- Home-Market-RS60 > 0: 1,017
+- Home-Market-RS20 and RS60 > 0: 706
 
-The intended KRX base-information dataset remains relevant because KRX stock basic information exposes security-group and stock-kind fields such as `SECUGRP_NM` and `KIND_STKCERT_TP_NM`; the latter is the stock-kind field required for deterministic common/preferred classification once the official bulk route is successfully retrieved.
+These are SHADOW EVIDENCE ONLY. None of them is a lane PASS rule, P0 threshold, entry trigger, or productive trade signal.
 
-### Canada / TSX — official page reachable, classification evidence not yet materialised
+## Lane status
 
-- HTTP 200
-- HTML capability probe succeeded
-- official page contains a full-list download route, but v0.9 did not yet obtain a security-type field sufficient for strict common/ordinary classification.
+All six lanes remain unavailable for automated P0 decisions.
 
-### Europe / STOXX Europe 600 — runner TLS problem
+In particular, Lane 4 now has usable Home-Market-RS evidence for the synchronized coverage, but Sector RS remains blocked.
 
-- GitHub Actions request failed before content parsing
-- SSL certificate verification error
-- no classification inference made
-- official STOXX page still exposes component/reference-data sections, so the next route should remediate transport/access rather than weaken source governance.
+Sector metadata contract is prepared but not populated. It requires at least:
+- `WS_ID`
+- `Sector_Taxonomy`
+- `Sector_Code`
+- `Sector_Name`
+- `Source_Name`
+- `Source_Reference`
+- `Source_Version_or_AsOf`
+- `Mapping_Status`
 
-### Mexico / BMV — page reachable, issuer-level evidence only
+Prohibited remain:
+- per-security web lookup fanout
+- guessed sector mapping from company names
+- silent taxonomy mixing without crosswalk
+- unversioned sector labels
+- Alpha Vantage
 
-- HTTP 200
-- HTML probe succeeded
-- BMV issuer pages distinguish instruments/series and descriptions, including equity shares and certificate structures such as CPO, but v0.9 correctly did not infer strict eligibility from issuer membership alone.
+## Previous checkpoint — v0.20
 
-### South Africa / JSE — reference-data semantics found, live bulk file not yet acquired
+v0.20 remains frozen and unchanged.
 
-- HTTP 200
-- HTML probe succeeded
-- 21 candidate bulk/reference links discovered across MX/ZA
-- JSE reference-data documentation defines `InstrumentsEquity.csv` and instrument-type semantics; however a current free public bulk file sufficient for the 17 targets has not yet been materialised.
+Confirmed v0.20:
+- run status `P0_RELATIVE_STRENGTH_AUGMENTATION_V0_20_COMPLETE_WITH_ASOF_EXCEPTION`
+- input rows 2,037
+- synchronized rows 2,036
+- one AsOf exception `WS:US:WBS`
+- Home-Market-RS rows 2,036
+- positive 20d/60d Home-Market-RS component rows 706
+- Sector RS 0
+- P0 run false
+- survivors 0
+- numeric thresholds 0
 
-## 5. Why Strict U3K and P0 remain blocked
+## Next planned stage
 
-The master specification requires `Instrument_Type = UNKNOWN` to remain non-PASS in the Strict Universe.
+`P0_SECTOR_METADATA_BULK_SOURCE_PROBE_AND_SHADOW_RULE_TEST_DESIGN`
 
-Therefore:
-- no strict U3K freeze yet,
-- no complete global P0 claim,
-- no productive trade authority.
+Required direction:
+1. probe reproducible bulk sector-metadata sources with provenance;
+2. preserve deterministic `WS_ID` linkage and explicit taxonomy/version/as-of;
+3. fail closed on ambiguous or missing mappings;
+4. do not use per-security web fanout;
+5. keep Sector RS `RS_NOT_VERIFIED` until an auditable bulk source is accepted;
+6. continue Shadow-rule test design without promoting observed distributions or quantiles into P0 thresholds;
+7. keep productive trade authority false.
 
-The current strict candidate count remains **2,020** until deterministic evidence changes it.
+## Evidence files for restart
 
-## 6. Next DEV step — v0.10
+Primary v0.21 evidence:
+- `output_p0_lane_shadow_validation_v0_21/summary_v0.21.json`
+- `output_p0_lane_shadow_validation_v0_21/stage_checkpoint_v0.21.json`
+- `output_p0_lane_shadow_validation_v0_21/shadow_manifest_v0.21.json`
+- `output_p0_lane_shadow_validation_v0_21/p0_shadow_component_counts_v0.21.csv`
+- `output_p0_lane_shadow_validation_v0_21/p0_lane_shadow_validation_matrix_v0.21.csv`
+- `output_p0_lane_shadow_validation_v0_21/sector_metadata_inventory_v0.21.csv`
+- `output_p0_lane_shadow_validation_v0_21/sector_metadata_contract_v0.21.json`
+- `output_p0_lane_shadow_validation_v0_21/p0_lane_parameter_registry_v0.21.json`
 
-v0.10 should be a **bounded deterministic remediation/classification stage**, not a broad web search.
+## Result wording
 
-Priority order:
+Allowed:
+`bester verifizierter Kandidat innerhalb der tatsächlich geprüften Coverage`
 
-1. **KRX route remediation**
-   - acquire one official KOSPI stock-basic-information bulk payload using the correct browser/session/referer request pattern;
-   - capture `ISU_SRT_CD`, `SECUGRP_NM`, `KIND_STKCERT_TP_NM`;
-   - exact-match the 92 frozen KOSPI200 target codes;
-   - classify only rows whose official stock-kind field unambiguously means common/ordinary vs preferred/non-standard.
-
-2. **STOXX transport remediation**
-   - resolve GitHub-runner certificate/access problem for the official STOXX component/reference-data route;
-   - no third-party constituent substitution.
-
-3. **HKEX semantic refinement**
-   - retain the verified 82/82 match;
-   - seek an official security-type discriminator beyond generic `Equity`, or leave unresolved.
-
-4. **TMX/BMV/JSE bulk-source refinement**
-   - follow only official bulk/reference routes;
-   - no per-security loop where a bulk source is reasonably available;
-   - no name-based or index-membership-only PASS.
-
-v0.10 may change eligibility only where official security-specific fields with documented semantics are present. All other rows remain review/NOT_VERIFIED.
-
-## 7. Resume rule
-
-For a new chat/session:
-1. Read this `CURRENT-Handoff.md`.
-2. Read the authoritative master spec in `docs/spec/`.
-3. Read the newest repo summary/output.
-4. Confirm current `main` HEAD.
-5. Resume from the smallest valid next stage.
-
-Older handoffs are provenance only when superseded by a newer repo checkpoint.
-
-## 8. Productive boundary
-
-All repository v0.x work remains DEV / SHADOW.
-
-A DEV result does not authorize a real trade. Welt-Swing v7.2 remains the productive authority until explicit validated promotion.
+Forbidden:
+`weltweit bester Kandidat`
