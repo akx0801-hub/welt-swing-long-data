@@ -1,0 +1,40 @@
+{
+  "schema": "WELT_SWING_UNIVERSE_GAP_ROOT_CAUSE_AUDIT_CONFIG_V0_23",
+  "run_id": "WS-LONG-UNIVERSE-GAP-ROOT-CAUSE-2026-08-26-v0.23",
+  "output_dir": "output_universe_gap_root_cause_v0_23",
+  "inputs": {
+    "v022_summary": "output_universe_lineage_v0_22/summary_v0.22.json",
+    "v022_lineage_rows": "output_universe_lineage_v0_22/universe_lineage_row_reconciliation_v0.22.csv",
+    "v014_full_eligibility": "output_instrument_resolution_v0_14/eligibility_after_instrument_v0.14.csv",
+    "v015_manual_queue": "output_instrument_resolution_v0_15/instrument_manual_review_queue_v0.15.csv",
+    "v05_summary": "output_u3k_liquidity_fx_v0_5/summary_v0.5.json",
+    "non_ready_summary": "output_non_ready_remediation/summary_v0.2.json",
+    "listing_remediation_audit": "output_non_ready_remediation/listing_and_mapping_remediation_audit_v0.2.csv",
+    "targeted_refresh_summary": "output_targeted_refresh_6/summary_v0.3.json",
+    "targeted_refresh_state": "output_targeted_refresh_6/targeted_after_state_v0.3.csv"
+  },
+  "expected_counts": {
+    "v022_lineage_rows": 3663,
+    "pre_remediation_active_rows": 3663,
+    "historical_full_eligibility_rows": 3657,
+    "strict_rows": 2037,
+    "instrument_unresolved_rows": 650,
+    "other_non_strict_rows": 970,
+    "historical_inactive_exclusions": 6,
+    "targeted_refresh_rows": 6,
+    "eu_instrument_unresolved_rows": 365,
+    "eu_other_non_strict_rows": 235
+  },
+  "governance": {
+    "offline_only": true,
+    "external_requests": 0,
+    "alpha_vantage_allowed": false,
+    "price_downloads_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_run_allowed": false,
+    "productive_trading_authority": false,
+    "canonical_mutation_allowed": false,
+    "historical_mutation_allowed": false,
+    "rule_weakening_for_coverage_allowed": false
+  }
+}
