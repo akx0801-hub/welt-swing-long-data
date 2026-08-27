@@ -1,0 +1,48 @@
+{
+  "schema": "WELT_SWING_UNIVERSE_GAP_ROOT_CAUSE_MANIFEST_V0_23",
+  "generated_utc": "2026-08-27T21:37:32.494757+00:00",
+  "data_source": "FROZEN_REPOSITORY_EVIDENCE_ONLY",
+  "input_hash": "326d5d44dc267318f768205ec2c102b132af8486d7ecd4b598bffcc094bc94a9",
+  "parameter_hash": "11dde762f526390e39dee735e8f5bbc721315d7c672d3eb1be438aa9efabe6fe",
+  "evidence_output_hash": "4f127a12b8b22a49fad48df2a6b92cb84effaddd96c2ae308ac5657e1e373f6d",
+  "external_requests": 0,
+  "alpha_vantage_allowed": false,
+  "files": {
+    "historical_active_denominator_reconciliation_v0.23.csv": {
+      "sha256": "cf3d2f46e1e47b2e04ba790a675c061335200acf166433affd8c0d3725788f06",
+      "bytes": 3679
+    },
+    "other_non_strict_root_causes_v0.23.csv": {
+      "sha256": "b87f05d5fbe2f12638494b5eb6759ad170fd4aea81c5e7dc3b7f6dff7ae755d9",
+      "bytes": 353584
+    },
+    "other_non_strict_root_cause_counts_v0.23.csv": {
+      "sha256": "73d46a1dc3b1a596c52656152eee068f3ca3f56f55135621f0e4630c7566d36e",
+      "bytes": 4276
+    },
+    "instrument_unresolved_root_causes_v0.23.csv": {
+      "sha256": "9a1c7e4eb9d3494afa8fef1f2f8335c8fdb93dceac037fc700d6168649963aa0",
+      "bytes": 224104
+    },
+    "instrument_unresolved_reason_counts_v0.23.csv": {
+      "sha256": "83e2303ad598606fe7905e10b6cca3b1ac51c4b1862d2b22237d51e1b892b1cc",
+      "bytes": 507
+    },
+    "segment_root_cause_matrix_v0.23.csv": {
+      "sha256": "e5793b93be7a26dd96e2dfc36d8963173afb0281245c985d394f54d6e060dc55",
+      "bytes": 772
+    },
+    "remediation_plan_v0.23.csv": {
+      "sha256": "ac0856a332c03b04d0a5bceb07234d4b36d9e201ae6b237fea5b916a3ca444fa",
+      "bytes": 4257
+    },
+    "summary_v0.23.json": {
+      "sha256": "15d93b684b7886ffb3f1c9828593ae0dbac17d9d12ee2d52a4a94587b286380d",
+      "bytes": 1973
+    },
+    "stage_checkpoint_v0.23.json": {
+      "sha256": "c0cc4696cb7c08867e4b6f6e2f56afd64eb18a991bebcf40cf04ac77b8261be7",
+      "bytes": 937
+    }
+  }
+}

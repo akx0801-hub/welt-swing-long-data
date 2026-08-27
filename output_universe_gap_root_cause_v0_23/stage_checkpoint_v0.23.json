@@ -1,0 +1,22 @@
+{
+  "schema": "WELT_SWING_STAGE_CHECKPOINT_V0_23",
+  "run_id": "WS-LONG-UNIVERSE-GAP-ROOT-CAUSE-2026-08-26-v0.23",
+  "stage_id": "UNIVERSE_GAP_ROOT_CAUSE_AUDIT_AND_REMEDIATION_PLAN",
+  "stage_version": "v0.23",
+  "start": "2026-08-27T21:37:32.322017+00:00",
+  "end": "2026-08-27T21:37:32.494599+00:00",
+  "input_hash": "326d5d44dc267318f768205ec2c102b132af8486d7ecd4b598bffcc094bc94a9",
+  "parameter_hash": "11dde762f526390e39dee735e8f5bbc721315d7c672d3eb1be438aa9efabe6fe",
+  "output_hash": "4f127a12b8b22a49fad48df2a6b92cb84effaddd96c2ae308ac5657e1e373f6d",
+  "input_count": 3663,
+  "checked_count": 3663,
+  "pass_count": 3663,
+  "fail_count": 0,
+  "data_error_count": 0,
+  "quarantine_count": 0,
+  "status": "SUCCESS",
+  "failed_source": null,
+  "coverage_gate_status": "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT",
+  "unattributed_gap_reason_rows": 0,
+  "next_stage": "EU_INSTRUMENT_BULK_EVIDENCE_AND_GLOBAL_GAP_REMEDIATION_DESIGN"
+}

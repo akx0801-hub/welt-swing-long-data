@@ -1,0 +1,15 @@
+Primary_Universe_Index,Source_Lineage_Rows_v0_22,Strict_Rows,Instrument_Unresolved_Rows,Other_NonStrict_Rows,Historical_Inactive_Exclusions,Valid_Strict_or_Inactive_Exclusions,Data_Remediation_Candidate_Rows,Instrument_Evidence_Candidate_Rows,Root_Cause_Accounting_OK
+AU_ASX200,200,53,0,145,2,139,8,0,True
+BR_IBRX100,99,38,0,61,0,59,2,0,True
+CA_TSX,217,0,105,112,0,110,2,105,True
+CN_CSI300,300,295,0,5,0,3,2,0,True
+EU_STOXX600,600,0,365,235,0,227,8,365,True
+HK_HSI,93,0,82,11,0,11,0,82,True
+IN_NIFTY50,50,45,0,5,0,5,0,0,True
+JP_N225,225,207,0,18,0,18,0,0,True
+KR_KOSPI200,200,0,92,108,0,106,2,92,True
+MX_IPC,34,0,6,27,1,28,0,6,True
+NZ_NZX50,50,0,0,48,2,49,1,0,True
+TW_TW50,50,50,0,0,0,0,0,0,True
+US_SP1500,1506,1332,0,173,1,148,26,0,True
+ZA_TOP40,39,17,0,22,0,13,9,0,True
