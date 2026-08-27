@@ -1,0 +1,175 @@
+name: Welt-Swing Universe Gap Root Cause Audit v0.23
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/universe_gap_root_cause_audit_v0.23.json"
+
+permissions:
+  contents: write
+
+jobs:
+  universe_gap_root_cause_audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: |
+          python -m py_compile scripts/universe_gap_root_cause_audit_v0_23.py
+          python scripts/universe_gap_root_cause_audit_v0_23.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+
+          check_blob "output_universe_lineage_v0_22/summary_v0.22.json" "61c6c5cb5ef24fcdedb7f01399f63f9953630d86"
+          check_blob "output_universe_lineage_v0_22/universe_lineage_row_reconciliation_v0.22.csv" "c57214b7ca16b53dd04af9a2b206d754c3453540"
+          check_blob "output_instrument_resolution_v0_14/eligibility_after_instrument_v0.14.csv" "ae34a081a6e0dd6730f6bc604955b715a1dfdf62"
+          check_blob "output_instrument_resolution_v0_15/instrument_manual_review_queue_v0.15.csv" "e9d9983ca00e0f4b30b8d519e17268641a0d0004"
+          check_blob "output_u3k_liquidity_fx_v0_5/summary_v0.5.json" "cb828f08e6a384b5379bd8c69c94a2696d0f2a0a"
+          check_blob "output_non_ready_remediation/summary_v0.2.json" "d245031ede0fcc1da5a01c1dbc8ff7cbe5f9b780"
+          check_blob "output_non_ready_remediation/listing_and_mapping_remediation_audit_v0.2.csv" "f90078b1349fcb6eda0163e3091079f123c8b045"
+          check_blob "output_targeted_refresh_6/summary_v0.3.json" "f77f15a715011bc7bac134313d382a2fc154362f"
+          check_blob "output_targeted_refresh_6/targeted_after_state_v0.3.csv" "de0c7c4a2dc90bf9a65c780afdd72c26daa95397"
+
+      - name: Root-Cause-Audit ausführen
+        run: |
+          python scripts/universe_gap_root_cause_audit_v0_23.py \
+            --config config/universe_gap_root_cause_audit_v0.23.json
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path("output_universe_gap_root_cause_v0_23")
+          s = json.loads((out/"summary_v0.23.json").read_text(encoding="utf-8"))
+          c = json.loads((out/"stage_checkpoint_v0.23.json").read_text(encoding="utf-8"))
+          m = json.loads((out/"manifest_v0.23.json").read_text(encoding="utf-8"))
+          other = pd.read_csv(out/"other_non_strict_root_causes_v0.23.csv", keep_default_na=False)
+          unr = pd.read_csv(out/"instrument_unresolved_root_causes_v0.23.csv", keep_default_na=False)
+          hist = pd.read_csv(out/"historical_active_denominator_reconciliation_v0.23.csv", keep_default_na=False)
+          seg = pd.read_csv(out/"segment_root_cause_matrix_v0.23.csv", keep_default_na=False)
+          plan = pd.read_csv(out/"remediation_plan_v0.23.csv", keep_default_na=False)
+
+          assert s["run_status"] == "UNIVERSE_GAP_ROOT_CAUSE_AUDIT_V0_23_COMPLETE"
+          assert s["pre_remediation_source_active_rows"] == 3663
+          assert s["historical_eligibility_scope_rows"] == 3657
+          assert s["historical_inactive_exclusions_resolved"] == 6
+          assert s["historical_inactive_exclusions_exactly_match_v0_2_evidence"] is True
+          assert s["targeted_refresh_rows"] == 6
+          assert s["targeted_refresh_disjoint_from_historical_inactive_exclusions"] is True
+          assert s["strict_rows"] == 2037
+          assert s["instrument_unresolved_rows"] == 650
+          assert s["other_non_strict_rows"] == 970
+          assert s["other_non_strict_root_causes_attributed"] == 970
+          assert s["unattributed_gap_reason_rows_after_v0_23"] == 0
+          assert s["historical_eligibility_scope_strict_coverage_pct"] == 55.7014
+          assert s["eu_stoxx600"]["strict_rows"] == 0
+          assert s["eu_stoxx600"]["instrument_unresolved_rows"] == 365
+          assert s["eu_stoxx600"]["other_non_strict_rows"] == 235
+          assert s["global_p0_coverage_gate"] == "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert s["root_cause_audit_complete"] is True
+          assert s["p0_run"] is False
+          assert s["p0_lane_decisions_made"] is False
+          assert s["p0_survivor_rows"] == 0
+          assert s["sector_rs_performed"] is False
+          assert s["price_downloads_performed"] is False
+          assert s["external_requests"] == 0
+          assert s["alpha_vantage_allowed"] is False
+          assert s["productive_trading_authority"] is False
+          assert s["canonical_master_mutated"] is False
+          assert s["historical_artifacts_mutated"] is False
+
+          assert len(other) == 970
+          assert len(unr) == 650
+          assert len(hist) == 6
+          assert len(seg) == 14
+          assert len(plan) > 0
+          assert not other["Primary_Root_Cause_v0_23"].eq("UNEXPLAINED_STRICT_STATUS_MISMATCH").any()
+          assert other["All_Blockers_v0_23"].astype(str).str.len().gt(0).all()
+          assert unr["Root_Cause_v0_23"].eq("INSTRUMENT_TYPE_NOT_YET_STRICTLY_VERIFIED").all()
+          assert unr["Remediation_Class_v0_23"].eq("INSTRUMENT_BULK_EVIDENCE_REQUIRED").all()
+          assert hist["Remediation_Class_v0_23"].eq("VALID_HISTORICAL_INACTIVE_EXCLUSION_NO_REMEDIATION").all()
+          assert seg["Root_Cause_Accounting_OK"].astype(str).str.lower().eq("true").all()
+
+          expected_inactive = {
+              "WS:XASX:IFL", "WS:XASX:NSR", "WS:XMEX:ELEKTRA",
+              "WS:XNZE:ARV", "WS:XNZE:MNW", "WS:US:CWEN.A"
+          }
+          assert set(hist["WS_ID"].astype(str)) == expected_inactive
+
+          assert c["status"] == "SUCCESS"
+          assert c["input_count"] == 3663
+          assert c["checked_count"] == 3663
+          assert c["pass_count"] == 3663
+          assert c["fail_count"] == 0
+          assert c["data_error_count"] == 0
+          assert c["quarantine_count"] == 0
+          assert c["unattributed_gap_reason_rows"] == 0
+          assert c["coverage_gate_status"] == "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert c["next_stage"] == "EU_INSTRUMENT_BULK_EVIDENCE_AND_GLOBAL_GAP_REMEDIATION_DESIGN"
+
+          required = {
+              "historical_active_denominator_reconciliation_v0.23.csv",
+              "other_non_strict_root_causes_v0.23.csv",
+              "other_non_strict_root_cause_counts_v0.23.csv",
+              "instrument_unresolved_root_causes_v0.23.csv",
+              "instrument_unresolved_reason_counts_v0.23.csv",
+              "segment_root_cause_matrix_v0.23.csv",
+              "remediation_plan_v0.23.csv",
+              "summary_v0.23.json",
+              "stage_checkpoint_v0.23.json"
+          }
+          assert required.issubset(set(m["files"]))
+          assert m["external_requests"] == 0
+          assert m["alpha_vantage_allowed"] is False
+
+          print("UNIVERSE_GAP_ROOT_CAUSE_AUDIT_V0_23_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_universe_gap_root_cause_v0_23
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Audit universe gap root causes v0.23"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: universe-gap-root-cause-v0.23
+          path: output_universe_gap_root_cause_v0_23/
