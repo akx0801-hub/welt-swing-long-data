@@ -1,0 +1,173 @@
+name: Welt-Swing EU Instrument + Global Remediation Design v0.24
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/eu_instrument_bulk_evidence_global_remediation_design_v0.24.json"
+
+permissions:
+  contents: write
+
+jobs:
+  eu_instrument_global_remediation_design:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Offline-Selbsttest
+        run: |
+          python -m py_compile scripts/eu_instrument_bulk_evidence_global_remediation_design_v0_24.py
+          python scripts/eu_instrument_bulk_evidence_global_remediation_design_v0_24.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+
+          check_blob "output_universe_gap_root_cause_v0_23/summary_v0.23.json" "9bbabdf4742f0e695f25ca989c937e6a21468504"
+          check_blob "output_universe_gap_root_cause_v0_23/instrument_unresolved_root_causes_v0.23.csv" "60e73adb4a54772985100c9bb4e33d20ebe747f7"
+          check_blob "output_universe_gap_root_cause_v0_23/other_non_strict_root_causes_v0.23.csv" "8f67e7729a242c2044de8d062ff38f05123e279e"
+          check_blob "output_universe_gap_root_cause_v0_23/remediation_plan_v0.23.csv" "a6700aa52431612b4825c9a9e48f460923392445"
+          check_blob "output_instrument_resolution_v0_9/source_probe_status_v0.9.csv" "6bce38e418a29abd8a60696f08e8ddb8f42bd152"
+          check_blob "output_instrument_resolution_v0_9/hkex_reference_matches_v0.9.csv" "4fd24602837fc17d623ce8f8afefc7bbad963b15"
+          check_blob "output_qa_policy_promotion_v0_4/summary_v0.4.json" "9e9a9f2baf133d225ca98577b45abe3d55d65ec1"
+          check_blob "output_qa_policy_promotion_v0_4/residual_non_ready_v0.4.csv" "c648a8a5777786d4b3fefac1e44a9dd0d7cfed69"
+
+      - name: Design- und Reconciliation-Lauf
+        run: |
+          python scripts/eu_instrument_bulk_evidence_global_remediation_design_v0_24.py \
+            --config config/eu_instrument_bulk_evidence_global_remediation_design_v0.24.json
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path("output_eu_instrument_global_remediation_design_v0_24")
+          s = json.loads((out/"summary_v0.24.json").read_text(encoding="utf-8"))
+          c = json.loads((out/"stage_checkpoint_v0.24.json").read_text(encoding="utf-8"))
+          m = json.loads((out/"manifest_v0.24.json").read_text(encoding="utf-8"))
+          eu = pd.read_csv(out/"eu_unresolved_route_inventory_v0.24.csv", keep_default_na=False)
+          routes = pd.read_csv(out/"global_instrument_evidence_route_inventory_v0.24.csv", keep_default_na=False)
+          hk = pd.read_csv(out/"hkex_frozen_semantics_inventory_v0.24.csv", keep_default_na=False)
+          data = pd.read_csv(out/"data_remediation_reconciliation_v0.24.csv", keep_default_na=False)
+          priority = pd.read_csv(out/"global_remediation_priority_v0.24.csv", keep_default_na=False)
+
+          assert s["run_status"] == "EU_INSTRUMENT_BULK_EVIDENCE_GLOBAL_REMEDIATION_DESIGN_V0_24_COMPLETE"
+          assert s["instrument_unresolved_rows"] == 650
+          assert s["instrument_unresolved_by_segment"] == {
+              "CA_TSX": 105, "EU_STOXX600": 365, "HK_HSI": 82,
+              "KR_KOSPI200": 92, "MX_IPC": 6
+          }
+          assert s["eu_unresolved_rows"] == 365
+          assert s["eu_route_buckets_country_mic"] == len(eu)
+          assert s["eu_primary_mic_count"] > 0
+          assert s["eu_country_count"] > 0
+          assert s["eu_automatic_instrument_pass_rows"] == 0
+          assert s["hk_unresolved_rows"] == 82
+          assert s["hk_frozen_reference_exact_match_rows"] == 82
+          assert s["hk_frozen_reference_set_equal_current_unresolved"] is True
+          assert s["hk_semantics_buckets"] == len(hk)
+          assert s["hk_automatic_instrument_pass_rows"] == 0
+          assert s["data_remediation_rows_total"] == 60
+          assert s["data_history_rows"] == 55
+          assert s["data_history_exactly_match_qa_v0_4_residual_non_ready"] is True
+          assert s["data_or_fx_rows"] == 5
+          assert s["qa_v0_4_ready_after"] == 3602
+          assert s["qa_v0_4_residual_non_ready_rows"] == 55
+          assert s["instrument_decisions_changed"] == 0
+          assert s["eligibility_promotions_made"] == 0
+          assert s["global_p0_coverage_gate"] == "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert s["design_complete"] is True
+          assert s["p0_run"] is False
+          assert s["sector_rs_performed"] is False
+          assert s["price_downloads_performed"] is False
+          assert s["fx_downloads_performed"] is False
+          assert s["external_requests"] == 0
+          assert s["web_calls_per_security"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert s["productive_trading_authority"] is False
+          assert s["canonical_master_mutated"] is False
+          assert s["historical_artifacts_mutated"] is False
+          assert len(routes) == 5
+          assert routes["Rows"].astype(int).sum() == 650
+          assert not routes["Automatic_PASS_Allowed_In_v0_24"].astype(str).str.lower().eq("true").any()
+          assert data.shape[0] == 60
+          assert priority.shape[0] > 0
+
+          hkrow = routes.loc[routes["Primary_Universe_Index"].eq("HK_HSI")].iloc[0]
+          assert hkrow["Evidence_State_v0_24"] == "FROZEN_HKEX_BULK_REFERENCE_MATCHED_SEMANTICS_NOT_PROMOTED"
+          eurow = routes.loc[routes["Primary_Universe_Index"].eq("EU_STOXX600")].iloc[0]
+          assert eurow["Evidence_State_v0_24"] == "OFFICIAL_BULK_SECURITY_TYPE_ROUTE_REQUIRED"
+
+          assert c["status"] == "SUCCESS"
+          assert c["input_count"] == 710
+          assert c["checked_count"] == 710
+          assert c["pass_count"] == 710
+          assert c["fail_count"] == 0
+          assert c["data_error_count"] == 0
+          assert c["quarantine_count"] == 0
+          assert c["instrument_decisions_changed"] == 0
+          assert c["coverage_gate_status"] == "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert c["next_stage"] == "OFFICIAL_BULK_SECURITY_TYPE_PROBE_AND_DATA_GAP_RECHECK"
+
+          required = {
+              "eu_unresolved_route_inventory_v0.24.csv",
+              "global_instrument_evidence_route_inventory_v0.24.csv",
+              "hkex_frozen_semantics_inventory_v0.24.csv",
+              "data_remediation_reconciliation_v0.24.csv",
+              "data_remediation_counts_v0.24.csv",
+              "global_remediation_priority_v0.24.csv",
+              "bounded_probe_policy_v0.24.json",
+              "summary_v0.24.json",
+              "stage_checkpoint_v0.24.json",
+          }
+          assert required.issubset(set(m["files"]))
+          assert m["external_requests"] == 0
+          assert m["alpha_vantage_allowed"] is False
+          print("EU_INSTRUMENT_BULK_EVIDENCE_GLOBAL_REMEDIATION_DESIGN_V0_24_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_eu_instrument_global_remediation_design_v0_24
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Design EU instrument and global remediation v0.24"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: eu-instrument-global-remediation-design-v0.24
+          path: output_eu_instrument_global_remediation_design_v0_24/
