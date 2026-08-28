@@ -45,6 +45,42 @@ def host_allowed(url, allowed):
 def safe_name(s):
     return re.sub(r"[^A-Za-z0-9_.-]+", "_", s).strip("_")
 
+def looks_like_error_landing(final_url, text=""):
+    """
+    Fail-closed detection for official endpoints that return HTTP 200
+    while landing on a known error page (e.g. KRX /comm/error/503.html).
+    """
+    path = (urlparse(final_url).path or "").lower()
+    body = (text or "").lower()
+    path_error = bool(re.search(r"/(?:error|errors?)/(?:4\d\d|5\d\d)(?:\.[a-z0-9]+)?$", path))
+    known_krx_error = "/comm/error/503" in path
+    body_error = any(marker in body for marker in (
+        "503 service unavailable",
+        "service unavailable",
+        "temporarily unavailable",
+    ))
+    return path_error or known_krx_error or body_error
+
+def find_excel_header_row(path, required_names, max_scan_rows=30):
+    """
+    Find the first row whose normalized cell values contain all required column names.
+    This handles official workbooks that have title/preamble rows above the real header.
+    """
+    preview = pd.read_excel(
+        path,
+        sheet_name=0,
+        header=None,
+        nrows=max_scan_rows,
+        dtype=str,
+        keep_default_na=False,
+    )
+    required = {str(x).strip().lower() for x in required_names}
+    for idx, row in preview.iterrows():
+        values = {str(v).strip().lower() for v in row.tolist() if str(v).strip()}
+        if required.issubset(values):
+            return int(idx)
+    return None
+
 def markers(text):
     t = text.lower()
     return {
@@ -81,10 +117,33 @@ def candidate_links(base_url, html, allowed, limit):
 
 def self_test():
     assert host_allowed("https://www.londonstockexchange.com/reports", ["londonstockexchange.com"])
+    assert host_allowed(
+        "https://www.cashmarket.deutsche-boerse.com/cash-en/trading/Equities/list-of-tradable-shares",
+        ["deutsche-boerse.com"],
+    )
     assert not host_allowed("https://example.com/a", ["londonstockexchange.com"])
+
     mic_test = pd.DataFrame({"Primary_MIC": ["XAMS", "XAMS", "XLON"], "Rows": [19, 2, 82]})
     mic_counts = mic_test.groupby("Primary_MIC")["Rows"].sum().astype(int).to_dict()
     assert mic_counts == {"XAMS": 21, "XLON": 82}
+
+    assert looks_like_error_landing("https://data.krx.co.kr/comm/error/503.html")
+    assert not looks_like_error_landing("https://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd")
+
+    # Synthetic HKEX-style workbook preamble/header test.
+    tmp = Path("_v025_selftest_hkex.xlsx")
+    try:
+        pd.DataFrame([
+            ["List of Securities", "", "", ""],
+            ["Generated", "", "", ""],
+            ["Category", "Sub-Category", "ISIN", "Stock Code"],
+            ["Equity", "Equity Securities", "HK0000000001", "00001"],
+        ]).to_excel(tmp, index=False, header=False)
+        assert find_excel_header_row(tmp, ["Category", "Sub-Category", "ISIN"]) == 2
+    finally:
+        if tmp.exists():
+            tmp.unlink()
+
     print("OFFICIAL_BULK_SECURITY_TYPE_PROBE_DATA_GAP_RECHECK_V0_25_SELF_TEST_PASS")
 
 def probe(spec, cfg, raw_dir):
@@ -128,6 +187,14 @@ def probe(spec, cfg, raw_dir):
         if not host_allowed(r.url, allowed):
             raise RuntimeError(f"Redirect left approved official domains: {r.url}")
         r.raise_for_status()
+
+        # Some official services return HTTP 200 for an error landing page.
+        # Detect this fail-closed before declaring the probe usable.
+        ctype_probe = row["Content_Type"].lower()
+        probe_text = r.text if ("text/" in ctype_probe or "json" in ctype_probe) else ""
+        if looks_like_error_landing(r.url, probe_text):
+            raise RuntimeError(f"Official endpoint resolved to error landing page: {r.url}")
+
         row["Probe_Status"] = "HTTP_OK"
 
         ext = spec.get("raw_extension", ".bin")
@@ -163,18 +230,37 @@ def probe(spec, cfg, raw_dir):
         if spec.get("parser") == "HKEX_LIST_XLSX":
             xls = pd.ExcelFile(raw)
             sheet = xls.sheet_names[0]
-            df = pd.read_excel(raw, sheet_name=sheet, dtype=str, keep_default_na=False)
+
+            # HKEX workbook has title/preamble rows above the actual field header.
+            header_row = find_excel_header_row(raw, ["Category", "Sub-Category", "ISIN"])
+            row["Workbook_Header_Row_Zero_Based"] = "" if header_row is None else int(header_row)
+
+            if header_row is None:
+                df = pd.read_excel(raw, sheet_name=sheet, dtype=str, keep_default_na=False)
+                row["Materialization_Status_v0_25"] = "PARSED_BUT_HEADER_ROW_NOT_FOUND"
+            else:
+                df = pd.read_excel(
+                    raw,
+                    sheet_name=sheet,
+                    header=header_row,
+                    dtype=str,
+                    keep_default_na=False,
+                )
+
             cols = [str(c).strip() for c in df.columns]
             row["Workbook_Sheet"] = sheet
             row["Workbook_Rows"] = len(df)
             row["Workbook_Columns"] = ";".join(cols)
-            cat = next((c for c in df.columns if str(c).strip().lower() == "category"), None)
-            sub = next((c for c in df.columns if "sub-category" in str(c).strip().lower()), None)
-            isin = next((c for c in df.columns if str(c).strip().lower() == "isin"), None)
+
+            normalized = {str(c).strip().lower(): c for c in df.columns}
+            cat = normalized.get("category")
+            sub = normalized.get("sub-category")
+            isin = normalized.get("isin")
+
             if cat is not None and sub is not None and isin is not None:
                 row["Official_Semantics_Strength_v0_25"] = "BULK_IDENTIFIER_PLUS_CATEGORY_SUBCATEGORY"
                 row["Materialization_Status_v0_25"] = "PARSED_OFFICIAL_BULK_REFERENCE"
-            else:
+            elif header_row is not None:
                 row["Materialization_Status_v0_25"] = "PARSED_BUT_REQUIRED_FIELDS_NOT_FOUND"
     except Exception as e:
         row["Error"] = f"{type(e).__name__}: {e}"
