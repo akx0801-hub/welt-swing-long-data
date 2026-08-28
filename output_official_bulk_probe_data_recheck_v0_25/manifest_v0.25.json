@@ -1,28 +1,28 @@
 {
   "schema": "WELT_SWING_OFFICIAL_BULK_SECURITY_TYPE_PROBE_DATA_GAP_RECHECK_MANIFEST_V0_25",
-  "generated_utc": "2026-08-28T19:56:46.184638+00:00",
+  "generated_utc": "2026-08-28T21:03:49.002205+00:00",
   "input_hash": "320c4a677fc250eab41a6ee2924b7c8a1ba475942b3f5841ec5dc8551ff78dee",
-  "parameter_hash": "12647f0f6db4646f380bb5779524f202ec1fb2812f7c70eaca04a12c1b214088",
-  "evidence_output_hash": "d31b6a57ef71c221f0cf1246494984d7816d7be59267687838f933855f94b3f8",
+  "parameter_hash": "a88939c1b22a433f6c076e95045d2a665b80b5908cb9250eab3d65c8d3977117",
+  "evidence_output_hash": "16c72986ee67ad6eb7ce7e549bc4334da76ad724d9ef78d9f8b7eaa9177dcae2",
   "external_requests": 11,
   "web_calls_per_security": false,
   "alpha_vantage_allowed": false,
   "files": {
     "official_source_probe_status_v0.25.csv": {
-      "sha256": "5ea0a1abdece43cd3d12754046a45b3e23f2532dc0117eb0648f89b4e47dc01c",
-      "bytes": 5458
+      "sha256": "6865967f1ae126970625d5bf771d89dab741d162ae8aad801819cd8e5ae9489e",
+      "bytes": 5618
     },
     "official_candidate_links_v0.25.csv": {
-      "sha256": "68d9947bd63c4d351b6e192bb34739eb9a9bfddd69624c79c710edeaadbe95c6",
-      "bytes": 28151
+      "sha256": "f7b3f13c097794665e12f470343b6a90dfc177083669362e89e408f3c8578f5f",
+      "bytes": 35035
     },
     "eu_official_probe_route_coverage_v0.25.csv": {
       "sha256": "83243c27c622dab03cf40f2c45115cbebc3ce4e058a0b40419028061b468328d",
       "bytes": 5563
     },
     "global_instrument_probe_state_v0.25.csv": {
-      "sha256": "c63494049986099f38e3ca769643777bacd66da75b413db3c359bdc7bea42747",
-      "bytes": 3082
+      "sha256": "a37c0fa598dbb52f45915c01ca5b37d4f262bcfa68ec6d386ec4c336c8880bba",
+      "bytes": 3067
     },
     "data_gap_recheck_v0.25.csv": {
       "sha256": "c74d46b3320cf1a12edb7e438e828a3c4b7a26be9ebd182689b10dcb0395bbe7",
@@ -33,23 +33,23 @@
       "bytes": 1297
     },
     "source_materialization_followup_v0.25.csv": {
-      "sha256": "b27dfe05c2d3dabb7035f7225734566f50972355b31a37020b674897a2742a75",
-      "bytes": 1824
+      "sha256": "fbf6212f4b1a5f962d27226ff2b70b6713fd30c186c7e0440ec7907fc1bdd0db",
+      "bytes": 1809
     },
     "summary_v0.25.json": {
-      "sha256": "e01ffeccf6eca2c30785bc8444fe1bc9ed5b17424ad02ac2ac672ad33e532fb6",
+      "sha256": "92e65bb907330f9a936bb1544132943db422bba292e62a011803565ddca9b0ad",
       "bytes": 1704
     },
     "raw_official_probe/BMV_LISTED_COMPANIES.html": {
-      "sha256": "18630c443f30cde11a4f70e319269cc6db2b8578d5bb1650e7e6f99b3a1cc88c",
-      "bytes": 154391
+      "sha256": "bd903bdfe978b94c788148c4f83ecf3631598c59051ecc8c97eaf6b56b3610ec",
+      "bytes": 154392
     },
     "raw_official_probe/EU_EURONEXT_EQUITIES.html": {
       "sha256": "ffdb9575a2a00e46f0d8ad26ed48d60a82bc545d89afe9e33dbe2736aa12bdd7",
       "bytes": 425824
     },
     "raw_official_probe/EU_GPW_LISTED_COMPANIES.html": {
-      "sha256": "2034ab439205d62146fdd0a8a5ded1060f3e47bd64b81bc99faa2c30c85d8271",
+      "sha256": "38f10a7f3ac7fd5db34e88c0e0289cdf915b4e23abac77a504cf2ae3e1be029e",
       "bytes": 141958
     },
     "raw_official_probe/EU_LSE_REPORTS.html": {
@@ -57,16 +57,20 @@
       "bytes": 54995
     },
     "raw_official_probe/EU_NASDAQ_NORDIC_EQUITIES.html": {
-      "sha256": "3a3826af7a5a5f2353265b76e22e0fd4943e5b30f6d4000cf67c1861cffd147b",
-      "bytes": 170669
+      "sha256": "06d86ff843beb571cae9e04d249eb156f4ffac7a141d1ae9ea154c19a33da1d5",
+      "bytes": 170671
     },
     "raw_official_probe/EU_SIX_EQUITIES.html": {
       "sha256": "44c34ae57b4de3824a614fa43f54e553f08d66d800d1e859a27aade8449699aa",
       "bytes": 247555
     },
     "raw_official_probe/EU_VIENNA_COMPANIES.html": {
-      "sha256": "be35bb6725cc2eae3fb2a4a47f67ee6539efd09c3eff2604db4ee4d40afd7e74",
+      "sha256": "c8f21a2fe36f25986886bc0f17f89344ce4f0f662a0f2303b9a2ff5e38756beb",
       "bytes": 342485
+    },
+    "raw_official_probe/EU_XETRA_SHARES.html": {
+      "sha256": "2b61751b816b97d5a9f7416e26de58bdfddab1a9729c7896a2d140857fdeae2a",
+      "bytes": 191695
     },
     "raw_official_probe/HKEX_FULL_LIST.xlsx": {
       "sha256": "0ccda15ac73982573edb9d451adc3c0a6cec93362a008450eb4a771f8f3e45ff",
@@ -81,8 +85,8 @@
       "bytes": 69878
     },
     "stage_checkpoint_v0.25.json": {
-      "sha256": "5c5aca51cd846875479f3c8acd1969a27400be53e763496c5a13b54b0678e067",
-      "bytes": 1157
+      "sha256": "634897faa2131cb6b8e91abb7ce2358b4f9f51c5ec214f249d6c3d84314a1f6f",
+      "bytes": 1162
     }
   }
 }

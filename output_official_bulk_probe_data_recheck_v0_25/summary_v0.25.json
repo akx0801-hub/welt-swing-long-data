@@ -1,6 +1,6 @@
 {
   "schema": "WELT_SWING_OFFICIAL_BULK_SECURITY_TYPE_PROBE_DATA_GAP_RECHECK_V0_25",
-  "generated_utc": "2026-08-28T19:56:46.178627+00:00",
+  "generated_utc": "2026-08-28T21:03:48.998189+00:00",
   "run_status": "OFFICIAL_BULK_SECURITY_TYPE_PROBE_DATA_GAP_RECHECK_V0_25_COMPLETE_WITH_SOURCE_PROBE_ERRORS",
   "stage_status": "PARTIAL",
   "instrument_unresolved_rows": 650,
@@ -18,8 +18,8 @@
   "official_source_probe_count": 11,
   "official_source_http_ok_count": 10,
   "official_source_probe_error_count": 1,
-  "parsed_official_bulk_reference_count": 0,
-  "candidate_link_count": 204,
+  "parsed_official_bulk_reference_count": 1,
+  "candidate_link_count": 244,
   "data_gap_rows_rechecked": 60,
   "data_history_rows": 55,
   "data_or_fx_rows": 5,
