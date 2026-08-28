@@ -1,6 +1,6 @@
 {
   "schema": "WELT_SWING_OFFICIAL_BULK_SECURITY_TYPE_PROBE_DATA_GAP_RECHECK_CONFIG_V0_25",
-  "run_id": "WS-LONG-OFFICIAL-BULK-PROBE-DATA-RECHECK-2026-08-28-v0.25-r2",
+  "run_id": "WS-LONG-OFFICIAL-BULK-PROBE-DATA-RECHECK-2026-08-28-v0.25-r3",
   "output_dir": "output_official_bulk_probe_data_recheck_v0_25",
   "inputs": {
     "v024_summary": "output_eu_instrument_global_remediation_design_v0_24/summary_v0.24.json",
@@ -45,7 +45,9 @@
       "hkex.com.hk",
       "tsx.com",
       "data.krx.co.kr",
-      "bmv.com.mx"
+      "bmv.com.mx",
+      "deutsche-boerse.com",
+      "cashmarket.deutsche-boerse.com"
     ],
     "timeout_seconds": 25,
     "candidate_link_limit_per_source": 40,
@@ -188,5 +190,5 @@
     "historical_mutation_allowed": false,
     "rule_weakening_for_coverage_allowed": false
   },
-  "revision": "r2_xams_multi_country_mic_aggregation_fix"
+  "revision": "r3_xetra_redirect_hkex_header_krx_error_landing_fix"
 }
