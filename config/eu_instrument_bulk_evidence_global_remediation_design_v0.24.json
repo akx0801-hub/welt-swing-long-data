@@ -1,0 +1,47 @@
+{
+  "schema": "WELT_SWING_EU_INSTRUMENT_BULK_EVIDENCE_GLOBAL_REMEDIATION_DESIGN_CONFIG_V0_24",
+  "run_id": "WS-LONG-EU-INSTRUMENT-GLOBAL-REMEDIATION-DESIGN-2026-08-28-v0.24",
+  "output_dir": "output_eu_instrument_global_remediation_design_v0_24",
+  "inputs": {
+    "v023_summary": "output_universe_gap_root_cause_v0_23/summary_v0.23.json",
+    "v023_instrument_unresolved": "output_universe_gap_root_cause_v0_23/instrument_unresolved_root_causes_v0.23.csv",
+    "v023_other_non_strict": "output_universe_gap_root_cause_v0_23/other_non_strict_root_causes_v0.23.csv",
+    "v023_remediation_plan": "output_universe_gap_root_cause_v0_23/remediation_plan_v0.23.csv",
+    "v09_source_probe_status": "output_instrument_resolution_v0_9/source_probe_status_v0.9.csv",
+    "v09_hkex_matches": "output_instrument_resolution_v0_9/hkex_reference_matches_v0.9.csv",
+    "v04_qa_summary": "output_qa_policy_promotion_v0_4/summary_v0.4.json",
+    "v04_residual_non_ready": "output_qa_policy_promotion_v0_4/residual_non_ready_v0.4.csv"
+  },
+  "expected_counts": {
+    "instrument_unresolved_rows": 650,
+    "instrument_unresolved_by_segment": {
+      "CA_TSX": 105,
+      "EU_STOXX600": 365,
+      "HK_HSI": 82,
+      "KR_KOSPI200": 92,
+      "MX_IPC": 6
+    },
+    "other_non_strict_rows": 970,
+    "data_remediation_rows_total": 60,
+    "data_history_rows": 55,
+    "data_or_fx_rows": 5,
+    "residual_non_ready_rows_v0_4": 55,
+    "qa_ready_after": 3602
+  },
+  "governance": {
+    "offline_only": true,
+    "external_requests": 0,
+    "alpha_vantage_allowed": false,
+    "per_security_web_fanout_allowed": false,
+    "price_downloads_allowed": false,
+    "fx_downloads_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_run_allowed": false,
+    "instrument_decision_changes_allowed": false,
+    "eligibility_promotions_allowed": false,
+    "productive_trading_authority": false,
+    "canonical_mutation_allowed": false,
+    "historical_mutation_allowed": false,
+    "rule_weakening_for_coverage_allowed": false
+  }
+}
