@@ -1,0 +1,137 @@
+name: Welt-Swing Official Bulk Probe + Data Recheck v0.25
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/official_bulk_security_type_probe_data_gap_recheck_v0.25.json"
+
+permissions:
+  contents: write
+
+jobs:
+  official_bulk_probe_data_recheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install requests openpyxl
+
+      - name: Selbsttest
+        run: |
+          python -m py_compile scripts/official_bulk_security_type_probe_data_gap_recheck_v0_25.py
+          python scripts/official_bulk_security_type_probe_data_gap_recheck_v0_25.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+          check_blob "output_eu_instrument_global_remediation_design_v0_24/summary_v0.24.json" "7eaf7e0444e24c72727ad4bf9f44e90398c7efbf"
+          check_blob "output_eu_instrument_global_remediation_design_v0_24/stage_checkpoint_v0.24.json" "4d8cfea4ac7b665a055647529304cdd699de3732"
+          check_blob "output_eu_instrument_global_remediation_design_v0_24/global_instrument_evidence_route_inventory_v0.24.csv" "16893c1487e658d18cb701a61427753b6fa858d7"
+          check_blob "output_eu_instrument_global_remediation_design_v0_24/eu_unresolved_route_inventory_v0.24.csv" "b0009ad005e634373a687f18830fd4ed6ef2b471"
+          check_blob "output_eu_instrument_global_remediation_design_v0_24/data_remediation_reconciliation_v0.24.csv" "6b3b48279ce6b68e8a2e752d3711743f666da9c8"
+          check_blob "output_eu_instrument_global_remediation_design_v0_24/bounded_probe_policy_v0.24.json" "92e2680573f2dd01a6403fc07b4ef631a4c7bce0"
+          check_blob "output_universe_gap_root_cause_v0_23/instrument_unresolved_root_causes_v0.23.csv" "60e73adb4a54772985100c9bb4e33d20ebe747f7"
+
+      - name: Official-Bulk-Probe und Data-Gap-Recheck
+        run: |
+          python scripts/official_bulk_security_type_probe_data_gap_recheck_v0_25.py \
+            --config config/official_bulk_security_type_probe_data_gap_recheck_v0.25.json
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+          out=Path("output_official_bulk_probe_data_recheck_v0_25")
+          s=json.loads((out/"summary_v0.25.json").read_text())
+          c=json.loads((out/"stage_checkpoint_v0.25.json").read_text())
+          m=json.loads((out/"manifest_v0.25.json").read_text())
+          p=pd.read_csv(out/"official_source_probe_status_v0.25.csv",keep_default_na=False)
+          eu=pd.read_csv(out/"eu_official_probe_route_coverage_v0.25.csv",keep_default_na=False)
+          gs=pd.read_csv(out/"global_instrument_probe_state_v0.25.csv",keep_default_na=False)
+          d=pd.read_csv(out/"data_gap_recheck_v0.25.csv",keep_default_na=False)
+
+          assert s["instrument_unresolved_rows"]==650
+          assert s["eu_unresolved_rows"]==365 and s["eu_route_buckets"]==18
+          assert s["eu_configured_probe_route_rows"]==348
+          assert s["eu_unconfigured_probe_route_rows"]==17
+          assert s["official_source_probe_count"]==11
+          assert s["official_source_http_ok_count"]+s["official_source_probe_error_count"]==11
+          assert s["data_gap_rows_rechecked"]==60 and s["data_history_rows"]==55 and s["data_or_fx_rows"]==5
+          assert s["instrument_decisions_changed"]==0 and s["eligibility_promotions_made"]==0
+          assert s["p0_run"] is False and s["sector_rs_performed"] is False
+          assert s["price_downloads_performed"] is False and s["fx_downloads_performed"] is False
+          assert s["external_requests"]==11 and s["web_calls_per_security"] is False
+          assert s["alpha_vantage_allowed"] is False and s["productive_trading_authority"] is False
+          assert s["canonical_master_mutated"] is False and s["historical_artifacts_mutated"] is False
+          assert s["coverage_gate_status"]=="BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert s["next_stage"]=="OFFICIAL_SOURCE_MATERIALIZATION_AND_DATA_GAP_REPAIR"
+
+          assert len(p)==11
+          assert len(eu)==18 and eu["Rows"].astype(int).sum()==365
+          assert len(gs)==5 and gs["Rows"].astype(int).sum()==650
+          assert len(d)==60
+          assert not d["Automatic_Eligibility_Promotion_v0_25"].astype(str).str.lower().eq("true").any()
+          assert not gs["Automatic_PASS_Allowed_v0_25"].astype(str).str.lower().eq("true").any()
+
+          assert c["status"] in {"SUCCESS","PARTIAL"}
+          assert c["input_count"]==710 and c["checked_count"]==710 and c["pass_count"]==710
+          assert c["fail_count"]==0 and c["data_error_count"]==0 and c["quarantine_count"]==0
+          assert c["source_probe_count"]==11
+          assert c["source_probe_http_ok_count"]+c["source_probe_error_count"]==11
+          assert c["external_requests"]==11 and c["web_calls_per_security"] is False
+          assert c["instrument_decisions_changed"]==0
+
+          required={
+            "official_source_probe_status_v0.25.csv","official_candidate_links_v0.25.csv",
+            "eu_official_probe_route_coverage_v0.25.csv","global_instrument_probe_state_v0.25.csv",
+            "data_gap_recheck_v0.25.csv","data_gap_recheck_counts_v0.25.csv",
+            "source_materialization_followup_v0.25.csv","summary_v0.25.json","stage_checkpoint_v0.25.json"
+          }
+          assert required.issubset(set(m["files"]))
+          assert m["external_requests"]==11 and m["web_calls_per_security"] is False and m["alpha_vantage_allowed"] is False
+          print("OFFICIAL_BULK_SECURITY_TYPE_PROBE_DATA_GAP_RECHECK_V0_25_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_official_bulk_probe_data_recheck_v0_25
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Probe official bulk sources and recheck data gaps v0.25"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-bulk-probe-data-recheck-v0.25
+          path: output_official_bulk_probe_data_recheck_v0_25/
