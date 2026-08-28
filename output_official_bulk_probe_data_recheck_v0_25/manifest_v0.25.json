@@ -1,0 +1,88 @@
+{
+  "schema": "WELT_SWING_OFFICIAL_BULK_SECURITY_TYPE_PROBE_DATA_GAP_RECHECK_MANIFEST_V0_25",
+  "generated_utc": "2026-08-28T19:56:46.184638+00:00",
+  "input_hash": "320c4a677fc250eab41a6ee2924b7c8a1ba475942b3f5841ec5dc8551ff78dee",
+  "parameter_hash": "12647f0f6db4646f380bb5779524f202ec1fb2812f7c70eaca04a12c1b214088",
+  "evidence_output_hash": "d31b6a57ef71c221f0cf1246494984d7816d7be59267687838f933855f94b3f8",
+  "external_requests": 11,
+  "web_calls_per_security": false,
+  "alpha_vantage_allowed": false,
+  "files": {
+    "official_source_probe_status_v0.25.csv": {
+      "sha256": "5ea0a1abdece43cd3d12754046a45b3e23f2532dc0117eb0648f89b4e47dc01c",
+      "bytes": 5458
+    },
+    "official_candidate_links_v0.25.csv": {
+      "sha256": "68d9947bd63c4d351b6e192bb34739eb9a9bfddd69624c79c710edeaadbe95c6",
+      "bytes": 28151
+    },
+    "eu_official_probe_route_coverage_v0.25.csv": {
+      "sha256": "83243c27c622dab03cf40f2c45115cbebc3ce4e058a0b40419028061b468328d",
+      "bytes": 5563
+    },
+    "global_instrument_probe_state_v0.25.csv": {
+      "sha256": "c63494049986099f38e3ca769643777bacd66da75b413db3c359bdc7bea42747",
+      "bytes": 3082
+    },
+    "data_gap_recheck_v0.25.csv": {
+      "sha256": "c74d46b3320cf1a12edb7e438e828a3c4b7a26be9ebd182689b10dcb0395bbe7",
+      "bytes": 43353
+    },
+    "data_gap_recheck_counts_v0.25.csv": {
+      "sha256": "d9b0dd9a15707efb1a80baa077043a7a46e0e25eef792294050ad7ad71cb6d19",
+      "bytes": 1297
+    },
+    "source_materialization_followup_v0.25.csv": {
+      "sha256": "b27dfe05c2d3dabb7035f7225734566f50972355b31a37020b674897a2742a75",
+      "bytes": 1824
+    },
+    "summary_v0.25.json": {
+      "sha256": "e01ffeccf6eca2c30785bc8444fe1bc9ed5b17424ad02ac2ac672ad33e532fb6",
+      "bytes": 1704
+    },
+    "raw_official_probe/BMV_LISTED_COMPANIES.html": {
+      "sha256": "18630c443f30cde11a4f70e319269cc6db2b8578d5bb1650e7e6f99b3a1cc88c",
+      "bytes": 154391
+    },
+    "raw_official_probe/EU_EURONEXT_EQUITIES.html": {
+      "sha256": "ffdb9575a2a00e46f0d8ad26ed48d60a82bc545d89afe9e33dbe2736aa12bdd7",
+      "bytes": 425824
+    },
+    "raw_official_probe/EU_GPW_LISTED_COMPANIES.html": {
+      "sha256": "2034ab439205d62146fdd0a8a5ded1060f3e47bd64b81bc99faa2c30c85d8271",
+      "bytes": 141958
+    },
+    "raw_official_probe/EU_LSE_REPORTS.html": {
+      "sha256": "c082660492d1bfb06ac164700d1187ed1d47dc1e940d356ff9f622546ef03d25",
+      "bytes": 54995
+    },
+    "raw_official_probe/EU_NASDAQ_NORDIC_EQUITIES.html": {
+      "sha256": "3a3826af7a5a5f2353265b76e22e0fd4943e5b30f6d4000cf67c1861cffd147b",
+      "bytes": 170669
+    },
+    "raw_official_probe/EU_SIX_EQUITIES.html": {
+      "sha256": "44c34ae57b4de3824a614fa43f54e553f08d66d800d1e859a27aade8449699aa",
+      "bytes": 247555
+    },
+    "raw_official_probe/EU_VIENNA_COMPANIES.html": {
+      "sha256": "be35bb6725cc2eae3fb2a4a47f67ee6539efd09c3eff2604db4ee4d40afd7e74",
+      "bytes": 342485
+    },
+    "raw_official_probe/HKEX_FULL_LIST.xlsx": {
+      "sha256": "0ccda15ac73982573edb9d451adc3c0a6cec93362a008450eb4a771f8f3e45ff",
+      "bytes": 1404395
+    },
+    "raw_official_probe/KRX_DATA_MARKETPLACE.html": {
+      "sha256": "1d3284269ff4b41565a06645df9a03f097e20a2d8f4d793a0c631b62f9a8a8de",
+      "bytes": 1679
+    },
+    "raw_official_probe/TMX_LISTED_DIRECTORY.html": {
+      "sha256": "eae1b2aa86c70a01207b4f26ac710c7fdd583b70494f05afa2eb601250a51da6",
+      "bytes": 69878
+    },
+    "stage_checkpoint_v0.25.json": {
+      "sha256": "5c5aca51cd846875479f3c8acd1969a27400be53e763496c5a13b54b0678e067",
+      "bytes": 1157
+    }
+  }
+}
