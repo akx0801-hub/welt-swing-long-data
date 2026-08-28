@@ -1,0 +1,32 @@
+{
+  "schema": "WELT_SWING_BOUNDED_BULK_SOURCE_PROBE_POLICY_V0_24",
+  "generated_utc": "2026-08-28T18:47:20.443138+00:00",
+  "applies_to_next_stage_only": true,
+  "v0_24_external_requests": 0,
+  "alpha_vantage_allowed": false,
+  "per_security_web_fanout_allowed": false,
+  "allowed_source_classes": [
+    "official primary exchange bulk security reference",
+    "official index administrator bulk/reference data when security-type semantics are explicit",
+    "official security registry bulk reference data"
+  ],
+  "required_source_evidence": [
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "raw content SHA256",
+    "machine-readable schema inventory",
+    "deterministic match-key definition",
+    "security-type/class/CFI semantics from official source"
+  ],
+  "mapping_policy": "AMBIGUOUS_OR_UNMATCHED_FAIL_CLOSED",
+  "taxonomy_policy": "NO_SILENT_MIXING; source-specific security-type semantics must be documented before cross-source normalization",
+  "decision_policy": "NO INSTRUMENT PASS/FAIL FROM INDEX MEMBERSHIP ALONE UNLESS THE OFFICIAL ELIGIBILITY RULE ITSELF IS ACCEPTED AS SUFFICIENT COMMON/ORDINARY-SHARE EVIDENCE",
+  "request_budget_design": {
+    "EU_STOXX600": "bulk by official venue/source route; never 365 individual requests",
+    "HK_HSI": "prefer frozen v0.9 82/82 HKEX match evidence; probe semantics only if needed",
+    "CA_TSX": "bounded official bulk/reference semantics probe",
+    "KR_KOSPI200": "one/few bounded official bulk transport probes; never per-security",
+    "MX_IPC": "bounded official bulk/reference probe for six rows"
+  }
+}

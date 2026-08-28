@@ -1,0 +1,48 @@
+{
+  "schema": "WELT_SWING_EU_INSTRUMENT_BULK_EVIDENCE_GLOBAL_REMEDIATION_DESIGN_MANIFEST_V0_24",
+  "generated_utc": "2026-08-28T18:47:20.444817+00:00",
+  "data_source": "FROZEN_REPOSITORY_EVIDENCE_ONLY",
+  "input_hash": "bb28a14df158faa1bcd8ea3eb04660d425c83dd044a5c0a5080de1e8e10cecf0",
+  "parameter_hash": "2d157707088ece5b8f06762e93595bfe1ebb0ef9b4ffe65104c17ddeda84d2fe",
+  "evidence_output_hash": "788201c70c7dedc556b4095f29e02eca3696e68a3d5e6ead9550a1e3b2f26a55",
+  "external_requests": 0,
+  "alpha_vantage_allowed": false,
+  "files": {
+    "eu_unresolved_route_inventory_v0.24.csv": {
+      "sha256": "deb1d5e4519959f086291e5ec74256834bbcb7d225c50178650c85b7685cf6e0",
+      "bytes": 4474
+    },
+    "global_instrument_evidence_route_inventory_v0.24.csv": {
+      "sha256": "104f757a8abb6d8f354280ee96ba8e320dd38707759060c22796a3167fadc886",
+      "bytes": 2539
+    },
+    "hkex_frozen_semantics_inventory_v0.24.csv": {
+      "sha256": "08cf65e5563c631a437e7fb044ded2c93fae83ba21fc1e119395799cce6a0991",
+      "bytes": 294
+    },
+    "data_remediation_reconciliation_v0.24.csv": {
+      "sha256": "a53278dbb42a3e46cb42dc10d700e0292be54cd2a6e381b3f79344f2c60dca21",
+      "bytes": 36135
+    },
+    "data_remediation_counts_v0.24.csv": {
+      "sha256": "cf36337294b2ccbca2f96dc8adf3a64403a03cf56f2e36583e9c9600f1c6398c",
+      "bytes": 1932
+    },
+    "global_remediation_priority_v0.24.csv": {
+      "sha256": "8f1e96ddbac7bfd7ed599ee5beff27d5343595bccffce3958d38bc7de44de69c",
+      "bytes": 2884
+    },
+    "bounded_probe_policy_v0.24.json": {
+      "sha256": "91bfc1ab1cc11b61e5ff87f0b63bdb20e544934f26da88b247a61218996b4357",
+      "bytes": 1601
+    },
+    "summary_v0.24.json": {
+      "sha256": "73bbc97c88805039d0b3de60c67cd8728238c29f5bdef2c16a42ac6374a0ba68",
+      "bytes": 1822
+    },
+    "stage_checkpoint_v0.24.json": {
+      "sha256": "ddc071563a6f2f05c5b4979118b70155ac521d0587a6d028bb604b2608a4c0cc",
+      "bytes": 954
+    }
+  }
+}

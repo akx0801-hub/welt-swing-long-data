@@ -1,0 +1,22 @@
+{
+  "schema": "WELT_SWING_STAGE_CHECKPOINT_V0_24",
+  "run_id": "WS-LONG-EU-INSTRUMENT-GLOBAL-REMEDIATION-DESIGN-2026-08-28-v0.24",
+  "stage_id": "EU_INSTRUMENT_BULK_EVIDENCE_AND_GLOBAL_GAP_REMEDIATION_DESIGN",
+  "stage_version": "v0.24",
+  "start": "2026-08-28T18:47:20.397967+00:00",
+  "end": "2026-08-28T18:47:20.444685+00:00",
+  "input_hash": "bb28a14df158faa1bcd8ea3eb04660d425c83dd044a5c0a5080de1e8e10cecf0",
+  "parameter_hash": "2d157707088ece5b8f06762e93595bfe1ebb0ef9b4ffe65104c17ddeda84d2fe",
+  "output_hash": "788201c70c7dedc556b4095f29e02eca3696e68a3d5e6ead9550a1e3b2f26a55",
+  "input_count": 710,
+  "checked_count": 710,
+  "pass_count": 710,
+  "fail_count": 0,
+  "data_error_count": 0,
+  "quarantine_count": 0,
+  "status": "SUCCESS",
+  "failed_source": null,
+  "coverage_gate_status": "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT",
+  "instrument_decisions_changed": 0,
+  "next_stage": "OFFICIAL_BULK_SECURITY_TYPE_PROBE_AND_DATA_GAP_RECHECK"
+}
