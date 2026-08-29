@@ -1,0 +1,67 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION_MANIFEST_V0_29",
+  "generated_utc": "2026-08-29T13:46:24.344501+00:00",
+  "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+  "input_hash": "3a998b2a77994f35b7f27ddb0af0fc120a885c47ea65f8cdef6f3ddf9f449741",
+  "parameter_hash": "e1884d012c689821d9eb00c29cad87d589ac94143000073375e01b15b41fbfe3",
+  "core_output_hash": "6e13e9ef93e5b5cbe8d3d235d141a99c22f026a5147148edc56c840925f24cf8",
+  "official_requests": 10,
+  "candidate_link_follow_requests": 0,
+  "per_security_web_calls": false,
+  "alpha_vantage_allowed": false,
+  "universe_mutated": false,
+  "files": {
+    "output_current_master_missing_source_materialization_v0_29/official_source_probe_status_v0.29.csv": {
+      "sha256": "6ccdade8d7d07e8d914044047d8f9302c2d6c4a4700f5b33faace0205a108737",
+      "bytes": 3153
+    },
+    "output_current_master_missing_source_materialization_v0_29/official_candidate_links_v0.29.csv": {
+      "sha256": "a9e5b68f38804e8bd3b270cb689e92390f5a69d0cf7d96134b52c4572edaf5af",
+      "bytes": 64328
+    },
+    "output_current_master_missing_source_materialization_v0_29/b3_ibrx100_materialized_membership_v0.29.csv": {
+      "sha256": "daa78e6977b080c137580d31dd2e8e819ea8e4efd977f1e9b4c631e421fd7659",
+      "bytes": 93
+    },
+    "output_current_master_missing_source_materialization_v0_29/missing_segment_materialization_status_v0.29.csv": {
+      "sha256": "76d98284d761125ec8590b48bfd61f8f777aba7a61ea1e63d71019609700b64b",
+      "bytes": 1692
+    },
+    "output_current_master_missing_source_materialization_v0_29/imported_segment_provenance_carryforward_v0.29.csv": {
+      "sha256": "250f6c4fd4d9c72f0344beb09ee1fb0e9db9befb080c5d4c803a760ba5d43590",
+      "bytes": 2250
+    },
+    "output_current_master_missing_source_materialization_v0_29/summary_v0.29.json": {
+      "sha256": "1ab7b94f94df1d0ecd7f9a2df8d1259f6e4d6722d021c4df7b0b8484d3019481",
+      "bytes": 2124
+    },
+    "output_current_master_missing_source_materialization_v0_29/stage_checkpoint_v0.29.json": {
+      "sha256": "f3e606d8cd64bc1e35fa186bdafb1b22c3e0e31f0b16a3e70aa75a37ef5470ff",
+      "bytes": 1248
+    },
+    "WELT-SWING-CURRENT-Handoff-v0.29.md": {
+      "sha256": "225dc30ffb8d0bf421fc502769e468d0703242f37dd8b6657c37a093d1efc046",
+      "bytes": 3650
+    },
+    "WELT-SWING-CURRENT-Handoff-CURRENT.md": {
+      "sha256": "225dc30ffb8d0bf421fc502769e468d0703242f37dd8b6657c37a093d1efc046",
+      "bytes": 3650
+    },
+    "output_current_master_missing_source_materialization_v0_29/raw_official_source/BMV_SPECIAL_INFORMATION.html": {
+      "sha256": "ced0e7ad900b22c2682bd81226fdb69bf6ddf1ed34f53182d0875759dba03af3",
+      "bytes": 299825
+    },
+    "output_current_master_missing_source_materialization_v0_29/raw_official_source/KRX_KOSPI200_DATA_MARKETPLACE.html": {
+      "sha256": "cbdc25a8e7f241cf1deea9c9415e27b30b71770ed176544006f7585ba9837fab",
+      "bytes": 474
+    },
+    "output_current_master_missing_source_materialization_v0_29/raw_official_source/B3_IBRX100_DAY_PORTFOLIO.html": {
+      "sha256": "70d885f859b805383ff64a08bfd4ce6bb7f32b3a0465459bd0ef4d4c871b1a43",
+      "bytes": 2612
+    },
+    "output_current_master_missing_source_materialization_v0_29/raw_official_source/NZX_INDICES.html": {
+      "sha256": "78a288d0e75a10f4f13339a7968e0fc30bcda06fe657bf066b36860fddf96e8e",
+      "bytes": 487857
+    }
+  }
+}
