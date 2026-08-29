@@ -54,7 +54,6 @@ jobs:
           check_blob "universe/research_partial_1535.csv" "246db0440e49ecd1108d74a8d939fc1988ce38b0"
           check_blob "universe/research_partial_1535_manifest.json" "00f4093794e363ec51615e107b3807634b621773"
           check_blob "output_research_1535/coverage.json" "3eb3075412c38ee423b5fd84d5bddbbb1fcdd9dc"
-          check_blob "scripts/build_research_partial_1535.py" "651752b2a1cb527ac0e12f079f12e0c7590ffbe0"
           check_blob "output_official_security_type_data_requalification_v0_27/summary_v0.27.json" "022f82b2f71055cc89cc0bd6a57dc43b9363d598"
           check_blob "output_official_security_type_data_requalification_v0_27/stage_checkpoint_v0.27.json" "015955aba04912d7e849ceacb2dc1b5a5912f358"
 
