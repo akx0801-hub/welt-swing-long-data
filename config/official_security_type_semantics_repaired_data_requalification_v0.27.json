@@ -1,6 +1,6 @@
 {
   "schema": "WELT_SWING_OFFICIAL_SECURITY_TYPE_SEMANTICS_REPAIRED_DATA_REQUALIFICATION_CONFIG_V0_27",
-  "run_id": "WS-LONG-OFFICIAL-SECURITY-TYPE-DATA-REQUALIFICATION-2026-08-29-v0.27",
+  "run_id": "WS-LONG-OFFICIAL-SECURITY-TYPE-DATA-REQUALIFICATION-2026-08-29-v0.27-r1",
   "output_dir": "output_official_security_type_data_requalification_v0_27",
   "source_cache": "runtime_cache/full_3663_prices.sqlite",
   "inputs": {
@@ -44,5 +44,7 @@
     "canonical_master_mutation_allowed": false,
     "historical_artifact_mutation_allowed": false,
     "rule_weakening_for_coverage_allowed": false
-  }
+  },
+  "retry_revision": 1,
+  "retry_reason": "Fix v0.26 HKEX summary key names: matched_rows / isin_compatible_rows"
 }
