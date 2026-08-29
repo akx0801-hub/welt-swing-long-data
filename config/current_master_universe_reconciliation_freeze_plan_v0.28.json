@@ -1,6 +1,6 @@
 {
   "schema": "WELT_SWING_CURRENT_MASTER_UNIVERSE_RECONCILIATION_FREEZE_PLAN_CONFIG_V0_28",
-  "run_id": "WS-LONG-CURRENT-MASTER-UNIVERSE-RECONCILIATION-2026-08-29-v0.28",
+  "run_id": "WS-LONG-CURRENT-MASTER-UNIVERSE-RECONCILIATION-2026-08-29-v0.28-r2",
   "output_dir": "output_current_master_reconciliation_v0_28",
   "inputs": {
     "master_spec": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
@@ -28,5 +28,7 @@
     "p0_run_allowed": false,
     "productive_trading_authority": false,
     "strict_u3k_freeze_allowed": false
-  }
+  },
+  "revision": "r2_remove_unused_build_research_partial_1535_blob_gate",
+  "patch_reason": "First v0.28 run failed only because Frozen-Input-Gates pinned an obsolete blob SHA for scripts/build_research_partial_1535.py. That helper script is not consumed by v0.28, so its blob gate is removed; all actual stage inputs remain frozen."
 }
