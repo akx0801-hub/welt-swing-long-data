@@ -1,0 +1,70 @@
+{
+  "schema": "WELT_SWING_OFFICIAL_SECURITY_TYPE_SEMANTICS_REPAIRED_DATA_REQUALIFICATION_V0_27",
+  "generated_utc": "2026-08-29T07:17:26.789848+00:00",
+  "run_status": "OFFICIAL_SECURITY_TYPE_SEMANTICS_REPAIRED_DATA_REQUALIFICATION_V0_27_COMPLETE",
+  "stage_status": "PARTIAL",
+  "lineage_scope": "LEGACY_PRE_MASTER_RESEARCH_LINEAGE",
+  "current_master_canonical_universe_reconciled": false,
+  "strict_u3k_frozen": false,
+  "legacy_instrument_unresolved_rows": 650,
+  "instrument_unresolved_state_counts": {
+    "OFFICIAL_BULK_SECURITY_TYPE_EVIDENCE_STILL_MISSING": 459,
+    "KRX_OFFICIAL_BULK_SOURCE_BLOCKED_ERROR_503": 92,
+    "HKEX_IDENTITY_CATEGORY_MATERIALIZED_SUBTYPE_NOT_STRICTLY_PROVEN": 82,
+    "BME_OFFICIAL_BULK_ROUTE_NOT_CONFIGURED": 17
+  },
+  "hkex_semantics": {
+    "rows": 82,
+    "strict_pass_rows": 0,
+    "not_verified_rows": 82,
+    "instrument_decisions_changed": 0
+  },
+  "residual_data_quality": {
+    "rows": 55,
+    "quarantine_rows": 49,
+    "warmup_rows": 6,
+    "ready_rows": 0,
+    "further_blind_redownload_rows": 0,
+    "reason_counts": {
+      "QUARANTINE|INVALID_OHLC_OR_VOLUME": 23,
+      "QUARANTINE|SUSPICIOUS_RETURN_NEEDS_REPAIR": 26,
+      "WARMUP|INSUFFICIENT_HISTORY": 6
+    }
+  },
+  "data_or_fx_requalification": {
+    "rows": 5,
+    "cache_states": 3657,
+    "cache_ready": 3602,
+    "shadow_liquidity_gate_counts": {
+      "NOT_VERIFIED": 5
+    },
+    "shadow_pass_rows": 0,
+    "eligibility_promotions_made": 0
+  },
+  "instrument_decisions_changed": 0,
+  "eligibility_promotions_made": 0,
+  "historical_strict_eligibility_mutated": false,
+  "p0_run": false,
+  "p0_lane_decisions_made": false,
+  "p0_survivor_rows": 0,
+  "sector_rs_performed": false,
+  "alpha_vantage_allowed": false,
+  "productive_trading_authority": false,
+  "canonical_master_mutated": false,
+  "historical_artifacts_mutated": false,
+  "price_downloads_performed": false,
+  "candidate_link_network_fetches": 0,
+  "per_security_web_calls": false,
+  "coverage_gate_status": "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT",
+  "failed_source": "KRX_DATA_MARKETPLACE",
+  "next_stage": "CURRENT_MASTER_OFFICIAL_SOURCE_UNIVERSE_RECONCILIATION_AND_FREEZE_PLAN",
+  "required_result_wording": "bester verifizierter Kandidat innerhalb der tatsächlich geprüften Coverage",
+  "forbidden_result_wording": "weltweit bester Kandidat",
+  "notes": [
+    "v0.27 closes the useful requalification loop on the legacy/pre-master repair work without pretending it is current-master canonical coverage.",
+    "All 55 re-downloaded residual histories remain non-READY; repeated blind redownload is therefore prohibited.",
+    "Five Data/FX cases are recomputed in shadow using the promoted v0.26 cache and frozen v0.5 FX/methodology; no historical eligibility is mutated.",
+    "HKEX Category/Sub-Category evidence remains insufficient to prove strict Common/Ordinary Share subtype for each security.",
+    "The next primary development effort pivots to the current-master official-source clean-restart lineage and Strict-U3K freeze plan."
+  ]
+}

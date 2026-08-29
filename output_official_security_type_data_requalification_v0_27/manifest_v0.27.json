@@ -1,0 +1,49 @@
+{
+  "schema": "WELT_SWING_OFFICIAL_SECURITY_TYPE_SEMANTICS_REPAIRED_DATA_REQUALIFICATION_MANIFEST_V0_27",
+  "generated_utc": "2026-08-29T07:17:27.045940+00:00",
+  "lineage_scope": "LEGACY_PRE_MASTER_RESEARCH_LINEAGE",
+  "input_hash": "665e622f3be691b24755681a4b3839a80bc09e79664f60aaf580ecafc97109ae",
+  "parameter_hash": "80555d040909c0f71a641c2352391e385bd037d71f65111b8ddd4fb9f8e7850d",
+  "evidence_output_hash": "408067ff9101d79bd12d433678c8e0a7e48fdd62a7720d47a50d07adec2e5238",
+  "alpha_vantage_allowed": false,
+  "per_security_web_calls": false,
+  "price_downloads_performed": false,
+  "files": {
+    "data_or_fx_liquidity_recompute_counts_v0.27.csv": {
+      "sha256": "d9c5a257409ed2ad785927cb53a412ca3b64655a24a2b5cbee114eaece53e65f",
+      "bytes": 135
+    },
+    "data_or_fx_liquidity_recompute_v0.27.csv": {
+      "sha256": "dc0e7b33dfbf78ee86d4fca1eb3ee69fa87ab8ce9a9f43120061d000462e55a3",
+      "bytes": 4717
+    },
+    "hkex_security_type_semantics_v0.27.csv": {
+      "sha256": "e3799cd008580133b83d215b4f49836ae2d43cba1b66a6ce648f99c2bfdc6fe8",
+      "bytes": 42825
+    },
+    "legacy_requalification_impact_v0.27.csv": {
+      "sha256": "904f95877ed36dd5de6069f294256595a7f9d1a20f11b7b0ac1da5df97dd1c42",
+      "bytes": 172
+    },
+    "residual_data_quality_requalification_v0.27.csv": {
+      "sha256": "ce9e11b38079fcae6af979e493efc81691157694ea9517f2431ed3f8cb41fdbc",
+      "bytes": 14246
+    },
+    "residual_reason_counts_v0.27.csv": {
+      "sha256": "0177a7ce80b9c0384c2dc49da0c5e599e3f327b45278f929f988c3b5bb4bca99",
+      "bytes": 290
+    },
+    "stage_checkpoint_v0.27.json": {
+      "sha256": "0c7b242b073fc078c5afa92bbc9a9da912ab57b499870f8a590660a993c64f77",
+      "bytes": 1094
+    },
+    "summary_v0.27.json": {
+      "sha256": "4a0ce2759bef1ca4e1a076d982e7d331988cd8a35a9a52d1db8207eb86215190",
+      "bytes": 3031
+    },
+    "unresolved_instrument_blockers_v0.27.csv": {
+      "sha256": "80d1c46fb9aa697478ce0c0a3c7cee74209a92cae5576edfdc5e20546ac3caea",
+      "bytes": 276307
+    }
+  }
+}
