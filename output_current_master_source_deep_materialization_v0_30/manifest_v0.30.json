@@ -1,0 +1,58 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_OFFICIAL_SOURCE_DEEP_MATERIALIZATION_RETRY_MANIFEST_V0_30",
+  "generated_utc": "2026-08-29T14:13:42.082438+00:00",
+  "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+  "input_hash": "18b7f5cf488531510452c1e5b7c5cb19b52940c8c56281588c91b4a6d1e6ffb6",
+  "parameter_hash": "d650a40be696c189d6128ba2a53ae6c8b47b874487ecc9a9ad9152d89ff4009a",
+  "core_output_hash": "c61b4e0b4d65bf674ba9ef90a67e1ef21149c332c20fcab82b00e2b25df82197",
+  "external_requests_max": 3,
+  "per_security_web_calls": false,
+  "alpha_vantage_allowed": false,
+  "universe_mutated": false,
+  "files": {
+    "output_current_master_source_deep_materialization_v0_30/b3_ibrx100_membership_v0.30.csv": {
+      "sha256": "803a05f64d1df2647d53c3b2b80667070f3de3fb9bd67061bae1f4912a651973",
+      "bytes": 32828
+    },
+    "output_current_master_source_deep_materialization_v0_30/krx_kospi200_membership_v0.30.csv": {
+      "sha256": "c586007b495678314724b3c047b0856f64982445b5c754b216ade1ecae7cf9a6",
+      "bytes": 165
+    },
+    "output_current_master_source_deep_materialization_v0_30/bmv_ipc_final_rebalance_text_v0.30.txt": {
+      "sha256": "604a518cb682c8b65bc557d34e6a9ab75b243719e5f2aeb39de5aa24bbfeef1b",
+      "bytes": 1492
+    },
+    "output_current_master_source_deep_materialization_v0_30/source_deep_materialization_status_v0.30.csv": {
+      "sha256": "cff66f64628446af11cdf676d87db032865e28a24bfc05b3faa06f992d03fd9a",
+      "bytes": 585
+    },
+    "output_current_master_source_deep_materialization_v0_30/summary_v0.30.json": {
+      "sha256": "6dfa54ca15ddf80e96e82a58723acec6a949f428ac406f6119404a0035765866",
+      "bytes": 2883
+    },
+    "output_current_master_source_deep_materialization_v0_30/stage_checkpoint_v0.30.json": {
+      "sha256": "50c5fc45411389625cff7c1ed6e03dff623bb633da38928ca41aa3e7f814089f",
+      "bytes": 1137
+    },
+    "WELT-SWING-CURRENT-Handoff-v0.30.md": {
+      "sha256": "e9a22dfee9d3e83f325568e2743928916a88ccc97cca7a83d6d9b42e71d68c1c",
+      "bytes": 3395
+    },
+    "WELT-SWING-CURRENT-Handoff-CURRENT.md": {
+      "sha256": "e9a22dfee9d3e83f325568e2743928916a88ccc97cca7a83d6d9b42e71d68c1c",
+      "bytes": 3395
+    },
+    "output_current_master_source_deep_materialization_v0_30/b3_ibrx100_official_raw_v0.30.json": {
+      "sha256": "13a4720ae0abec4de03960e4cbbe3dd18cc859e40b6c0402ad66888579558c9e",
+      "bytes": 19631
+    },
+    "output_current_master_source_deep_materialization_v0_30/krx_kospi200_official_raw_v0.30.txt": {
+      "sha256": "377b375adcc04b5ba5998c978372401a4c6327ccc218e17e383f72861085cb95",
+      "bytes": 6
+    },
+    "output_current_master_source_deep_materialization_v0_30/bmv_ipc_final_rebalance_v0.30.pdf": {
+      "sha256": "9e2d54833aa53babe10054f8088c143e85783dde8c668fc4c4969c4193a48fa3",
+      "bytes": 137691
+    }
+  }
+}
