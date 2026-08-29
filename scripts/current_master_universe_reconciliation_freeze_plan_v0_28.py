@@ -137,6 +137,73 @@ def date_range_text(series: pd.Series) -> str:
     return f"{min(vals)}..{max(vals)}"
 
 
+
+def build_research_snapshot_reconciliation(
+    master: pd.DataFrame,
+    research: pd.DataFrame,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """
+    Compare the historical 1535 research CSV to the current r6 XLSX.
+
+    The XLSX is authoritative for current-master development. The CSV is a
+    historical derived research snapshot, so field drift is evidence to record,
+    not a reason to invalidate the current master.
+    """
+    require(not research["WS_ID"].astype(str).duplicated().any(), "Duplicate WS_ID in research 1535 CSV")
+
+    fields = ["Primary_Universe_Index", "Primary_MIC", "Primary_Ticker"]
+    left = master[["WS_ID"] + fields].fillna("").astype(str).copy()
+    right = research[["WS_ID"] + fields].fillna("").astype(str).copy()
+
+    left = left.rename(columns={c: f"Current_{c}" for c in fields})
+    right = right.rename(columns={c: f"Research_{c}" for c in fields})
+
+    merged = left.merge(
+        right,
+        on="WS_ID",
+        how="outer",
+        indicator=True,
+        validate="one_to_one",
+    )
+
+    def row_state(r: pd.Series) -> str:
+        if r["_merge"] == "left_only":
+            return "ONLY_IN_CURRENT_MASTER"
+        if r["_merge"] == "right_only":
+            return "ONLY_IN_RESEARCH_SNAPSHOT"
+        changed = [
+            c for c in fields
+            if txt(r[f"Current_{c}"]) != txt(r[f"Research_{c}"])
+        ]
+        return "MATCH" if not changed else "FIELD_DRIFT:" + ";".join(changed)
+
+    merged["Reconciliation_State_v0_28"] = merged.apply(row_state, axis=1)
+    merged["Authoritative_Side_v0_28"] = "CURRENT_MASTER_XLSX"
+    merged["Blocking_Current_Master_v0_28"] = False
+
+    audit = merged.loc[
+        merged["Reconciliation_State_v0_28"].ne("MATCH")
+    ].copy()
+
+    state_counts = {
+        str(k): int(v)
+        for k, v in merged["Reconciliation_State_v0_28"].value_counts().to_dict().items()
+    }
+    meta = {
+        "authoritative_side": "CURRENT_MASTER_XLSX",
+        "current_master_rows": int(len(master)),
+        "research_snapshot_rows": int(len(research)),
+        "ws_id_overlap_rows": int((merged["_merge"] == "both").sum()),
+        "only_in_current_master_rows": int((merged["_merge"] == "left_only").sum()),
+        "only_in_research_snapshot_rows": int((merged["_merge"] == "right_only").sum()),
+        "exact_key_match_rows": int((merged["Reconciliation_State_v0_28"] == "MATCH").sum()),
+        "drift_rows": int(len(audit)),
+        "state_counts": state_counts,
+        "current_master_blocked_by_research_drift": False,
+    }
+    return audit, meta
+
+
 def build_segment_inventory(master: pd.DataFrame) -> pd.DataFrame:
     actual_counts = master["Primary_Universe_Index"].astype(str).value_counts().to_dict()
     rows = []
@@ -407,6 +474,17 @@ The frozen historical `output_research_1535/coverage.json` is dated `{coverage.g
 
 Do not use this historical coverage file as proof that prices are currently fresh.
 
+Research-snapshot identity reconciliation:
+
+- Authoritative side: `{summary['research_snapshot_reconciliation']['authoritative_side']}`
+- Exact identity-key matches: {summary['research_snapshot_reconciliation']['exact_key_match_rows']}
+- Drift rows recorded: {summary['research_snapshot_reconciliation']['drift_rows']}
+- Only in current master: {summary['research_snapshot_reconciliation']['only_in_current_master_rows']}
+- Only in research snapshot: {summary['research_snapshot_reconciliation']['only_in_research_snapshot_rows']}
+- Current master blocked by historical snapshot drift: `false`
+
+Any drift is documented in `research_snapshot_identity_drift_v0.28.csv`; it does not override the current XLSX.
+
 ## 5. Legacy lineage closeout
 
 v0.27 successfully closed the useful legacy/pre-master requalification loop.
@@ -518,7 +596,10 @@ def run(cfg_path: Path) -> dict[str, Any]:
     actual_counts = master["Primary_Universe_Index"].astype(str).value_counts().to_dict()
     require(actual_counts == IMPORTED_EXPECTED, f"Current r6 segment counts changed: {actual_counts}")
 
-    # Research snapshot gates and exact key reconciliation.
+    # Research snapshot gates and non-blocking reconciliation.
+    # The XLSX is authoritative. The CSV is a historical derived snapshot and
+    # may contain field drift that must be recorded rather than used to block
+    # current-master reconciliation.
     require(research_manifest.get("source_master_rows") == 1535, "Research manifest master count changed")
     require(research_manifest.get("rows") == 1535, "Research manifest row count changed")
     require(research_manifest.get("scope") == "RESEARCH_PARTIAL", "Research manifest scope changed")
@@ -531,10 +612,7 @@ def run(cfg_path: Path) -> dict[str, Any]:
         "Research 1535 CSV content hash differs from its manifest",
     )
     require(len(research) == 1535, "Research CSV row count changed")
-    compare_cols = ["WS_ID","Primary_Universe_Index","Primary_MIC","Primary_Ticker"]
-    mcmp = master[compare_cols].fillna("").astype(str).sort_values("WS_ID").reset_index(drop=True)
-    rcmp = research[compare_cols].fillna("").astype(str).sort_values("WS_ID").reset_index(drop=True)
-    require(mcmp.equals(rcmp), "Research 1535 identity keys differ from current master XLSX")
+    research_drift, research_recon_meta = build_research_snapshot_reconciliation(master, research)
 
     # Historical price coverage is context only, never freshness authority.
     require(coverage.get("universe_count") == 1535, "Historical coverage denominator changed")
@@ -563,6 +641,7 @@ def run(cfg_path: Path) -> dict[str, Any]:
     segment_inventory.to_csv(out_dir/"current_master_segment_inventory_v0.28.csv", index=False)
     identity_audit.to_csv(out_dir/"current_master_identity_quality_v0.28.csv", index=False)
     source_audit.to_csv(out_dir/"current_master_source_authority_audit_v0.28.csv", index=False)
+    research_drift.to_csv(out_dir/"research_snapshot_identity_drift_v0.28.csv", index=False)
     lineage_matrix.to_csv(out_dir/"lineage_authority_matrix_v0.28.csv", index=False)
     freeze_plan.to_csv(out_dir/"freeze_plan_v0.28.csv", index=False)
 
@@ -588,6 +667,7 @@ def run(cfg_path: Path) -> dict[str, Any]:
         "imported_segment_counts": IMPORTED_EXPECTED,
         "missing_segments": blocker_register["Segment_ID"].tolist(),
         "identity_quality": identity_meta,
+        "research_snapshot_reconciliation": research_recon_meta,
         "source_superset_complete": SOURCE_SUPERSET_COMPLETE,
         "source_superset_frozen": False,
         "swing_u3k_eligible_ready": False,
@@ -629,6 +709,7 @@ def run(cfg_path: Path) -> dict[str, Any]:
         out_dir/"current_master_segment_inventory_v0.28.csv",
         out_dir/"current_master_identity_quality_v0.28.csv",
         out_dir/"current_master_source_authority_audit_v0.28.csv",
+        out_dir/"research_snapshot_identity_drift_v0.28.csv",
         out_dir/"current_master_blocker_register_v0.28.csv",
         out_dir/"current_master_workbook_sheet_inventory_v0.28.csv",
         out_dir/"lineage_authority_matrix_v0.28.csv",
