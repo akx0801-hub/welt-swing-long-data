@@ -1,0 +1,52 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_OFFICIAL_SOURCE_DEEP_MATERIALIZATION_RETRY_CONFIG_V0_30",
+  "run_id": "WS-LONG-CURRENT-MASTER-SOURCE-DEEP-MATERIALIZATION-2026-08-29-v0.30",
+  "output_dir": "output_current_master_source_deep_materialization_v0_30",
+  "inputs": {
+    "v029_summary": "output_current_master_missing_source_materialization_v0_29/summary_v0.29.json",
+    "v029_checkpoint": "output_current_master_missing_source_materialization_v0_29/stage_checkpoint_v0.29.json",
+    "v029_probe_status": "output_current_master_missing_source_materialization_v0_29/official_source_probe_status_v0.29.csv",
+    "v029_candidate_links": "output_current_master_missing_source_materialization_v0_29/official_candidate_links_v0.29.csv",
+    "current_handoff": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
+  },
+  "handoff": {
+    "versioned_path": "WELT-SWING-CURRENT-Handoff-v0.30.md",
+    "stable_path": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
+  },
+  "b3": {
+    "base_url": "https://sistemaswebb3-listados.b3.com.br/indexProxy/indexCall/GetPortfolioDay",
+    "allowed_domains": [
+      "b3.com.br"
+    ],
+    "page_size": 200,
+    "minimum_rows_for_membership_evidence": 80
+  },
+  "krx": {
+    "url": "https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd",
+    "allowed_domains": [
+      "krx.co.kr"
+    ],
+    "trade_date": "20260828",
+    "minimum_rows_for_membership_evidence": 180
+  },
+  "bmv": {
+    "allowed_domains": [
+      "bmv.com.mx"
+    ]
+  },
+  "governance": {
+    "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+    "official_sources_only": true,
+    "external_requests_max": 3,
+    "per_security_web_calls_allowed": false,
+    "universe_mutation_allowed": false,
+    "canonical_import_allowed": false,
+    "instrument_decision_changes_allowed": false,
+    "eligibility_promotions_allowed": false,
+    "price_downloads_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_run_allowed": false,
+    "alpha_vantage_allowed": false,
+    "productive_trading_authority": false
+  }
+}
