@@ -1,0 +1,80 @@
+{
+  "schema": "WELT_SWING_OFFICIAL_SOURCE_MATERIALIZATION_DATA_GAP_REPAIR_MANIFEST_V0_26",
+  "generated_utc": "2026-08-29T05:56:58.766488+00:00",
+  "lineage_scope": "LEGACY_PRE_MASTER_RESEARCH_LINEAGE",
+  "input_hash": "d527505dfa0479a1761c940173a80dfa4c8ee4eeb2cc9c347ec444c19acfc955",
+  "parameter_hash": "8547531deb6eb935fa44b51e57a4d993a645bdaf198e584a2066a5426f223b4e",
+  "evidence_output_hash": "77a215aa9396dbfe5ad685d5ad6f154214a897c01f29fb3cd0728d77386af3c3",
+  "alpha_vantage_allowed": false,
+  "per_security_web_calls": false,
+  "files": {
+    "data_history_after_price_counts_v0.26.csv": {
+      "sha256": "f0be68d4683d84979dce0418455dee9c1884b260dd049973c7b1c281141f8824",
+      "bytes": 2659
+    },
+    "data_history_after_state_v0.26.csv": {
+      "sha256": "140156f6d64a7bc004b1f9d9a9d17e4c84b93acdf2d992415e528789c6c298fa",
+      "bytes": 10359
+    },
+    "data_history_batch_log_v0.26.csv": {
+      "sha256": "6a51d5f2f6f1cd20c4a53ce85a6b4f7b7c234dbe72e313a839ea2dd0c47ca0d1",
+      "bytes": 616
+    },
+    "data_history_before_price_counts_v0.26.csv": {
+      "sha256": "984b301534cd5cbc3d2d57747f978296360a3a115a0a36aa04b2129801b7363b",
+      "bytes": 2659
+    },
+    "data_history_before_state_v0.26.csv": {
+      "sha256": "1eb63629832148536c28e4b1f2b7f5f8ac0def665249c0838ea6a9ddc730f8d1",
+      "bytes": 10003
+    },
+    "data_history_hard_failures_v0.26.csv": {
+      "sha256": "7a6743c4189790f6aa4df116cf31a54d874e8e34117db06cd3449c31f1eeb9f7",
+      "bytes": 191
+    },
+    "data_history_repair_queue_v0.26.csv": {
+      "sha256": "abdf065156c8413e78ea4b78ed94a83c62a9ebb7f6ddcfedb407aa922f0b7b5d",
+      "bytes": 40142
+    },
+    "data_history_repair_universe_v0.26.csv": {
+      "sha256": "8b7368060a732e0ccd5f77fbd8a2d550e168228c078d9370692d97765fd95cb4",
+      "bytes": 32937
+    },
+    "data_or_fx_recompute_queue_v0.26.csv": {
+      "sha256": "9ae449a6df24a78c52188bc9992bf53e817ba07de266ad32d5b2e300d6e89494",
+      "bytes": 3975
+    },
+    "hkex_current_category_counts_v0.26.csv": {
+      "sha256": "f824e40748cbd5793f5952ad32c26e0f1c07bdcdb8523d2d1a9def80d60dffeb",
+      "bytes": 184
+    },
+    "hkex_current_exact_match_audit_v0.26.csv": {
+      "sha256": "2aa6e06d92ea1b4d44cbd2bb70dbf424d6d6a9932243c54328f8ddbf180cf875",
+      "bytes": 21073
+    },
+    "official_candidate_link_priority_v0.26.csv": {
+      "sha256": "337f70064c8a9797e6238af75864e6ed11424c0b76fda6eaad38b747ca1e9679",
+      "bytes": 59271
+    },
+    "official_candidate_link_shortlist_v0.26.csv": {
+      "sha256": "93bbf70b578ca459de599bdd0d5bb5cd7fcf5faa67d94b41f67f2b6e06f9b87e",
+      "bytes": 20077
+    },
+    "official_source_materialization_state_v0.26.csv": {
+      "sha256": "e6d6d70a12f6dbd8ee927a0b13ea68010960dfa5ff293242396b82d400431008",
+      "bytes": 2667
+    },
+    "source_blockers_carried_forward_v0.26.csv": {
+      "sha256": "7d6e89c32ebc32fd6dcf85b47347f20059c71453317278c801340b1d64f75b70",
+      "bytes": 301
+    },
+    "stage_checkpoint_v0.26.json": {
+      "sha256": "f242d24b6fa15103e7d77c43e7476d5d8283878de1a08db986ed5c7106592897",
+      "bytes": 1111
+    },
+    "summary_v0.26.json": {
+      "sha256": "04201448e18faf0f6544edc1e97762b6bf3a0e357a7187ee040a07d25732df78",
+      "bytes": 3619
+    }
+  }
+}

@@ -1,0 +1,1 @@
+ws_id,yahoo_symbol,mapping_status,status,reason_code,unique_bars,valid_bars,repaired_rows,suspicious_returns,zero_volume_share,first_bar_date,last_bar_date,last_fetch_utc,batch_id,last_error

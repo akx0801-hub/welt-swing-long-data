@@ -1,0 +1,108 @@
+{
+  "schema": "WELT_SWING_OFFICIAL_SOURCE_MATERIALIZATION_DATA_GAP_REPAIR_V0_26",
+  "generated_utc": "2026-08-29T05:56:58.762090+00:00",
+  "run_status": "OFFICIAL_SOURCE_MATERIALIZATION_DATA_GAP_REPAIR_V0_26_COMPLETE",
+  "stage_status": "PARTIAL",
+  "lineage_scope": "LEGACY_PRE_MASTER_RESEARCH_LINEAGE",
+  "current_master_canonical_universe_reconciled": false,
+  "strict_u3k_frozen": false,
+  "legacy_instrument_unresolved_rows": 650,
+  "hkex": {
+    "header_row_zero_based": 2,
+    "reference_rows": 17910,
+    "matched_rows": 82,
+    "isin_compatible_rows": 82,
+    "category_buckets": 1,
+    "instrument_decisions_changed": 0,
+    "semantics_status": "MATERIALIZED_NOT_YET_ACCEPTED_AS_STRICT_COMMON_ORDINARY_SHARE_RULE"
+  },
+  "candidate_links": {
+    "frozen_rows": 244,
+    "positive_signal_rows": 238,
+    "top_score": 8,
+    "links_fetched_in_v0_26": 0
+  },
+  "source_blockers_carried_forward": {
+    "KR_KOSPI200_rows": 92,
+    "EU_XMAD_rows": 17
+  },
+  "data_repair": {
+    "target_rows": 55,
+    "data_or_fx_rows": 5,
+    "source_cache_states_before": 3657,
+    "source_cache_ready_before": 3602,
+    "source_cache_non_ready_before": 55,
+    "source_cache_price_rows_before": 1813378,
+    "work_cache_states_after": 3657,
+    "work_cache_ready_after": 3602,
+    "work_cache_price_rows_after": 1813500,
+    "target_status_counts": {
+      "QUARANTINE": 49,
+      "WARMUP": 6
+    },
+    "target_ready_rows_after": 0,
+    "target_unresolved_rows_after": 55,
+    "hard_failure_rows": 0,
+    "hard_failure_ws_ids": [],
+    "cache_promotion_recommended": true,
+    "run_result": {
+      "mode": "INITIAL",
+      "source": "YFINANCE_FREE",
+      "productive": false,
+      "universe_count": 55,
+      "mapped_count": 55,
+      "unmapped_count": 0,
+      "symbol_resets": 0,
+      "rescue_attempted": 0,
+      "repair_candidates": 49,
+      "repair_attempted": 49,
+      "missing_symbols": 0,
+      "cache_counts": {
+        "price_rows": 1813500,
+        "states": 3657,
+        "ready": 3602,
+        "batches": 48
+      },
+      "mapping_status_counts": {
+        "EXPLICIT": 55
+      },
+      "config": {
+        "batch_size": 20,
+        "threads": true,
+        "timeout_seconds": 15.0,
+        "initial_period": "2y",
+        "interval": "1d",
+        "overlap_calendar_days": 14,
+        "min_valid_bars": 252,
+        "ready_unique_bars": 260,
+        "max_filterable_invalid_bars": 2,
+        "max_filterable_invalid_share": 0.01,
+        "stale_calendar_days": 10,
+        "max_identical_retries": 1,
+        "retry_sleep_seconds": 2.0,
+        "pause_between_batches_seconds": 0.5,
+        "repair_anomalies": true,
+        "repair_batch_size": 25,
+        "suspicious_abs_return": 0.5,
+        "zero_volume_warning_share": 0.2
+      },
+      "run_hash": "4df370d837ea30faeffc9b25af11bf4c0da7b1f20aeef8b68bfdacc45759d55f"
+    }
+  },
+  "data_source": "YFINANCE_FREE_TARGETED_BATCH_REPAIR",
+  "price_download_scope_rows": 55,
+  "per_security_web_calls": false,
+  "instrument_decisions_changed": 0,
+  "eligibility_promotions_made": 0,
+  "p0_run": false,
+  "sector_rs_performed": false,
+  "alpha_vantage_allowed": false,
+  "productive_trading_authority": false,
+  "canonical_master_mutated": false,
+  "historical_artifacts_mutated": false,
+  "coverage_gate_status": "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT",
+  "failed_source": "KRX_DATA_MARKETPLACE",
+  "next_stage": "OFFICIAL_SECURITY_TYPE_SEMANTICS_AND_REPAIRED_DATA_REQUALIFICATION",
+  "required_result_wording": "bester verifizierter Kandidat innerhalb der tatsächlich geprüften Coverage",
+  "forbidden_result_wording": "weltweit bester Kandidat"
+}
