@@ -1,0 +1,8 @@
+Step,Stage,Required,State_v0_28,Action
+1,CURRENT_MASTER_SOURCE_PROVENANCE_FREEZE,True,PENDING,Freeze explicit official-source provenance for the seven currently imported r6 segments.
+2,MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION,True,BLOCKED_OR_NOT_RUN,Materialize official full constituent sources for missing segments: US_SP1500;MX_IPC;KR_KOSPI200;AU_ASX200;NZ_NZX50;BR_IBRX100;ZA_TOP40
+3,CURRENT_MASTER_IDENTITY_REVALIDATION,True,NOT_RUN_GLOBAL,Revalidate ISIN/MIC/Primary Ticker/WS_ID identities on the completed current-master source snapshot.
+4,SOURCE_SUPERSET_FREEZE,True,NOT_READY,Freeze a versioned current-master SOURCE_SUPERSET only after accepted source coverage accounting.
+5,U3K_ELIGIBILITY_REBUILD,True,NOT_RUN,"Run data-quality, instrument, primary-market liquidity and execution eligibility against the current-master lineage."
+6,SWING_U3K_FROZEN,True,NOT_READY,Deterministically freeze <=3000 eligible securities; no regional quota and no threshold weakening.
+7,P0_GLOBAL_PRICE_FIRST,True,BLOCKED,Run P0 only after a valid SWING_U3K_FROZEN exists; otherwise remain RESEARCH_PARTIAL.

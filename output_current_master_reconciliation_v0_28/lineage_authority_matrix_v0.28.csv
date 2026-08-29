@@ -1,0 +1,4 @@
+Lineage,Rows,Source_Authority_For_Current_Master,Universe_Complete,Use,Notes
+CURRENT_MASTER_CLEAN_RESTART_R6,1535,True,False,PRIMARY_CURRENT_MASTER_RECONCILIATION_INPUT,Seven imported segments; current path toward canonical SOURCE_SUPERSET and future Strict U3K.
+LEGACY_PRE_MASTER_PHASE2,3663,False,False,ENGINEERING_AND_DIAGNOSTIC_EVIDENCE_ONLY,Contains fallback-derived constituent lineage incompatible with the current master source gate.
+LEGACY_V0_27_CLOSEOUT,710,False,False,LEGACY_REQUALIFICATION_CLOSEOUT_ONLY,Useful diagnostics; must not canonize fallback-derived memberships.

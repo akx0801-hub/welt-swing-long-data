@@ -1,0 +1,2 @@
+WS_ID,Current_Primary_Universe_Index,Current_Primary_MIC,Current_Primary_Ticker,Research_Primary_Universe_Index,Research_Primary_MIC,Research_Primary_Ticker,_merge,Reconciliation_State_v0_28,Authoritative_Side_v0_28,Blocking_Current_Master_v0_28
+WS:XTSE:NA,CA_TSX,XTSE,NA,CA_TSX,XTSE,,both,FIELD_DRIFT:Primary_Ticker,CURRENT_MASTER_XLSX,False

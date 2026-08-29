@@ -1,0 +1,83 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_UNIVERSE_RECONCILIATION_FREEZE_PLAN_V0_28",
+  "generated_utc": "2026-08-29T10:03:08.927209+00:00",
+  "run_status": "CURRENT_MASTER_UNIVERSE_RECONCILIATION_FREEZE_PLAN_V0_28_COMPLETE",
+  "stage_status": "PARTIAL",
+  "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+  "target_segment_count": 14,
+  "imported_segment_count": 7,
+  "missing_segment_count": 7,
+  "current_master_rows": 1535,
+  "imported_segment_counts": {
+    "EU_STOXX600": 600,
+    "CA_TSX": 217,
+    "JP_N225": 225,
+    "HK_HSI": 93,
+    "CN_CSI300": 300,
+    "IN_NIFTY50": 50,
+    "TW_TW50": 50
+  },
+  "missing_segments": [
+    "US_SP1500",
+    "MX_IPC",
+    "KR_KOSPI200",
+    "AU_ASX200",
+    "NZ_NZX50",
+    "BR_IBRX100",
+    "ZA_TOP40"
+  ],
+  "identity_quality": {
+    "rows": 1535,
+    "unique_ws_id": 1535,
+    "duplicate_ws_id_rows": 0,
+    "strict_identity_rows": 97,
+    "fallback_identity_rows": 1438,
+    "incomplete_or_invalid_identity_rows": 0
+  },
+  "research_snapshot_reconciliation": {
+    "authoritative_side": "CURRENT_MASTER_XLSX",
+    "current_master_rows": 1535,
+    "research_snapshot_rows": 1535,
+    "ws_id_overlap_rows": 1535,
+    "only_in_current_master_rows": 0,
+    "only_in_research_snapshot_rows": 0,
+    "exact_key_match_rows": 1534,
+    "drift_rows": 1,
+    "state_counts": {
+      "MATCH": 1534,
+      "FIELD_DRIFT:Primary_Ticker": 1
+    },
+    "current_master_blocked_by_research_drift": false
+  },
+  "source_superset_complete": false,
+  "source_superset_frozen": false,
+  "swing_u3k_eligible_ready": false,
+  "swing_u3k_frozen": false,
+  "p0_run": false,
+  "sector_rs_performed": false,
+  "price_downloads_performed": false,
+  "external_requests": 0,
+  "per_security_web_calls": false,
+  "alpha_vantage_allowed": false,
+  "productive_trading_authority": false,
+  "legacy_phase2_canonical_source_authority": false,
+  "historical_research_1535_price_context": {
+    "generated_utc": "2026-08-23T20:31:19.162779+00:00",
+    "ready_count": 1287,
+    "price_ready_coverage_pct": 83.8436,
+    "mapping_coverage_pct": 99.9349,
+    "freshness_authority": false
+  },
+  "coverage_gate_status": "BLOCKED_CURRENT_MASTER_SOURCE_SUPERSET_INCOMPLETE_7_OF_14",
+  "failed_source": "MULTIPLE_TARGET_SEGMENTS_NOT_IMPORTED",
+  "next_stage": "CURRENT_MASTER_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION",
+  "required_result_wording": "bester verifizierter Kandidat innerhalb der tatsächlich geprüften Coverage",
+  "forbidden_result_wording": "weltweit bester Kandidat",
+  "notes": [
+    "v0.28 is an offline reconciliation/plan stage. It makes no network requests and no constituent substitutions.",
+    "The current r6 1535-row master is the primary current-master lineage; the legacy Phase2/3663 lineage is engineering evidence only.",
+    "Seven target segments remain absent from the current-master source snapshot, so Strict U3K freeze and global P0 remain blocked.",
+    "The historical research_1535 price coverage is retained as context only and is not treated as fresh market data.",
+    "From v0.28 onward major stages refresh both a versioned Current Handoff and a stable recovery alias."
+  ]
+}

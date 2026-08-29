@@ -1,0 +1,61 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_UNIVERSE_RECONCILIATION_FREEZE_PLAN_MANIFEST_V0_28",
+  "generated_utc": "2026-08-29T10:03:08.929984+00:00",
+  "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+  "input_hash": "e6ee8b692972dafeeee42bfdc877b2f7caaee16e4015ea0344e6e2af5aad7903",
+  "parameter_hash": "2ab39ac833fd73b4b6f8f1807332322b20f7611c3ba754b15fc8c5ef5372f4d8",
+  "core_output_hash": "f5e9ae5b799d16ad158e061bc1989b98f00d683ddb90afd16dafe85ec9b2a0be",
+  "external_requests": 0,
+  "alpha_vantage_allowed": false,
+  "p0_run": false,
+  "files": {
+    "output_current_master_reconciliation_v0_28/current_master_segment_inventory_v0.28.csv": {
+      "sha256": "6ecfbfdb5629b3f339fa2dad94a0e5c126c8cf8cdf0abf96093d23aa181565df",
+      "bytes": 4686
+    },
+    "output_current_master_reconciliation_v0_28/current_master_identity_quality_v0.28.csv": {
+      "sha256": "59c05a2eb7d21b65219d0647e3002b6ebdbc73c66200c92fb572a1c1da339bef",
+      "bytes": 1093
+    },
+    "output_current_master_reconciliation_v0_28/current_master_source_authority_audit_v0.28.csv": {
+      "sha256": "de4c573c007ed6350582688b16cb6ba50875be29347275716c4ca4e2662c6411",
+      "bytes": 2748
+    },
+    "output_current_master_reconciliation_v0_28/research_snapshot_identity_drift_v0.28.csv": {
+      "sha256": "705eec0802383f4b2435576bba7b90ebaaea4bb545d4bde7a1630cfc8ec331b1",
+      "bytes": 343
+    },
+    "output_current_master_reconciliation_v0_28/current_master_blocker_register_v0.28.csv": {
+      "sha256": "d3c07650c16ef11cb125027cb9320a0869ced669b7acab3287b3a6052b0d78c0",
+      "bytes": 2102
+    },
+    "output_current_master_reconciliation_v0_28/current_master_workbook_sheet_inventory_v0.28.csv": {
+      "sha256": "d1be60f8cf691d04cbe18e57c5853b485c93e69fdbfe94e029491d17c3e25487",
+      "bytes": 91
+    },
+    "output_current_master_reconciliation_v0_28/lineage_authority_matrix_v0.28.csv": {
+      "sha256": "196aa4260e08a34f3e195516e6434ade67d5a71d4841b2fccd4c26af0d84caed",
+      "bytes": 585
+    },
+    "output_current_master_reconciliation_v0_28/freeze_plan_v0.28.csv": {
+      "sha256": "a3650c25efa103795b0d92123ed73ffabc5f8c49ee306241b159ae8f25a343ed",
+      "bytes": 1105
+    },
+    "output_current_master_reconciliation_v0_28/summary_v0.28.json": {
+      "sha256": "1d8dca4d44bfc59a72a1923ea6b9f79ece0b1105234334b9786a486d54951c37",
+      "bytes": 3130
+    },
+    "output_current_master_reconciliation_v0_28/stage_checkpoint_v0.28.json": {
+      "sha256": "7f3ce239188d3920815282cc8aa828144b1cc6a9bd08c6335f4dd53fd3ce60ad",
+      "bytes": 1149
+    },
+    "WELT-SWING-CURRENT-Handoff-v0.28.md": {
+      "sha256": "0b19b82f4d25a9f6b79f6a972ab3c79df553d2e6b6dd9f51e2c73d847f7b0fb4",
+      "bytes": 5536
+    },
+    "WELT-SWING-CURRENT-Handoff-CURRENT.md": {
+      "sha256": "0b19b82f4d25a9f6b79f6a972ab3c79df553d2e6b6dd9f51e2c73d847f7b0fb4",
+      "bytes": 5536
+    }
+  }
+}
