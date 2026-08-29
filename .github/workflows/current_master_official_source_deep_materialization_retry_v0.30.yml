@@ -1,0 +1,170 @@
+name: Welt-Swing Official Source Deep Materialization v0.30
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/current_master_official_source_deep_materialization_retry_v0.30.json"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  deep_materialization:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install requests pypdf
+
+      - name: Selbsttest
+        run: |
+          python -m py_compile scripts/current_master_official_source_deep_materialization_retry_v0_30.py
+          python scripts/current_master_official_source_deep_materialization_retry_v0_30.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+
+          check_blob "output_current_master_missing_source_materialization_v0_29/summary_v0.29.json" "f975a91d2ac9de4353093b5f92b0c723a8666f99"
+          check_blob "output_current_master_missing_source_materialization_v0_29/stage_checkpoint_v0.29.json" "50e54f49ac0f7a868a2c18a4142067f76656beb0"
+          check_blob "output_current_master_missing_source_materialization_v0_29/official_source_probe_status_v0.29.csv" "f596142132f76083bbbd9ca6f997f5b100f93d2d"
+          check_blob "output_current_master_missing_source_materialization_v0_29/official_candidate_links_v0.29.csv" "1df716b57350fb9509cc90f14db929352a87cbe4"
+          check_blob "WELT-SWING-CURRENT-Handoff-CURRENT.md" "1ed72e2b8de4e26585d5dedd920ac708e3de9dd3"
+
+      - name: Deep Materialization
+        run: |
+          python scripts/current_master_official_source_deep_materialization_retry_v0_30.py \
+            --config config/current_master_official_source_deep_materialization_retry_v0.30.json
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path("output_current_master_source_deep_materialization_v0_30")
+          s = json.loads((out/"summary_v0.30.json").read_text(encoding="utf-8"))
+          c = json.loads((out/"stage_checkpoint_v0.30.json").read_text(encoding="utf-8"))
+          m = json.loads((out/"manifest_v0.30.json").read_text(encoding="utf-8"))
+          status = pd.read_csv(out/"source_deep_materialization_status_v0.30.csv", keep_default_na=False)
+          b3 = pd.read_csv(out/"b3_ibrx100_membership_v0.30.csv", keep_default_na=False)
+          krx = pd.read_csv(out/"krx_kospi200_membership_v0.30.csv", keep_default_na=False)
+
+          assert s["run_status"] == "CURRENT_MASTER_OFFICIAL_SOURCE_DEEP_MATERIALIZATION_RETRY_V0_30_COMPLETE"
+          assert s["stage_status"] == "PARTIAL"
+          assert s["lineage_scope"] == "CURRENT_MASTER_CLEAN_RESTART"
+          assert s["current_master_rows_before"] == 1535
+          assert s["current_master_rows_after"] == 1535
+          assert s["canonical_segments_imported_v0_30"] == 0
+
+          assert len(status) == 7
+          assert set(status["Segment_ID"]) == {
+              "US_SP1500","MX_IPC","KR_KOSPI200","AU_ASX200",
+              "NZ_NZX50","BR_IBRX100","ZA_TOP40"
+          }
+          assert not status["Canonical_Import_v0_30"].astype(str).str.lower().eq("true").any()
+
+          if s["b3_ibrx100"]["status"].startswith("MATERIALIZED_OFFICIAL_"):
+              assert len(b3) >= 80
+              assert b3["Primary_Ticker_Candidate"].nunique() >= 80
+          else:
+              assert len(b3) < 80
+
+          if s["krx_kospi200"]["status"].startswith("MATERIALIZED_OFFICIAL_"):
+              assert len(krx) >= 180
+              assert krx["Primary_Ticker_Candidate"].nunique() >= 180
+
+          assert s["universe_mutated"] is False
+          assert s["instrument_decisions_changed"] == 0
+          assert s["eligibility_promotions_made"] == 0
+          assert s["price_downloads_performed"] is False
+          assert s["sector_rs_performed"] is False
+          assert s["p0_run"] is False
+          assert s["source_superset_complete"] is False
+          assert s["source_superset_frozen"] is False
+          assert s["swing_u3k_frozen"] is False
+          assert s["per_security_web_calls"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert s["productive_trading_authority"] is False
+
+          assert c["input_count"] == 3
+          assert c["checked_count"] == 3
+          assert c["pass_count"] + c["fail_count"] == 3
+          assert c["status"] == "PARTIAL"
+          assert c["universe_mutated"] is False
+
+          assert s["next_stage"] in {
+              "CURRENT_MASTER_MATERIALIZED_OFFICIAL_MEMBERSHIP_IDENTITY_RECONCILIATION",
+              "CURRENT_MASTER_OFFICIAL_SOURCE_ACCESS_REMEDIATION_V0_31"
+          }
+
+          assert Path("WELT-SWING-CURRENT-Handoff-v0.30.md").exists()
+          assert Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").exists()
+          assert Path("WELT-SWING-CURRENT-Handoff-v0.30.md").read_bytes() == Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").read_bytes()
+
+          required = {
+              "output_current_master_source_deep_materialization_v0_30/b3_ibrx100_membership_v0.30.csv",
+              "output_current_master_source_deep_materialization_v0_30/krx_kospi200_membership_v0.30.csv",
+              "output_current_master_source_deep_materialization_v0_30/bmv_ipc_final_rebalance_text_v0.30.txt",
+              "output_current_master_source_deep_materialization_v0_30/source_deep_materialization_status_v0.30.csv",
+              "output_current_master_source_deep_materialization_v0_30/summary_v0.30.json",
+              "output_current_master_source_deep_materialization_v0_30/stage_checkpoint_v0.30.json",
+              "WELT-SWING-CURRENT-Handoff-v0.30.md",
+              "WELT-SWING-CURRENT-Handoff-CURRENT.md",
+          }
+          assert required.issubset(set(m["files"]))
+          print("CURRENT_MASTER_OFFICIAL_SOURCE_DEEP_MATERIALIZATION_RETRY_V0_30_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Ergebnisse und Current Handoff committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            output_current_master_source_deep_materialization_v0_30 \
+            WELT-SWING-CURRENT-Handoff-v0.30.md \
+            WELT-SWING-CURRENT-Handoff-CURRENT.md
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Deep-materialize current-master official sources v0.30"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-master-source-deep-materialization-v0.30
+          path: |
+            output_current_master_source_deep_materialization_v0_30/
+            WELT-SWING-CURRENT-Handoff-v0.30.md
+            WELT-SWING-CURRENT-Handoff-CURRENT.md
