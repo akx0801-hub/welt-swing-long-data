@@ -1,0 +1,57 @@
+{
+  "schema": "WELT_SWING_OFFICIAL_SOURCE_MATERIALIZATION_DATA_GAP_REPAIR_CONFIG_V0_26",
+  "run_id": "WS-LONG-OFFICIAL-SOURCE-MATERIALIZATION-DATA-REPAIR-2026-08-29-v0.26",
+  "output_dir": "output_official_source_materialization_data_repair_v0_26",
+  "source_cache": "runtime_cache/full_3663_prices.sqlite",
+  "work_cache": "runtime_cache/full_3663_prices_v026_work.sqlite",
+  "inputs": {
+    "v025_summary": "output_official_bulk_probe_data_recheck_v0_25/summary_v0.25.json",
+    "v025_checkpoint": "output_official_bulk_probe_data_recheck_v0_25/stage_checkpoint_v0.25.json",
+    "v025_probe_status": "output_official_bulk_probe_data_recheck_v0_25/official_source_probe_status_v0.25.csv",
+    "v025_candidate_links": "output_official_bulk_probe_data_recheck_v0_25/official_candidate_links_v0.25.csv",
+    "v025_data_gap_recheck": "output_official_bulk_probe_data_recheck_v0_25/data_gap_recheck_v0.25.csv",
+    "v025_hkex_xlsx": "output_official_bulk_probe_data_recheck_v0_25/raw_official_probe/HKEX_FULL_LIST.xlsx",
+    "v023_instrument_unresolved": "output_universe_gap_root_cause_v0_23/instrument_unresolved_root_causes_v0.23.csv",
+    "v09_hkex_matches": "output_instrument_resolution_v0_9/hkex_reference_matches_v0.9.csv",
+    "qa_v04_summary": "output_qa_policy_promotion_v0_4/summary_v0.4.json",
+    "qa_v04_residual_non_ready": "output_qa_policy_promotion_v0_4/residual_non_ready_v0.4.csv",
+    "remediated_master": "universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv"
+  },
+  "data_repair": {
+    "target_rows": 55,
+    "batch_size": 20,
+    "initial_period": "2y",
+    "pause_between_batches_seconds": 0.5,
+    "repair_anomalies": true,
+    "hard_failure_statuses": ["DOWNLOAD_FAILED", "MAPPING_PENDING"]
+  },
+  "expected": {
+    "legacy_instrument_unresolved_rows": 650,
+    "hk_hsi_unresolved_rows": 82,
+    "candidate_link_rows": 244,
+    "history_repair_rows": 55,
+    "data_or_fx_rows": 5,
+    "qa_v04_cache_states": 3657,
+    "qa_v04_ready_rows": 3602,
+    "krx_blocked_rows": 92,
+    "xmad_unconfigured_rows": 17
+  },
+  "governance": {
+    "lineage_scope": "LEGACY_PRE_MASTER_RESEARCH_LINEAGE",
+    "current_master_canonical_universe_reconciled": false,
+    "strict_u3k_frozen": false,
+    "instrument_decision_changes_allowed": false,
+    "eligibility_promotions_allowed": false,
+    "candidate_link_network_fetch_allowed": false,
+    "targeted_price_repair_allowed": true,
+    "targeted_price_repair_rows_max": 55,
+    "per_security_web_calls_allowed": false,
+    "alpha_vantage_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_run_allowed": false,
+    "productive_trading_authority": false,
+    "canonical_master_mutation_allowed": false,
+    "historical_artifact_mutation_allowed": false,
+    "rule_weakening_for_coverage_allowed": false
+  }
+}
