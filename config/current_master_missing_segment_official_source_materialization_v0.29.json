@@ -1,0 +1,106 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION_CONFIG_V0_29",
+  "run_id": "WS-LONG-CURRENT-MASTER-MISSING-SOURCE-MATERIALIZATION-2026-08-29-v0.29",
+  "output_dir": "output_current_master_missing_source_materialization_v0_29",
+  "inputs": {
+    "master_spec": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
+    "v028_summary": "output_current_master_reconciliation_v0_28/summary_v0.28.json",
+    "v028_checkpoint": "output_current_master_reconciliation_v0_28/stage_checkpoint_v0.28.json",
+    "v028_blocker_register": "output_current_master_reconciliation_v0_28/current_master_blocker_register_v0.28.csv",
+    "v028_source_authority_audit": "output_current_master_reconciliation_v0_28/current_master_source_authority_audit_v0.28.csv",
+    "current_handoff": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
+  },
+  "handoff": {
+    "versioned_path": "WELT-SWING-CURRENT-Handoff-v0.29.md",
+    "stable_path": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
+  },
+  "network": {
+    "max_requests": 10,
+    "allowed_domains": [
+      "spglobal.com",
+      "bmv.com.mx",
+      "krx.co.kr",
+      "nzx.com",
+      "b3.com.br",
+      "jse.co.za"
+    ]
+  },
+  "official_sources": [
+    {
+      "segment_id": "US_SP1500",
+      "source_id": "SPDJI_SP1500_PRODUCT",
+      "source_name": "S&P Dow Jones Indices — S&P Composite 1500",
+      "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-composite-1500/"
+    },
+    {
+      "segment_id": "MX_IPC",
+      "source_id": "SPDJI_BMV_IPC_PRODUCT",
+      "source_name": "S&P Dow Jones Indices — S&P/BMV IPC",
+      "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-bmv-ipc/"
+    },
+    {
+      "segment_id": "MX_IPC",
+      "source_id": "BMV_SPECIAL_INFORMATION",
+      "source_name": "Bolsa Mexicana de Valores — Special Information / Constituents List",
+      "url": "https://www.bmv.com.mx/en/markets/special-information"
+    },
+    {
+      "segment_id": "KR_KOSPI200",
+      "source_id": "KRX_KOSPI200_DATA_MARKETPLACE",
+      "source_name": "Korea Exchange Data Marketplace — KOSPI 200 route",
+      "url": "https://data.krx.co.kr/?scrnId=02080709"
+    },
+    {
+      "segment_id": "AU_ASX200",
+      "source_id": "SPDJI_ASX200_PRODUCT",
+      "source_name": "S&P Dow Jones Indices — S&P/ASX 200",
+      "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-asx-200/"
+    },
+    {
+      "segment_id": "NZ_NZX50",
+      "source_id": "NZX_INDICES",
+      "source_name": "NZX — S&P/NZX Indices",
+      "url": "https://www.nzx.com/markets/indices"
+    },
+    {
+      "segment_id": "NZ_NZX50",
+      "source_id": "SPDJI_NZX50_PRODUCT",
+      "source_name": "S&P Dow Jones Indices — S&P/NZX 50 Index",
+      "url": "https://www.spglobal.com/spdji/en/indices/equity/sp-nzx-50-index/"
+    },
+    {
+      "segment_id": "BR_IBRX100",
+      "source_id": "B3_IBRX100_DAY_PORTFOLIO",
+      "source_name": "B3 — IBrX 100 Carteira do Dia",
+      "url": "https://sistemaswebb3-listados.b3.com.br/indexPage/day/IBXX?language=pt-br"
+    },
+    {
+      "segment_id": "ZA_TOP40",
+      "source_id": "JSE_FTSEJSE_INDEX_SERIES",
+      "source_name": "JSE — FTSE/JSE Africa Index Series",
+      "url": "https://www.jse.co.za/services/indices/ftsejse-africa-index-series"
+    },
+    {
+      "segment_id": "ZA_TOP40",
+      "source_id": "JSE_FTSEJSE_DOCUMENTS",
+      "source_name": "JSE Client Portal — FTSE/JSE Africa Index Series Documents",
+      "url": "https://clientportal.jse.co.za/communication/ftse-jse-africa-index-series-documents"
+    }
+  ],
+  "governance": {
+    "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+    "official_sources_only": true,
+    "max_external_requests": 10,
+    "candidate_link_follow_requests_allowed": 0,
+    "per_security_web_calls_allowed": false,
+    "legacy_phase2_constituent_substitution_allowed": false,
+    "universe_mutation_allowed": false,
+    "instrument_decision_changes_allowed": false,
+    "eligibility_promotions_allowed": false,
+    "price_downloads_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_run_allowed": false,
+    "alpha_vantage_allowed": false,
+    "productive_trading_authority": false
+  }
+}
