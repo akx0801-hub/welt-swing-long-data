@@ -1,0 +1,172 @@
+name: Welt-Swing Missing Official Sources v0.29
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/current_master_missing_segment_official_source_materialization_v0.29.json"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  materialize_missing_sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install requests beautifulsoup4 lxml html5lib
+
+      - name: Selbsttest
+        run: |
+          python -m py_compile scripts/current_master_missing_segment_official_source_materialization_v0_29.py
+          python scripts/current_master_missing_segment_official_source_materialization_v0_29.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+
+          check_blob "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md" "680d0434e534d1fe136e694ca05cb574958a1a24"
+          check_blob "output_current_master_reconciliation_v0_28/summary_v0.28.json" "ace208cbc4d175bc87fb40b8b4e3b7f9a956cc50"
+          check_blob "output_current_master_reconciliation_v0_28/stage_checkpoint_v0.28.json" "8f6a7e120c67797abad3115ebeafba134a671d6e"
+          check_blob "output_current_master_reconciliation_v0_28/current_master_blocker_register_v0.28.csv" "638d2b861bada3881356352eeca0cbdeea5cdc05"
+          check_blob "output_current_master_reconciliation_v0_28/current_master_source_authority_audit_v0.28.csv" "d01027d69c26bc5459055d1e21bedb31b136447e"
+          check_blob "WELT-SWING-CURRENT-Handoff-CURRENT.md" "cb64565980c93a88e68794d57a4a035f235847f6"
+
+      - name: Missing-Segment Official Source Materialization
+        run: |
+          python scripts/current_master_missing_segment_official_source_materialization_v0_29.py \
+            --config config/current_master_missing_segment_official_source_materialization_v0.29.json
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path("output_current_master_missing_source_materialization_v0_29")
+          s = json.loads((out/"summary_v0.29.json").read_text(encoding="utf-8"))
+          c = json.loads((out/"stage_checkpoint_v0.29.json").read_text(encoding="utf-8"))
+          m = json.loads((out/"manifest_v0.29.json").read_text(encoding="utf-8"))
+          probes = pd.read_csv(out/"official_source_probe_status_v0.29.csv", keep_default_na=False)
+          links = pd.read_csv(out/"official_candidate_links_v0.29.csv", keep_default_na=False)
+          status = pd.read_csv(out/"missing_segment_materialization_status_v0.29.csv", keep_default_na=False)
+
+          assert s["run_status"] == "CURRENT_MASTER_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION_V0_29_COMPLETE"
+          assert s["stage_status"] == "PARTIAL"
+          assert s["lineage_scope"] == "CURRENT_MASTER_CLEAN_RESTART"
+          assert s["current_master_rows_before"] == 1535
+          assert s["current_master_rows_after"] == 1535
+          assert s["imported_segments_before"] == 7
+          assert s["imported_segments_after"] == 7
+          assert s["missing_segments_checked"] == 7
+          assert s["canonical_segments_imported_v0_29"] == 0
+
+          assert len(probes) == 10
+          assert s["official_request_count"] == 10
+          assert s["official_http_ok_count"] + s["official_source_error_count"] == 10
+          assert s["candidate_link_follow_requests"] == 0
+          if len(links):
+              assert not links["Fetched_In_v0_29"].astype(str).str.lower().eq("true").any()
+
+          assert len(status) == 7
+          assert set(status["Segment_ID"]) == {
+              "US_SP1500","MX_IPC","KR_KOSPI200","AU_ASX200",
+              "NZ_NZX50","BR_IBRX100","ZA_TOP40"
+          }
+          assert not status["Canonical_Membership_Imported_v0_29"].astype(str).str.lower().eq("true").any()
+          assert not status["Universe_Mutated_v0_29"].astype(str).str.lower().eq("true").any()
+
+          us = status.loc[status["Segment_ID"].eq("US_SP1500")].iloc[0]
+          assert us["Materialization_State_v0_29"] == "SOURCE_BLOCKED_FULL_EXPORT_LOGIN_REQUIRED"
+
+          assert s["source_superset_complete"] is False
+          assert s["source_superset_frozen"] is False
+          assert s["swing_u3k_eligible_ready"] is False
+          assert s["swing_u3k_frozen"] is False
+          assert s["universe_mutated"] is False
+          assert s["instrument_decisions_changed"] == 0
+          assert s["eligibility_promotions_made"] == 0
+          assert s["price_downloads_performed"] is False
+          assert s["sector_rs_performed"] is False
+          assert s["p0_run"] is False
+          assert s["per_security_web_calls"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert s["productive_trading_authority"] is False
+
+          assert c["input_count"] == 7
+          assert c["checked_count"] == 7
+          assert c["pass_count"] + c["fail_count"] == 7
+          assert c["status"] == "PARTIAL"
+          assert c["universe_mutated"] is False
+
+          assert Path("WELT-SWING-CURRENT-Handoff-v0.29.md").exists()
+          assert Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").exists()
+          assert Path("WELT-SWING-CURRENT-Handoff-v0.29.md").read_bytes() == Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").read_bytes()
+
+          required = {
+              "output_current_master_missing_source_materialization_v0_29/official_source_probe_status_v0.29.csv",
+              "output_current_master_missing_source_materialization_v0_29/official_candidate_links_v0.29.csv",
+              "output_current_master_missing_source_materialization_v0_29/b3_ibrx100_materialized_membership_v0.29.csv",
+              "output_current_master_missing_source_materialization_v0_29/missing_segment_materialization_status_v0.29.csv",
+              "output_current_master_missing_source_materialization_v0_29/imported_segment_provenance_carryforward_v0.29.csv",
+              "output_current_master_missing_source_materialization_v0_29/summary_v0.29.json",
+              "output_current_master_missing_source_materialization_v0_29/stage_checkpoint_v0.29.json",
+              "WELT-SWING-CURRENT-Handoff-v0.29.md",
+              "WELT-SWING-CURRENT-Handoff-CURRENT.md",
+          }
+          assert required.issubset(set(m["files"]))
+          print("CURRENT_MASTER_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION_V0_29_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Ergebnisse und Current Handoff committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            output_current_master_missing_source_materialization_v0_29 \
+            WELT-SWING-CURRENT-Handoff-v0.29.md \
+            WELT-SWING-CURRENT-Handoff-CURRENT.md
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Materialize current-master missing official sources v0.29"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-master-missing-official-sources-v0.29
+          path: |
+            output_current_master_missing_source_materialization_v0_29/
+            WELT-SWING-CURRENT-Handoff-v0.29.md
+            WELT-SWING-CURRENT-Handoff-CURRENT.md
