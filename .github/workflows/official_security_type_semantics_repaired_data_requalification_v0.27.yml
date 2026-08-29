@@ -1,0 +1,197 @@
+name: Welt-Swing Security Semantics + Data Requalification v0.27
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/official_security_type_semantics_repaired_data_requalification_v0.27.json"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  requalify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Selbsttest
+        run: |
+          python -m py_compile scripts/official_security_type_semantics_repaired_data_requalification_v0_27.py
+          python scripts/official_security_type_semantics_repaired_data_requalification_v0_27.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+
+          check_blob "output_official_source_materialization_data_repair_v0_26/summary_v0.26.json" "3732b806b39fd1ab2f5c63ca34c941069311b5d7"
+          check_blob "output_official_source_materialization_data_repair_v0_26/stage_checkpoint_v0.26.json" "35de2f7e55f63851066adf9e96b10305437f9ba7"
+          check_blob "output_official_source_materialization_data_repair_v0_26/data_history_after_state_v0.26.csv" "369ba211aed1754af83d0504dc5bf129212bb4eb"
+          check_blob "output_official_source_materialization_data_repair_v0_26/data_or_fx_recompute_queue_v0.26.csv" "82bdf63923bcd7802c387d8aebe69f0c37353e44"
+          check_blob "output_official_source_materialization_data_repair_v0_26/hkex_current_exact_match_audit_v0.26.csv" "e5800c824a278c6e24288d115cc9dd1ceb97369f"
+          check_blob "output_official_source_materialization_data_repair_v0_26/cache_promotion_status.txt" "2b3bb92553007e45a3fec6308625b501a39b6f3f"
+          check_blob "output_universe_gap_root_cause_v0_23/instrument_unresolved_root_causes_v0.23.csv" "60e73adb4a54772985100c9bb4e33d20ebe747f7"
+          check_blob "universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv" "02cbe2dff4984cd2732e5a1e8439d38360972fa9"
+          check_blob "output_u3k_liquidity_fx_v0_5/fx_history_to_eur_v0.5.csv" "35c50d8c9c0931acacb69a549fe85f59d65d3e76"
+          check_blob "config/u3k_liquidity_fx_v0.5.json" "0faa1a08e6303fe695bd925ccbb1794bce907e20"
+          check_blob "scripts/build_u3k_liquidity_fx_audit_v0_5.py" "68456e271fafbc23e0b722a126113c9696e9ec9c"
+          check_blob "scripts/feature_builder.py" "f6e14fedaa874bc89b6d33f51d6730e175c2b60e"
+
+      - name: Promoted v0.26 Cache wiederherstellen
+        uses: actions/cache/restore@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-v027-probe-${{ github.run_id }}
+          restore-keys: |
+            full-3663-price-${{ runner.os }}-v026-
+
+      - name: Cache-Gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f runtime_cache/full_3663_prices.sqlite
+          python - <<'PY'
+          import sqlite3
+          con = sqlite3.connect("runtime_cache/full_3663_prices.sqlite")
+          try:
+              states = con.execute("SELECT COUNT(*) FROM cache_state").fetchone()[0]
+              ready = con.execute(
+                  "SELECT COUNT(*) FROM cache_state WHERE status='READY'"
+              ).fetchone()[0]
+          finally:
+              con.close()
+          assert states == 3657, states
+          assert ready == 3602, ready
+          print("V026_PROMOTED_CACHE_GATE_PASS")
+          PY
+
+      - name: Requalification
+        run: |
+          python scripts/official_security_type_semantics_repaired_data_requalification_v0_27.py \
+            --config config/official_security_type_semantics_repaired_data_requalification_v0.27.json
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path("output_official_security_type_data_requalification_v0_27")
+          s = json.loads((out/"summary_v0.27.json").read_text(encoding="utf-8"))
+          c = json.loads((out/"stage_checkpoint_v0.27.json").read_text(encoding="utf-8"))
+          m = json.loads((out/"manifest_v0.27.json").read_text(encoding="utf-8"))
+          residual = pd.read_csv(out/"residual_data_quality_requalification_v0.27.csv", keep_default_na=False)
+          rc = pd.read_csv(out/"residual_reason_counts_v0.27.csv", keep_default_na=False)
+          liq = pd.read_csv(out/"data_or_fx_liquidity_recompute_v0.27.csv", keep_default_na=False)
+          hk = pd.read_csv(out/"hkex_security_type_semantics_v0.27.csv", keep_default_na=False)
+          unresolved = pd.read_csv(out/"unresolved_instrument_blockers_v0.27.csv", keep_default_na=False)
+
+          assert s["run_status"] == "OFFICIAL_SECURITY_TYPE_SEMANTICS_REPAIRED_DATA_REQUALIFICATION_V0_27_COMPLETE"
+          assert s["stage_status"] == "PARTIAL"
+          assert s["lineage_scope"] == "LEGACY_PRE_MASTER_RESEARCH_LINEAGE"
+          assert s["current_master_canonical_universe_reconciled"] is False
+          assert s["strict_u3k_frozen"] is False
+
+          assert len(residual) == 55
+          assert (residual["status"] == "QUARANTINE").sum() == 49
+          assert (residual["status"] == "WARMUP").sum() == 6
+          assert (residual["status"] == "READY").sum() == 0
+          assert not residual["Further_Blind_Redownload_v0_27"].astype(str).str.lower().eq("true").any()
+          assert int(rc["Rows"].astype(int).sum()) == 55
+
+          assert len(liq) == 5
+          assert s["data_or_fx_requalification"]["cache_states"] == 3657
+          assert s["data_or_fx_requalification"]["cache_ready"] == 3602
+          assert s["data_or_fx_requalification"]["eligibility_promotions_made"] == 0
+
+          assert len(hk) == 82
+          assert (hk["Instrument_Decision_v0_27"] == "UNCHANGED_NOT_VERIFIED").all()
+          assert s["hkex_semantics"]["strict_pass_rows"] == 0
+
+          assert len(unresolved) == 650
+          vc = unresolved["v0_27_Unresolved_State"].value_counts().to_dict()
+          assert vc.get("HKEX_IDENTITY_CATEGORY_MATERIALIZED_SUBTYPE_NOT_STRICTLY_PROVEN", 0) == 82
+          assert vc.get("KRX_OFFICIAL_BULK_SOURCE_BLOCKED_ERROR_503", 0) == 92
+          assert vc.get("BME_OFFICIAL_BULK_ROUTE_NOT_CONFIGURED", 0) == 17
+
+          assert s["instrument_decisions_changed"] == 0
+          assert s["eligibility_promotions_made"] == 0
+          assert s["historical_strict_eligibility_mutated"] is False
+          assert s["price_downloads_performed"] is False
+          assert s["candidate_link_network_fetches"] == 0
+          assert s["p0_run"] is False
+          assert s["sector_rs_performed"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert s["productive_trading_authority"] is False
+          assert s["coverage_gate_status"] == "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert s["failed_source"] == "KRX_DATA_MARKETPLACE"
+          assert s["next_stage"] == "CURRENT_MASTER_OFFICIAL_SOURCE_UNIVERSE_RECONCILIATION_AND_FREEZE_PLAN"
+
+          assert c["status"] == "PARTIAL"
+          assert c["input_count"] == 710
+          assert c["checked_count"] == 710
+          assert c["pass_count"] == 710
+          assert c["fail_count"] == 0
+          assert c["quarantine_count"] == 49
+
+          required = {
+              "residual_data_quality_requalification_v0.27.csv",
+              "residual_reason_counts_v0.27.csv",
+              "data_or_fx_liquidity_recompute_v0.27.csv",
+              "data_or_fx_liquidity_recompute_counts_v0.27.csv",
+              "hkex_security_type_semantics_v0.27.csv",
+              "unresolved_instrument_blockers_v0.27.csv",
+              "legacy_requalification_impact_v0.27.csv",
+              "summary_v0.27.json",
+              "stage_checkpoint_v0.27.json",
+          }
+          assert required.issubset(set(m["files"]))
+          print("OFFICIAL_SECURITY_TYPE_SEMANTICS_REPAIRED_DATA_REQUALIFICATION_V0_27_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_official_security_type_data_requalification_v0_27
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Requalify security semantics and repaired data v0.27"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-security-type-data-requalification-v0.27
+          path: output_official_security_type_data_requalification_v0_27/
