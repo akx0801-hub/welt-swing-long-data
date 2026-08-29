@@ -1,0 +1,241 @@
+name: Welt-Swing Official Source Materialization + Data Repair v0.26
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/official_source_materialization_data_gap_repair_v0.26.json"
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  materialize_and_repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install openpyxl
+
+      - name: Selbsttest
+        run: |
+          python -m py_compile scripts/official_source_materialization_data_gap_repair_v0_26.py
+          python scripts/official_source_materialization_data_gap_repair_v0_26.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+
+          check_blob "output_official_bulk_probe_data_recheck_v0_25/summary_v0.25.json" "f4e22e5cbc0c61ea388f3e7721e9d0425c969b98"
+          check_blob "output_official_bulk_probe_data_recheck_v0_25/stage_checkpoint_v0.25.json" "0affeed2233b73d6e6517a47603b30337d0cd972"
+          check_blob "output_official_bulk_probe_data_recheck_v0_25/official_source_probe_status_v0.25.csv" "5eba8808c2585014e0e27bd79ee7571d712908ac"
+          check_blob "output_official_bulk_probe_data_recheck_v0_25/official_candidate_links_v0.25.csv" "e619e2e1450c53f785b51d6ff19754c7b45198b8"
+          check_blob "output_official_bulk_probe_data_recheck_v0_25/data_gap_recheck_v0.25.csv" "4f3fffbf4e392d8e7fc14a0504db84d1e74040ab"
+          check_blob "output_official_bulk_probe_data_recheck_v0_25/raw_official_probe/HKEX_FULL_LIST.xlsx" "2ac2350c9bc3491691fae8d82c4c6bbccec70c0f"
+          check_blob "output_universe_gap_root_cause_v0_23/instrument_unresolved_root_causes_v0.23.csv" "60e73adb4a54772985100c9bb4e33d20ebe747f7"
+          check_blob "output_instrument_resolution_v0_9/hkex_reference_matches_v0.9.csv" "4fd24602837fc17d623ce8f8afefc7bbad963b15"
+          check_blob "output_qa_policy_promotion_v0_4/summary_v0.4.json" "9e9a9f2baf133d225ca98577b45abe3d55d65ec1"
+          check_blob "output_qa_policy_promotion_v0_4/residual_non_ready_v0.4.csv" "c648a8a5777786d4b3fefac1e44a9dd0d7cfed69"
+          check_blob "universe/Welt-Swing-Universe-Master-RemediatedData-v0.8.csv" "02cbe2dff4984cd2732e5a1e8439d38360972fa9"
+          check_blob "scripts/price_cache.py" "454a1036e02c8ea73504921163aad1438a7e9f9d"
+
+      - name: QA-v0.4 Main-Cache wiederherstellen
+        id: restore_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-v026-probe-${{ github.run_id }}
+          restore-keys: |
+            full-3663-price-${{ runner.os }}-qa-v04-
+
+      - name: QA-v0.4 Cache-Baseline-Gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f runtime_cache/full_3663_prices.sqlite
+          python - <<'PY'
+          import sqlite3
+          import pandas as pd
+
+          residual = pd.read_csv(
+              "output_qa_policy_promotion_v0_4/residual_non_ready_v0.4.csv",
+              keep_default_na=False,
+              dtype=str,
+          )
+          expected = set(residual["WS_ID"].astype(str))
+          assert len(expected) == 55
+
+          con = sqlite3.connect("runtime_cache/full_3663_prices.sqlite")
+          try:
+              states = con.execute("SELECT COUNT(*) FROM cache_state").fetchone()[0]
+              ready = con.execute("SELECT COUNT(*) FROM cache_state WHERE status='READY'").fetchone()[0]
+              non_ready = {r[0] for r in con.execute("SELECT ws_id FROM cache_state WHERE status<>'READY'").fetchall()}
+          finally:
+              con.close()
+
+          assert states == 3657, states
+          assert ready == 3602, ready
+          assert len(non_ready) == 55, len(non_ready)
+          assert non_ready == expected
+          print("QA_V04_CACHE_BASELINE_GATE_PASS")
+          PY
+
+      - name: Source materialisieren und 55 Histories reparieren
+        id: repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/official_source_materialization_data_gap_repair_v0_26.py \
+            --config config/official_source_materialization_data_gap_repair_v0.26.json
+
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          s = json.loads(Path("output_official_source_materialization_data_repair_v0_26/summary_v0.26.json").read_text(encoding="utf-8"))
+          promote = bool(s["data_repair"]["cache_promotion_recommended"])
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"promote={'true' if promote else 'false'}\n")
+          print("CACHE_PROMOTION_RECOMMENDED=", promote)
+          PY
+
+      - name: Cache-Promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ steps.repair.outputs.promote }}" = "true" ]; then
+            cp runtime_cache/full_3663_prices_v026_work.sqlite runtime_cache/full_3663_prices.sqlite
+            echo "PROMOTED_V026_WORK_CACHE_TO_MAIN" > output_official_source_materialization_data_repair_v0_26/cache_promotion_status.txt
+          else
+            echo "NOT_PROMOTED_HARD_FAILURES_PRESENT" > output_official_source_materialization_data_repair_v0_26/cache_promotion_status.txt
+          fi
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, sqlite3
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path("output_official_source_materialization_data_repair_v0_26")
+          s = json.loads((out/"summary_v0.26.json").read_text(encoding="utf-8"))
+          c = json.loads((out/"stage_checkpoint_v0.26.json").read_text(encoding="utf-8"))
+          m = json.loads((out/"manifest_v0.26.json").read_text(encoding="utf-8"))
+          hk = pd.read_csv(out/"hkex_current_exact_match_audit_v0.26.csv", keep_default_na=False)
+          links = pd.read_csv(out/"official_candidate_link_priority_v0.26.csv", keep_default_na=False)
+          after = pd.read_csv(out/"data_history_after_state_v0.26.csv", keep_default_na=False)
+          datafx = pd.read_csv(out/"data_or_fx_recompute_queue_v0.26.csv", keep_default_na=False)
+          promo = (out/"cache_promotion_status.txt").read_text(encoding="utf-8").strip()
+
+          assert s["run_status"] == "OFFICIAL_SOURCE_MATERIALIZATION_DATA_GAP_REPAIR_V0_26_COMPLETE"
+          assert s["stage_status"] == "PARTIAL"
+          assert s["lineage_scope"] == "LEGACY_PRE_MASTER_RESEARCH_LINEAGE"
+          assert s["current_master_canonical_universe_reconciled"] is False
+          assert s["strict_u3k_frozen"] is False
+          assert s["legacy_instrument_unresolved_rows"] == 650
+          assert s["hkex"]["matched_rows"] == 82
+          assert s["hkex"]["isin_compatible_rows"] == 82
+          assert s["hkex"]["instrument_decisions_changed"] == 0
+          assert len(hk) == 82
+          assert hk["Current_ISIN_Match_v0_26"].astype(str).str.lower().eq("true").all()
+          assert s["candidate_links"]["frozen_rows"] == 244
+          assert s["candidate_links"]["links_fetched_in_v0_26"] == 0
+          assert len(links) == 244
+          assert s["data_repair"]["target_rows"] == 55
+          assert s["data_repair"]["data_or_fx_rows"] == 5
+          assert s["data_repair"]["source_cache_states_before"] == 3657
+          assert s["data_repair"]["source_cache_ready_before"] == 3602
+          assert s["data_repair"]["source_cache_non_ready_before"] == 55
+          assert s["data_repair"]["work_cache_states_after"] == 3657
+          assert len(after) == 55 and len(datafx) == 5
+          assert s["instrument_decisions_changed"] == 0
+          assert s["eligibility_promotions_made"] == 0
+          assert s["p0_run"] is False and s["sector_rs_performed"] is False
+          assert s["alpha_vantage_allowed"] is False and s["productive_trading_authority"] is False
+          assert s["canonical_master_mutated"] is False and s["historical_artifacts_mutated"] is False
+          assert s["coverage_gate_status"] == "BLOCKED_RESEARCH_PARTIAL_NOT_GLOBAL_STRICT"
+          assert s["failed_source"] == "KRX_DATA_MARKETPLACE"
+          assert s["next_stage"] == "OFFICIAL_SECURITY_TYPE_SEMANTICS_AND_REPAIRED_DATA_REQUALIFICATION"
+          assert c["status"] == "PARTIAL" and c["input_count"] == 710 and c["checked_count"] == 710
+          assert c["instrument_decisions_changed"] == 0 and c["eligibility_promotions_made"] == 0
+
+          if s["data_repair"]["cache_promotion_recommended"]:
+              assert s["data_repair"]["hard_failure_rows"] == 0
+              assert promo == "PROMOTED_V026_WORK_CACHE_TO_MAIN"
+              con = sqlite3.connect("runtime_cache/full_3663_prices.sqlite")
+              try:
+                  assert con.execute("SELECT COUNT(*) FROM cache_state").fetchone()[0] == 3657
+              finally:
+                  con.close()
+          else:
+              assert s["data_repair"]["hard_failure_rows"] > 0
+              assert promo == "NOT_PROMOTED_HARD_FAILURES_PRESENT"
+
+          required = {
+              "hkex_current_exact_match_audit_v0.26.csv",
+              "hkex_current_category_counts_v0.26.csv",
+              "official_candidate_link_priority_v0.26.csv",
+              "official_candidate_link_shortlist_v0.26.csv",
+              "official_source_materialization_state_v0.26.csv",
+              "source_blockers_carried_forward_v0.26.csv",
+              "data_history_before_state_v0.26.csv",
+              "data_history_after_state_v0.26.csv",
+              "data_history_repair_queue_v0.26.csv",
+              "data_or_fx_recompute_queue_v0.26.csv",
+              "summary_v0.26.json",
+              "stage_checkpoint_v0.26.json"
+          }
+          assert required.issubset(set(m["files"]))
+          print("OFFICIAL_SOURCE_MATERIALIZATION_DATA_GAP_REPAIR_V0_26_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Reparierten Cache speichern
+        if: steps.repair.outputs.promote == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: runtime_cache/full_3663_prices.sqlite
+          key: full-3663-price-${{ runner.os }}-v026-${{ github.run_id }}
+
+      - name: Ergebnisse committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_official_source_materialization_data_repair_v0_26
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Materialize official sources and repair data gaps v0.26"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-source-materialization-data-repair-v0.26
+          path: output_official_source_materialization_data_repair_v0_26/
