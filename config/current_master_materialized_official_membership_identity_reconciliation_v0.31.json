@@ -1,0 +1,43 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_MATERIALIZED_OFFICIAL_MEMBERSHIP_IDENTITY_RECONCILIATION_CONFIG_V0_31",
+  "run_id": "WS-LONG-CURRENT-MASTER-MEMBERSHIP-IDENTITY-RECONCILIATION-2026-08-30-v0.31",
+  "output_dir": "output_current_master_membership_identity_reconciliation_v0_31",
+  "inputs": {
+    "master_spec": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
+    "v030_summary": "output_current_master_source_deep_materialization_v0_30/summary_v0.30.json",
+    "v030_checkpoint": "output_current_master_source_deep_materialization_v0_30/stage_checkpoint_v0.30.json",
+    "v030_b3_raw": "output_current_master_source_deep_materialization_v0_30/b3_ibrx100_official_raw_v0.30.json",
+    "v030_b3_membership": "output_current_master_source_deep_materialization_v0_30/b3_ibrx100_membership_v0.30.csv",
+    "v030_bmv_text": "output_current_master_source_deep_materialization_v0_30/bmv_ipc_final_rebalance_text_v0.30.txt",
+    "current_handoff": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
+  },
+  "identity": {
+    "primary_mic": "BVMF",
+    "primary_mic_evidence_url": "https://www.b3.com.br/lumis/portal/file/fileDownload.jsp?fileId=8AA8D0976133DB2C0161344308732779",
+    "isin_policy": "DO_NOT_GUESS_IF_NOT_IN_OFFICIAL_MEMBERSHIP_SOURCE"
+  },
+  "source": {
+    "b3_endpoint_base": "https://sistemaswebb3-listados.b3.com.br/indexProxy/indexCall/GetPortfolioDay",
+    "b3_type_on_semantics": "ORDINARY_SHARE",
+    "b3_type_pn_semantics": "PREFERRED_SHARE",
+    "b3_type_unit_semantics": "UNIT"
+  },
+  "handoff": {
+    "versioned_path": "WELT-SWING-CURRENT-Handoff-v0.31.md",
+    "stable_path": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
+  },
+  "governance": {
+    "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+    "offline_only": true,
+    "external_requests_allowed": 0,
+    "canonical_import_allowed": false,
+    "universe_mutation_allowed": false,
+    "liquidity_gate_allowed": false,
+    "eligibility_promotions_allowed": false,
+    "price_downloads_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_run_allowed": false,
+    "alpha_vantage_allowed": false,
+    "productive_trading_authority": false
+  }
+}
