@@ -82,14 +82,22 @@ def coverage_layout(ws):
     hs={c:txt(ws.cell(hr,c).value).lower().replace(" ","_") for c in range(1,ws.max_column+1)}
     cc=[c for c,h in hs.items() if c!=segcol and any(t in h for t in ("count","rows","members","constituents"))]
     sc=[c for c,h in hs.items() if c!=segcol and any(t in h for t in ("status","state"))]
-    req(len(cc)==1 and len(sc)==1,f"IMPORT_COVERAGE_SCHEMA_AMBIGUOUS: count={cc} status={sc}")
+    req(len(sc)==1,f"IMPORT_COVERAGE_SCHEMA_AMBIGUOUS: status={sc}")
     sr={}
     for r in range(hr+1,ws.max_row+1):
         v=txt(ws.cell(r,segcol).value)
         if v in TARGETS:
             req(v not in sr,f"DUPLICATE_IMPORT_COVERAGE_SEGMENT: {v}"); sr[v]=r
     req(set(OLD_SEGMENTS)<=set(sr),"IMPORT_COVERAGE_MISSING_EXISTING_SEGMENTS")
-    return {"hr":hr,"seg":segcol,"count":cc[0],"status":sc[0],"rows":sr}
+    matching=[]
+    for candidate in cc:
+        try:
+            if all(intval(ws.cell(sr[seg],candidate).value)==expected for seg,expected in OLD_SEGMENTS.items()):
+                matching.append(candidate)
+        except RuntimeError:
+            pass
+    req(len(matching)==1,f"IMPORT_COVERAGE_SCHEMA_AMBIGUOUS: count={cc} matching_current_rows={matching}")
+    return {"hr":hr,"seg":segcol,"count":matching[0],"status":sc[0],"rows":sr}
 
 def intval(v):
     try:return int(float(txt(v)))
