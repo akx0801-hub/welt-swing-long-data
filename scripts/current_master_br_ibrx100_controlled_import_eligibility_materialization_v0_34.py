@@ -54,7 +54,7 @@ def rjson(path):
 
 def wjson(path,obj):
     Path(path).parent.mkdir(parents=True,exist_ok=True)
-    Path(path).write_text(json.dumps(obj,ensure_ascii=False,indent=2,sort_keys=True)+"\\n",encoding="utf-8")
+    Path(path).write_text(json.dumps(obj,ensure_ascii=False,indent=2,sort_keys=True)+"\n",encoding="utf-8")
 
 def rcsv(path):
     req(Path(path).is_file(),f"MISSING_INPUT: {path}")
@@ -62,7 +62,7 @@ def rcsv(path):
 
 def wcsv(df,path):
     Path(path).parent.mkdir(parents=True,exist_ok=True)
-    df.to_csv(path,index=False,lineterminator="\\n")
+    df.to_csv(path,index=False,lineterminator="\n")
 
 def norm(df):
     out=df.copy()
