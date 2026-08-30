@@ -1,0 +1,127 @@
+name: Welt-Swing BR IBrX100 Controlled Import v0.34
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config/current_master_br_ibrx100_controlled_import_eligibility_materialization_v0.34.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: current-master-br-ibrx100-controlled-import-v0.34
+  cancel-in-progress: false
+
+jobs:
+  controlled_import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Python Setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install openpyxl
+
+      - name: Python compile gate
+        run: |
+          python -m py_compile scripts/current_master_br_ibrx100_controlled_import_eligibility_materialization_v0_34.py
+
+      - name: Self-Test
+        run: |
+          python scripts/current_master_br_ibrx100_controlled_import_eligibility_materialization_v0_34.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob() {
+            local path="$1"
+            local expected="$2"
+            test -f "$path"
+            local actual
+            actual="$(git hash-object "$path")"
+            if [ "$actual" != "$expected" ]; then
+              echo "FROZEN INPUT MISMATCH: $path expected=$expected actual=$actual"
+              exit 1
+            fi
+          }
+          check_blob "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md" "680d0434e534d1fe136e694ca05cb574958a1a24"
+          check_blob "WELT-SWING-CURRENT-Handoff-v0.33.md" "f91dfbcf12d216fa75d64d33ae27d6b5035763bb"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/summary_v0.33.json" "3ef82f661652dcb840d41119984826b11cbca9ce"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/stage_checkpoint_v0.33.json" "927cd7e3955c9446826a64ae34bda220b86b7583"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_controlled_master_import_plan_v0.33.csv" "9f47edb54751a77816f103eafb2840f1ce71fd5b"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_master_import_projection_v0.33.csv" "46a08368683e6ccf7abeb1af41ae343e741ce986"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_standard_eligibility_ready_v0.33.csv" "0446fd7c6620137100ac200e32949222e090bd78"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_standard_eligibility_v0.33.csv" "0446fd7c6620137100ac200e32949222e090bd78"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_low_liquidity_exception_pool_v0.33.csv" "f894e02789c1130368a551a86e4985eb4d6b783c"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_standard_exclusions_v0.33.csv" "21e90b5bff2ebce39cc0029486b22bed72c98092"
+          check_blob "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_history_gate_v0.33.csv" "d39b54f869f7bd7a3dbf04d7f70de5afede58d9e"
+          check_blob "universe/segments/br_ibrx100_source_frozen_v0.32.csv" "aeb03d77ae80818312cbeb70e2643bae1f521fde"
+          check_blob "output_current_master_br_ibrx100_liquidity_v0_32/br_ibrx100_liquidity_precheck_v0.32.csv" "c03010329f7f74fca50576d9be5e0250cf3b0fd9"
+          check_blob "universe/Welt-Swing-Universe-Master-v2.0.xlsx" "0d58014169873ac0ee52ca739a60e09f8bd5799f"
+          check_blob "universe/research_partial_1535.csv" "246db0440e49ecd1108d74a8d939fc1988ce38b0"
+
+      - name: Controlled Import Stage
+        run: |
+          python scripts/current_master_br_ibrx100_controlled_import_eligibility_materialization_v0_34.py \
+            --config config/current_master_br_ibrx100_controlled_import_eligibility_materialization_v0.34.json
+
+      - name: Post-Import Result Gates
+        run: |
+          python scripts/current_master_br_ibrx100_controlled_import_eligibility_materialization_v0_34.py \
+            --config config/current_master_br_ibrx100_controlled_import_eligibility_materialization_v0.34.json \
+            --validate
+          git diff --exit-code -- universe/research_partial_1535.csv
+          test "$(git hash-object universe/snapshots/Welt-Swing-Universe-Master-v2.0-pre-BR-v0.34.xlsx)" = "0d58014169873ac0ee52ca739a60e09f8bd5799f"
+
+      - name: Outputs, Current Master und CURRENT Handoff committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add universe/Welt-Swing-Universe-Master-v2.0.xlsx
+          git add universe/snapshots/Welt-Swing-Universe-Master-v2.0-pre-BR-v0.34.xlsx
+          git add universe/segments/br_ibrx100_eligibility_state_v0.34.csv
+          git add universe/segments/br_ibrx100_standard_eligibility_ready_v0.34.csv
+          git add universe/research_partial_1633.csv
+          git add universe/research_partial_1633_manifest.json
+          git add output_current_master_br_ibrx100_import_v0_34/
+          git add WELT-SWING-CURRENT-Handoff-v0.34.md
+          git add WELT-SWING-CURRENT-Handoff-CURRENT.md
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Complete B3 IBrX100 controlled import v0.34"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-master-br-ibrx100-controlled-import-v0.34
+          path: |
+            output_current_master_br_ibrx100_import_v0_34/
+            universe/snapshots/Welt-Swing-Universe-Master-v2.0-pre-BR-v0.34.xlsx
+            universe/segments/br_ibrx100_eligibility_state_v0.34.csv
+            universe/segments/br_ibrx100_standard_eligibility_ready_v0.34.csv
+            universe/research_partial_1633.csv
+            universe/research_partial_1633_manifest.json
+            WELT-SWING-CURRENT-Handoff-v0.34.md
+            WELT-SWING-CURRENT-Handoff-CURRENT.md
