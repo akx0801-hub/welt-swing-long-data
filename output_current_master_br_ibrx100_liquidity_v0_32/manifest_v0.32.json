@@ -1,0 +1,61 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_BR_IBRX100_SOURCE_SEGMENT_FREEZE_AND_LIQUIDITY_PRECHECK_MANIFEST_V0_32",
+  "generated_utc": "2026-08-30T10:28:53.540159+00:00",
+  "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+  "input_hash": "469a8527114339ced37862c87470889eace860825046b3722750f020bc0ea82c",
+  "parameter_hash": "98c65d96bce4b72a8a900a6761d02efb2d5a59ee3ddc4e14adb1daffc15c12ef",
+  "core_output_hash": "cf5303557728ba134fe810d0f26e1d7c358c9563a875816cffbc5884f3180a56",
+  "provider": "YFINANCE_FREE",
+  "turnover_method": "PRICE_X_VOLUME_TURNOVER_APPROXIMATION",
+  "alpha_vantage_allowed": false,
+  "eligibility_promotion_v0_32": false,
+  "canonical_master_import_v0_32": false,
+  "universe_mutated": false,
+  "p0_run": false,
+  "files": {
+    "universe/segments/br_ibrx100_source_frozen_v0.32.csv": {
+      "sha256": "90ccd83a6eff131879859c3eb662d046ce4370460630b40f1f965babc4f0ca93",
+      "bytes": 49525
+    },
+    "universe/segments/br_ibrx100_strict_ordinary_frozen_v0.32.csv": {
+      "sha256": "13774874f7452f271be05a5e50d8355b50b60088b4e28f196c1aef41afa11428",
+      "bytes": 40019
+    },
+    "output_current_master_br_ibrx100_liquidity_v0_32/br_ibrx100_liquidity_precheck_v0.32.csv": {
+      "sha256": "7bf10cc77a7b383076b5d0731fc49711f9aa82d1b85112bb6e00ff2cfa503acc",
+      "bytes": 18787
+    },
+    "output_current_master_br_ibrx100_liquidity_v0_32/br_ibrx100_price_data_quality_v0.32.csv": {
+      "sha256": "b75979e97918481e768056e3065b329a9907b11990d04af29e4f96440e50a163",
+      "bytes": 15284
+    },
+    "output_current_master_br_ibrx100_liquidity_v0_32/br_ibrx100_price_history_v0.32.csv": {
+      "sha256": "19679781eee4eae4ac51d919e101f08b2514bdc780e09b2b0f344a96b202d0f8",
+      "bytes": 1381092
+    },
+    "output_current_master_br_ibrx100_liquidity_v0_32/eurbrl_fx_history_v0.32.csv": {
+      "sha256": "05a5c6519cff7c9d1092d03e24565986b83477028025f0bb89b2fff50261c14f",
+      "bytes": 3674
+    },
+    "output_current_master_br_ibrx100_liquidity_v0_32/liquidity_class_counts_v0.32.csv": {
+      "sha256": "46c1edcfacab95c4842261e582548d5efe8eb5f4d23029b07bd55b836213f95e",
+      "bytes": 135
+    },
+    "output_current_master_br_ibrx100_liquidity_v0_32/summary_v0.32.json": {
+      "sha256": "863dc29f3f0570a648c66a2740227cf466765d069bab3fbeffe8e3431d1df914",
+      "bytes": 2440
+    },
+    "output_current_master_br_ibrx100_liquidity_v0_32/stage_checkpoint_v0.32.json": {
+      "sha256": "6d599ecef50b526f89007f811d1b2e863746d465f1a9d3a865c7ffcf512fe4fd",
+      "bytes": 1418
+    },
+    "WELT-SWING-CURRENT-Handoff-v0.32.md": {
+      "sha256": "3885ae4d4d233f6b81e9d301e04432fa9cb3af3fdbc8db1ef80ed441a9944f45",
+      "bytes": 3910
+    },
+    "WELT-SWING-CURRENT-Handoff-CURRENT.md": {
+      "sha256": "3885ae4d4d233f6b81e9d301e04432fa9cb3af3fdbc8db1ef80ed441a9944f45",
+      "bytes": 3910
+    }
+  }
+}
