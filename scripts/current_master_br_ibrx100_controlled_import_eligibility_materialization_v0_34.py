@@ -133,8 +133,8 @@ def update_summary(ws):
     found=None
     for r in range(1,min(ws.max_row,20)+1):
         vals=[txt(ws.cell(r,c).value).lower().replace(" ","_") for c in range(1,ws.max_column+1)]
-        ks=[i+1 for i,v in enumerate(vals) if v in {"key","metric","field","item"}]
-        vs=[i+1 for i,v in enumerate(vals) if v in {"value","result","current_value"}]
+        ks=[i+1 for i,v in enumerate(vals) if v in {"key","metric","field","item"} or "key" in v or "metric" in v]
+        vs=[i+1 for i,v in enumerate(vals) if v in {"value","result","current_value"} or "value" in v or "result" in v]
         if len(ks)==1 and len(vs)==1:found=(r,ks[0],vs[0]);break
     req(found is not None,"RUN_SUMMARY_SCHEMA_AMBIGUOUS: key/value table not found")
     hr,kc,vc=found; existing={}
