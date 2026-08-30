@@ -1,0 +1,19 @@
+{
+  "canonical_master_import_v0_34": true,
+  "current_master_rows": 1633,
+  "eligibility_state_materialized_v0_34": true,
+  "imported_target_segments": 8,
+  "lineage": "CURRENT_MASTER_CLEAN_RESTART",
+  "missing_target_segments": 6,
+  "next_stage": "CURRENT_MASTER_REMAINING_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION",
+  "p0_run": false,
+  "productive": false,
+  "productive_eligibility_promotion_v0_34": false,
+  "result_gates_passed": true,
+  "schema": "WELT_SWING_CURRENT_MASTER_BR_IBRX100_CONTROLLED_IMPORT_ELIGIBILITY_MATERIALIZATION_V0_34_CHECKPOINT",
+  "stage_classification": "PARTIAL",
+  "stage_id": "CURRENT_MASTER_BR_IBRX100_CONTROLLED_SOURCE_SUPERSET_IMPORT_AND_ELIGIBILITY_STATE_MATERIALIZATION",
+  "status": "SUCCESS",
+  "universe_mutated_v0_34": true,
+  "version": "v0.34"
+}

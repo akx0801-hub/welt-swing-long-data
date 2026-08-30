@@ -1,0 +1,6 @@
+Check,Actual,Expected,State
+Universe_Master_Rows,1633,1633,PASS
+Unique_WS_ID,1633,1633,PASS
+Unique_MIC_Ticker,1633,1633,PASS
+BR_IBRX100_Rows,98,98,PASS
+Old_WS_ID_Preserved,1535,1535,PASS

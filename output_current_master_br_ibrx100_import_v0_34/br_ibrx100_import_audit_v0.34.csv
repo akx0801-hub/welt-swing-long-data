@@ -1,0 +1,7 @@
+Gate,Expected,Actual,State
+Pre-Import Master Rows,1535,1535,PASS
+Post-Import Master Rows,1633,1633,PASS
+Added Brazil Rows,98,98,PASS
+Changed Preexisting Rows,0,0,PASS
+Collision Count,0,0,PASS
+Backup SHA256 equals input,bfef93b8a3abbc5f641a5db52b17c10f36455add748b66c55d907d027caaecba,bfef93b8a3abbc5f641a5db52b17c10f36455add748b66c55d907d027caaecba,PASS

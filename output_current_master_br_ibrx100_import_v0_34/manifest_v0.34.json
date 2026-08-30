@@ -1,0 +1,97 @@
+{
+  "files": [
+    {
+      "bytes": 354,
+      "path": "output_current_master_br_ibrx100_import_v0_34/br_ibrx100_import_audit_v0.34.csv",
+      "sha256": "c43b885d72f5d6f7a7b7bd85bf529c71f7e1a24d72aed9acb009c0d69d5dc077"
+    },
+    {
+      "bytes": 31025,
+      "path": "output_current_master_br_ibrx100_import_v0_34/br_ibrx100_imported_rows_v0.34.csv",
+      "sha256": "d80ccc83c71951f16096518d86a9681e997d9e07e6984eee7504eb6c39469b2a"
+    },
+    {
+      "bytes": 225,
+      "path": "output_current_master_br_ibrx100_import_v0_34/br_ibrx100_eligibility_state_audit_v0.34.csv",
+      "sha256": "0a6b1baf625f383dfc6edf17258ee0c9d86439610a57ab98d419dc72bdc89bc4"
+    },
+    {
+      "bytes": 231487,
+      "path": "output_current_master_br_ibrx100_import_v0_34/preexisting_1535_immutability_audit_v0.34.csv",
+      "sha256": "f661cfd6a5db27ae867b61ef9194e9172020aba97b353045a2b88cae4d844a37"
+    },
+    {
+      "bytes": 167,
+      "path": "output_current_master_br_ibrx100_import_v0_34/current_master_segment_inventory_v0.34.csv",
+      "sha256": "c7be3ceff369b4a4fb2561c396f422472b696edc39a9e85ab0c58da0218d05ef"
+    },
+    {
+      "bytes": 187,
+      "path": "output_current_master_br_ibrx100_import_v0_34/current_master_post_import_identity_audit_v0.34.csv",
+      "sha256": "46636f39881ae64ef94529bd9fc51bbe07238e2ba6b68a774b6e8c1acfae5ea8"
+    },
+    {
+      "bytes": 286,
+      "path": "output_current_master_br_ibrx100_import_v0_34/workbook_sheet_consistency_audit_v0.34.csv",
+      "sha256": "3aa8fec49ef64f57456a5f7d5d5066819a8944d422d29859c616e338e48de61a"
+    },
+    {
+      "bytes": 181,
+      "path": "output_current_master_br_ibrx100_import_v0_34/research_partial_1633_reconciliation_v0.34.csv",
+      "sha256": "e4d508fd9a29bb9e53037faaf4f4be5d3b32db7aa8a2a89d139914abb4739e79"
+    },
+    {
+      "bytes": 1998,
+      "path": "output_current_master_br_ibrx100_import_v0_34/summary_v0.34.json",
+      "sha256": "9447f7231a20e3cf5ea69b4763591d8abceeb89ed42cbb1c9a6abcef2806bceb"
+    },
+    {
+      "bytes": 795,
+      "path": "output_current_master_br_ibrx100_import_v0_34/stage_checkpoint_v0.34.json",
+      "sha256": "2b8b285e722fb4755001ab5f21b8cd92057a550aa6afca008daf5cdd85addcf7"
+    },
+    {
+      "bytes": 156504,
+      "path": "universe/snapshots/Welt-Swing-Universe-Master-v2.0-pre-BR-v0.34.xlsx",
+      "sha256": "bfef93b8a3abbc5f641a5db52b17c10f36455add748b66c55d907d027caaecba"
+    },
+    {
+      "bytes": 20453,
+      "path": "universe/segments/br_ibrx100_eligibility_state_v0.34.csv",
+      "sha256": "d43e5449b287414788b55f44b2b9809176c43ad0197e97cec9bb088385b663f3"
+    },
+    {
+      "bytes": 11167,
+      "path": "universe/segments/br_ibrx100_standard_eligibility_ready_v0.34.csv",
+      "sha256": "9ae5876d0d2d4988767bfdd6fd82111e4e8d7d9dda289c3b9b47704946bd1dff"
+    },
+    {
+      "bytes": 355070,
+      "path": "universe/research_partial_1633.csv",
+      "sha256": "11e0d3e5a2154d6755ecce1b549adbda21aea3b8b1d5e8889516535cee30d77e"
+    },
+    {
+      "bytes": 720,
+      "path": "universe/research_partial_1633_manifest.json",
+      "sha256": "c687a0b066200632268e386d8709a4e0f1d8f1c90acf81e54c4bc39aa926c294"
+    },
+    {
+      "bytes": 1717,
+      "path": "WELT-SWING-CURRENT-Handoff-v0.34.md",
+      "sha256": "fd79121172286460fdefe0fc2b69f1fd23ea77edfbd4fa16c2d7d3c53d4dfd2f"
+    },
+    {
+      "bytes": 1717,
+      "path": "WELT-SWING-CURRENT-Handoff-CURRENT.md",
+      "sha256": "fd79121172286460fdefe0fc2b69f1fd23ea77edfbd4fa16c2d7d3c53d4dfd2f"
+    },
+    {
+      "bytes": 170017,
+      "path": "universe/Welt-Swing-Universe-Master-v2.0.xlsx",
+      "sha256": "96d769b0611c05a6f41d5af41cc77d225a98f296f2a79eef3f2fc0b555bc1fdc"
+    }
+  ],
+  "generated_utc": "2026-08-30T16:09:40.301247+00:00",
+  "schema": "WELT_SWING_CURRENT_MASTER_BR_IBRX100_CONTROLLED_IMPORT_ELIGIBILITY_MATERIALIZATION_V0_34_MANIFEST",
+  "version": "v0.34"
+}

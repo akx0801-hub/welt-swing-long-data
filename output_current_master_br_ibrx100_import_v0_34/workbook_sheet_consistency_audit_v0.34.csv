@@ -1,0 +1,7 @@
+Sheet,Check,Actual,Expected,State
+Universe_Master,Rows,1633,1633,PASS
+Import_Coverage,Imported_Target_Segments,8,8,PASS
+Import_Coverage,Missing_Target_Segments,6,6,PASS
+Dedupe_Rules,Preserved,True,True,PASS
+Status_Definitions,Preserved,True,True,PASS
+Run_Summary,Updated,True,True,PASS
