@@ -257,6 +257,7 @@ def validate_inputs(cfg: dict, paths: dict[str, Path], data: dict) -> dict:
     require(source["Source_AsOf_Official"].eq(SOURCE_ASOF).all(), "Source as-of changed")
     require(source["ISIN"].eq("").all(), "Source contains non-authoritative ISIN")
     require(source["Identity_Gate_v0_31"].eq("PASS").all(), "Identity gate changed")
+    require(source["Source_Membership_Gate_v0_31"].eq("PASS_OFFICIAL_B3_IBRX100").all(), "Source membership gate changed")
     require(int(source["Instrument_Gate_v0_31"].eq("FAIL").sum()) == 19, "Instrument fail count changed")
     require(int(source["Instrument_Type_v0_31"].eq("PREFERRED_SHARE").sum()) == 12, "Preferred count changed")
     require(int(source["Instrument_Type_v0_31"].eq("UNIT").sum()) == 7, "Unit count changed")
@@ -445,7 +446,7 @@ def build_standard_eligibility(standard: pd.DataFrame, history: pd.DataFrame, so
     work = work.merge(source_fields, on="WS_ID", how="left", validate="one_to_one")
     rows: list[dict] = []
     for _, row in work.iterrows():
-        source_pass = txt(row["Source_Membership_Gate_v0_31"]) == "PASS"
+        source_pass = txt(row["Source_Membership_Gate_v0_31"]) == "PASS_OFFICIAL_B3_IBRX100"
         identity_pass = txt(row["Identity_Gate_v0_31"]) == "PASS"
         instrument_pass = txt(row["Instrument_Gate_v0_31"]) == "PASS" and txt(row["Instrument_Type_v0_31"]) == "ORDINARY_SHARE"
         liquidity_pass = txt(row["Liquidity_Class"]) in STANDARD_CLASSES
@@ -817,6 +818,15 @@ def validate_outputs(cfg: dict) -> None:
 
     require(len(eligibility) == 38 and eligibility["WS_ID"].nunique() == 38, "Eligibility ledger mismatch")
     require(set(eligibility["WS_ID"]) == standard_ids, "Eligibility set mismatch")
+    hard_ready = (
+        eligibility["Source_Gate_State"].eq("PASS_OFFICIAL_B3_IBRX100")
+        & eligibility["Identity_Gate_State"].eq("PASS")
+        & eligibility["Instrument_Gate_State"].eq("PASS")
+        & eligibility["Liquidity_Class"].isin(STANDARD_CLASSES)
+        & eligibility["Mapping_State"].eq("RESOLVED_FORMAT_AND_OHLCV")
+        & eligibility["History_Gate_State"].eq(HISTORY_PASS)
+    )
+    require(eligibility["Eligibility_Plan_State"].eq(ELIGIBILITY_READY).equals(hard_ready), "Eligibility ready classification does not equal all-hard-gates conjunction")
     require(len(ready) == int(eligibility["Eligibility_Plan_State"].eq(ELIGIBILITY_READY).sum()), "Ready subset mismatch")
     require(ready["History_Gate_State"].eq(HISTORY_PASS).all() if len(ready) else True, "Ready row without history PASS")
     require((ready["Canonical_Import_v0_33"].str.lower().eq("false")).all() if len(ready) else True, "Ready row imported")
