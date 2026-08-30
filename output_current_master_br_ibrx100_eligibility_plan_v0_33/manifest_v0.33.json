@@ -1,0 +1,78 @@
+{
+  "schema": "WELT_SWING_MANIFEST_V0_33",
+  "generated_utc": "2026-08-30T11:24:43.224258+00:00",
+  "stage_id": "CURRENT_MASTER_BR_IBRX100_ELIGIBILITY_GATE_COMPLETION_AND_CONTROLLED_SEGMENT_IMPORT_PLAN",
+  "version": "v0.33",
+  "files": [
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_history_gate_v0.33.csv",
+      "bytes": 8021,
+      "sha256": "b06802073ddceb08d61130b9b02f4ac0d3fc6ee36873837660d3158f3a41901c"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_standard_eligibility_v0.33.csv",
+      "bytes": 10779,
+      "sha256": "8a92d6ac3c75543bb385bea231e1007ea28fdec059f1910ce689f2b4e16122bb"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_standard_eligibility_ready_v0.33.csv",
+      "bytes": 383,
+      "sha256": "39222c28f303e73d592923b5e3c1b95e87d96acda09db2e8b3fd4d2e043159e2"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_low_liquidity_exception_pool_v0.33.csv",
+      "bytes": 8970,
+      "sha256": "1adc5a2c23f76759e30a470a6261db8f371470d20a0b9b7e346e3fe2b1cda5e0"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_standard_exclusions_v0.33.csv",
+      "bytes": 32111,
+      "sha256": "ebd471b7978188c0058109882c415d147e3fd7dcacaf6954e31c179f61e09944"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_master_collision_audit_v0.33.csv",
+      "bytes": 140,
+      "sha256": "5ae5bc887a8d3fe6c183632dce8dc045f60fda76985ea78ec165c67fbf0a6d39"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_controlled_master_import_plan_v0.33.csv",
+      "bytes": 28734,
+      "sha256": "7ca17823dc9f497a10f5d30a9031bd94e2b2387bd996611cd4770ca6ac56b91d"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_master_import_projection_v0.33.csv",
+      "bytes": 33083,
+      "sha256": "586ad4a19ab8121f33eaaeafc3a5c6c7a8905dd3b5833388c76537fcf6e5e9eb"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_history_cache_v0.33.csv",
+      "bytes": 3435277,
+      "sha256": "f6b4ff96ba37dce8208a476fc9816db9d86f3a5ea2d8e9fd7580189dffd3eb4d"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/eligibility_state_counts_v0.33.csv",
+      "bytes": 480,
+      "sha256": "9b10accc1cd35dcb2c8f0480ebe5b3b97a91a26733653f6406dfc19ae24f152a"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/summary_v0.33.json",
+      "bytes": 3000,
+      "sha256": "4c57ba8b01f1c9d3fee88f48b69d66a69dd83e9553771407b8ee169f6d8420a6"
+    },
+    {
+      "path": "output_current_master_br_ibrx100_eligibility_plan_v0_33/stage_checkpoint_v0.33.json",
+      "bytes": 1280,
+      "sha256": "e39a0c1f6bafeb7c5ce1183984a8dc4482c619a9bb830cf9674c83225c23d306"
+    },
+    {
+      "path": "WELT-SWING-CURRENT-Handoff-v0.33.md",
+      "bytes": 3853,
+      "sha256": "7b6015bff73e9a9a390b135c3f0a38f2160e8ab1a87a054e724bb2aba4b9e4c5"
+    },
+    {
+      "path": "WELT-SWING-CURRENT-Handoff-CURRENT.md",
+      "bytes": 3853,
+      "sha256": "7b6015bff73e9a9a390b135c3f0a38f2160e8ab1a87a054e724bb2aba4b9e4c5"
+    }
+  ]
+}
