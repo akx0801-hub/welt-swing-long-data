@@ -1,6 +1,6 @@
 {
   "schema": "WELT_SWING_CURRENT_MASTER_BR_IBRX100_ELIGIBILITY_GATE_COMPLETION_IMPORT_PLAN_V0_33",
-  "generated_utc": "2026-08-30T11:24:38.970295+00:00",
+  "generated_utc": "2026-08-30T11:45:58.278725+00:00",
   "run_status": "CURRENT_MASTER_BR_IBRX100_ELIGIBILITY_GATE_COMPLETION_AND_CONTROLLED_SEGMENT_IMPORT_PLAN_V0_33_COMPLETE",
   "stage_status": "PARTIAL",
   "status_label": "DEV / RESEARCH / SHADOW - NOT PRODUCTIVE",
@@ -24,12 +24,12 @@
   },
   "history_data_download_fail_count": 0,
   "eligibility_state_counts": {
-    "STANDARD_U3K_NOT_READY_DATA_QUALITY": 38,
+    "STANDARD_ELIGIBILITY_READY": 38,
     "LOW_LIQUIDITY_EXCEPTION_POOL": 28,
     "STANDARD_U3K_NOT_ELIGIBLE_INSTRUMENT": 19,
     "STANDARD_U3K_NOT_ELIGIBLE_LIQUIDITY": 13
   },
-  "standard_eligibility_ready": 0,
+  "standard_eligibility_ready": 38,
   "scalable_status_counts": {
     "SCALABLE_NOT_VERIFIED": 98
   },
@@ -38,7 +38,7 @@
   "import_plan_rows": 98,
   "master_projection_rows": 98,
   "expected_current_master_rows_after_future_br_import": 1633,
-  "history_price_asof": "2026-08-28",
+  "history_price_asof": "2026-08-27",
   "provider": "YFINANCE_FREE",
   "primary_mic": "BVMF",
   "source_asof": "2026-08-31",

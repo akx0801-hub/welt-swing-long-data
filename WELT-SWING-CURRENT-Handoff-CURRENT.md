@@ -1,10 +1,10 @@
 # WELT-SWING LONG DEV - CURRENT HANDOFF
 
 **Version:** v0.33
-**Generated UTC:** 2026-08-30T11:24:38.970295+00:00
+**Generated UTC:** 2026-08-30T11:45:58.278725+00:00
 **Status:** DEV / RESEARCH / SHADOW - NOT PRODUCTIVE
 **Primary lineage:** CURRENT_MASTER_CLEAN_RESTART
-**Trigger/input commit:** d9437e670f37d3403af78e6f2a9c91a7a2963557
+**Trigger/input commit:** 9aeed4cb95ebc1e3362f18770609c9288db3fec2
 
 ## 1. Authority
 
@@ -49,7 +49,7 @@ Only the 38 PASS_PREFERRED plus PASS_STANDARD candidates were downloaded.
 - Provider: YFINANCE_FREE
 - Primary market: B3 / BVMF
 - Yahoo mapping: Primary_Ticker.SA
-- History Price_AsOf: 2026-08-28
+- History Price_AsOf: 2026-08-27
 - History candidates checked: 38
 - PASS_HISTORY_STANDARD_U3K: 38
 - INSUFFICIENT_HISTORY_FOR_STANDARD_U3K: 0
@@ -61,7 +61,7 @@ Only the 38 PASS_PREFERRED plus PASS_STANDARD candidates were downloaded.
 
 ## 5. Standard eligibility plan
 
-- STANDARD_ELIGIBILITY_READY: 0
+- STANDARD_ELIGIBILITY_READY: 38
 - Meaning: all currently testable standard hard gates passed
 - Productive eligibility promotion: false
 
