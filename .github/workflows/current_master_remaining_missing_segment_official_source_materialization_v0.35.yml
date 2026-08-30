@@ -1,0 +1,39 @@
+name: Current Master Remaining Official Source Materialization v0.35
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/current_master_remaining_missing_segment_official_source_materialization_v0.35.json
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  v035:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Compile
+        run: python -m py_compile scripts/current_master_remaining_missing_segment_official_source_materialization_v0_35.py
+      - name: Self-test
+        run: python scripts/current_master_remaining_missing_segment_official_source_materialization_v0_35.py --self-test
+      - name: Frozen input gates and source materialization
+        run: python scripts/current_master_remaining_missing_segment_official_source_materialization_v0_35.py
+      - name: Result gates
+        run: |
+          test "$(python -c "import csv; print(sum(1 for _ in csv.DictReader(open('output_current_master_remaining_source_materialization_v0_35/remaining_segment_materialization_status_v0.35.csv'))))")" = 6
+          test "$(python -c "import json; x=json.load(open('output_current_master_remaining_source_materialization_v0_35/summary_v0.35.json')); print(x['current_master_rows'])")" = 1633
+          git diff --exit-code -- universe/Welt-Swing-Universe-Master-v2.0.xlsx universe/research_partial_1633.csv
+      - name: Commit outputs and handoff
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_current_master_remaining_source_materialization_v0_35 WELT-SWING-CURRENT-Handoff-v0.35.md WELT-SWING-CURRENT-Handoff-CURRENT.md
+          git diff --cached --quiet || git commit -m "v0.35 materialize remaining official source access evidence"
+          git push
+      - uses: actions/upload-artifact@v4
+        with:
+          name: current-master-remaining-source-materialization-v0.35
+          path: output_current_master_remaining_source_materialization_v0_35
