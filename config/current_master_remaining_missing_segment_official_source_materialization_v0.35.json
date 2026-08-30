@@ -1,0 +1,23 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_REMAINING_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION_V0_35",
+  "stage_id": "CURRENT_MASTER_REMAINING_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION",
+  "version": "v0.35",
+  "status": "DEV / RESEARCH / SHADOW - NOT PRODUCTIVE",
+  "frozen_baseline_commit": "63be0bba22911cbda752062862f6ea28127af913",
+  "frozen_inputs": [
+    "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
+    "WELT-SWING-CURRENT-Handoff-CURRENT.md",
+    "output_current_master_br_ibrx100_import_v0_34/summary_v0.34.json",
+    "output_current_master_br_ibrx100_import_v0_34/stage_checkpoint_v0.34.json",
+    "output_current_master_source_deep_materialization_v0_30/source_deep_materialization_status_v0.30.csv",
+    "output_current_master_missing_source_materialization_v0_29/official_source_probe_status_v0.29.csv",
+    "output_current_master_missing_source_materialization_v0_29/official_candidate_links_v0.29.csv",
+    "universe/Welt-Swing-Universe-Master-v2.0.xlsx",
+    "universe/research_partial_1633_manifest.json"
+  ],
+  "source_request_limit": 6,
+  "canonical_master_import_v0_35": false,
+  "universe_mutated_v0_35": false,
+  "eligibility_promotion_v0_35": false,
+  "alpha_vantage": false
+}
