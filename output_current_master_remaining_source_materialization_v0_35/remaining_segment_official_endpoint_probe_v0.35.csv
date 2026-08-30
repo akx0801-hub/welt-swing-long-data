@@ -1,0 +1,7 @@
+Segment_ID,Source_ID,URL,Browser_Reachable,Runner_Reachable,Authentication_Required,Subscription_Required,HTTP_Status,Content_Type,Response_Bytes,Expected_Segment,Parsed_Row_Count,Unique_Security_Count,Full_Membership_Claimed,Full_Membership_Validated,AsOf,Notes
+US_SP1500,OFFICIAL_US_SP1500,https://www.spglobal.com/spdji/en/indices/equity/sp-composite-1500/,true,false,unknown,unknown,,,0,US_SP1500,0,0,false,false,,Runner request failed: HTTP Error 403: Forbidden
+MX_IPC,OFFICIAL_MX_IPC,https://www.bmv.com.mx/en/markets/special-information,true,true,unknown,unknown,200,text/html,301385,MX_IPC,0,0,false,false,,Official page response captured; page response alone is not full membership.
+KR_KOSPI200,OFFICIAL_KR_KOSPI200,https://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd?locale=en,true,true,unknown,unknown,200,text/html,481762,KR_KOSPI200,0,0,false,false,,Official page response captured; page response alone is not full membership.
+AU_ASX200,OFFICIAL_AU_ASX200,https://www.spglobal.com/spdji/en/indices/equity/sp-asx-200/,true,false,unknown,unknown,,,0,AU_ASX200,0,0,false,false,,Runner request failed: HTTP Error 403: Forbidden
+NZ_NZX50,OFFICIAL_NZ_NZX50,https://www.nzx.com/markets/indices,true,true,unknown,unknown,200,text/html,485220,NZ_NZX50,0,0,false,false,,Official page response captured; page response alone is not full membership.
+ZA_TOP40,OFFICIAL_ZA_TOP40,https://www.jse.co.za/services/indices/ftsejse-africa-index-series,true,false,unknown,unknown,,,0,ZA_TOP40,0,0,false,false,,Runner request failed: HTTP Error 403: Forbidden

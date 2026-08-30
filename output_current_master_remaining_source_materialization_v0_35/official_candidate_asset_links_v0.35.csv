@@ -1,0 +1,7 @@
+Segment_ID,Source_ID,Candidate_URL,Official_Domain,Runner_Reproducible_Full_Membership,Notes
+US_SP1500,OFFICIAL_US_SP1500,https://www.spglobal.com/spdji/en/indices/equity/sp-composite-1500/,true,false,S&P DJI full constituents UI has no anonymous reproducible full export.
+MX_IPC,OFFICIAL_MX_IPC,https://www.bmv.com.mx/en/markets/special-information,true,false,BMV official change evidence is not a complete current IPC membership list.
+KR_KOSPI200,OFFICIAL_KR_KOSPI200,https://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd?locale=en,true,false,KRX platform reached; anonymous current constituent endpoint not validated.
+AU_ASX200,OFFICIAL_AU_ASX200,https://www.spglobal.com/spdji/en/indices/equity/sp-asx-200/,true,false,S&P page visible; no reproducible official full export.
+NZ_NZX50,OFFICIAL_NZ_NZX50,https://www.nzx.com/markets/indices,true,false,NZX states constituent data is no longer displayed and refers to S&P subscription.
+ZA_TOP40,OFFICIAL_ZA_TOP40,https://www.jse.co.za/services/indices/ftsejse-africa-index-series,true,false,JSE/FTSE-JSE constituent data route remains subscription/client-portal controlled.
