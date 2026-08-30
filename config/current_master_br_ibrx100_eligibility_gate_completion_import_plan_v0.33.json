@@ -7,7 +7,7 @@
   "handoff_current": "WELT-SWING-CURRENT-Handoff-CURRENT.md",
   "inputs": {
     "master_spec": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
-    "current_handoff": "WELT-SWING-CURRENT-Handoff-CURRENT.md",
+    "current_handoff": "WELT-SWING-CURRENT-Handoff-v0.32.md",
     "v032_summary": "output_current_master_br_ibrx100_liquidity_v0_32/summary_v0.32.json",
     "v032_checkpoint": "output_current_master_br_ibrx100_liquidity_v0_32/stage_checkpoint_v0.32.json",
     "v032_liquidity": "output_current_master_br_ibrx100_liquidity_v0_32/br_ibrx100_liquidity_precheck_v0.32.csv",
@@ -41,5 +41,5 @@
   "swing_u3k_frozen": false,
   "source_superset_complete": false,
   "alpha_vantage_allowed": false,
-  "retry_token": 1
+  "retry_token": 2
 }
