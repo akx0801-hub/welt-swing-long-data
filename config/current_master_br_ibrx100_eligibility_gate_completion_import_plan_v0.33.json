@@ -41,5 +41,5 @@
   "swing_u3k_frozen": false,
   "source_superset_complete": false,
   "alpha_vantage_allowed": false,
-  "retry_token": 0
+  "retry_token": 1
 }
