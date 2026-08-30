@@ -1,0 +1,199 @@
+name: Welt-Swing Membership Identity Reconciliation v0.31
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/current_master_materialized_official_membership_identity_reconciliation_v0.31.json"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  reconcile_membership_identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Pakete installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Selbsttest
+        run: |
+          python -m py_compile scripts/current_master_materialized_official_membership_identity_reconciliation_v0_31.py
+          python scripts/current_master_materialized_official_membership_identity_reconciliation_v0_31.py --self-test
+
+      - name: Frozen-Input-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob () {
+            local path="$1"
+            local expected="$2"
+            local actual
+            actual="$(git hash-object "$path")"
+            echo "$path -> $actual"
+            test "$actual" = "$expected"
+          }
+
+          check_blob "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md" "680d0434e534d1fe136e694ca05cb574958a1a24"
+          check_blob "output_current_master_source_deep_materialization_v0_30/summary_v0.30.json" "ff7ad96d319bc45c830ecadb4b22b79c34016486"
+          check_blob "output_current_master_source_deep_materialization_v0_30/stage_checkpoint_v0.30.json" "63f9f5e48a4d735e397956fbf1a64e8c0a08d1ab"
+          check_blob "output_current_master_source_deep_materialization_v0_30/b3_ibrx100_official_raw_v0.30.json" "efd5a73e52a9e3e54788fcad01efdd05222a23a0"
+          check_blob "output_current_master_source_deep_materialization_v0_30/b3_ibrx100_membership_v0.30.csv" "83fa1c8440dd3d50e00059e5a7697b2ce54cda55"
+          check_blob "output_current_master_source_deep_materialization_v0_30/bmv_ipc_final_rebalance_text_v0.30.txt" "33ab889dac856a509a9181a06af32aa6a3e501a4"
+          check_blob "WELT-SWING-CURRENT-Handoff-CURRENT.md" "f1d46ff7e1ab586d0108cdf270e796dd601e2d54"
+
+      - name: Identity Reconciliation
+        run: |
+          python scripts/current_master_materialized_official_membership_identity_reconciliation_v0_31.py \
+            --config config/current_master_materialized_official_membership_identity_reconciliation_v0.31.json
+
+      - name: Ergebnis-Gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+
+          out = Path("output_current_master_membership_identity_reconciliation_v0_31")
+          s = json.loads((out/"summary_v0.31.json").read_text(encoding="utf-8"))
+          c = json.loads((out/"stage_checkpoint_v0.31.json").read_text(encoding="utf-8"))
+          m = json.loads((out/"manifest_v0.31.json").read_text(encoding="utf-8"))
+
+          rec = pd.read_csv(out/"br_ibrx100_identity_reconciliation_v0.31.csv", keep_default_na=False)
+          strict = pd.read_csv(out/"br_ibrx100_strict_ordinary_candidates_v0.31.csv", keep_default_na=False)
+          excl = pd.read_csv(out/"br_ibrx100_instrument_exclusions_v0.31.csv", keep_default_na=False)
+          nv = pd.read_csv(out/"br_ibrx100_instrument_not_verified_v0.31.csv", keep_default_na=False)
+          mx = pd.read_csv(out/"mx_ipc_official_change_ledger_v0.31.csv", keep_default_na=False)
+          seg = pd.read_csv(out/"segment_identity_reconciliation_status_v0.31.csv", keep_default_na=False)
+
+          assert s["run_status"] == "CURRENT_MASTER_MATERIALIZED_OFFICIAL_MEMBERSHIP_IDENTITY_RECONCILIATION_V0_31_COMPLETE"
+          assert s["stage_status"] == "PARTIAL"
+          assert s["lineage_scope"] == "CURRENT_MASTER_CLEAN_RESTART"
+          assert s["current_master_rows_before"] == 1535
+          assert s["current_master_rows_after"] == 1535
+          assert s["canonical_segments_imported_v0_31"] == 0
+          assert s["br_ibrx100_source_asof"] == "2026-08-31"
+          assert s["br_primary_mic"] == "BVMF"
+          assert s["br_isin_guessed"] is False
+
+          counts = s["br_ibrx100_counts"]
+          assert counts["rows"] == 98
+          assert counts["identity_pass"] == 98
+          assert counts["instrument_pass"] + counts["instrument_fail"] + counts["instrument_not_verified"] == 98
+          assert counts["ordinary_share"] == counts["instrument_pass"]
+          assert counts["strict_candidates"] == counts["ordinary_share"]
+          assert counts["preferred_share"] + counts["unit"] == counts["instrument_fail"]
+          assert counts["unknown"] == counts["instrument_not_verified"]
+
+          assert len(rec) == 98
+          assert rec["Primary_Ticker"].nunique() == 98
+          assert rec["WS_ID_Candidate"].nunique() == 98
+          assert rec["Primary_MIC"].eq("BVMF").all()
+          assert rec["ISIN"].eq("").all()
+          assert not rec["Canonical_Master_Import_v0_31"].astype(str).str.lower().eq("true").any()
+
+          assert len(strict) == counts["strict_candidates"]
+          if len(strict):
+              assert strict["Instrument_Type_v0_31"].eq("ORDINARY_SHARE").all()
+              assert strict["Instrument_Gate_v0_31"].eq("PASS").all()
+              assert strict["Identity_Gate_v0_31"].eq("PASS").all()
+              assert strict["Needs_Liquidity_Gate"].astype(str).str.lower().eq("true").all()
+
+          assert len(excl) == counts["instrument_fail"]
+          if len(excl):
+              assert excl["Instrument_Type_v0_31"].isin(["PREFERRED_SHARE","UNIT"]).all()
+              assert excl["Instrument_Gate_v0_31"].eq("FAIL").all()
+
+          assert len(nv) == counts["instrument_not_verified"]
+          if len(nv):
+              assert nv["Instrument_Gate_v0_31"].eq("NOT_VERIFIED").all()
+
+          assert len(mx) == 2
+          assert set(mx["Action"]) == {"ADD","DROP"}
+          assert mx["Full_Current_Membership_Proven"].astype(str).str.lower().eq("false").all()
+          assert set(seg["Segment_ID"]) == {"BR_IBRX100","MX_IPC"}
+
+          assert s["mx_full_current_membership_proven"] is False
+          assert s["universe_mutated"] is False
+          assert s["eligibility_promotions_made"] == 0
+          assert s["liquidity_gate_run"] is False
+          assert s["price_downloads_performed"] is False
+          assert s["sector_rs_performed"] is False
+          assert s["p0_run"] is False
+          assert s["source_superset_complete"] is False
+          assert s["source_superset_frozen"] is False
+          assert s["swing_u3k_frozen"] is False
+          assert s["external_requests"] == 0
+          assert s["alpha_vantage_allowed"] is False
+          assert s["productive_trading_authority"] is False
+          assert s["next_stage"] == "CURRENT_MASTER_BR_IBRX100_SOURCE_SEGMENT_FREEZE_AND_LIQUIDITY_PRECHECK"
+
+          assert c["input_count"] == 98
+          assert c["checked_count"] == 98
+          assert c["pass_count"] == counts["strict_candidates"]
+          assert c["fail_count"] == counts["instrument_fail"]
+          assert c["quarantine_count"] == counts["instrument_not_verified"]
+          assert c["status"] == "PARTIAL"
+          assert c["universe_mutated"] is False
+
+          assert Path("WELT-SWING-CURRENT-Handoff-v0.31.md").exists()
+          assert Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").exists()
+          assert Path("WELT-SWING-CURRENT-Handoff-v0.31.md").read_bytes() == Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").read_bytes()
+
+          required = {
+              "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_identity_reconciliation_v0.31.csv",
+              "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_strict_ordinary_candidates_v0.31.csv",
+              "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_instrument_exclusions_v0.31.csv",
+              "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_instrument_not_verified_v0.31.csv",
+              "output_current_master_membership_identity_reconciliation_v0_31/mx_ipc_official_change_ledger_v0.31.csv",
+              "output_current_master_membership_identity_reconciliation_v0_31/segment_identity_reconciliation_status_v0.31.csv",
+              "output_current_master_membership_identity_reconciliation_v0_31/summary_v0.31.json",
+              "output_current_master_membership_identity_reconciliation_v0_31/stage_checkpoint_v0.31.json",
+              "WELT-SWING-CURRENT-Handoff-v0.31.md",
+              "WELT-SWING-CURRENT-Handoff-CURRENT.md",
+          }
+          assert required.issubset(set(m["files"]))
+          print("CURRENT_MASTER_MATERIALIZED_OFFICIAL_MEMBERSHIP_IDENTITY_RECONCILIATION_V0_31_WORKFLOW_GATES_PASS")
+          PY
+
+      - name: Ergebnisse und Current Handoff committen
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            output_current_master_membership_identity_reconciliation_v0_31 \
+            WELT-SWING-CURRENT-Handoff-v0.31.md \
+            WELT-SWING-CURRENT-Handoff-CURRENT.md
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen zu committen."
+          else
+            git commit -m "Reconcile B3 IBrX100 identity and instruments v0.31"
+            git push
+          fi
+
+      - name: Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-master-membership-identity-reconciliation-v0.31
+          path: |
+            output_current_master_membership_identity_reconciliation_v0_31/
+            WELT-SWING-CURRENT-Handoff-v0.31.md
+            WELT-SWING-CURRENT-Handoff-CURRENT.md
