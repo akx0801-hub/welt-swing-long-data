@@ -129,23 +129,19 @@ def update_coverage(ws):
     return {"imported":imported_n,"missing":14-imported_n,"status":imported}
 
 def update_summary(ws):
-    req(ws.max_column>=2,"RUN_SUMMARY_SCHEMA_AMBIGUOUS")
-    found=None
-    for r in range(1,min(ws.max_row,20)+1):
-        vals=[txt(ws.cell(r,c).value).lower().replace(" ","_") for c in range(1,ws.max_column+1)]
-        ks=[i+1 for i,v in enumerate(vals) if v in {"key","metric","field","item"} or "key" in v or "metric" in v]
-        vs=[i+1 for i,v in enumerate(vals) if v in {"value","result","current_value"} or "value" in v or "result" in v]
-        if len(ks)==1 and len(vs)==1:found=(r,ks[0],vs[0]);break
-    req(found is not None,"RUN_SUMMARY_SCHEMA_AMBIGUOUS: key/value table not found")
-    hr,kc,vc=found; existing={}
-    for r in range(hr+1,ws.max_row+1):
-        k=txt(ws.cell(r,kc).value)
-        if k:existing[k.lower()]=r
+    before=[[ws.cell(r,c).value for c in range(1,ws.max_column+1)] for r in range(1,ws.max_row+1)]
+    req(not any(txt(c.value)=="v0.34_Key" for row in ws.iter_rows() for c in row),"RUN_SUMMARY_V0_34_BLOCK_ALREADY_EXISTS")
+    start=ws.max_row+2
+    ws.cell(start,1).value="v0.34_Key"
+    ws.cell(start,2).value="v0.34_Value"
     updates={"Current_Master_Rows":1633,"Imported_Target_Segments":8,"Missing_Target_Segments":6,"BR_IBRX100_Rows":98,"Stage_Version":VERSION,"Stage_ID":STAGE_ID,"Stage_Status":"PARTIAL","Source_Superset_Complete":False,"P0_Run":False,"Productive":False,"Alpha_Vantage":False}
-    for k,v in updates.items():
-        r=existing.get(k.lower())
-        if r is None:r=ws.max_row+1;ws.cell(r,kc).value=k
-        ws.cell(r,vc).value=v
+    for offset,(key,value) in enumerate(updates.items(),1):
+        ws.cell(start+offset,1).value=key
+        ws.cell(start+offset,2).value=value
+    for r,values in enumerate(before,1):
+        req([ws.cell(r,c).value for c in range(1,ws.max_column+1)]==values,f"RUN_SUMMARY_PREEXISTING_CHANGED_ROW_{r}")
+    materialized={txt(ws.cell(r,1).value):ws.cell(r,2).value for r in range(start+1,start+1+len(updates))}
+    req(materialized==updates,"RUN_SUMMARY_V0_34_BLOCK_VALIDATION_FAILED")
 
 def load_inputs(cfg):
     p=cfg["inputs"]
