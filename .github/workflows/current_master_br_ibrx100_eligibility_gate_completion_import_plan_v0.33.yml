@@ -62,7 +62,7 @@ jobs:
             fi
           }
           check_blob "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md" "680d0434e534d1fe136e694ca05cb574958a1a24"
-          check_blob "WELT-SWING-CURRENT-Handoff-CURRENT.md" "6c89d8bf69a5cd4d7a0c522d836d9587ce052d42"
+          check_blob "WELT-SWING-CURRENT-Handoff-v0.32.md" "6c89d8bf69a5cd4d7a0c522d836d9587ce052d42"
           check_blob "output_current_master_br_ibrx100_liquidity_v0_32/summary_v0.32.json" "59e2fe0a2ebcb07a818071e065b8f16883cfabdb"
           check_blob "output_current_master_br_ibrx100_liquidity_v0_32/stage_checkpoint_v0.32.json" "02a23ebcb68827f57b764629c69e096813f4e9b8"
           check_blob "output_current_master_br_ibrx100_liquidity_v0_32/br_ibrx100_liquidity_precheck_v0.32.csv" "c03010329f7f74fca50576d9be5e0250cf3b0fd9"
