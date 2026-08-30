@@ -1,0 +1,55 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_BR_IBRX100_SOURCE_SEGMENT_FREEZE_AND_LIQUIDITY_PRECHECK_CONFIG_V0_32",
+  "run_id": "WS-LONG-CURRENT-MASTER-BR-IBRX100-SOURCE-FREEZE-LIQUIDITY-PRECHECK-2026-08-30-v0.32",
+  "stage_id": "CURRENT_MASTER_BR_IBRX100_SOURCE_SEGMENT_FREEZE_AND_LIQUIDITY_PRECHECK",
+  "stage_version": "v0.32",
+  "output_dir": "output_current_master_br_ibrx100_liquidity_v0_32",
+  "inputs": {
+    "master_spec": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
+    "v031_summary": "output_current_master_membership_identity_reconciliation_v0_31/summary_v0.31.json",
+    "v031_checkpoint": "output_current_master_membership_identity_reconciliation_v0_31/stage_checkpoint_v0.31.json",
+    "v031_identity_reconciliation": "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_identity_reconciliation_v0.31.csv",
+    "v031_strict_ordinary": "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_strict_ordinary_candidates_v0.31.csv",
+    "v031_instrument_exclusions": "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_instrument_exclusions_v0.31.csv",
+    "v030_b3_raw": "output_current_master_source_deep_materialization_v0_30/b3_ibrx100_official_raw_v0.30.json",
+    "current_handoff": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
+  },
+  "frozen_segments": {
+    "source_path": "universe/segments/br_ibrx100_source_frozen_v0.32.csv",
+    "strict_path": "universe/segments/br_ibrx100_strict_ordinary_frozen_v0.32.csv"
+  },
+  "price": {
+    "provider": "YFINANCE_FREE",
+    "yahoo_b3_suffix": ".SA",
+    "fx_symbol": "EURBRL=X",
+    "interval": "1d",
+    "lookback_calendar_days": 120,
+    "turnover_method": "PRICE_X_VOLUME_TURNOVER_APPROXIMATION",
+    "max_automatic_retries": 1
+  },
+  "liquidity": {
+    "required_valid_sessions": 20,
+    "thresholds": {
+      "preferred_eur": 20000000,
+      "standard_eur": 15000000,
+      "exception_pool_eur": 5000000
+    }
+  },
+  "handoff": {
+    "versioned_path": "WELT-SWING-CURRENT-Handoff-v0.32.md",
+    "stable_path": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
+  },
+  "governance": {
+    "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+    "canonical_master_import_allowed": false,
+    "eligibility_promotion_allowed": false,
+    "universe_mutation_allowed": false,
+    "p0_run_allowed": false,
+    "sector_rs_allowed": false,
+    "productive_allowed": false,
+    "swing_u3k_freeze_allowed": false,
+    "source_superset_complete": false,
+    "alpha_vantage_allowed": false
+  },
+  "next_stage": "CURRENT_MASTER_BR_IBRX100_ELIGIBILITY_GATE_COMPLETION_AND_CONTROLLED_SEGMENT_IMPORT_PLAN"
+}
