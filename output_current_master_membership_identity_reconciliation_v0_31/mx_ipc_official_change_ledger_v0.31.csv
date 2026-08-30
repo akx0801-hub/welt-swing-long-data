@@ -1,0 +1,3 @@
+Segment_ID,Ticker_Official_Announcement,Company_Name_Official,Action,Announcement_Date,Effective_Date,Evidence_Type,Full_Current_Membership_Proven,Canonical_Import_v0_31
+MX_IPC,VOLAR A,Controladora Vuela Compañía de Aviación S.A.B. de C.V.,ADD,2026-03-13,2026-03-23,OFFICIAL_FINAL_REBALANCE_CHANGE_ONLY,False,False
+MX_IPC,CUERVO *,"Becle, S.A. de C.V",DROP,2026-03-13,2026-03-23,OFFICIAL_FINAL_REBALANCE_CHANGE_ONLY,False,False

@@ -1,0 +1,54 @@
+{
+  "schema": "WELT_SWING_CURRENT_MASTER_MATERIALIZED_OFFICIAL_MEMBERSHIP_IDENTITY_RECONCILIATION_MANIFEST_V0_31",
+  "generated_utc": "2026-08-30T06:58:03.875173+00:00",
+  "lineage_scope": "CURRENT_MASTER_CLEAN_RESTART",
+  "input_hash": "2055cc815de302e08792b607c9d727bd5c0b6bb608629f1172cb066be14ebe89",
+  "parameter_hash": "ed13faadfb1ddf856c6d59f6607917541f3007a6f91a116415ff906d93804fe7",
+  "core_output_hash": "7c4b8d44b23962f78bb3cef0177b2f2a9c775d9cc8e6695f16a32997a8c62c02",
+  "external_requests": 0,
+  "per_security_web_calls": false,
+  "alpha_vantage_allowed": false,
+  "universe_mutated": false,
+  "files": {
+    "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_identity_reconciliation_v0.31.csv": {
+      "sha256": "90ccd83a6eff131879859c3eb662d046ce4370460630b40f1f965babc4f0ca93",
+      "bytes": 49525
+    },
+    "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_strict_ordinary_candidates_v0.31.csv": {
+      "sha256": "13774874f7452f271be05a5e50d8355b50b60088b4e28f196c1aef41afa11428",
+      "bytes": 40019
+    },
+    "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_instrument_exclusions_v0.31.csv": {
+      "sha256": "a84e058dc16c9b06f97845ef04a59c01f5aef2cecf45680fffa6ab7b0d5e5621",
+      "bytes": 9994
+    },
+    "output_current_master_membership_identity_reconciliation_v0_31/br_ibrx100_instrument_not_verified_v0.31.csv": {
+      "sha256": "76ef1c0619a86f95df7280b3c12706320ad6075b6cca00500297f3d63bc6030e",
+      "bytes": 488
+    },
+    "output_current_master_membership_identity_reconciliation_v0_31/mx_ipc_official_change_ledger_v0.31.csv": {
+      "sha256": "ca9aec60385a4adc25ce264a3d332a04572509a01333cbd567580d547eacb684",
+      "bytes": 431
+    },
+    "output_current_master_membership_identity_reconciliation_v0_31/segment_identity_reconciliation_status_v0.31.csv": {
+      "sha256": "e7886acb4a83a94004a66d57f9d29525ffc086f22daae1074bda7f13e6dbe840",
+      "bytes": 550
+    },
+    "output_current_master_membership_identity_reconciliation_v0_31/summary_v0.31.json": {
+      "sha256": "9279c0e8b3584386805e8663b6d1395df215e01c72ce225e24871e207fb706c4",
+      "bytes": 2174
+    },
+    "output_current_master_membership_identity_reconciliation_v0_31/stage_checkpoint_v0.31.json": {
+      "sha256": "a99939b6789cedb60f1eab76ea6c90f63618e06888a780af45432c7295adf0b0",
+      "bytes": 1191
+    },
+    "WELT-SWING-CURRENT-Handoff-v0.31.md": {
+      "sha256": "942300d145814d21db7c56deb7b8a991d02647c152ef85f6608099341040ba44",
+      "bytes": 3632
+    },
+    "WELT-SWING-CURRENT-Handoff-CURRENT.md": {
+      "sha256": "942300d145814d21db7c56deb7b8a991d02647c152ef85f6608099341040ba44",
+      "bytes": 3632
+    }
+  }
+}
