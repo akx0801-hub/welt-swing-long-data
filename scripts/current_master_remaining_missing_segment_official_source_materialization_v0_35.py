@@ -1,77 +1,58 @@
 #!/usr/bin/env python3
-"""v0.35: official-source materialization only; never mutates the master."""
-import csv, hashlib, json, pathlib, subprocess, sys, urllib.request, urllib.error
-from datetime import datetime, timezone
-
-ROOT=pathlib.Path(__file__).resolve().parents[1]
-OUT=ROOT/"output_current_master_remaining_source_materialization_v0_35"
-RAW=OUT/"raw_official_source"
-CFG=ROOT/"config/current_master_remaining_missing_segment_official_source_materialization_v0.35.json"
-SEGMENTS=[
- ("US_SP1500","SOURCE_BLOCKED_FULL_EXPORT_LOGIN_OR_LICENSE_REQUIRED","S&P DJI full constituents UI has no anonymous reproducible full export."),
- ("MX_IPC","OFFICIAL_CHANGE_DOCUMENTS_ONLY","BMV official change evidence is not a complete current IPC membership list."),
- ("KR_KOSPI200","OFFICIAL_SOURCE_FOUND_DATA_ENDPOINT_NOT_RESOLVED","KRX platform reached; anonymous current constituent endpoint not validated."),
- ("AU_ASX200","OFFICIAL_FULL_LIST_VISIBLE_BUT_REPRODUCIBLE_EXPORT_NOT_MATERIALIZED","S&P page visible; no reproducible official full export."),
- ("NZ_NZX50","OFFICIAL_ROUTE_SUBSCRIPTION_OR_LICENSE_REQUIRED","NZX states constituent data is no longer displayed and refers to S&P subscription."),
- ("ZA_TOP40","OFFICIAL_ROUTE_SUBSCRIPTION_OR_LICENSE_REQUIRED","JSE/FTSE-JSE constituent data route remains subscription/client-portal controlled.")
-]
-URLS={
- "US_SP1500":"https://www.spglobal.com/spdji/en/indices/equity/sp-composite-1500/",
- "MX_IPC":"https://www.bmv.com.mx/en/markets/special-information",
- "KR_KOSPI200":"https://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd?locale=en",
- "AU_ASX200":"https://www.spglobal.com/spdji/en/indices/equity/sp-asx-200/",
- "NZ_NZX50":"https://www.nzx.com/markets/indices",
- "ZA_TOP40":"https://www.jse.co.za/services/indices/ftsejse-africa-index-series"
-}
-def sha(p):
- h=hashlib.sha256()
- with open(p,"rb") as f:
-  for b in iter(lambda:f.read(1048576),b""): h.update(b)
- return h.hexdigest()
-def write_csv(name, rows, fields):
- with open(OUT/name,"w",newline="",encoding="utf-8") as f:
-  w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(rows)
-def git_blob(path):
- return subprocess.check_output(["git","hash-object",str(ROOT/path)],text=True).strip()
-def frozen_gate(cfg):
- baseline=cfg["frozen_baseline_commit"]; audit=[]
- for p in cfg["frozen_inputs"]:
-  actual=git_blob(p)
-  expected=subprocess.check_output(["git","rev-parse",f"{baseline}:{p}"],text=True).strip()
-  audit.append({"Path":p,"Expected_Blob_SHA":expected,"Actual_Blob_SHA":actual,"PASS":str(actual==expected).lower()})
- if not all(x["PASS"]=="true" for x in audit): raise RuntimeError("FROZEN_INPUT_GATE_FAILED")
- return audit
-def probe(segment,url):
- name=segment+"_official_page.html"
+"""v0.35-r2: real evidence-led official source materialization."""
+import csv,json,pathlib,shutil,subprocess,sys
+from io import BytesIO
+import requests
+from bs4 import BeautifulSoup
+from pypdf import PdfReader
+R=pathlib.Path(__file__).resolve().parents[1]; O=R/"output_current_master_remaining_source_materialization_v0_35"; RAW=O/"raw_official_source"; C=R/"config/current_master_remaining_missing_segment_official_source_materialization_v0.35.json"
+def out(n,rows,cols):
+ with open(O/n,"w",newline="",encoding="utf-8") as f:w=csv.DictWriter(f,fieldnames=cols);w.writeheader();w.writerows(rows)
+def gate(p,b):
+ a=subprocess.check_output(["git","hash-object",str(R/p)],text=True).strip();e=subprocess.check_output(["git","rev-parse",b+":"+p],text=True).strip()
+ if a!=e:raise RuntimeError("FROZEN_INPUT_GATE_FAILED "+p)
+ return {"Path":p,"Expected_Blob_SHA":e,"Actual_Blob_SHA":a,"PASS":True}
+def parse(body,ct):
+ text=""; rows=[]; codes=[]
+ if "pdf" in ct:
+  try:text="\n".join(x.extract_text() or "" for x in PdfReader(BytesIO(body)).pages)
+  except Exception:pass
+ elif "json" in ct:
+  try:
+   x=json.loads(body); text=json.dumps(x); rows=x.get("output",x.get("data",[])) if isinstance(x,dict) else x
+   for z in rows:
+    if isinstance(z,dict):
+     v=next((z.get(k) for k in ["ISU_CD","ISU_SRT_CD","code","symbol","ticker"] if z.get(k)),None)
+     if v:codes.append(str(v))
+  except Exception:pass
+ else:
+  text=body.decode("utf-8","ignore"); t=BeautifulSoup(text,"lxml").find("table")
+  if t:
+   rows=[[c.get_text(" ",strip=True) for c in r.find_all(["td","th"])] for r in t.find_all("tr")[1:]]
+   codes=[r[1] for r in rows if len(r)>1 and r[1]]
+ return text,rows,sorted(set(codes))
+def probe(e):
  try:
-  r=urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"WeltSwingResearch/0.35"}),timeout=25)
-  body=r.read(); status=getattr(r,"status",200); ctype=r.headers.get_content_type()
-  (RAW/name).write_bytes(body)
-  return {"Segment_ID":segment,"Source_ID":"OFFICIAL_"+segment,"URL":url,"Browser_Reachable":"true","Runner_Reachable":"true","Authentication_Required":"unknown","Subscription_Required":"unknown","HTTP_Status":status,"Content_Type":ctype,"Response_Bytes":len(body),"Expected_Segment":segment,"Parsed_Row_Count":0,"Unique_Security_Count":0,"Full_Membership_Claimed":"false","Full_Membership_Validated":"false","AsOf":"","Notes":"Official page response captured; page response alone is not full membership."}
- except Exception as e:
-  (RAW/(segment+"_request_error.json")).write_text(json.dumps({"url":url,"error":str(e)},indent=2),encoding="utf-8")
-  return {"Segment_ID":segment,"Source_ID":"OFFICIAL_"+segment,"URL":url,"Browser_Reachable":"true","Runner_Reachable":"false","Authentication_Required":"unknown","Subscription_Required":"unknown","HTTP_Status":"","Content_Type":"","Response_Bytes":0,"Expected_Segment":segment,"Parsed_Row_Count":0,"Unique_Security_Count":0,"Full_Membership_Claimed":"false","Full_Membership_Validated":"false","AsOf":"","Notes":"Runner request failed: "+str(e)[:240]}
-def handoff(status_rows):
- lines=["# WELT-SWING CURRENT HANDOFF v0.35","","Status: DEV / RESEARCH / SHADOW – NOT PRODUCTIVE","","- Current Master: 1633, unverändert","- Imported target segments: 8/14","- Missing target segments: 6/14","- Canonical_Master_Import_v0_35: false","- Universe_Mutated_v0_35: false","- Eligibility_Promotion_v0_35: false","- P0: false; Sector RS: false; SWING_U3K_FROZEN: false; Productive: false; Alpha Vantage: false","","## Missing-segment source materialization"]
- for x in status_rows: lines.append(f"- {x['Segment_ID']}: {x['Final_State_v0_35']} — rows {x['Materialized_Row_Count']}; blocker: {x['Primary_Blocker']}")
- lines += ["","- New full membership segments: 0","- Source Superset Complete: false","- Global stage: PARTIAL","- Next Stage: CURRENT_MASTER_REMAINING_SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION","","Recovery Order: v0.35 source-access remediation/governance decision; no identity stage until a reproducible official full membership exists.",""]
- text="\n".join(lines)
- (ROOT/"WELT-SWING-CURRENT-Handoff-v0.35.md").write_text(text,encoding="utf-8")
- (ROOT/"WELT-SWING-CURRENT-Handoff-CURRENT.md").write_text(text,encoding="utf-8")
+  q=requests.request(e.get("Method","GET"),e["URL"],data=e.get("Form_Data"),headers={"User-Agent":"WeltSwing/0.35-r2"},timeout=30,allow_redirects=True);ct=q.headers.get("content-type","").split(";")[0].lower(); RAW.joinpath(e["Segment_ID"]+"_"+e["Source_ID"]+".bin").write_bytes(q.content);t,rows,codes=parse(q.content,ct);lo=t.lower();claim=any(x in lo for x in ["full constituents","constituents list","constituent list"]);valid=claim and len(rows)>=e.get("Plausible_Min_Rows",99999) and len(codes)>=e.get("Plausible_Min_Rows",99999) and "top 10" not in lo
+  return dict(Segment_ID=e["Segment_ID"],Source_ID=e["Source_ID"],URL=e["URL"],Source_Type=e["Source_Type"],HTTP_Status=q.status_code,Content_Type=ct,Response_Bytes=len(q.content),Redirect_Final_URL=q.url,Authentication_Required=str("log in" in lo).lower(),Subscription_Required=str("subscription" in lo).lower(),Parsed_Row_Count=len(rows),Unique_Security_Count=len(codes),Full_Membership_Claimed=str(claim).lower(),Full_Membership_Validated=str(valid).lower(),AsOf="",Error_Class="",Evidence_Notes=t[:700].replace("\n"," "),Runner_Tested="true",Runner_Reproducible=str(q.status_code==200).lower(),Direct_Asset=str(e["Direct_Asset"]).lower())
+ except Exception as x:return dict(Segment_ID=e["Segment_ID"],Source_ID=e["Source_ID"],URL=e["URL"],Source_Type=e["Source_Type"],HTTP_Status="",Content_Type="",Response_Bytes=0,Redirect_Final_URL="",Authentication_Required="unknown",Subscription_Required="unknown",Parsed_Row_Count=0,Unique_Security_Count=0,Full_Membership_Claimed="false",Full_Membership_Validated="false",AsOf="",Error_Class=type(x).__name__,Evidence_Notes=str(x),Runner_Tested="true",Runner_Reproducible="false",Direct_Asset=str(e["Direct_Asset"]).lower())
+def state(s,ps):
+ p=[x for x in ps if x["Segment_ID"]==s];v=[x for x in p if x["Full_Membership_Validated"]=="true"];n=" ".join(x["Evidence_Notes"].lower() for x in p)
+ if v:return "FULL_OFFICIAL_MEMBERSHIP_MATERIALIZED",sum(int(x["Parsed_Row_Count"]) for x in v),"validated parsed official membership"
+ if "subscription" in n:return "OFFICIAL_ROUTE_SUBSCRIPTION_OR_LICENSE_REQUIRED",0,"official subscription evidence"
+ if "full constituents" in n:return "OFFICIAL_FULL_LIST_VISIBLE_BUT_REPRODUCIBLE_EXPORT_NOT_MATERIALIZED",0,"full-list UI without reproducible parse"
+ if "rebalance" in n or "quarterly review" in n:return "OFFICIAL_CHANGE_DOCUMENTS_ONLY",0,"official change/review asset only"
+ if s=="KR_KOSPI200" and any(x["Source_Type"]=="API" for x in p):return "OFFICIAL_SOURCE_FOUND_DATA_ENDPOINT_NOT_RESOLVED",0,"official KRX API candidate tested without validated constituents"
+ return "OFFICIAL_SOURCE_NOT_MATERIALIZED",0,"official routes tested without full membership"
 def main():
- if "--self-test" in sys.argv: print("SELF_TEST_OK"); return
- cfg=json.loads(CFG.read_text(encoding="utf-8")); OUT.mkdir(exist_ok=True); RAW.mkdir(exist_ok=True)
- gates=frozen_gate(cfg)
- probes=[probe(s,URLS[s]) for s,_,_ in SEGMENTS]
- status=[]
- for s,state,blocker in SEGMENTS:
-  status.append({"Segment_ID":s,"Prior_State":"UNMATERIALIZED_OFFICIAL_SOURCE","Final_State_v0_35":state,"Full_Official_Membership_Materialized":"false","Materialized_Row_Count":0,"Identity_Reconciliation_Required":"false","Canonical_Import_v0_35":"false","Primary_Blocker":blocker,"Next_Action":"SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION"})
- write_csv("remaining_segment_official_endpoint_probe_v0.35.csv",probes,list(probes[0]))
- write_csv("remaining_segment_source_access_ledger_v0.35.csv",[{**x,"FINAL_STATE":x["Final_State_v0_35"]} for x in status],list(status[0])+["FINAL_STATE"])
- write_csv("remaining_segment_materialization_status_v0.35.csv",status,list(status[0]))
- write_csv("official_candidate_asset_links_v0.35.csv",[{"Segment_ID":s,"Source_ID":"OFFICIAL_"+s,"Candidate_URL":URLS[s],"Official_Domain":"true","Runner_Reproducible_Full_Membership":"false","Notes":b} for s,_,b in SEGMENTS],["Segment_ID","Source_ID","Candidate_URL","Official_Domain","Runner_Reproducible_Full_Membership","Notes"])
- write_csv("materialized_membership_inventory_v0.35.csv",[],["Segment_ID","Membership_File","Rows","Canonical_Import_v0_35"])
- summary={"schema":"WELT_SWING_REMAINING_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION_V0_35","stage_id":"CURRENT_MASTER_REMAINING_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION","version":"v0.35","status":"DEV / RESEARCH / SHADOW - NOT PRODUCTIVE","lineage":"CURRENT_MASTER_CLEAN_RESTART","current_master_rows":1633,"imported_target_segments":8,"missing_segments_checked":6,"new_full_membership_segments":0,"canonical_master_import_v0_35":False,"universe_mutated_v0_35":False,"eligibility_promotion_v0_35":False,"p0":False,"sector_rs":False,"swing_u3k_frozen":False,"productive":False,"alpha_vantage":False,"source_superset_complete":False,"stage_status_global":"PARTIAL","next_stage":"CURRENT_MASTER_REMAINING_SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION","generated_utc":datetime.now(timezone.utc).isoformat()}
- for n in ["summary_v0.35.json","stage_checkpoint_v0.35.json","manifest_v0.35.json"]: (OUT/n).write_text(json.dumps({**summary,"frozen_input_audit":gates},indent=2,sort_keys=True)+"\n",encoding="utf-8")
- handoff(status); print(json.dumps(summary))
-if __name__=="__main__": main()
+ if "--self-test" in sys.argv:print("SELF_TEST_OK");return
+ c=json.loads(C.read_text());shutil.rmtree(O,ignore_errors=True);RAW.mkdir(parents=True);audit=[gate(p,c["frozen_baseline_commit"]) for p in c["frozen_inputs"]];ps=[probe(e) for e in c["candidate_endpoints"]];out("remaining_segment_official_endpoint_probe_v0.35.csv",ps,list(ps[0]))
+ st=[]
+ for s in c["segments"]:
+  z,n,b=state(s,ps);st.append(dict(Segment_ID=s,Prior_State="UNMATERIALIZED_OFFICIAL_SOURCE",Final_State_v0_35=z,Full_Official_Membership_Materialized=str(z=="FULL_OFFICIAL_MEMBERSHIP_MATERIALIZED").lower(),Materialized_Row_Count=n,Identity_Reconciliation_Required=str(n>0).lower(),Canonical_Import_v0_35="false",Primary_Blocker=b,Next_Action="IDENTITY_RECONCILIATION" if n else "SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION"))
+ out("remaining_segment_materialization_status_v0.35.csv",st,list(st[0]));out("remaining_segment_source_access_ledger_v0.35.csv",st,list(st[0]))
+ a=[dict(Segment_ID=e["Segment_ID"],Source_ID=e["Source_ID"],Candidate_URL=e["URL"],Discovery_Method=e["Discovery_Method"],Cloud_Browser_Visible=str(e["Discovered_In_Cloud_Browser"]).lower(),Direct_Asset=str(e["Direct_Asset"]).lower(),Official_Domain="true",Runner_Tested="true",Runner_Reproducible=next(x["Runner_Reproducible"] for x in ps if x["Source_ID"]==e["Source_ID"]),Full_Membership_Potential=e["Expected_Semantics"],Notes="") for e in c["candidate_endpoints"]];out("official_candidate_asset_links_v0.35.csv",a,list(a[0]));out("materialized_membership_inventory_v0.35.csv",[],["Segment_ID","Membership_File","Rows","Canonical_Import_v0_35"])
+ f=sum(x["Full_Official_Membership_Materialized"]=="true" for x in st);nx="CURRENT_MASTER_REMAINING_MATERIALIZED_SEGMENT_IDENTITY_RECONCILIATION" if f else "CURRENT_MASTER_REMAINING_SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION";sm=dict(revision="r2_real_deep_materialization",version="v0.35",current_master_rows=1633,imported_target_segments=8,missing_segments_checked=6,tested_official_endpoints=len(ps),direct_asset_or_api_candidates=sum(e["Direct_Asset"] for e in c["candidate_endpoints"]),new_full_membership_segments=f,next_stage=nx,canonical_master_import_v0_35=False,universe_mutated_v0_35=False,eligibility_promotion_v0_35=False,alpha_vantage=False,p0=False,sector_rs=False,swing_u3k_frozen=False,productive=False,source_superset_complete=False,stage_status_global="PARTIAL",frozen_input_audit=audit)
+ for n in ["summary_v0.35.json","stage_checkpoint_v0.35.json","manifest_v0.35.json"]:(O/n).write_text(json.dumps(sm,indent=2)+"\n")
+ h="# WELT-SWING CURRENT HANDOFF v0.35\n\nRevision: v0.35-r2 real deep materialization\n\n- Current Master: 1633 unchanged\n"+"\n".join("- "+x["Segment_ID"]+": "+x["Final_State_v0_35"]+" / rows "+str(x["Materialized_Row_Count"]) for x in st)+"\n\n- Next Stage: "+nx+"\n";(R/"WELT-SWING-CURRENT-Handoff-v0.35.md").write_text(h);(R/"WELT-SWING-CURRENT-Handoff-CURRENT.md").write_text(h)
+if __name__=="__main__":main()
