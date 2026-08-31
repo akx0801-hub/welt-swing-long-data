@@ -5742,6 +5742,12 @@ Special Information
                     <ul class="elements">
                         
                         
+                        <li><a href="/en/information-products">
+                            Information Products
+                            </a>
+                        </li>
+                        
+                        
                         <li><a href="/en/press-room">
                             Press Room
                             </a>
@@ -5760,6 +5766,18 @@ Special Information
                         </li>
                         
                         
+                        <li><a href="/en/markets/market-press-release">
+                            Market Press Release
+                            </a>
+                        </li>
+                        
+                        
+                        <li><a href="/en/markets/equity">
+                            Equity
+                            </a>
+                        </li>
+                        
+                        
                         <li><a href="http://feeds.feedburner.com/BmvBoletin">
                             RSS
                             </a>
@@ -5768,24 +5786,6 @@ Special Information
                         
                         <li><a href="/en/issuers/issuers-information">
                             Issuers Information
-                            </a>
-                        </li>
-                        
-                        
-                        <li><a href="/en/markets/market-press-release">
-                            Market Press Release
-                            </a>
-                        </li>
-                        
-                        
-                        <li><a href="/en/information-products">
-                            Information Products
-                            </a>
-                        </li>
-                        
-                        
-                        <li><a href="/en/markets/equity">
-                            Equity
                             </a>
                         </li>
                         
@@ -6179,34 +6179,34 @@ Special Information
                 <li>
                     <!-- Captcha -->
                     <div id='idcaptcha_registro' class='commonCaptcha'>
-                        <p class="special">To continue, please click on the number:<strong>&nbsp;SEVEN</strong></p>
+                        <p class="special">To continue, please click on the number:<strong>&nbsp;NINE</strong></p>
                         <ul id="captchaRegister" class="captcha">
                             
                             <li>
-                                <input class="default" id="idcaptcha_registro_4" name="captcha_idcaptcha_registro" type="radio" value="4"/>
-                                <input type="hidden" class="keyHidd_idcaptcha_registro_4" value='Y2I4OTE1Mzg4MmVmMDJmYWVhYzkwNzdiODk0N2VhMDM='/>
-                                <input type="hidden" class="dateHidd_idcaptcha_registro_4" value='2026-08-30 21:19:40.251'/>
-                                <label for="idcaptcha_registro_4">4</label>
-                            </li>
-                            
-                            <li>
-                                <input class="default" id="idcaptcha_registro_6" name="captcha_idcaptcha_registro" type="radio" value="6"/>
-                                <input type="hidden" class="keyHidd_idcaptcha_registro_6" value='Y2I4OTE1Mzg4MmVmMDJmYWVhYzkwNzdiODk0N2VhMDM='/>
-                                <input type="hidden" class="dateHidd_idcaptcha_registro_6" value='2026-08-30 21:19:40.251'/>
-                                <label for="idcaptcha_registro_6">6</label>
+                                <input class="default" id="idcaptcha_registro_3" name="captcha_idcaptcha_registro" type="radio" value="3"/>
+                                <input type="hidden" class="keyHidd_idcaptcha_registro_3" value='Yjg2ZTFjNGQwZjI4ZWU5ODAwMGYxYTU1NmM3MzA3NGU='/>
+                                <input type="hidden" class="dateHidd_idcaptcha_registro_3" value='2026-08-31 04:04:20.24'/>
+                                <label for="idcaptcha_registro_3">3</label>
                             </li>
                             
                             <li>
                                 <input class="default" id="idcaptcha_registro_7" name="captcha_idcaptcha_registro" type="radio" value="7"/>
-                                <input type="hidden" class="keyHidd_idcaptcha_registro_7" value='Y2I4OTE1Mzg4MmVmMDJmYWVhYzkwNzdiODk0N2VhMDM='/>
-                                <input type="hidden" class="dateHidd_idcaptcha_registro_7" value='2026-08-30 21:19:40.251'/>
+                                <input type="hidden" class="keyHidd_idcaptcha_registro_7" value='Yjg2ZTFjNGQwZjI4ZWU5ODAwMGYxYTU1NmM3MzA3NGU='/>
+                                <input type="hidden" class="dateHidd_idcaptcha_registro_7" value='2026-08-31 04:04:20.24'/>
                                 <label for="idcaptcha_registro_7">7</label>
                             </li>
                             
                             <li>
+                                <input class="default" id="idcaptcha_registro_8" name="captcha_idcaptcha_registro" type="radio" value="8"/>
+                                <input type="hidden" class="keyHidd_idcaptcha_registro_8" value='Yjg2ZTFjNGQwZjI4ZWU5ODAwMGYxYTU1NmM3MzA3NGU='/>
+                                <input type="hidden" class="dateHidd_idcaptcha_registro_8" value='2026-08-31 04:04:20.24'/>
+                                <label for="idcaptcha_registro_8">8</label>
+                            </li>
+                            
+                            <li>
                                 <input class="default" id="idcaptcha_registro_9" name="captcha_idcaptcha_registro" type="radio" value="9"/>
-                                <input type="hidden" class="keyHidd_idcaptcha_registro_9" value='Y2I4OTE1Mzg4MmVmMDJmYWVhYzkwNzdiODk0N2VhMDM='/>
-                                <input type="hidden" class="dateHidd_idcaptcha_registro_9" value='2026-08-30 21:19:40.251'/>
+                                <input type="hidden" class="keyHidd_idcaptcha_registro_9" value='Yjg2ZTFjNGQwZjI4ZWU5ODAwMGYxYTU1NmM3MzA3NGU='/>
+                                <input type="hidden" class="dateHidd_idcaptcha_registro_9" value='2026-08-31 04:04:20.24'/>
                                 <label for="idcaptcha_registro_9">9</label>
                             </li>
                             
@@ -6404,10 +6404,4 @@ Special Information
 
 	</body>
 </html>
-<!--Time: 87ms - SemanticWebBuilder: http://www.Grupo_BMV.swb#WebPage:Informacion_especial--> 
-<script id="f5_cspm">(function(){var f5_cspm={f5_p:'EPKBHKMBLAAHFLBAJCCKGDOJBFMDOIMJINHIBPHFKFJNBNPFPNEGMHNIOGFFLDJEIJEBEEFEAALDCGDIGMJAANFHAAECCGLBBJABNHJEMIBNFAOKELNGFOCLLEAGIKOI',setCharAt:function(str,index,chr){if(index>str.length-1)return str;return str.substr(0,index)+chr+str.substr(index+1);},get_byte:function(str,i){var s=(i/16)|0;i=(i&15);s=s*32;return((str.charCodeAt(i+16+s)-65)<<4)|(str.charCodeAt(i+s)-65);},set_byte:function(str,i,b){var s=(i/16)|0;i=(i&15);s=s*32;str=f5_cspm.setCharAt(str,(i+16+s),String.fromCharCode((b>>4)+65));str=f5_cspm.setCharAt(str,(i+s),String.fromCharCode((b&15)+65));return str;},set_latency:function(str,latency){latency=latency&0xffff;str=f5_cspm.set_byte(str,40,(latency>>8));str=f5_cspm.set_byte(str,41,(latency&0xff));str=f5_cspm.set_byte(str,35,2);return str;},wait_perf_data:function(){try{var wp=window.performance.timing;if(wp.loadEventEnd>0){var res=wp.loadEventEnd-wp.navigationStart;if(res<60001){var cookie_val=f5_cspm.set_latency(f5_cspm.f5_p,res);window.document.cookie='f5avr1727483010aaaaaaaaaaaaaaaa_cspm_='+encodeURIComponent(cookie_val)+';path=/;'+'';}
-return;}}
-catch(err){return;}
-setTimeout(f5_cspm.wait_perf_data,100);return;},go:function(){var chunk=window.document.cookie.split(/\s*;\s*/);for(var i=0;i<chunk.length;++i){var pair=chunk[i].split(/\s*=\s*/);if(pair[0]=='f5_cspm'&&pair[1]=='1234')
-{var d=new Date();d.setTime(d.getTime()-1000);window.document.cookie='f5_cspm=;expires='+d.toUTCString()+';path=/;'+';';setTimeout(f5_cspm.wait_perf_data,100);}}}}
-f5_cspm.go();}());</script>
+<!--Time: 95ms - SemanticWebBuilder: http://www.Grupo_BMV.swb#WebPage:Informacion_especial--> 

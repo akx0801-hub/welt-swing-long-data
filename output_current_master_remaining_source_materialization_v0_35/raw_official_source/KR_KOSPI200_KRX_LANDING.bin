@@ -563,7 +563,7 @@
 	<!-- CONTAINER -->
 	
 		
-		<section id="container" class="container_main night">
+		<section id="container" class="container_main day">
 			<!--b:s-->
 <div class="main_wrap">
   <div class="main_wrapbox">
@@ -2050,7 +2050,7 @@
             </ul>
             <a href="javascript:gotoMenu('/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201020301','MDC0201020301');" class="more mr1"><img src="/templets/mdc/img/mainbox_more.png" alt="더보기" /></a>
             <div class="sample_tb">
-              <dfn class="count">Previous business day</dfn>
+              <dfn class="count"></dfn>
               <span class="smlinfo1" id="unitTxt">(KRW : 1billion)</span>
               <table id="jsTradingTrendAsInvestorTable" data-grid="{databind: true, emptyData: false}">
                 <caption>Trading by Investor(투자자별 매수, 매도, 순매수에 대한 매매동향을 제공한다.)</caption>
@@ -2084,7 +2084,7 @@
             </ul>
             <a href="javascript:gotoMenu('/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201050302','MDC0201020301');" class="more mr2"><img src="/templets/mdc/img/mainbox_more.png" alt="더보기" /></a>
             <div class="sample_tb">
-              <dfn class="count">Previous business day</dfn>
+              <dfn class="count"></dfn>
               <span class="smlinfo2" id="unitTxt2">(KRW : 1billion)</span>
               <table id="jsTradingTrendAsInvestorTable2" data-grid="{databind: true, emptyData: false}">
                 <caption>Trading by Investor(투자자별 매수, 매도, 순매수에 대한 매매동향을 제공한다.)</caption>
@@ -2121,7 +2121,7 @@
             <h4>Trading by Market</h4>
             <h5 class="smtit" id="jsTradingTrendAsMarket" data-type="ACC_TRDVAL">Trading value <span class="smlinfo3" id="unitTxt3">(KRW : 1billion)</span></h5>
             <div class="sample_tb">
-              <dfn class="count">Previous business day</dfn>
+              <dfn class="count">20minute delayed</dfn>
               <table>
                 <colgroup>
                   <col style="width: 25%">
@@ -2184,7 +2184,7 @@
             </div>
             <h5 class="smtit" id="jsTradingTrendAsMarket2" data-type="ACC_TRDVOL">Trading volume <span class="smlinfo3" id="unitTxt4">(shares : 1million)</span></h5>
             <div class="sample_tb">
-              <dfn class="count">Previous business day</dfn>
+              <dfn class="count">20minute delayed</dfn>
               <table>
                 <colgroup>
                   <col style="width: 25%">
@@ -2252,7 +2252,7 @@
             <h4>Listing summary</h4>
             <span class="smlinfo4" id="unitTxt5">(KRW : 1billion, shares: 1million)</span>
             <div class="sample_tb">
-              <dfn class="count">Previous business day</dfn>
+              <dfn class="count">20minute delayed</dfn>
               <table id="jsListedBrandTable" data-grid="{databind: true, emptyData: true}">
                 <colgroup>
                   <col style="width: auto;">
@@ -2759,7 +2759,7 @@
       };
 
       // 주요5대지수 리스트
-      var vOpnTmDdInfo = 'Previous business day';
+      var vOpnTmDdInfo = '';
       var getMain5IndexList = function (callback) {
         api.util.submitAjax({
           url: '/comm/bldAttendant/getJsonData.cmd',

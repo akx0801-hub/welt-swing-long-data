@@ -1,79 +1,77 @@
 {
-  "alpha_vantage": false,
-  "canonical_master_import_v0_35": false,
+  "revision": "r2_real_deep_materialization",
+  "version": "v0.35",
   "current_master_rows": 1633,
-  "eligibility_promotion_v0_35": false,
-  "frozen_input_audit": [
-    {
-      "Actual_Blob_SHA": "680d0434e534d1fe136e694ca05cb574958a1a24",
-      "Expected_Blob_SHA": "680d0434e534d1fe136e694ca05cb574958a1a24",
-      "PASS": "true",
-      "Path": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md"
-    },
-    {
-      "Actual_Blob_SHA": "ade0046f9b5aa8b3ee3ca0c2711094a2eb2f5089",
-      "Expected_Blob_SHA": "ade0046f9b5aa8b3ee3ca0c2711094a2eb2f5089",
-      "PASS": "true",
-      "Path": "WELT-SWING-CURRENT-Handoff-CURRENT.md"
-    },
-    {
-      "Actual_Blob_SHA": "29bb02312bbacc44018e119932726753edac43a3",
-      "Expected_Blob_SHA": "29bb02312bbacc44018e119932726753edac43a3",
-      "PASS": "true",
-      "Path": "output_current_master_br_ibrx100_import_v0_34/summary_v0.34.json"
-    },
-    {
-      "Actual_Blob_SHA": "027dbb39052651244d02913ddb11c418790b2aa1",
-      "Expected_Blob_SHA": "027dbb39052651244d02913ddb11c418790b2aa1",
-      "PASS": "true",
-      "Path": "output_current_master_br_ibrx100_import_v0_34/stage_checkpoint_v0.34.json"
-    },
-    {
-      "Actual_Blob_SHA": "25229029fc367c42afa58e4c6ee8512b78f76d3e",
-      "Expected_Blob_SHA": "25229029fc367c42afa58e4c6ee8512b78f76d3e",
-      "PASS": "true",
-      "Path": "output_current_master_source_deep_materialization_v0_30/source_deep_materialization_status_v0.30.csv"
-    },
-    {
-      "Actual_Blob_SHA": "f596142132f76083bbbd9ca6f997f5b100f93d2d",
-      "Expected_Blob_SHA": "f596142132f76083bbbd9ca6f997f5b100f93d2d",
-      "PASS": "true",
-      "Path": "output_current_master_missing_source_materialization_v0_29/official_source_probe_status_v0.29.csv"
-    },
-    {
-      "Actual_Blob_SHA": "1df716b57350fb9509cc90f14db929352a87cbe4",
-      "Expected_Blob_SHA": "1df716b57350fb9509cc90f14db929352a87cbe4",
-      "PASS": "true",
-      "Path": "output_current_master_missing_source_materialization_v0_29/official_candidate_links_v0.29.csv"
-    },
-    {
-      "Actual_Blob_SHA": "fe901a2a35c50c781269be6b58e39caf4416b8ca",
-      "Expected_Blob_SHA": "fe901a2a35c50c781269be6b58e39caf4416b8ca",
-      "PASS": "true",
-      "Path": "universe/Welt-Swing-Universe-Master-v2.0.xlsx"
-    },
-    {
-      "Actual_Blob_SHA": "684f04afbd6cb57789ad4e083bcc70c4b5824f9e",
-      "Expected_Blob_SHA": "684f04afbd6cb57789ad4e083bcc70c4b5824f9e",
-      "PASS": "true",
-      "Path": "universe/research_partial_1633_manifest.json"
-    }
-  ],
-  "generated_utc": "2026-08-30T21:19:42.177442+00:00",
   "imported_target_segments": 8,
-  "lineage": "CURRENT_MASTER_CLEAN_RESTART",
   "missing_segments_checked": 6,
+  "tested_official_endpoints": 9,
+  "direct_asset_or_api_candidates": 3,
   "new_full_membership_segments": 0,
   "next_stage": "CURRENT_MASTER_REMAINING_SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION",
-  "p0": false,
-  "productive": false,
-  "schema": "WELT_SWING_REMAINING_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION_V0_35",
-  "sector_rs": false,
-  "source_superset_complete": false,
-  "stage_id": "CURRENT_MASTER_REMAINING_MISSING_SEGMENT_OFFICIAL_SOURCE_MATERIALIZATION",
-  "stage_status_global": "PARTIAL",
-  "status": "DEV / RESEARCH / SHADOW - NOT PRODUCTIVE",
-  "swing_u3k_frozen": false,
+  "canonical_master_import_v0_35": false,
   "universe_mutated_v0_35": false,
-  "version": "v0.35"
+  "eligibility_promotion_v0_35": false,
+  "alpha_vantage": false,
+  "p0": false,
+  "sector_rs": false,
+  "swing_u3k_frozen": false,
+  "productive": false,
+  "source_superset_complete": false,
+  "stage_status_global": "PARTIAL",
+  "frozen_input_audit": [
+    {
+      "Path": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
+      "Expected_Blob_SHA": "680d0434e534d1fe136e694ca05cb574958a1a24",
+      "Actual_Blob_SHA": "680d0434e534d1fe136e694ca05cb574958a1a24",
+      "PASS": true
+    },
+    {
+      "Path": "WELT-SWING-CURRENT-Handoff-v0.34.md",
+      "Expected_Blob_SHA": "ade0046f9b5aa8b3ee3ca0c2711094a2eb2f5089",
+      "Actual_Blob_SHA": "ade0046f9b5aa8b3ee3ca0c2711094a2eb2f5089",
+      "PASS": true
+    },
+    {
+      "Path": "output_current_master_br_ibrx100_import_v0_34/summary_v0.34.json",
+      "Expected_Blob_SHA": "29bb02312bbacc44018e119932726753edac43a3",
+      "Actual_Blob_SHA": "29bb02312bbacc44018e119932726753edac43a3",
+      "PASS": true
+    },
+    {
+      "Path": "output_current_master_br_ibrx100_import_v0_34/stage_checkpoint_v0.34.json",
+      "Expected_Blob_SHA": "027dbb39052651244d02913ddb11c418790b2aa1",
+      "Actual_Blob_SHA": "027dbb39052651244d02913ddb11c418790b2aa1",
+      "PASS": true
+    },
+    {
+      "Path": "output_current_master_missing_source_materialization_v0_29/official_candidate_links_v0.29.csv",
+      "Expected_Blob_SHA": "1df716b57350fb9509cc90f14db929352a87cbe4",
+      "Actual_Blob_SHA": "1df716b57350fb9509cc90f14db929352a87cbe4",
+      "PASS": true
+    },
+    {
+      "Path": "output_current_master_missing_source_materialization_v0_29/official_source_probe_status_v0.29.csv",
+      "Expected_Blob_SHA": "f596142132f76083bbbd9ca6f997f5b100f93d2d",
+      "Actual_Blob_SHA": "f596142132f76083bbbd9ca6f997f5b100f93d2d",
+      "PASS": true
+    },
+    {
+      "Path": "output_current_master_source_deep_materialization_v0_30/source_deep_materialization_status_v0.30.csv",
+      "Expected_Blob_SHA": "25229029fc367c42afa58e4c6ee8512b78f76d3e",
+      "Actual_Blob_SHA": "25229029fc367c42afa58e4c6ee8512b78f76d3e",
+      "PASS": true
+    },
+    {
+      "Path": "universe/Welt-Swing-Universe-Master-v2.0.xlsx",
+      "Expected_Blob_SHA": "fe901a2a35c50c781269be6b58e39caf4416b8ca",
+      "Actual_Blob_SHA": "fe901a2a35c50c781269be6b58e39caf4416b8ca",
+      "PASS": true
+    },
+    {
+      "Path": "universe/research_partial_1633_manifest.json",
+      "Expected_Blob_SHA": "684f04afbd6cb57789ad4e083bcc70c4b5824f9e",
+      "Actual_Blob_SHA": "684f04afbd6cb57789ad4e083bcc70c4b5824f9e",
+      "PASS": true
+    }
+  ]
 }

@@ -1,7 +1,10 @@
-Segment_ID,Source_ID,Candidate_URL,Official_Domain,Runner_Reproducible_Full_Membership,Notes
-US_SP1500,OFFICIAL_US_SP1500,https://www.spglobal.com/spdji/en/indices/equity/sp-composite-1500/,true,false,S&P DJI full constituents UI has no anonymous reproducible full export.
-MX_IPC,OFFICIAL_MX_IPC,https://www.bmv.com.mx/en/markets/special-information,true,false,BMV official change evidence is not a complete current IPC membership list.
-KR_KOSPI200,OFFICIAL_KR_KOSPI200,https://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd?locale=en,true,false,KRX platform reached; anonymous current constituent endpoint not validated.
-AU_ASX200,OFFICIAL_AU_ASX200,https://www.spglobal.com/spdji/en/indices/equity/sp-asx-200/,true,false,S&P page visible; no reproducible official full export.
-NZ_NZX50,OFFICIAL_NZ_NZX50,https://www.nzx.com/markets/indices,true,false,NZX states constituent data is no longer displayed and refers to S&P subscription.
-ZA_TOP40,OFFICIAL_ZA_TOP40,https://www.jse.co.za/services/indices/ftsejse-africa-index-series,true,false,JSE/FTSE-JSE constituent data route remains subscription/client-portal controlled.
+Segment_ID,Source_ID,Candidate_URL,Discovery_Method,Cloud_Browser_Visible,Direct_Asset,Official_Domain,Runner_Tested,Runner_Reproducible,Full_Membership_Potential,Notes
+US_SP1500,SPDJI_US_PAGE,https://www.spglobal.com/spdji/en/indices/equity/sp-composite-1500/,cloud_browser_full_constituents_ui,true,false,true,true,false,full_constituents_ui,
+MX_IPC,BMV_LANDING,https://www.bmv.com.mx/en/markets/special-information,cloud_browser,true,false,true,true,true,special_information,
+MX_IPC,BMV_IPC_REBALANCE_PDF,https://www.bmv.com.mx/docs-pub/INDICES/CTEN_INREB/Official%20Number%20of%20Shares%20IPC%20Rebalance%20-%20December%202016.pdf,v0_29_official_candidate_links,true,true,true,true,false,change_document,
+KR_KOSPI200,KRX_LANDING,https://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd?locale=en,cloud_browser,true,false,true,true,true,index_platform,
+KR_KOSPI200,KRX_GETJSON_MDCSTAT03501,https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd,official_krx_page_js_route,true,true,true,true,false,constituent_api_candidate,
+AU_ASX200,SPDJI_ASX_PAGE,https://www.spglobal.com/spdji/en/indices/equity/sp-asx-200/,cloud_browser_full_constituents_ui,true,false,true,true,false,full_constituents_ui,
+NZ_NZX50,NZX_INDICES,https://www.nzx.com/markets/indices,cloud_browser,true,false,true,true,true,subscription_notice,
+ZA_TOP40,JSE_SERIES,https://www.jse.co.za/services/indices/ftsejse-africa-index-series,cloud_browser,true,false,true,true,false,index_series,
+ZA_TOP40,JSE_QUARTERLY_REVIEW,https://senspdf.jse.co.za/documents/SENS_20240606_S490472.pdf,cloud_browser_official_asset,true,true,true,true,false,review_change_document,
