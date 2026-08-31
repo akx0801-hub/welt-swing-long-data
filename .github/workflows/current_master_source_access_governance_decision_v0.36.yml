@@ -1,0 +1,51 @@
+name: Current Master Source Access Governance v0.36
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/current_master_source_access_governance_decision_v0.36.json
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: py_compile
+        run: python -m py_compile scripts/current_master_source_access_governance_decision_v0_36.py
+      - name: Self-Test
+        run: python scripts/current_master_source_access_governance_decision_v0_36.py --self-test
+      - name: Frozen-Input-Gates and Governance Decision
+        run: python scripts/current_master_source_access_governance_decision_v0_36.py
+      - name: Strong Result Gates
+        run: |
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_current_master_source_governance_v0_36")
+          s=json.loads((out/"summary_v0.36.json").read_text())
+          assert s["current_master_rows"]==1633
+          assert s["imported_target_segments"]==8 and s["missing_target_segments"]==6
+          assert not s["full_scan_allowed"] and s["research_partial_allowed"]
+          r=list(csv.DictReader((out/"remaining_segment_governance_register_v0.36.csv").open()))
+          assert len(r)==6 and all(x["Fallback_Allowed"]=="False" for x in r)
+          assert all(x["Remediation_Status"]=="DEFERRED_UNTIL_EXTERNAL_ACCESS_CHANGE" for x in r)
+          i=list(csv.DictReader((out/"current_master_imported_segment_inventory_v0.36.csv").open()))
+          assert len(i)==8 and sum(int(x["Current_Master_Row_Count"]) for x in i)==1633
+          assert Path("WELT-SWING-CURRENT-Handoff-v0.36.md").read_bytes()==Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").read_bytes()
+          PY
+      - name: Commit outputs and handoff
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_current_master_source_governance_v0_36 WELT-SWING-CURRENT-Handoff-v0.36.md WELT-SWING-CURRENT-Handoff-CURRENT.md
+          git diff --cached --quiet || git commit -m "v0.36 source-access governance decision"
+          git push
+      - uses: actions/upload-artifact@v4
+        with:
+          name: current-master-source-governance-v0.36
+          path: output_current_master_source_governance_v0_36
