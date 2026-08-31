@@ -1,0 +1,51 @@
+name: Current Master Research Partial 1633 Baseline v0.37
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0.37.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: py_compile
+        run: python -m py_compile scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py
+      - name: Self-Test
+        run: python scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py --self-test
+      - name: Frozen Input Gates
+        run: |
+          test -f docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md
+          test -f WELT-SWING-CURRENT-Handoff-v0.36.md
+          test -f universe/Welt-Swing-Universe-Master-v2.0.xlsx
+          test -f universe/research_partial_1633.csv
+      - name: Evidence Inventory and Baseline Reconciliation
+        run: python scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py
+      - name: Strong Result Gates
+        run: |
+          test "$(($(wc -l < output_current_master_research_partial_1633_baseline_v0_37/eligibility_baseline_1633_v0.37.csv)-1))" = "1633"
+          test "$(($(wc -l < output_current_master_research_partial_1633_baseline_v0_37/data_refresh_plan_1633_v0.37.csv)-1))" = "1633"
+          test "$(cmp -s WELT-SWING-CURRENT-Handoff-v0.37.md WELT-SWING-CURRENT-Handoff-CURRENT.md; echo $?)" = "0"
+          python - <<'PY'
+          import csv
+          p='output_current_master_research_partial_1633_baseline_v0_37/eligibility_baseline_1633_v0.37.csv'
+          r=list(csv.DictReader(open(p,encoding='utf-8')))
+          assert len({x['WS_ID'] for x in r}) == 1633
+          assert not any(x['Productive_Eligibility']=='true' or x['SWING_U3K_FROZEN_Member']=='true' for x in r)
+          PY
+      - name: Commit outputs and handoff
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add output_current_master_research_partial_1633_baseline_v0_37 WELT-SWING-CURRENT-Handoff-v0.37.md WELT-SWING-CURRENT-Handoff-CURRENT.md
+          git diff --cached --quiet || git commit -m "v0.37 baseline reconciliation outputs"
+          git push
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v0.37-baseline
+          path: output_current_master_research_partial_1633_baseline_v0_37
