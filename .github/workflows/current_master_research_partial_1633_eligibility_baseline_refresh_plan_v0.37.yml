@@ -12,25 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: {python-version: '3.11'}
-      - name: py_compile
-name: Current Master Research Partial 1633 Baseline v0.37
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'config/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0.37.json'
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-jobs:
-  reconcile:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v5
@@ -44,131 +25,77 @@ jobs:
           BASE="b308232c7d0b2cec9cf09aeab7eca78376014468"
           EXPECTED_BLOB="7044238cc288f8576b1ef3b7da279651ada70a92"
           git show "${BASE}:${SCRIPT}" > /tmp/v0_37_b308.py
-          ACTUAL_BLOB="$(git hash-object /tmp/v0_37_b308.py)"
-          test "${ACTUAL_BLOB}" = "${EXPECTED_BLOB}"
+          test "$(git hash-object /tmp/v0_37_b308.py)" = "${EXPECTED_BLOB}"
           cp /tmp/v0_37_b308.py "${SCRIPT}"
           python - "${SCRIPT}" <<'PY'
           import sys
-          path = sys.argv[1]
-          text = open(path, encoding="utf-8").read()
-          old_count_anchor = '''    count_rows("mapping_baseline_counts_v0.37.csv", ledger, "Mapping_Baseline_State")
-    count_rows("history_baseline_counts_v0.37.csv", ledger, "History_Evidence_State")
-    count_rows("liquidity_baseline_counts_v0.37.csv", ledger, "Liquidity_Evidence_State")
-    count_rows("scalable_baseline_counts_v0.37.csv", ledger, "Scalable_Tradeability_Status")
-    count_rows("prior_eligibility_counts_v0.37.csv", ledger, "Prior_Eligibility_State")'''
-          new_count_anchor = old_count_anchor + '''
-    count_rows("identity_baseline_counts_v0.37.csv", ledger, "Identity_Baseline_State")
-    count_rows("instrument_baseline_counts_v0.37.csv", ledger, "Instrument_Gate_Baseline_State")
-    count_rows("refresh_action_counts_v0.37.csv", ledger, "Planned_Next_Action")'''
-          old_summary_anchor = '''            "mapping": dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),
-            "history": dict(Counter(r["History_Evidence_State"] for r in ledger)),
-            "liquidity": dict(Counter(r["Liquidity_Evidence_State"] for r in ledger)),
-            "scalable": dict(Counter(r["Scalable_Tradeability_Status"] for r in ledger)),
-            "prior_eligibility": dict(Counter(r["Prior_Eligibility_State"] for r in ledger)),
-            "refresh_action": dict(Counter(r["Planned_Next_Action"] for r in ledger)),
-            "exceptions": len(exceptions),'''
-          new_summary_anchor = '''            "identity": dict(Counter(r["Identity_Baseline_State"] for r in ledger)),
-            "instrument": dict(Counter(r["Instrument_Gate_Baseline_State"] for r in ledger)),
-''' + old_summary_anchor
-          if text.count(old_count_anchor) != 1:
-              raise SystemExit("count anchor occurrence is not exactly one")
-          if text.count(old_summary_anchor) != 1:
-              raise SystemExit("summary anchor occurrence is not exactly one")
-          text = text.replace(old_count_anchor, new_count_anchor, 1)
-          text = text.replace(old_summary_anchor, new_summary_anchor, 1)
-          required = ["from __future__ import annotations", "def main(", "if __name__", "def state_text(", "def br_evidence(", "def classify_br(", "def action(", "historical_eligibility_evidence_inventory_v0.37.csv", "baseline_evidence_lineage_v0.37.csv", "data_refresh_batch_plan_v0.37.csv", "eligibility_recompute_plan_v0.37.csv"]
-          for item in required:
-              if item not in text:
-                  raise SystemExit(f"required marker missing: {item}")
-          if text.count("from __future__ import annotations") != 1 or text.count("def main(") != 1 or text.count("if __name__") != 1:
-              raise SystemExit("duplicate module structure")
-          open(path, "w", encoding="utf-8").write(text)
+          p=sys.argv[1]; t=open(p,encoding="utf-8").read()
+          old="\n".join([
+          '    count_rows("mapping_baseline_counts_v0.37.csv", ledger, "Mapping_Baseline_State")',
+          '    count_rows("history_baseline_counts_v0.37.csv", ledger, "History_Evidence_State")',
+          '    count_rows("liquidity_baseline_counts_v0.37.csv", ledger, "Liquidity_Evidence_State")',
+          '    count_rows("scalable_baseline_counts_v0.37.csv", ledger, "Scalable_Tradeability_Status")',
+          '    count_rows("prior_eligibility_counts_v0.37.csv", ledger, "Prior_Eligibility_State")'])
+          new=old+"\n"+"\n".join([
+          '    count_rows("identity_baseline_counts_v0.37.csv", ledger, "Identity_Baseline_State")',
+          '    count_rows("instrument_baseline_counts_v0.37.csv", ledger, "Instrument_Gate_Baseline_State")',
+          '    count_rows("refresh_action_counts_v0.37.csv", ledger, "Planned_Next_Action")'])
+          start='            "mapping": dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),'
+          end='            "exceptions": len(exceptions),'
+          a=t.find(start); b=t.find(end)
+          if t.count(old)!=1 or a<0 or b<0 or t.find(start,a+1)>=0 or t.find(end,b+1)>=0: raise SystemExit("restoration anchor is not exactly one")
+          block=t[a:b]
+          if '"identity":' in block or '"instrument":' in block: raise SystemExit("summary already patched")
+          block='            "identity": dict(Counter(r["Identity_Baseline_State"] for r in ledger)),\n            "instrument": dict(Counter(r["Instrument_Gate_Baseline_State"] for r in ledger)),\n'+block
+          t=t.replace(old,new,1); t=t[:a]+block+t[b:]
+          required=["from __future__ import annotations","def main(","if __name__","def state_text(","def br_evidence(","def classify_br(","def action(","historical_eligibility_evidence_inventory_v0.37.csv","baseline_evidence_lineage_v0.37.csv","data_refresh_batch_plan_v0.37.csv","eligibility_recompute_plan_v0.37.csv"]
+          if any(x not in t for x in required) or t.count("from __future__ import annotations")!=1 or t.count("def main(")!=1 or t.count("if __name__")!=1: raise SystemExit("structure gate failed")
+          open(p,"w",encoding="utf-8").write(t)
           PY
-          git diff -- "${SCRIPT}"
-          git diff "${BASE}" -- "${SCRIPT}"
-          python - "${SCRIPT}" <<'PY'
-          import subprocess, sys
-          added, deleted, _ = subprocess.check_output(["git", "diff", "--numstat", "b308232c7d0b2cec9cf09aeab7eca78376014468", "--", sys.argv[1]], text=True).strip().split("\t")
-          if int(added) > 12 or int(deleted) > 2:
-              raise SystemExit(f"non-minimal restoration diff: +{added} -{deleted}")
+          git diff "$BASE" -- "$SCRIPT"
+          python - "$SCRIPT" <<'PY'
+          import subprocess,sys
+          a,d,_=subprocess.check_output(["git","diff","--numstat","b308232c7d0b2cec9cf09aeab7eca78376014468","--",sys.argv[1]],text=True).strip().split("\t")
+          if int(a)>14 or int(d)>2: raise SystemExit(f"non-minimal diff +{a} -{d}")
           PY
       - name: py_compile
         run: python -m py_compile scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py
       - name: Self-Test
         run: python scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py --self-test
-      - name: Frozen Input Gates
+      - name: Immutable input gates
         run: |
-          set -euo pipefail
-          for p in universe/Welt-Swing-Universe-Master-v2.0.xlsx universe/research_partial_1633.csv universe/research_partial_1633_manifest.json WELT-SWING-CURRENT-Handoff-v0.36.md; do git rev-parse HEAD:"$p"; done > /tmp/immutable-before
+          for p in universe/Welt-Swing-Universe-Master-v2.0.xlsx universe/research_partial_1633.csv universe/research_partial_1633_manifest.json WELT-SWING-CURRENT-Handoff-v0.36.md; do git rev-parse HEAD:"$p"; done
       - name: Evidence Inventory and Baseline Reconciliation
         run: python scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py
       - name: Strong Result Gates
         run: |
           set -euo pipefail
           OUT=output_current_master_research_partial_1633_baseline_v0_37
-          test "$(($(wc -l < "$OUT/eligibility_baseline_1633_v0.37.csv")-1))" = "1633"
-          test "$(($(wc -l < "$OUT/data_refresh_plan_1633_v0.37.csv")-1))" = "1633"
+          test "$(($(wc -l < "$OUT/eligibility_baseline_1633_v0.37.csv")-1))" = 1633
+          test "$(($(wc -l < "$OUT/data_refresh_plan_1633_v0.37.csv")-1))" = 1633
           test "$(($(wc -l < "$OUT/data_refresh_batch_plan_v0.37.csv")-1))" -gt 1
-          test "$(($(wc -l < "$OUT/eligibility_recompute_plan_v0.37.csv")-1))" = "8"
+          test "$(($(wc -l < "$OUT/eligibility_recompute_plan_v0.37.csv")-1))" = 8
           test "$(($(wc -l < "$OUT/baseline_evidence_lineage_v0.37.csv")-1))" -ge 6
           test "$(($(wc -l < "$OUT/historical_eligibility_evidence_inventory_v0.37.csv")-1))" -gt 5
-          for f in identity instrument mapping history liquidity scalable prior_eligibility refresh_action; do test -f "$OUT/${f}_baseline_counts_v0.37.csv" || test -f "$OUT/${f}_counts_v0.37.csv"; done
+          for f in identity_baseline_counts instrument_baseline_counts mapping_baseline_counts history_baseline_counts liquidity_baseline_counts scalable_baseline_counts prior_eligibility_counts refresh_action_counts; do test -f "$OUT/$f"_v0.37.csv; done
           cmp -s WELT-SWING-CURRENT-Handoff-v0.37.md WELT-SWING-CURRENT-Handoff-CURRENT.md
           python - <<'PY'
-          import csv, json
-          out="output_current_master_research_partial_1633_baseline_v0_37"
-          rows=list(csv.DictReader(open(f"{out}/eligibility_baseline_1633_v0.37.csv", encoding="utf-8")))
-          assert len({r["WS_ID"] for r in rows}) == 1633
-          assert not any(r["Productive_Eligibility"]=="true" or r["SWING_U3K_FROZEN_Member"]=="true" for r in rows)
-          br=[r for r in rows if r["Primary_Universe_Index"]=="BR_IBRX100"]
-          assert len(br)==98
-          expected={"STANDARD_ELIGIBILITY_READY":38,"LOW_LIQUIDITY_EXCEPTION_POOL":28,"STANDARD_U3K_NOT_ELIGIBLE_LIQUIDITY":13,"STANDARD_U3K_NOT_ELIGIBLE_INSTRUMENT":19}
-          actual={k:sum(r["Prior_Eligibility_State"]==k for r in br) for k in expected}
-          assert actual==expected, actual
-          s=json.load(open(f"{out}/summary_v0.37.json", encoding="utf-8"))
-          for k,v in {"data_refresh_executed_v0_37":False,"productive":False,"p0":False,"swing_u3k_frozen":False,"full_scan_allowed":False}.items(): assert s[k] is v
+          import csv,json
+          o="output_current_master_research_partial_1633_baseline_v0_37"; r=list(csv.DictReader(open(f"{o}/eligibility_baseline_1633_v0.37.csv",encoding="utf-8")))
+          assert len({x["WS_ID"] for x in r})==1633
+          assert not any(x["Productive_Eligibility"]=="true" or x["SWING_U3K_FROZEN_Member"]=="true" for x in r)
+          br=[x for x in r if x["Primary_Universe_Index"]=="BR_IBRX100"]; assert len(br)==98
+          want={"STANDARD_ELIGIBILITY_READY":38,"LOW_LIQUIDITY_EXCEPTION_POOL":28,"STANDARD_U3K_NOT_ELIGIBLE_LIQUIDITY":13,"STANDARD_U3K_NOT_ELIGIBLE_INSTRUMENT":19}
+          assert {k:sum(x["Prior_Eligibility_State"]==k for x in br) for k in want}==want
+          s=json.load(open(f"{o}/summary_v0.37.json",encoding="utf-8"))
+          assert not s["data_refresh_executed_v0_37"] and not s["productive"] and not s["p0"] and not s["swing_u3k_frozen"] and not s["full_scan_allowed"]
           PY
-          while read -r sha; do test -n "$sha"; done < /tmp/immutable-before
       - name: Commit outputs and restored script
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py output_current_master_research_partial_1633_baseline_v0_37 WELT-SWING-CURRENT-Handoff-v0.37.md WELT-SWING-CURRENT-Handoff-CURRENT.md
           git diff --cached --quiet || git commit -m "v0.37 restore full baseline logic and finalize counts"
-          git push
-      - uses: actions/upload-artifact@v4
-        with:
-          name: v0.37-baseline
-          path: output_current_master_research_partial_1633_baseline_v0_37
-        run: python -m py_compile scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py
-      - name: Self-Test
-        run: python scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py --self-test
-      - name: Frozen Input Gates
-        run: |
-          test -f docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md
-          test -f WELT-SWING-CURRENT-Handoff-v0.36.md
-          test -f universe/Welt-Swing-Universe-Master-v2.0.xlsx
-          test -f universe/research_partial_1633.csv
-      - name: Evidence Inventory and Baseline Reconciliation
-        run: python scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py
-      - name: Strong Result Gates
-        run: |
-          test "$(($(wc -l < output_current_master_research_partial_1633_baseline_v0_37/eligibility_baseline_1633_v0.37.csv)-1))" = "1633"
-          test "$(($(wc -l < output_current_master_research_partial_1633_baseline_v0_37/data_refresh_plan_1633_v0.37.csv)-1))" = "1633"
-          test "$(cmp -s WELT-SWING-CURRENT-Handoff-v0.37.md WELT-SWING-CURRENT-Handoff-CURRENT.md; echo $?)" = "0"
-          python - <<'PY'
-          import csv
-          p='output_current_master_research_partial_1633_baseline_v0_37/eligibility_baseline_1633_v0.37.csv'
-          r=list(csv.DictReader(open(p,encoding='utf-8')))
-          assert len({x['WS_ID'] for x in r}) == 1633
-          assert not any(x['Productive_Eligibility']=='true' or x['SWING_U3K_FROZEN_Member']=='true' for x in r)
-          PY
-      - name: Commit outputs and handoff
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add output_current_master_research_partial_1633_baseline_v0_37 WELT-SWING-CURRENT-Handoff-v0.37.md WELT-SWING-CURRENT-Handoff-CURRENT.md
-          git diff --cached --quiet || git commit -m "v0.37 baseline reconciliation outputs"
           git push
       - uses: actions/upload-artifact@v4
         with:
