@@ -12,31 +12,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: {fetch-depth: 0}
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
-        with: {python-version: "3.11"}
+        with:
+          python-version: "3.11"
       - name: py_compile
         run: python -m py_compile scripts/current_master_source_access_governance_decision_v0_36.py
       - name: Self-Test
         run: python scripts/current_master_source_access_governance_decision_v0_36.py --self-test
-      - name: Frozen-Input-Gates and Governance Decision
+      - name: Frozen-Input-Gates
         run: python scripts/current_master_source_access_governance_decision_v0_36.py
       - name: Strong Result Gates
         run: |
           python - <<'PY'
-          import csv,json
+          import csv, json, subprocess
           from pathlib import Path
-          out=Path("output_current_master_source_governance_v0_36")
-          s=json.loads((out/"summary_v0.36.json").read_text())
-          assert s["current_master_rows"]==1633
-          assert s["imported_target_segments"]==8 and s["missing_target_segments"]==6
-          assert not s["full_scan_allowed"] and s["research_partial_allowed"]
-          r=list(csv.DictReader((out/"remaining_segment_governance_register_v0.36.csv").open()))
-          assert len(r)==6 and all(x["Fallback_Allowed"]=="False" for x in r)
-          assert all(x["Remediation_Status"]=="DEFERRED_UNTIL_EXTERNAL_ACCESS_CHANGE" for x in r)
-          i=list(csv.DictReader((out/"current_master_imported_segment_inventory_v0.36.csv").open()))
-          assert len(i)==8 and sum(int(x["Current_Master_Row_Count"]) for x in i)==1633
-          assert Path("WELT-SWING-CURRENT-Handoff-v0.36.md").read_bytes()==Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").read_bytes()
+          out = Path("output_current_master_source_governance_v0_36")
+          summary = json.loads((out / "summary_v0.36.json").read_text())
+          assert summary["current_master_rows"] == 1633
+          assert summary["imported_segments"] == 8 and summary["missing_segments"] == 6
+          assert summary["source_superset_complete"] is False
+          assert summary["full_scan_allowed"] is False
+          assert summary["research_partial_allowed"] is True
+          assert summary["p0_run_v0_36"] is False and summary["swing_u3k_frozen"] is False
+          assert summary["productive"] is False and summary["alpha_vantage"] is False
+          imported = list(csv.DictReader((out / "current_master_imported_segment_inventory_v0.36.csv").open()))
+          register = list(csv.DictReader((out / "remaining_segment_governance_register_v0.36.csv").open()))
+          reopen = list(csv.DictReader((out / "source_reopen_trigger_register_v0.36.csv").open()))
+          audit = list(csv.DictReader((out / "frozen_input_audit_v0.36.csv").open()))
+          assert len(imported) == 8 and sum(int(x["Current_Master_Row_Count"]) for x in imported) == 1633
+          assert len(register) == 6 and len(reopen) == 6
+          assert {x["Segment_ID"] for x in imported}.isdisjoint({x["Segment_ID"] for x in register})
+          assert all(x["Fallback_Allowed"] == "False" and x["Canonical_Import"] == "False" for x in register)
+          assert all(x["Automatic_Retry"] == "False" for x in reopen)
+          assert len(audit) == 10 and all(len(x["Actual_Blob_SHA"]) == 40 for x in audit)
+          assert Path("WELT-SWING-CURRENT-Handoff-v0.36.md").read_bytes() == Path("WELT-SWING-CURRENT-Handoff-CURRENT.md").read_bytes()
+          subprocess.run(["git", "diff", "--exit-code", "--", "universe/Welt-Swing-Universe-Master-v2.0.xlsx", "universe/research_partial_1633.csv", "universe/research_partial_1633_manifest.json"], check=True)
           PY
       - name: Commit outputs and handoff
         run: |
