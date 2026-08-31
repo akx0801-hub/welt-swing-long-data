@@ -5,7 +5,7 @@ on:
     paths: [config/current_master_remaining_missing_segment_official_source_materialization_v0.35.json]
 permissions: {contents: write}
 jobs:
-  v035r2:
+  v035r3:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
           assert len(s)==6 and len(a)>6 and any(x['Source_Type']=='API' and x['Segment_ID']=='KR_KOSPI200' for x in p)
           assert any(x['Segment_ID']=='MX_IPC' and x['Direct_Asset']=='true' for x in p)
           assert all(x['Final_State_v0_35'] for x in s)
-          x=json.load(open(o+'summary_v0.35.json'));assert x['current_master_rows']==1633 and x['revision']=='r2_real_deep_materialization'
+          x=json.load(open(o+'summary_v0.35.json'));assert x['current_master_rows']==1633 and x['revision']=='r3_real_deep_materialization'
           PY
           git diff --exit-code -- universe/Welt-Swing-Universe-Master-v2.0.xlsx universe/research_partial_1633.csv
       - name: Commit outputs and handoff
@@ -39,9 +39,10 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add -A output_current_master_remaining_source_materialization_v0_35 WELT-SWING-CURRENT-Handoff-v0.35.md WELT-SWING-CURRENT-Handoff-CURRENT.md
-          git diff --cached --quiet || git commit -m 'v0.35-r2 real deep source materialization evidence'
+          git diff --cached --quiet || git commit -m 'v0.35-r3 real deep source materialization evidence'
           git push
       - uses: actions/upload-artifact@v4
         with:
-          name: current-master-remaining-source-materialization-v0.35-r2
+          name: current-master-remaining-source-materialization-v0.35-r3
           path: output_current_master_remaining_source_materialization_v0_35
+
