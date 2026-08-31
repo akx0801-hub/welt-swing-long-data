@@ -1,0 +1,7 @@
+Evidence_ID,Artifact_Path,Blob_SHA,Stage,Evidence_Type,Authority_Class,Rows_Used,Join_Key,AsOf,Notes
+E001,universe/research_partial_1633.csv,9851b1c4f68205c2d5e778fc1d3d79be17c6fd13,v0.37 predecessor,FROZEN_INPUT,CURRENT_CANONICAL,,WS_ID,,
+E002,universe/segments/br_ibrx100_eligibility_state_v0.34.csv,494f987c731fc786118b9459193a2ab1224eee9a,v0.37 predecessor,FROZEN_INPUT,CURRENT_CANONICAL,,WS_ID,,
+E003,universe/segments/br_ibrx100_standard_eligibility_ready_v0.34.csv,29a1780493cd793df3433012133c8358ed9bae60,v0.37 predecessor,FROZEN_INPUT,CURRENT_CANONICAL,,WS_ID,,
+E004,output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_standard_eligibility_v0.33.csv,0446fd7c6620137100ac200e32949222e090bd78,v0.37 predecessor,FROZEN_INPUT,CURRENT_CANONICAL,,WS_ID,,
+E005,output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_history_gate_v0.33.csv,d39b54f869f7bd7a3dbf04d7f70de5afede58d9e,v0.37 predecessor,FROZEN_INPUT,CURRENT_CANONICAL,,WS_ID,,
+E006,output_current_master_br_ibrx100_liquidity_v0_32/br_ibrx100_liquidity_precheck_v0.32.csv,c03010329f7f74fca50576d9be5e0250cf3b0fd9,v0.37 predecessor,FROZEN_INPUT,CURRENT_CANONICAL,,WS_ID,,
