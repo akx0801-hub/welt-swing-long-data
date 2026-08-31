@@ -1,4 +1,5 @@
-{
+{"network_access": false,"network_access": false,
+  "technical_retry": 1,
   "stage": "CURRENT_MASTER_REMAINING_SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION",
   "version": "v0.36",
   "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
