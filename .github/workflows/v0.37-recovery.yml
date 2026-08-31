@@ -110,7 +110,7 @@ jobs:
           if int(a)>4 or int(d)>1: raise SystemExit(f"non-minimal diff +{a} -{d}")
           PY2
 
-"""
+          """
           t=t[:start]+replacement+t[end:]
           open(p,"w",encoding="utf-8").write(t)
           PY
