@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#z.read("xl/"+target.lstrip("/"))z.read(target.lstrip("/") if target.startswith("xl/") else "xl/"+target.lstrip("/"))!/usr/bin/env python3
 """v0.36 offline source-access governance decision; no network access."""
 from __future__ import annotations
 import argparse,csv,datetime,hashlib,json,subprocess,sys,zipfile
