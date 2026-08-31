@@ -1,5 +1,5 @@
 {
-  "revision": "r2_real_deep_materialization",
+  "revision": "r3_final_materialization_capability_and_current_asset_fix",
   "frozen_baseline_commit": "63be0bba22911cbda752062862f6ea28127af913",
   "frozen_inputs": [
     "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
@@ -44,13 +44,13 @@
     },
     {
       "Segment_ID": "MX_IPC",
-      "Source_ID": "BMV_IPC_REBALANCE_PDF",
-      "URL": "https://www.bmv.com.mx/docs-pub/INDICES/CTEN_INREB/Official%20Number%20of%20Shares%20IPC%20Rebalance%20-%20December%202016.pdf",
+      "Source_ID": "BMV_IPC_2026_REBALANCE_FINAL",
+      "URL": "https://www.bmv.com.mx/docs-pub/INDICES/CTEN_INCM/SP%20BMV%20IPC%20Rebalance%20Announcement%20%28English%29%20-%20Final.pdf",
       "Source_Type": "PDF",
-      "Discovery_Method": "v0_29_official_candidate_links",
+      "Discovery_Method": "v0_29_current_official_candidate_link",
       "Discovered_In_Cloud_Browser": true,
       "Direct_Asset": true,
-      "Expected_Semantics": "change_document"
+      "Expected_Semantics": "current_change_document"
     },
     {
       "Segment_ID": "KR_KOSPI200",
@@ -59,67 +59,3 @@
       "Source_Type": "HTML",
       "Discovery_Method": "cloud_browser",
       "Discovered_In_Cloud_Browser": true,
-      "Direct_Asset": false,
-      "Expected_Semantics": "index_platform"
-    },
-    {
-      "Segment_ID": "KR_KOSPI200",
-      "Source_ID": "KRX_GETJSON_MDCSTAT03501",
-      "URL": "https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd",
-      "Source_Type": "API",
-      "Method": "POST",
-      "Form_Data": {
-        "bld": "dbms/MDC/STAT/standard/MDCSTAT03501"
-      },
-      "Discovery_Method": "official_krx_page_js_route",
-      "Discovered_In_Cloud_Browser": true,
-      "Direct_Asset": true,
-      "Expected_Semantics": "constituent_api_candidate"
-    },
-    {
-      "Segment_ID": "AU_ASX200",
-      "Source_ID": "SPDJI_ASX_PAGE",
-      "URL": "https://www.spglobal.com/spdji/en/indices/equity/sp-asx-200/",
-      "Source_Type": "HTML",
-      "Discovery_Method": "cloud_browser_full_constituents_ui",
-      "Discovered_In_Cloud_Browser": true,
-      "Direct_Asset": false,
-      "Expected_Semantics": "full_constituents_ui",
-      "Plausible_Min_Rows": 180
-    },
-    {
-      "Segment_ID": "NZ_NZX50",
-      "Source_ID": "NZX_INDICES",
-      "URL": "https://www.nzx.com/markets/indices",
-      "Source_Type": "HTML",
-      "Discovery_Method": "cloud_browser",
-      "Discovered_In_Cloud_Browser": true,
-      "Direct_Asset": false,
-      "Expected_Semantics": "subscription_notice"
-    },
-    {
-      "Segment_ID": "ZA_TOP40",
-      "Source_ID": "JSE_SERIES",
-      "URL": "https://www.jse.co.za/services/indices/ftsejse-africa-index-series",
-      "Source_Type": "HTML",
-      "Discovery_Method": "cloud_browser",
-      "Discovered_In_Cloud_Browser": true,
-      "Direct_Asset": false,
-      "Expected_Semantics": "index_series"
-    },
-    {
-      "Segment_ID": "ZA_TOP40",
-      "Source_ID": "JSE_QUARTERLY_REVIEW",
-      "URL": "https://senspdf.jse.co.za/documents/SENS_20240606_S490472.pdf",
-      "Source_Type": "PDF",
-      "Discovery_Method": "cloud_browser_official_asset",
-      "Discovered_In_Cloud_Browser": true,
-      "Direct_Asset": true,
-      "Expected_Semantics": "review_change_document"
-    }
-  ],
-  "canonical_master_import_v0_35": false,
-  "universe_mutated_v0_35": false,
-  "eligibility_promotion_v0_35": false,
-  "alpha_vantage": false
-}
