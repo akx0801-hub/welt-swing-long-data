@@ -76,15 +76,28 @@ def workbook_rows() -> list[dict]:
     return [dict(zip(headers, row + [""] * max(0, len(headers) - len(row)))) for row in values[1:] if any(row)]
 
 def segment_counts(rows: list[dict]) -> dict[str, int]:
-    candidates = []
-    for key in rows[0]:
-        counts = {segment: sum(1 for row in rows if (row.get(key) or "").strip() == segment) for segment in IMPORTED}
-        if all(counts.values()) and sum(counts.values()) == len(rows):
-            candidates.append(counts)
-    if not candidates:
-        raise RuntimeError("no workbook column reconciles the eight imported target segments to 1633")
-    return candidates[0]
-
+    aliases = {
+        "EU_STOXX600": ("EU_STOXX600", "STOXX EUROPE 600", "STOXX 600"),
+        "CA_TSX": ("CA_TSX", "S&P/TSX", "SP/TSX", "TSX COMPOSITE"),
+        "JP_N225": ("JP_N225", "NIKKEI 225", "N225"),
+        "HK_HSI": ("HK_HSI", "HANG SENG", "HSI"),
+        "CN_CSI300": ("CN_CSI300", "CSI 300", "CSI300"),
+        "IN_NIFTY50": ("IN_NIFTY50", "NIFTY 50", "NIFTY50"),
+        "TW_TW50": ("TW_TW50", "TAIWAN 50", "TW50"),
+        "BR_IBRX100": ("BR_IBRX100", "IBRX 100", "IBRX100"),
+    }
+    counts = {segment: 0 for segment in IMPORTED}
+    unresolved = 0
+    for row in rows:
+        payload = " | ".join(str(value).upper() for value in row.values())
+        matches = [segment for segment, tokens in aliases.items() if any(token in payload for token in tokens)]
+        if len(matches) == 1:
+            counts[matches[0]] += 1
+        else:
+            unresolved += 1
+    if unresolved or not all(counts.values()) or sum(counts.values()) != len(rows):
+        raise RuntimeError(f"master segment mapping unresolved={unresolved}; counts={counts}")
+    return counts
 def frozen_audit(config: dict) -> list[dict]:
     audit = []
     capture = bool(config.get("allow_initial_blob_capture", False))
