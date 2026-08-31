@@ -40,45 +40,45 @@
     },
     {
       "Path": "WELT-SWING-CURRENT-Handoff-v0.35.md",
-      "Expected_Blob_SHA": "",
+      "Expected_Blob_SHA": "70e6271630868467f1c91dd1faca9c407df98bcd",
       "Actual_Blob_SHA": "70e6271630868467f1c91dd1faca9c407df98bcd",
-      "PASS": false,
-      "Initial_Capture_Only": true
+      "PASS": true,
+      "Initial_Capture_Only": false
     },
     {
       "Path": "output_current_master_remaining_source_materialization_v0_35/summary_v0.35.json",
-      "Expected_Blob_SHA": "",
+      "Expected_Blob_SHA": "516454692e42601ae070f2abf666fc78ff3ad074",
       "Actual_Blob_SHA": "516454692e42601ae070f2abf666fc78ff3ad074",
-      "PASS": false,
-      "Initial_Capture_Only": true
+      "PASS": true,
+      "Initial_Capture_Only": false
     },
     {
       "Path": "output_current_master_remaining_source_materialization_v0_35/stage_checkpoint_v0.35.json",
-      "Expected_Blob_SHA": "",
+      "Expected_Blob_SHA": "516454692e42601ae070f2abf666fc78ff3ad074",
       "Actual_Blob_SHA": "516454692e42601ae070f2abf666fc78ff3ad074",
-      "PASS": false,
-      "Initial_Capture_Only": true
+      "PASS": true,
+      "Initial_Capture_Only": false
     },
     {
       "Path": "output_current_master_remaining_source_materialization_v0_35/remaining_segment_official_endpoint_probe_v0.35.csv",
-      "Expected_Blob_SHA": "",
+      "Expected_Blob_SHA": "2be177bce5aa22c3d66d73621bd108ea13d0bc68",
       "Actual_Blob_SHA": "2be177bce5aa22c3d66d73621bd108ea13d0bc68",
-      "PASS": false,
-      "Initial_Capture_Only": true
+      "PASS": true,
+      "Initial_Capture_Only": false
     },
     {
       "Path": "output_current_master_remaining_source_materialization_v0_35/official_candidate_asset_links_v0.35.csv",
-      "Expected_Blob_SHA": "",
+      "Expected_Blob_SHA": "32a4ebc506d5aa9d99fe809f24de28da171a7310",
       "Actual_Blob_SHA": "32a4ebc506d5aa9d99fe809f24de28da171a7310",
-      "PASS": false,
-      "Initial_Capture_Only": true
+      "PASS": true,
+      "Initial_Capture_Only": false
     },
     {
       "Path": "config/current_master_remaining_missing_segment_official_source_materialization_v0.35.json",
-      "Expected_Blob_SHA": "",
+      "Expected_Blob_SHA": "9576f789cac2e4a4ce53a672092e27e8be2e62b5",
       "Actual_Blob_SHA": "9576f789cac2e4a4ce53a672092e27e8be2e62b5",
-      "PASS": false,
-      "Initial_Capture_Only": true
+      "PASS": true,
+      "Initial_Capture_Only": false
     },
     {
       "Path": "universe/Welt-Swing-Universe-Master-v2.0.xlsx",
@@ -89,10 +89,10 @@
     },
     {
       "Path": "universe/research_partial_1633.csv",
-      "Expected_Blob_SHA": "",
+      "Expected_Blob_SHA": "9851b1c4f68205c2d5e778fc1d3d79be17c6fd13",
       "Actual_Blob_SHA": "9851b1c4f68205c2d5e778fc1d3d79be17c6fd13",
-      "PASS": false,
-      "Initial_Capture_Only": true
+      "PASS": true,
+      "Initial_Capture_Only": false
     },
     {
       "Path": "universe/research_partial_1633_manifest.json",
