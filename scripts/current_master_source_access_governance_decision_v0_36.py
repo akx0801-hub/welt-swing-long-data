@@ -68,7 +68,12 @@ def workbook_rows() -> list[dict]:
             cells = {}
             for cell in row.findall("m:c", ns):
                 raw = cell.find("m:v", ns)
-                value = "" if raw is None else (strings[int(raw.text)] if cell.attrib.get("t") == "s" else raw.text)
+                if cell.attrib.get("t") == "inlineStr":
+                    value = "".join(node.text or "" for node in cell.iter("{%s}t" % ns["m"]))
+                elif raw is None:
+                    value = ""
+                else:
+                    value = strings[int(raw.text)] if cell.attrib.get("t") == "s" else raw.text
                 cells[column_number(cell.attrib.get("r", "A1"))] = value
             if cells:
                 values.append([cells.get(index, "") for index in range(max(cells) + 1)])
