@@ -1,5 +1,6 @@
 {
   "revision": "v0.36_initial_blob_capture_then_strict_freeze",
+  "technical_retry": 2,
   "stage": "CURRENT_MASTER_REMAINING_SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION",
   "version": "v0.36",
   "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
