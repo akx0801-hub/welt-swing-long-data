@@ -1,0 +1,24 @@
+{
+  "stage": "CURRENT_MASTER_REMAINING_SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION",
+  "version": "v0.36",
+  "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
+  "network_access": false,
+  "frozen_inputs": [
+    {"path":"docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md","blob_sha":"680d0434e534d1fe136e694ca05cb574958a1a24"},
+    {"path":"WELT-SWING-CURRENT-Handoff-v0.35.md","blob_sha":""},
+    {"path":"output_current_master_remaining_source_materialization_v0_35/summary_v0.35.json","blob_sha":""},
+    {"path":"output_current_master_remaining_source_materialization_v0_35/stage_checkpoint_v0.35.json","blob_sha":""},
+    {"path":"output_current_master_remaining_source_materialization_v0_35/remaining_segment_official_endpoint_probe_v0.35.csv","blob_sha":""},
+    {"path":"output_current_master_remaining_source_materialization_v0_35/official_candidate_asset_links_v0.35.csv","blob_sha":""},
+    {"path":"config/current_master_remaining_missing_segment_official_source_materialization_v0.35.json","blob_sha":""},
+    {"path":"universe/Welt-Swing-Universe-Master-v2.0.xlsx","blob_sha":"fe901a2a35c50c781269be6b58e39caf4416b8ca"},
+    {"path":"universe/research_partial_1633.csv","blob_sha":""},
+    {"path":"universe/research_partial_1633_manifest.json","blob_sha":"684f04afbd6cb57789ad4e083bcc70c4b5824f9e"}
+  ],
+  "governance": {
+    "full_scan_allowed": false,
+    "research_partial_allowed": true,
+    "third_party_fallback_allowed": false,
+    "automatic_source_retry": false
+  }
+}
