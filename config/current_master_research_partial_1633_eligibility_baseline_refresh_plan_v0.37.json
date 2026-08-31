@@ -1,0 +1,51 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_ELIGIBILITY_BASELINE_RECONCILIATION_AND_DATA_REFRESH_PLAN",
+  "version": "v0.37",
+  "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
+  "offline_only": true,
+  "network_requests_forbidden": true,
+  "current_master_rows": 1633,
+  "imported_segment_counts": {
+    "EU_STOXX600": 600,
+    "CA_TSX": 217,
+    "JP_N225": 225,
+    "HK_HSI": 93,
+    "CN_CSI300": 300,
+    "IN_NIFTY50": 50,
+    "TW_TW50": 50,
+    "BR_IBRX100": 98
+  },
+  "missing_segments": [
+    "US_SP1500",
+    "MX_IPC",
+    "KR_KOSPI200",
+    "AU_ASX200",
+    "NZ_NZX50",
+    "ZA_TOP40"
+  ],
+  "frozen_input_paths": [
+    "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
+    "WELT-SWING-CURRENT-Handoff-v0.36.md",
+    "output_current_master_source_governance_v0_36/summary_v0.36.json",
+    "output_current_master_source_governance_v0_36/current_master_imported_segment_inventory_v0.36.csv",
+    "output_current_master_source_governance_v0_36/remaining_segment_governance_register_v0.36.csv",
+    "universe/Welt-Swing-Universe-Master-v2.0.xlsx",
+    "universe/research_partial_1633.csv",
+    "universe/research_partial_1633_manifest.json",
+    "universe/segments/br_ibrx100_eligibility_state_v0.34.csv",
+    "universe/segments/br_ibrx100_standard_eligibility_ready_v0.34.csv",
+    "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_standard_eligibility_v0.33.csv",
+    "output_current_master_br_ibrx100_eligibility_plan_v0_33/br_ibrx100_history_gate_v0.33.csv",
+    "output_current_master_br_ibrx100_liquidity_v0_32/br_ibrx100_liquidity_precheck_v0.32.csv"
+  ],
+  "known_immutable_blob_sha": {
+    "master_spec": "680d0434e534d1fe136e694ca05cb574958a1a24",
+    "current_master_xlsx": "fe901a2a35c50c781269be6b58e39caf4416b8ca",
+    "research_partial_1633": "9851b1c4f68205c2d5e778fc1d3d79be17c6fd13",
+    "research_partial_manifest": "684f04afbd6cb57789ad4e083bcc70c4b5824f9e"
+  },
+  "productive": false,
+  "p0": false,
+  "swing_u3k_frozen": false,
+  "alpha_vantage": false
+}
