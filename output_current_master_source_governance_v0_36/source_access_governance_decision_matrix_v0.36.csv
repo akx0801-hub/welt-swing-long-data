@@ -1,0 +1,11 @@
+Decision_ID,Decision,State,Rationale,Evidence,Impact
+OFFICIAL_SOURCE_GATE_RETAINED,OFFICIAL_SOURCE_GATE_RETAINED,True,Official full-membership evidence remains mandatory.,v0.35-r3 frozen evidence,No substitute import.
+THIRD_PARTY_FALLBACK_REJECTED,THIRD_PARTY_FALLBACK_REJECTED,True,"Wikipedia, ETF holdings, screeners and unofficial lists remain prohibited.",Master specification,Fallback blocked.
+LEGACY_PHASE2_MEMBERSHIP_NOT_CANONICAL,LEGACY_PHASE2_MEMBERSHIP_NOT_CANONICAL,True,Legacy phase2 membership cannot substitute official current evidence.,Master specification,No canonical import.
+FULL_SCAN_NOT_ALLOWED,FULL_SCAN_NOT_ALLOWED,True,Six target segments remain blocked.,Governance register,FULL_SCAN_ALLOWED=false.
+RESEARCH_PARTIAL_CONTINUATION_ALLOWED,RESEARCH_PARTIAL_CONTINUATION_ALLOWED,True,Transparent 8/14 universe is allowed only for DEV research.,Master specification,RESEARCH_PARTIAL_ALLOWED=true.
+CURRENT_MASTER_1633_RETAINED,CURRENT_MASTER_1633_RETAINED,True,No source materialization or import occurs in v0.36.,Immutability audit,1633 retained.
+MISSING_SEGMENTS_DEFERRED,MISSING_SEGMENTS_DEFERRED,True,Retry only after explicit external-access-change evidence.,Governance register,Automatic retry=false.
+GLOBAL_U3K_FREEZE_NOT_ALLOWED,GLOBAL_U3K_FREEZE_NOT_ALLOWED,True,Global source superset is incomplete.,Master specification,No global freeze.
+P0_NOT_RUN_IN_V0_36,P0_NOT_RUN_IN_V0_36,True,This is an offline governance stage.,Stage configuration,P0=false.
+PRODUCTIVE_PROMOTION_NOT_ALLOWED,PRODUCTIVE_PROMOTION_NOT_ALLOWED,True,Research-partial has no productive authority.,Master specification,productive=false.

@@ -1,0 +1,25 @@
+{
+  "current_master_rows": 1633,
+  "research_partial_rows": 1633,
+  "imported_segments": 8,
+  "missing_segments": 6,
+  "imported_segment_counts": {
+    "EU_STOXX600": 600,
+    "CA_TSX": 217,
+    "JP_N225": 225,
+    "HK_HSI": 93,
+    "CN_CSI300": 300,
+    "IN_NIFTY50": 50,
+    "TW_TW50": 50,
+    "BR_IBRX100": 98
+  },
+  "segment_coverage_numerator": 8,
+  "segment_coverage_denominator": 14,
+  "source_superset_complete": false,
+  "full_scan_allowed": false,
+  "research_partial_allowed": true,
+  "p0_run_v0_36": false,
+  "swing_u3k_frozen": false,
+  "productive": false,
+  "alpha_vantage": false
+}

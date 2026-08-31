@@ -1,0 +1,9 @@
+Segment_ID,Current_Master_Row_Count,Imported
+EU_STOXX600,600,True
+CA_TSX,217,True
+JP_N225,225,True
+HK_HSI,93,True
+CN_CSI300,300,True
+IN_NIFTY50,50,True
+TW_TW50,50,True
+BR_IBRX100,98,True
