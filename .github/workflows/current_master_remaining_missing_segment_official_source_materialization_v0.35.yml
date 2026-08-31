@@ -31,7 +31,7 @@ jobs:
           assert len(s)==6 and len(a)>6 and any(x['Source_Type']=='API' and x['Segment_ID']=='KR_KOSPI200' for x in p)
           assert any(x['Segment_ID']=='MX_IPC' and x['Direct_Asset']=='true' for x in p)
           assert all(x['Final_State_v0_35'] for x in s)
-          x=json.load(open(o+'summary_v0.35.json'));assert x['current_master_rows']==1633 and x['revision']=='r3_real_deep_materialization'
+          x=json.load(open(o+'summary_v0.35.json'));assert x['current_master_rows']==1633 and x['revision']=='r3_final_materialization_capability_and_current_asset_fix'
           PY
           git diff --exit-code -- universe/Welt-Swing-Universe-Master-v2.0.xlsx universe/research_partial_1633.csv
       - name: Commit outputs and handoff
@@ -45,4 +45,6 @@ jobs:
         with:
           name: current-master-remaining-source-materialization-v0.35-r3
           path: output_current_master_remaining_source_materialization_v0_35
+
+
 
