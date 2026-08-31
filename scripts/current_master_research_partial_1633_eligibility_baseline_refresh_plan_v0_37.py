@@ -139,13 +139,9 @@ def main():
     write("baseline_reconciliation_exceptions_v0.37.csv",["Exception_Type","WS_ID","Details"],exceptions)
     count_rows("mapping_baseline_counts_v0.37.csv","Mapping_Baseline_State",ledger);count_rows("history_baseline_counts_v0.37.csv","History_Evidence_State",ledger);count_rows("liquidity_baseline_counts_v0.37.csv","Liquidity_Evidence_State",ledger);count_rows("scalable_baseline_counts_v0.37.csv","Scalable_Tradeability_Status",ledger);count_rows("prior_eligibility_counts_v0.37.csv","Prior_Eligibility_State",ledger)
     summary={"stage":"CURRENT_MASTER_RESEARCH_PARTIAL_1633_ELIGIBILITY_BASELINE_RECONCILIATION_AND_DATA_REFRESH_PLAN","version":"v0.37","current_master_rows":1633,"baseline_ledger_rows":len(ledger),"data_refresh_executed_v0_37":False,"baseline_reconciled_v0_37":True,"data_refresh_plan_materialized_v0_37":True,"universe_mutated_v0_37":False,"eligibility_promotion_v0_37":False,"productive":False,"p0":False,"swing_u3k_frozen":False,"source_superset_complete":False,"full_scan_allowed":False,"next_stage":"CURRENT_MASTER_RESEARCH_PARTIAL_1633_BASELINE_COLLISION_REMEDIATION" if exceptions else "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_HISTORY_LIQUIDITY_DATA_REFRESH","counts":{"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),"history":dict(Counter(r["History_Evidence_State"] for r in ledger)),"liquidity":dict(Counter(r["Liquidity_Evidence_State"] for r in ledger)),"scalable":dict(Counter(r["Scalable_Tradeability_Status"] for r in ledger)),"prior_eligibility":dict(Counter(r["Prior_Eligibility_State"] for r in ledger)),"refresh_action":dict(Counter(r["Planned_Next_Action"] for r in ledger)),"exceptions":len(exceptions)}}
-    (OUT/"summary_v0.37.json").write_text(json.dumps(summary,indent=2)+"
-",encoding="utf-8")
-    (OUT/"stage_checkpoint_v0.37.json").write_text(json.dumps(summary,indent=2)+"
-",encoding="utf-8")
-    (OUT/"manifest_v0.37.json").write_text(json.dumps({"files":sorted(p.name for p in OUT.iterdir()),"offline":True},indent=2)+"
-",encoding="utf-8")
-    handoff="
-".join(["# WELT-SWING CURRENT HANDOFF v0.37","","Current Master = 1633","Operating Mode = RESEARCH_PARTIAL","Imported = 8/14; Missing = 6/14","Baseline Ledger Rows = 1633","Data Refresh Executed = false","P0 = false","SWING_U3K_FROZEN = false","Productive = false","Source Governance v0.36 remains unchanged","Next Stage = "+summary["next_stage"],""])
+    (OUT/"summary_v0.37.json").write_text(json.dumps(summary,indent=2)+"\n",encoding="utf-8")
+    (OUT/"stage_checkpoint_v0.37.json").write_text(json.dumps(summary,indent=2)+"\n",encoding="utf-8")
+    (OUT/"manifest_v0.37.json").write_text(json.dumps({"files":sorted(p.name for p in OUT.iterdir()),"offline":True},indent=2)+"\n",encoding="utf-8")
+    handoff="\n".join(["# WELT-SWING CURRENT HANDOFF v0.37","","Current Master = 1633","Operating Mode = RESEARCH_PARTIAL","Imported = 8/14; Missing = 6/14","Baseline Ledger Rows = 1633","Data Refresh Executed = false","P0 = false","SWING_U3K_FROZEN = false","Productive = false","Source Governance v0.36 remains unchanged","Next Stage = "+summary["next_stage"],""])
     (ROOT/"WELT-SWING-CURRENT-Handoff-v0.37.md").write_text(handoff,encoding="utf-8");(ROOT/"WELT-SWING-CURRENT-Handoff-CURRENT.md").write_text(handoff,encoding="utf-8")
 if __name__=="__main__":main()
