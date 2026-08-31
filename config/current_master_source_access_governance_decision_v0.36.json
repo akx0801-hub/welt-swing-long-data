@@ -1,11 +1,10 @@
 {
-  "revision": "v0.36_initial_blob_capture_then_strict_freeze",
-  "technical_retry": 3,
+  "revision": "v0.36_strict_frozen_input_blob_pins",
   "stage": "CURRENT_MASTER_REMAINING_SOURCE_ACCESS_REMEDIATION_AND_GOVERNANCE_DECISION",
   "version": "v0.36",
   "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
   "network_access": false,
-  "allow_initial_blob_capture": true,
+  "allow_initial_blob_capture": false,
   "frozen_inputs": [
     {
       "path": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
@@ -13,27 +12,27 @@
     },
     {
       "path": "WELT-SWING-CURRENT-Handoff-v0.35.md",
-      "blob_sha": ""
+      "blob_sha": "70e6271630868467f1c91dd1faca9c407df98bcd"
     },
     {
       "path": "output_current_master_remaining_source_materialization_v0_35/summary_v0.35.json",
-      "blob_sha": ""
+      "blob_sha": "516454692e42601ae070f2abf666fc78ff3ad074"
     },
     {
       "path": "output_current_master_remaining_source_materialization_v0_35/stage_checkpoint_v0.35.json",
-      "blob_sha": ""
+      "blob_sha": "516454692e42601ae070f2abf666fc78ff3ad074"
     },
     {
       "path": "output_current_master_remaining_source_materialization_v0_35/remaining_segment_official_endpoint_probe_v0.35.csv",
-      "blob_sha": ""
+      "blob_sha": "2be177bce5aa22c3d66d73621bd108ea13d0bc68"
     },
     {
       "path": "output_current_master_remaining_source_materialization_v0_35/official_candidate_asset_links_v0.35.csv",
-      "blob_sha": ""
+      "blob_sha": "32a4ebc506d5aa9d99fe809f24de28da171a7310"
     },
     {
       "path": "config/current_master_remaining_missing_segment_official_source_materialization_v0.35.json",
-      "blob_sha": ""
+      "blob_sha": "9576f789cac2e4a4ce53a672092e27e8be2e62b5"
     },
     {
       "path": "universe/Welt-Swing-Universe-Master-v2.0.xlsx",
@@ -41,7 +40,7 @@
     },
     {
       "path": "universe/research_partial_1633.csv",
-      "blob_sha": ""
+      "blob_sha": "9851b1c4f68205c2d5e778fc1d3d79be17c6fd13"
     },
     {
       "path": "universe/research_partial_1633_manifest.json",
