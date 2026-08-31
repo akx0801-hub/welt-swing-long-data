@@ -1,0 +1,123 @@
+name: v0.37 Recovery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Restore b308 script and patch counts
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="b308232c7d0b2cec9cf09aeab7eca78376014468"
+          EXPECTED_BLOB="7044238cc288f8576b1ef3b7da279651ada70a92"
+          SCRIPT="scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py"
+          git show "${BASE}:${SCRIPT}" > "${SCRIPT}"
+          test "$(git hash-object "${SCRIPT}")" = "${EXPECTED_BLOB}"
+          python - "${SCRIPT}" <<'PY'
+          import sys
+          p=sys.argv[1]; t=open(p,encoding="utf-8").read()
+          summary_anchor='    summary={'
+          if t.count(summary_anchor)!=1: raise SystemExit("summary anchor count != 1")
+          addition=('    count_rows("identity_baseline_counts_v0.37.csv","Identity_Baseline_State",ledger)\n'
+                    '    count_rows("instrument_baseline_counts_v0.37.csv","Instrument_Gate_Baseline_State",ledger)\n'
+                    '    count_rows("refresh_action_counts_v0.37.csv","Planned_Next_Action",ledger)\n')
+          t=t.replace(summary_anchor,addition+summary_anchor,1)
+          old='"counts":{"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),'
+          new=('"counts":{'
+               '"identity":dict(Counter(r["Identity_Baseline_State"] for r in ledger)),'
+               '"instrument":dict(Counter(r["Instrument_Gate_Baseline_State"] for r in ledger)),'
+               '"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),')
+          if t.count(old)!=1: raise SystemExit("summary counts anchor count != 1")
+          t=t.replace(old,new,1)
+          required=["from __future__ import annotations","def main(","if __name__","def state_text(","def br_evidence(","def classify_br(","def action(","data_refresh_batch_plan_v0.37.csv","eligibility_recompute_plan_v0.37.csv","historical_eligibility_evidence_inventory_v0.37.csv","baseline_evidence_lineage_v0.37.csv"]
+          if any(x not in t for x in required): raise SystemExit("restored logic missing")
+          if t.count("from __future__ import annotations")!=1 or t.count("def main(")!=1 or t.count("if __name__")!=1: raise SystemExit("structure gate failed")
+          for x in ["identity_baseline_counts_v0.37.csv","instrument_baseline_counts_v0.37.csv","refresh_action_counts_v0.37.csv"]:
+              if t.count(x)!=1: raise SystemExit("count patch invalid")
+          open(p,"w",encoding="utf-8").write(t)
+          PY
+          python -m py_compile "${SCRIPT}"
+          python "${SCRIPT}" --self-test
+          git diff "${BASE}" -- "${SCRIPT}"
+          python - "${SCRIPT}" <<'PY'
+          import subprocess,sys
+          a,d,_=subprocess.check_output(["git","diff","--numstat","b308232c7d0b2cec9cf09aeab7eca78376014468","--",sys.argv[1]],text=True).strip().split("\t")
+          if int(a)>4 or int(d)>1: raise SystemExit(f"non-minimal restored script diff +{a} -{d}")
+          print("minimal script diff PASS",a,d)
+          PY
+      - name: Fix regular v0.37 workflow restore step
+        shell: bash
+        run: |
+          set -euo pipefail
+          WF=".github/workflows/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0.37.yml"
+          python - "${WF}" <<'PY'
+          import sys
+          p=sys.argv[1]; t=open(p,encoding="utf-8").read()
+          assert t.count("name: Current Master Research Partial 1633 Baseline v0.37")==1
+          assert t.count("permissions:")==1
+          assert t.count("jobs:")==1
+          assert t.count("      - name: Restore full v0.37 baseline script and additive counts")==1
+          assert t.count("      - name: py_compile")==1
+          print("committed workflow structure PASS")
+          start=t.index("      - name: Restore full v0.37 baseline script and additive counts\n")
+          end=t.index("      - name: py_compile\n",start)
+          replacement="""      - name: Restore full v0.37 baseline script and additive counts
+        shell: bash
+        run: |
+          set -euo pipefail
+          SCRIPT="scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py"
+          BASE="b308232c7d0b2cec9cf09aeab7eca78376014468"
+          EXPECTED_BLOB="7044238cc288f8576b1ef3b7da279651ada70a92"
+          git show "${BASE}:${SCRIPT}" > /tmp/v0_37_b308.py
+          test "$(git hash-object /tmp/v0_37_b308.py)" = "${EXPECTED_BLOB}"
+          cp /tmp/v0_37_b308.py "${SCRIPT}"
+          python - "${SCRIPT}" <<'PY2'
+          import sys
+          p=sys.argv[1]; t=open(p,encoding="utf-8").read()
+          summary_anchor='    summary={'
+          if t.count(summary_anchor)!=1: raise SystemExit("summary anchor count != 1")
+          addition=('    count_rows("identity_baseline_counts_v0.37.csv","Identity_Baseline_State",ledger)\\n'
+                    '    count_rows("instrument_baseline_counts_v0.37.csv","Instrument_Gate_Baseline_State",ledger)\\n'
+                    '    count_rows("refresh_action_counts_v0.37.csv","Planned_Next_Action",ledger)\\n')
+          t=t.replace(summary_anchor,addition+summary_anchor,1)
+          old='"counts":{"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),'
+          new=('"counts":{'
+               '"identity":dict(Counter(r["Identity_Baseline_State"] for r in ledger)),'
+               '"instrument":dict(Counter(r["Instrument_Gate_Baseline_State"] for r in ledger)),'
+               '"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),')
+          if t.count(old)!=1: raise SystemExit("summary counts anchor count != 1")
+          t=t.replace(old,new,1)
+          if t.count("from __future__ import annotations")!=1 or t.count("def main(")!=1 or t.count("if __name__")!=1: raise SystemExit("structure gate failed")
+          open(p,"w",encoding="utf-8").write(t)
+          PY2
+          python -m py_compile "${SCRIPT}"
+          python "${SCRIPT}" --self-test
+          python - "${SCRIPT}" <<'PY2'
+          import subprocess,sys
+          a,d,_=subprocess.check_output(["git","diff","--numstat","b308232c7d0b2cec9cf09aeab7eca78376014468","--",sys.argv[1]],text=True).strip().split("\\t")
+          if int(a)>4 or int(d)>1: raise SystemExit(f"non-minimal diff +{a} -{d}")
+          PY2
+
+"""
+          t=t[:start]+replacement+t[end:]
+          open(p,"w",encoding="utf-8").write(t)
+          PY
+      - name: Commit recovered v0.37 technical files
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py .github/workflows/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0.37.yml
+          git diff --cached --quiet || git commit -m "v0.37 recover b308 script and anchor fix"
+          git push
