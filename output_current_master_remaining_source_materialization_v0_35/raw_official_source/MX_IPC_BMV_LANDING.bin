@@ -5742,12 +5742,6 @@ Special Information
                     <ul class="elements">
                         
                         
-                        <li><a href="/en/information-products">
-                            Information Products
-                            </a>
-                        </li>
-                        
-                        
                         <li><a href="/en/press-room">
                             Press Room
                             </a>
@@ -5766,18 +5760,6 @@ Special Information
                         </li>
                         
                         
-                        <li><a href="/en/markets/market-press-release">
-                            Market Press Release
-                            </a>
-                        </li>
-                        
-                        
-                        <li><a href="/en/markets/equity">
-                            Equity
-                            </a>
-                        </li>
-                        
-                        
                         <li><a href="http://feeds.feedburner.com/BmvBoletin">
                             RSS
                             </a>
@@ -5786,6 +5768,24 @@ Special Information
                         
                         <li><a href="/en/issuers/issuers-information">
                             Issuers Information
+                            </a>
+                        </li>
+                        
+                        
+                        <li><a href="/en/markets/market-press-release">
+                            Market Press Release
+                            </a>
+                        </li>
+                        
+                        
+                        <li><a href="/en/information-products">
+                            Information Products
+                            </a>
+                        </li>
+                        
+                        
+                        <li><a href="/en/markets/equity">
+                            Equity
                             </a>
                         </li>
                         
@@ -6179,35 +6179,35 @@ Special Information
                 <li>
                     <!-- Captcha -->
                     <div id='idcaptcha_registro' class='commonCaptcha'>
-                        <p class="special">To continue, please click on the number:<strong>&nbsp;NINE</strong></p>
+                        <p class="special">To continue, please click on the number:<strong>&nbsp;ONE</strong></p>
                         <ul id="captchaRegister" class="captcha">
                             
                             <li>
+                                <input class="default" id="idcaptcha_registro_1" name="captcha_idcaptcha_registro" type="radio" value="1"/>
+                                <input type="hidden" class="keyHidd_idcaptcha_registro_1" value='ZDIwMjRmOTdkOWI4MzViMDg5YzJjNjM2NjM3ZDEzMDc='/>
+                                <input type="hidden" class="dateHidd_idcaptcha_registro_1" value='2026-08-31 05:17:41.781'/>
+                                <label for="idcaptcha_registro_1">1</label>
+                            </li>
+                            
+                            <li>
                                 <input class="default" id="idcaptcha_registro_3" name="captcha_idcaptcha_registro" type="radio" value="3"/>
-                                <input type="hidden" class="keyHidd_idcaptcha_registro_3" value='Yjg2ZTFjNGQwZjI4ZWU5ODAwMGYxYTU1NmM3MzA3NGU='/>
-                                <input type="hidden" class="dateHidd_idcaptcha_registro_3" value='2026-08-31 04:04:20.24'/>
+                                <input type="hidden" class="keyHidd_idcaptcha_registro_3" value='ZDIwMjRmOTdkOWI4MzViMDg5YzJjNjM2NjM3ZDEzMDc='/>
+                                <input type="hidden" class="dateHidd_idcaptcha_registro_3" value='2026-08-31 05:17:41.781'/>
                                 <label for="idcaptcha_registro_3">3</label>
                             </li>
                             
                             <li>
-                                <input class="default" id="idcaptcha_registro_7" name="captcha_idcaptcha_registro" type="radio" value="7"/>
-                                <input type="hidden" class="keyHidd_idcaptcha_registro_7" value='Yjg2ZTFjNGQwZjI4ZWU5ODAwMGYxYTU1NmM3MzA3NGU='/>
-                                <input type="hidden" class="dateHidd_idcaptcha_registro_7" value='2026-08-31 04:04:20.24'/>
-                                <label for="idcaptcha_registro_7">7</label>
+                                <input class="default" id="idcaptcha_registro_5" name="captcha_idcaptcha_registro" type="radio" value="5"/>
+                                <input type="hidden" class="keyHidd_idcaptcha_registro_5" value='ZDIwMjRmOTdkOWI4MzViMDg5YzJjNjM2NjM3ZDEzMDc='/>
+                                <input type="hidden" class="dateHidd_idcaptcha_registro_5" value='2026-08-31 05:17:41.781'/>
+                                <label for="idcaptcha_registro_5">5</label>
                             </li>
                             
                             <li>
                                 <input class="default" id="idcaptcha_registro_8" name="captcha_idcaptcha_registro" type="radio" value="8"/>
-                                <input type="hidden" class="keyHidd_idcaptcha_registro_8" value='Yjg2ZTFjNGQwZjI4ZWU5ODAwMGYxYTU1NmM3MzA3NGU='/>
-                                <input type="hidden" class="dateHidd_idcaptcha_registro_8" value='2026-08-31 04:04:20.24'/>
+                                <input type="hidden" class="keyHidd_idcaptcha_registro_8" value='ZDIwMjRmOTdkOWI4MzViMDg5YzJjNjM2NjM3ZDEzMDc='/>
+                                <input type="hidden" class="dateHidd_idcaptcha_registro_8" value='2026-08-31 05:17:41.781'/>
                                 <label for="idcaptcha_registro_8">8</label>
-                            </li>
-                            
-                            <li>
-                                <input class="default" id="idcaptcha_registro_9" name="captcha_idcaptcha_registro" type="radio" value="9"/>
-                                <input type="hidden" class="keyHidd_idcaptcha_registro_9" value='Yjg2ZTFjNGQwZjI4ZWU5ODAwMGYxYTU1NmM3MzA3NGU='/>
-                                <input type="hidden" class="dateHidd_idcaptcha_registro_9" value='2026-08-31 04:04:20.24'/>
-                                <label for="idcaptcha_registro_9">9</label>
                             </li>
                             
                         </ul>
@@ -6404,4 +6404,4 @@ Special Information
 
 	</body>
 </html>
-<!--Time: 95ms - SemanticWebBuilder: http://www.Grupo_BMV.swb#WebPage:Informacion_especial--> 
+<!--Time: 108ms - SemanticWebBuilder: http://www.Grupo_BMV.swb#WebPage:Informacion_especial--> 

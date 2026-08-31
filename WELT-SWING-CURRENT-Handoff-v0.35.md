@@ -1,6 +1,6 @@
 # WELT-SWING CURRENT HANDOFF v0.35
 
-Revision: v0.35-r2 real deep materialization
+Revision: v0.35-r3 final materialization capability
 
 - Current Master: 1633 unchanged
 - US_SP1500: OFFICIAL_SOURCE_NOT_MATERIALIZED / rows 0

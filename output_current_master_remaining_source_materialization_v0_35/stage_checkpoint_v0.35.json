@@ -1,6 +1,5 @@
 {
-  "revision": "r2_real_deep_materialization",
-  "version": "v0.35",
+  "revision": "r3_final_materialization_capability_and_current_asset_fix",
   "current_master_rows": 1633,
   "imported_target_segments": 8,
   "missing_segments_checked": 6,
