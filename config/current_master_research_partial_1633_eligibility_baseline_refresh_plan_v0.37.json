@@ -48,5 +48,5 @@
   "p0": false,
   "swing_u3k_frozen": false,
   "alpha_vantage": false,
-  "revision": "technical_retry_newline_syntax"
+  "revision": "identity_instrument_count_completion"
 }
