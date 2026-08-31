@@ -1,5 +1,5 @@
 {
-  "files": [
+  "outputs": [
     "baseline_evidence_lineage_v0.37.csv",
     "baseline_reconciliation_exceptions_v0.37.csv",
     "data_refresh_batch_plan_v0.37.csv",
@@ -8,12 +8,15 @@
     "eligibility_recompute_plan_v0.37.csv",
     "historical_eligibility_evidence_inventory_v0.37.csv",
     "history_baseline_counts_v0.37.csv",
+    "identity_baseline_counts_v0.37.csv",
+    "instrument_baseline_counts_v0.37.csv",
     "liquidity_baseline_counts_v0.37.csv",
+    "manifest_v0.37.json",
     "mapping_baseline_counts_v0.37.csv",
     "prior_eligibility_counts_v0.37.csv",
+    "refresh_action_counts_v0.37.csv",
     "scalable_baseline_counts_v0.37.csv",
     "stage_checkpoint_v0.37.json",
     "summary_v0.37.json"
-  ],
-  "offline": true
+  ]
 }

@@ -3,6 +3,7 @@
   "version": "v0.37",
   "current_master_rows": 1633,
   "baseline_ledger_rows": 1633,
+  "refresh_plan_rows": 1633,
   "data_refresh_executed_v0_37": false,
   "baseline_reconciled_v0_37": true,
   "data_refresh_plan_materialized_v0_37": true,
@@ -11,40 +12,45 @@
   "productive": false,
   "p0": false,
   "swing_u3k_frozen": false,
-  "source_superset_complete": false,
-  "full_scan_allowed": false,
   "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_HISTORY_LIQUIDITY_DATA_REFRESH",
   "counts": {
-    "mapping": {
+    "Identity_Baseline_State": {
+      "NOT_VERIFIED": 1633
+    },
+    "Instrument_Gate_Baseline_State": {
+      "NOT_VERIFIED": 1535,
+      "PASS": 79,
+      "FAIL": 19
+    },
+    "Mapping_Baseline_State": {
       "MAPPING_PRESENT_NOT_REVALIDATED": 1633
     },
-    "history": {
+    "History_Evidence_State": {
       "HISTORY_NOT_CHECKED": 1595,
       "PASS_HISTORY_PRIOR_EVIDENCE": 38
     },
-    "liquidity": {
+    "Liquidity_Evidence_State": {
       "LIQUIDITY_NOT_CHECKED": 1554,
       "PASS_STANDARD_PRIOR_EVIDENCE": 38,
       "FAIL_LIQUIDITY_PRIOR": 13,
       "LOW_LIQUIDITY_EXCEPTION_POOL_PRIOR": 28
     },
-    "scalable": {
+    "Scalable_Tradeability_Status": {
       "NOT_VERIFIED": 1535,
       "SCALABLE_NOT_VERIFIED": 98
     },
-    "prior_eligibility": {
+    "Prior_Eligibility_State": {
       "NOT_ELIGIBLE_OR_NOT_RECONCILED": 1535,
       "STANDARD_ELIGIBILITY_READY": 38,
       "STANDARD_U3K_NOT_ELIGIBLE_LIQUIDITY": 13,
       "LOW_LIQUIDITY_EXCEPTION_POOL": 28,
       "STANDARD_U3K_NOT_ELIGIBLE_INSTRUMENT": 19
     },
-    "refresh_action": {
+    "Planned_Next_Action": {
       "PRICE_HISTORY_AND_LIQUIDITY_REFRESH_REQUIRED": 1535,
       "ELIGIBILITY_RECOMPUTE_AFTER_REFRESH": 38,
       "PRICE_HISTORY_REFRESH_REQUIRED": 41,
       "NO_STANDARD_REFRESH_INSTRUMENT_FAIL": 19
-    },
-    "exceptions": 0
+    }
   }
 }
