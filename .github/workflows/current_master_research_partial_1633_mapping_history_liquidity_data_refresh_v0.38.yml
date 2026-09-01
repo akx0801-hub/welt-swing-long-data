@@ -1,0 +1,95 @@
+name: Current Master Research Partial 1633 Mapping History Liquidity Data Refresh v0.38
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - config/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0.38.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: current-master-research-partial-1633-v0.38
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      PYTHONUNBUFFERED: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      STAGE: CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_HISTORY_LIQUIDITY_DATA_REFRESH
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Python Setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dependency Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "yfinance==1.6.0" pandas numpy openpyxl
+      - name: py_compile
+        run: python -m py_compile scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py
+      - name: Self-Test
+        run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --self-test
+      - name: Frozen Input Gates
+        run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --validate-inputs
+      - name: Restore v0.38 Runtime Cache
+        id: price-cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: runtime_cache/v0_38/current_master_1633_market_prices.sqlite
+          key: current-master-1633-v0.38-${{ hashFiles('universe/research_partial_1633.csv', 'scripts/price_cache.py', 'config/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0.38.json') }}
+          restore-keys: |
+            current-master-1633-v0.38-
+      - name: Provider Smoke Gate
+        run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --smoke
+      - name: Mapping Materialization
+        run: echo "Deterministic mapping is materialized by the controlled refresh runner."
+      - name: Controlled Batch OHLCV Refresh
+        run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --run
+      - name: Price QA
+        run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/price_cache_status_1633_v0.38.csv
+      - name: Controlled FX Batch Refresh
+        run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/fx_daily_v0.38.csv
+      - name: History Current Gate
+        run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/history_gate_current_1633_v0.38.csv
+      - name: Liquidity Current Calculation
+        run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/liquidity_current_1633_v0.38.csv
+      - name: Data Readiness Materialization
+        run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/current_data_readiness_1633_v0.38.csv
+      - name: Strong Result Gates
+        run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --strong-gates
+      - name: Commit outputs + handoffs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_current_master_research_partial_1633_data_refresh_v0_38 WELT-SWING-CURRENT-Handoff-v0.38.md WELT-SWING-CURRENT-Handoff-CURRENT.md
+          if git diff --cached --quiet; then
+            echo "No output changes to commit."
+          else
+            git commit -m "Complete current master data refresh v0.38"
+            git push
+          fi
+      - name: Cache save
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: runtime_cache/v0_38/current_master_1633_market_prices.sqlite
+          key: ${{ steps.price-cache-restore.outputs.cache-primary-key }}
+      - name: Artifact Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-master-1633-v0.38-data-refresh
+          if-no-files-found: warn
+          path: |
+            output_current_master_research_partial_1633_data_refresh_v0_38
+            runtime_cache/v0_38/current_master_1633_market_prices.sqlite
