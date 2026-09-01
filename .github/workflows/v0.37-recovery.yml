@@ -74,41 +74,41 @@ jobs:
           start=t.index("      - name: Restore full v0.37 baseline script and additive counts\n")
           end=t.index("      - name: py_compile\n",start)
           replacement="""      - name: Restore full v0.37 baseline script and additive counts
-        shell: bash
-        run: |
-          set -euo pipefail
-          SCRIPT="scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py"
-          BASE="b308232c7d0b2cec9cf09aeab7eca78376014468"
-          EXPECTED_BLOB="7044238cc288f8576b1ef3b7da279651ada70a92"
-          git show "${BASE}:${SCRIPT}" > /tmp/v0_37_b308.py
-          test "$(git hash-object /tmp/v0_37_b308.py)" = "${EXPECTED_BLOB}"
-          cp /tmp/v0_37_b308.py "${SCRIPT}"
-          python - "${SCRIPT}" <<'PY2'
-          import sys
-          p=sys.argv[1]; t=open(p,encoding="utf-8").read()
-          summary_anchor='    summary={'
-          if t.count(summary_anchor)!=1: raise SystemExit("summary anchor count != 1")
-          addition=('    count_rows("identity_baseline_counts_v0.37.csv","Identity_Baseline_State",ledger)\\n'
-                    '    count_rows("instrument_baseline_counts_v0.37.csv","Instrument_Gate_Baseline_State",ledger)\\n'
-                    '    count_rows("refresh_action_counts_v0.37.csv","Planned_Next_Action",ledger)\\n')
-          t=t.replace(summary_anchor,addition+summary_anchor,1)
-          old='"counts":{"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),'
-          new=('"counts":{'
-               '"identity":dict(Counter(r["Identity_Baseline_State"] for r in ledger)),'
-               '"instrument":dict(Counter(r["Instrument_Gate_Baseline_State"] for r in ledger)),'
-               '"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),')
-          if t.count(old)!=1: raise SystemExit("summary counts anchor count != 1")
-          t=t.replace(old,new,1)
-          if t.count("from __future__ import annotations")!=1 or t.count("def main(")!=1 or t.count("if __name__")!=1: raise SystemExit("structure gate failed")
-          open(p,"w",encoding="utf-8").write(t)
-          PY2
-          python -m py_compile "${SCRIPT}"
-          python "${SCRIPT}" --self-test
-          python - "${SCRIPT}" <<'PY2'
-          import subprocess,sys
-          a,d,_=subprocess.check_output(["git","diff","--numstat","b308232c7d0b2cec9cf09aeab7eca78376014468","--",sys.argv[1]],text=True).strip().split("\\t")
-          if int(a)>4 or int(d)>1: raise SystemExit(f"non-minimal diff +{a} -{d}")
-          PY2
+                  shell: bash
+                  run: |
+                    set -euo pipefail
+                    SCRIPT="scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py"
+                    BASE="b308232c7d0b2cec9cf09aeab7eca78376014468"
+                    EXPECTED_BLOB="7044238cc288f8576b1ef3b7da279651ada70a92"
+                    git show "${BASE}:${SCRIPT}" > /tmp/v0_37_b308.py
+                    test "$(git hash-object /tmp/v0_37_b308.py)" = "${EXPECTED_BLOB}"
+                    cp /tmp/v0_37_b308.py "${SCRIPT}"
+                    python - "${SCRIPT}" <<'PY2'
+                    import sys
+                    p=sys.argv[1]; t=open(p,encoding="utf-8").read()
+                    summary_anchor='    summary={'
+                    if t.count(summary_anchor)!=1: raise SystemExit("summary anchor count != 1")
+                    addition=('    count_rows("identity_baseline_counts_v0.37.csv","Identity_Baseline_State",ledger)\\n'
+                              '    count_rows("instrument_baseline_counts_v0.37.csv","Instrument_Gate_Baseline_State",ledger)\\n'
+                              '    count_rows("refresh_action_counts_v0.37.csv","Planned_Next_Action",ledger)\\n')
+                    t=t.replace(summary_anchor,addition+summary_anchor,1)
+                    old='"counts":{"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),'
+                    new=('"counts":{'
+                         '"identity":dict(Counter(r["Identity_Baseline_State"] for r in ledger)),'
+                         '"instrument":dict(Counter(r["Instrument_Gate_Baseline_State"] for r in ledger)),'
+                         '"mapping":dict(Counter(r["Mapping_Baseline_State"] for r in ledger)),')
+                    if t.count(old)!=1: raise SystemExit("summary counts anchor count != 1")
+                    t=t.replace(old,new,1)
+                    if t.count("from __future__ import annotations")!=1 or t.count("def main(")!=1 or t.count("if __name__")!=1: raise SystemExit("structure gate failed")
+                    open(p,"w",encoding="utf-8").write(t)
+                    PY2
+                    python -m py_compile "${SCRIPT}"
+                    python "${SCRIPT}" --self-test
+                    python - "${SCRIPT}" <<'PY2'
+                    import subprocess,sys
+                    a,d,_=subprocess.check_output(["git","diff","--numstat","b308232c7d0b2cec9cf09aeab7eca78376014468","--",sys.argv[1]],text=True).strip().split("\\t")
+                    if int(a)>4 or int(d)>1: raise SystemExit(f"non-minimal diff +{a} -{d}")
+                    PY2
 
           """
           t=t[:start]+replacement+t[end:]
