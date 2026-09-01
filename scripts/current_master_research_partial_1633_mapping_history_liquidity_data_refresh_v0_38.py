@@ -99,10 +99,13 @@ def scale_for(mic: str, cfg: dict[str, Any]) -> float:
     return float(cfg["quote_scale_by_mic"].get(str(mic).upper(), 1.0))
 
 def mapping_frame(universe: pd.DataFrame, ledger: pd.DataFrame) -> pd.DataFrame:
-    m = build_yahoo_symbol_map(universe, override_path="config/yahoo_symbol_overrides.csv")
+    m = build_yahoo_symbol_map(universe, override_path="config/yahoo_symbol_overrides.csv").rename(
+        columns={"Yahoo_Symbol":"Candidate_Yahoo_Symbol", "Yahoo_Mapping_Status":"Mapping_Source"}
+    )
     b = ledger[["WS_ID", "Mapping_Baseline_State", "Yahoo_Symbol_Current", "Instrument_Gate_Baseline_State", "Liquidity_Evidence_State"]].copy()
-    out = universe.merge(m[["WS_ID","Yahoo_Symbol","Yahoo_Mapping_Status"]], on="WS_ID", how="left").merge(b, on="WS_ID", how="left")
-    out.rename(columns={"Yahoo_Symbol":"Candidate_Yahoo_Symbol", "Yahoo_Mapping_Status":"Mapping_Source"}, inplace=True)
+    # research_partial may carry stale provider columns; v0.38 always rematerializes them.
+    base = universe.drop(columns=["Candidate_Yahoo_Symbol", "Mapping_Source"], errors="ignore")
+    out = base.merge(m[["WS_ID","Candidate_Yahoo_Symbol","Mapping_Source"]], on="WS_ID", how="left").merge(b, on="WS_ID", how="left")
     out["Candidate_Yahoo_Symbol"] = out["Candidate_Yahoo_Symbol"].fillna("")
     out["Segment_Key"] = out[segment_col(out)].fillna("UNSPECIFIED")
     return out
