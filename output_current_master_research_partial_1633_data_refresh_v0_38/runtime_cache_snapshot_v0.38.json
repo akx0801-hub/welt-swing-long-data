@@ -1,0 +1,79 @@
+{
+  "cache_path": "runtime_cache/v0_38/current_master_1633_market_prices.sqlite",
+  "Cache_SHA256": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+  "Cache_Row_Count": 676550,
+  "Cache_State_Count": 1614,
+  "Artifact_Name": "current-master-1633-v0.38-price-cache",
+  "price_cache_result": {
+    "mode": "INITIAL",
+    "source": "YFINANCE_FREE",
+    "productive": false,
+    "universe_count": 1614,
+    "mapped_count": 1614,
+    "unmapped_count": 0,
+    "symbol_resets": 0,
+    "rescue_attempted": 239,
+    "repair_candidates": 7,
+    "repair_attempted": 7,
+    "missing_symbols": 239,
+    "cache_counts": {
+      "price_rows": 676550,
+      "states": 1614,
+      "ready": 1365,
+      "batches": 21
+    },
+    "mapping_status_counts": {
+      "DERIVED_RULE": 908,
+      "DERIVED_RULE_NORMALIZED": 618,
+      "EXPLICIT": 79,
+      "PROJECT_OVERRIDE": 9
+    },
+    "config": {
+      "batch_size": 100,
+      "threads": true,
+      "timeout_seconds": 15.0,
+      "initial_period": "2y",
+      "interval": "1d",
+      "overlap_calendar_days": 14,
+      "min_valid_bars": 252,
+      "ready_unique_bars": 260,
+      "max_filterable_invalid_bars": 2,
+      "max_filterable_invalid_share": 0.01,
+      "stale_calendar_days": 10,
+      "max_identical_retries": 1,
+      "retry_sleep_seconds": 2.0,
+      "pause_between_batches_seconds": 0.0,
+      "repair_anomalies": true,
+      "repair_batch_size": 25,
+      "suspicious_abs_return": 0.5,
+      "zero_volume_warning_share": 0.2
+    },
+    "run_hash": "82f6d2ed2e45e717db7c0912909eefbad5b5f2ce85269841ea490f85b2dc7311"
+  },
+  "smoke": {
+    "status": "PASS",
+    "requested": [
+      "ABEV3.SA",
+      "AAUC.TO",
+      "000001.SZ",
+      "AALB.AS",
+      "0001.HK",
+      "RELIANCE.NS",
+      "1332.T",
+      "3661.TW"
+    ],
+    "received": [
+      "ABEV3.SA",
+      "AAUC.TO",
+      "000001.SZ",
+      "AALB.AS",
+      "0001.HK",
+      "RELIANCE.NS",
+      "1332.T",
+      "3661.TW"
+    ],
+    "started_utc": "2026-09-01T04:46:05+00:00",
+    "finished_utc": "2026-09-01T04:46:05+00:00",
+    "global_eod_safe_cutoff": "2026-08-31"
+  }
+}

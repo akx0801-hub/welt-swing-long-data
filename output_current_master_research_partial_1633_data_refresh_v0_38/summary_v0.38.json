@@ -1,0 +1,130 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_HISTORY_LIQUIDITY_DATA_REFRESH",
+  "version": "v0.38",
+  "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
+  "run_timestamp_utc": "2026-09-01T04:46:04+00:00",
+  "global_eod_safe_cutoff": "2026-08-31",
+  "current_master_rows": 1633,
+  "imported_segments": 8,
+  "missing_segments": 6,
+  "instrument_fail_not_requested": 19,
+  "stock_refresh_target_count": 1614,
+  "mapping_state_counts": {
+    "MAPPING_DATA_CONFIRMED": 1375,
+    "MAPPING_DOWNLOAD_NO_DATA": 239,
+    "MAPPING_NOT_REQUESTED_INSTRUMENT_FAIL": 19
+  },
+  "price_cache_status_counts": {
+    "READY": 1365,
+    "DOWNLOAD_FAILED": 239,
+    "NOT_REQUESTED": 19,
+    "QUARANTINE": 7,
+    "WARMUP": 3
+  },
+  "history_current_counts": {
+    "PASS_HISTORY_CURRENT": 1365,
+    "HISTORY_MAPPING_BLOCKED": 239,
+    "NOT_REQUESTED_INSTRUMENT_FAIL": 19,
+    "HISTORY_DATA_QUALITY_FAIL": 7,
+    "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K": 3
+  },
+  "liquidity_current_counts": {
+    "PASS_PREFERRED": 812,
+    "LIQUIDITY_DATA_INSUFFICIENT": 268,
+    "LOW_LIQUIDITY_EXCEPTION_POOL": 215,
+    "LIQUIDITY_FX_UNRESOLVED": 183,
+    "PASS_STANDARD": 80,
+    "FAIL_LIQUIDITY": 75
+  },
+  "fx_requested_currencies": [
+    "BRL",
+    "CAD",
+    "CHF",
+    "CNY",
+    "DKK",
+    "EUR",
+    "GBP",
+    "HKD",
+    "INR",
+    "JPY",
+    "NOK",
+    "PLN",
+    "SEK",
+    "TWD",
+    "USD"
+  ],
+  "fx_resolved_currencies": [
+    "BRL",
+    "CAD",
+    "CHF",
+    "CNY",
+    "DKK",
+    "EUR",
+    "GBP",
+    "HKD",
+    "INR",
+    "JPY",
+    "NOK",
+    "PLN",
+    "SEK",
+    "TWD",
+    "USD"
+  ],
+  "fx_unresolved_currencies": [],
+  "data_readiness_counts": {
+    "READY_FOR_ELIGIBILITY_RECOMPUTE": 1182,
+    "BLOCKED_MAPPING": 239,
+    "BLOCKED_FX": 183,
+    "BLOCKED_INSTRUMENT": 19,
+    "QUARANTINE_DATA_QUALITY": 7,
+    "BLOCKED_HISTORY_DATA": 3
+  },
+  "mapping_remediation_count": 239,
+  "data_quality_exception_count": 7,
+  "provider_batch_count": 52,
+  "provider_rescue_count": 0,
+  "provider_repair_count": 1,
+  "data_refresh_executed_v0_38": true,
+  "universe_mutated_v0_38": false,
+  "eligibility_promotion_v0_38": false,
+  "p0": false,
+  "sector_rs": false,
+  "swing_u3k_frozen": false,
+  "productive": false,
+  "full_scan_allowed": false,
+  "alpha_vantage": false,
+  "counts": {
+    "mapping": {
+      "MAPPING_DATA_CONFIRMED": 1375,
+      "MAPPING_DOWNLOAD_NO_DATA": 239,
+      "MAPPING_NOT_REQUESTED_INSTRUMENT_FAIL": 19
+    },
+    "history": {
+      "PASS_HISTORY_CURRENT": 1365,
+      "HISTORY_MAPPING_BLOCKED": 239,
+      "NOT_REQUESTED_INSTRUMENT_FAIL": 19,
+      "HISTORY_DATA_QUALITY_FAIL": 7,
+      "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K": 3
+    },
+    "liquidity": {
+      "PASS_PREFERRED": 812,
+      "LIQUIDITY_DATA_INSUFFICIENT": 268,
+      "LOW_LIQUIDITY_EXCEPTION_POOL": 215,
+      "LIQUIDITY_FX_UNRESOLVED": 183,
+      "PASS_STANDARD": 80,
+      "FAIL_LIQUIDITY": 75
+    },
+    "readiness": {
+      "READY_FOR_ELIGIBILITY_RECOMPUTE": 1182,
+      "BLOCKED_MAPPING": 239,
+      "BLOCKED_FX": 183,
+      "BLOCKED_INSTRUMENT": 19,
+      "QUARANTINE_DATA_QUALITY": 7,
+      "BLOCKED_HISTORY_DATA": 3
+    },
+    "fx": {
+      "FX_RESOLVED": 15
+    }
+  },
+  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_DATA_GAP_REMEDIATION"
+}
