@@ -118,6 +118,6 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py .github/workflows/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0.37.yml
+          git add scripts/current_master_research_partial_1633_eligibility_baseline_refresh_plan_v0_37.py 
           git diff --cached --quiet || git commit -m "v0.37 recover b308 script and anchor fix"
           git push
