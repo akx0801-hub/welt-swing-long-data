@@ -431,6 +431,44 @@ def self_test() -> None:
     require(m.WS_ID.tolist()==["A","B"],"MAPPING_PRESERVES_WS_ID_TEST")
     print("v0.38 self-test PASS")
 
+RETRY_CACHE_PATH = Path("runtime_cache/v0_38/current_master_1633_market_prices.sqlite")
+RETRY_CACHE_SHA256 = "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0"
+RETRY_CACHE_COUNTS = {"price_daily": 676550, "cache_state": 1614, "batch_log": 21}
+
+
+def validate_retry_cache(cache_path: Path | str = RETRY_CACHE_PATH) -> dict[str, int | str]:
+    path = Path(cache_path)
+    if path != RETRY_CACHE_PATH:
+        raise RuntimeError(f"RETRY_CACHE_PATH_INVALID:{path}")
+    if not path.is_file():
+        raise RuntimeError(f"RETRY_CACHE_MISSING:{path}")
+
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    cache_sha = digest.hexdigest()
+
+    if cache_sha != RETRY_CACHE_SHA256:
+        raise RuntimeError(f"RETRY_CACHE_SHA256_MISMATCH:{cache_sha}")
+
+    with sqlite3.connect(f"file:{path}?mode=ro", uri=True) as conn:
+        counts = {
+            table: int(conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0])
+            for table in RETRY_CACHE_COUNTS
+        }
+
+    if counts != RETRY_CACHE_COUNTS:
+        raise RuntimeError(f"RETRY_CACHE_COUNTS_MISMATCH:{counts}")
+
+    return {
+        "cache_sha": cache_sha,
+        "price_rows": counts["price_daily"],
+        "state_rows": counts["cache_state"],
+        "batch_rows": counts["batch_log"],
+    }
+
+
 def retry_fx_batch_audit(cfg):
     raise RuntimeError("FX_BATCH_AUDIT_ONLY_NOT_IMPLEMENTED")
 
