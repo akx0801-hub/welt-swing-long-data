@@ -1,2 +1,9 @@
 Step,Action,State
-1,"Identity/Instrument, mapping, history, liquidity, data quality, eligibility recompute",PLANNING_ONLY
+1,Identity/Instrument remediation,PLANNED_ONLY
+2,Mapping verification/creation,PLANNED_ONLY
+3,Price history refresh,PLANNED_ONLY
+4,Liquidity refresh,PLANNED_ONLY
+5,Data quality gate,PLANNED_ONLY
+6,Standard eligibility recompute,PLANNED_ONLY
+7,Scalable plausibility revalidation,PLANNED_ONLY
+8,Funnel decision,PLANNED_ONLY
