@@ -431,15 +431,25 @@ def self_test() -> None:
     require(m.WS_ID.tolist()==["A","B"],"MAPPING_PRESERVES_WS_ID_TEST")
     print("v0.38 self-test PASS")
 
+def retry_fx_batch_audit(cfg):
+    raise RuntimeError("FX_BATCH_AUDIT_ONLY_NOT_IMPLEMENTED")
+
+
+def retry_strong_gates():
+    raise RuntimeError("FX_BATCH_AUDIT_ONLY_STRONG_GATES_NOT_IMPLEMENTED")
+
+
 if __name__=="__main__":
     ap=argparse.ArgumentParser()
     ap.add_argument("--config",default=str(DEFAULT_CONFIG))
     ap.add_argument("--self-test",action="store_true"); ap.add_argument("--validate-inputs",action="store_true")
-    ap.add_argument("--smoke",action="store_true"); ap.add_argument("--run",action="store_true"); ap.add_argument("--strong-gates",action="store_true")
+    ap.add_argument("--smoke",action="store_true"); ap.add_argument("--run",action="store_true"); ap.add_argument("--strong-gates",action="store_true"); ap.add_argument("--retry-fx-batch-audit",action="store_true"); ap.add_argument("--retry-strong-gates",action="store_true")
     a=ap.parse_args(); cfg=read_json(Path(a.config))
     if a.self_test: self_test()
     if a.validate_inputs: load_inputs(cfg); print("frozen input gates PASS")
     if a.smoke:
         u,l,_,_=load_inputs(cfg); m=mapping_frame(u,l); smoke_gate(m,cfg,datetime.now(UTC).date()-timedelta(days=1)); print("provider smoke PASS")
+    if a.retry_fx_batch_audit: retry_fx_batch_audit(cfg)
+    if a.retry_strong_gates: retry_strong_gates()
     if a.run: run(cfg)
     if a.strong_gates: strong_gates(); print("strong result gates PASS")
