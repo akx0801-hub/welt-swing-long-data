@@ -436,6 +436,45 @@ RETRY_CACHE_SHA256 = "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c8
 RETRY_CACHE_COUNTS = {"price_daily": 676550, "cache_state": 1614, "batch_log": 21}
 
 
+class ReadOnlySQLitePriceCache:
+    """Minimal read-only cache adapter for FX_BATCH_AUDIT_ONLY."""
+
+    def __init__(self, cache_path: Path | str):
+        path = Path(cache_path).resolve()
+        self.conn = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+        self.conn.execute("PRAGMA query_only=ON")
+
+    def load_price_frame(self, ws_id: str) -> pd.DataFrame:
+        q = """
+            SELECT day,open,high,low,close,adj_close,volume,
+                   dividends,stock_splits,repaired
+            FROM price_daily
+            WHERE ws_id=?
+            ORDER BY day
+        """
+        frame = pd.read_sql_query(q, self.conn, params=[ws_id])
+        if frame.empty:
+            return pd.DataFrame()
+        frame["day"] = pd.to_datetime(frame["day"], errors="coerce")
+        return frame.dropna(subset=["day"]).set_index("day")
+
+    def load_batch_log(self) -> pd.DataFrame:
+        return pd.read_sql_query(
+            """
+            SELECT batch_id,source_id,started_utc,finished_utc,
+                   symbol_count,received_count,missing_count,retry_count,
+                   repair_pass,status,error_text
+            FROM batch_log
+            ORDER BY started_utc,batch_id
+            """,
+            self.conn,
+        )
+
+
+    def close(self) -> None:
+        self.conn.close()
+
+
 def validate_retry_cache(cache_path: Path | str = RETRY_CACHE_PATH) -> dict[str, int | str]:
     path = Path(cache_path)
     if path != RETRY_CACHE_PATH:
@@ -470,7 +509,73 @@ def validate_retry_cache(cache_path: Path | str = RETRY_CACHE_PATH) -> dict[str,
 
 
 def retry_fx_batch_audit(cfg):
-    raise RuntimeError("FX_BATCH_AUDIT_ONLY_NOT_IMPLEMENTED")
+    validate_retry_cache()
+    universe, ledger, _baseline, _frozen = load_inputs(cfg)
+    cutoff = datetime.now(UTC).date() - timedelta(days=1)
+    mapped = mapping_frame(universe, ledger)
+
+    planned = pd.DataFrame(batch_plan(mapped, int(cfg["batch_size"])))
+    planned.insert(0, "Audit_Row_Type", "PLANNED")
+
+    cache = ReadOnlySQLitePriceCache(RETRY_CACHE_PATH)
+    try:
+        actual = cache.load_batch_log().rename(
+            columns={
+                "batch_id": "Batch_ID",
+                "source_id": "Source_ID",
+                "started_utc": "Started_UTC",
+                "finished_utc": "Finished_UTC",
+                "symbol_count": "Symbol_Count",
+                "received_count": "Received_Count",
+                "missing_count": "Missing_Count",
+                "retry_count": "Retry_Count",
+                "repair_pass": "Repair_Pass",
+                "status": "Status",
+                "error_text": "Error",
+            }
+        )
+        actual.insert(0, "Audit_Row_Type", "ACTUAL")
+
+        currencies = sorted(
+            {
+                normalize_currency(x)
+                for x in mapped["Primary_Currency"].astype(str)
+                if normalize_currency(x)
+            }
+        )
+        fx, fxrows, fxcover = fx_frames(currencies, cfg, cutoff)
+        ledgers, _ = materialize_ledgers(mapped, cache, fx, cfg, cutoff)
+    finally:
+        cache.close()
+
+    batches = pd.concat([planned, actual], ignore_index=True, sort=False)
+    OUT.mkdir(parents=True, exist_ok=True)
+    write_csv(
+        OUT / "mapping_revalidation_1633_v0.38.csv", ledgers["mapping"]
+    )
+    write_csv(
+        OUT / "history_gate_current_1633_v0.38.csv", ledgers["history"]
+    )
+    write_csv(OUT / "fx_daily_v0.38.csv", fxrows)
+    write_csv(OUT / "fx_coverage_v0.38.csv", fxcover)
+    write_csv(
+        OUT / "liquidity_session_evidence_v0.38.csv", ledgers["sessions"]
+    )
+    write_csv(
+        OUT / "liquidity_current_1633_v0.38.csv", ledgers["liquidity"]
+    )
+    write_csv(
+        OUT / "current_data_readiness_1633_v0.38.csv", ledgers["readiness"]
+    )
+    write_csv(OUT / "provider_batch_log_v0.38.csv", batches)
+
+    return {
+        "mode": "FX_BATCH_AUDIT_ONLY",
+        "cache": str(RETRY_CACHE_PATH),
+        "planned_batches": int(len(planned)),
+        "actual_batches": int(len(actual)),
+        "cutoff": cutoff.isoformat(),
+    }
 
 
 def retry_strong_gates():
