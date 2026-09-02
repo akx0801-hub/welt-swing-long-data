@@ -27,20 +27,45 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Detect v0.38 run mode
+        id: run-mode
+        shell: bash
+        run: |
+          MODE="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('config/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0.38.json')
+          cfg = json.loads(p.read_text(encoding='utf-8'))
+          print(cfg.get('run_mode', 'NORMAL'))
+          PY
+          )"
+          case "$MODE" in
+            NORMAL|FX_BATCH_AUDIT_ONLY) ;;
+            *) echo "Unsupported run_mode: $MODE" >&2; exit 1 ;;
+          esac
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "v0.38 run mode: $MODE"
+
       - name: Python Setup
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
       - name: Dependency Install
         run: |
           python -m pip install --upgrade pip
           python -m pip install "yfinance==1.6.0" pandas numpy openpyxl
+
       - name: py_compile
         run: python -m py_compile scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py
+
       - name: Self-Test
         run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --self-test
+
       - name: Frozen Input Gates
         run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --validate-inputs
+
       - name: Restore v0.38 Runtime Cache
         id: price-cache-restore
         uses: actions/cache/restore@v4
@@ -49,25 +74,58 @@ jobs:
           key: current-master-1633-v0.38-${{ hashFiles('universe/research_partial_1633.csv', 'scripts/price_cache.py', 'config/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0.38.json') }}
           restore-keys: |
             current-master-1633-v0.38-
+
+      # --------------------------- NORMAL v0.38 ---------------------------
       - name: Provider Smoke Gate
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --smoke
+
       - name: Mapping Materialization
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: echo "Deterministic mapping is materialized by the controlled refresh runner."
+
       - name: Controlled Batch OHLCV Refresh
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --run
+
       - name: Price QA
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/price_cache_status_1633_v0.38.csv
+
       - name: Controlled FX Batch Refresh
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/fx_daily_v0.38.csv
+
       - name: History Current Gate
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/history_gate_current_1633_v0.38.csv
+
       - name: Liquidity Current Calculation
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/liquidity_current_1633_v0.38.csv
+
       - name: Data Readiness Materialization
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: test -f output_current_master_research_partial_1633_data_refresh_v0_38/current_data_readiness_1633_v0.38.csv
+
       - name: Strong Result Gates
+        if: steps.run-mode.outputs.mode == 'NORMAL'
         run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --strong-gates
+
+      # ----------------------- FX_BATCH_AUDIT_ONLY ------------------------
+      # No provider smoke, no --run, no stock fetch and no stock cache write
+      # is permitted on this branch.  The retry function validates the exact
+      # pre-fix cache SHA/counts before and after its FX-only work.
+      - name: FX Batch Audit Only Retry
+        if: steps.run-mode.outputs.mode == 'FX_BATCH_AUDIT_ONLY'
+        run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --retry-fx-batch-audit
+
+      - name: FX Batch Audit Only Strong Gates
+        if: steps.run-mode.outputs.mode == 'FX_BATCH_AUDIT_ONLY'
+        run: python scripts/current_master_research_partial_1633_mapping_history_liquidity_data_refresh_v0_38.py --retry-strong-gates
+
       - name: Commit outputs + handoffs
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -75,15 +133,21 @@ jobs:
           if git diff --cached --quiet; then
             echo "No output changes to commit."
           else
-            git commit -m "Complete current master data refresh v0.38"
+            if [ "${{ steps.run-mode.outputs.mode }}" = "FX_BATCH_AUDIT_ONLY" ]; then
+              git commit -m "Complete v0.38 FX batch audit retry"
+            else
+              git commit -m "Complete current master data refresh v0.38"
+            fi
             git push
           fi
+
       - name: Cache save
-        if: always()
+        if: always() && steps.run-mode.outputs.mode == 'NORMAL'
         uses: actions/cache/save@v4
         with:
           path: runtime_cache/v0_38/current_master_1633_market_prices.sqlite
           key: ${{ steps.price-cache-restore.outputs.cache-primary-key }}
+
       - name: Artifact Upload
         if: always()
         uses: actions/upload-artifact@v4
