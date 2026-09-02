@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 81,
-    "NOT_STARTED": 156,
+    "RESEARCHED": 88,
+    "NOT_STARTED": 149,
     "PARTIAL": 2
   },
   "last_completed_market_mic": "XPAR",
   "last_completed_ws_id": "WS:XPAR:SESFD.PA",
-  "next_ws_id": "WS:XSWX:ALCC.S",
-  "source_evidence_sha256": "4ffed4e8e70f7a828daa2fa2989acdf376b3ff16fbb5fe219b246f16e46dc605",
-  "as_of_utc": "2026-09-02T21:11:27.789011+00:00"
+  "next_ws_id": "WS:XAMS:AEGN.AS",
+  "source_evidence_sha256": "0c92d401e93bb2d55d5a5cc312d06ee2a51d710a37b019cbf1218f312d50f981",
+  "as_of_utc": "2026-09-02T21:27:54.612593+00:00"
 }

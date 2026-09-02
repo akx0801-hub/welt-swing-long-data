@@ -1,0 +1,201 @@
+{
+  "version": "v0.42",
+  "phase_a_total": 88,
+  "source_evidence_sha256": "0c92d401e93bb2d55d5a5cc312d06ee2a51d710a37b019cbf1218f312d50f981",
+  "status_counts": {
+    "PARTIAL": 2,
+    "RESEARCHED": 86
+  },
+  "confidence_counts": {
+    "HIGH": 17,
+    "MEDIUM": 69,
+    "UNRESOLVED": 2
+  },
+  "diagnostic_split": {
+    "CASE_NORMALIZATION_SUSPECT": {
+      "total": 78,
+      "status_counts": {
+        "PARTIAL": 2,
+        "RESEARCHED": 76
+      },
+      "confidence_counts": {
+        "HIGH": 14,
+        "MEDIUM": 62,
+        "UNRESOLVED": 2
+      },
+      "partial": 2,
+      "blocked": 0
+    },
+    "SUFFIX_MAPPING_SUSPECT": {
+      "total": 10,
+      "status_counts": {
+        "RESEARCHED": 10
+      },
+      "confidence_counts": {
+        "HIGH": 3,
+        "MEDIUM": 7
+      },
+      "partial": 0,
+      "blocked": 0
+    }
+  },
+  "non_high_count": 71,
+  "corporate_action_cases": [
+    {
+      "WS_ID": "WS:XCSE:ALKB.CO",
+      "Status": "SHARE_SPLIT_2022_ISIN_CHANGE_NOTATION_REVIEWED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XCSE:NSISB.CO",
+      "Status": "RENAME_MERGER_REVIEWED",
+      "Decision": "CONFIRMED_PROVIDER_SYMBOL_CANDIDATE"
+    },
+    {
+      "WS_ID": "WS:XETR:BASFN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "UNRESOLVED_MANUAL"
+    },
+    {
+      "WS_ID": "WS:XETR:BAYGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "UNRESOLVED_MANUAL"
+    },
+    {
+      "WS_ID": "WS:XETR:BNRGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:DB1GN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_PROVIDER_SYMBOL_CANDIDATE"
+    },
+    {
+      "WS_ID": "WS:XETR:DBKGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:DHLN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:DTEGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:DTGGE.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:ENR1N.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:EONGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:EVKN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:FNTGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:FPE3_P.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:FTKN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:G24N.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:HNRGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:IFXGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:LEGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:MBGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:MTXGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:MUVGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:PSHG_P.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:SATG_P.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:SDFGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:SIEGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:TLXGN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:TUI1N.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:VNAN.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    },
+    {
+      "WS_ID": "WS:XETR:VOWG_P.DE",
+      "Status": "UNVERIFIED",
+      "Decision": "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED"
+    }
+  ],
+  "candidate_collisions": 0
+}

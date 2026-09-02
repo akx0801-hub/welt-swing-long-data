@@ -7,12 +7,15 @@
     "manifest_v0.42.json",
     "mapping_evidence_239_v0.42.csv",
     "medium_confidence_candidates_v0.42.csv",
+    "phase_a_non_high_review_v0.42.csv",
+    "phase_a_quality_review_v0.42.csv",
+    "phase_a_quality_summary_v0.42.json",
     "provider_not_found_v0.42.csv",
     "research_progress_v0.42.csv",
     "stage_checkpoint_v0.42.json",
     "summary_v0.42.json",
     "unresolved_v0.42.csv"
   ],
-  "source_evidence_sha256": "4ffed4e8e70f7a828daa2fa2989acdf376b3ff16fbb5fe219b246f16e46dc605",
-  "as_of_utc": "2026-09-02T21:11:27.789011+00:00"
+  "source_evidence_sha256": "0c92d401e93bb2d55d5a5cc312d06ee2a51d710a37b019cbf1218f312d50f981",
+  "as_of_utc": "2026-09-02T21:27:54.612593+00:00"
 }
