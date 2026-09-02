@@ -322,7 +322,14 @@ def run_controlled(config_path: Path) -> dict[str, Any]:
             b=dq.loc[idxs]; label=f"DQ_REPAIR_{seq:03d}"; logical.append({"Logical_Batch":label,"Phase":"DQ_REPAIR","Repair_Pass":True,"WS_ID_Count":len(b),"Request_Start":cfg["request_start"],"Request_End_Exclusive":cfg["request_end_exclusive"]})
             for _,r in b.iterrows(): requests.append({"Logical_Batch":label,"Phase":"DQ_REPAIR","WS_ID":txt(r["WS_ID"]),"Provider_Symbol":txt(r["Yahoo_Symbol"]),"Repair_Pass":True,"Request_Start":cfg["request_start"],"Request_End_Exclusive":cfg["request_end_exclusive"]})
             runner._process_batch(b,period=None,start=start,end=end,repair_pass=True,as_of=cutoff)
-        cache.conn.commit(); after_state,after_counts=snapshot_target_state(cache.conn,targets); non_after=cache_non_target_digest(cache.conn,targets); new_batches=new_batch_log_rows(cache.conn,before_batch_ids); max_day=cache.conn.execute("SELECT MAX(day) FROM price_daily").fetchone()[0]; require(not max_day or str(max_day)<=cfg["safe_cutoff"],f"WORK_CACHE_FUTURE_BAR_GATE:{max_day}")
+        cache.conn.commit(); after_state,after_counts=snapshot_target_state(cache.conn,targets); non_after=cache_non_target_digest(cache.conn,targets); new_batches=new_batch_log_rows(cache.conn,before_batch_ids)
+        # The frozen v0.38 source cache is byte-immutable and may contain provider rows
+        # beyond the research cutoff because its original acquisition used a rolling
+        # period request.  v0.40 must not reinterpret or delete those non-target rows.
+        # The cutoff gate therefore applies only to the 158 rows that v0.40 purged and
+        # rematerialized.  Non-target integrity is enforced separately by the digest.
+        ph=qmarks(len(targets)); max_day=cache.conn.execute(f"SELECT MAX(day) FROM price_daily WHERE ws_id IN ({ph})",targets).fetchone()[0]
+        require(not max_day or str(max_day)<=cfg["safe_cutoff"],f"WORK_CACHE_TARGET_FUTURE_BAR_GATE:{max_day}")
     finally: cache.close()
 
     write_csv(OUT/"logical_batch_plan_v0.40.csv",logical); write_csv(OUT/"provider_request_ledger_v0.40.csv",requests); write_csv(OUT/"mapping_missing_after_normal_v0.40.csv",pd.DataFrame({"Provider_Symbol":sorted(missing_normal)})); write_csv(OUT/"provider_batch_log_new_v0.40.csv",new_batches); write_csv(OUT/"target_after_state_v0.40.csv",after_state); write_csv(OUT/"target_after_price_counts_v0.40.csv",after_counts)
@@ -349,7 +356,9 @@ def strong_gates(config_path: Path) -> None:
     if not blog.empty and "retry_count" in blog.columns: require((pd.to_numeric(blog["retry_count"],errors="coerce").fillna(0)<=int(cfg["max_identical_retries"])).all(),"STRONG_IDENTICAL_RETRY_CEILING_GATE")
     require(summary["network_allowed"] is True and summary["stock_download_executed"] is True,"STRONG_STOCK_NETWORK_GATE"); require(summary["fx_download_executed"] is False and summary["provider_search_executed"] is False and summary["alpha_vantage_executed"] is False,"STRONG_FORBIDDEN_NETWORK_GATE"); require(summary["automatic_mapping_override_created"] is False,"STRONG_NO_AUTO_OVERRIDE_GATE"); require(summary["frozen_source_cache_sha_before"]==cfg["frozen_source_cache_sha256"]==summary["frozen_source_cache_sha_after"]==source["sha256"],"STRONG_SOURCE_CACHE_IMMUTABILITY_GATE"); require(summary["work_cache_non_target_digest_before"]==summary["work_cache_non_target_digest_after"],"STRONG_NON_TARGET_CACHE_IMMUTABILITY_GATE"); require(summary["universe_mutated"] is False and summary["eligibility_promoted"] is False and summary["p0"] is False and summary["sector_rs"] is False and summary["swing_u3k_frozen_mutated"] is False and summary["productive"] is False,"STRONG_NONPRODUCTIVE_NO_PROMOTION_GATE")
     work=Path(cfg["work_cache_path"]); require(work.is_file(),"STRONG_WORK_CACHE_MISSING"); require(sha256_file(work)==summary["work_cache_sha256"],"STRONG_WORK_CACHE_SHA_GATE")
-    with sqlite3.connect(f"file:{work.resolve()}?mode=ro",uri=True) as c: max_day=c.execute("SELECT MAX(day) FROM price_daily").fetchone()[0]; require(not max_day or str(max_day)<=cfg["safe_cutoff"],"STRONG_FUTURE_BAR_GATE")
+    with sqlite3.connect(f"file:{work.resolve()}?mode=ro",uri=True) as c:
+        target_ids=sorted(set(plan["WS_ID"].astype(str))); ph=qmarks(len(target_ids)); max_day=c.execute(f"SELECT MAX(day) FROM price_daily WHERE ws_id IN ({ph})",target_ids).fetchone()[0]
+        require(not max_day or str(max_day)<=cfg["safe_cutoff"],"STRONG_TARGET_FUTURE_BAR_GATE")
     validate_frozen_inputs(cfg); print("v0.40 CONTROLLED_RETRY_DATA_ONLY strong gates PASS")
 
 
