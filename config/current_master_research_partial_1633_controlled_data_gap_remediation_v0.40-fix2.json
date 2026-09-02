@@ -1,0 +1,56 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION",
+  "version": "v0.40-FIX2",
+  "run_mode": "DQ_DEPENDENCY_RETRY_ONLY",
+  "workflow_trigger_policy": "MANUAL_DISPATCH_ONLY",
+  "workflow_path": ".github/workflows/current_master_research_partial_1633_controlled_data_gap_remediation_v0.40-fix2.yml",
+  "source_result_commit": "dc19cb39d456cd2c3b25f1c6efe42fe52fc3d63c",
+  "source_run_id": 33649915242,
+  "source_output_dir": "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40",
+  "mapping_results_path": "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/mapping_retry_results_151_v0.40.csv",
+  "source_cache_restore_key": "current-master-1633-v0.40-controlled-remediation-33649915242",
+  "source_cache_path": "runtime_cache/v0_40/current_master_1633_controlled_remediation.sqlite",
+  "source_cache_sha256": "ffffd708a04a795d09e2ead30e36f6df2c4d5316a26ace7bcc46805a5b41ac71",
+  "source_cache_counts": {
+    "price_daily": 675043,
+    "cache_state": 1614,
+    "batch_log": 26
+  },
+  "work_cache_path": "runtime_cache/v0_40_fix2/current_master_1633_controlled_remediation_fix2.sqlite",
+  "execution_log_path": "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2/execution_v0.40-fix2.log",
+  "target_ws_ids": [
+    "WS:XLON:ROR.L",
+    "WS:XTSE:IAU",
+    "WS:XTSE:LAC"
+  ],
+  "target_provider_symbols": [
+    "ROR.L",
+    "IAU.TO",
+    "LAC.TO"
+  ],
+  "request_start": "2024-09-01",
+  "request_end_exclusive": "2026-09-01",
+  "safe_cutoff": "2026-08-31",
+  "safe_cutoff_plus_one": "2026-09-01",
+  "max_identical_retries": 1,
+  "retry_sleep_seconds": 2.0,
+  "min_valid_bars": 252,
+  "ready_unique_bars": 260,
+  "max_filterable_invalid_bars": 2,
+  "max_filterable_invalid_share": 0.01,
+  "stale_calendar_days": 10,
+  "suspicious_abs_return": 0.5,
+  "provider_search_allowed": false,
+  "fx_download_allowed": false,
+  "alpha_vantage_allowed": false,
+  "universe_mutation_allowed": false,
+  "eligibility_promotion_allowed": false,
+  "productive_allowed": false,
+  "frozen_input_blobs": {
+    "scripts/price_cache.py": "454a1036e02c8ea73504921163aad1438a7e9f9d",
+    "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/summary_v0.40.json": "e4d9af282628789ff8ccb42be13a1b5b05a7ece1",
+    "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/data_quality_repair_results_7_v0.40.csv": "c3c1f3b5f7cf01b96ddf92f7dc61005747bbd896",
+    "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/mapping_retry_results_151_v0.40.csv": "1861270d5e15746416bbf21aa50bd68809a12b1a",
+    "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/target_plan_158_v0.40.csv": "a2834acb6aed369ee4e1007abbb0de4a42e7258c"
+  }
+}
