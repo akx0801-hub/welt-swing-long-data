@@ -1,0 +1,53 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION",
+  "version": "v0.40",
+  "run_mode": "CONTROLLED_RETRY_DATA_ONLY",
+  "source_result_commit": "66d9e2ec1eb8ba6ebc3c402854317c6216fccad5",
+  "outputs": [
+    "controlled_results_158_v0.40.csv",
+    "data_quality_repair_results_7_v0.40.csv",
+    "logical_batch_plan_v0.40.csv",
+    "mapping_missing_after_normal_v0.40.csv",
+    "mapping_retry_results_151_v0.40.csv",
+    "provider_batch_log_new_v0.40.csv",
+    "provider_request_ledger_v0.40.csv",
+    "residual_non_ready_v0.40.csv",
+    "stage_checkpoint_v0.40.json",
+    "summary_v0.40.json",
+    "target_after_price_counts_v0.40.csv",
+    "target_after_state_v0.40.csv",
+    "target_before_price_counts_v0.40.csv",
+    "target_before_state_v0.40.csv",
+    "target_plan_158_v0.40.csv"
+  ],
+  "frozen_input_blobs": {
+    "universe/research_partial_1633.csv": "9851b1c4f68205c2d5e778fc1d3d79be17c6fd13",
+    "scripts/price_cache.py": "454a1036e02c8ea73504921163aad1438a7e9f9d",
+    "output_current_master_research_partial_1633_data_gap_remediation_v0_39/summary_v0.39.json": "53db2c2e918c3246104723f9e6d7d1b11355d59b",
+    "output_current_master_research_partial_1633_data_gap_remediation_v0_39/remediation_queue_v0.39.csv": "a44c0cba295a83141b6efbbd0ee95978abac4c23",
+    "output_current_master_research_partial_1633_data_gap_remediation_v0_39/mapping_gap_audit_239_v0.39.csv": "a614e7d6e233e661929443480126a8f701dee952",
+    "output_current_master_research_partial_1633_data_gap_remediation_v0_39/data_quality_gap_audit_7_v0.39.csv": "48538b5703320eb3e185994608fcfc71127ad10e",
+    "output_current_master_research_partial_1633_data_gap_remediation_v0_39/history_gap_audit_3_v0.39.csv": "57005b4a6ca6139f779c744c2e1dc900b9c559e9",
+    "output_current_master_research_partial_1633_data_gap_remediation_v0_39/protected_instrument_fail_19_v0.39.csv": "32ddc212137f529053dcf43249ae078680f4c229",
+    "output_current_master_research_partial_1633_data_gap_remediation_v0_39/stage_checkpoint_v0.39.json": "208df9508ce827f8d1e31fe79cc6e5e625416f17"
+  },
+  "frozen_source_cache": {
+    "path": "runtime_cache/v0_38/current_master_1633_market_prices.sqlite",
+    "sha256": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+    "counts": {
+      "price_daily": 676550,
+      "cache_state": 1614,
+      "batch_log": 21
+    }
+  },
+  "work_cache": {
+    "path": "runtime_cache/v0_40/current_master_1633_controlled_remediation.sqlite",
+    "sha256": "ffffd708a04a795d09e2ead30e36f6df2c4d5316a26ace7bcc46805a5b41ac71",
+    "counts": {
+      "price_daily": 675043,
+      "cache_state": 1614,
+      "batch_log": 26
+    }
+  },
+  "productive": false
+}

@@ -1,0 +1,68 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION",
+  "version": "v0.40",
+  "run_mode": "CONTROLLED_RETRY_DATA_ONLY",
+  "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
+  "source_result_commit": "66d9e2ec1eb8ba6ebc3c402854317c6216fccad5",
+  "safe_cutoff": "2026-08-31",
+  "request_start": "2024-09-01",
+  "request_end_exclusive": "2026-09-01",
+  "target_total": 158,
+  "mapping_exact_retry_targets": 151,
+  "data_quality_repair_targets": 7,
+  "manual_review_excluded": 88,
+  "history_defer_excluded": 3,
+  "protected_instrument_fail_excluded": 19,
+  "post_status_counts": {
+    "DOWNLOAD_FAILED": 154,
+    "QUARANTINE": 2,
+    "WARMUP": 2
+  },
+  "controlled_result_counts": {
+    "DEFER_TEMPORAL_AFTER_DATA_RECOVERY": 2,
+    "RESIDUAL_DATA_QUALITY": 2,
+    "RESIDUAL_NO_DATA": 154
+  },
+  "mapping_missing_after_normal_count": 151,
+  "logical_batch_count": 5,
+  "provider_batch_log_new_count": 5,
+  "identical_retry_count_from_batch_log": 0,
+  "network_allowed": true,
+  "stock_download_allowed": true,
+  "stock_download_executed": true,
+  "fx_download_allowed": false,
+  "fx_download_executed": false,
+  "provider_search_allowed": false,
+  "provider_search_executed": false,
+  "alpha_vantage_allowed": false,
+  "alpha_vantage_executed": false,
+  "automatic_mapping_override_allowed": false,
+  "automatic_mapping_override_created": false,
+  "frozen_source_cache_sha_before": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+  "frozen_source_cache_sha_after": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+  "work_cache_path": "runtime_cache/v0_40/current_master_1633_controlled_remediation.sqlite",
+  "work_cache_sha256": "ffffd708a04a795d09e2ead30e36f6df2c4d5316a26ace7bcc46805a5b41ac71",
+  "work_cache_counts": {
+    "price_daily": 675043,
+    "cache_state": 1614,
+    "batch_log": 26
+  },
+  "work_cache_non_target_digest_before": {
+    "price_daily": "02e54bcaaf0616b8e1e21ee7dd0616fb436a9db00aca1a6b46c53e1f9bb93872",
+    "cache_state": "da5bda164702a77400edffe38cd25f740c194164a7efe227c7e869554dc84e2c"
+  },
+  "work_cache_non_target_digest_after": {
+    "price_daily": "02e54bcaaf0616b8e1e21ee7dd0616fb436a9db00aca1a6b46c53e1f9bb93872",
+    "cache_state": "da5bda164702a77400edffe38cd25f740c194164a7efe227c7e869554dc84e2c"
+  },
+  "universe_mutation_allowed": false,
+  "universe_mutated": false,
+  "eligibility_promotion_allowed": false,
+  "eligibility_promoted": false,
+  "p0": false,
+  "sector_rs": false,
+  "swing_u3k_frozen_mutated": false,
+  "productive": false,
+  "run_timestamp_utc": "2026-09-02T15:39:54+00:00",
+  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW"
+}

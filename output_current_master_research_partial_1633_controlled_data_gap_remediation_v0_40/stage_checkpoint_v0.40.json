@@ -1,0 +1,10 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION",
+  "version": "v0.40",
+  "run_mode": "CONTROLLED_RETRY_DATA_ONLY",
+  "completed": true,
+  "strong_gates_required": true,
+  "source_result_commit": "66d9e2ec1eb8ba6ebc3c402854317c6216fccad5",
+  "work_cache_sha256": "ffffd708a04a795d09e2ead30e36f6df2c4d5316a26ace7bcc46805a5b41ac71",
+  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW"
+}
