@@ -1,0 +1,11 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION",
+  "version": "v0.40-FIX2",
+  "run_mode": "DQ_DEPENDENCY_RETRY_ONLY",
+  "completed": true,
+  "strong_gates_required": true,
+  "source_result_commit": "dc19cb39d456cd2c3b25f1c6efe42fe52fc3d63c",
+  "source_run_id": 33649915242,
+  "work_cache_sha256": "b047ad3b6c60c35944b9aa3440b803abd2d3c2b8519f590b54bb50c915ef0e02",
+  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW"
+}

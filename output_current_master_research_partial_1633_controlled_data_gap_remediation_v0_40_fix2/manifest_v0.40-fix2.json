@@ -1,0 +1,48 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION",
+  "version": "v0.40-FIX2",
+  "run_mode": "DQ_DEPENDENCY_RETRY_ONLY",
+  "source_result_commit": "dc19cb39d456cd2c3b25f1c6efe42fe52fc3d63c",
+  "source_cache": {
+    "path": "runtime_cache/v0_40/current_master_1633_controlled_remediation.sqlite",
+    "sha256": "ffffd708a04a795d09e2ead30e36f6df2c4d5316a26ace7bcc46805a5b41ac71",
+    "counts": {
+      "price_daily": 675043,
+      "cache_state": 1614,
+      "batch_log": 26
+    }
+  },
+  "work_cache": {
+    "path": "runtime_cache/v0_40_fix2/current_master_1633_controlled_remediation_fix2.sqlite",
+    "sha256": "b047ad3b6c60c35944b9aa3440b803abd2d3c2b8519f590b54bb50c915ef0e02",
+    "counts": {
+      "price_daily": 676550,
+      "cache_state": 1614,
+      "batch_log": 27
+    }
+  },
+  "frozen_input_blobs": {
+    "scripts/price_cache.py": "454a1036e02c8ea73504921163aad1438a7e9f9d",
+    "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/summary_v0.40.json": "e4d9af282628789ff8ccb42be13a1b5b05a7ece1",
+    "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/data_quality_repair_results_7_v0.40.csv": "c3c1f3b5f7cf01b96ddf92f7dc61005747bbd896",
+    "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/mapping_retry_results_151_v0.40.csv": "1861270d5e15746416bbf21aa50bd68809a12b1a",
+    "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40/target_plan_158_v0.40.csv": "a2834acb6aed369ee4e1007abbb0de4a42e7258c"
+  },
+  "outputs": [
+    "execution_v0.40-fix2.log",
+    "final_controlled_results_158_v0.40.csv",
+    "final_data_quality_results_7_v0.40.csv",
+    "final_residual_non_ready_158_v0.40.csv",
+    "fix2_after_price_counts_v0.40.csv",
+    "fix2_after_state_v0.40.csv",
+    "fix2_before_price_counts_v0.40.csv",
+    "fix2_before_state_v0.40.csv",
+    "fix2_provider_batch_log_new_v0.40.csv",
+    "fix2_provider_request_ledger_v0.40.csv",
+    "fix2_target_plan_3_v0.40.csv",
+    "runtime_dependency_report_v0.40-fix2.json",
+    "stage_checkpoint_v0.40-fix2.json",
+    "summary_v0.40-fix2.json"
+  ],
+  "productive": false
+}

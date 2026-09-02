@@ -1,0 +1,77 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION",
+  "version": "v0.40-FIX2",
+  "run_mode": "DQ_DEPENDENCY_RETRY_ONLY",
+  "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
+  "source_result_commit": "dc19cb39d456cd2c3b25f1c6efe42fe52fc3d63c",
+  "source_run_id": 33649915242,
+  "target_count": 3,
+  "target_ws_ids": [
+    "WS:XLON:ROR.L",
+    "WS:XTSE:IAU",
+    "WS:XTSE:LAC"
+  ],
+  "target_provider_symbols": [
+    "ROR.L",
+    "IAU.TO",
+    "LAC.TO"
+  ],
+  "runtime_dependencies": {
+    "yfinance": "1.6.0",
+    "pandas": "3.0.5",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.0"
+  },
+  "target_post_status_counts": {
+    "QUARANTINE": 3
+  },
+  "target_controlled_result_counts": {
+    "RESIDUAL_DATA_QUALITY": 3
+  },
+  "final_158_post_status_counts": {
+    "DOWNLOAD_FAILED": 151,
+    "QUARANTINE": 5,
+    "WARMUP": 2
+  },
+  "final_158_controlled_result_counts": {
+    "DEFER_TEMPORAL_AFTER_DATA_RECOVERY": 2,
+    "RESIDUAL_DATA_QUALITY": 5,
+    "RESIDUAL_NO_DATA": 151
+  },
+  "source_cache_sha_before": "ffffd708a04a795d09e2ead30e36f6df2c4d5316a26ace7bcc46805a5b41ac71",
+  "source_cache_sha_after": "ffffd708a04a795d09e2ead30e36f6df2c4d5316a26ace7bcc46805a5b41ac71",
+  "source_cache_counts": {
+    "price_daily": 675043,
+    "cache_state": 1614,
+    "batch_log": 26
+  },
+  "work_cache_path": "runtime_cache/v0_40_fix2/current_master_1633_controlled_remediation_fix2.sqlite",
+  "work_cache_sha256": "b047ad3b6c60c35944b9aa3440b803abd2d3c2b8519f590b54bb50c915ef0e02",
+  "work_cache_counts": {
+    "price_daily": 676550,
+    "cache_state": 1614,
+    "batch_log": 27
+  },
+  "non_target_digest_before": {
+    "price_daily": "62a4323f4e548be66d34030affddb9cc1991b3f26efb94606e3c0860fa623b16",
+    "cache_state": "b344932f497421e1186faa112620678d5b8a178f7a0c82e6fbdfca56b5dbaf77"
+  },
+  "non_target_digest_after": {
+    "price_daily": "62a4323f4e548be66d34030affddb9cc1991b3f26efb94606e3c0860fa623b16",
+    "cache_state": "b344932f497421e1186faa112620678d5b8a178f7a0c82e6fbdfca56b5dbaf77"
+  },
+  "new_provider_batch_log_count": 1,
+  "provider_search_executed": false,
+  "fx_download_executed": false,
+  "alpha_vantage_executed": false,
+  "mapping_override_created": false,
+  "universe_mutated": false,
+  "eligibility_promoted": false,
+  "p0": false,
+  "sector_rs": false,
+  "swing_u3k_frozen_mutated": false,
+  "productive": false,
+  "run_timestamp_utc": "2026-09-02T16:45:01+00:00",
+  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW"
+}
