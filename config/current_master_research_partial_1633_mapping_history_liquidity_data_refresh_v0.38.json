@@ -1,6 +1,17 @@
 {
   "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_HISTORY_LIQUIDITY_DATA_REFRESH",
   "version": "v0.38",
+  "run_mode": "FX_BATCH_AUDIT_ONLY",
+  "retry_safe_cutoff": "2026-08-31",
+  "retry_pre_fix_run_id": 33471051553,
+  "retry_pre_fix_result_commit": "8eb1846f11e13a388a00838e44240372fa467aac",
+  "retry_cache_path": "runtime_cache/v0_38/current_master_1633_market_prices.sqlite",
+  "retry_cache_sha256": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+  "retry_cache_counts": {
+    "price_daily": 676550,
+    "cache_state": 1614,
+    "batch_log": 21
+  },
   "provider": "YFINANCE_FREE",
   "productive_provider": false,
   "alpha_vantage_allowed": false,
