@@ -1,0 +1,107 @@
+name: Current Master Research Partial 1633 Controlled Data Gap Remediation v0.40 FIX2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: current-master-1633-v0.40-fix2-dq-dependency-retry
+  cancel-in-progress: false
+
+jobs:
+  dq-dependency-retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONUNBUFFERED: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Python Setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Dependency Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "yfinance==1.6.0" pandas numpy scipy scikit-learn
+
+      - name: Explicit dependency preflight
+        run: |
+          python - <<'PY'
+          import yfinance, pandas, numpy, scipy, sklearn
+          print("dependency-preflight PASS")
+          print("yfinance", yfinance.__version__)
+          print("pandas", pandas.__version__)
+          print("numpy", numpy.__version__)
+          print("scipy", scipy.__version__)
+          print("sklearn", sklearn.__version__)
+          PY
+
+      - name: Restore exact v0.40 working cache
+        uses: actions/cache/restore@v4
+        with:
+          path: runtime_cache/v0_40/current_master_1633_controlled_remediation.sqlite
+          key: current-master-1633-v0.40-controlled-remediation-33649915242
+          fail-on-cache-miss: true
+
+      - name: py_compile
+        run: python -m py_compile scripts/current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2.py
+
+      - name: Self-Test
+        run: python scripts/current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2.py --self-test
+
+      - name: Frozen Input / Dependency / Target Gates
+        run: python scripts/current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2.py --validate-inputs
+
+      - name: DQ_DEPENDENCY_RETRY_ONLY
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2
+          python scripts/current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2.py --run 2>&1 \
+            | tee output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2/execution_v0.40-fix2.log
+
+      - name: Runtime error marker gate
+        shell: bash
+        run: |
+          ! grep -E "ModuleNotFoundError|No module named|ImportError|Traceback \(most recent call last\)" \
+            output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2/execution_v0.40-fix2.log
+
+      - name: Strong Gates
+        run: python scripts/current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2.py --strong-gates
+
+      - name: Commit FIX2 outputs
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2
+          if git diff --cached --quiet; then
+            echo "No FIX2 output changes to commit."
+          else
+            git commit -m "Complete v0.40 FIX2 DQ dependency retry"
+            git push
+          fi
+
+      - name: Save v0.40 FIX2 working cache
+        uses: actions/cache/save@v4
+        with:
+          path: runtime_cache/v0_40_fix2/current_master_1633_controlled_remediation_fix2.sqlite
+          key: current-master-1633-v0.40-fix2-dq-dependency-retry-${{ github.run_id }}
+
+      - name: Artifact Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-master-1633-v0.40-fix2-dq-dependency-retry
+          path: output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2/
+          if-no-files-found: warn
