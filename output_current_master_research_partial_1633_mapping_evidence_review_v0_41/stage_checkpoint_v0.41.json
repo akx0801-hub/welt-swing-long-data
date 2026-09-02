@@ -1,0 +1,7 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW",
+  "version": "v0.41",
+  "status": "PASS_SCAFFOLD_UNRESOLVED",
+  "evidence_rows": 239,
+  "next_stage": "RESULT_REVIEW_BEFORE_V0_42"
+}

@@ -1,0 +1,39 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW",
+  "version": "v0.41",
+  "status": "PASS_SCAFFOLD_UNRESOLVED",
+  "run_mode": "MAPPING_EVIDENCE_REVIEW_ONLY",
+  "input_audit": "output_current_master_research_partial_1633_data_gap_remediation_v0_39/mapping_gap_audit_239_v0.39.csv",
+  "input_master": "output_current_master_research_partial_1633_controlled_data_gap_remediation_v0_40_fix2/fix2_target_plan_3_v0.40.csv",
+  "evidence_count": 239,
+  "unique_ws_id_count": 239,
+  "diagnostic_counts": {
+    "CASE_NORMALIZATION_SUSPECT": 78,
+    "EXACT_PROVIDER_SYMBOL_NO_DATA": 151,
+    "SUFFIX_MAPPING_SUSPECT": 10
+  },
+  "decision_counts": {
+    "UNRESOLVED_MANUAL": 239
+  },
+  "confidence_counts": {
+    "UNRESOLVED": 239
+  },
+  "strong_gates": {
+    "exactly_239_rows": true,
+    "exactly_239_unique_ws_ids": true,
+    "diagnostic_split_exact": true,
+    "identity_frozen": true,
+    "universe_mutated": false,
+    "eligibility_promoted": false,
+    "mapping_override_created": false,
+    "price_download": false,
+    "fx_download": false,
+    "alpha_vantage": false,
+    "p0": false,
+    "sector_rs": false,
+    "swing_u3k_frozen_mutated": false,
+    "productive": false
+  },
+  "research_status": "NO_EVIDENCE_ASSERTED_MANUAL_REVIEW_REQUIRED",
+  "created_utc": "2026-09-02T18:17:22.110176+00:00"
+}

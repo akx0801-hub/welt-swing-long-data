@@ -1,0 +1,12 @@
+name: WS v0.41 Mapping Evidence Review
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run v0.41 evidence review
+        run: python scripts/mapping_evidence_review_v0_41.py

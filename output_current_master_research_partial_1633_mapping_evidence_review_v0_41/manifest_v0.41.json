@@ -1,0 +1,14 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW",
+  "version": "v0.41",
+  "files": [
+    "evidence_sources_v0.41.csv",
+    "mapping_corporate_action_candidates_v0.41.csv",
+    "mapping_current_symbol_candidates_v0.41.csv",
+    "mapping_evidence_review_239_v0.41.csv",
+    "mapping_identity_review_required_v0.41.csv",
+    "mapping_override_candidates_v0.41.csv",
+    "mapping_unresolved_v0.41.csv"
+  ],
+  "input_sha256": "763927e644f0f285e050ad78a169a44519b6f24d609e1ace6c8b45c4826865aa"
+}

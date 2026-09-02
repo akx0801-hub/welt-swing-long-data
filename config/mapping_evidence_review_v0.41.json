@@ -1,0 +1,12 @@
+{
+  "version": "v0.41",
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW",
+  "run_mode": "MAPPING_EVIDENCE_REVIEW_ONLY",
+  "audit_glob": "**/mapping_gap_audit_239_v0.39.csv",
+  "allow_universe_write": false,
+  "allow_eligibility_write": false,
+  "allow_price_download": false,
+  "allow_fx_download": false,
+  "allow_alpha_vantage": false,
+  "productive": false
+}
