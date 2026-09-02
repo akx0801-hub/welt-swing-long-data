@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 20,
-    "NOT_STARTED": 216,
+    "RESEARCHED": 21,
+    "NOT_STARTED": 215,
     "PARTIAL": 3
   },
   "last_completed_market_mic": "XETR",
-  "last_completed_ws_id": "WS:XETR:LEGN.DE",
-  "next_ws_id": "WS:XETR:AMV0N.DE",
-  "source_evidence_sha256": "1a981f2263dcb3c7d7c541836c6fee51c6cc479d06f383312f5a89d1e0aa9221",
-  "as_of_utc": "2026-09-02T20:13:00.285020+00:00"
+  "last_completed_ws_id": "WS:XETR:AMV0N.DE",
+  "next_ws_id": "WS:XETR:BNRGN.DE",
+  "source_evidence_sha256": "7e2e45f4e1aaf1354966aedd6b1096206b982cc80cfafa235cd21c7731db8ed1",
+  "as_of_utc": "2026-09-02T20:22:16.650920+00:00"
 }
