@@ -4,8 +4,8 @@
     "NOT_STARTED": 236,
     "PARTIAL": 3
   },
-  "last_completed_market_mic": "",
-  "last_completed_ws_id": "",
+  "last_completed_market_mic": "XAMS",
+  "last_completed_ws_id": "WS:XAMS:ABNDS.AS",
   "next_ws_id": "WS:XAMS:ABND.AS",
   "as_of_utc": "2026-09-02T19:04:46.219182+00:00"
 }
