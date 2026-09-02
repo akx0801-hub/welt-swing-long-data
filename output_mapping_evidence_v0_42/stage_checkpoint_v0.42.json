@@ -1,11 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "NOT_STARTED": 236,
+    "RESEARCHED": 1,
+    "NOT_STARTED": 235,
     "PARTIAL": 3
   },
   "last_completed_market_mic": "XAMS",
-  "last_completed_ws_id": "WS:XAMS:ABNDS.AS",
-  "next_ws_id": "WS:XAMS:ABND.AS",
-  "as_of_utc": "2026-09-02T19:04:46.219182+00:00"
+  "last_completed_ws_id": "WS:XAMS:ABND.AS",
+  "next_ws_id": "WS:XCSE:ALKB.CO",
+  "source_evidence_sha256": "baba44ab983629f25fcbf8a09f00de038df9d44679a549029e0759599ed18702",
+  "as_of_utc": "2026-09-02T19:20:20.882995+00:00"
 }

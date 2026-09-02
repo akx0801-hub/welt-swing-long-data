@@ -15,6 +15,11 @@ def rows(p):
 def write(p,rs,fields):
     with open(p,'w',encoding='utf-8',newline='') as f:
         w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(rs)
+def parse_ts(v):
+    try: return datetime.fromisoformat(v.replace('Z','+00:00'))
+    except Exception: return datetime.min.replace(tzinfo=timezone.utc)
+def source_hash():
+    with open(CFG,'rb') as f: return hashlib.sha256(f.read()).hexdigest()
 def main():
     rs=rows(CFG); aud=rows(AUD); af={r['WS_ID']:r for r in aud}; errs=[]
     if len(rs)!=239 or len({r.get('WS_ID','') for r in rs})!=239: errs.append('evidence rows/unique WS_ID != 239')
@@ -31,6 +36,11 @@ def main():
         if r.get('Evidence_Confidence')=='HIGH':
             if not r.get('Evidence_Primary_URL') or not r.get('Evidence_Provider_URL') or not r.get('Proposed_Yahoo_Symbol'): errs.append(f'HIGH evidence incomplete {r.get("WS_ID")}')
             if r.get('Provider_Listing_Type') not in {'PRIMARY','SECONDARY','ADR','OTC'}: errs.append(f'HIGH provider type {r.get("WS_ID")}')
+            if r.get('Research_Status')!='RESEARCHED' or r.get('Needs_Price_Verification')!='YES': errs.append(f'HIGH consistency {r.get("WS_ID")}')
+        if r.get('Research_Status') in {'RESEARCHED','PARTIAL','BLOCKED'}:
+            if not r.get('Evidence_AsOf_UTC') or parse_ts(r.get('Evidence_AsOf_UTC'))==datetime.min.replace(tzinfo=timezone.utc): errs.append(f'missing/invalid timestamp {r.get("WS_ID")}')
+        if r.get('Research_Status')=='RESEARCHED' and r.get('Evidence_Status')=='NOT_RESEARCHED': errs.append(f'RESEARCHED scaffold status {r.get("WS_ID")}')
+        if r.get('Research_Status')=='NOT_STARTED' and r.get('Evidence_Confidence')=='HIGH': errs.append(f'NOT_STARTED HIGH {r.get("WS_ID")}')
     bysym={}; coll=[]
     for r in rs:
         s=r.get('Proposed_Yahoo_Symbol','').strip()
@@ -44,12 +54,19 @@ def main():
     write(os.path.join(OUT,'mapping_evidence_239_v0.42.csv'),rs,fields)
     groups={'high_confidence_candidates_v0.42.csv':[r for r in rs if r.get('Evidence_Confidence')=='HIGH'],'medium_confidence_candidates_v0.42.csv':[r for r in rs if r.get('Evidence_Confidence')=='MEDIUM'],'corporate_action_candidates_v0.42.csv':[r for r in rs if r.get('Decision')=='CORPORATE_ACTION_REMAP_CANDIDATE'],'identity_review_required_v0.42.csv':[r for r in rs if r.get('Decision')=='PRIMARY_IDENTITY_REVIEW_REQUIRED'],'provider_not_found_v0.42.csv':[r for r in rs if r.get('Decision')=='PROVIDER_LISTING_NOT_FOUND'],'unresolved_v0.42.csv':[r for r in rs if r.get('Evidence_Confidence') in {'LOW','UNRESOLVED'} or r.get('Decision')=='UNRESOLVED_MANUAL']}
     for fn,gr in groups.items(): write(os.path.join(OUT,fn),gr,fields)
+    if len(groups['high_confidence_candidates_v0.42.csv']) != sum(r.get('Evidence_Confidence')=='HIGH' for r in rs): errs.append('HIGH output count mismatch')
     write(os.path.join(OUT,'candidate_collision_review_v0.42.csv'),coll,['Proposed_Yahoo_Symbol','WS_IDs','Collision_Status'])
     prog=[{'WS_ID':r['WS_ID'],'Research_Status':r.get('Research_Status',''),'Evidence_AsOf_UTC':r.get('Evidence_AsOf_UTC',''),'Decision':r.get('Decision','')} for r in rs]; write(os.path.join(OUT,'research_progress_v0.42.csv'),prog,list(prog[0]))
     counts=lambda k:dict(Counter(r.get(k,'') for r in rs))
-    summary={'stage':'CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_EVIDENCE_ACQUISITION','version':'v0.42','run_mode':'MAPPING_EVIDENCE_ACQUISITION_ONLY','status':'FAILED' if errs else ('COMPLETE' if all(r.get('Research_Status') in {'RESEARCHED','PARTIAL','BLOCKED'} for r in rs) else 'IN_PROGRESS'),'evidence_rows':len(rs),'unique_ws_ids':len({r.get('WS_ID') for r in rs}),'research_status_counts':counts('Research_Status'),'confidence_counts':counts('Evidence_Confidence'),'decision_counts':counts('Decision'),'candidate_collisions':len(coll),'errors':errs,'universe_mutated':False,'eligibility_promoted':False,'price_download':False,'productive':False,'as_of_utc':datetime.now(timezone.utc).isoformat()}
+    sha=source_hash(); summary={'stage':'CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_EVIDENCE_ACQUISITION','version':'v0.42','run_mode':'MAPPING_EVIDENCE_ACQUISITION_ONLY','status':'FAILED' if errs else ('COMPLETE' if all(r.get('Research_Status') in {'RESEARCHED','PARTIAL','BLOCKED'} for r in rs) else 'IN_PROGRESS'),'evidence_rows':len(rs),'unique_ws_ids':len({r.get('WS_ID') for r in rs}),'research_status_counts':counts('Research_Status'),'confidence_counts':counts('Evidence_Confidence'),'decision_counts':counts('Decision'),'candidate_collisions':len(coll),'errors':errs,'source_evidence_sha256':sha,'universe_mutated':False,'eligibility_promoted':False,'price_download':False,'productive':False,'as_of_utc':datetime.now(timezone.utc).isoformat()}
     json.dump(summary,open(os.path.join(OUT,'summary_v0.42.json'),'w',encoding='utf-8'),indent=2)
-    ck={'stage':'v0.42','research_status_counts':summary['research_status_counts'],'last_completed_market_mic':'','last_completed_ws_id':'','next_ws_id':next((r['WS_ID'] for r in rs if r.get('Research_Status')=='NOT_STARTED'),''),'as_of_utc':summary['as_of_utc']}; json.dump(ck,open(os.path.join(OUT,'stage_checkpoint_v0.42.json'),'w',encoding='utf-8'),indent=2)
-    manifest={'files':sorted(os.listdir(OUT)),'evidence_sha256':hashlib.sha256(open(CFG,'rb').read()).hexdigest(),'as_of_utc':summary['as_of_utc']}; json.dump(manifest,open(os.path.join(OUT,'manifest_v0.42.json'),'w',encoding='utf-8'),indent=2)
+    completed=[r for r in rs if r.get('Research_Status') in {'RESEARCHED','PARTIAL','BLOCKED'} and r.get('Evidence_AsOf_UTC')]
+    last=max(completed,key=lambda r:parse_ts(r.get('Evidence_AsOf_UTC'))) if completed else None
+    pending=[r for r in rs if r.get('Research_Status')=='NOT_STARTED']; phase=[r for r in pending if r.get('v0_39_Diagnostic_Classification') in {'CASE_NORMALIZATION_SUSPECT','SUFFIX_MAPPING_SUSPECT'}]; nxt=(phase or [r for r in pending]) [0] if pending else None
+    ck={'stage':'v0.42','research_status_counts':summary['research_status_counts'],'last_completed_market_mic':last.get('Primary_MIC','') if last else '','last_completed_ws_id':last.get('WS_ID','') if last else '','next_ws_id':nxt.get('WS_ID','') if nxt else '','source_evidence_sha256':sha,'as_of_utc':summary['as_of_utc']}
+    if ck['last_completed_ws_id'] and ck['last_completed_ws_id'] not in af: errs.append('checkpoint last_completed_ws_id not in audit')
+    if ck['next_ws_id'] and ck['next_ws_id'] not in af: errs.append('checkpoint next_ws_id not in audit')
+    json.dump(ck,open(os.path.join(OUT,'stage_checkpoint_v0.42.json'),'w',encoding='utf-8'),indent=2)
+    manifest={'files':sorted(os.listdir(OUT)),'source_evidence_sha256':sha,'as_of_utc':summary['as_of_utc']}; json.dump(manifest,open(os.path.join(OUT,'manifest_v0.42.json'),'w',encoding='utf-8'),indent=2)
     print(json.dumps(summary,indent=2)); return 1 if errs else 0
 if __name__=='__main__': sys.exit(main())

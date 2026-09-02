@@ -6,20 +6,24 @@
   "evidence_rows": 239,
   "unique_ws_ids": 239,
   "research_status_counts": {
-    "NOT_STARTED": 236,
+    "RESEARCHED": 1,
+    "NOT_STARTED": 235,
     "PARTIAL": 3
   },
   "confidence_counts": {
-    "UNRESOLVED": 239
+    "HIGH": 1,
+    "UNRESOLVED": 238
   },
   "decision_counts": {
-    "UNRESOLVED_MANUAL": 239
+    "CONFIRMED_PROVIDER_SYMBOL_CANDIDATE": 1,
+    "UNRESOLVED_MANUAL": 238
   },
   "candidate_collisions": 0,
   "errors": [],
+  "source_evidence_sha256": "baba44ab983629f25fcbf8a09f00de038df9d44679a549029e0759599ed18702",
   "universe_mutated": false,
   "eligibility_promoted": false,
   "price_download": false,
   "productive": false,
-  "as_of_utc": "2026-09-02T19:04:46.219182+00:00"
+  "as_of_utc": "2026-09-02T19:20:20.882995+00:00"
 }
