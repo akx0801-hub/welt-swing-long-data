@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 2,
-    "NOT_STARTED": 234,
+    "RESEARCHED": 8,
+    "NOT_STARTED": 228,
     "PARTIAL": 3
   },
   "last_completed_market_mic": "XCSE",
-  "last_completed_ws_id": "WS:XCSE:ALKB.CO",
-  "next_ws_id": "WS:XCSE:CARLB.CO",
-  "source_evidence_sha256": "e30eb1d990295fe42e71cb47f1ba09556b46c7273ac72eb939966eebd0196c7f",
-  "as_of_utc": "2026-09-02T19:24:36.711361+00:00"
+  "last_completed_ws_id": "WS:XCSE:CARLB.CO",
+  "next_ws_id": "WS:XDUB:AIBG.I",
+  "source_evidence_sha256": "fe2030700de6e94c6865fef67248bae50c5cba6ec1d080b8a2d4c60f962902e6",
+  "as_of_utc": "2026-09-02T19:39:40.993512+00:00"
 }
