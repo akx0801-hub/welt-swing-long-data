@@ -60,6 +60,15 @@ Der Workflow besitzt ausschließlich `workflow_dispatch`; `push`, `schedule`, `p
 
 Nach bestandenen Strong Gates werden nur die v0.40-Outputs committed. Die isolierte v0.40-Arbeitscache wird unter einem neuen GitHub-Actions-Cache-Key gespeichert.
 
+## Technischer Fix nach Run 1
+
+Der erste manuelle Lauf `33648513370` scheiterte kontrolliert vor Strong Gates und Commit. Zwei technische Ursachen wurden korrigiert, ohne den fachlichen Scope zu ändern:
+
+- `yfinance repair=True` benötigt in diesem Runtime-Pfad `scipy`; der Workflow installiert deshalb zusätzlich `scipy`.
+- Der Future-Bar-Gate hatte fälschlich `MAX(day)` über die gesamte v0.40-Arbeitskopie geprüft. Die Arbeitskopie enthält jedoch byte-identisch die eingefrorenen Nicht-Target-Zeilen des v0.38-Caches. Der Cutoff-Gate prüft jetzt ausschließlich die 158 v0.40-Targets; die Nicht-Target-Zeilen bleiben stattdessen über den bereits vorhandenen deterministischen Non-Target-Digest geschützt.
+
+Run 1 erzeugte keinen Ergebniscommit und speicherte keinen v0.40-Arbeitscache. Ein erneuter Lauf darf daher nur als neuer manueller `workflow_dispatch` auf dem korrigierten `main` erfolgen; kein Re-run des alten Job-Snapshots.
+
 ## 11. Nächster Stage
 
 v0.40 löst die 88 `MANUAL_REVIEW`-Mappingfälle absichtlich nicht. Der nächste logische Schritt nach Review der v0.40-Ergebnisse ist `CURRENT_MASTER_RESEARCH_PARTIAL_1633_MANUAL_MAPPING_EVIDENCE_REVIEW`. Erst danach darf über aktuelle Eligibility-Recomputation und U3K-Input-Plan entschieden werden.
