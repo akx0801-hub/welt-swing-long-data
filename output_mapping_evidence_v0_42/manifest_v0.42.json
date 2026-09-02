@@ -1,0 +1,18 @@
+{
+  "files": [
+    "candidate_collision_review_v0.42.csv",
+    "corporate_action_candidates_v0.42.csv",
+    "high_confidence_candidates_v0.42.csv",
+    "identity_review_required_v0.42.csv",
+    "manifest_v0.42.json",
+    "mapping_evidence_239_v0.42.csv",
+    "medium_confidence_candidates_v0.42.csv",
+    "provider_not_found_v0.42.csv",
+    "research_progress_v0.42.csv",
+    "stage_checkpoint_v0.42.json",
+    "summary_v0.42.json",
+    "unresolved_v0.42.csv"
+  ],
+  "evidence_sha256": "f0ba580dafca2eb200ede699237b2f7b3eb9419f30486cda2f6c35c9b0a7565a",
+  "as_of_utc": "2026-09-02T18:40:59.020334+00:00"
+}

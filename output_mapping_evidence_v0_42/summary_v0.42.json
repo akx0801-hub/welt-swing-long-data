@@ -1,0 +1,24 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_EVIDENCE_ACQUISITION",
+  "version": "v0.42",
+  "run_mode": "MAPPING_EVIDENCE_ACQUISITION_ONLY",
+  "status": "IN_PROGRESS",
+  "evidence_rows": 239,
+  "unique_ws_ids": 239,
+  "research_status_counts": {
+    "NOT_STARTED": 239
+  },
+  "confidence_counts": {
+    "UNRESOLVED": 239
+  },
+  "decision_counts": {
+    "UNRESOLVED_MANUAL": 239
+  },
+  "candidate_collisions": 0,
+  "errors": [],
+  "universe_mutated": false,
+  "eligibility_promoted": false,
+  "price_download": false,
+  "productive": false,
+  "as_of_utc": "2026-09-02T18:40:59.020334+00:00"
+}

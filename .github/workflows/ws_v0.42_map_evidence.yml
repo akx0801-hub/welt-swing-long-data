@@ -1,0 +1,17 @@
+name: WS v0.42 Map Evidence
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - run: python scripts/mapping_evidence_validate_v0_42.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mapping-evidence-v0.42
+          path: output_mapping_evidence_v0_42/

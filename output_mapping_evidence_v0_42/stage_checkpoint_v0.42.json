@@ -1,0 +1,10 @@
+{
+  "stage": "v0.42",
+  "research_status_counts": {
+    "NOT_STARTED": 239
+  },
+  "last_completed_market_mic": "",
+  "last_completed_ws_id": "",
+  "next_ws_id": "WS:XAMS:ABND.AS",
+  "as_of_utc": "2026-09-02T18:40:59.020334+00:00"
+}
