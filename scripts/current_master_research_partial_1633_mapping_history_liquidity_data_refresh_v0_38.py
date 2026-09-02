@@ -1119,18 +1119,23 @@ def retry_liquidity_readiness(
             for d, q in recent.iterrows():
                 if pd.isna(q["volume"]) or float(q["volume"]) < 0:
                     continue
-                rate, fxdate, lag = fx_asof(fx.get(cur), pd.Timestamp(d), tolerance=10)
-                if rate is None:
-                    fxmiss = True
-                    continue
+                session_date = pd.Timestamp(d).date().isoformat()
+                if cur == "EUR":
+                    rate, fxdate, lag = 1.0, session_date, 0
+                    meta = {"source": "EUR_IDENTITY", "direction": "IDENTITY"}
+                else:
+                    rate, fxdate, lag = fx_asof(fx.get(cur), pd.Timestamp(d), tolerance=10)
+                    if rate is None:
+                        fxmiss = True
+                        continue
+                    meta = fx_meta.get(cur, {})
                 native = float(q["close"]) * float(q["volume"]) * scale
                 eur = native * rate
                 usable.append(eur)
-                meta = fx_meta.get(cur, {})
                 sessions.append(
                     {
                         "WS_ID": ws,
-                        "Session_Date": pd.Timestamp(d).date().isoformat(),
+                        "Session_Date": session_date,
                         "Raw_Close": float(q["close"]),
                         "Raw_Volume": float(q["volume"]),
                         "Quote_Scale_To_Major_Currency": scale,
@@ -1468,6 +1473,24 @@ def retry_strong_gates() -> None:
     require(len(eur_daily) == 1, "RETRY_EUR_DAILY_ROW_GATE")
     require(abs(float(eur_daily.iloc[0]["FX_to_EUR"]) - 1.0) < 1e-12, "RETRY_EUR_RATE_GATE")
     require((pd.to_datetime(fxdaily["FX_Date"], errors="coerce").dt.date <= RETRY_SAFE_CUTOFF).all(), "RETRY_FX_DAILY_CUTOFF_GATE")
+
+    session_evidence = pd.read_csv(OUT / "liquidity_session_evidence_v0.38.csv", dtype=str, keep_default_na=False)
+    eur_sessions = session_evidence[session_evidence["Currency_Normalized"] == "EUR"].copy()
+    require(len(eur_sessions) > 0, "RETRY_EUR_SESSION_EVIDENCE_MISSING")
+    require((pd.to_numeric(eur_sessions["FX_to_EUR"], errors="raise") == 1.0).all(), "RETRY_EUR_SESSION_RATE_GATE")
+    require((eur_sessions["FX_Source_Symbol"] == "EUR_IDENTITY").all(), "RETRY_EUR_SESSION_SOURCE_GATE")
+    require((eur_sessions["FX_Direction"] == "IDENTITY").all(), "RETRY_EUR_SESSION_DIRECTION_GATE")
+    require((eur_sessions["FX_Date_Used"] == eur_sessions["Session_Date"]).all(), "RETRY_EUR_SESSION_DATE_GATE")
+    require((pd.to_numeric(eur_sessions["FX_Lag_Days"], errors="raise") == 0).all(), "RETRY_EUR_SESSION_LAG_GATE")
+
+    mapping = pd.read_csv(OUT / "mapping_revalidation_1633_v0.38.csv", dtype=str, keep_default_na=False)
+    eur_ws = set(mapping.loc[mapping["Primary_Currency"].map(lambda x: normalized_currency(x, cfg["currency_aliases"])) == "EUR", "WS_ID"])
+    liquidity = pd.read_csv(OUT / "liquidity_current_1633_v0.38.csv", dtype=str, keep_default_na=False)
+    readiness = pd.read_csv(OUT / "current_data_readiness_1633_v0.38.csv", dtype=str, keep_default_na=False)
+    eur_liquidity = liquidity[liquidity["WS_ID"].isin(eur_ws)]
+    eur_readiness = readiness[readiness["WS_ID"].isin(eur_ws)]
+    require(not (eur_liquidity["Liquidity_Current_State"] == "LIQUIDITY_FX_UNRESOLVED").any(), "RETRY_EUR_FALSE_FX_UNRESOLVED_GATE")
+    require(not (eur_readiness["Data_Readiness_Current"] == "BLOCKED_FX").any(), "RETRY_EUR_FALSE_BLOCKED_FX_GATE")
 
     summary = read_json(OUT / "summary_v0.38.json")
     require(summary.get("retry_mode") == RETRY_MODE, "RETRY_SUMMARY_MODE_GATE")
