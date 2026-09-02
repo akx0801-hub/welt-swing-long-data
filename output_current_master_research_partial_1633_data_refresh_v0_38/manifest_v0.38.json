@@ -9,11 +9,13 @@
     "history_gate_current_1633_v0.38.csv",
     "liquidity_current_1633_v0.38.csv",
     "liquidity_session_evidence_v0.38.csv",
+    "manifest_v0.38.json",
     "mapping_remediation_queue_v0.38.csv",
     "mapping_revalidation_1633_v0.38.csv",
     "market_asof_by_segment_v0.38.csv",
     "price_cache_status_1633_v0.38.csv",
     "provider_batch_log_v0.38.csv",
+    "provider_batch_plan_v0.38.csv",
     "runtime_cache_snapshot_v0.38.json",
     "stage_checkpoint_v0.38.json",
     "summary_v0.38.json"
@@ -110,5 +112,9 @@
     "config/u3k_liquidity_fx_v0.5.json": "0faa1a08e6303fe695bd925ccbb1794bce907e20"
   },
   "current_master_rows": 1633,
-  "productive": false
+  "productive": false,
+  "retry_mode": "FX_BATCH_AUDIT_ONLY",
+  "pre_fix_run_id": 33471051553,
+  "pre_fix_result_commit": "8eb1846f11e13a388a00838e44240372fa467aac",
+  "global_eod_safe_cutoff": "2026-08-31"
 }

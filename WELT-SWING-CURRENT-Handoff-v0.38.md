@@ -1,24 +1,32 @@
 # WELT-SWING CURRENT HANDOFF – v0.38
 
 Stage: CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_HISTORY_LIQUIDITY_DATA_REFRESH
-Current Master = 1633
 Operating Mode = RESEARCH_PARTIAL
+Retry Mode = FX_BATCH_AUDIT_ONLY
+Pre-Fix Run ID = 33471051553
+Pre-Fix Result Commit = 8eb1846f11e13a388a00838e44240372fa467aac
+Current Master = 1633
 Imported = 8/14
 Missing = 6/14
 Global EOD Safe Cutoff = 2026-08-31
+Stock OHLCV Network Refresh In Retry = false
+FX Network Refresh In Retry = true
+Frozen Stock Cache Read Only = true
 Stock Refresh Target = 1614
 Mapping Current Counts = {"MAPPING_DATA_CONFIRMED": 1375, "MAPPING_DOWNLOAD_NO_DATA": 239, "MAPPING_NOT_REQUESTED_INSTRUMENT_FAIL": 19}
 History Current Counts = {"HISTORY_DATA_QUALITY_FAIL": 7, "HISTORY_MAPPING_BLOCKED": 239, "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K": 3, "NOT_REQUESTED_INSTRUMENT_FAIL": 19, "PASS_HISTORY_CURRENT": 1365}
-Liquidity Current Counts = {"FAIL_LIQUIDITY": 75, "LIQUIDITY_DATA_INSUFFICIENT": 268, "LIQUIDITY_FX_UNRESOLVED": 183, "LOW_LIQUIDITY_EXCEPTION_POOL": 215, "PASS_PREFERRED": 812, "PASS_STANDARD": 80}
+Liquidity Current Counts = {"FAIL_LIQUIDITY": 75, "LIQUIDITY_DATA_INSUFFICIENT": 268, "LIQUIDITY_FX_UNRESOLVED": 133, "LOW_LIQUIDITY_EXCEPTION_POOL": 216, "PASS_PREFERRED": 859, "PASS_STANDARD": 82}
 FX Coverage = {"FX_RESOLVED": 15}
-Data Readiness Counts = {"BLOCKED_FX": 183, "BLOCKED_HISTORY_DATA": 3, "BLOCKED_INSTRUMENT": 19, "BLOCKED_MAPPING": 239, "QUARANTINE_DATA_QUALITY": 7, "READY_FOR_ELIGIBILITY_RECOMPUTE": 1182}
+Data Readiness Counts = {"BLOCKED_FX": 133, "BLOCKED_HISTORY_DATA": 3, "BLOCKED_INSTRUMENT": 19, "BLOCKED_MAPPING": 239, "QUARANTINE_DATA_QUALITY": 7, "READY_FOR_ELIGIBILITY_RECOMPUTE": 1232}
 Mapping Remediation Count = 239
 Data Quality Exception Count = 7
-Provider Batch Count = 52
-Data Refresh Executed = true
+Provider Batch Plan Count = 31
+Provider Actual Batch Count = 21
+Provider Actual Types = NORMAL 17 / RESCUE 3 / REPAIR 1
 Universe Mutated = false
 Eligibility Promotion = false
 P0 = false
+Sector RS = false
 SWING_U3K_FROZEN = false
 Productive = false
 Alpha Vantage = false

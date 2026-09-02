@@ -75,5 +75,26 @@
     "started_utc": "2026-09-01T04:46:05+00:00",
     "finished_utc": "2026-09-01T04:46:05+00:00",
     "global_eod_safe_cutoff": "2026-08-31"
+  },
+  "retry_fx_batch_audit": {
+    "mode": "FX_BATCH_AUDIT_ONLY",
+    "retry_timestamp_utc": "2026-09-02T07:28:49+00:00",
+    "pre_fix_run_id": 33471051553,
+    "pre_fix_result_commit": "8eb1846f11e13a388a00838e44240372fa467aac",
+    "global_eod_safe_cutoff": "2026-08-31",
+    "cache_before": {
+      "cache_sha": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+      "price_rows": 676550,
+      "state_rows": 1614,
+      "batch_rows": 21
+    },
+    "cache_after": {
+      "cache_sha": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+      "price_rows": 676550,
+      "state_rows": 1614,
+      "batch_rows": 21
+    },
+    "stock_network_request_count": 0,
+    "fx_network_refresh": true
   }
 }

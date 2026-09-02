@@ -29,11 +29,11 @@
     "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K": 3
   },
   "liquidity_current_counts": {
-    "PASS_PREFERRED": 812,
+    "PASS_PREFERRED": 859,
     "LIQUIDITY_DATA_INSUFFICIENT": 268,
-    "LOW_LIQUIDITY_EXCEPTION_POOL": 215,
-    "LIQUIDITY_FX_UNRESOLVED": 183,
-    "PASS_STANDARD": 80,
+    "LOW_LIQUIDITY_EXCEPTION_POOL": 216,
+    "LIQUIDITY_FX_UNRESOLVED": 133,
+    "PASS_STANDARD": 82,
     "FAIL_LIQUIDITY": 75
   },
   "fx_requested_currencies": [
@@ -72,17 +72,17 @@
   ],
   "fx_unresolved_currencies": [],
   "data_readiness_counts": {
-    "READY_FOR_ELIGIBILITY_RECOMPUTE": 1182,
+    "READY_FOR_ELIGIBILITY_RECOMPUTE": 1232,
     "BLOCKED_MAPPING": 239,
-    "BLOCKED_FX": 183,
+    "BLOCKED_FX": 133,
     "BLOCKED_INSTRUMENT": 19,
     "QUARANTINE_DATA_QUALITY": 7,
     "BLOCKED_HISTORY_DATA": 3
   },
   "mapping_remediation_count": 239,
   "data_quality_exception_count": 7,
-  "provider_batch_count": 52,
-  "provider_rescue_count": 0,
+  "provider_batch_count": 21,
+  "provider_rescue_count": 3,
   "provider_repair_count": 1,
   "data_refresh_executed_v0_38": true,
   "universe_mutated_v0_38": false,
@@ -107,17 +107,17 @@
       "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K": 3
     },
     "liquidity": {
-      "PASS_PREFERRED": 812,
+      "PASS_PREFERRED": 859,
       "LIQUIDITY_DATA_INSUFFICIENT": 268,
-      "LOW_LIQUIDITY_EXCEPTION_POOL": 215,
-      "LIQUIDITY_FX_UNRESOLVED": 183,
-      "PASS_STANDARD": 80,
+      "LOW_LIQUIDITY_EXCEPTION_POOL": 216,
+      "LIQUIDITY_FX_UNRESOLVED": 133,
+      "PASS_STANDARD": 82,
       "FAIL_LIQUIDITY": 75
     },
     "readiness": {
-      "READY_FOR_ELIGIBILITY_RECOMPUTE": 1182,
+      "READY_FOR_ELIGIBILITY_RECOMPUTE": 1232,
       "BLOCKED_MAPPING": 239,
-      "BLOCKED_FX": 183,
+      "BLOCKED_FX": 133,
       "BLOCKED_INSTRUMENT": 19,
       "QUARANTINE_DATA_QUALITY": 7,
       "BLOCKED_HISTORY_DATA": 3
@@ -126,5 +126,21 @@
       "FX_RESOLVED": 15
     }
   },
-  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_DATA_GAP_REMEDIATION"
+  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_DATA_GAP_REMEDIATION",
+  "retry_mode": "FX_BATCH_AUDIT_ONLY",
+  "retry_timestamp_utc": "2026-09-02T07:28:49+00:00",
+  "pre_fix_run_id": 33471051553,
+  "pre_fix_result_commit": "8eb1846f11e13a388a00838e44240372fa467aac",
+  "provider_batch_plan_count": 31,
+  "provider_normal_count": 17,
+  "provider_normal_symbol_attempts": 1614,
+  "provider_rescue_symbol_attempts": 239,
+  "provider_repair_symbol_attempts": 7,
+  "retry_fx_batch_audit_executed_v0_38": true,
+  "stock_ohlcv_network_refresh_in_retry": false,
+  "stock_network_request_count_in_retry": 0,
+  "fx_network_refresh_in_retry": true,
+  "cache_read_only_in_retry": true,
+  "retry_cache_sha_before": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+  "retry_cache_sha_after": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0"
 }
