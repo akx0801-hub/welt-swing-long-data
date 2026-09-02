@@ -1,0 +1,80 @@
+name: Current Master Research Partial 1633 Data Gap Audit v0.39
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: current-master-research-partial-1633-data-gap-audit-v0.39
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONUNBUFFERED: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Python Setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Dependency Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pandas numpy
+
+      - name: Restore frozen v0.38 Runtime Cache
+        id: frozen-cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: runtime_cache/v0_38/current_master_1633_market_prices.sqlite
+          key: current-master-1633-v0.38-v0.39-audit-readonly
+          restore-keys: |
+            current-master-1633-v0.38-
+
+      - name: py_compile
+        run: python -m py_compile scripts/current_master_research_partial_1633_data_gap_remediation_v0_39.py
+
+      - name: Self-Test
+        run: python scripts/current_master_research_partial_1633_data_gap_remediation_v0_39.py --self-test
+
+      - name: Frozen Input Gates
+        run: python scripts/current_master_research_partial_1633_data_gap_remediation_v0_39.py --validate-inputs
+
+      - name: DATA_GAP_AUDIT_ONLY
+        run: python scripts/current_master_research_partial_1633_data_gap_remediation_v0_39.py --audit
+
+      - name: Strong Gates
+        run: python scripts/current_master_research_partial_1633_data_gap_remediation_v0_39.py --strong-gates
+
+      - name: Commit audit outputs
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output_current_master_research_partial_1633_data_gap_remediation_v0_39
+          if git diff --cached --quiet; then
+            echo "No audit output changes to commit."
+          else
+            git commit -m "Complete v0.39 data gap audit only"
+            git push
+          fi
+
+      - name: Artifact Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-master-1633-v0.39-data-gap-audit
+          path: output_current_master_research_partial_1633_data_gap_remediation_v0_39/
+          if-no-files-found: warn
