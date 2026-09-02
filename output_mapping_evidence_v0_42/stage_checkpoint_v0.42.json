@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 1,
-    "NOT_STARTED": 235,
+    "RESEARCHED": 2,
+    "NOT_STARTED": 234,
     "PARTIAL": 3
   },
-  "last_completed_market_mic": "XAMS",
-  "last_completed_ws_id": "WS:XAMS:ABND.AS",
-  "next_ws_id": "WS:XCSE:ALKB.CO",
-  "source_evidence_sha256": "baba44ab983629f25fcbf8a09f00de038df9d44679a549029e0759599ed18702",
-  "as_of_utc": "2026-09-02T19:20:20.882995+00:00"
+  "last_completed_market_mic": "XCSE",
+  "last_completed_ws_id": "WS:XCSE:ALKB.CO",
+  "next_ws_id": "WS:XCSE:CARLB.CO",
+  "source_evidence_sha256": "e30eb1d990295fe42e71cb47f1ba09556b46c7273ac72eb939966eebd0196c7f",
+  "as_of_utc": "2026-09-02T19:24:36.711361+00:00"
 }
