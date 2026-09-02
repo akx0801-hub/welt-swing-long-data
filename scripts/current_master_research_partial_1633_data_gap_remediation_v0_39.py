@@ -167,10 +167,14 @@ def validate_frozen_inputs(cfg: dict[str, Any]) -> None:
     for path, expected in cfg["frozen_input_blobs"].items():
         actual = git_blob(path)
         require(actual == expected, f"FROZEN_INPUT_BLOB_MISMATCH:{path}:{actual}!={expected}")
-    require(
-        not Path(".github/workflows/current_master_research_partial_1633_data_gap_remediation_v0.39.yml").exists(),
-        "AUDIT_ONLY_WORKFLOW_MUST_NOT_EXIST_YET",
-    )
+    workflow_path = Path(cfg["audit_workflow_path"])
+    require(workflow_path.is_file(), f"AUDIT_WORKFLOW_MISSING:{workflow_path}")
+    workflow_text = workflow_path.read_text(encoding="utf-8")
+    require("workflow_dispatch:" in workflow_text, "AUDIT_WORKFLOW_MANUAL_DISPATCH_MISSING")
+    for forbidden in ("\n  push:", "\n  schedule:", "\n  pull_request:", "\n  repository_dispatch:"):
+        require(forbidden not in workflow_text, f"AUDIT_WORKFLOW_NON_MANUAL_TRIGGER_FORBIDDEN:{forbidden.strip()}")
+    require(cfg.get("workflow_execution_allowed") is True, "AUDIT_WORKFLOW_EXECUTION_NOT_AUTHORIZED")
+    require(cfg.get("workflow_trigger_policy") == "MANUAL_DISPATCH_ONLY", "AUDIT_WORKFLOW_TRIGGER_POLICY_MISMATCH")
 
 
 def valid_mask(frame: pd.DataFrame) -> pd.Series:
