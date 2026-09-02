@@ -78,7 +78,7 @@
   },
   "retry_fx_batch_audit": {
     "mode": "FX_BATCH_AUDIT_ONLY",
-    "retry_timestamp_utc": "2026-09-02T07:28:49+00:00",
+    "retry_timestamp_utc": "2026-09-02T11:21:21+00:00",
     "pre_fix_run_id": 33471051553,
     "pre_fix_result_commit": "8eb1846f11e13a388a00838e44240372fa467aac",
     "global_eod_safe_cutoff": "2026-08-31",

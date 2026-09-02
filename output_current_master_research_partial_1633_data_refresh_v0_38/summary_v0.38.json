@@ -29,12 +29,11 @@
     "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K": 3
   },
   "liquidity_current_counts": {
-    "PASS_PREFERRED": 859,
+    "PASS_PREFERRED": 925,
+    "LOW_LIQUIDITY_EXCEPTION_POOL": 268,
     "LIQUIDITY_DATA_INSUFFICIENT": 268,
-    "LOW_LIQUIDITY_EXCEPTION_POOL": 216,
-    "LIQUIDITY_FX_UNRESOLVED": 133,
-    "PASS_STANDARD": 82,
-    "FAIL_LIQUIDITY": 75
+    "PASS_STANDARD": 89,
+    "FAIL_LIQUIDITY": 83
   },
   "fx_requested_currencies": [
     "BRL",
@@ -72,9 +71,8 @@
   ],
   "fx_unresolved_currencies": [],
   "data_readiness_counts": {
-    "READY_FOR_ELIGIBILITY_RECOMPUTE": 1232,
+    "READY_FOR_ELIGIBILITY_RECOMPUTE": 1365,
     "BLOCKED_MAPPING": 239,
-    "BLOCKED_FX": 133,
     "BLOCKED_INSTRUMENT": 19,
     "QUARANTINE_DATA_QUALITY": 7,
     "BLOCKED_HISTORY_DATA": 3
@@ -107,17 +105,15 @@
       "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K": 3
     },
     "liquidity": {
-      "PASS_PREFERRED": 859,
+      "PASS_PREFERRED": 925,
+      "LOW_LIQUIDITY_EXCEPTION_POOL": 268,
       "LIQUIDITY_DATA_INSUFFICIENT": 268,
-      "LOW_LIQUIDITY_EXCEPTION_POOL": 216,
-      "LIQUIDITY_FX_UNRESOLVED": 133,
-      "PASS_STANDARD": 82,
-      "FAIL_LIQUIDITY": 75
+      "PASS_STANDARD": 89,
+      "FAIL_LIQUIDITY": 83
     },
     "readiness": {
-      "READY_FOR_ELIGIBILITY_RECOMPUTE": 1232,
+      "READY_FOR_ELIGIBILITY_RECOMPUTE": 1365,
       "BLOCKED_MAPPING": 239,
-      "BLOCKED_FX": 133,
       "BLOCKED_INSTRUMENT": 19,
       "QUARANTINE_DATA_QUALITY": 7,
       "BLOCKED_HISTORY_DATA": 3
@@ -128,7 +124,7 @@
   },
   "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_DATA_GAP_REMEDIATION",
   "retry_mode": "FX_BATCH_AUDIT_ONLY",
-  "retry_timestamp_utc": "2026-09-02T07:28:49+00:00",
+  "retry_timestamp_utc": "2026-09-02T11:21:21+00:00",
   "pre_fix_run_id": 33471051553,
   "pre_fix_result_commit": "8eb1846f11e13a388a00838e44240372fa467aac",
   "provider_batch_plan_count": 31,
