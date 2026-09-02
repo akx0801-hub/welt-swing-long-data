@@ -55,7 +55,9 @@ Verboten sind:
 - Eligibility-Promotion
 - produktive Statusänderungen
 
-Es wird bewusst noch kein GitHub-Actions-Workflow für v0.39 angelegt.
+Nach abgeschlossenem Pre-Run-Review wird ein eigener GitHub-Actions-Workflow angelegt. Er besitzt ausschließlich `workflow_dispatch` und keinen `push`, `schedule`, `pull_request` oder `repository_dispatch` Trigger. Dadurch kann weder das Hochladen der Config noch ein anderer normaler Commit den v0.39-Audit automatisch starten.
+
+`network_allowed = false` bezieht sich auf den Audit-Code und Markt-/Provider-Datenzugriffe. GitHub-Actions-Infrastruktur wie Checkout, Python-Setup, Dependency-Installation und Cache-Restore ist davon nicht umfasst; der Audit selbst führt keine Provider-Suche und keine Stock-/FX-Netzwerkabfrage aus.
 
 ## 4. Mapping-Audit – 239 Fälle
 
@@ -152,6 +154,9 @@ Der Audit verändert weder v0.38-Handoffs noch v0.38-Outputs.
 ## 9. Strong Gates
 
 Die Strong Gates prüfen mindestens:
+
+- v0.39-Audit-Workflow vorhanden und ausschließlich manuell auslösbar (`workflow_dispatch`)
+- Config autorisiert ausschließlich `MANUAL_DISPATCH_ONLY`
 
 - exakten Source-Commit als Ancestor
 - exakte eingefrorene v0.38-Git-Blobs
