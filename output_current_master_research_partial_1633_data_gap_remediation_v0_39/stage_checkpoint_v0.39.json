@@ -1,0 +1,9 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_DATA_GAP_REMEDIATION",
+  "version": "v0.39",
+  "run_mode": "DATA_GAP_AUDIT_ONLY",
+  "completed": true,
+  "strong_gates_required": true,
+  "source_result_commit": "03230b1409d8da7ec513f76383e18fcf07aef465",
+  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION"
+}

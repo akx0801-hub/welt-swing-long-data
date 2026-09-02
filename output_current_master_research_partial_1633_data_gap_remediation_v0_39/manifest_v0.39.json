@@ -1,0 +1,41 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_DATA_GAP_REMEDIATION",
+  "version": "v0.39",
+  "run_mode": "DATA_GAP_AUDIT_ONLY",
+  "source_result_commit": "03230b1409d8da7ec513f76383e18fcf07aef465",
+  "outputs": [
+    "data_gap_audit_249_v0.39.csv",
+    "data_quality_gap_audit_7_v0.39.csv",
+    "history_gap_audit_3_v0.39.csv",
+    "invalid_bar_events_v0.39.csv",
+    "mapping_gap_audit_239_v0.39.csv",
+    "protected_instrument_fail_19_v0.39.csv",
+    "remediation_queue_v0.39.csv",
+    "stage_checkpoint_v0.39.json",
+    "summary_v0.39.json",
+    "suspicious_return_events_v0.39.csv"
+  ],
+  "frozen_input_blobs": {
+    "universe/research_partial_1633.csv": "9851b1c4f68205c2d5e778fc1d3d79be17c6fd13",
+    "output_current_master_research_partial_1633_data_refresh_v0_38/mapping_revalidation_1633_v0.38.csv": "d5d86245aeeccde37f9d111dd27e824c649b5447",
+    "output_current_master_research_partial_1633_data_refresh_v0_38/mapping_remediation_queue_v0.38.csv": "92c478c9a8e2f2a8f52a3c7a5632ef8802d35d12",
+    "output_current_master_research_partial_1633_data_refresh_v0_38/price_cache_status_1633_v0.38.csv": "2b4c4e2bacf08f96742c4ac3f74aff069a7dfd5a",
+    "output_current_master_research_partial_1633_data_refresh_v0_38/history_gate_current_1633_v0.38.csv": "d44c8b289211050306fffc458f33cf0ada01087b",
+    "output_current_master_research_partial_1633_data_refresh_v0_38/data_quality_exceptions_v0.38.csv": "d761818fac9b4bbf8ac067108216abc41ad444e9",
+    "output_current_master_research_partial_1633_data_refresh_v0_38/market_asof_by_segment_v0.38.csv": "45b8ffd10b7960565391318f67315d8e92080780",
+    "output_current_master_research_partial_1633_data_refresh_v0_38/current_data_readiness_1633_v0.38.csv": "497b8ac1bffdfee50c8f8ad9750b7af2f7187790",
+    "output_current_master_research_partial_1633_data_refresh_v0_38/summary_v0.38.json": "0a82def1d439d093cbf2c84fe7025e5ac8786e43",
+    "WELT-SWING-CURRENT-Handoff-v0.38.md": "445f0d5a905ef6401550a9679413800a9a7249a2"
+  },
+  "frozen_cache": {
+    "path": "runtime_cache/v0_38/current_master_1633_market_prices.sqlite",
+    "sha256": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+    "counts": {
+      "price_daily": 676550,
+      "cache_state": 1614,
+      "batch_log": 21
+    }
+  },
+  "network_request_count": 0,
+  "productive": false
+}

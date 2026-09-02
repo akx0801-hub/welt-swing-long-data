@@ -1,0 +1,57 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_DATA_GAP_REMEDIATION",
+  "version": "v0.39",
+  "run_mode": "DATA_GAP_AUDIT_ONLY",
+  "status": "DEV / RESEARCH / SHADOW – NOT PRODUCTIVE",
+  "source_result_commit": "03230b1409d8da7ec513f76383e18fcf07aef465",
+  "source_v0_38_ready": 1365,
+  "audit_target_count": 249,
+  "gap_family_counts": {
+    "DATA_QUALITY": 7,
+    "HISTORY": 3,
+    "MAPPING": 239
+  },
+  "disposition_counts": {
+    "DEFER_TEMPORAL": 3,
+    "MANUAL_REVIEW": 88,
+    "RETRY_DATA": 158
+  },
+  "classification_counts": {
+    "CASE_NORMALIZATION_SUSPECT": 78,
+    "EXACT_PROVIDER_SYMBOL_NO_DATA": 151,
+    "INVALID_BAR_TARGETED_REPAIR_CANDIDATE": 2,
+    "STRUCTURAL_TEMPORAL_EXCLUSION_UNTIL_HISTORY_MATURES": 3,
+    "SUFFIX_MAPPING_SUSPECT": 10,
+    "SUSPICIOUS_RETURN_TARGETED_REPAIR_CANDIDATE": 5
+  },
+  "data_quality_reason_counts": {
+    "INVALID_OHLC_OR_VOLUME": 2,
+    "SUSPICIOUS_RETURN_NEEDS_REPAIR": 5
+  },
+  "protected_instrument_fail_count": 19,
+  "automatic_fix_count": 0,
+  "terminal_blocked_count": 0,
+  "network_allowed": false,
+  "network_request_count": 0,
+  "stock_download_allowed": false,
+  "stock_download_executed": false,
+  "fx_download_allowed": false,
+  "fx_download_executed": false,
+  "provider_search_allowed": false,
+  "provider_search_executed": false,
+  "cache_read_only": true,
+  "cache_sha_before": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+  "cache_sha_after": "d466ae08fc22c5bcae86dacb88759773565552cd58e17640d971d191c83311d0",
+  "automatic_mapping_override_allowed": false,
+  "automatic_mapping_override_created": false,
+  "universe_mutation_allowed": false,
+  "universe_mutated": false,
+  "eligibility_promotion_allowed": false,
+  "eligibility_promoted": false,
+  "p0": false,
+  "sector_rs": false,
+  "swing_u3k_frozen_mutated": false,
+  "productive": false,
+  "audit_timestamp_utc": "2026-09-02T12:48:33+00:00",
+  "next_stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_DATA_GAP_REMEDIATION"
+}
