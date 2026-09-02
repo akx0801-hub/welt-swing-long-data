@@ -1,10 +1,11 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "NOT_STARTED": 239
+    "NOT_STARTED": 236,
+    "PARTIAL": 3
   },
-  "last_completed_market_mic": "",
-  "last_completed_ws_id": "",
+  "last_completed_market_mic": "XETR",
+  "last_completed_ws_id": "WS:XETR:DB1GN.DE",
   "next_ws_id": "WS:XAMS:ABND.AS",
-  "as_of_utc": "2026-09-02T18:40:59.020334+00:00"
+  "as_of_utc": "2026-09-02T18:42:41.424833+00:00"
 }
