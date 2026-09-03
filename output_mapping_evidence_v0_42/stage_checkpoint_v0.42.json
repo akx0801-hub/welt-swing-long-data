@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 101,
+    "RESEARCHED": 102,
     "PARTIAL": 1,
-    "NOT_STARTED": 137
+    "NOT_STARTED": 136
   },
-  "last_completed_market_mic": "XBRU",
-  "last_completed_ws_id": "WS:XBRU:AGES.BR",
-  "next_ws_id": "WS:XCSE:ZELA.CO",
-  "source_evidence_sha256": "1296ee10741919567166197614213d3a80ea1209f884add09ca1596dbdc62c4a",
-  "as_of_utc": "2026-09-03T09:24:30.530316+00:00"
+  "last_completed_market_mic": "XCSE",
+  "last_completed_ws_id": "WS:XCSE:ZELA.CO",
+  "next_ws_id": "WS:XETR:AG1G.DE",
+  "source_evidence_sha256": "4ef78ae19f15a45821d17fcf1abd0aa142e424d001c78214cff523126d489433",
+  "as_of_utc": "2026-09-03T09:33:08.323134+00:00"
 }
