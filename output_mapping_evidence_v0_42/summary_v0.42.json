@@ -22,10 +22,10 @@
   },
   "candidate_collisions": 0,
   "errors": [],
-  "source_evidence_sha256": "6564637f42dfa5ea712e495f3a868f2af351709996ce6737e3e4ac0325d5342f",
+  "source_evidence_sha256": "8429d50f2bbc6755c68c3f1b0ae583ce4a8d1b9d24c891aeeda23875236f6a85",
   "universe_mutated": false,
   "eligibility_promoted": false,
   "price_download": false,
   "productive": false,
-  "as_of_utc": "2026-09-03T06:19:11.529514+00:00"
+  "as_of_utc": "2026-09-03T06:32:58.692425+00:00"
 }
