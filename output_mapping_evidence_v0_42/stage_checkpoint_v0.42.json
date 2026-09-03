@@ -1,13 +1,12 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 86,
-    "NOT_STARTED": 151,
-    "PARTIAL": 2
+    "RESEARCHED": 88,
+    "NOT_STARTED": 151
   },
   "last_completed_market_mic": "XETR",
-  "last_completed_ws_id": "WS:XETR:DB1GN.DE",
+  "last_completed_ws_id": "WS:XETR:BASFN.DE",
   "next_ws_id": "WS:XAMS:AEGN.AS",
-  "source_evidence_sha256": "8429d50f2bbc6755c68c3f1b0ae583ce4a8d1b9d24c891aeeda23875236f6a85",
-  "as_of_utc": "2026-09-03T06:32:58.692425+00:00"
+  "source_evidence_sha256": "e9e3c166b311ef62aeb652c12cdd2c82c331d55010e2c2930ced88031f6bcf6b",
+  "as_of_utc": "2026-09-03T06:49:38.301035+00:00"
 }
