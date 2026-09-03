@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 102,
+    "RESEARCHED": 103,
     "PARTIAL": 1,
-    "NOT_STARTED": 136
+    "NOT_STARTED": 135
   },
-  "last_completed_market_mic": "XCSE",
-  "last_completed_ws_id": "WS:XCSE:ZELA.CO",
-  "next_ws_id": "WS:XETR:AG1G.DE",
-  "source_evidence_sha256": "4ef78ae19f15a45821d17fcf1abd0aa142e424d001c78214cff523126d489433",
-  "as_of_utc": "2026-09-03T09:33:08.323134+00:00"
+  "last_completed_market_mic": "XETR",
+  "last_completed_ws_id": "WS:XETR:AG1G.DE",
+  "next_ws_id": "WS:XETR:ALVG.DE",
+  "source_evidence_sha256": "ae62d093d0601f7dce0170b5cba814161c0978b08e5509a727a9a3ee3fcccd11",
+  "as_of_utc": "2026-09-03T21:01:27.085192+00:00"
 }
