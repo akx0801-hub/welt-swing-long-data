@@ -4,8 +4,8 @@
     "RESEARCHED": 239
   },
   "last_completed_market_mic": "XSWX",
-  "last_completed_ws_id": "WS:XSWX:ALCC.S",
+  "last_completed_ws_id": "WS:XSWX:ROPC.S",
   "next_ws_id": "",
-  "source_evidence_sha256": "b902bb585df7c8e35bd1e4042e9459698f5adcf91c90eb56c9158a99e6fb4128",
-  "as_of_utc": "2026-09-04T21:14:21.477800+00:00"
+  "source_evidence_sha256": "eed229bfac3112c4103e87c92bbfd6f3ccdd61c4ca31b39040c88ed5005d15b3",
+  "as_of_utc": "2026-09-04T21:16:54.252267+00:00"
 }
