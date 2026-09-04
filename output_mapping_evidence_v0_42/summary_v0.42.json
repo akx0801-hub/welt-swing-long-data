@@ -9,19 +9,19 @@
     "RESEARCHED": 239
   },
   "confidence_counts": {
-    "HIGH": 218,
-    "MEDIUM": 21
+    "HIGH": 226,
+    "MEDIUM": 13
   },
   "decision_counts": {
-    "CONFIRMED_PROVIDER_SYMBOL_CANDIDATE": 222,
-    "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED": 17
+    "CONFIRMED_PROVIDER_SYMBOL_CANDIDATE": 230,
+    "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED": 9
   },
   "candidate_collisions": 0,
   "errors": [],
-  "source_evidence_sha256": "05a2adedfd64901c3a0a9c23a72c048b9aef67278a5dfdeb9560d7137294a059",
+  "source_evidence_sha256": "d154e7727f3ab74a7bfc8ce61e3ba0e1efd0344939bd41eb82c39287ebfa01b2",
   "universe_mutated": false,
   "eligibility_promoted": false,
   "price_download": false,
   "productive": false,
-  "as_of_utc": "2026-09-04T20:47:41.661693+00:00"
+  "as_of_utc": "2026-09-04T20:58:59.537812+00:00"
 }

@@ -3,9 +3,9 @@
   "research_status_counts": {
     "RESEARCHED": 239
   },
-  "last_completed_market_mic": "XETR",
-  "last_completed_ws_id": "WS:XETR:SATG_P.DE",
+  "last_completed_market_mic": "XAMS",
+  "last_completed_ws_id": "WS:XAMS:AEGN.AS",
   "next_ws_id": "",
-  "source_evidence_sha256": "05a2adedfd64901c3a0a9c23a72c048b9aef67278a5dfdeb9560d7137294a059",
-  "as_of_utc": "2026-09-04T20:47:41.661693+00:00"
+  "source_evidence_sha256": "d154e7727f3ab74a7bfc8ce61e3ba0e1efd0344939bd41eb82c39287ebfa01b2",
+  "as_of_utc": "2026-09-04T20:58:59.537812+00:00"
 }
