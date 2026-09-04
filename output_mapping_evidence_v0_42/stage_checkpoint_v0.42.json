@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 222,
+    "RESEARCHED": 224,
     "PARTIAL": 1,
-    "NOT_STARTED": 16
+    "NOT_STARTED": 14
   },
-  "last_completed_market_mic": "XWBO",
-  "last_completed_ws_id": "WS:XWBO:WBSV.VI",
+  "last_completed_market_mic": "XMAD",
+  "last_completed_ws_id": "WS:XMAD:SABE.MC",
   "next_ws_id": "WS:XETR:FREG.DE",
-  "source_evidence_sha256": "c50e4a7df26b8a2873ae4fd3feeb2301e5fe5558fbbbc6e835121179cb4c1245",
-  "as_of_utc": "2026-09-04T16:37:30.644168+00:00"
+  "source_evidence_sha256": "b1292d04640c342f189ddb7ab6338ad487408b3568e76908d242a97560ff3dc7",
+  "as_of_utc": "2026-09-04T16:44:01.410405+00:00"
 }
