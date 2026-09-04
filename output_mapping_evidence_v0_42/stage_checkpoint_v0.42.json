@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 204,
+    "RESEARCHED": 214,
     "PARTIAL": 1,
-    "NOT_STARTED": 34
+    "NOT_STARTED": 24
   },
   "last_completed_market_mic": "XMIL",
-  "last_completed_ws_id": "WS:XMIL:TENR.MI",
+  "last_completed_ws_id": "WS:XMIL:UNPI.MI",
   "next_ws_id": "WS:XETR:FREG.DE",
-  "source_evidence_sha256": "9b42182969f0a9546af6e6c97d5b785bcf376e2d66c2a119720030799b45dd2e",
-  "as_of_utc": "2026-09-04T16:01:04.741465+00:00"
+  "source_evidence_sha256": "73acdeea0be8b35b92ce92fee4268614852d04386ff95574373b0e57f7224acf",
+  "as_of_utc": "2026-09-04T16:13:30.335984+00:00"
 }
