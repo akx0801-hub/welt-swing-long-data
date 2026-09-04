@@ -6,25 +6,22 @@
   "evidence_rows": 239,
   "unique_ws_ids": 239,
   "research_status_counts": {
-    "RESEARCHED": 238,
-    "PARTIAL": 1
+    "RESEARCHED": 239
   },
   "confidence_counts": {
-    "HIGH": 157,
-    "MEDIUM": 81,
-    "UNRESOLVED": 1
+    "HIGH": 158,
+    "MEDIUM": 81
   },
   "decision_counts": {
-    "CONFIRMED_PROVIDER_SYMBOL_CANDIDATE": 161,
-    "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED": 77,
-    "PRIMARY_IDENTITY_REVIEW_REQUIRED": 1
+    "CONFIRMED_PROVIDER_SYMBOL_CANDIDATE": 162,
+    "CONFIRMED_CURRENT_SYMBOL_BUT_PRICE_VERIFY_REQUIRED": 77
   },
   "candidate_collisions": 0,
   "errors": [],
-  "source_evidence_sha256": "41f7f9618810939ffcf6e434e4fafce7f8db3785e444958aedf3ff2a4e42b6af",
+  "source_evidence_sha256": "6663826c2cb0e917b38c4ab4733ff1bc8546ec2a2effb134452d5796624aff1f",
   "universe_mutated": false,
   "eligibility_promoted": false,
   "price_download": false,
   "productive": false,
-  "as_of_utc": "2026-09-04T17:49:16.687194+00:00"
+  "as_of_utc": "2026-09-04T18:09:06.663412+00:00"
 }
