@@ -9,8 +9,8 @@
     "RESEARCHED": 239
   },
   "confidence_counts": {
-    "HIGH": 234,
-    "MEDIUM": 5
+    "HIGH": 238,
+    "MEDIUM": 1
   },
   "decision_counts": {
     "CONFIRMED_PROVIDER_SYMBOL_CANDIDATE": 238,
@@ -18,10 +18,10 @@
   },
   "candidate_collisions": 0,
   "errors": [],
-  "source_evidence_sha256": "eed229bfac3112c4103e87c92bbfd6f3ccdd61c4ca31b39040c88ed5005d15b3",
+  "source_evidence_sha256": "dbfa25dec58da2d758ba5830864c09cf17741bd2271d92f4ea204c7c027d11f2",
   "universe_mutated": false,
   "eligibility_promoted": false,
   "price_download": false,
   "productive": false,
-  "as_of_utc": "2026-09-04T21:16:54.252267+00:00"
+  "as_of_utc": "2026-09-04T21:22:07.587481+00:00"
 }
