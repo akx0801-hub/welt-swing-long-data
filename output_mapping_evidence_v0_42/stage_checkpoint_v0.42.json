@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 131,
+    "RESEARCHED": 170,
     "PARTIAL": 1,
-    "NOT_STARTED": 107
+    "NOT_STARTED": 68
   },
-  "last_completed_market_mic": "XETR",
-  "last_completed_ws_id": "WS:XETR:NEKG.DE",
+  "last_completed_market_mic": "XPAR",
+  "last_completed_ws_id": "WS:XPAR:VLLP.PA",
   "next_ws_id": "WS:XETR:FREG.DE",
-  "source_evidence_sha256": "d980ae2e1c33ca07bfafd968d35b60d497864d91d6f84e70d4a82580c46675b0",
-  "as_of_utc": "2026-09-04T07:06:38.941038+00:00"
+  "source_evidence_sha256": "2d715dd201851d6c50eeb535443ff8631629744bf686df1e3dd463915dc43c28",
+  "as_of_utc": "2026-09-04T07:09:39.925298+00:00"
 }
