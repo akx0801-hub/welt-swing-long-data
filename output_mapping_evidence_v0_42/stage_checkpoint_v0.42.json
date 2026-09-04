@@ -3,9 +3,9 @@
   "research_status_counts": {
     "RESEARCHED": 239
   },
-  "last_completed_market_mic": "XAMS",
-  "last_completed_ws_id": "WS:XAMS:ARDS.AS",
+  "last_completed_market_mic": "XSTO",
+  "last_completed_ws_id": "WS:XSTO:ADDTB.ST",
   "next_ws_id": "",
-  "source_evidence_sha256": "6663826c2cb0e917b38c4ab4733ff1bc8546ec2a2effb134452d5796624aff1f",
-  "as_of_utc": "2026-09-04T18:09:06.663412+00:00"
+  "source_evidence_sha256": "a5a75fb7398a5b6aedfd5c71ec247473620b9baf371c7b35ecb3f29e6025672b",
+  "as_of_utc": "2026-09-04T18:27:48.083626+00:00"
 }
