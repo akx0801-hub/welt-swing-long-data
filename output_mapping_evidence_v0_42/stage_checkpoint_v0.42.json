@@ -5,9 +5,9 @@
     "PARTIAL": 1,
     "NOT_STARTED": 1
   },
-  "last_completed_market_mic": "XOSL",
-  "last_completed_ws_id": "WS:XOSL:GJFG.OL",
+  "last_completed_market_mic": "XETR",
+  "last_completed_ws_id": "WS:XETR:FPE3_P.DE",
   "next_ws_id": "WS:XETR:FREG.DE",
-  "source_evidence_sha256": "801a78068e80c661a1ac6f8c513f71f2ce5d6b827d3539c7e9454b889392d1ca",
-  "as_of_utc": "2026-09-04T17:37:22.389172+00:00"
+  "source_evidence_sha256": "f0f27894b31b41ce45786076aecaece0f3275cf1100e16c094efc9b8431cc615",
+  "as_of_utc": "2026-09-04T17:44:14.049889+00:00"
 }
