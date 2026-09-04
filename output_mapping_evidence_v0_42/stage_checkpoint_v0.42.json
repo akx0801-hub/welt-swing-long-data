@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 128,
+    "RESEARCHED": 129,
     "PARTIAL": 1,
-    "NOT_STARTED": 110
+    "NOT_STARTED": 109
   },
   "last_completed_market_mic": "XETR",
-  "last_completed_ws_id": "WS:XETR:ZALG.DE",
-  "next_ws_id": "WS:XETR:BMWG.DE",
-  "source_evidence_sha256": "e4c5c223429fc74170ce2af16e157d3f5fa1f020b6b53eab68dd43116a44a1fd",
-  "as_of_utc": "2026-09-04T04:52:21.112718+00:00"
+  "last_completed_ws_id": "WS:XETR:BMWG.DE",
+  "next_ws_id": "WS:XETR:FREG.DE",
+  "source_evidence_sha256": "f9ab7f06d8bfeb8c5c83184a6ca0bbbb584d3fbc857d3aa7b2c1277c5cce6645",
+  "as_of_utc": "2026-09-04T04:59:07.105519+00:00"
 }
