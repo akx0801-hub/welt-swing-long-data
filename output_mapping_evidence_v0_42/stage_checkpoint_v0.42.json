@@ -4,8 +4,8 @@
     "RESEARCHED": 239
   },
   "last_completed_market_mic": "XETR",
-  "last_completed_ws_id": "WS:XETR:FNTGN.DE",
+  "last_completed_ws_id": "WS:XETR:MUVGN.DE",
   "next_ws_id": "",
-  "source_evidence_sha256": "d61b2b4a8f933a6137754f167f0f4f30504600c51d8e902ab14fc791cca3a582",
-  "as_of_utc": "2026-09-04T19:44:29.461359+00:00"
+  "source_evidence_sha256": "b24b81891d144287fe1080e055090654b4622440ef982b15894f4a822b0c0286",
+  "as_of_utc": "2026-09-04T19:48:16.248603+00:00"
 }
