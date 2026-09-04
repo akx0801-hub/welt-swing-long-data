@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 234,
+    "RESEARCHED": 235,
     "PARTIAL": 1,
-    "NOT_STARTED": 4
+    "NOT_STARTED": 3
   },
-  "last_completed_market_mic": "XSTO",
-  "last_completed_ws_id": "WS:XSTO:AVANZ.ST",
+  "last_completed_market_mic": "XHEL",
+  "last_completed_ws_id": "WS:XHEL:KCRA.HE",
   "next_ws_id": "WS:XETR:FREG.DE",
-  "source_evidence_sha256": "3ed081c09a28186a21cc5c7c58e2434c0dd929af1e73576eb37aa7888ea3cd57",
-  "as_of_utc": "2026-09-04T17:05:37.820329+00:00"
+  "source_evidence_sha256": "b84af352503d7d1d2421d2c58e10d26f18ae7dd670f064f1494efc3939874330",
+  "as_of_utc": "2026-09-04T17:14:37.074740+00:00"
 }
