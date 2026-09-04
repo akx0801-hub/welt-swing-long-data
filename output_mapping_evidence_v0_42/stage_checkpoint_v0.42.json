@@ -4,8 +4,8 @@
     "RESEARCHED": 239
   },
   "last_completed_market_mic": "XSTO",
-  "last_completed_ws_id": "WS:XSTO:GETIB.ST",
+  "last_completed_ws_id": "WS:XSTO:LIFCOB.ST",
   "next_ws_id": "",
-  "source_evidence_sha256": "06a304a9d31f8b8e892fdab321e44c6294d22acf2374701a75ccdbf6c5c56946",
-  "as_of_utc": "2026-09-04T18:32:21.347380+00:00"
+  "source_evidence_sha256": "fe50bdb505657dbeb717d6e360e6b49108cdd02cbceb70407f9369efec222f7a",
+  "as_of_utc": "2026-09-04T18:44:23.214402+00:00"
 }
