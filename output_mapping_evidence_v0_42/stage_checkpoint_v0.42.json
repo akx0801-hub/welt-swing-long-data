@@ -4,8 +4,8 @@
     "RESEARCHED": 239
   },
   "last_completed_market_mic": "XSTO",
-  "last_completed_ws_id": "WS:XSTO:TRELB.ST",
+  "last_completed_ws_id": "WS:XSTO:OCTVSDB.ST",
   "next_ws_id": "",
-  "source_evidence_sha256": "057d39c636e59ea5a2cd2196c3b97106b9dedbfa736165d22db563f85361f6a8",
-  "as_of_utc": "2026-09-04T18:56:31.581122+00:00"
+  "source_evidence_sha256": "35917a85f235c61590e65f754ac4ecb77de75ded46d108e9253103a7496e41aa",
+  "as_of_utc": "2026-09-04T19:12:50.825760+00:00"
 }
