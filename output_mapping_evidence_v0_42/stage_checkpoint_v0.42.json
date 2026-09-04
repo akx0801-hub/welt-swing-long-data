@@ -3,9 +3,9 @@
   "research_status_counts": {
     "RESEARCHED": 239
   },
-  "last_completed_market_mic": "XAMS",
-  "last_completed_ws_id": "WS:XAMS:MICCT.AS",
+  "last_completed_market_mic": "XSWX",
+  "last_completed_ws_id": "WS:XSWX:ALCC.S",
   "next_ws_id": "",
-  "source_evidence_sha256": "2d30e62d06ac1b95418d380a03116641aa91849b647e4c9c158053c347393102",
-  "as_of_utc": "2026-09-04T21:02:40.482887+00:00"
+  "source_evidence_sha256": "b902bb585df7c8e35bd1e4042e9459698f5adcf91c90eb56c9158a99e6fb4128",
+  "as_of_utc": "2026-09-04T21:14:21.477800+00:00"
 }
