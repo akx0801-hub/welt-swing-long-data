@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 224,
+    "RESEARCHED": 227,
     "PARTIAL": 1,
-    "NOT_STARTED": 14
+    "NOT_STARTED": 11
   },
   "last_completed_market_mic": "XMAD",
-  "last_completed_ws_id": "WS:XMAD:SABE.MC",
+  "last_completed_ws_id": "WS:XMAD:GRLS.MC",
   "next_ws_id": "WS:XETR:FREG.DE",
-  "source_evidence_sha256": "b1292d04640c342f189ddb7ab6338ad487408b3568e76908d242a97560ff3dc7",
-  "as_of_utc": "2026-09-04T16:44:01.410405+00:00"
+  "source_evidence_sha256": "7c551e9c79b268ecbb53015b3063f6620ba6ea0bd3029657b052be01311b94fa",
+  "as_of_utc": "2026-09-04T16:47:03.874048+00:00"
 }
