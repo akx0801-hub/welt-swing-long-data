@@ -1,13 +1,13 @@
 {
   "stage": "v0.42",
   "research_status_counts": {
-    "RESEARCHED": 192,
+    "RESEARCHED": 197,
     "PARTIAL": 1,
-    "NOT_STARTED": 46
+    "NOT_STARTED": 41
   },
   "last_completed_market_mic": "XLON",
-  "last_completed_ws_id": "WS:XLON:TCAPI.L",
+  "last_completed_ws_id": "WS:XLON:ICGIN.L",
   "next_ws_id": "WS:XETR:FREG.DE",
-  "source_evidence_sha256": "9cb6b6cdb78ba7242f62c9708d0587dc16436e164209925d1151c2bd4e6d5775",
-  "as_of_utc": "2026-09-04T10:03:56.469106+00:00"
+  "source_evidence_sha256": "7fba0cfc94e9e3f4865d8885612b28eda9b9c141a1ce7c2d39ada28bddf09246",
+  "as_of_utc": "2026-09-04T10:14:05.321255+00:00"
 }
