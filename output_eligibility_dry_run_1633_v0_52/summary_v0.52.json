@@ -1,0 +1,35 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_ELIGIBILITY_DRY_RUN",
+  "version": "v0.52",
+  "run_mode": "ELIGIBILITY_DRY_RUN_ONLY",
+  "rows": 1633,
+  "history_counts": {
+    "PASS_HISTORY_CURRENT": 1601,
+    "DATA_QUALITY_FAIL": 7,
+    "INSUFFICIENT_HISTORY": 6,
+    "NOT_VERIFIED": 19
+  },
+  "eligibility_counts": {
+    "PASS_STRICT_CANDIDATE": 759,
+    "LOW_LIQUIDITY_EXCEPTION": 132,
+    "INSTRUMENT_REVIEW": 678,
+    "DATA_QUALITY_FAIL": 7,
+    "INSUFFICIENT_HISTORY": 6,
+    "FAIL_LIQUIDITY": 27,
+    "PREFERRED": 5,
+    "NOT_VERIFIED": 19
+  },
+  "pass_strict_candidate": 759,
+  "v0_50_147": 147,
+  "strict_overlap_with_147": 137,
+  "strict_not_in_147": 622,
+  "in_147_not_strict_now": 10,
+  "drop_from_147_reason": {
+    "INSTRUMENT_REVIEW": 10
+  },
+  "unknown_blocked_from_strict": 686,
+  "universe_write": false,
+  "u3k_frozen_members": 0,
+  "productive": false,
+  "as_of_utc": "2026-09-05T10:23:19Z"
+}
