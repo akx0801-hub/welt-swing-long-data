@@ -1,0 +1,47 @@
+{
+  "stage": "US1_SP500_COMMON",
+  "us1_status": "BUILD_PASS_READY_FOR_MANAGER_INTEGRATION_GATE",
+  "source": "wikipedia_list_of_sp500_companies",
+  "source_class": "SECONDARY",
+  "source_as_of_utc": "2026-09-05T14:53:36Z",
+  "wiki_last_modified": "Fri, 04 Sep 2026 04:06:44 GMT",
+  "discovery": 503,
+  "admitted": 399,
+  "review": 104,
+  "excluded": 0,
+  "history": {
+    "PASS": 398,
+    "HISTORY_FAIL": 1
+  },
+  "liquidity": {
+    "PREFERRED": 399
+  },
+  "eligibility": {
+    "ELIGIBLE": 398,
+    "HISTORY_FAILURE": 1
+  },
+  "canonical": 399,
+  "history_pass": 398,
+  "liquidity_pass_standard_or_preferred": 399,
+  "eligible": 398,
+  "gates": {
+    "G0_SCOPE": "PASS",
+    "G1_MEMBERSHIP": "PASS",
+    "G2_INSTRUMENT": "PASS",
+    "G3_IDENTITY": "PASS",
+    "G4_EVIDENCE": "PASS",
+    "G5_MAPPING": "PASS",
+    "G6_HISTORY": "PASS",
+    "G7_LIQUIDITY": "PASS",
+    "G8_ELIGIBILITY": "PASS",
+    "G9_CANONICAL": "PASS",
+    "G10_INTEGRITY": "PASS"
+  },
+  "research_partial": 1633,
+  "strict": 759,
+  "us_in_1633": 0,
+  "universe_write": false,
+  "u3k_frozen_members": 0,
+  "productive": false,
+  "next_action": "STOP_MANAGER_GATE"
+}
