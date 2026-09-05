@@ -1,0 +1,24 @@
+{
+  "stage": "P6_COVERAGE_EXPANSION_DECISION",
+  "status": "P6 COVERAGE & EXPANSION DECISION GATE \u2014 COMPLETE",
+  "head": "75b8eed",
+  "research_partial": 2374,
+  "strict": 759,
+  "frozen": 0,
+  "us": 741,
+  "canada": 217,
+  "australia": 0,
+  "korea": 0,
+  "winner": "AU_SP_ASX_200_COMMON",
+  "canada_decision": "CANADA_REQUIRES_IDENTITY_GATE_FIRST",
+  "ranking": [
+    "C_Australia",
+    "C_Korea",
+    "A_US3"
+  ],
+  "universe_write": false,
+  "download": false,
+  "recommendation_is_not_build": true,
+  "next_action": "STOP_MANAGER_SELECTS_ONE_BOUNDED_NEXT_PHASE",
+  "as_of_utc": "2026-09-05T16:44:13Z"
+}

@@ -1,0 +1,5 @@
+slice,membership,strict,gap,gap_type,empty_isin
+US_XNYS_XNAS,741,0,741,CONVERSION_NOT_RUN,0
+Canada_XTSE,217,0,217,IDENTITY_BLOCKED,217
+Australia,0,0,0,EXPANSION,0
+Korea,0,0,0,EXPANSION,0
