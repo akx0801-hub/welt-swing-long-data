@@ -1,0 +1,30 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_INSTRUMENT_SHARE_CLASS",
+  "version": "v0.51",
+  "run_mode": "APPLY",
+  "unknown_before": 910,
+  "evidence_rows": 239,
+  "apply_ordinary": 219,
+  "apply_preferred": 5,
+  "hold_review": 15,
+  "conflicts": 0,
+  "unknown_without_evidence": 671,
+  "bucket_counts_239": {
+    "REVIEW": 15,
+    "ORDINARY_SHARE": 219,
+    "PREFERRED_SHARE": 5
+  },
+  "universe_identity_frozen": true,
+  "eligibility_written": false,
+  "u3k_frozen_members": 0,
+  "productive": false,
+  "as_of_utc": "2026-09-05T10:20:15Z",
+  "instrument_after": {
+    "COMMON_STOCK": 625,
+    "UNKNOWN": 686,
+    "ORDINARY_SHARE": 298,
+    "PREFERRED_SHARE": 17,
+    "UNIT": 7
+  },
+  "applied_rows": 239
+}
