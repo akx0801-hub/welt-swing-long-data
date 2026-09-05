@@ -1,0 +1,42 @@
+{
+  "stage": "US1_INTEGRATION_EVIDENCE_GATE",
+  "status": "READY_FOR_US1_INTEGRATION_WRITE_GATE",
+  "head": "ce9018c",
+  "membership_source": "wikipedia_secondary+ishares_IVV_institutional",
+  "ivv_as_of": "Sep 03, 2026",
+  "admitted_reviewed": 399,
+  "membership_verified": 373,
+  "membership_conflict": 26,
+  "identity_pass": 399,
+  "instrument_pass": 399,
+  "canonical_pass": 399,
+  "history_pass": 398,
+  "liquidity_pass": 399,
+  "eligible": 398,
+  "integration_ready": 372,
+  "evidence_review": 26,
+  "data_repair_required": 0,
+  "admission_review": 104,
+  "not_eligible": 1,
+  "excluded": 0,
+  "review_104": {
+    "REVIEW_IDENTITY": 39,
+    "REVIEW_PRIMARY_MIC": 15,
+    "REVIEW_REIT": 29,
+    "REVIEW_SHARE_CLASS": 15,
+    "REVIEW_MULTIPLE_REASONS": 6
+  },
+  "hona": "NOT_ELIGIBLE_HISTORY_FAIL_NOT_REPAIRABLE",
+  "research_partial": 1633,
+  "strict": 759,
+  "frozen": 0,
+  "us_in_1633": 0,
+  "universe_write": false,
+  "next_action": "STOP_MANAGER_GATE",
+  "class_counts_admitted": {
+    "A": 372,
+    "B": 26,
+    "E": 1
+  },
+  "as_of_utc": "2026-09-05T15:18:36Z"
+}

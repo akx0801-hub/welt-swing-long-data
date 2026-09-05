@@ -1,0 +1,14 @@
+{
+  "ticker": "HONA",
+  "isin": "US43849R1059",
+  "bars": 58,
+  "ivv_hona": true,
+  "ivv_hon": {
+    "ticker": "HON",
+    "isin": "US4385162056",
+    "asset": "Equity"
+  },
+  "class": "E",
+  "repairable": "NO",
+  "reason": "Short history; IVV lists HONA and HON as distinct. Not a mapping mix-up."
+}
