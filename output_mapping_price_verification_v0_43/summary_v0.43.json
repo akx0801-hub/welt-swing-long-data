@@ -1,0 +1,23 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_MAPPING_PRICE_VERIFICATION",
+  "version": "v0.43",
+  "run_mode": "PRICE_VERIFICATION_SIDECAR_ONLY",
+  "status": "COMPLETE",
+  "evidence_rows": 239,
+  "probe_rows": 239,
+  "probe_status_counts": {
+    "PASS": 239
+  },
+  "currency_match_counts": {
+    "EXACT": 221,
+    "GBP_PENCE_EQUIVALENT": 18
+  },
+  "source_evidence_sha256": "884d2f8a1118399a30c306b0b9aec4bb3946fd7633f70181b742f1f78a6249f7",
+  "universe_mutated": false,
+  "eligibility_promoted": false,
+  "price_download": false,
+  "productive": false,
+  "mapping_applied": false,
+  "v0_42_csv_mutated": false,
+  "as_of_utc": "2026-09-05T06:05:46Z"
+}
