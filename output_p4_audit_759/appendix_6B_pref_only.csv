@@ -1,0 +1,18 @@
+Issuer_Key,Name,Ticker,ISIN,MIC,Instrument_Type,Share_Class,Ordinary_In_1633,Ordinary_Tickers,Status,Note
+FUCHS,FUCHS PREF,FPE3_p.DE,,XETR,PREFERRED_SHARE,preference shares / Vorzugsaktien,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+HENKEL,HENKEL PREF,HNKG_p.DE,,XETR,PREFERRED_SHARE,preferred shares,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+PORSCHE AUTOMOBIL HLDG,PORSCHE AUTOMOBIL HLDG PREF,PSHG_p.DE,,XETR,PREFERRED_SHARE,preference shares,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+SARTORIUS,SARTORIUS PREF.,SATG_p.DE,,XETR,PREFERRED_SHARE,preference shares,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+VOLKSWAGEN,VOLKSWAGEN PREF,VOWG_p.DE,,XETR,PREFERRED_SHARE,preference shares,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+BRADESCO,BRADESCO,BBDC4,,BVMF,PREFERRED_SHARE,PN N1,YES,BBDC3,ORDINARY_PRESENT,Coverage observation only. Preferred not scan-default.
+BRADESPAR,BRADESPAR,BRAP4,,BVMF,PREFERRED_SHARE,PN N1,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+CEMIG,CEMIG,CMIG4,,BVMF,PREFERRED_SHARE,PN N1,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+GERDAU,GERDAU,GGBR4,,BVMF,PREFERRED_SHARE,PN ED N1,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+GERDAU MET,GERDAU MET,GOAU4,,BVMF,PREFERRED_SHARE,PN ED N1,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+ISA ENERGIA,ISA ENERGIA,ISAE4,,BVMF,PREFERRED_SHARE,PN N1,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+ITAUSA,ITAUSA,ITSA4,,BVMF,PREFERRED_SHARE,PN N1,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+ITAUUNIBANCO,ITAUUNIBANCO,ITUB4,,BVMF,PREFERRED_SHARE,PN N1,YES,ITUB3,ORDINARY_PRESENT,Coverage observation only. Preferred not scan-default.
+PETROBRAS,PETROBRAS,PETR4,,BVMF,PREFERRED_SHARE,PN EDJ N2,YES,PETR3,ORDINARY_PRESENT,Coverage observation only. Preferred not scan-default.
+MARCOPOLO,MARCOPOLO,POMO4,,BVMF,PREFERRED_SHARE,PN ED N2,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+RANDON PART,RANDON PART,RAPT4,,BVMF,PREFERRED_SHARE,PN N1,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.
+USIMINAS,USIMINAS,USIM5,,BVMF,PREFERRED_SHARE,PNA N1,NO,,ORDINARY_MISSING_IN_1633,Coverage observation only. Preferred not scan-default.

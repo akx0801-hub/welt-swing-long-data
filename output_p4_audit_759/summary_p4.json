@@ -1,0 +1,97 @@
+{
+  "stage": "P4_COMPOSITION_COVERAGE_AUDIT",
+  "version": "v0.54-P4",
+  "run_mode": "READ_ONLY_AUDIT",
+  "strict": 759,
+  "mic_top": [
+    {
+      "MIC": "XTKS",
+      "n": 197,
+      "pct": 26.0,
+      "region_map": "Asia-Pacific"
+    },
+    {
+      "MIC": "XSHG",
+      "n": 186,
+      "pct": 24.5,
+      "region_map": "Asia-Pacific"
+    },
+    {
+      "MIC": "XSHE",
+      "n": 108,
+      "pct": 14.2,
+      "region_map": "Asia-Pacific"
+    },
+    {
+      "MIC": "XTAI",
+      "n": 49,
+      "pct": 6.5,
+      "region_map": "Asia-Pacific"
+    },
+    {
+      "MIC": "XNSE",
+      "n": 45,
+      "pct": 5.9,
+      "region_map": "Asia-Pacific"
+    }
+  ],
+  "region": {
+    "Asia-Pacific": 585,
+    "Europe": 137,
+    "Americas": 37
+  },
+  "us_primary_mic": 0,
+  "instrument_type": {
+    "COMMON_STOCK": 585,
+    "ORDINARY_SHARE": 174
+  },
+  "share_empty": 291,
+  "share_buckets": {
+    "MISSING_EMPTY": 291,
+    "ORDINARY_OR_COMMON_EVIDENCE": 465,
+    "OTHER": 3
+  },
+  "liquidity": {
+    "PREFERRED": 695,
+    "STANDARD": 64
+  },
+  "turnover_bands": {
+    ">=100m": 273,
+    "50-100m": 185,
+    "20-50m": 237,
+    "15-20m": 64
+  },
+  "mapping_status": {
+    "UNMAPPED": 585,
+    "EVIDENCE_CANDIDATE_APPLIED": 137,
+    "YFINANCE_VERIFIED": 37
+  },
+  "history_source": {
+    "v0.38": 622,
+    "v0.47": 137
+  },
+  "index": {
+    "IN_NIFTY50": 45,
+    "TW_TW50": 49,
+    "EU_STOXX600": 137,
+    "CN_CSI300": 294,
+    "JP_N225": 197,
+    "BR_IBRX100": 37
+  },
+  "overlap_147_in_759": 137,
+  "overlap_147_dropped": 10,
+  "drop_reason": {
+    "INSTRUMENT_REVIEW": 10
+  },
+  "name_dups_in_759": 0,
+  "review_15": 15,
+  "pref_rows": 17,
+  "pref_ordinary_missing": 14,
+  "dual_groups": 7,
+  "unknown_count_context": 686,
+  "universe_write": false,
+  "eligibility_promoted": false,
+  "u3k_frozen_members": 0,
+  "productive": false,
+  "as_of_utc": "2026-09-05T11:35:29Z"
+}

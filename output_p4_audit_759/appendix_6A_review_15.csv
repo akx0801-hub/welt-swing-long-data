@@ -1,0 +1,16 @@
+WS_ID,Ticker,Name,ISIN,MIC,Share_Class_Evidence,Instrument_Type,Review_Reason,Eligibility_DryRun
+WS:XAMS:ABND.AS,ABNd.AS,ABN AMRO BANK,,XAMS,ordinary share represented by depositary receipts,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XETR:ALVG.DE,ALVG.DE,ALLIANZ,,XETR,registered shares with restricted transferability,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XETR:BASFN.DE,BASFn.DE,BASF,,XETR,registered shares with no par value,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XETR:BAYGN.DE,BAYGn.DE,BAYER,,XETR,registered no-par-value shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XETR:LHAG.DE,LHAG.DE,LUFTHANSA,,XETR,registered shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XETR:RWEG.DE,RWEG.DE,RWE,,XETR,bearer shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XSTO:INDUC.ST,INDUc.ST,INDUSTRIVARDEN C,,XSTO,C share,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XSTO:OCTVSDB.ST,OCTVsdb.ST,OCTAVE INTELLIGENCE SDR,,XSTO,SDB,UNKNOWN,Closed-map REVIEW string; type not invented,INSUFFICIENT_HISTORY
+WS:XSWX:ALCC.S,ALCC.S,ALCON,,XSWX,registered shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XSWX:BKWB.S,BKWB.S,BKW,,XSWX,registered shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XSWX:COTNE.S,COTNE.S,COMET HOLDINGS 'R',,XSWX,registered shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XSWX:HBANC.S,HBANC.S,HELVETIA BALOISE HLDG,,XSWX,registered shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XSWX:ROPC.S,ROPC.S,ROCHE PS,,XSWX,participation certificate,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XSWX:SIGNC.S,SIGNC.S,SIG GROUP AG,,XSWX,registered shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
+WS:XSWX:SRENH.S,SRENH.S,SWISS REINSURANCE COMPANY,,XSWX,registered shares,UNKNOWN,Closed-map REVIEW string; type not invented,INSTRUMENT_REVIEW
