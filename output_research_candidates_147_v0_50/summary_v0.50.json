@@ -1,0 +1,33 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_RESEARCH_CANDIDATES_147",
+  "version": "v0.50",
+  "run_mode": "RESEARCH_CANDIDATE_LIST_ONLY",
+  "status": "COMPLETE",
+  "candidate_rows": 147,
+  "held_out_rows": 89,
+  "mic_counts": {
+    "XAMS": 6,
+    "XBRU": 1,
+    "XCSE": 7,
+    "XDUB": 3,
+    "XETR": 44,
+    "XHEL": 1,
+    "XLON": 8,
+    "XMAD": 2,
+    "XMIL": 13,
+    "XPAR": 35,
+    "XSTO": 19,
+    "XSWX": 3,
+    "XWAR": 1,
+    "XWBO": 4
+  },
+  "liq_counts": {
+    "PREFERRED": 122,
+    "STANDARD": 25
+  },
+  "universe_mutated": false,
+  "u3k_frozen_mutated": false,
+  "eligibility_promoted": false,
+  "productive": false,
+  "as_of_utc": "2026-09-05T08:28:49Z"
+}
