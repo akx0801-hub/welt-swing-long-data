@@ -1,0 +1,17 @@
+Category,Decision,Rule
+COMMON_STOCK,ADMIT,"XNYS/XNAS primary common, ISIN+MIC+ticker, not ADR/ETF."
+ORDINARY_SHARE,ADMIT,Same if US primary listing.
+PREFERRED,DISCOVER,Visible; never canonical scan default.
+ETF,EXCLUDE,Not single-name scan.
+FUND,EXCLUDE,Same as ETF.
+UNIT,EXCLUDE,Not standard scan.
+WARRANT,EXCLUDE,Not standard scan.
+RIGHT,EXCLUDE,Not standard scan.
+ADR,EXCLUDE,US listing of non-US issuer; not US Primary.
+ADS,EXCLUDE,Same as ADR.
+BDC,REVIEW,Fail-closed until extra policy.
+REIT,REVIEW,Fail-closed until extra policy.
+LP,REVIEW,Fail-closed until extra policy.
+MLP,REVIEW,Fail-closed until extra policy.
+SPAC,EXCLUDE,Not mature operating common.
+UNKNOWN,EXCLUDE,No mass-admit then classify later.

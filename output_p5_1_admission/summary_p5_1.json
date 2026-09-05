@@ -1,0 +1,23 @@
+{
+  "stage": "P5_1_US_PRIMARY_ADMISSION",
+  "version": "v0.56-P5.1",
+  "run_mode": "READ_ONLY_ADMISSION",
+  "p5_1_status": "READY_FOR_SEPARATE_US_1_BUILD",
+  "ready_means": "architecture_only_not_data",
+  "first_us1_slice": "SP500_COMMON_XNYS_XNAS_NO_ADR_ETF_PREF",
+  "primary_mics": [
+    "XNYS",
+    "XNAS"
+  ],
+  "identity_minimum": "ISIN+Primary_MIC+Primary_Ticker",
+  "isin_fallback": "NONE_FAIL_CLOSED",
+  "us_membership_now": 0,
+  "strict": 759,
+  "membership": 1633,
+  "universe_write": false,
+  "eligibility_promoted": false,
+  "u3k_frozen_members": 0,
+  "productive": false,
+  "next_data_build": "NONE_WITHOUT_US1_MANAGER_ORDER",
+  "as_of_utc": "2026-09-05T14:13:46Z"
+}
