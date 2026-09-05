@@ -1,0 +1,25 @@
+{
+  "stage": "P5_0_ARCHITECTURE_COVERAGE_GATE",
+  "version": "v0.55-P5.0",
+  "run_mode": "READ_ONLY_ARCHITECTURE",
+  "recommended_architecture": "B_1633_WORKBENCH",
+  "governance": "C_LAYERS_NOT_TIER1_U3K",
+  "rejected": [
+    "A_1633_MASTER",
+    "C_AS_759_U3K_LIGHT"
+  ],
+  "u3k_working_definition": "approx_3000_liquid_canonical_primary_scan_listings",
+  "first_expansion_if_approved": "US_PRIMARY_XNYS_XNAS",
+  "strict": 759,
+  "membership": 1633,
+  "us_primary_membership": 0,
+  "canada_membership": 217,
+  "canada_strict": 0,
+  "unknown_instrument_type": 686,
+  "universe_write": false,
+  "eligibility_promoted": false,
+  "u3k_frozen_members": 0,
+  "productive": false,
+  "next_data_build": "NONE_WITHOUT_MANAGER_ORDER",
+  "as_of_utc": "2026-09-05T14:03:30Z"
+}

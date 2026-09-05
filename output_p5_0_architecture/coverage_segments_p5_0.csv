@@ -1,0 +1,12 @@
+Region,Index,Membership_1633,Strict_759,Gap_Type
+USA,none,0,0,expansion
+Europe,EU_STOXX600,600,137,conversion
+Japan,JP_N225,225,197,stage_strict
+China,CN_CSI300,300,294,stage_strict
+Taiwan,TW_TW50,50,49,stage_strict
+India,IN_NIFTY50,50,45,stage_strict
+Brazil,BR_IBRX100,98,37,conversion
+Canada,CA_TSX,217,0,conversion
+Hong Kong,HK_HSI,93,0,conversion
+Australia,none,0,0,expansion
+Korea,none,0,0,expansion
