@@ -1,0 +1,17 @@
+{
+  "stage": "AU1_ADMISSION_POLICY_READONLY",
+  "status": "AU-1 ADMISSION POLICY \u2014 READ-ONLY COMPLETE",
+  "head": "386af4c",
+  "research_partial": 2374,
+  "strict": 759,
+  "frozen": 0,
+  "australia_membership": 0,
+  "d4": "REVIEW",
+  "d5": "REVIEW",
+  "d9": "READY_WITH_CONDITIONS",
+  "universe_write": false,
+  "download": false,
+  "build": false,
+  "next_action": "STOP_MANAGER_GATE_REQUIRED_FOR_AU1_ADMISSION_BUILD",
+  "as_of_utc": "2026-09-05T17:39:35Z"
+}
