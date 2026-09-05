@@ -1,0 +1,24 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_HISTORY_DOWNLOAD_APPLIED_239",
+  "version": "v0.47",
+  "run_mode": "HISTORY_DOWNLOAD_APPLIED_239_ONLY",
+  "status": "COMPLETE",
+  "applied_rows": 239,
+  "sidecar_rows": 239,
+  "history_qa_counts": {
+    "PASS_HISTORY": 236,
+    "FAIL_HISTORY": 3
+  },
+  "cache_status_counts": {
+    "READY": 236,
+    "QUARANTINE": 3
+  },
+  "pass_history": 236,
+  "as_of": "2026-09-04",
+  "sqlite_gitignored": true,
+  "universe_mutated": false,
+  "eligibility_promoted": false,
+  "mapping_status_flipped": false,
+  "productive": false,
+  "as_of_utc": "2026-09-05T07:32:55Z"
+}
