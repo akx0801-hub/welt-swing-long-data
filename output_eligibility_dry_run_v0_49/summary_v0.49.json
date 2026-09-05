@@ -1,0 +1,21 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_ELIGIBILITY_DRY_RUN",
+  "version": "v0.49",
+  "run_mode": "ELIGIBILITY_DRY_RUN_ONLY",
+  "status": "COMPLETE",
+  "sidecar_rows": 236,
+  "parked_history": 3,
+  "dry_run_counts": {
+    "PASS_STRICT_CANDIDATE": 147,
+    "EXCEPTION_POOL": 69,
+    "FAIL_LIQUIDITY": 15,
+    "INSTRUMENT_REVIEW": 5
+  },
+  "universe_mutated": false,
+  "universe_status_written": false,
+  "eligibility_promoted": false,
+  "u3k_frozen_mutated": false,
+  "mapping_status_flipped": false,
+  "productive": false,
+  "as_of_utc": "2026-09-05T08:05:04Z"
+}
