@@ -1,0 +1,18 @@
+{
+  "stage": "US2_ADMISSION_POLICY_READONLY",
+  "status": "US-2 ADMISSION POLICY \u2014 READ-ONLY COMPLETE",
+  "head": "3b9ed92",
+  "research_partial": 2005,
+  "us1": 372,
+  "strict": 759,
+  "frozen": 0,
+  "universe_write": false,
+  "download": false,
+  "build": false,
+  "recommended_first_slice_if_later_authorized": "SP400_MIDCAP_COMMON_XNYS_XNAS_DISJOINT_US1",
+  "reit": "REVIEW_FAIL_CLOSED",
+  "adr": "EXCLUDE",
+  "ready_means": "policy_only_not_build",
+  "next_action": "STOP_MANAGER_GATE",
+  "as_of_utc": "2026-09-05T16:01:16Z"
+}
