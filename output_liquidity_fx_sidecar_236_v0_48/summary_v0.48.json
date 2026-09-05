@@ -1,0 +1,19 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_LIQUIDITY_FX_SIDECAR_236",
+  "version": "v0.48",
+  "run_mode": "LIQUIDITY_FX_SIDECAR_236_PASS_ONLY",
+  "status": "COMPLETE",
+  "sidecar_rows": 236,
+  "class_counts": {
+    "PREFERRED": 125,
+    "LOW_EXCEPTION": 69,
+    "FAIL_LIQ": 15,
+    "STANDARD": 27
+  },
+  "universe_mutated": false,
+  "eligibility_promoted": false,
+  "mapping_status_flipped": false,
+  "sqlite_committed": false,
+  "productive": false,
+  "as_of_utc": "2026-09-05T07:50:44Z"
+}
