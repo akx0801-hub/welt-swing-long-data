@@ -1,0 +1,21 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CONTROLLED_MAPPING_APPLY",
+  "version": "v0.44",
+  "run_mode": "CONTROLLED_MAPPING_APPLY",
+  "status": "COMPLETE",
+  "universe_rows": 1633,
+  "applied_rows": 239,
+  "untouched_rows": 1394,
+  "mapping_status_applied": "EVIDENCE_CANDIDATE_APPLIED",
+  "yfinance_verified_set": false,
+  "identity_frozen": true,
+  "evidence_sha256_before": "884d2f8a1118399a30c306b0b9aec4bb3946fd7633f70181b742f1f78a6249f7",
+  "universe_sha256_before": "11e0d3e5a2154d6755ecce1b549adbda21aea3b8b1d5e8889516535cee30d77e",
+  "universe_sha256_after": "5276507880c10ffea62e37a2f459f5a9c0dd7c4a74731af7fa465281a3f6813f",
+  "evidence_sha256_after": "884d2f8a1118399a30c306b0b9aec4bb3946fd7633f70181b742f1f78a6249f7",
+  "v0_42_csv_mutated": false,
+  "eligibility_promoted": false,
+  "price_download": false,
+  "productive": false,
+  "as_of_utc": "2026-09-05T06:39:59Z"
+}
