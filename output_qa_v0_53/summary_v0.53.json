@@ -1,0 +1,38 @@
+{
+  "stage": "QA_SIDECAR_V0_53",
+  "version": "v0.53",
+  "run_mode": "QA_DOCS_ONLY",
+  "rows": 1633,
+  "multi_share_class_groups": 37,
+  "multi_share_class_rows": 48,
+  "group_type_counts": {
+    "REVIEW": 5,
+    "NO_ORDINARY_IN_UNIVERSE": 14,
+    "DUAL_LISTING_MULTI_MIC": 14,
+    "ORDINARY_LIKE": 8,
+    "UNIT_REVIEW": 7
+  },
+  "canonical_yes": 4,
+  "scalable_qa_counts": {
+    "not verified": 1633
+  },
+  "bar_qa_counts": {
+    "PASS_BAR_QA": 1606,
+    "FAIL_LT_260+LT_252": 8,
+    "NO_BARS": 19
+  },
+  "history_future_dates": 0,
+  "history_duplicates": 0,
+  "sqlite_path": "/workspaces/welt-swing-long-data/runtime_cache/applied_239_history_v0_47.sqlite",
+  "sqlite_ws_ids": 239,
+  "pass_strict_candidate": 759,
+  "pass_strict_unchanged_from_v0_52": true,
+  "v0_52_strict": 759,
+  "strict_bar_lt_260": 0,
+  "universe_write": false,
+  "eligibility_promoted": false,
+  "u3k_frozen_members": 0,
+  "productive": false,
+  "as_of": "2026-09-05",
+  "as_of_utc": "2026-09-05T11:11:58Z"
+}
