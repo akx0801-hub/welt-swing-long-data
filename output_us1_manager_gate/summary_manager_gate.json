@@ -1,0 +1,15 @@
+{
+  "stage": "US1_MANAGER_GATE_NEXT_SEGMENT",
+  "status": "MANAGER_GATE_NO_NEXT_SEGMENT_EXECUTED",
+  "head": "1b64717",
+  "research_partial": 2005,
+  "us1": 372,
+  "strict": 759,
+  "frozen": 0,
+  "universe_write": false,
+  "us1_closed": true,
+  "recommended": "B_READ_ONLY_US2_ADMISSION_POLICY",
+  "ready_for_build": "NONE",
+  "next_action": "STOP_MANAGER_GATE",
+  "as_of_utc": "2026-09-05T15:53:08Z"
+}
