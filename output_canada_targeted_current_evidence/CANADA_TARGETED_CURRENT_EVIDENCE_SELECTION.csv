@@ -1,0 +1,216 @@
+Selection_Rank,Source_Security_Name,Source_Ticker,Existing_Primary_MIC,Existing_Primary_Ticker,Selection_Score,Selection_Factor_XTSE,Selection_Factor_Simple_Equity,Selection_Factor_No_Corp_Action,Selection_Factor_No_Multi_Class,Selection_Factor_Issuer_Evidence,Selection_Factor_Listing_Evidence,Selection_Factor_Identifier_Evidence,Selection_Penalty_Instrument,Selection_Penalty_Foreign_Secondary,Selection_Penalty_Corp_Action,Selection_Penalty_Multi_Class,Selected,Selection_Reason
+1,Allied Gold Corporation,AAUC,XTSE,AAUC,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+2,Advantage Energy Ltd.,AAV,XTSE,AAV,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+3,AbraSilver Resource Corp.,ABRA,XTSE,ABRA,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+4,Barrick Mining Corporation,ABX,XTSE,ABX,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+5,Agnico Eagle Mines Limited,AEM,XTSE,AEM,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+6,First Majestic Silver Corp.,AG,XTSE,AG,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+7,Alamos Gold Inc.,AGI,XTSE,AGI,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+8,Altus Group Limited,AIF,XTSE,AIF,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+9,AltaGas Ltd.,ALA,XTSE,ALA,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+10,Altius Minerals Corporation,ALS,XTSE,ALS,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+11,Algonquin Power & Utilities Corp.,AQN,XTSE,AQN,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+12,Aecon Group Inc.,ARE,XTSE,ARE,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+13,Aris Mining Corporation,ARIS,XTSE,ARIS,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+14,Avino Silver & Gold Mines Ltd.,ASM,XTSE,ASM,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+15,Alimentation Couche-Tard Inc.,ATD,XTSE,ATD,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+16,Athabasca Oil Corporation,ATH,XTSE,ATH,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+17,AtkinsRéalis Group Inc.,ATRL,XTSE,ATRL,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+18,ATS Corporation,ATS,XTSE,ATS,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+19,Aya Gold & Silver Inc.,AYA,XTSE,AYA,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+20,BlackBerry Limited,BB,XTSE,BB,16,3,3,2,2,2,2,2,0,0,0,0,YES,Selected before research by deterministic score/ticker tie-break.
+21,BCE Inc.,BCE,XTSE,BCE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+22,Badger Infrastructure Solutions Ltd.,BDGI,XTSE,BDGI,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+23,Bird Construction Inc.,BDT,XTSE,BDT,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+24,Bausch Health Companies Inc.,BHC,XTSE,BHC,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+25,Birchcliff Energy Ltd.,BIR,XTSE,BIR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+26,Bank of Montreal,BMO,XTSE,BMO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+27,Bank of Nova Scotia (The),BNS,XTSE,BNS,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+28,Baytex Energy Corp.,BTE,XTSE,BTE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+29,B2Gold Corp.,BTO,XTSE,BTO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+30,Boyd Group Services Inc.,BYD,XTSE,BYD,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+31,CAE Inc.,CAE,XTSE,CAE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+32,Cameco Corporation,CCO,XTSE,CCO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+33,CES Energy Solutions Corp.,CEU,XTSE,CEU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+34,Centerra Gold Inc.,CG,XTSE,CG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+35,Celestica Inc.,CLS,XTSE,CLS,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+36,Canadian Imperial Bank Of Commerce,CM,XTSE,CM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+37,Canadian Natural Resources Limited,CNQ,XTSE,CNQ,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+38,Canadian National Railway Company,CNR,XTSE,CNR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+39,Canadian Pacific Kansas City Limited,CP,XTSE,CP,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+40,Capital Power Corporation,CPX,XTSE,CPX,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+41,Capstone Copper Corp.,CS,XTSE,CS,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+42,Constellation Software Inc.,CSU,XTSE,CSU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+43,Cenovus Energy Inc.,CVE,XTSE,CVE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+44,Definity Financial Corporation,DFY,XTSE,DFY,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+45,Denison Mines Corp.,DML,XTSE,DML,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+46,Dollarama Inc.,DOL,XTSE,DOL,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+47,DPM Metals Inc.,DPM,XTSE,DPM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+48,Descartes Systems Group Inc. (The),DSG,XTSE,DSG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+49,Discovery Mining Ltd.,DSV,XTSE,DSV,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+50,Endeavour Silver Corp.,EDR,XTSE,EDR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+51,Element Fleet Management Corp.,EFN,XTSE,EFN,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+52,Energy Fuels Inc.,EFR,XTSE,EFR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+53,Enerflex Ltd.,EFX,XTSE,EFX,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+54,Exchange Income Corporation,EIF,XTSE,EIF,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+55,Eldorado Gold Corporation,ELD,XTSE,ELD,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+56,Emera Incorporated,EMA,XTSE,EMA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+57,Enbridge Inc.,ENB,XTSE,ENB,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+58,EQB Inc.,EQB,XTSE,EQB,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+59,Equinox Gold Corp.,EQX,XTSE,EQX,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+60,Ero Copper Corp.,ERO,XTSE,ERO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+61,Extendicare Inc.,EXE,XTSE,EXE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+62,First Quantum Minerals Ltd.,FM,XTSE,FM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+63,Franco-Nevada Corporation,FNV,XTSE,FNV,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+64,Freehold Royalties Ltd.,FRU,XTSE,FRU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+65,FirstService Corporation,FSV,XTSE,FSV,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+66,Fortis Inc.,FTS,XTSE,FTS,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+67,Finning International Inc.,FTT,XTSE,FTT,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+68,Fortuna Mining Corp.,FVI,XTSE,FVI,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+69,Gibson Energy Inc.,GEI,XTSE,GEI,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+70,Gildan Activewear Inc.,GIL,XTSE,GIL,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+71,G Mining Ventures Corp.,GMIN,XTSE,GMIN,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+72,Great-West Lifeco Inc.,GWO,XTSE,GWO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+73,Hydro One Limited,H,XTSE,H,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+74,Hudbay Minerals Inc.,HBM,XTSE,HBM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+75,Headwater Exploration Inc.,HWX,XTSE,HWX,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+76,iA Financial Corporation Inc.,IAG,XTSE,IAG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+77,i-80 Gold Corp.,IAU,XTSE,IAU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+78,Intact Financial Corporation,IFC,XTSE,IFC,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+79,IGM Financial Inc.,IGM,XTSE,IGM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+80,IAMGOLD Corporation,IMG,XTSE,IMG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+81,Imperial Oil Limited,IMO,XTSE,IMO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+82,International Petroleum Corporation,IPCO,XTSE,IPCO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+83,Ivanhoe Mines Ltd.,IVN,XTSE,IVN,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+84,Jamieson Wellness Inc.,JWEL,XTSE,JWEL,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+85,Kinross Gold Corporation,K,XTSE,K,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+86,Kelt Exploration Ltd.,KEL,XTSE,KEL,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+87,Keyera Corp.,KEY,XTSE,KEY,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+88,K92 Mining Inc.,KNT,XTSE,KNT,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+89,Kinaxis Inc.,KXS,XTSE,KXS,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+90,Loblaw Companies Limited,L,XTSE,L,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+91,Lithium Americas Corp.,LAC,XTSE,LAC,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+92,Laurentian Bank of Canada,LB,XTSE,LB,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+93,Labrador Iron Ore Royalty Corporation,LIF,XTSE,LIF,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+94,Linamar Corporation,LNR,XTSE,LNR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+95,Lundin Gold Inc.,LUG,XTSE,LUG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+96,Lundin Mining Corporation,LUN,XTSE,LUN,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+97,Montage Gold Corp.,MAU,XTSE,MAU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+98,MDA Space Ltd.,MDA,XTSE,MDA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+99,Manulife Financial Corporation,MFC,XTSE,MFC,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+100,Maple Leaf Foods Inc.,MFI,XTSE,MFI,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+101,Magna International Inc.,MG,XTSE,MG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+102,Metro Inc.,MRU,XTSE,MRU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+103,Mullen Group Ltd.,MTL,XTSE,MTL,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+104,Methanex Corporation,MX,XTSE,MX,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+105,National Bank of Canada,NA,XTSE,NA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+106,NFI Group Inc.,NFI,XTSE,NFI,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+107,NovaGold Resources Inc.,NG,XTSE,NG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+108,NGEx Minerals Ltd.,NGEX,XTSE,NGEX,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+109,Northland Power Inc.,NPI,XTSE,NPI,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+110,Nutrien Ltd.,NTR,XTSE,NTR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+111,North West Company Inc. (The),NWC,XTSE,NWC,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+112,NexGen Energy Ltd.,NXE,XTSE,NXE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+113,OceanaGold Corporation,OGC,XTSE,OGC,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+114,OR Royalties Inc.,OR,XTSE,OR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+115,Open Text Corporation,OTEX,XTSE,OTEX,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+116,Pan American Silver Corp.,PAAS,XTSE,PAAS,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+117,Premium Brands Holdings Corporation,PBH,XTSE,PBH,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+118,Peyto Exploration & Development Corp.,PEY,XTSE,PEY,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+119,Pembina Pipeline Corporation,PPL,XTSE,PPL,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+120,Perpetua Resources Corp.,PPTA,XTSE,PPTA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+121,PrairieSky Royalty Ltd.,PSK,XTSE,PSK,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+122,Parex Resources Inc.,PXT,XTSE,PXT,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+123,Restaurant Brands International Inc.,QSR,XTSE,QSR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+124,RB Global Inc.,RBA,XTSE,RBA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+125,Richelieu Hardware Ltd.,RCH,XTSE,RCH,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+126,Russel Metals Inc.,RUS,XTSE,RUS,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+127,Royal Bank of Canada,RY,XTSE,RY,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+128,Saputo Inc.,SAP,XTSE,SAP,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+129,Strathcona Resources Ltd.,SCR,XTSE,SCR,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+130,Spartan Delta Corp.,SDE,XTSE,SDE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+131,Seabridge Gold Inc.,SEA,XTSE,SEA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+132,Sienna Senior Living Inc.,SIA,XTSE,SIA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+133,Sprott Inc.,SII,XTSE,SII,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+134,Stella-Jones Inc.,SJ,XTSE,SJ,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+135,Skeena Resources Limited,SKE,XTSE,SKE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+136,Sun Life Financial Inc.,SLF,XTSE,SLF,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+137,South Bow Corporation,SOBO,XTSE,SOBO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+138,Superior Plus Corp.,SPB,XTSE,SPB,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+139,SSR Mining Inc.,SSRM,XTSE,SSRM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+140,Stantec Inc.,STN,XTSE,STN,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+141,Suncor Energy Inc.,SU,XTSE,SU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+142,Silvercorp Metals Inc.,SVM,XTSE,SVM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+143,Southern Cross Gold Consolidated Ltd.,SXGC,XTSE,SXGC,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+144,TELUS Corporation,T,XTSE,T,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+145,TransAlta Corporation,TA,XTSE,TA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+146,Toronto-Dominion Bank (The),TD,XTSE,TD,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+147,TFI International Inc.,TFII,XTSE,TFII,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+148,Triple Flag Precious Metals Corp.,TFPM,XTSE,TFPM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+149,Toromont Industries Ltd.,TIH,XTSE,TIH,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+150,Trekor Metals Limited,TKO,XTSE,TKO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+151,Tourmaline Oil Corp.,TOU,XTSE,TOU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+152,Topaz Energy Corp.,TPZ,XTSE,TPZ,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+153,Thomson Reuters Corporation,TRI,XTSE,TRI,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+154,TC Energy Corporation,TRP,XTSE,TRP,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+155,Trisura Group Ltd.,TSU,XTSE,TSU,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+156,Tamarack Valley Energy Ltd.,TVE,XTSE,TVE,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+157,TerraVest Industries Inc.,TVK,XTSE,TVK,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+158,Torex Gold Resources Inc.,TXG,XTSE,TXG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+159,Americas Gold and Silver Corporation,USA,XTSE,USA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+160,Vermilion Energy Inc.,VET,XTSE,VET,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+161,5N Plus Inc.,VNP,XTSE,VNP,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+162,Vizsla Silver Corp.,VZLA,XTSE,VZLA,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+163,Waste Connections Inc.,WCN,XTSE,WCN,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+164,Whitecap Resources Inc.,WCP,XTSE,WCP,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+165,Wesdome Gold Mines Ltd.,WDO,XTSE,WDO,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+166,West Fraser Timber Co. Ltd.,WFG,XTSE,WFG,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+167,George Weston Limited,WN,XTSE,WN,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+168,Wheaton Precious Metals Corp.,WPM,XTSE,WPM,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+169,WSP Global Inc.,WSP,XTSE,WSP,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+170,TMX Group Limited,X,XTSE,X,16,3,3,2,2,2,2,2,0,0,0,0,NO,Outside frozen top-20 target.
+171,Allied Properties Real Estate Investment Trust,AP.UN,XTSE,AP.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+172,Boardwalk Real Estate Investment Trust,BEI.UN,XTSE,BEI.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+173,Brookfield Renewable Partners L.P.,BEP.UN,XTSE,BEP.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+174,Brookfield Infrastructure Partners L.P.,BIP.UN,XTSE,BIP.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+175,Canadian Apartment Properties Real Estate Investment Trust,CAR.UN,XTSE,CAR.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+176,Choice Properties Real Estate Investment Trust,CHP.UN,XTSE,CHP.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+177,Crombie Real Estate Investment Trust,CRR.UN,XTSE,CRR.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+178,CT Real Estate Investment Trust,CRT.UN,XTSE,CRT.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+179,Chartwell Retirement Residences,CSH.UN,XTSE,CSH.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+180,Dream Industrial Real Estate Investment Trust,DIR.UN,XTSE,DIR.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+181,First Capital Real Estate Investment Trust,FCR.UN,XTSE,FCR.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+182,Granite Real Estate Investment Trust,GRT.UN,XTSE,GRT.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+183,H&R Real Estate Investment Trust,HR.UN,XTSE,HR.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+184,Killam Apartment Real Estate Investment Trust,KMP.UN,XTSE,KMP.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+185,Primaris Real Estate Investment Trust,PMZ.UN,XTSE,PMZ.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+186,RioCan Real Estate Investment Trust,REI.UN,XTSE,REI.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+187,SmartCentres Real Estate Investment Trust,SRU.UN,XTSE,SRU.UN,9,3,0,2,2,2,2,2,-4,0,0,0,NO,Outside frozen top-20 target.
+188,Air Canada Voting and Variable Voting Shares,AC,XTSE,AC,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+189,ATCO Ltd. Class I Non-voting Shares,ACO.X,XTSE,ACO.X,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+190,Aritzia Inc. Subordinate Voting Shares,ATZ,XTSE,ATZ,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+191,Brookfield Asset Management Ltd. Class A Limited Voting Shares,BAM,XTSE,BAM,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+192,Bombardier Inc. Class B Subordinate Voting Shares,BBD.B,XTSE,BBD.B,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+193,Brookfield Business Corporation Class A Subordinate Voting Shares,BBUC,XTSE,BBUC,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+194,Brookfield Corporation Class A Limited Voting Shares,BN,XTSE,BN,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+195,Cogeco Communications Inc. Subordinate Voting Shares,CCA,XTSE,CCA,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+196,CCL Industries Inc. Unlimited Class B Non-Voting Shares,CCL.B,XTSE,CCL.B,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+197,Colliers International Group Inc. Subordinate Voting Shares,CIGI,XTSE,CIGI,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+198,Cargojet Inc. Common and Variable Voting Shares,CJT,XTSE,CJT,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+199,Canadian Tire Corporation Limited Class A Non-Voting Shares,CTC.A,XTSE,CTC.A,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+200,Canadian Utilities Limited Class A Non-Voting Shares,CU,XTSE,CU,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+201,Curaleaf Holdings Inc. Subordinate Voting Shares,CURA,XTSE,CURA,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+202,BRP Inc. Subordinate Voting Shares,DOO,XTSE,DOO,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+203,Empire Company Limited Non-Voting Class A Shares,EMP.A,XTSE,EMP.A,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+204,Fairfax Financial Holdings Limited Subordinate Voting Shares,FFH,XTSE,FFH,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+205,GFL Environmental Inc. subordinate voting shares,GFL,XTSE,GFL,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+206,CGI Inc. Class A Subordinate Voting Shares,GIB.A,XTSE,GIB.A,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+207,Hammond Power Solutions Inc. Class A Subordinate Voting Shares,HPS.A,XTSE,HPS.A,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+208,Lightspeed Commerce Inc. Subordinate Voting Shares,LSPD,XTSE,LSPD,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+209,ONEX Corporation Subordinate Voting Shares,ONEX,XTSE,ONEX,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+210,Paramount Resources Ltd. Class A Common Shares,POU,XTSE,POU,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+211,Power Corporation of Canada Subordinate Voting Shares,POW,XTSE,POW,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+212,Quebecor Inc. Class B Subordinate Voting Shares,QBR.B,XTSE,QBR.B,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+213,Rogers Communications Inc. Class B Non-voting Shares,RCI.B,XTSE,RCI.B,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+214,Shopify Inc. Class A Subordinate Voting Shares,SHOP,XTSE,SHOP,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
+215,Teck Resources Limited Class B Subordinate Voting Shares,TECK.B,XTSE,TECK.B,8,3,0,2,0,2,2,2,0,0,0,-3,NO,Outside frozen top-20 target.
