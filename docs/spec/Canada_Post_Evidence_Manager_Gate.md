@@ -31,6 +31,7 @@ This is a manager decision only. It authorizes no evidence rerun, admission, map
 - Strict: 759
 - Frozen: 0
 - Universe touched by v2: NO
+- Intended commit message: `Canada post evidence manager gate`
 
 ## Meaning of the result
 
@@ -141,4 +142,3 @@ A full Canada recovery, a rebuild, Korea, AU-2 or US-3 are not authorized by thi
 **NEXT AUTHORIZED STAGE: Canada Targeted Manual Identity Recovery — READ-ONLY / NO UNIVERSE WRITE**
 
 This report does not authorize the recovery stage automatically beyond defining its exact scope. Canada remains 217 historical Membership rows, with 0 evidence-ready rows, until a separately executed and separately reviewed stage produces qualifying evidence.
-
