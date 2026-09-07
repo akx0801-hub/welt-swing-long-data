@@ -1,0 +1,13 @@
+Selection_Rank,Source_Security_Name,Source_Local_Code,Existing_Primary_MIC,Existing_Primary_Ticker,Selection_Score,Selection_Factor_XTSE,Selection_Factor_Simple_Equity,Selection_Factor_No_Corp_Action,Selection_Factor_No_Multi_Class,Selection_Factor_Issuer_Evidence,Selection_Factor_Listing_Evidence,Selection_Factor_Identifier_Evidence,Selection_Penalty_Instrument,Selection_Penalty_Foreign_Secondary,Selection_Penalty_Corp_Action,Selection_Penalty_Multi_Class,Selected,Selection_Reason
+1,HiteJinro,000080,XKRX,000080,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 1 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+2,Orion Holdings,001800,XKRX,001800,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 19 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+3,Hyundai Motor,005380,XKRX,005380,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 37 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+4,Hotel Shilla,008770,XKRX,008770,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 55 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+5,SKC,011790,XKRX,011790,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 73 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+6,Dongsuh,026960,XKRX,026960,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 91 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+7,Kiwoom Securities,039490,XKRX,039490,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 110 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+8,Daewoong Pharmaceutical,069620,XKRX,069620,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 128 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+9,KB Financial,105560,XKRX,105560,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 146 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+10,Samsung Biologics,207940,XKRX,207940,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 164 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+11,SK Bioscience,302440,XKRX,302440,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 182 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
+12,d'Alba Global,483650,XKRX,483650,20,3,3,2,2,2,2,2,0,0,0,0,YES,Fixed rank 200 of 200 after ascending local-code sort; source-lineage and no explicit disqualifier
