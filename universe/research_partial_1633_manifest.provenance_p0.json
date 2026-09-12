@@ -1,0 +1,13 @@
+{
+  "Artifact_ID": "universe/research_partial_1633_manifest.json",
+  "Snapshot_ID": "WS-PROV-RESEARCH-PARTIAL-CURRENT-CANONICAL-20260830-PROVENANCE-P0-V1",
+  "Source_ID": "CURRENT_CANONICAL",
+  "Source_Authority": "RESEARCH_ONLY",
+  "Source_AsOf": "2026-08-30",
+  "Retrieved_At": "2026-08-30T16:09:40.298669+00:00",
+  "Content_Hash": "c687a0b066200632268e386d8709a4e0f1d8f1c90acf81e54c4bc39aa926c294",
+  "Schema_Version": "PROVENANCE_P0_V1",
+  "Population_or_Domain": "RESEARCH_PARTIAL",
+  "Currentness_Status": "UNKNOWN",
+  "Evidence_Strength": "MEDIUM"
+}
