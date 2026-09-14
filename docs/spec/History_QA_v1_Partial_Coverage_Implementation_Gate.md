@@ -2,7 +2,7 @@
 
 ## Authority state
 
-**IMPLEMENTATION_PERSISTED_VALIDATION_PENDING**
+**IMPLEMENTATION_VALIDATED**
 
 Lifecycle model:
 
@@ -10,39 +10,65 @@ Lifecycle model:
 2. `IMPLEMENTATION_PERSISTED_VALIDATION_PENDING`
 3. `IMPLEMENTATION_VALIDATED`
 
-This persistence gate moves only from state 1 to state 2. It does not establish state 3.
+The implementation authority was persisted in the prior gate, repaired at commit `bb0ef11c4f8a8584006049b20449baa42ddb1831`, and subsequently validated by the committed GitHub Actions workflow. This closeout records the transition from `IMPLEMENTATION_PERSISTED_VALIDATION_PENDING` to `IMPLEMENTATION_VALIDATED`.
 
 ## Execution state
 
-**NOT_EXECUTED**
+**EXECUTED / SUCCESS**
 
-Full-population generator execution was intentionally not performed in this gate because the current builder environment cannot materialize the required large committed CSV inputs as complete local files without prohibited reconstruction.
+Authoritative validation execution:
+
+- workflow: `.github/workflows/history_qa_v1_validation.yml`
+- run ID: `34843238084`
+- event: `workflow_dispatch`
+- validated commit: `bb0ef11c4f8a8584006049b20449baa42ddb1831`
+- run attempt: 1
+- conclusion: `success`
+- validation completion timestamp: `2026-09-14T12:07:48Z`
 
 ## Full population validation
 
-**VALIDATION_PENDING**
+**VALIDATED**
 
-No full-population History QA result, status distribution, output byte count, output SHA-256, deterministic generation result, or focused full-population test result is claimed here.
+The committed workflow executed the History QA v1 generator twice independently against the complete committed repository inputs, compared raw bytes and SHA-256 values, ran the focused committed validator, checked full-population invariants, checked repository immutability, and uploaded validation evidence.
 
-## CI workflow
+Validation checks:
 
-`.github/workflows/history_qa_v1_validation.yml`
+- static no-network/provider gate: PASS
+- policy contract gate: PASS
+- focused implementation compile: PASS
+- generator run 1: PASS
+- generator run 2: PASS
+- deterministic SHA-256 equality: PASS
+- raw byte equality: PASS
+- focused committed validator: 7 tests PASS
+- full-population invariants: PASS
+- repository immutability: PASS
+- validation artifact upload: PASS
 
-CI workflow status:
+Generator evidence:
 
-**PERSISTED / NOT YET EXECUTED**
+- run 1 SHA-256: `c8454ea60e559d04236241dcbe3323835592d0802f90ba3a9e0566841e680f60`
+- run 2 SHA-256: `c8454ea60e559d04236241dcbe3323835592d0802f90ba3a9e0566841e680f60`
+- output bytes per run: `820333`
 
-The workflow is outside this gate's changed-file scope and is not modified here. It is the authorized later execution environment for complete-repository validation.
+## Validation artifact
+
+- artifact name: `history-qa-v1-validation-34843238084`
+- artifact ID: `10346693672`
+- artifact digest: `sha256:1045793d906c5bcaba64d77413cd477d94aa76d8773af37acc412b3eb399c1a2`
+
+The artifact is execution evidence only. The materialized History QA CSV remains derived and non-canonical.
 
 ## Production / QA release
 
 **NOT_AUTHORIZED**
 
-A later successful CI execution and explicit execution-attestation gate are required before `IMPLEMENTATION_VALIDATED` may be asserted.
+`IMPLEMENTATION_VALIDATED` establishes execution evidence for History QA v1 only. It does not authorize a productive Welt-Swing v7.2 Universe change, U3K freeze, U3K membership creation, production release, market-data refresh, automatic promotion of Research Partial members, Company_Key resolution, or reopening of P0 byte work.
 
 ## Canonical authority model
 
-Canonical History QA v1 authority is:
+Canonical History QA v1 authority remains:
 
 `SOURCE INPUTS + POLICY + GENERATOR + VALIDATOR + REPORT`
 
@@ -50,19 +76,13 @@ The materialized 2,527-row History QA CSV is **DERIVED / NON-CANONICAL**.
 
 ## Materialized output
 
-Materialized output:
-
-**NOT_CREATED IN THIS GATE**
+The validation workflow created derived outputs only in the GitHub Actions workspace / validation evidence context.
 
 Materialized output authority:
 
 **DERIVED / NON-CANONICAL**
 
-Expected derived path when later executed:
-
-`output_history_qa_v1/history_qa_v1_2527.csv`
-
-That derived CSV is not committed by this gate.
+The derived CSV is not committed to the repository by the validation workflow or this closeout gate.
 
 ## Policy
 
@@ -74,7 +94,7 @@ Policy version:
 
 `WELT-SWING-HISTORY-QA-v1.0`
 
-Promoted thresholds encoded in policy:
+Validated policy thresholds:
 
 - minimum unique bars: 260
 - minimum valid bars: 252
@@ -107,13 +127,13 @@ Approved inputs:
 - `output_us1_write/dry_run_write_plan.csv`
 - `config/history_qa_v1_policy.json`
 
-The generator is repository-local and deterministic by construction. It uses the committed Company/Security mapping authority for `Security_Key`, preserves current Research Partial order, normalizes original baseline history evidence using v0.53 lineage with v0.47/v0.38 support, uses the persisted US1 legacy-to-current bridge, and emits explicit fail-closed unavailable rows when no History QA evidence is attached.
+The validated generator remains repository-local and deterministic. It uses the committed Company/Security mapping authority for `Security_Key`, preserves current Research Partial order, normalizes original baseline history evidence using v0.53 lineage with v0.47/v0.38 support, uses the persisted US1 legacy-to-current bridge, and emits explicit fail-closed unavailable rows when no History QA evidence is attached.
 
-It contains no provider calls, no network calls, no raw-cache dependency, no runtime timestamps, no Universe write, no membership mutation, and no Company_Key inference.
+The validation workflow confirmed that the generator and focused validator contain no prohibited market-data provider/network behavior under the committed static gate.
 
 ## Fixed output schema
 
-The derived output schema is exactly:
+The derived output schema remains exactly:
 
 1. `Security_Key`
 2. `Source_WS_ID`
@@ -152,16 +172,62 @@ Material contradiction among authoritative evidence maps to `HISTORY_CONFLICT`.
 
 No liquidity-only usable-session metric is promoted into the History v1 core.
 
+## Validated population invariants
+
+GitHub Actions run `34843238084` validated:
+
+- Research Partial: 2527
+- History QA output rows: 2527
+- unique `Security_Key`: 2527
+- unique `Source_WS_ID`: 2527
+- evidence-backed rows: 2005
+- no-history-evidence rows: 522
+- US2 `HISTORY_UNAVAILABLE`: 369
+- AU1 `HISTORY_UNAVAILABLE`: 153
+- Strict: 759
+- Frozen: 0
+- Universe Membership Changed: NO
+
+Actual execution distributions:
+
+History status:
+
+- `HISTORY_CONFLICT`: 9
+- `HISTORY_OK`: 1606
+- `HISTORY_PARTIAL`: 380
+- `HISTORY_TOO_SHORT`: 9
+- `HISTORY_UNAVAILABLE`: 523
+
+Currentness:
+
+- `CURRENT`: 1633
+- `UNAVAILABLE`: 523
+- `UNKNOWN`: 371
+
+Adjustment integrity:
+
+- `ADJUSTMENT_PARTIAL`: 1633
+- `ADJUSTMENT_UNKNOWN`: 894
+
+QA confidence:
+
+- `LOW`: 380
+- `MEDIUM`: 1606
+- `UNRESOLVED`: 541
+
+The total `HISTORY_UNAVAILABLE` count is 523 while the explicit no-history-evidence cohort is 522; one evidence-backed row is also unavailable. The two measures are intentionally not conflated.
+
 ## Fail-closed uncovered model
 
-When no History QA evidence exists, the generator encodes:
+The focused validator and full-population invariant step validated the 522 no-history-evidence rows fail closed:
 
 - `History_Status = HISTORY_UNAVAILABLE`
 - `History_Currentness_Status = UNAVAILABLE`
 - `QA_Confidence = UNRESOLVED`
-- history measurement fields = NULL/empty
-- `MISSING_HISTORY_EVIDENCE`
-- `MISSING_CURRENTNESS_METADATA`
+- unavailable history measurement fields are NULL/empty
+- `MISSING_HISTORY_EVIDENCE` present
+- `MISSING_CURRENTNESS_METADATA` present
+- no row in the cohort has `HISTORY_OK`
 
 Admission provenance may remain in `Source_ID`; it does not imply a market-history source.
 
@@ -171,38 +237,28 @@ Validator:
 
 `tests/test_history_qa_v1.py`
 
-The validator is designed for the later complete-repository CI execution. It checks exact output schema and current security population, expected partial-coverage invariants, fail-closed missing-history semantics, approved vocabularies, policy version, Strict/Frozen governance, repeated byte/SHA determinism, and source-conflict precedence.
+The committed focused validator executed successfully in run `34843238084`:
 
-These checks are defined but **NOT_EXECUTED** in this persistence gate.
+- tests executed: 7
+- tests passed: 7
+- result: PASS
 
-## Expected CI invariants
+The tests cover exact output schema, current security population and identity, expected partial-coverage fail-closed behavior, vocabulary/policy/flags, Strict/Frozen governance, repeated byte/SHA determinism, and source-conflict precedence.
 
-The following are expected future CI invariants, not results from this gate:
+## Repository immutability
 
-- total History QA rows: 2527
-- evidence-backed rows: 2005
-- no-history-evidence rows: 522
-- US2 unavailable rows: 369
-- AU1 unavailable rows: 153
-- Research Partial: 2527
-- Strict: 759
-- Frozen: 0
-- Universe Membership Changed: NO
+The validation workflow's repository immutability gate passed. The remote `main` head remained `bb0ef11c4f8a8584006049b20449baa42ddb1831` after validation and before this documentation-only closeout commit.
 
-Actual History status, currentness, adjustment, and confidence distributions remain **NOT_EXECUTED** until CI.
+No generator, policy, validator, workflow, Universe source, Strict artifact, or Frozen artifact is modified by this closeout.
 
-## Static persistence checks
+## Authority transition
 
-Bounded static checks authorized for this gate cover Python syntax, JSON syntax, approved schema/vocabularies, absence of provider/network logic, absence of Universe mutation logic, absence of runtime timestamp dependence, and compatibility with the persisted CI workflow.
+Before closeout:
 
-Full generator execution: **NOT_EXECUTED**
+`IMPLEMENTATION_PERSISTED_VALIDATION_PENDING`
 
-Focused full-population tests: **NOT_EXECUTED**
+After closeout:
 
-Full-population validation: **VALIDATION_PENDING**
+`IMPLEMENTATION_VALIDATED`
 
-## CI handoff
-
-The persisted workflow is expected later to check out the complete repository, execute the committed generator twice, compare raw bytes and SHA-256 values, execute the focused validator, verify the expected 2527 / 2005 / 522 / 369 / 153 and 2527 / 759 / 0 invariants, report actual distributions, and upload validation evidence.
-
-A successful CI run still does not by itself rewrite this report or assert `IMPLEMENTATION_VALIDATED`; that state transition belongs to the later execution-attestation gate.
+This transition is supported by successful full-population execution evidence and does not change any higher Universe membership layer or production-release state.
