@@ -1,0 +1,63 @@
+{
+  "policy_version": "WELT-SWING-HISTORY-QA-v1.0",
+  "minimum_unique_bars": 260,
+  "minimum_valid_bars": 252,
+  "stale_after_calendar_days": 10,
+  "promoted_filtered_bar_policy": {
+    "max_invalid_bars": 2,
+    "max_invalid_share": 0.01,
+    "minimum_valid_observations_after_filter": 260
+  },
+  "continuity_gap_threshold": "DEFERRED",
+  "history_status_vocabulary": [
+    "HISTORY_CONFLICT",
+    "HISTORY_IDENTITY_UNRESOLVED",
+    "HISTORY_UNAVAILABLE",
+    "HISTORY_STALE",
+    "HISTORY_TOO_SHORT",
+    "HISTORY_GAPPED",
+    "HISTORY_PARTIAL",
+    "HISTORY_OK"
+  ],
+  "history_status_precedence": [
+    "HISTORY_CONFLICT",
+    "HISTORY_IDENTITY_UNRESOLVED",
+    "HISTORY_UNAVAILABLE",
+    "HISTORY_STALE",
+    "HISTORY_TOO_SHORT",
+    "HISTORY_GAPPED",
+    "HISTORY_PARTIAL",
+    "HISTORY_OK"
+  ],
+  "currentness_vocabulary": [
+    "CURRENT",
+    "STALE",
+    "UNKNOWN",
+    "UNAVAILABLE"
+  ],
+  "adjustment_vocabulary": [
+    "ADJUSTMENT_OK",
+    "ADJUSTMENT_PARTIAL",
+    "ADJUSTMENT_UNKNOWN",
+    "ADJUSTMENT_CONFLICT"
+  ],
+  "confidence_vocabulary": [
+    "HIGH",
+    "MEDIUM",
+    "LOW",
+    "UNRESOLVED"
+  ],
+  "allowed_qa_flags": [
+    "MISSING_HISTORY_EVIDENCE",
+    "MISSING_CURRENTNESS_METADATA",
+    "LEGACY_NORMALIZED",
+    "IDENTITY_UNRESOLVED",
+    "ADJUSTMENT_UNKNOWN",
+    "STALE_HISTORY",
+    "SHORT_HISTORY",
+    "GAPPED_HISTORY",
+    "DATA_QUALITY_FAIL",
+    "FUTURE_OBSERVATION",
+    "DUPLICATE_OBSERVATION"
+  ]
+}
