@@ -1,0 +1,374 @@
+name: History QA v1 Validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: history-qa-v1-validation
+  cancel-in-progress: false
+
+jobs:
+  validate-history-qa-v1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Prepare validation evidence directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/history_qa_v1_validation_evidence"
+          printf '%s\n' "IMPLEMENTATION_PERSISTED_VALIDATION_PENDING" \
+            > "$RUNNER_TEMP/history_qa_v1_validation_evidence/authority_state.txt"
+          git rev-parse HEAD \
+            > "$RUNNER_TEMP/history_qa_v1_validation_evidence/validated_commit.txt"
+
+      - name: Committed implementation authority preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            scripts/generate_history_qa_v1.py
+            tests/test_history_qa_v1.py
+            config/history_qa_v1_policy.json
+            docs/spec/History_QA_v1_Partial_Coverage_Implementation_Gate.md
+            universe/research_partial_1633.csv
+            output_p4_audit_759/summary_p4.json
+          )
+          for path in "${required[@]}"; do
+            test -f "$path" || { echo "required committed input missing: $path" >&2; exit 1; }
+          done
+
+      - name: Static no-network and no-provider gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          targets = [
+              Path("scripts/generate_history_qa_v1.py"),
+              Path("tests/test_history_qa_v1.py"),
+          ]
+          forbidden_roots = {
+              "aiohttp",
+              "ftplib",
+              "http",
+              "httpx",
+              "requests",
+              "socket",
+              "urllib",
+              "yfinance",
+          }
+          forbidden_literals = (
+              "http://",
+              "https://",
+              "raw.githubusercontent.com",
+          )
+
+          for path in targets:
+              text = path.read_text(encoding="utf-8")
+              tree = ast.parse(text, filename=str(path))
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      roots = {alias.name.split(".", 1)[0] for alias in node.names}
+                  elif isinstance(node, ast.ImportFrom):
+                      roots = {(node.module or "").split(".", 1)[0]}
+                  else:
+                      roots = set()
+                  bad = roots & forbidden_roots
+                  if bad:
+                      raise SystemExit(f"forbidden network/provider import in {path}: {sorted(bad)}")
+              lowered = text.lower()
+              for literal in forbidden_literals:
+                  if literal in lowered:
+                      raise SystemExit(f"forbidden network literal in {path}: {literal}")
+          print("static no-network/provider gate: PASS")
+          PY
+
+      - name: Policy contract gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          policy = json.loads(Path("config/history_qa_v1_policy.json").read_text(encoding="utf-8"))
+          assert policy["policy_version"] == "WELT-SWING-HISTORY-QA-v1.0"
+          assert policy["minimum_unique_bars"] == 260
+          assert policy["minimum_valid_bars"] == 252
+          assert policy["stale_after_calendar_days"] == 10
+          promoted = policy["promoted_filtered_bar_policy"]
+          assert promoted["max_invalid_bars"] == 2
+          assert promoted["max_invalid_share"] == 0.01
+          assert promoted["minimum_valid_observations_after_filter"] == 260
+          assert policy["continuity_gap_threshold"] == "DEFERRED"
+          print("policy contract gate: PASS")
+          PY
+
+      - name: Compile focused implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/generate_history_qa_v1.py tests/test_history_qa_v1.py
+
+      - name: Generate History QA v1 run 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/history_qa_v1_validation_evidence"
+          python scripts/generate_history_qa_v1.py \
+            --output "$EVIDENCE/history_qa_v1_run1.csv" \
+            2>&1 | tee "$EVIDENCE/generator_run1.log"
+
+      - name: Generate History QA v1 run 2 independently
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/history_qa_v1_validation_evidence"
+          python scripts/generate_history_qa_v1.py \
+            --output "$EVIDENCE/history_qa_v1_run2.csv" \
+            2>&1 | tee "$EVIDENCE/generator_run2.log"
+
+      - name: Deterministic SHA-256 and byte equality gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/history_qa_v1_validation_evidence"
+          RUN1="$EVIDENCE/history_qa_v1_run1.csv"
+          RUN2="$EVIDENCE/history_qa_v1_run2.csv"
+          H1="$(sha256sum "$RUN1" | awk '{print $1}')"
+          H2="$(sha256sum "$RUN2" | awk '{print $1}')"
+          B1="$(wc -c < "$RUN1" | tr -d ' ')"
+          B2="$(wc -c < "$RUN2" | tr -d ' ')"
+          {
+            printf 'run1_sha256=%s\n' "$H1"
+            printf 'run2_sha256=%s\n' "$H2"
+            printf 'run1_bytes=%s\n' "$B1"
+            printf 'run2_bytes=%s\n' "$B2"
+          } | tee "$EVIDENCE/determinism.txt"
+          test "$H1" = "$H2"
+          test "$B1" = "$B2"
+          cmp -s "$RUN1" "$RUN2"
+
+      - name: Focused committed validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/history_qa_v1_validation_evidence"
+          HISTORY_QA_V1_OUTPUT="$EVIDENCE/history_qa_v1_run1.csv" \
+          HISTORY_QA_V1_SECOND_OUTPUT="$EVIDENCE/history_qa_v1_run2.csv" \
+            python -m unittest discover -s tests -p 'test_history_qa_v1.py' -v \
+            2>&1 | tee "$EVIDENCE/focused_validator.log"
+
+      - name: Full-population invariants and distributions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv
+          import json
+          import os
+          import re
+          from collections import Counter
+          from pathlib import Path
+
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "history_qa_v1_validation_evidence"
+          output = evidence / "history_qa_v1_run1.csv"
+          policy_version = "WELT-SWING-HISTORY-QA-v1.0"
+
+          expected_columns = [
+              "Security_Key",
+              "Source_WS_ID",
+              "Evidence_Source_WS_ID",
+              "History_Status",
+              "History_Start",
+              "History_End",
+              "History_Observation_Count",
+              "History_Valid_Observation_Count",
+              "Expected_Session_Count",
+              "Usable_Session_Count",
+              "Gap_Count",
+              "Gap_Share",
+              "Zero_Volume_Share",
+              "Last_Observation_Date",
+              "History_Currentness_Status",
+              "Listing_Resolution_Status",
+              "Adjustment_Integrity_Status",
+              "Source_ID",
+              "Evidence_Artifact",
+              "Source_AsOf",
+              "Retrieved_At",
+              "History_Policy_Version",
+              "QA_Confidence",
+              "QA_Flags",
+          ]
+          allowed_statuses = {
+              "HISTORY_CONFLICT",
+              "HISTORY_IDENTITY_UNRESOLVED",
+              "HISTORY_UNAVAILABLE",
+              "HISTORY_STALE",
+              "HISTORY_TOO_SHORT",
+              "HISTORY_GAPPED",
+              "HISTORY_PARTIAL",
+              "HISTORY_OK",
+          }
+          allowed_currentness = {"CURRENT", "STALE", "UNKNOWN", "UNAVAILABLE"}
+          allowed_adjustment = {
+              "ADJUSTMENT_OK",
+              "ADJUSTMENT_PARTIAL",
+              "ADJUSTMENT_UNKNOWN",
+              "ADJUSTMENT_CONFLICT",
+          }
+          allowed_confidence = {"HIGH", "MEDIUM", "LOW", "UNRESOLVED"}
+          allowed_flags = {
+              "MISSING_HISTORY_EVIDENCE",
+              "MISSING_CURRENTNESS_METADATA",
+              "LEGACY_NORMALIZED",
+              "IDENTITY_UNRESOLVED",
+              "ADJUSTMENT_UNKNOWN",
+              "STALE_HISTORY",
+              "SHORT_HISTORY",
+              "GAPPED_HISTORY",
+              "DATA_QUALITY_FAIL",
+              "FUTURE_OBSERVATION",
+              "DUPLICATE_OBSERVATION",
+          }
+
+          def flags(value: str) -> set[str]:
+              if not value:
+                  return set()
+              return {part.strip() for part in re.split(r"[|;,]", value) if part.strip()}
+
+          with output.open("r", encoding="utf-8-sig", newline="") as handle:
+              reader = csv.DictReader(handle)
+              assert reader.fieldnames == expected_columns, reader.fieldnames
+              rows = list(reader)
+
+          assert len(rows) == 2527, len(rows)
+          assert len({row["Security_Key"] for row in rows}) == 2527
+          assert len({row["Source_WS_ID"] for row in rows}) == 2527
+          assert all(row["History_Status"] in allowed_statuses for row in rows)
+          assert all(row["History_Currentness_Status"] in allowed_currentness for row in rows)
+          assert all(row["Adjustment_Integrity_Status"] in allowed_adjustment for row in rows)
+          assert all(row["QA_Confidence"] in allowed_confidence for row in rows)
+          assert all(row["History_Policy_Version"] == policy_version for row in rows)
+          for row in rows:
+              assert flags(row["QA_Flags"]) <= allowed_flags
+
+          no_history = [row for row in rows if "MISSING_HISTORY_EVIDENCE" in flags(row["QA_Flags"])]
+          evidence_backed = [row for row in rows if "MISSING_HISTORY_EVIDENCE" not in flags(row["QA_Flags"])]
+          assert len(evidence_backed) == 2005, len(evidence_backed)
+          assert len(no_history) == 522, len(no_history)
+
+          missing_measurement_fields = [
+              "History_Start",
+              "History_End",
+              "History_Observation_Count",
+              "History_Valid_Observation_Count",
+              "Expected_Session_Count",
+              "Usable_Session_Count",
+              "Gap_Count",
+              "Gap_Share",
+              "Zero_Volume_Share",
+              "Last_Observation_Date",
+          ]
+          for row in no_history:
+              row_flags = flags(row["QA_Flags"])
+              assert row["History_Status"] == "HISTORY_UNAVAILABLE"
+              assert row["History_Currentness_Status"] == "UNAVAILABLE"
+              assert row["QA_Confidence"] == "UNRESOLVED"
+              assert "MISSING_CURRENTNESS_METADATA" in row_flags
+              assert all(row[field] == "" for field in missing_measurement_fields)
+
+          us2 = [row for row in no_history if row["Source_ID"] == "US2_SP400_COMMON_ADMISSION"]
+          au1 = [row for row in no_history if row["Source_ID"] == "AU1_EVIDENCE_ADMISSION_GATE"]
+          assert len(us2) == 369, len(us2)
+          assert len(au1) == 153, len(au1)
+          assert len(us2) + len(au1) == len(no_history)
+
+          with Path("universe/research_partial_1633.csv").open("r", encoding="utf-8-sig", newline="") as handle:
+              research_partial = sum(1 for _ in csv.DictReader(handle))
+          assert research_partial == 2527, research_partial
+
+          p4 = json.loads(Path("output_p4_audit_759/summary_p4.json").read_text(encoding="utf-8"))
+          assert p4["strict"] == 759, p4["strict"]
+          assert p4["u3k_frozen_members"] == 0, p4["u3k_frozen_members"]
+          assert p4["universe_write"] is False
+
+          status_distribution = dict(sorted(Counter(row["History_Status"] for row in rows).items()))
+          currentness_distribution = dict(sorted(Counter(row["History_Currentness_Status"] for row in rows).items()))
+          adjustment_distribution = dict(sorted(Counter(row["Adjustment_Integrity_Status"] for row in rows).items()))
+          confidence_distribution = dict(sorted(Counter(row["QA_Confidence"] for row in rows).items()))
+
+          summary = {
+              "authority_state_before_attestation": "IMPLEMENTATION_PERSISTED_VALIDATION_PENDING",
+              "workflow_sets_IMPLEMENTATION_VALIDATED": False,
+              "research_partial": research_partial,
+              "strict": p4["strict"],
+              "frozen": p4["u3k_frozen_members"],
+              "total_rows": len(rows),
+              "evidence_backed": len(evidence_backed),
+              "no_history_evidence": len(no_history),
+              "us2_history_unavailable": len(us2),
+              "au1_history_unavailable": len(au1),
+              "history_status_distribution": status_distribution,
+              "currentness_distribution": currentness_distribution,
+              "adjustment_distribution": adjustment_distribution,
+              "confidence_distribution": confidence_distribution,
+          }
+          (evidence / "validation_summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+
+          step_summary = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          with step_summary.open("a", encoding="utf-8") as handle:
+              handle.write("# History QA v1 execution validation evidence\n\n")
+              handle.write("This run produces evidence only. It does not set `IMPLEMENTATION_VALIDATED`; a later execution-attestation gate must do that.\n\n")
+              handle.write(f"- Total rows: {len(rows)}\n")
+              handle.write(f"- Evidence-backed: {len(evidence_backed)}\n")
+              handle.write(f"- No-history evidence: {len(no_history)}\n")
+              handle.write(f"- US2 HISTORY_UNAVAILABLE: {len(us2)}\n")
+              handle.write(f"- AU1 HISTORY_UNAVAILABLE: {len(au1)}\n")
+              handle.write(f"- Research Partial: {research_partial}\n")
+              handle.write(f"- Strict: {p4['strict']}\n")
+              handle.write(f"- Frozen: {p4['u3k_frozen_members']}\n\n")
+              handle.write("## History_Status distribution\n\n")
+              for key, value in status_distribution.items():
+                  handle.write(f"- {key}: {value}\n")
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+
+      - name: Repository immutability gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code
+          git diff --cached --exit-code
+          test -z "$(git status --porcelain --untracked-files=no)"
+
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: history-qa-v1-validation-${{ github.run_id }}
+          path: ${{ runner.temp }}/history_qa_v1_validation_evidence/
+          if-no-files-found: error
+          retention-days: 30
