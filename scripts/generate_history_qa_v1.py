@@ -96,12 +96,12 @@ def build_rows():
  if len(a)!=1633:raise ValueError('v0.53 count')
  a=ix(a,'WS_ID','v0.53')
  if set(a)-set(ci):raise ValueError('obsolete v0.53 security')
- b38=ix(cr(V38,['WS_ID','Unique_Daily_Bars','Valid_Completed_Bars','First_Valid_Bar','Last_Completed_Bars','Zero_Volume_Share','Global_EOD_Safe_Cutoff','Fetch_Timestamp_UTC']),'WS_ID','v0.38');b47=ix(cr(V47,['WS_ID','History_QA','Unique_Bars','Valid_Bars','First_Bar','Last_Bar']),'WS_ID','v0.47');s47=jr(V47S);jr(V38M);jr(V38C);uh=ix(cr(U1,['WS_ID','ISIN','Primary_MIC','Unique_Bars','Valid_Bars','Future_Bars','Duplicate_Dates','History_State','History_Source']),'WS_ID','US1');su=jr(U1S);br={}
- for x in cr(BR,['WS_ID','ISIN",'Primary_MIC','Primary_Ticker','New_WS_ID']):
+ b38=ix(cr(V38,['WS_ID','Unique_Daily_Bars','Valid_Completed_Bars','First_Valid_Bar','Last_Completed_Bar','Zero_Volume_Share','Global_EOD_Safe_Cutoff','Fetch_Timestamp_UTC']),'WS_ID','v0.38');b47=ix(cr(V47,['WS_ID','History_QA','Unique_Bars','Valid_Bars','First_Bar','Last_Bar']),'WS_ID','v0.47');s47=jr(V47S);jr(V38M);jr(V38C);uh=ix(cr(U1,['WS_ID','ISIN','Primary_MIC','Unique_Bars','Valid_Bars','Future_Bars','Duplicate_Dates','History_State','History_Source']),'WS_ID','US1');su=jr(U1S);br={}
+ for x in cr(BR,['WS_ID', 'ISIN', 'Primary_MIC', 'Primary_Ticker', 'New_WS_ID']):
   n=(x.get('New_WS_ID')or'').strip()
   if n:
    if n in br:raise ValueError('duplicate US1 bridge')
-   br[]=x
+   br[n]=x
  if sum((x.get('Source_ID')or'').strip()=='US1_SP500_COMMON_EVIDENCE_GATE' for x in cur)!=372:raise ValueError('US1 current count')
  out=[]
  for c in cur:
