@@ -1,0 +1,75 @@
+{
+  "policy_version": "WELT-SWING-LIQUIDITY-QA-v1.0",
+  "liquidity_status_vocabulary": [
+    "LIQUIDITY_CONFLICT",
+    "LIQUIDITY_IDENTITY_UNRESOLVED",
+    "LIQUIDITY_UNAVAILABLE",
+    "LIQUIDITY_STALE",
+    "LIQUIDITY_VERY_THIN",
+    "LIQUIDITY_THIN",
+    "LIQUIDITY_OK"
+  ],
+  "liquidity_status_precedence": [
+    "LIQUIDITY_CONFLICT",
+    "LIQUIDITY_IDENTITY_UNRESOLVED",
+    "LIQUIDITY_UNAVAILABLE",
+    "LIQUIDITY_STALE",
+    "LIQUIDITY_VERY_THIN",
+    "LIQUIDITY_THIN",
+    "LIQUIDITY_OK"
+  ],
+  "liquidity_bucket_vocabulary": [
+    "PREFERRED",
+    "STANDARD",
+    "LOW_EXCEPTION",
+    "FAIL_LT_5M"
+  ],
+  "fx_status_vocabulary": [
+    "FX_IDENTITY_EUR",
+    "FX_OK",
+    "FX_PARTIAL",
+    "FX_UNAVAILABLE",
+    "FX_CONFLICT"
+  ],
+  "currentness_vocabulary": [
+    "CURRENT",
+    "STALE",
+    "UNKNOWN",
+    "UNAVAILABLE"
+  ],
+  "listing_status_vocabulary": [
+    "LISTING_RESOLVED",
+    "LISTING_PARTIAL",
+    "LISTING_UNRESOLVED",
+    "LISTING_CONFLICT",
+    "LISTING_INACTIVE"
+  ],
+  "confidence_vocabulary": [
+    "HIGH",
+    "MEDIUM",
+    "LOW",
+    "UNRESOLVED"
+  ],
+  "allowed_qa_flags": [
+    "MISSING_LIQUIDITY_EVIDENCE",
+    "MISSING_SESSION_EVIDENCE",
+    "MISSING_CURRENTNESS_METADATA",
+    "INSUFFICIENT_USABLE_SESSIONS",
+    "FX_EVIDENCE_MISSING",
+    "FX_EVIDENCE_PARTIAL",
+    "LEGACY_NORMALIZED",
+    "IDENTITY_UNRESOLVED",
+    "STALE_LIQUIDITY",
+    "DATA_QUALITY_FAIL",
+    "LISTING_INACTIVE"
+  ],
+  "thresholds": {
+    "preferred_turnover_eur": 20000000,
+    "standard_pass_turnover_eur": 15000000,
+    "low_exception_turnover_eur": 5000000,
+    "minimum_usable_sessions": 18,
+    "window_sessions": 20
+  },
+  "liquidity_stale_threshold": "DEFERRED",
+  "zero_volume_status_threshold": "NONE_INFORMATIONAL_ONLY"
+}
