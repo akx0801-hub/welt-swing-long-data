@@ -1,0 +1,366 @@
+name: Liquidity QA v1 Validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: liquidity-qa-v1-validation
+  cancel-in-progress: false
+
+jobs:
+  validate-liquidity-qa-v1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout persisted implementation authority
+        uses: actions/checkout@v4
+        with:
+          ref: 05d084c76e4de78389b2d07028ac9277bb5f9145
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Prepare validation evidence directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/liquidity_qa_v1_validation_evidence"
+          mkdir -p "$EVIDENCE"
+          printf '%s\n' "IMPLEMENTATION_PERSISTED_VALIDATION_PENDING" > "$EVIDENCE/authority_state.txt"
+          git rev-parse HEAD > "$EVIDENCE/validated_commit.txt"
+          printf '%s\n' "$GITHUB_RUN_ID" > "$EVIDENCE/workflow_run_id.txt"
+
+      - name: Committed implementation authority preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "05d084c76e4de78389b2d07028ac9277bb5f9145"
+          required=(
+            config/liquidity_qa_v1_policy.json
+            scripts/generate_liquidity_qa_v1.py
+            tests/test_liquidity_qa_v1.py
+            docs/spec/Liquidity_QA_v1_Bounded_Implementation_Gate.md
+            universe/research_partial_1633.csv
+            scripts/generate_company_security_mapping_v1.py
+            output_current_master_research_partial_1633_data_refresh_v0_38/liquidity_current_1633_v0.38.csv
+            output_current_master_research_partial_1633_data_refresh_v0_38/liquidity_session_evidence_v0.38.csv
+            output_current_master_research_partial_1633_data_refresh_v0_38/fx_coverage_v0.38.csv
+            output_current_master_research_partial_1633_data_refresh_v0_38/fx_daily_v0.38.csv
+            output_current_master_research_partial_1633_data_refresh_v0_38/history_gate_current_1633_v0.38.csv
+            output_current_master_research_partial_1633_data_refresh_v0_38/summary_v0.38.json
+            output_liquidity_fx_sidecar_236_v0_48/liquidity_236_v0.48.csv
+            output_liquidity_fx_sidecar_236_v0_48/summary_v0.48.json
+            output_us1/liquidity_us1.csv
+            output_us1/summary_us1.json
+            output_us1_write/dry_run_write_plan.csv
+            output_p4_audit_759/summary_p4.json
+            universe/SWING_U3K_FROZEN_v0.5.csv
+          )
+          for path in "${required[@]}"; do
+            test -f "$path" || { echo "required committed input missing: $path" >&2; exit 1; }
+          done
+
+      - name: Static no-network and no-provider gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          targets = [
+              Path("scripts/generate_liquidity_qa_v1.py"),
+              Path("tests/test_liquidity_qa_v1.py"),
+          ]
+          forbidden_import_roots = {
+              "aiohttp", "ftplib", "http", "httpx", "requests", "socket", "urllib", "yfinance",
+              "alpha_vantage", "eodhd", "lseg", "factset",
+          }
+          forbidden_call_names = {"urlopen"}
+          forbidden_provider_names = {"yfinance", "alpha_vantage", "eodhd", "lseg", "factset"}
+
+          for path in targets:
+              tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+              for node in ast.walk(tree):
+                  roots = set()
+                  if isinstance(node, ast.Import):
+                      roots = {alias.name.split(".", 1)[0].lower() for alias in node.names}
+                  elif isinstance(node, ast.ImportFrom):
+                      roots = {(node.module or "").split(".", 1)[0].lower()}
+                  bad = roots & forbidden_import_roots
+                  if bad:
+                      raise SystemExit(f"forbidden network/provider import in {path}: {sorted(bad)}")
+                  if isinstance(node, ast.Call):
+                      if isinstance(node.func, ast.Name) and node.func.id.lower() in forbidden_call_names:
+                          raise SystemExit(f"forbidden network call in {path}: {node.func.id}")
+                      if isinstance(node.func, ast.Attribute):
+                          root = node.func.value
+                          if isinstance(root, ast.Name) and root.id.lower() in forbidden_provider_names:
+                              raise SystemExit(f"forbidden provider call in {path}: {root.id}.{node.func.attr}")
+              print(f"static executable-code gate PASS: {path}")
+          PY
+
+      - name: Policy contract gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = json.loads(Path("config/liquidity_qa_v1_policy.json").read_text(encoding="utf-8"))
+          assert p["policy_version"] == "WELT-SWING-LIQUIDITY-QA-v1.0"
+          assert p["liquidity_status_vocabulary"] == [
+              "LIQUIDITY_CONFLICT", "LIQUIDITY_IDENTITY_UNRESOLVED", "LIQUIDITY_UNAVAILABLE",
+              "LIQUIDITY_STALE", "LIQUIDITY_VERY_THIN", "LIQUIDITY_THIN", "LIQUIDITY_OK",
+          ]
+          assert p["liquidity_status_precedence"] == p["liquidity_status_vocabulary"]
+          assert p["liquidity_bucket_vocabulary"] == ["PREFERRED", "STANDARD", "LOW_EXCEPTION", "FAIL_LT_5M"]
+          assert p["fx_status_vocabulary"] == ["FX_IDENTITY_EUR", "FX_OK", "FX_PARTIAL", "FX_UNAVAILABLE", "FX_CONFLICT"]
+          assert p["currentness_vocabulary"] == ["CURRENT", "STALE", "UNKNOWN", "UNAVAILABLE"]
+          assert p["listing_status_vocabulary"] == ["LISTING_RESOLVED", "LISTING_PARTIAL", "LISTING_UNRESOLVED", "LISTING_CONFLICT", "LISTING_INACTIVE"]
+          assert p["confidence_vocabulary"] == ["HIGH", "MEDIUM", "LOW", "UNRESOLVED"]
+          assert p["thresholds"] == {
+              "preferred_turnover_eur": 20000000,
+              "standard_pass_turnover_eur": 15000000,
+              "low_exception_turnover_eur": 5000000,
+              "minimum_usable_sessions": 18,
+              "window_sessions": 20,
+          }
+          assert p["liquidity_stale_threshold"] == "DEFERRED"
+          assert p["zero_volume_status_threshold"] == "NONE_INFORMATIONAL_ONLY"
+          print("policy contract gate: PASS")
+          PY
+
+      - name: Compile focused implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/generate_liquidity_qa_v1.py tests/test_liquidity_qa_v1.py
+
+      - name: Generate Liquidity QA v1 run 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/liquidity_qa_v1_validation_evidence"
+          python scripts/generate_liquidity_qa_v1.py --output "$EVIDENCE/liquidity_qa_v1_run1.csv" 2>&1 | tee "$EVIDENCE/generator_run1.log"
+
+      - name: Generate Liquidity QA v1 run 2 independently
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/liquidity_qa_v1_validation_evidence"
+          python scripts/generate_liquidity_qa_v1.py --output "$EVIDENCE/liquidity_qa_v1_run2.csv" 2>&1 | tee "$EVIDENCE/generator_run2.log"
+
+      - name: Deterministic SHA-256 and byte equality gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/liquidity_qa_v1_validation_evidence"
+          RUN1="$EVIDENCE/liquidity_qa_v1_run1.csv"
+          RUN2="$EVIDENCE/liquidity_qa_v1_run2.csv"
+          H1="$(sha256sum "$RUN1" | awk '{print $1}')"
+          H2="$(sha256sum "$RUN2" | awk '{print $1}')"
+          B1="$(wc -c < "$RUN1" | tr -d ' ')"
+          B2="$(wc -c < "$RUN2" | tr -d ' ')"
+          {
+            printf 'run1_sha256=%s\n' "$H1"
+            printf 'run2_sha256=%s\n' "$H2"
+            printf 'run1_bytes=%s\n' "$B1"
+            printf 'run2_bytes=%s\n' "$B2"
+          } | tee "$EVIDENCE/determinism.txt"
+          test "$H1" = "$H2"
+          test "$B1" = "$B2"
+          cmp -s "$RUN1" "$RUN2"
+
+      - name: Focused committed validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE="$RUNNER_TEMP/liquidity_qa_v1_validation_evidence"
+          LIQUIDITY_QA_V1_OUTPUT="$EVIDENCE/liquidity_qa_v1_run1.csv" \
+          LIQUIDITY_QA_V1_SECOND_OUTPUT="$EVIDENCE/liquidity_qa_v1_run2.csv" \
+            python -m unittest discover -s tests -p 'test_liquidity_qa_v1.py' -v \
+            2>&1 | tee "$EVIDENCE/focused_validator.log"
+
+      - name: Full-population invariants and distributions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv
+          import json
+          import os
+          from collections import Counter
+          from decimal import Decimal
+          from pathlib import Path
+
+          evidence = Path(os.environ["RUNNER_TEMP"]) / "liquidity_qa_v1_validation_evidence"
+          output = evidence / "liquidity_qa_v1_run1.csv"
+
+          def split_flags(value):
+              return {x for x in (value or "").split("|") if x}
+
+          with Path("universe/research_partial_1633.csv").open("r", encoding="utf-8-sig", newline="") as f:
+              source = list(csv.DictReader(f))
+          with output.open("r", encoding="utf-8-sig", newline="") as f:
+              reader = csv.DictReader(f)
+              rows = list(reader)
+
+          assert len(source) == 2527
+          assert len(rows) == 2527
+          assert [r["Source_WS_ID"] for r in rows] == [r["WS_ID"] for r in source]
+          assert len({r["Security_Key"] for r in rows}) == 2527
+          assert len({r["Source_WS_ID"] for r in rows}) == 2527
+
+          by_ws = {r["WS_ID"]: r for r in source}
+          us1 = [r for r in rows if by_ws[r["Source_WS_ID"]].get("Source_ID") == "US1_SP500_COMMON_EVIDENCE_GATE"]
+          us2 = [r for r in rows if by_ws[r["Source_WS_ID"]].get("Source_ID") == "US2_SP400_COMMON_ADMISSION"]
+          au1 = [r for r in rows if by_ws[r["Source_WS_ID"]].get("Source_ID") == "AU1_EVIDENCE_ADMISSION_GATE"]
+          original = [r for r in rows if by_ws[r["Source_WS_ID"]].get("Source_ID") not in {
+              "US1_SP500_COMMON_EVIDENCE_GATE", "US2_SP400_COMMON_ADMISSION", "AU1_EVIDENCE_ADMISSION_GATE"
+          }]
+          assert len(original) == 1633
+          assert len(us1) == 372
+          assert len(us2) == 369
+          assert len(au1) == 153
+
+          unsupported = [r for r in rows if "MISSING_LIQUIDITY_EVIDENCE" in split_flags(r["QA_Flags"])]
+          assert len(unsupported) == 522
+          assert set(r["Source_WS_ID"] for r in unsupported) == set(r["Source_WS_ID"] for r in us2 + au1)
+          blank_fields = [
+              "Liquidity_Bucket", "Usable_Session_Count", "MedianTurnover20_EUR",
+              "Zero_Volume_Share", "Last_Liquidity_Observation_Date",
+          ]
+          for r in unsupported:
+              fl = split_flags(r["QA_Flags"])
+              assert r["Liquidity_Status"] == "LIQUIDITY_UNAVAILABLE"
+              assert r["Liquidity_Currentness_Status"] == "UNAVAILABLE"
+              assert r["QA_Confidence"] == "UNRESOLVED"
+              assert "MISSING_LIQUIDITY_EVIDENCE" in fl
+              assert "MISSING_CURRENTNESS_METADATA" in fl
+              assert all(r[k] == "" for k in blank_fields)
+          for r in au1:
+              assert r["FX_Evidence_Status"] == "FX_UNAVAILABLE"
+              assert "FX_EVIDENCE_MISSING" in split_flags(r["QA_Flags"])
+
+          for r in rows:
+              usable = None if r["Usable_Session_Count"] == "" else int(r["Usable_Session_Count"])
+              med = None if r["MedianTurnover20_EUR"] == "" else Decimal(r["MedianTurnover20_EUR"])
+              fx = r["FX_Evidence_Status"]
+              if fx == "FX_UNAVAILABLE":
+                  assert med is None
+              if fx == "FX_CONFLICT":
+                  assert r["Liquidity_Status"] == "LIQUIDITY_CONFLICT"
+              if r["Price_Currency"] == "EUR" and med is not None:
+                  assert fx == "FX_IDENTITY_EUR"
+              if r["Price_Currency"] != "EUR" and med is not None:
+                  assert fx in {"FX_OK", "FX_PARTIAL"}
+              if usable is not None and usable < 18:
+                  assert r["Liquidity_Status"] == "LIQUIDITY_UNAVAILABLE"
+                  assert r["Liquidity_Bucket"] == ""
+              if usable is not None and usable >= 18 and med is not None and fx in {"FX_IDENTITY_EUR", "FX_OK", "FX_PARTIAL"} and r["Listing_Resolution_Status"] == "LISTING_RESOLVED" and r["Liquidity_Status"] not in {"LIQUIDITY_CONFLICT", "LIQUIDITY_STALE"}:
+                  if med >= Decimal("20000000"):
+                      assert (r["Liquidity_Bucket"], r["Liquidity_Status"]) == ("PREFERRED", "LIQUIDITY_OK")
+                  elif med >= Decimal("15000000"):
+                      assert (r["Liquidity_Bucket"], r["Liquidity_Status"]) == ("STANDARD", "LIQUIDITY_OK")
+                  elif med >= Decimal("5000000"):
+                      assert (r["Liquidity_Bucket"], r["Liquidity_Status"]) == ("LOW_EXCEPTION", "LIQUIDITY_THIN")
+                  else:
+                      assert (r["Liquidity_Bucket"], r["Liquidity_Status"]) == ("FAIL_LT_5M", "LIQUIDITY_VERY_THIN")
+
+          us1_normalized = []
+          for r in us1:
+              if r["Liquidity_Status"] not in {"LIQUIDITY_CONFLICT", "LIQUIDITY_IDENTITY_UNRESOLVED"}:
+                  fl = split_flags(r["QA_Flags"])
+                  assert r["Evidence_Source_WS_ID"].startswith("US1:")
+                  assert r["FX_Evidence_Status"] == "FX_PARTIAL"
+                  assert r["Liquidity_Currentness_Status"] == "UNKNOWN"
+                  assert r["QA_Confidence"] == "LOW"
+                  for flag in ("LEGACY_NORMALIZED", "MISSING_SESSION_EVIDENCE", "MISSING_CURRENTNESS_METADATA", "FX_EVIDENCE_PARTIAL"):
+                      assert flag in fl
+                  us1_normalized.append(r)
+
+          with Path("output_p4_audit_759/summary_p4.json").open("r", encoding="utf-8") as f:
+              p4 = json.load(f)
+          assert p4["strict"] == 759
+          assert p4["u3k_frozen_members"] == 0
+          assert p4["universe_write"] is False
+          with Path("universe/SWING_U3K_FROZEN_v0.5.csv").open("r", encoding="utf-8-sig", newline="") as f:
+              assert sum(1 for _ in csv.DictReader(f)) == 0
+
+          def dist(field, blank="<NULL>"):
+              return dict(sorted(Counter((r[field] if r[field] != "" else blank) for r in rows).items()))
+
+          summary = {
+              "authority_state": "IMPLEMENTATION_PERSISTED_VALIDATION_PENDING",
+              "workflow_sets_IMPLEMENTATION_VALIDATED": False,
+              "validated_sha": "05d084c76e4de78389b2d07028ac9277bb5f9145",
+              "total_rows": len(rows),
+              "unique_security_keys": len({r["Security_Key"] for r in rows}),
+              "unique_source_ws_id": len({r["Source_WS_ID"] for r in rows}),
+              "original": len(original),
+              "us1": len(us1),
+              "us2": len(us2),
+              "au1": len(au1),
+              "unsupported": len(unsupported),
+              "evidence_backed": len(rows) - len(unsupported),
+              "us1_normalized": len(us1_normalized),
+              "liquidity_status_distribution": dist("Liquidity_Status"),
+              "liquidity_bucket_distribution": dist("Liquidity_Bucket"),
+              "fx_status_distribution": dist("FX_Evidence_Status"),
+              "currentness_distribution": dist("Liquidity_Currentness_Status"),
+              "listing_distribution": dist("Listing_Resolution_Status"),
+              "confidence_distribution": dist("QA_Confidence"),
+              "research_partial": len(source),
+              "strict": p4["strict"],
+              "frozen": p4["u3k_frozen_members"],
+              "universe_write": p4["universe_write"],
+          }
+          (evidence / "validation_summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print(json.dumps(summary, indent=2, sort_keys=True))
+
+          step_summary = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          with step_summary.open("a", encoding="utf-8") as f:
+              f.write("# Liquidity QA v1 execution validation evidence\n\n")
+              f.write("This run produces execution evidence only and does not set `IMPLEMENTATION_VALIDATED`.\n\n")
+              for k in ("total_rows", "unique_security_keys", "unique_source_ws_id", "original", "us1", "us2", "au1", "unsupported", "evidence_backed", "us1_normalized", "strict", "frozen"):
+                  f.write(f"- {k}: {summary[k]}\n")
+              for title, key in (
+                  ("Liquidity_Status", "liquidity_status_distribution"),
+                  ("Liquidity_Bucket", "liquidity_bucket_distribution"),
+                  ("FX_Evidence_Status", "fx_status_distribution"),
+                  ("Liquidity_Currentness_Status", "currentness_distribution"),
+                  ("Listing_Resolution_Status", "listing_distribution"),
+                  ("QA_Confidence", "confidence_distribution"),
+              ):
+                  f.write(f"\n## {title}\n\n")
+                  for name, count in summary[key].items():
+                      f.write(f"- {name}: {count}\n")
+          PY
+
+      - name: Governance and repository immutability gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "05d084c76e4de78389b2d07028ac9277bb5f9145"
+          git diff --exit-code
+          git diff --cached --exit-code
+          test -z "$(git status --porcelain --untracked-files=no)"
+
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: liquidity-qa-v1-validation-${{ github.run_id }}
+          path: ${{ runner.temp }}/liquidity_qa_v1_validation_evidence/
+          if-no-files-found: error
+          retention-days: 30
