@@ -1,0 +1,127 @@
+name: 522 Common OHLCV Acquisition v1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-market-evidence-522:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout implementation authority
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Repository and governance preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.sha }}"
+          test "$(git rev-parse HEAD^)" = "70710f000cc69bc18abad24f8cf565b42f5f4866"
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          rows = list(csv.DictReader(open('universe/research_partial_1633.csv', encoding='utf-8-sig')))
+          assert len(rows) == 2527
+          assert sum(r.get('Source_ID') == 'US2_SP400_COMMON_ADMISSION' for r in rows) == 369
+          assert sum(r.get('Source_ID') == 'AU1_EVIDENCE_ADMISSION_GATE' for r in rows) == 153
+          s = json.load(open('output_p4_audit_759/summary_p4.json', encoding='utf-8'))
+          assert s['strict'] == 759
+          frozen = Path('universe/SWING_U3K_FROZEN_v0.5.csv').read_text(encoding='utf-8').splitlines()
+          assert len(frozen) == 1
+          print('GOVERNANCE_PREFLIGHT_PASS 2527/759/0 369+153=522')
+          PY
+
+      - name: Install bounded acquisition dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install "yfinance==1.6.0" "pandas==2.2.3" "numpy==2.1.3"
+
+      - name: Offline implementation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/acquire_market_evidence_522_v1.py tests/test_market_evidence_522_acquisition_v1.py
+          python -m unittest discover -s tests -p 'test_market_evidence_522_acquisition_v1.py' -v
+          python scripts/acquire_market_evidence_522_v1.py --offline-preflight
+
+      - name: Acquire bounded 522 OHLCV and FX evidence
+        shell: bash
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          set -euo pipefail
+          rm -rf output_market_evidence_522_v1 runtime_cache/market_evidence_522_v1
+          mkdir -p runtime_cache/market_evidence_522_v1
+          python scripts/acquire_market_evidence_522_v1.py \
+            --execute-acquisition \
+            --repository-sha "${{ github.sha }}" \
+            --output-dir output_market_evidence_522_v1
+
+      - name: Validate evidence contract and governance invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, json, hashlib
+          from pathlib import Path
+          out = Path('output_market_evidence_522_v1')
+          expected = [
+            'security_binding_522.csv',
+            'ohlcv_daily_522.csv',
+            'fx_daily_522.csv',
+            'acquisition_qa_522.csv',
+            'acquisition_manifest_522.json',
+          ]
+          assert sorted(p.name for p in out.iterdir() if p.is_file()) == sorted(expected)
+          b = list(csv.DictReader(open(out/'security_binding_522.csv', encoding='utf-8')))
+          q = list(csv.DictReader(open(out/'acquisition_qa_522.csv', encoding='utf-8')))
+          assert len(b) == 522 and len(q) == 522
+          assert len({r['Security_Key'] for r in b}) == 522
+          assert len({r['Source_WS_ID'] for r in b}) == 522
+          assert sum(r['Cohort'] == 'US2' for r in b) == 369
+          assert sum(r['Cohort'] == 'AU1' for r in b) == 153
+          assert all(r['Price_Currency'] == 'USD' for r in b if r['Cohort'] == 'US2')
+          assert all(r['Price_Currency'] == 'AUD' for r in b if r['Cohort'] == 'AU1')
+          m = json.load(open(out/'acquisition_manifest_522.json', encoding='utf-8'))
+          assert m['repository_sha'] == '${{ github.sha }}'
+          assert m['target'] == {'total': 522, 'US2': 369, 'AU1': 153}
+          assert m['research_partial'] == 2527 and m['strict'] == 759 and m['frozen'] == 0
+          assert m['universe_write'] is False
+          for name, info in m['artifact_hashes'].items():
+              data = (out/name).read_bytes()
+              assert hashlib.sha256(data).hexdigest() == info['sha256']
+              assert len(data) == info['bytes']
+          print(json.dumps({
+              'target': len(b),
+              'qa_rows': len(q),
+              'status_counts': m['acquisition_status_counts'],
+              'fx_counts': m['fx_observation_counts'],
+              'universe_write': m['universe_write'],
+          }, sort_keys=True))
+          PY
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload five derived evidence artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-evidence-522-${{ github.run_id }}
+          path: |
+            output_market_evidence_522_v1/security_binding_522.csv
+            output_market_evidence_522_v1/ohlcv_daily_522.csv
+            output_market_evidence_522_v1/fx_daily_522.csv
+            output_market_evidence_522_v1/acquisition_qa_522.csv
+            output_market_evidence_522_v1/acquisition_manifest_522.json
+          if-no-files-found: error
+          retention-days: 14
