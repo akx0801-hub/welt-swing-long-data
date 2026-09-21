@@ -16,6 +16,19 @@ BIND=['Security_Key','Source_WS_ID','Cohort','ISIN','Primary_MIC','Primary_Ticke
 OHLCV=['Security_Key','Source_WS_ID','Observation_Date','Open','High','Low','Close','Adjusted_Close','Volume','Dividend','Stock_Split','Price_Currency','Primary_MIC','Primary_Ticker','Provider_Symbol','Provider_Repaired','Source_ID','Source_AsOf','Retrieved_At','Adjustment_Status','Observation_Status']
 FX=['FX_Observation_Date','Price_Currency','FX_to_EUR','FX_Source_Symbol','FX_Direction','Source_ID','Source_AsOf','Retrieved_At','Observation_Status']
 QA=['Security_Key','Source_WS_ID','Cohort','Provider_Symbol','Acquisition_Status','Unique_Observations','Valid_Observations','Invalid_Observations','Duplicate_Dates','Future_Dates','Repaired_Observations','First_Observation_Date','Last_Observation_Date','Zero_Volume_Share','Adjustment_Status','Source_ID','Source_AsOf','Retrieved_At','QA_Flags']
+REPAIR7_PAIRS=(
+ ('WSSEC:WS:XNAS:STRL','WS:XNAS:STRL'),
+ ('WSSEC:WS:XNAS:MEDP','WS:XNAS:MEDP'),
+ ('WSSEC:WS:XNYS:MP','WS:XNYS:MP'),
+ ('WSSEC:WS:XNYS:KD','WS:XNYS:KD'),
+ ('WSSEC:WS:XASX:MSB','WS:XASX:MSB'),
+ ('WSSEC:WS:XASX:TUA','WS:XASX:TUA'),
+ ('WSSEC:WS:XASX:CTD','WS:XASX:CTD'),
+)
+REPAIR7_KEYS=frozenset(k for k,_ in REPAIR7_PAIRS);REPAIR7_IDS=frozenset(w for _,w in REPAIR7_PAIRS)
+REPAIR7_OUTPUT_DIR=ROOT/'output_market_evidence_repair_7_v1'
+REPAIR7_BIND='security_binding_repair_7.csv';REPAIR7_OHLCV='ohlcv_repair_7.csv';REPAIR7_QA='repair_qa_7.csv';REPAIR7_MANIFEST='repair_manifest_7.json'
+SOURCE_ACQUISITION_RUN_ID=35568241641;SOURCE_ACQUISITION_SHA='255bc56eef99c447eb659a1ece645fed27a825f7'
 class GovernanceFailure(RuntimeError):pass
 @dataclass(frozen=True)
 class Clock: retrieved_at:str; cutoff:date
@@ -60,6 +73,18 @@ def bind(rows,override=None):
   used[ps]=w;q=dict(r);q.update(Provider_Symbol=ps,Provider_Mapping_Status='PROJECT_OVERRIDE' if o else 'EXPLICIT_VERIFIED' if ex else st);out.append(q)
  return out
 def bindings(rows):return [{k:(txt(r.get('Primary_Currency')).upper() if k=='Price_Currency' else txt(r.get(k))) for k in BIND} for r in rows]
+def select_authorized_repair7(rows):
+ if len(rows)!=N or len({r['Security_Key'] for r in rows})!=N or len({r['Source_WS_ID'] for r in rows})!=N:raise GovernanceFailure('full 522 identity invariant required before repair selection')
+ if Counter(r['Cohort'] for r in rows)!=Counter({'US2':NU,'AU1':NA}):raise GovernanceFailure('full 522 cohort invariant required before repair selection')
+ bypair={}
+ for r in rows:
+  p=(r['Security_Key'],r['Source_WS_ID'])
+  if p in bypair:raise GovernanceFailure('duplicate repair identity')
+  bypair[p]=r
+ if any(p not in bypair for p in REPAIR7_PAIRS):raise GovernanceFailure('authorized repair identity missing')
+ out=[bypair[p] for p in REPAIR7_PAIRS]
+ if len(out)!=7 or {r['Security_Key'] for r in out}!=REPAIR7_KEYS or {r['Source_WS_ID'] for r in out}!=REPAIR7_IDS:raise GovernanceFailure('repair-7 target invariant')
+ return out
 def clock(ts=None,days=1):
  d=datetime.fromisoformat(ts.replace('Z','+00:00')) if ts else datetime.now(timezone.utc);d=d.replace(tzinfo=d.tzinfo or timezone.utc).astimezone(timezone.utc);return Clock(d.strftime('%Y-%m-%dT%H:%M:%SZ'),d.date()-timedelta(days=days))
 def dups(df):
@@ -154,6 +179,22 @@ def write(out,br,obs,fx,qa,cl,sha,cfg):
  for n,v in data.items():(out/n).write_bytes(v)
  m=dict(schema='WELT_SWING_MARKET_EVIDENCE_522_ACQUISITION_MANIFEST_V1',policy_version=POLICY,repository_sha=sha,source_id=SOURCE,source_as_of=cl.cutoff.isoformat(),retrieved_at=cl.retrieved_at,target={'total':N,'US2':NU,'AU1':NA},research_partial=2527,strict=STRICT,frozen=FROZEN,universe_write=False,productive=False,artifact_rows={names['security_binding']:len(br),names['ohlcv_daily']:len(obs),names['fx_daily']:len(fx),names['acquisition_qa']:len(qa)},artifact_hashes={n:{'sha256':hashlib.sha256(v).hexdigest(),'bytes':len(v)} for n,v in data.items()},acquisition_status_counts=dict(sorted(Counter(q['Acquisition_Status'] for q in qa).items())),fx_observation_counts=dict(sorted(Counter(x['Price_Currency'] for x in fx).items())))
  (out/names['manifest']).write_text(json.dumps(m,indent=2,sort_keys=True)+'\n',encoding='utf-8',newline='\n');return m
+def write_repair7(out,br,obs,qa,cl,sha):
+ out=Path(out);out.mkdir(parents=True,exist_ok=True);data={REPAIR7_BIND:csvbytes(br,BIND),REPAIR7_OHLCV:csvbytes(obs,OHLCV),REPAIR7_QA:csvbytes(qa,QA)}
+ for n,v in data.items():(out/n).write_bytes(v)
+ m=dict(schema='WELT_SWING_SUSPICIOUS_RETURN_REPAIR_7_MANIFEST_V1',policy_version=POLICY,mode='TARGETED_SUSPICIOUS_RETURN_REPAIR_7',repository_sha=sha,source_acquisition_run_id=SOURCE_ACQUISITION_RUN_ID,source_acquisition_repository_sha=SOURCE_ACQUISITION_SHA,source_id=SOURCE,source_as_of=cl.cutoff.isoformat(),retrieved_at=cl.retrieved_at,target={'total':7,'US2':4,'AU1':3},target_security_keys=[k for k,_ in REPAIR7_PAIRS],target_source_ws_ids=[w for _,w in REPAIR7_PAIRS],research_partial=2527,strict=STRICT,frozen=FROZEN,universe_write=False,productive=False,artifact_rows={REPAIR7_BIND:len(br),REPAIR7_OHLCV:len(obs),REPAIR7_QA:len(qa)},artifact_hashes={n:{'sha256':hashlib.sha256(v).hexdigest(),'bytes':len(v)} for n,v in data.items()},acquisition_status_counts=dict(sorted(Counter(q['Acquisition_Status'] for q in qa).items())),repaired_observations=sum(int(q.get('Repaired_Observations') or 0) for q in qa))
+ (out/REPAIR7_MANIFEST).write_text(json.dumps(m,indent=2,sort_keys=True)+'\n',encoding='utf-8',newline='\n');return m
+def validate_repair7(br,obs,qa,cl):
+ if len(br)!=7 or len(qa)!=7 or {r['Security_Key'] for r in br}!=REPAIR7_KEYS or {r['Source_WS_ID'] for r in br}!=REPAIR7_IDS:raise GovernanceFailure('repair-7 binding invariant')
+ if Counter(r['Cohort'] for r in br)!=Counter({'US2':4,'AU1':3}):raise GovernanceFailure('repair-7 cohort invariant')
+ if {r['Security_Key'] for r in qa}!=REPAIR7_KEYS or {r['Source_WS_ID'] for r in qa}!=REPAIR7_IDS:raise GovernanceFailure('repair-7 QA identity invariant')
+ seen=set()
+ for r in obs:
+  if r['Security_Key'] not in REPAIR7_KEYS or r['Source_WS_ID'] not in REPAIR7_IDS:raise GovernanceFailure('off-target repair evidence')
+  k=(r['Security_Key'],r['Observation_Date'])
+  if k in seen or date.fromisoformat(k[1])>cl.cutoff:raise GovernanceFailure('repair observation key/future invariant')
+  seen.add(k)
+
 def validate(br,obs,fx,qa,cl):
  if len(br)!=N or len(qa)!=N or len({r['Security_Key'] for r in br})!=N or len({r['Source_WS_ID'] for r in br})!=N:raise GovernanceFailure('522 key/count invariant')
  if Counter(r['Cohort'] for r in br)!=Counter({'US2':NU,'AU1':NA}):raise GovernanceFailure('cohort invariant')
@@ -183,10 +224,15 @@ def write_artifacts(output_dir,*,bindings,observations,fx_rows,qa_rows,clock,rep
 def validate_evidence_contract(bindings,observations,fx_rows,qa_rows,clock):return validate(bindings,observations,fx_rows,qa_rows,clock)
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--config',type=Path,default=ROOT/'config/market_evidence_522_acquisition_v1.json');ap.add_argument('--offline-preflight',action='store_true');ap.add_argument('--execute-acquisition',action='store_true');ap.add_argument('--repository-sha',default=os.getenv('GITHUB_SHA',''));ap.add_argument('--output-dir',type=Path);ap.add_argument('--retrieved-at');a=ap.parse_args();cfg=json.loads(a.config.read_text())
- if cfg['policy_version']!=POLICY or a.offline_preflight==a.execute_acquisition:raise SystemExit('policy/mode mismatch')
+ ap=argparse.ArgumentParser();ap.add_argument('--config',type=Path,default=ROOT/'config/market_evidence_522_acquisition_v1.json');ap.add_argument('--offline-preflight',action='store_true');ap.add_argument('--execute-acquisition',action='store_true');ap.add_argument('--execute-suspicious-return-repair-7',action='store_true');ap.add_argument('--repository-sha',default=os.getenv('GITHUB_SHA',''));ap.add_argument('--output-dir',type=Path);ap.add_argument('--retrieved-at');a=ap.parse_args();cfg=json.loads(a.config.read_text())
+ modes=sum(bool(x) for x in (a.offline_preflight,a.execute_acquisition,a.execute_suspicious_return_repair_7))
+ if cfg['policy_version']!=POLICY or modes!=1:raise SystemExit('policy/mode mismatch')
  rows=bind(canonical(cfg),ROOT/'config/yahoo_symbol_overrides.csv')
  if a.offline_preflight:print(json.dumps({'status':'OFFLINE_PREFLIGHT_PASS','target':len(rows),'network_calls':0,'universe_write':False}));return 0
  if not a.repository_sha:raise SystemExit('--repository-sha required')
- cl=clock(a.retrieved_at,cfg['history']['closed_bar_cutoff_days']);br=bindings(rows);obs,qa=stocks(rows,cl,cfg);fx=acquire_fx(cl,cfg);validate(br,obs,fx,qa,cl);print(json.dumps(write(a.output_dir or ROOT/cfg['output_dir'],br,obs,fx,qa,cl,a.repository_sha,cfg),sort_keys=True));return 0
+ cl=clock(a.retrieved_at,cfg['history']['closed_bar_cutoff_days'])
+ if a.execute_suspicious_return_repair_7:
+  if a.output_dir is not None:raise SystemExit('targeted repair output directory is fixed')
+  target=select_authorized_repair7(rows);br=bindings(target);obs,qa=stocks(target,cl,cfg);validate_repair7(br,obs,qa,cl);print(json.dumps(write_repair7(REPAIR7_OUTPUT_DIR,br,obs,qa,cl,a.repository_sha),sort_keys=True));return 0
+ br=bindings(rows);obs,qa=stocks(rows,cl,cfg);fx=acquire_fx(cl,cfg);validate(br,obs,fx,qa,cl);print(json.dumps(write(a.output_dir or ROOT/cfg['output_dir'],br,obs,fx,qa,cl,a.repository_sha,cfg),sort_keys=True));return 0
 if __name__=='__main__':raise SystemExit(main())

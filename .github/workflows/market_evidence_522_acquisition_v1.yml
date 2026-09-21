@@ -2,6 +2,15 @@ name: 522 Common OHLCV Acquisition v1
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Execution mode
+        required: true
+        type: choice
+        default: full_acquisition
+        options:
+          - full_acquisition
+          - targeted_repair_7
 
 permissions:
   contents: read
@@ -58,6 +67,7 @@ jobs:
           python scripts/acquire_market_evidence_522_v1.py --offline-preflight
 
       - name: Acquire bounded 522 OHLCV and FX evidence
+        if: ${{ inputs.mode == 'full_acquisition' }}
         shell: bash
         env:
           PYTHONUNBUFFERED: '1'
@@ -70,7 +80,20 @@ jobs:
             --repository-sha "${{ github.sha }}" \
             --output-dir output_market_evidence_522_v1
 
+      - name: Acquire seven-security suspicious-return repair evidence
+        if: ${{ inputs.mode == 'targeted_repair_7' }}
+        shell: bash
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          set -euo pipefail
+          rm -rf output_market_evidence_repair_7_v1
+          python scripts/acquire_market_evidence_522_v1.py \
+            --execute-suspicious-return-repair-7 \
+            --repository-sha "${{ github.sha }}"
+
       - name: Validate evidence contract and governance invariants
+        if: ${{ inputs.mode == 'full_acquisition' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -114,7 +137,44 @@ jobs:
           PY
           test "$(git status --porcelain --untracked-files=no)" = ""
 
+      - name: Validate seven-security repair evidence
+        if: ${{ inputs.mode == 'targeted_repair_7' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, json, hashlib
+          from pathlib import Path
+          out = Path('output_market_evidence_repair_7_v1')
+          expected = ['security_binding_repair_7.csv','ohlcv_repair_7.csv','repair_qa_7.csv','repair_manifest_7.json']
+          assert sorted(p.name for p in out.iterdir() if p.is_file()) == sorted(expected)
+          keys = {'WSSEC:WS:XNAS:STRL','WSSEC:WS:XNAS:MEDP','WSSEC:WS:XNYS:MP','WSSEC:WS:XNYS:KD','WSSEC:WS:XASX:MSB','WSSEC:WS:XASX:TUA','WSSEC:WS:XASX:CTD'}
+          ids = {'WS:XNAS:STRL','WS:XNAS:MEDP','WS:XNYS:MP','WS:XNYS:KD','WS:XASX:MSB','WS:XASX:TUA','WS:XASX:CTD'}
+          b = list(csv.DictReader(open(out/'security_binding_repair_7.csv', encoding='utf-8')))
+          q = list(csv.DictReader(open(out/'repair_qa_7.csv', encoding='utf-8')))
+          assert len(b) == 7 and len(q) == 7
+          assert {r['Security_Key'] for r in b} == keys and {r['Source_WS_ID'] for r in b} == ids
+          assert {r['Security_Key'] for r in q} == keys and {r['Source_WS_ID'] for r in q} == ids
+          assert sum(r['Cohort'] == 'US2' for r in b) == 4 and sum(r['Cohort'] == 'AU1' for r in b) == 3
+          assert 'WS:XNYS:MOGA' not in ids and 'WS:XNAS:SOLS' not in ids
+          m = json.load(open(out/'repair_manifest_7.json', encoding='utf-8'))
+          assert m['repository_sha'] == '${{ github.sha }}'
+          assert m['source_acquisition_run_id'] == 35568241641
+          assert m['source_acquisition_repository_sha'] == '255bc56eef99c447eb659a1ece645fed27a825f7'
+          assert m['target'] == {'total': 7, 'US2': 4, 'AU1': 3}
+          assert set(m['target_security_keys']) == keys and set(m['target_source_ws_ids']) == ids
+          assert m['research_partial'] == 2527 and m['strict'] == 759 and m['frozen'] == 0
+          assert m['universe_write'] is False
+          for name, info in m['artifact_hashes'].items():
+              data = (out/name).read_bytes()
+              assert hashlib.sha256(data).hexdigest() == info['sha256']
+              assert len(data) == info['bytes']
+          print(json.dumps({'target': len(b), 'status_counts': m['acquisition_status_counts'], 'repaired_observations': m['repaired_observations'], 'universe_write': m['universe_write']}, sort_keys=True))
+          PY
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
       - name: Upload five derived evidence artifacts
+        if: ${{ inputs.mode == 'full_acquisition' }}
         uses: actions/upload-artifact@v4
         with:
           name: market-evidence-522-${{ github.run_id }}
@@ -124,5 +184,18 @@ jobs:
             output_market_evidence_522_v1/fx_daily_522.csv
             output_market_evidence_522_v1/acquisition_qa_522.csv
             output_market_evidence_522_v1/acquisition_manifest_522.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload seven-security repair evidence
+        if: ${{ inputs.mode == 'targeted_repair_7' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-evidence-repair-7-${{ github.run_id }}
+          path: |
+            output_market_evidence_repair_7_v1/security_binding_repair_7.csv
+            output_market_evidence_repair_7_v1/ohlcv_repair_7.csv
+            output_market_evidence_repair_7_v1/repair_qa_7.csv
+            output_market_evidence_repair_7_v1/repair_manifest_7.json
           if-no-files-found: error
           retention-days: 14
