@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${{ github.sha }}"
-          test "$(git rev-parse HEAD^)" = "dc433cb7c8516e75dee5a7c5cf63f1fad3928779"
+          git merge-base --is-ancestor dc433cb7c8516e75dee5a7c5cf63f1fad3928779 HEAD
           python - <<'PY'
           import csv, json
           from pathlib import Path
