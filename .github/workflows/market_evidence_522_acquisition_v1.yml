@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${{ github.sha }}"
-          test "$(git rev-parse HEAD^)" = "70710f000cc69bc18abad24f8cf565b42f5f4866"
+          test "$(git rev-parse HEAD^)" = "dc433cb7c8516e75dee5a7c5cf63f1fad3928779"
           python - <<'PY'
           import csv, json
           from pathlib import Path
