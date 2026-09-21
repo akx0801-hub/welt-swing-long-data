@@ -220,6 +220,24 @@ Not authorized by this implementation:
 - Company_Key creation
 - Tradeability, Eligibility, Scan or Execution decisions
 
+## Suspicious-return QA reconciliation v1
+
+The existing price-cache detector remains unchanged: an absolute raw-Close return greater than 0.50, excluding the existing split-near window, is an anomaly trigger only. It is not proof of defective data. The acquisition adapter derives the exact event dates from the same normalized technically-valid series and hard-fails if its event count differs from qa_symbol_frame().suspicious_returns.
+
+The deterministic registry is config/market_evidence_qa_reconciliation_registry_v1.csv. Its primary key is (Security_Key, Observation_Date); Source_WS_ID is a mandatory secondary identity guard. Ticker-only matching and live web lookup are forbidden. Only ACTIVE_VERIFIED records can reconcile an event. REVOKED records have no verification effect.
+
+Reconciliation states are SUSPICIOUS_EXTREME_RETURN_UNVERIFIED, VERIFIED_EXTREME_RETURN, CONTINUITY_BREAK_SUSPENSION and DATA_QUALITY_FAIL. The final Acquisition_Status vocabulary is unchanged. PROVIDER_REPAIR_PASS remains orthogonal processing provenance and has no readiness effect by itself.
+
+Market_Evidence_SHA256 uses this exact ordered field list: Security_Key, Source_WS_ID, Previous_Observation_Date, Observation_Date, Previous_Close, Observation_Close, Previous_Adjusted_Close, Observation_Adjusted_Close, Observation_Volume, Observation_Dividend, Observation_Stock_Split. Text is Unicode NFC; CRLF/CR inside values normalize to LF; empty/NULL is the literal <NULL>. Numeric fields are parsed as finite Decimal, rendered fixed-point, trailing fractional zeros and a trailing decimal point are removed, and all zero forms normalize to 0. The ordered normalized values are serialized as a compact UTF-8 JSON array with ensure_ascii=false and separators comma/colon, followed by exactly one LF, then SHA-256 hashed.
+
+Record_SHA256 applies the same text/NULL/serialization contract to every registry field in schema order except Record_SHA256 itself. Previous_Close, Observation_Close and Observed_Return_Pct use the Decimal numeric normalization above. Registry row order therefore does not affect individual record hashes or QA classification. Reconciliation_Registry_SHA256 is SHA-256 over the exact persisted registry file bytes.
+
+An exact ACTIVE_VERIFIED VERIFIED_EXTREME_RETURN record with matching identity/date, valid Record_SHA256 and matching Market_Evidence_SHA256 neutralizes only that exact suspicious-return event. Missing, revoked or date-unmatched records remain SUSPICIOUS_EXTREME_RETURN_UNVERIFIED and fail closed. A current-market hash mismatch fails closed as DATA_QUALITY_FAIL with reconciliation evidence mismatch; one verified event never validates another date.
+
+CONTINUITY_BREAK_SUSPENSION is activated only by an exact active registry record; zero volume alone never implies suspension. The registry defines Last_Pre_Suspension_Trade_Date and First_Post_Reinstatement_Trade_Date. Provider rows strictly between those dates are retained unchanged and, when otherwise OBSERVATION_OK, annotated OBSERVATION_SUSPENSION_NONTRADING. They do not belong to ordinary traded-session adjacency. The first post-reinstatement traded observation begins a new ordinary segment. The pre-suspension to post-reinstatement return may be computed as informational cumulative repricing only and never feeds the ordinary >50% anomaly trigger. Any non-zero trading observation inside the registry-defined continuity break, or missing exact boundary observations, fails closed as a continuity-evidence conflict.
+
+Full and targeted acquisition manifests add Reconciliation_Policy_Version and Reconciliation_Registry_SHA256 only. No Universe, membership, History QA v1 or Liquidity QA v1 authority is created or modified by this reconciliation layer.
+
 ## Next stage
 
-522 Common OHLCV Acquisition — Execution Validation Gate.
+Suspicious-Return QA Reconciliation — Controlled 522 Validation Gate.

@@ -1,9 +1,10 @@
 from __future__ import annotations
-import csv,hashlib,json,tempfile,unittest
+import copy,csv,hashlib,io,json,tempfile,unittest
 from datetime import date
 from pathlib import Path
 from unittest import mock
 import pandas as pd
+import numpy as np
 import sys
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'scripts'))
 import acquire_market_evidence_522_v1 as a
@@ -129,4 +130,90 @@ class TargetedRepair7(unittest.TestCase):
     self.assertEqual(a.main(),0)
   self.assertEqual(seen['stocks'],522)
  def test_governance_constants_unchanged(self):self.assertEqual((a.N,a.NU,a.NA,a.STRICT,a.FROZEN),(522,369,153,759,0))
+# Suspicious-return QA reconciliation v1 focused offline tests.
+FIX={
+'STRL':('WSSEC:WS:XNAS:STRL','WS:XNAS:STRL','2026-05-04','529.489990234375','2026-05-05','806.0','2429100.0'),
+'MEDP':('WSSEC:WS:XNAS:MEDP','WS:XNAS:MEDP','2025-07-21','308.8800048828125','2025-07-22','477.7300109863281','4473400.0'),
+'MP':('WSSEC:WS:XNYS:MP','WS:XNYS:MP','2025-07-09','30.030000686645508','2025-07-10','45.22999954223633','86416200.0'),
+'KD':('WSSEC:WS:XNYS:KD','WS:XNYS:KD','2026-02-06','23.489999771118164','2026-02-09','10.59000015258789','60968900.0'),
+'MSB':('WSSEC:WS:XASX:MSB','WS:XASX:MSB','2024-12-18','1.9800000190734863','2024-12-19','3.049999952316284','46747972.0'),
+'TUA':('WSSEC:WS:XASX:TUA','WS:XASX:TUA','2026-05-15','6.099999904632568','2026-05-18','2.2699999809265137','21574277.0')}
+RCL=a.RunClock('2026-09-21T12:00:00Z',date(2026,9,20))
+RCFG=a.FreeDataConfig(min_valid_bars=1,ready_unique_bars=1,stale_calendar_days=10,suspicious_abs_return=0.50)
+def rb(n):
+ sk,ws,*_=FIX[n];mic=ws.split(':')[1];tic=ws.split(':')[2]
+ return dict(Security_Key=sk,Source_WS_ID=ws,Cohort='AU1' if mic=='XASX' else 'US2',Primary_Currency='AUD' if mic=='XASX' else 'USD',Primary_MIC=mic,Primary_Ticker=tic,Provider_Symbol=tic+'.AX' if mic=='XASX' else tic,Provider_Mapping_Status='EXPLICIT_VERIFIED',ISIN='',Source_ID='')
+def rf(n,third=None):
+ sk,ws,d0,p0,d1,c1,vol=FIX[n];p=float(p0);c=float(c1);rows=[dict(open=p,high=p,low=p,close=p,adj_close=p,volume=1000.,dividends=0.,stock_splits=0.,repaired=0.),dict(open=c,high=max(c,c*1.05),low=min(c,c*.95),close=c,adj_close=c,volume=float(vol),dividends=0.,stock_splits=0.,repaired=0.)];dates=[d0,d1]
+ if third is not None:z=float(third);rows.append(dict(open=z,high=z*1.05,low=z*.95,close=z,adj_close=z,volume=12345.,dividends=0.,stock_splits=0.,repaired=0.));dates.append('2026-05-06' if n=='STRL' else '2026-06-01')
+ else:z=c*1.01;rows.append(dict(open=z,high=z*1.02,low=z*.98,close=z,adj_close=z,volume=12000.,dividends=0.,stock_splits=0.,repaired=0.));dates.append('2026-09-18')
+ return pd.DataFrame(rows,index=pd.to_datetime(dates))
+def ctdb():return dict(Security_Key='WSSEC:WS:XASX:CTD',Source_WS_ID='WS:XASX:CTD',Cohort='AU1',Primary_Currency='AUD',Primary_MIC='XASX',Primary_Ticker='CTD',Provider_Symbol='CTD.AX',Provider_Mapping_Status='EXPLICIT_VERIFIED',ISIN='',Source_ID='')
+def ctdf(conflict=False):
+ vals=[('2025-08-22',16.06999969482422,93277.),('2025-08-25',16.06999969482422,0.),('2025-08-26',16.06999969482422,1. if conflict else 0.),('2026-09-02',16.06999969482422,0.),('2026-09-03',2.319999933242798,24878302.),('2026-09-04',2.25,11883957.),('2026-09-18',2.30,5000000.)]
+ return pd.DataFrame([dict(open=c,high=c*1.05,low=c*.95,close=c,adj_close=c,volume=v,dividends=0.,stock_splits=0.,repaired=0.) for _,c,v in vals],index=pd.to_datetime([d for d,_,_ in vals]))
+def er():return {'rows':[],'by_key':{},'sha256':''}
+def lr():return a.load_reconciliation_registry()
+def registry_text(rows):
+ s=io.StringIO(newline='');w=csv.DictWriter(s,fieldnames=a.RECON_FIELDS,lineterminator='\n');w.writeheader();w.writerows(rows);return s.getvalue()
+class ReconciliationPolicy(unittest.TestCase):
+ def test_r01_threshold_unchanged(self):self.assertEqual(a.FreeDataConfig().suspicious_abs_return,.50)
+ def test_r02_detector_authoritative(self):self.assertEqual(a.qa_symbol_frame(rf('STRL'),config=RCFG,as_of=RCL.cutoff)['reason_code'],'SUSPICIOUS_RETURN_NEEDS_REPAIR')
+ def test_r03_derived_count_matches(self):self.assertEqual(len(a.derive_extreme_events(rf('STRL'),rb('STRL'),RCFG)),a.qa_symbol_frame(rf('STRL'),config=RCFG,as_of=RCL.cutoff)['suspicious_returns'])
+ def test_r04_unregistered_fail_closed(self):self.assertEqual(a.process_stock_frame(rf('STRL'),rb('STRL'),RCL,config=RCFG,registry=er()).qa['Acquisition_Status'],'DATA_QUALITY_FAIL')
+ def test_r05_unregistered_state_explicit(self):self.assertIn('SUSPICIOUS_EXTREME_RETURN_UNVERIFIED',a.process_stock_frame(rf('STRL'),rb('STRL'),RCL,config=RCFG,registry=er()).qa['QA_Flags'])
+ def test_r06_wrong_security_key_fails(self):
+  rows=copy.deepcopy(lr()['rows']);rows[0]['Security_Key']='WSSEC:WS:XNAS:WRONG';rows[0]['Record_SHA256']=a.registry_record_sha(rows[0])
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'r.csv';p.write_text(registry_text(rows))
+   with self.assertRaises(a.GovernanceFailure):a.load_reconciliation_registry(p)
+ def test_r07_wrong_source_id_fails(self):
+  rows=copy.deepcopy(lr()['rows']);rows[0]['Source_WS_ID']='WS:XNAS:WRONG';rows[0]['Record_SHA256']=a.registry_record_sha(rows[0])
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'r.csv';p.write_text(registry_text(rows))
+   with self.assertRaises(a.GovernanceFailure):a.load_reconciliation_registry(p)
+ def test_r08_wrong_date_does_not_verify(self):
+  f=rf('STRL').copy();f.index=pd.to_datetime(['2026-05-03','2026-05-04','2026-09-18']);self.assertTrue(a.reconcile_extreme_events(f,rb('STRL'),RCL,RCFG,lr())['unresolved'])
+ def test_r09_duplicate_key_fails(self):
+  rows=copy.deepcopy(lr()['rows']);z=copy.deepcopy(rows[0]);z['Record_ID']='DUP';z['Record_SHA256']=a.registry_record_sha(z);rows.append(z)
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'r.csv';p.write_text(registry_text(rows))
+   with self.assertRaises(a.GovernanceFailure):a.load_reconciliation_registry(p)
+ def test_r10_revoked_no_effect(self):
+  reg=copy.deepcopy(lr());r=reg['rows'][0];r['Verification_Status']='REVOKED';r['Record_SHA256']=a.registry_record_sha(r);reg['by_key']={(x['Security_Key'],x['Observation_Date']):x for x in reg['rows']};self.assertTrue(a.reconcile_extreme_events(rf('STRL'),rb('STRL'),RCL,RCFG,reg)['unresolved'])
+ def test_r11_bad_record_hash_fails(self):
+  rows=copy.deepcopy(lr()['rows']);rows[0]['Record_SHA256']='0'*64
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'r.csv';p.write_text(registry_text(rows))
+   with self.assertRaises(a.GovernanceFailure):a.load_reconciliation_registry(p)
+ def test_r12_market_hash_mismatch_fails(self):
+  f=rf('STRL');f.loc[pd.Timestamp('2026-05-05'),'volume']+=1;self.assertIn('RECONCILIATION_MARKET_EVIDENCE_MISMATCH',a.process_stock_frame(f,rb('STRL'),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r13_ticker_only_impossible(self):
+  r=rb('STRL');r['Security_Key']='WSSEC:WS:XNAS:FAKE';r['Source_WS_ID']='WS:XNAS:FAKE';self.assertTrue(a.reconcile_extreme_events(rf('STRL'),r,RCL,RCFG,lr())['unresolved'])
+ def test_r14_source_guard(self):self.assertTrue(a.validate_registry_identities(lr(),[rb(n) for n in FIX]+[ctdb()]))
+ def test_r15_strl(self):self.assertIn('VERIFIED_EXTREME_RETURN',a.process_stock_frame(rf('STRL'),rb('STRL'),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r16_medp(self):self.assertIn('VERIFIED_EXTREME_RETURN',a.process_stock_frame(rf('MEDP'),rb('MEDP'),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r17_mp(self):self.assertIn('VERIFIED_EXTREME_RETURN',a.process_stock_frame(rf('MP'),rb('MP'),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r18_kd(self):self.assertIn('VERIFIED_EXTREME_RETURN',a.process_stock_frame(rf('KD'),rb('KD'),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r19_msb(self):self.assertIn('VERIFIED_EXTREME_RETURN',a.process_stock_frame(rf('MSB'),rb('MSB'),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r20_tua(self):self.assertIn('VERIFIED_EXTREME_RETURN',a.process_stock_frame(rf('TUA'),rb('TUA'),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r21_second_event_unresolved(self):self.assertIn('SUSPICIOUS_EXTREME_RETURN_UNVERIFIED',a.process_stock_frame(rf('STRL',1600),rb('STRL'),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r22_repair_flag_no_readiness(self):self.assertEqual(a.process_stock_frame(rf('STRL'),rb('STRL'),RCL,config=RCFG,provider_repaired=True,registry=er()).qa['Acquisition_Status'],'DATA_QUALITY_FAIL')
+ def test_r23_zero_volume_no_inference(self):self.assertNotIn('OBSERVATION_SUSPENSION_NONTRADING',{o['Observation_Status'] for o in a.process_stock_frame(ctdf(),ctdb(),RCL,config=RCFG,registry=er()).observations})
+ def test_r24_ctd_continuity(self):self.assertIn('CONTINUITY_BREAK_SUSPENSION',a.process_stock_frame(ctdf(),ctdb(),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r25_ctd_rows_retained(self):self.assertEqual(len(a.process_stock_frame(ctdf(),ctdb(),RCL,config=RCFG,registry=lr()).observations),len(ctdf()))
+ def test_r26_ctd_annotation(self):self.assertIn('OBSERVATION_SUSPENSION_NONTRADING',{o['Observation_Status'] for o in a.process_stock_frame(ctdf(),ctdb(),RCL,config=RCFG,registry=lr()).observations})
+ def test_r27_ctd_segments(self):
+  c=a.suspension_context(ctdf(),lr()['by_key'][('WSSEC:WS:XASX:CTD','2026-09-03')]);self.assertEqual(c['pre_segment'].index.max().date().isoformat(),'2025-08-22');self.assertEqual(c['post_segment'].index.min().date().isoformat(),'2026-09-03')
+ def test_r28_ctd_cumulative_informational(self):self.assertAlmostEqual(a.suspension_context(ctdf(),lr()['by_key'][('WSSEC:WS:XASX:CTD','2026-09-03')])['cumulative_return'],2.319999933242798/16.06999969482422-1)
+ def test_r29_ctd_conflict(self):self.assertIn('CONTINUITY_EVIDENCE_CONFLICT',a.process_stock_frame(ctdf(True),ctdb(),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r30_hash_determinism(self):
+  e=a.derive_extreme_events(rf('MEDP'),rb('MEDP'),RCFG)[0];self.assertEqual(a.market_evidence_sha(e),a.market_evidence_sha(copy.deepcopy(e)));self.assertEqual(a.registry_record_sha(lr()['rows'][0]),a.registry_record_sha(copy.deepcopy(lr()['rows'][0])))
+ def test_r31_registry_order_irrelevant(self):
+  reg=lr();rev={'rows':list(reversed(reg['rows'])),'by_key':dict(reversed(list(reg['by_key'].items()))),'sha256':reg['sha256']};self.assertEqual(a.process_stock_frame(rf('MP'),rb('MP'),RCL,config=RCFG,registry=reg).qa['Acquisition_Status'],a.process_stock_frame(rf('MP'),rb('MP'),RCL,config=RCFG,registry=rev).qa['Acquisition_Status'])
+ def test_r32_registry_exact_population(self):self.assertEqual((len(lr()['rows']),sum(x['Reconciliation_State']=='VERIFIED_EXTREME_RETURN' for x in lr()['rows']),sum(x['Reconciliation_State']=='CONTINUITY_BREAK_SUSPENSION' for x in lr()['rows'])),(7,6,1))
+ def test_r33_manifest_provenance(self):
+  cfg={'artifacts':{'security_binding':'b.csv','ohlcv_daily':'o.csv','fx_daily':'f.csv','acquisition_qa':'q.csv','manifest':'m.json'}}
+  with tempfile.TemporaryDirectory() as d:
+   m=a.write(Path(d),[],[],[],[],RCL,'abc',cfg);self.assertEqual(m['Reconciliation_Policy_Version'],a.RECON_POLICY);self.assertEqual(m['Reconciliation_Registry_SHA256'],a.registry_file_sha())
 if __name__=='__main__':unittest.main()
