@@ -207,6 +207,13 @@ class ReconciliationPolicy(unittest.TestCase):
   c=a.suspension_context(ctdf(),lr()['by_key'][('WSSEC:WS:XASX:CTD','2026-09-03')]);self.assertEqual(c['pre_segment'].index.max().date().isoformat(),'2025-08-22');self.assertEqual(c['post_segment'].index.min().date().isoformat(),'2026-09-03')
  def test_r28_ctd_cumulative_informational(self):self.assertAlmostEqual(a.suspension_context(ctdf(),lr()['by_key'][('WSSEC:WS:XASX:CTD','2026-09-03')])['cumulative_return'],2.319999933242798/16.06999969482422-1)
  def test_r29_ctd_conflict(self):self.assertIn('CONTINUITY_EVIDENCE_CONFLICT',a.process_stock_frame(ctdf(True),ctdb(),RCL,config=RCFG,registry=lr()).qa['QA_Flags'])
+ def test_r29a_ctd_annotation_starts_at_formal_suspension(self):
+  obs=a.process_stock_frame(ctdf(),ctdb(),RCL,config=RCFG,registry=lr()).observations;by={o['Observation_Date']:o['Observation_Status'] for o in obs};self.assertNotEqual(by['2025-08-25'],'OBSERVATION_SUSPENSION_NONTRADING');self.assertEqual(by['2025-08-26'],'OBSERVATION_SUSPENSION_NONTRADING')
+ def test_r29b_ctd_boundary_removed_before_extreme_return_mask(self):self.assertEqual(a.derive_extreme_events(ctdf(),ctdb(),RCFG,lr()),[])
+ def test_r29c_ctd_ohlcv_unchanged(self):
+  obs=a.process_stock_frame(ctdf(),ctdb(),RCL,config=RCFG,registry=lr()).observations;z=next(o for o in obs if o['Observation_Date']=='2025-08-26');self.assertEqual((z['Close'],z['Volume']),(16.06999969482422,0.0))
+ def test_r29d_revoked_continuity_does_not_break_adjacency(self):
+  reg=copy.deepcopy(lr());rec=reg['by_key'][('WSSEC:WS:XASX:CTD','2026-09-03')];rec['Verification_Status']='REVOKED';rec['Record_SHA256']=a.registry_record_sha(rec);reg['by_key']={(x['Security_Key'],x['Observation_Date']):x for x in reg['rows']};self.assertEqual(len(a.derive_extreme_events(ctdf(),ctdb(),RCFG,reg)),1)
  def test_r30_hash_determinism(self):
   e=a.derive_extreme_events(rf('MEDP'),rb('MEDP'),RCFG)[0];self.assertEqual(a.market_evidence_sha(e),a.market_evidence_sha(copy.deepcopy(e)));self.assertEqual(a.registry_record_sha(lr()['rows'][0]),a.registry_record_sha(copy.deepcopy(lr()['rows'][0])))
  def test_r31_registry_order_irrelevant(self):

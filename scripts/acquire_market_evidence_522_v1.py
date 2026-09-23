@@ -162,10 +162,21 @@ def validate_registry_identities(registry,rows):
  for rec in registry['rows']:
   if (rec['Security_Key'],rec['Source_WS_ID']) not in pairs:raise GovernanceFailure('reconciliation registry identity outside governed cohort')
  return True
-def derive_extreme_events(x,r,cfg):
+def derive_extreme_events(x,r,cfg,registry=None):
  x=normalize_symbol_frame(x);vm=technical_valid_mask(x);xv=x.loc[vm].copy()
  if xv.empty:return []
- ret=xv['close'].pct_change(fill_method=None);split=xv['stock_splits'].fillna(0).abs()>0;near=split|split.shift(1,fill_value=False)|split.shift(-1,fill_value=False);mask=(ret.abs()>cfg.suspicious_abs_return)&~near
+ ret=xv['close'].pct_change(fill_method=None)
+ # Verified suspension/reinstatement records break ordinary return adjacency
+ # before the extreme-return mask is evaluated. Zero volume alone never does.
+ if registry:
+  for rec in registry.get('rows',[]):
+   if (txt(rec.get('Security_Key'))==r['Security_Key'] and txt(rec.get('Source_WS_ID'))==r['Source_WS_ID'] and
+       txt(rec.get('Reconciliation_State'))=='CONTINUITY_BREAK_SUSPENSION' and txt(rec.get('Verification_Status'))=='ACTIVE_VERIFIED' and
+       txt(rec.get('Continuity_Action'))=='BREAK_ORDINARY_RETURN_ADJACENCY'):
+    first_post=_parse_date(rec.get('First_Post_Reinstatement_Trade_Date'),'First_Post')
+    cut=np.asarray(xv.index.date==first_post,dtype=bool)
+    if cut.any():ret.loc[xv.index[cut]]=np.nan
+ split=xv['stock_splits'].fillna(0).abs()>0;near=split|split.shift(1,fill_value=False)|split.shift(-1,fill_value=False);mask=(ret.abs()>cfg.suspicious_abs_return)&~near
  idxs=list(xv.index);out=[]
  for idx in list(xv.index[mask]):
   pos=idxs.index(idx)
@@ -175,7 +186,7 @@ def derive_extreme_events(x,r,cfg):
   e['Market_Evidence_SHA256']=market_evidence_sha(e);out.append(e)
  return out
 def suspension_context(x,rec):
- x=normalize_symbol_frame(x);last_pre=_parse_date(rec['Last_Pre_Suspension_Trade_Date'],'Last_Pre');first_post=_parse_date(rec['First_Post_Reinstatement_Trade_Date'],'First_Post');dates=np.asarray(x.index.date,dtype=object);inside=(dates>last_pre)&(dates<first_post)
+ x=normalize_symbol_frame(x);last_pre=_parse_date(rec['Last_Pre_Suspension_Trade_Date'],'Last_Pre');suspension_start=_parse_date(rec['Suspension_Start_Date'],'Suspension_Start');first_post=_parse_date(rec['First_Post_Reinstatement_Trade_Date'],'First_Post');dates=np.asarray(x.index.date,dtype=object);inside=(dates>=suspension_start)&(dates<first_post)
  conflict=False
  if inside.any():
   v=pd.to_numeric(x.loc[inside,'volume'],errors='coerce')
@@ -193,19 +204,41 @@ def _status_after_reconciliation(x,cl,cfg):
  if u>=cfg.ready_unique_bars and v>=cfg.min_valid_bars:return 'READY','ISOLATED_INVALID_BAR_EXCLUDED' if bad==1 else 'FILTERED_INVALID_BARS_EXCLUDED' if bad>1 else ''
  return 'SHORT_HISTORY','INSUFFICIENT_HISTORY'
 def reconcile_extreme_events(x,r,cl,cfg,registry):
- qa=qa_symbol_frame(x,config=cfg,as_of=cl.cutoff);events=derive_extreme_events(x,r,cfg)
- if len(events)!=int(qa.get('suspicious_returns',0)):raise GovernanceFailure('extreme-event detector count mismatch')
+ qa=qa_symbol_frame(x,config=cfg,as_of=cl.cutoff)
  flags=[];unresolved=[];mismatch=[];verified=[];continuity=[];annotation_dates=set();conflict=False
+ # Validate and apply continuity records independently of ordinary return events,
+ # because the verified boundary must exist before those returns are derived.
+ continuity_records=[]
+ if registry:
+  for rec in registry.get('rows',[]):
+   if (txt(rec.get('Security_Key'))==r['Security_Key'] and txt(rec.get('Source_WS_ID'))==r['Source_WS_ID'] and
+       txt(rec.get('Reconciliation_State'))=='CONTINUITY_BREAK_SUSPENSION' and txt(rec.get('Verification_Status'))=='ACTIVE_VERIFIED' and
+       txt(rec.get('Continuity_Action'))=='BREAK_ORDINARY_RETURN_ADJACENCY'):
+    continuity_records.append(rec)
+ for rec in continuity_records:
+  xx=normalize_symbol_frame(x);prev=_parse_date(rec['Previous_Observation_Date'],'Previous_Observation_Date');obsd=_parse_date(rec['Observation_Date'],'Observation_Date');dates=np.asarray(xx.index.date,dtype=object)
+  pre=xx.loc[dates==prev];post=xx.loc[dates==obsd]
+  if len(pre)!=1 or len(post)!=1:
+   conflict=True;continue
+  p=pre.iloc[0];c=post.iloc[0]
+  e=dict(Security_Key=r['Security_Key'],Source_WS_ID=r['Source_WS_ID'],Previous_Observation_Date=prev.isoformat(),Observation_Date=obsd.isoformat(),Previous_Close=p['close'],Observation_Close=c['close'],Previous_Adjusted_Close=p['adj_close'],Observation_Adjusted_Close=c['adj_close'],Observation_Volume=c['volume'],Observation_Dividend=c['dividends'],Observation_Stock_Split=c['stock_splits'])
+  e['Market_Evidence_SHA256']=market_evidence_sha(e)
+  if rec['Market_Evidence_SHA256']!=e['Market_Evidence_SHA256']:
+   mismatch.append(e);continue
+  ctx=suspension_context(x,rec)
+  if ctx['conflict']:conflict=True;continue
+  continuity.append((e,ctx,rec))
+  for d,m in zip(xx.index.date,ctx['inside_mask']):
+   if m:annotation_dates.add(d.isoformat())
+ events=derive_extreme_events(x,r,cfg,registry)
+ expected=int(qa.get('suspicious_returns',0))
+ if len(events)+len(continuity)!=expected:raise GovernanceFailure('extreme-event detector count mismatch')
  for e in events:
   rec=registry['by_key'].get((r['Security_Key'],e['Observation_Date'])) if registry else None
   if not rec or rec['Verification_Status']!='ACTIVE_VERIFIED':unresolved.append(e);continue
   if rec['Source_WS_ID']!=r['Source_WS_ID'] or rec['Market_Evidence_SHA256']!=e['Market_Evidence_SHA256']:mismatch.append(e);continue
   if rec['Reconciliation_State']=='VERIFIED_EXTREME_RETURN':verified.append(e);continue
-  ctx=suspension_context(x,rec)
-  if ctx['conflict']:conflict=True;continue
-  continuity.append((e,ctx,rec));xx=normalize_symbol_frame(x)
-  for d,m in zip(xx.index.date,ctx['inside_mask']):
-   if m:annotation_dates.add(d.isoformat())
+  unresolved.append(e)
  if verified:flags.append('VERIFIED_EXTREME_RETURN')
  if continuity:flags.append('CONTINUITY_BREAK_SUSPENSION')
  if unresolved:flags.extend(['SUSPICIOUS_EXTREME_RETURN_UNVERIFIED','SUSPICIOUS_RETURN_NEEDS_REPAIR'])
@@ -213,7 +246,7 @@ def reconcile_extreme_events(x,r,cl,cfg,registry):
  if conflict:flags.extend(['DATA_QUALITY_FAIL','CONTINUITY_EVIDENCE_CONFLICT'])
  if unresolved or mismatch or conflict:
   st='DATA_QUALITY_FAIL';reason='SUSPICIOUS_EXTREME_RETURN_UNVERIFIED' if unresolved else 'RECONCILIATION_MARKET_EVIDENCE_MISMATCH' if mismatch else 'CONTINUITY_EVIDENCE_CONFLICT'
- elif events and qa.get('status')=='QUARANTINE' and qa.get('reason_code')=='SUSPICIOUS_RETURN_NEEDS_REPAIR':st,reason=_status_after_reconciliation(x,cl,cfg)
+ elif (events or continuity) and qa.get('status')=='QUARANTINE' and qa.get('reason_code')=='SUSPICIOUS_RETURN_NEEDS_REPAIR':st,reason=_status_after_reconciliation(x,cl,cfg)
  else:
   sm={'READY':'READY','WARMUP':'SHORT_HISTORY','STALE':'STALE_HISTORY','QUARANTINE':'DATA_QUALITY_FAIL','DOWNLOAD_FAILED':'NO_HISTORY'};st=sm.get(txt(qa.get('status')),'DATA_QUALITY_FAIL');reason=txt(qa.get('reason_code'))
  return dict(qa=qa,events=events,status=st,reason=reason,flags=flags,annotation_dates=annotation_dates,verified=verified,continuity=continuity,unresolved=unresolved,mismatch=mismatch,conflict=conflict)
