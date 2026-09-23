@@ -232,7 +232,10 @@ def reconcile_extreme_events(x,r,cl,cfg,registry):
    if m:annotation_dates.add(d.isoformat())
  events=derive_extreme_events(x,r,cfg,registry)
  expected=int(qa.get('suspicious_returns',0))
- if len(events)+len(continuity)!=expected:raise GovernanceFailure('extreme-event detector count mismatch')
+ # The verified continuity boundary is consumed before ordinary-return derivation.
+ # Count that matched boundary even if its evidence later fails closed.
+ consumed_continuity=len(continuity_records)
+ if len(events)+consumed_continuity!=expected:raise GovernanceFailure('extreme-event detector count mismatch')
  for e in events:
   rec=registry['by_key'].get((r['Security_Key'],e['Observation_Date'])) if registry else None
   if not rec or rec['Verification_Status']!='ACTIVE_VERIFIED':unresolved.append(e);continue
