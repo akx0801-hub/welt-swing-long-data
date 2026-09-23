@@ -8,3 +8,4 @@ WS:XLON:LMPL.L,LMP.L,LMPL.L,RIC/source ticker differs from Yahoo symbol,2026-08-
 WS:XLON:BAES.L,BA.L,BAES.L,RIC/source ticker differs from Yahoo symbol,2026-08-23
 WS:XSTO:EQTAB.ST,EQT.ST,EQTAB.ST,RIC/source ticker differs from Yahoo symbol,2026-08-23
 WS:XETR:P911_P.DE,P911.DE,P911_p.DE,RIC/source ticker differs from Yahoo symbol,2026-08-23
+WS:XNYS:MOGA,MOG-A,MOGA,Yahoo symbol differs from canonical NYSE ticker,2026-09-23
