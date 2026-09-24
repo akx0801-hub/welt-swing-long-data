@@ -1,0 +1,81 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_2527_CURRENT_ELIGIBILITY_RECOMPUTATION_AND_U3K_INPUT_PLAN",
+  "legacy_stage_name": "CURRENT_MASTER_RESEARCH_PARTIAL_1633_CURRENT_ELIGIBILITY_RECOMPUTATION_AND_U3K_INPUT_PLAN",
+  "version": "v0.39",
+  "run_mode": "BOUNDED_OFFLINE_ELIGIBILITY_DRY_RUN_ONLY",
+  "start_head": "9d195dbbf89f11b51d28cc987c5ed4686965ca1e",
+  "research_partial": 2527,
+  "prior_authoritative_strict_diagnostic": 759,
+  "proposed_current_strict_dry_run": 1425,
+  "overlap_with_prior_759": 622,
+  "proposed_additions": 803,
+  "proposed_removals": 137,
+  "eligibility_counts": {
+    "FAIL_LIQUIDITY": 48,
+    "HISTORY_CONFLICT": 236,
+    "HISTORY_PARTIAL": 5,
+    "HISTORY_UNAVAILABLE": 19,
+    "INSTRUMENT_REVIEW": 667,
+    "INSUFFICIENT_HISTORY": 7,
+    "LOW_LIQUIDITY_EXCEPTION": 120,
+    "PASS_STRICT_CANDIDATE": 1425
+  },
+  "cohort_proposed_strict": {
+    "BASE_1633": 622,
+    "US1": 372,
+    "US2": 368,
+    "AU1": 63
+  },
+  "removals_from_prior_759_by_reason": {
+    "HISTORY_CONFLICT": 137
+  },
+  "additions_by_cohort": {
+    "AU1": 63,
+    "US1": 372,
+    "US2": 368
+  },
+  "market_evidence_522": {
+    "US2": 369,
+    "AU1": 153,
+    "total": 522,
+    "acquisition_READY": 521,
+    "acquisition_SHORT_HISTORY": 1,
+    "acquisition_NO_HISTORY": 0,
+    "acquisition_DATA_QUALITY_FAIL": 0,
+    "validated_run": 35905876433,
+    "validated_sha": "126dbcd14282af1ff2a72a67f99ffb8ae7e180a3",
+    "artifact_digest": "sha256:2b36605125f5c70354bcf7536eb52e0ecd0a11e631e422d8a21746df466ac161"
+  },
+  "SOLS": {
+    "Source_WS_ID": "WS:XNAS:SOLS",
+    "eligibility": "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K",
+    "ordinary_valid_bars": 231
+  },
+  "CTD": {
+    "Source_WS_ID": "WS:XASX:CTD",
+    "acquisition_status": "READY",
+    "eligibility": "INSUFFICIENT_HISTORY_FOR_STANDARD_U3K",
+    "ordinary_valid_bars": 247,
+    "note": "Acquisition continuity validity is separate from Standard-U3K traded-history sufficiency."
+  },
+  "history_thresholds": {
+    "minimum_unique_bars": 260,
+    "minimum_valid_bars": 252
+  },
+  "liquidity_thresholds": {
+    "preferred_turnover_eur": 20000000,
+    "standard_pass_turnover_eur": 15000000,
+    "low_exception_turnover_eur": 5000000,
+    "minimum_usable_sessions": 18,
+    "window_sessions": 20
+  },
+  "u3k_input_plan_count": 1425,
+  "u3k_cap_required": false,
+  "u3k_frozen_members": 0,
+  "universe_write": false,
+  "productive": false,
+  "P0": "NOT_RUN",
+  "P1": "NOT_RUN",
+  "P2_TRADEABILITY": "NOT_RUN",
+  "market_provider_calls": 0
+}

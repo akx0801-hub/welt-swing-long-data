@@ -1,0 +1,81 @@
+{
+  "stage": "CURRENT_MASTER_RESEARCH_PARTIAL_2527_CURRENT_ELIGIBILITY_RECOMPUTATION_AND_U3K_INPUT_PLAN",
+  "version": "v0.39",
+  "start_head": "9d195dbbf89f11b51d28cc987c5ed4686965ca1e",
+  "input_authorities": {
+    "research_partial": {
+      "path": "universe/research_partial_1633.csv",
+      "git_blob_sha": "d8a32d96cc086727da099fd21bd311d13ff38117",
+      "rows": 2527
+    },
+    "prior_eligibility": {
+      "path": "output_eligibility_dry_run_1633_v0_52/eligibility_dry_run_1633_v0.52.csv",
+      "git_blob_sha": "1f13c5136b32959fdb60154f3f0e7c96f1d6742b",
+      "strict": 759
+    },
+    "history_policy": {
+      "path": "config/history_qa_v1_policy.json",
+      "git_blob_sha": "5bb727e0780c74878977584fb6f709213b80db20",
+      "policy_version": "WELT-SWING-HISTORY-QA-v1.0"
+    },
+    "liquidity_policy": {
+      "path": "config/liquidity_qa_v1_policy.json",
+      "git_blob_sha": "1e2dc1d04e39744cd14ff08bb035cf53bc38a81c",
+      "policy_version": "WELT-SWING-LIQUIDITY-QA-v1.0"
+    },
+    "mapping_authority": {
+      "path": "scripts/generate_company_security_mapping_v1.py",
+      "git_blob_sha": "e46836d1ebfc5cf2ef261a6b3b70cd0b97bd8ca1"
+    },
+    "history_qa_validation": {
+      "run_id": 34843238084,
+      "artifact_id": 10346693672,
+      "digest": "sha256:1045793d906c5bcaba64d77413cd477d94aa76d8773af37acc412b3eb399c1a2"
+    },
+    "liquidity_qa_validation": {
+      "run_id": 34952001742,
+      "artifact_id": 10389308551,
+      "digest": "sha256:092567336ae927ef42c52b9ec60fa7187c2c943548e5f3e5976971df0bfd2e5e"
+    },
+    "market_evidence_522": {
+      "run_id": 35905876433,
+      "artifact_id": 10771257237,
+      "digest": "sha256:2b36605125f5c70354bcf7536eb52e0ecd0a11e631e422d8a21746df466ac161",
+      "validated_sha": "126dbcd14282af1ff2a72a67f99ffb8ae7e180a3"
+    }
+  },
+  "output_hashes": {
+    "output_current_eligibility_dry_run_2527_v0_39/eligibility_dry_run_2527_v0.39.csv": {
+      "sha256": "dcaee0fd97e15c1a1bb5c3ea45b8cc9bd02e301eb6a3b7d8a31f7c227c33053e",
+      "bytes": 839337,
+      "rows": 2527
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/u3k_input_plan_v0.39.csv": {
+      "sha256": "908197ab05c2c6409844c293e1bd4336c48a75a77a0a7dab33e424add3f2221c",
+      "bytes": 199201,
+      "rows": 1425
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/summary_v0.39.json": {
+      "sha256": "2bfe3cdfc5535e0752c1567cf069bb1638725bc843a4f9cc7c207056f0d56e0d",
+      "bytes": 2496
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/stage_checkpoint_v0.39.json": {
+      "sha256": "5003a98edca2d6bb9eb5b182958b7d2655f0d854ad621695a7496792beae4166",
+      "bytes": 1267
+    },
+    "docs/validation/Current_Master_Research_Partial_2527_Current_Eligibility_Recomputation_and_U3K_Input_Plan_v0.39.md": {
+      "sha256": "bb803de2b5689913d5996edf0d7b1b2ce5eb3444e602434f2c5c866f8b23afb4",
+      "bytes": 2764
+    }
+  },
+  "governance": {
+    "research_partial": 2527,
+    "prior_authoritative_strict": 759,
+    "proposed_strict_dry_run": 1425,
+    "frozen": 0,
+    "universe_write": false,
+    "productive": false
+  },
+  "deterministic": true,
+  "market_provider_calls": 0
+}
