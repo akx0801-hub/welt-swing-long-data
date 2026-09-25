@@ -1,0 +1,74 @@
+{
+  "stage": "U3K_FREEZE_PREPARATION_1425",
+  "version": "v0.40",
+  "start_head": "1c1fe515b0c1b5e914c20b0b83eddcca4da0933c",
+  "input_authorities": {
+    "u3k_input_plan": {
+      "path": "output_current_eligibility_dry_run_2527_v0_39/u3k_input_plan_v0.39.csv",
+      "git_blob_sha": "17fce49c585fd748bdf2088c20f94aaea328c835",
+      "sha256": "908197ab05c2c6409844c293e1bd4336c48a75a77a0a7dab33e424add3f2221c",
+      "rows": 1425
+    },
+    "eligibility_dry_run": {
+      "path": "output_current_eligibility_dry_run_2527_v0_39/eligibility_dry_run_2527_v0.39.csv",
+      "git_blob_sha": "c84be3d4c128358b9b74d96a93fb1ee5f444cbc7",
+      "sha256": "dcaee0fd97e15c1a1bb5c3ea45b8cc9bd02e301eb6a3b7d8a31f7c227c33053e",
+      "rows": 2527
+    },
+    "source_summary": {
+      "path": "output_current_eligibility_dry_run_2527_v0_39/summary_v0.39.json",
+      "git_blob_sha": "5c8d6792ae0bd1b6a26121276f22c93a3b8cabb5"
+    },
+    "source_manifest": {
+      "path": "output_current_eligibility_dry_run_2527_v0_39/manifest_v0.39.json",
+      "git_blob_sha": "84972b4fd4c6705439b7a5c49dcd70345c6e4aaa"
+    },
+    "source_checkpoint": {
+      "path": "output_current_eligibility_dry_run_2527_v0_39/stage_checkpoint_v0.39.json",
+      "git_blob_sha": "03f787399513fb4068bd971a3acd9b7097a21ffd"
+    },
+    "validation_authority": {
+      "path": "docs/validation/Current_Master_Research_Partial_2527_Current_Eligibility_Recomputation_and_U3K_Input_Plan_v0.39.md",
+      "git_blob_sha": "4bbf5fc760e31ae523c496eb0d6a54d5876a0f65"
+    },
+    "frozen_authority": {
+      "path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+      "git_blob_sha": "6083e1335768e9414cb119d15369b71ebbc589d2",
+      "rows": 0
+    }
+  },
+  "output_hashes": {
+    "output_u3k_freeze_preparation_1425_v0_40/prospective_u3k_membership_v0.40.csv": {
+      "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+      "rows": 1425
+    },
+    "output_u3k_freeze_preparation_1425_v0_40/summary_v0.40.json": {
+      "sha256": "f75bd8e8644add8fa3e35b8a9a941d914165d19b60ff16caac0b5a2d82073ea2"
+    },
+    "output_u3k_freeze_preparation_1425_v0_40/stage_checkpoint_v0.40.json": {
+      "sha256": "8c7b181932105ddc8fff6ebdccb7f88d38271e3e16909f93e5af997ffc45df31"
+    },
+    "docs/validation/U3K_Freeze_Preparation_1425_v0.40.md": {
+      "sha256": "c6d7bbe5ea29f9e86f1e9f77be25642e0b5b024033cc1abf843296c40bb74377"
+    }
+  },
+  "readiness": {
+    "prospective_membership_count": 1425,
+    "duplicate_security_key": 0,
+    "duplicate_source_ws_id": 0,
+    "fail_closed_state_leakage": 0,
+    "SOLS_excluded": true,
+    "CTD_excluded": true,
+    "cap_required": false,
+    "freeze_authorized": false,
+    "frozen_members_current": 0,
+    "universe_write": false,
+    "productive": false,
+    "deterministic": true
+  },
+  "calls": {
+    "market_provider": 0,
+    "scalable": 0,
+    "alpha_vantage": 0
+  }
+}
