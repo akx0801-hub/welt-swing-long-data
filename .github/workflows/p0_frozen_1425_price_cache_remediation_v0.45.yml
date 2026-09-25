@@ -1,0 +1,109 @@
+name: P0 Frozen 1425 Price Cache Remediation v0.45
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/p0_frozen_1425_price_cache_remediation_v0_45.py
+      - .github/workflows/p0_frozen_1425_price_cache_remediation_v0.45.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  remediate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout bounded execution harness
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install bounded price-cache dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install "yfinance==1.6.0" "pandas==2.2.3" "numpy==2.1.3"
+
+      - name: Offline preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/price_cache.py scripts/p0_frozen_1425_price_cache_remediation_v0_45.py
+          python scripts/p0_frozen_1425_price_cache_remediation_v0_45.py             --offline-preflight             --repository-sha "$GITHUB_SHA"
+
+      - name: Download authoritative 522 market evidence
+        shell: bash
+        env:
+          GH_TOKEN: $${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p runtime_input/market_evidence_522
+          gh run download 35905876433             --repo "$GITHUB_REPOSITORY"             --name market-evidence-522-35905876433             --dir runtime_input/market_evidence_522
+          test -f runtime_input/market_evidence_522/security_binding_522.csv
+          test -f runtime_input/market_evidence_522/ohlcv_daily_522.csv
+          test -f runtime_input/market_evidence_522/acquisition_qa_522.csv
+          test -f runtime_input/market_evidence_522/acquisition_manifest_522.json
+
+      - name: Execute exact Frozen-1425 price-cache remediation
+        shell: bash
+        env:
+          PYTHONUNBUFFERED: '1'
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_price_cache_v0_45
+          rm -f runtime_cache/p0_frozen_1425_v0_45.sqlite
+          python scripts/p0_frozen_1425_price_cache_remediation_v0_45.py             --execute             --repository-sha "$GITHUB_SHA"             --market-evidence-dir runtime_input/market_evidence_522             --output-dir output_p0_frozen_1425_price_cache_v0_45             --db runtime_cache/p0_frozen_1425_v0_45.sqlite
+
+      - name: Validate bounded result
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+          out=Path('output_p0_frozen_1425_price_cache_v0_45')
+          s=json.load(open(out/'summary_v0.45.json',encoding='utf-8'))
+          c=json.load(open(out/'stage_checkpoint_v0.45.json',encoding='utf-8'))
+          rows=list(csv.DictReader(open(out/'cache_state_v0.45.csv',encoding='utf-8')))
+          frozen=Path('universe/SWING_U3K_FROZEN_v0.5.csv').read_bytes()
+          assert s['status']=='PASS'
+          assert s['initial_population']=={'current_ingestion':431,'stale_refresh':994,'sum':1425}
+          assert len(rows)==1425
+          assert len({r['Security_Key'] for r in rows})==1425
+          assert len({r['Source_WS_ID'] for r in rows})==1425
+          assert sum(s['final_price_cache_status_counts'].values())==1425
+          assert hashlib.sha256(frozen).hexdigest()=='54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb'
+          assert s['alpha_vantage_calls']==0
+          assert s['p0_run'] is False
+          assert s['feature_gate_promoted'] is False
+          assert s['rs_gate_promoted'] is False
+          assert s['parameter_promoted'] is False
+          assert s['universe_mutation'] is False
+          assert s['productive'] is False
+          assert c['tests_failed']==0
+          print(json.dumps({'ready':s['final_price_cache_status_counts'].get('READY',0),'nonready':s['nonready_count'],'p0_price_cache_ready':s['p0_price_cache_ready']},sort_keys=True))
+          PY
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded remediation evidence and runtime cache
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-price-cache-v0.45-${{ github.run_id }}
+          path: |
+            output_p0_frozen_1425_price_cache_v0_45/
+            runtime_cache/p0_frozen_1425_v0_45.sqlite
+          if-no-files-found: error
+          retention-days: 14
