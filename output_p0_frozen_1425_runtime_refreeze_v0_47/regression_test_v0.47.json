@@ -1,0 +1,9 @@
+{
+  "workflow_run_id": 36177809571,
+  "test_file": "tests/test_p0_frozen_1425_runtime_refreeze_v0_47.py",
+  "result": "PASS",
+  "tests_run": 1,
+  "assertion": "finalize/checkpoint/close occurs before stable_file_binding hash",
+  "implementation": "scripts/p0_frozen_1425_runtime_refreeze_v0_47.py",
+  "note": "The source v0.45 artifact is already finalized, so the production refreeze preserves its bytes exactly; the regression fixture exercises WAL finalization ordering on a temporary SQLite database."
+}

@@ -1,0 +1,43 @@
+{
+  "stage": "P0_FROZEN_1425_V045_RUNTIME_CACHE_INTEGRITY_CORRECTION_REFREEZE",
+  "version": "v0.47",
+  "required_start_head": "50672a0892d0d7d39c6f1dd255aa0af51565d521",
+  "harness_commits": [
+    "90b09b70286d532758352bd5b87e3aef382ae8c4",
+    "1d370bcebbd7c6655e8c23dfebf0d45d34c3fef7"
+  ],
+  "source_runtime": {
+    "run_id": 36138138825,
+    "artifact_id": 10865594502,
+    "artifact_zip_sha256": "d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab",
+    "sqlite_sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "bytes": 144216064
+  },
+  "refrozen_runtime": {
+    "run_id": 36177809571,
+    "artifact_id": 10882986280,
+    "artifact_zip_sha256": "1d2609551e3fce7f25a4910b949d0215244b5a73bbf915d061d65798e1414902",
+    "sqlite_sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "bytes": 144216064
+  },
+  "evidence_blobs": {
+    "runtime_integrity_v0.47.json": "0e7e40886d1b92a9386403361f9cf4249daf2c0d",
+    "state_reconciliation_v0.47.csv": "191908f73f695f4697aa5b3b88d3be8e34f7bd98",
+    "hash_binding_v0.47.json": "bef1056b9e8c1ed8e0a26d25c23e371b042a3988",
+    "regression_test_v0.47.json": "a109b269b4c214afa525a944a8ba043e21ecfbc5",
+    "summary_v0.47.json": "696b9c9b26a333b8b9bb9d8a97fef0af772b527b",
+    "stage_checkpoint_v0.47.json": "a21f68a720a4e04fd6868d01388e70dadc7f6841",
+    "docs/validation/P0_Frozen_1425_Runtime_Cache_Integrity_Refreeze_v0.47.md": "455bb0d1a3b68b15f4aeaf8065e42362614ae018"
+  },
+  "result": {
+    "status": "PASS",
+    "runtime_cache_authority_valid": true,
+    "p0_price_cache_ready": false,
+    "ready": 1415,
+    "quarantine": 10,
+    "market_provider_calls": 0,
+    "alpha_vantage_calls": 0,
+    "scalable_calls": 0,
+    "productive": false
+  }
+}

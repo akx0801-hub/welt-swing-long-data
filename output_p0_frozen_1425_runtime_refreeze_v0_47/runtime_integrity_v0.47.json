@@ -1,0 +1,115 @@
+{
+  "stage": "P0_FROZEN_1425_V045_RUNTIME_CACHE_INTEGRITY_CORRECTION_REFREEZE",
+  "version": "v0.47",
+  "required_start_head": "50672a0892d0d7d39c6f1dd255aa0af51565d521",
+  "successful_harness_head": "1d370bcebbd7c6655e8c23dfebf0d45d34c3fef7",
+  "source_artifact": {
+    "workflow_run_id": 36138138825,
+    "artifact_id": 10865594502,
+    "artifact_zip_sha256": "d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab"
+  },
+  "source_sqlite": {
+    "path": "runtime_cache/p0_frozen_1425_v0_45.sqlite",
+    "bytes": 144216064,
+    "sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "integrity_check": "ok",
+    "price_rows": 711204,
+    "states": 1425,
+    "status_counts": {
+      "READY": 1415,
+      "QUARANTINE": 10
+    }
+  },
+  "refrozen_artifact": {
+    "workflow_run_id": 36177809571,
+    "artifact_id": 10882986280,
+    "artifact_name": "p0-frozen-1425-runtime-refreeze-v0.47-36177809571",
+    "artifact_zip_sha256": "1d2609551e3fce7f25a4910b949d0215244b5a73bbf915d061d65798e1414902",
+    "head_sha": "1d370bcebbd7c6655e8c23dfebf0d45d34c3fef7"
+  },
+  "refrozen_sqlite": {
+    "path": "runtime_cache/p0_frozen_1425_v0_47.sqlite",
+    "bytes": 144216064,
+    "sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "packaged_bytes": 144216064,
+    "packaged_sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "hash_pass_1": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "hash_pass_2": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "byte_identical_to_source": true,
+    "integrity_check": "ok",
+    "price_rows": 711204,
+    "states": 1425,
+    "status_counts": {
+      "READY": 1415,
+      "QUARANTINE": 10
+    }
+  },
+  "logical_state_reconciliation": {
+    "ready_identity_missing": 0,
+    "ready_identity_unexpected": 0,
+    "exact10_equal": true,
+    "compared_state_field_mismatches": 0
+  },
+  "exact_quarantine": {
+    "WS:XASX:ANZ": {
+      "provider": "ANZ.AX",
+      "status": "QUARANTINE",
+      "reason": "STRICT_OHLC_RELATION_FAIL"
+    },
+    "WS:XASX:BSL": {
+      "provider": "BSL.AX",
+      "status": "QUARANTINE",
+      "reason": "STRICT_OHLC_RELATION_FAIL"
+    },
+    "WS:XASX:BXB": {
+      "provider": "BXB.AX",
+      "status": "QUARANTINE",
+      "reason": "STRICT_OHLC_RELATION_FAIL"
+    },
+    "WS:XASX:CBA": {
+      "provider": "CBA.AX",
+      "status": "QUARANTINE",
+      "reason": "STRICT_OHLC_RELATION_FAIL"
+    },
+    "WS:XASX:NXT": {
+      "provider": "NXT.AX",
+      "status": "QUARANTINE",
+      "reason": "STRICT_OHLC_RELATION_FAIL"
+    },
+    "WS:XASX:PME": {
+      "provider": "PME.AX",
+      "status": "QUARANTINE",
+      "reason": "STRICT_OHLC_RELATION_FAIL"
+    },
+    "WS:XASX:QAN": {
+      "provider": "QAN.AX",
+      "status": "QUARANTINE",
+      "reason": "STRICT_OHLC_RELATION_FAIL"
+    },
+    "WS:XASX:SDF": {
+      "provider": "SDF.AX",
+      "status": "QUARANTINE",
+      "reason": "STRICT_OHLC_RELATION_FAIL"
+    },
+    "WS:XNAS:ECHO": {
+      "provider": "ECHO",
+      "status": "QUARANTINE",
+      "reason": "SUSPICIOUS_RETURN_NEEDS_REPAIR"
+    },
+    "WS:XNAS:MRNA": {
+      "provider": "MRNA",
+      "status": "QUARANTINE",
+      "reason": "SUSPICIOUS_RETURN_NEEDS_REPAIR"
+    }
+  },
+  "frozen": {
+    "members": 1425,
+    "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+    "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+  },
+  "calls": {
+    "market_provider": 0,
+    "alpha_vantage": 0,
+    "scalable": 0
+  }
+}

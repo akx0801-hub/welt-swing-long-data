@@ -1,0 +1,16 @@
+{
+  "declared_runtime_sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+  "packaged_runtime_sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+  "sha256_equal": true,
+  "declared_runtime_bytes": 144216064,
+  "packaged_runtime_bytes": 144216064,
+  "bytes_equal": true,
+  "source_runtime_sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+  "source_and_refrozen_byte_identical": true,
+  "hash_pass_1": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+  "hash_pass_2": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+  "deterministic_repeat": true,
+  "packaged_artifact_id": 10882986280,
+  "packaged_artifact_zip_sha256": "1d2609551e3fce7f25a4910b949d0215244b5a73bbf915d061d65798e1414902",
+  "verification": "PASS"
+}
