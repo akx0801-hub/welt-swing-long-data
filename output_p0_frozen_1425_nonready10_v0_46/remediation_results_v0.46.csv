@@ -1,0 +1,11 @@
+Security_Key,Source_WS_ID,Primary_MIC,Primary_Ticker,Provider_Symbol,Input_Blocker,Remediation_Verdict,Evidence_Basis,Final_Price_Cache_Status
+WSSEC:WS:XASX:ANZ,WS:XASX:ANZ,XASX,ANZ,ANZ.AX,STRICT_OHLC_RELATION_FAIL,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XASX:BSL,WS:XASX:BSL,XASX,BSL,BSL.AX,STRICT_OHLC_RELATION_FAIL,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XASX:BXB,WS:XASX:BXB,XASX,BXB,BXB.AX,STRICT_OHLC_RELATION_FAIL,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XASX:CBA,WS:XASX:CBA,XASX,CBA,CBA.AX,STRICT_OHLC_RELATION_FAIL,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XASX:NXT,WS:XASX:NXT,XASX,NXT,NXT.AX,STRICT_OHLC_RELATION_FAIL,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XASX:PME,WS:XASX:PME,XASX,PME,PME.AX,STRICT_OHLC_RELATION_FAIL,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XASX:QAN,WS:XASX:QAN,XASX,QAN,QAN.AX,STRICT_OHLC_RELATION_FAIL,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XASX:SDF,WS:XASX:SDF,XASX,SDF,SDF.AX,STRICT_OHLC_RELATION_FAIL,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XNAS:ECHO,WS:XNAS:ECHO,XNAS,ECHO,ECHO,SUSPICIOUS_RETURN_NEEDS_REPAIR,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE
+WSSEC:WS:XNAS:MRNA,WS:XNAS:MRNA,XNAS,MRNA,MRNA,SUSPICIOUS_RETURN_NEEDS_REPAIR,QUARANTINE_RETAINED,FAIL_CLOSED: v0.45 runtime SQLite artifact SHA-256 mismatch; no anomaly-level state change authorized.,QUARANTINE

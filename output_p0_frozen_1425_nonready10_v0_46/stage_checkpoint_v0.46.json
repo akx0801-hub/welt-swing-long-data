@@ -1,0 +1,30 @@
+{
+  "stage": "P0_FROZEN_1425_NONREADY10_PRICE_QA_EXACT_REMEDIATION",
+  "version": "v0.46",
+  "status": "FAIL_CLOSED",
+  "tests": {
+    "T01_REQUIRED_START_HEAD_EXACT": "PASS",
+    "T02_EXACT10_RECONCILIATION": "PASS",
+    "T03_FROZEN_BLOB_UNCHANGED": "PASS",
+    "T04_V045_ARTIFACT_ZIP_DIGEST": "PASS",
+    "T05_V045_ALL_BOUNDED_OUTPUT_HASHES": "PASS",
+    "T06_V045_RUNTIME_SQLITE_SIZE": "PASS",
+    "T07_V045_RUNTIME_SQLITE_SHA256": "FAIL",
+    "T08_SQLITE_INTEGRITY_CHECK": "PASS",
+    "T09_1415_READY_BASELINE_UNCHANGED": "PASS",
+    "T10_PROVIDER_REFETCH_ZERO": "PASS",
+    "T11_ALPHA_VANTAGE_ZERO": "PASS",
+    "T12_SCALABLE_ZERO": "PASS",
+    "T13_P0_NOT_RUN": "PASS",
+    "T14_FEATURE_RS_PARAMETER_NOT_PROMOTED": "PASS",
+    "T15_PRODUCTIVE_FALSE": "PASS"
+  },
+  "tests_collected": 15,
+  "tests_passed": 14,
+  "tests_failed": 1,
+  "tests_skipped": 0,
+  "p0_price_cache_ready": false,
+  "final_total": 1425,
+  "final_ready": 1415,
+  "final_quarantine": 10
+}

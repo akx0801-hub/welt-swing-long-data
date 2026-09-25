@@ -1,0 +1,9 @@
+Check,Expected,Actual,Status,Implication
+Artifact_ZIP_SHA256,d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab,d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab,PASS,Downloaded artifact is the authoritative artifact.
+Runtime_SQLite_Size_Bytes,144216064,144216064,PASS,File size matches v0.45 manifest.
+Runtime_SQLite_SHA256,a245c23c7644589ef6c79195b61c13dfdd47bd8b89b9f3ee923de205a73541c0,9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9,FAIL,Authoritative runtime-cache byte identity is internally inconsistent; remediation must fail closed.
+Runtime_SQLite_Integrity_Check,ok,ok,PASS,"SQLite is structurally readable, but byte-authority mismatch remains."
+Runtime_SQLite_State_Count,1425,1425,PASS,State count matches v0.45 summary.
+Runtime_SQLite_Status_Counts,READY=1415;QUARANTINE=10,READY=1415;QUARANTINE=10,PASS,"Logical state matches v0.45 outputs, but byte hash authority still fails."
+V045_Output_File_Hashes,ALL_MATCH,ALL_MATCH,PASS,All ten bounded v0.45 evidence-output hashes match; inconsistency is isolated to runtime SQLite hash.
+Hash_Close_Order,SQLite final bytes hashed after close/checkpoint,v0.45 script hashes db_path before cache.close(); SQLitePriceCache uses WAL,DEFECT_EVIDENCED,Hash-before-close ordering is a reproducible integrity-packaging defect candidate; no closed History/Liquidity QA rule change is authorized here.

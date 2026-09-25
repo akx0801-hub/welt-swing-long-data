@@ -1,0 +1,46 @@
+{
+  "stage": "P0_FROZEN_1425_NONREADY10_PRICE_QA_EXACT_REMEDIATION",
+  "version": "v0.46",
+  "start_head": "018ff14b158807257175134db5286a099c6ed005",
+  "source_authorities": {
+    "universe/SWING_U3K_FROZEN_v0.5.csv": {
+      "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+      "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+      "rows": 1425
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/non_ready_v0.45.csv": {
+      "git_blob_sha": "9c718273631801cb4461d659358c467ec70e6b95",
+      "rows": 10
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/cache_state_v0.45.csv": {
+      "git_blob_sha": "b67b25a596d9b2f934755669c1750f65a87ddca9",
+      "rows": 1425
+    },
+    "scripts/p0_frozen_1425_price_cache_remediation_v0_45.py": {
+      "git_blob_sha": "c3ad241a1ba1336a05f782af1f5cf559dfaa5bdf"
+    },
+    "scripts/price_cache.py": {
+      "git_blob_sha": "454a1036e02c8ea73504921163aad1438a7e9f9d"
+    }
+  },
+  "runtime_artifact_validation": {
+    "workflow_run_id": 36138138825,
+    "artifact_id": 10865594502,
+    "artifact_digest_expected": "sha256:d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab",
+    "artifact_digest_actual": "sha256:d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab",
+    "sqlite_expected_sha256": "a245c23c7644589ef6c79195b61c13dfdd47bd8b89b9f3ee923de205a73541c0",
+    "sqlite_actual_sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "sqlite_integrity_check": "ok",
+    "output_hashes_match": true
+  },
+  "result": {
+    "status": "FAIL_CLOSED",
+    "p0_price_cache_ready": false,
+    "ready": 1415,
+    "quarantine": 10,
+    "market_provider_calls": 0,
+    "alpha_vantage_calls": 0,
+    "scalable_calls": 0,
+    "productive": false
+  }
+}
