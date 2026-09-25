@@ -1,0 +1,10 @@
+{
+  "stage": "STAGE_U_FROZEN_1425_INPUT_VALIDATION",
+  "version": "v0.43",
+  "frozen_path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+  "frozen_rows": 1425,
+  "frozen_git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "deterministic_repeat": true,
+  "p0_input_ready": true
+}

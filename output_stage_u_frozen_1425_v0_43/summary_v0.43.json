@@ -1,0 +1,121 @@
+{
+  "stage": "STAGE_U_FROZEN_1425_INPUT_VALIDATION",
+  "version": "v0.43",
+  "mode": "BOUNDED_OFFLINE_STAGE_U_VALIDATION",
+  "start_head": "7b372ff955b5ff2b8a97e066871cb96290b6c5d8",
+  "status": "PASS",
+  "frozen_snapshot": {
+    "rows": 1425,
+    "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+    "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+  },
+  "reconciliation": {
+    "frozen_to_current_eligibility_missing": 0,
+    "unexpected": 0,
+    "pass_strict_candidate": 1425,
+    "fail_closed_leakage": 0,
+    "source_ws_id_mismatch": 0,
+    "primary_mic_mismatch": 0,
+    "primary_ticker_mismatch": 0
+  },
+  "identity": {
+    "duplicate_security_key": 0,
+    "duplicate_source_ws_id": 0,
+    "missing_security_key": 0,
+    "missing_source_ws_id": 0,
+    "missing_primary_mic": 0,
+    "missing_primary_ticker": 0
+  },
+  "instrument": {
+    "status": "PASS",
+    "COMMON_STOCK": 1388,
+    "ORDINARY_SHARE": 37,
+    "incompatible": 0
+  },
+  "history": {
+    "status": "PASS",
+    "HISTORY_OK": 1425,
+    "minimum_observations": 275,
+    "minimum_valid_observations": 275,
+    "threshold_violations": 0
+  },
+  "liquidity": {
+    "status": "PASS",
+    "LIQUIDITY_OK": 1425,
+    "PREFERRED": 1369,
+    "STANDARD": 56,
+    "minimum_usable20": 20,
+    "minimum_median_turnover20_eur": 15052518.970567,
+    "threshold_violations": 0
+  },
+  "coverage": {
+    "evidence_cohort": {
+      "AU1": 63,
+      "BASE_1633": 622,
+      "US1": 372,
+      "US2": 368
+    },
+    "primary_mic": {
+      "BVMF": 37,
+      "XASX": 63,
+      "XNAS": 234,
+      "XNSE": 45,
+      "XNYS": 506,
+      "XSHE": 108,
+      "XSHG": 186,
+      "XTAI": 49,
+      "XTKS": 197
+    },
+    "source_id": {
+      "AU1_EVIDENCE_ADMISSION_GATE": 63,
+      "B3_OFFICIAL_INDEXPROXY_GETPORTFOLIODAY": 37,
+      "SRC_CSI300": 294,
+      "SRC_FTSE_TW50_CW_20260630": 49,
+      "SRC_NIFTY50": 45,
+      "SRC_NIKKEI225": 197,
+      "US1_SP500_COMMON_EVIDENCE_GATE": 372,
+      "US2_SP400_COMMON_ADMISSION": 368
+    },
+    "region": {
+      "status": "REGION_NOT_VERIFIED",
+      "members": 1425,
+      "reason": "No direct authoritative region field in the v0.39 Stage-U eligibility authority; market coverage is reported by Primary_MIC and Source_ID."
+    }
+  },
+  "exclusions": {
+    "count": 0
+  },
+  "sols_ctd": {
+    "SOLS_present": 0,
+    "CTD_present": 0
+  },
+  "p0_input_ready": true,
+  "P0": "NOT_RUN",
+  "P1": "NOT_RUN",
+  "P2": "NOT_RUN",
+  "market_data_acquisition": false,
+  "scalable_live_calls": 0,
+  "alpha_vantage_used": false,
+  "productive": false,
+  "universe_mutation": false,
+  "gates": {
+    "T01_START_HEAD_EXACT": "PASS",
+    "T02_FROZEN_COUNT_1425": "PASS",
+    "T03_FROZEN_BLOB_EXACT": "PASS",
+    "T04_FROZEN_SHA256_EXACT": "PASS",
+    "T05_MEMBERSHIP_ELIGIBILITY_RECONCILIATION_EXACT": "PASS",
+    "T06_PASS_STRICT_CANDIDATE_1425": "PASS",
+    "T07_IDENTITY_UNIQUE_COMPLETE": "PASS",
+    "T08_INSTRUMENT_COMPATIBILITY": "PASS",
+    "T09_HISTORY_COMPATIBILITY": "PASS",
+    "T10_LIQUIDITY_COMPATIBILITY": "PASS",
+    "T11_SOURCE_IDENTITY_CONSISTENCY": "PASS",
+    "T12_FAIL_CLOSED_LEAKAGE_ZERO": "PASS",
+    "T13_SOLS_ABSENT": "PASS",
+    "T14_CTD_ABSENT": "PASS",
+    "T15_DETERMINISTIC_VALIDATION": "PASS",
+    "T16_FROZEN_UNCHANGED": "PASS",
+    "T17_PRODUCTIVE_FALSE": "PASS",
+    "T18_NO_P0_P1_P2_OR_ACQUISITION": "PASS"
+  }
+}

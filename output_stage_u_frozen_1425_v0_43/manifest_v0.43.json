@@ -1,0 +1,71 @@
+{
+  "stage": "STAGE_U_FROZEN_1425_INPUT_VALIDATION",
+  "version": "v0.43",
+  "start_head": "7b372ff955b5ff2b8a97e066871cb96290b6c5d8",
+  "source_artifacts": {
+    "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md": {
+      "git_blob_sha": "680d0434e534d1fe136e694ca05cb574958a1a24"
+    },
+    "docs/validation/U3K_Freeze_Materialization_1425_v0.42.md": {
+      "git_blob_sha": "a58a3e4aa377d22a4eb34efd3106557c11ef9303"
+    },
+    "output_u3k_freeze_materialization_1425_v0_42/summary_v0.42.json": {
+      "git_blob_sha": "8f59b97f895101c1c1708a2dd006a51303facf7f"
+    },
+    "output_u3k_freeze_materialization_1425_v0_42/stage_checkpoint_v0.42.json": {
+      "git_blob_sha": "8184473b006353689aa0cbb52d7b590bd66ad2d4"
+    },
+    "output_u3k_freeze_materialization_1425_v0_42/manifest_v0.42.json": {
+      "git_blob_sha": "354e04cd1e95fc75a006a3d56185155e6a0eb60b"
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/eligibility_dry_run_2527_v0.39.csv": {
+      "git_blob_sha": "c84be3d4c128358b9b74d96a93fb1ee5f444cbc7",
+      "rows": 2527
+    },
+    "universe/SWING_U3K_FROZEN_v0.5.csv": {
+      "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+      "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+      "rows": 1425
+    }
+  },
+  "output_hashes": {
+    "output_stage_u_frozen_1425_v0_43/eligible_input_v0.43.csv": {
+      "sha256": "d6088df1a2fc3a12051aeee2df1a7f7ec49a4bf097a43b3954680727e671cdc8"
+    },
+    "output_stage_u_frozen_1425_v0_43/exclusions_v0.43.csv": {
+      "sha256": "eba7633f77ba19db584710a5116cd2a674f7d808be5343c252706ac4c8307ee2"
+    },
+    "output_stage_u_frozen_1425_v0_43/evidence_cohort_coverage_v0.43.csv": {
+      "sha256": "baa54d467c91e0bc99812bb1c065b75bf0475552dc696739e9767797b5a6ca10"
+    },
+    "output_stage_u_frozen_1425_v0_43/primary_mic_coverage_v0.43.csv": {
+      "sha256": "0508a640d5544a1e604bfdb09afd04b63c53bfd09e7bad2562130668a7e9248c"
+    },
+    "output_stage_u_frozen_1425_v0_43/source_coverage_v0.43.csv": {
+      "sha256": "e0cc628360232cb35b2818b01a44a4321aec81d240aee0a8802b622bbd635a4d"
+    },
+    "output_stage_u_frozen_1425_v0_43/region_coverage_v0.43.csv": {
+      "sha256": "ada4fa015b22a24fb656352aa345f0143b2e65fc42045da8b75646453b4e0e70"
+    },
+    "docs/validation/Stage_U_Frozen_1425_Input_Validation_v0.43.md": {
+      "sha256": "a6fb8ddd216307ee01af49988b4b29c25f54f5d68e6c7cb7b06899441151d94a"
+    },
+    "output_stage_u_frozen_1425_v0_43/summary_v0.43.json": {
+      "sha256": "7577b2a5aa61bc13352fdeead60cc0995bece8aac49185833ab02ba1dccab1b8"
+    },
+    "output_stage_u_frozen_1425_v0_43/stage_checkpoint_v0.43.json": {
+      "sha256": "2b91e67a8e2b8d4c0328456b62c9a30e02c4d737c6e14d14571fea322e35e254"
+    },
+    "output_stage_u_frozen_1425_v0_43/universe_hash_v0.43.json": {
+      "sha256": "a75f6625924f97dc1ce6c2f0da83ce02e16fa4d34d9bef065ecddf725d47e6e3"
+    }
+  },
+  "result": {
+    "status": "PASS",
+    "eligible_input_rows": 1425,
+    "exclusions": 0,
+    "p0_input_ready": true,
+    "productive": false,
+    "universe_mutation": false
+  }
+}

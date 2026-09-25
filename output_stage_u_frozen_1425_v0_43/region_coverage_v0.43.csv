@@ -1,0 +1,2 @@
+Region_Status,Member_Count,Reason
+REGION_NOT_VERIFIED,1425,No direct authoritative region field is present in the v0.39 Stage-U eligibility authority; Primary_MIC and Source_ID coverage are reported separately.
