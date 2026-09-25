@@ -1,0 +1,85 @@
+name: P0 Frozen 1425 Runtime Cache Integrity Refreeze v0.47
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/p0_frozen_1425_runtime_refreeze_v0_47.py
+      - tests/test_p0_frozen_1425_runtime_refreeze_v0_47.py
+      - .github/workflows/p0_frozen_1425_runtime_refreeze_v0.47.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  refreeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded refreeze harness
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Regression test finalize-close-before-hash ordering
+        run: python -m unittest tests/test_p0_frozen_1425_runtime_refreeze_v0_47.py
+
+      - name: Download exact authoritative v0.45 artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p runtime_input/v045
+          gh run download 36138138825 \
+            --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-price-cache-v0.45-36138138825 \
+            --dir runtime_input/v045
+          test -f runtime_input/v045/runtime_cache/p0_frozen_1425_v0_45.sqlite
+
+      - name: Exact byte refreeze and pre-upload validation
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_runtime_refreeze_v0_47
+          rm -f runtime_cache/p0_frozen_1425_v0_47.sqlite*
+          python scripts/p0_frozen_1425_runtime_refreeze_v0_47.py \
+            --source-sqlite runtime_input/v045/runtime_cache/p0_frozen_1425_v0_45.sqlite \
+            --target-sqlite runtime_cache/p0_frozen_1425_v0_47.sqlite \
+            --output-dir output_p0_frozen_1425_runtime_refreeze_v0_47 \
+            --repository-sha "$GITHUB_SHA"
+
+      - name: Assert refrozen bytes before package
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path('runtime_cache/p0_frozen_1425_v0_47.sqlite')
+          expected='9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9'
+          h=hashlib.sha256(p.read_bytes()).hexdigest()
+          x=json.load(open('output_p0_frozen_1425_runtime_refreeze_v0_47/runtime_integrity_v0.47.json',encoding='utf-8'))
+          assert h==expected==x['refrozen_sqlite_sha256']
+          assert p.stat().st_size==144216064==x['refrozen_sqlite_bytes']
+          assert x['status_counts']=={'QUARANTINE':10,'READY':1415}
+          assert x['market_provider_calls']==0
+          assert x['alpha_vantage_calls']==0
+          assert x['scalable_calls']==0
+          print(h, p.stat().st_size)
+          PY
+
+      - name: Upload corrected byte-bound runtime authority candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-runtime-refreeze-v0.47-${{ github.run_id }}
+          path: |
+            runtime_cache/p0_frozen_1425_v0_47.sqlite
+            output_p0_frozen_1425_runtime_refreeze_v0_47/
+          if-no-files-found: error
+          retention-days: 14
