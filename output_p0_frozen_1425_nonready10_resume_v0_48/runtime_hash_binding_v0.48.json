@@ -1,0 +1,39 @@
+{
+  "stage": "P0_FROZEN_1425_NONREADY10_PRICE_QA_RESUME",
+  "version": "v0.48",
+  "runtime_source": {
+    "version": "v0.47",
+    "run_id": 36177809571,
+    "artifact_id": 10882986280,
+    "sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+    "bytes": 144216064
+  },
+  "runtime_final": {
+    "run_id": 36183320195,
+    "artifact_id": 10885240894,
+    "artifact_zip_sha256": "0be6ca06691f2715c7c663bd7abfacbe1d65553d5debed4b6ba87b766918cfab",
+    "declared_sqlite_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "packaged_sqlite_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "declared_bytes": 144216064,
+    "packaged_bytes": 144216064,
+    "hash_pass_1": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "hash_pass_2": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "byte_binding_pass": true,
+    "deterministic_repeat": true,
+    "integrity_check": "ok"
+  },
+  "final_states": {
+    "READY": 1417,
+    "QUARANTINE": 8,
+    "total": 1425
+  },
+  "changed_state_identities": [
+    "WS:XNAS:ECHO",
+    "WS:XNAS:MRNA"
+  ],
+  "price_rows": 711204,
+  "market_provider_calls_diagnostic": 6,
+  "market_provider_calls_runtime_finalize": 0,
+  "alpha_vantage_calls": 0,
+  "scalable_calls": 0
+}

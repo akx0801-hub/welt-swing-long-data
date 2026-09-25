@@ -1,0 +1,5 @@
+Scope,Authority_Class,Authority,Date,Reference,Use
+ASX8,OFFICIAL_EXCHANGE,ASX,CURRENT_REFERENCE,https://www.asx.com.au/about/contact-asx/report-misconduct/reporting-misconduct-to-asx-faqs,Confirms closing price is produced by the ASX closing auction / last trade.
+ASX8,OFFICIAL_EXCHANGE,ASX,CURRENT_REFERENCE,https://www.asx.com.au/content/dam/asx/participants/trading-platforms/asx-closing-and-settlement-price-determination.pdf,Confirms ASX market closing price is based on CSPA/last ASX trade; no corrected per-security OHLC row was obtained.
+ECHO,ISSUER,EchoStar Corporation,2025-08-26,https://ir.echostar.com/node/32621,Issuer announced approximately $23B spectrum-license sale to AT&T on the exact event date.
+MRNA,ISSUER,Moderna / Merck,2026-08-19,https://news.modernatx.com/merck-and-moderna-announce-phase-3-interpath-001-trial-of-intismeran-plus-keytruda-met-endpoints-of-rfs-and-dmfs-in-melanoma,Issuer announced positive Phase 3 INTerpath-001 topline results on the exact event date.

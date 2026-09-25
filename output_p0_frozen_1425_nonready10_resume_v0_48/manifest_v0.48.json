@@ -1,0 +1,47 @@
+{
+  "stage": "P0_FROZEN_1425_NONREADY10_PRICE_QA_RESUME",
+  "version": "v0.48",
+  "required_start_head": "80f9637c5bc13a274d26b4126e778ee87b0bdc79",
+  "harness_commits": [
+    "9ad4eb92ac28074b3efcc680f2084d0d9ba58571",
+    "6009fe067a199e113bb62ecdf34a289856997cb9",
+    "fc6d85e329139ecf5333b1cd8b376ba2a1305f38"
+  ],
+  "source_authorities": {
+    "frozen": {
+      "path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+      "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+      "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+      "rows": 1425
+    },
+    "v047_runtime": {
+      "run_id": 36177809571,
+      "artifact_id": 10882986280,
+      "sha256": "9e2721e1cc32c8470719271f17e0fac51d9bc88f07edabb499b679d0343a39c9",
+      "bytes": 144216064
+    },
+    "v048_diagnostic": {
+      "run_id": 36182271465,
+      "artifact_id": 10884493276,
+      "artifact_zip_sha256": "928858d062fa2c7c793381a8e1f0c1b88697f2730e092c311632e64bda303816",
+      "provider_calls": 6
+    },
+    "v048_runtime": {
+      "run_id": 36183320195,
+      "artifact_id": 10885240894,
+      "artifact_zip_sha256": "0be6ca06691f2715c7c663bd7abfacbe1d65553d5debed4b6ba87b766918cfab",
+      "sqlite_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+      "bytes": 144216064
+    }
+  },
+  "result": {
+    "status": "PASS_WITH_REMAINING_QUARANTINE",
+    "ready": 1417,
+    "quarantine": 8,
+    "p0_price_cache_ready": false,
+    "data_corrections": 0,
+    "alpha_vantage_calls": 0,
+    "scalable_calls": 0,
+    "productive": false
+  }
+}

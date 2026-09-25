@@ -1,0 +1,63 @@
+{
+  "stage": "P0_FROZEN_1425_NONREADY10_PRICE_QA_RESUME",
+  "version": "v0.48",
+  "mode": "EXACT_10_PRICE_QA_REMEDIATION_RESUME",
+  "required_start_head": "80f9637c5bc13a274d26b4126e778ee87b0bdc79",
+  "status": "PASS_WITH_REMAINING_QUARANTINE",
+  "v047_authority_validated": true,
+  "exact10": {
+    "matched": 10,
+    "missing": 0,
+    "unexpected": 0
+  },
+  "asx8": {
+    "resolved_ready": 0,
+    "provider_data_unresolved": 8,
+    "final_quarantine": 8,
+    "qa_implementation_defect": false
+  },
+  "echo": {
+    "classification": "GENUINE_MARKET_MOVE",
+    "verdict": "LEGITIMATE_EVENT_READY",
+    "return_pct": 70.24765850287811
+  },
+  "mrna": {
+    "classification": "GENUINE_MARKET_MOVE",
+    "verdict": "LEGITIMATE_EVENT_READY",
+    "return_pct": 176.96951623021624
+  },
+  "data_corrections": 0,
+  "runtime_state_changes": 2,
+  "final_price_cache_status": {
+    "READY": 1417,
+    "QUARANTINE": 8
+  },
+  "p0_price_cache_ready": false,
+  "frozen_members": 1425,
+  "frozen_git_blob": "018a03eb4614a197da9d2d566e77f32c61238dad",
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "runtime_hash_binding": {
+    "run_id": 36183320195,
+    "artifact_id": 10885240894,
+    "artifact_zip_sha256": "0be6ca06691f2715c7c663bd7abfacbe1d65553d5debed4b6ba87b766918cfab",
+    "declared_sqlite_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "packaged_sqlite_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "declared_bytes": 144216064,
+    "packaged_bytes": 144216064,
+    "hash_pass_1": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "hash_pass_2": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "byte_binding_pass": true,
+    "deterministic_repeat": true,
+    "integrity_check": "ok"
+  },
+  "provider_calls": 6,
+  "alpha_vantage_calls": 0,
+  "scalable_calls": 0,
+  "p0_run": false,
+  "features_promoted": false,
+  "rs_promoted": false,
+  "parameters_promoted": false,
+  "universe_mutation": false,
+  "productive": false,
+  "next_gate": "P0 FROZEN-1425 ASX-8 PROVIDER OHLC AUTHORITY RESOLUTION GATE"
+}
