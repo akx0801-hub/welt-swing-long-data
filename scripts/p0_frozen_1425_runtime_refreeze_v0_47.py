@@ -73,7 +73,7 @@ def inspect_sqlite(path: Path) -> dict:
     conn = sqlite3.connect(uri, uri=True)
     try:
         integrity = str(conn.execute("PRAGMA integrity_check").fetchone()[0])
-        price_rows = int(conn.execute("SELECT COUNT(*) FROM price_rows").fetchone()[0])
+        price_rows = int(conn.execute("SELECT COUNT(*) FROM price_daily").fetchone()[0])
         states = int(conn.execute("SELECT COUNT(*) FROM cache_state").fetchone()[0])
         status_counts = {str(k): int(v) for k, v in conn.execute(
             "SELECT status, COUNT(*) FROM cache_state GROUP BY status ORDER BY status"
