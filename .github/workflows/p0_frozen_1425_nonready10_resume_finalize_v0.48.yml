@@ -1,0 +1,61 @@
+name: P0 Frozen 1425 NonReady10 Resume Runtime Finalize v0.48
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/p0_frozen_1425_nonready10_resume_finalize_v0_48.py
+      - .github/workflows/p0_frozen_1425_nonready10_resume_finalize_v0.48.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download exact v0.47 runtime authority
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p runtime_input/v047
+          gh run download 36177809571 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-runtime-refreeze-v0.47-36177809571 \
+            --dir runtime_input/v047
+      - name: Download exact v0.48 diagnostic evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p runtime_input/v048diag
+          gh run download 36182271465 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-nonready10-resume-diag-v0.48-36182271465 \
+            --dir runtime_input/v048diag
+      - name: Apply only evidence-verified ECHO/MRNA state reconciliation and finalize
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_nonready10_resume_runtime_v0_48
+          rm -f runtime_cache/p0_frozen_1425_v0_48.sqlite*
+          python scripts/p0_frozen_1425_nonready10_resume_finalize_v0_48.py \
+            --source-sqlite runtime_input/v047/runtime_cache/p0_frozen_1425_v0_47.sqlite \
+            --diag-dir runtime_input/v048diag \
+            --target-sqlite runtime_cache/p0_frozen_1425_v0_48.sqlite \
+            --out output_p0_frozen_1425_nonready10_resume_runtime_v0_48
+      - name: Upload byte-bound v0.48 runtime candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-nonready10-resume-runtime-v0.48-${{ github.run_id }}
+          path: |
+            runtime_cache/p0_frozen_1425_v0_48.sqlite
+            output_p0_frozen_1425_nonready10_resume_runtime_v0_48/
+          if-no-files-found: error
+          retention-days: 14
