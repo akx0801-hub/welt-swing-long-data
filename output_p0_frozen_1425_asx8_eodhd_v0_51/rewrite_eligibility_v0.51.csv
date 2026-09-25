@@ -1,0 +1,9 @@
+Security_Key,Source_WS_ID,Ticker,CACHE_REWRITE_EVIDENCE_READY,Reason
+WSSEC:WS:XASX:ANZ,WS:XASX:ANZ,ANZ,NO,No EODHD row acquired because Phase A failed closed
+WSSEC:WS:XASX:BSL,WS:XASX:BSL,BSL,NO,No EODHD row acquired because Phase A failed closed
+WSSEC:WS:XASX:BXB,WS:XASX:BXB,BXB,NO,No EODHD row acquired because Phase A failed closed
+WSSEC:WS:XASX:CBA,WS:XASX:CBA,CBA,NO,No EODHD row acquired because Phase A failed closed
+WSSEC:WS:XASX:NXT,WS:XASX:NXT,NXT,NO,No EODHD row acquired because Phase A failed closed
+WSSEC:WS:XASX:PME,WS:XASX:PME,PME,NO,No EODHD row acquired because Phase A failed closed
+WSSEC:WS:XASX:QAN,WS:XASX:QAN,QAN,NO,No EODHD row acquired because Phase A failed closed
+WSSEC:WS:XASX:SDF,WS:XASX:SDF,SDF,NO,No EODHD row acquired because Phase A failed closed

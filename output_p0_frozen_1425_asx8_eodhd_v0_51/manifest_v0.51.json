@@ -1,0 +1,91 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_EODHD_ENTITLEMENT_PRECHECK_AND_CONDITIONAL_EXACT_DATE_ACQUISITION",
+  "version": "v0.51",
+  "start_head": "24a59c988de4b7183877b456109d00c4833fde7d",
+  "source_project_authorities": {
+    "v050_doc": {
+      "path": "docs/validation/P0_Frozen_1425_ASX8_Official_Licensed_EOD_Acquisition_v0.50.md",
+      "git_blob_sha": "ea7664b32e89bd7c25dd0814ce088018126ed669"
+    },
+    "v050_summary": {
+      "path": "output_p0_frozen_1425_asx8_eod_acquisition_v0_50/summary_v0.50.json",
+      "git_blob_sha": "eabe2cb20b6d0101bfa94451d4daaa4786968749"
+    },
+    "v050_checkpoint": {
+      "path": "output_p0_frozen_1425_asx8_eod_acquisition_v0_50/stage_checkpoint_v0.50.json",
+      "git_blob_sha": "6baad057425fbb76d0d61346c01014fc53438ca3"
+    },
+    "v050_manifest": {
+      "path": "output_p0_frozen_1425_asx8_eod_acquisition_v0_50/manifest_v0.50.json",
+      "git_blob_sha": "35c4efc88970e365e180aec9407f56f5dbd57318"
+    },
+    "v050_source_inventory": {
+      "path": "output_p0_frozen_1425_asx8_eod_acquisition_v0_50/source_inventory_v0.50.csv",
+      "git_blob_sha": "dcfcd83ed797da2b420acb3d14d5009373af568a"
+    },
+    "v050_access_licensing": {
+      "path": "output_p0_frozen_1425_asx8_eod_acquisition_v0_50/access_licensing_assessment_v0.50.csv",
+      "git_blob_sha": "0bf95f13380f3c2e7239649ed12614af8a95606b"
+    },
+    "v049_verdicts": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/per_security_verdicts_v0.49.csv",
+      "git_blob_sha": "0ab455c142c598ead71f113db024dfc3934b60c6"
+    },
+    "v049_cross_source": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/cross_source_ohlc_v0.49.csv",
+      "git_blob_sha": "d738ed8ba2b0c8fab87bc1d496df11039f4533ff"
+    },
+    "frozen": {
+      "path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+      "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+      "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+      "rows": 1425
+    }
+  },
+  "external_public_evidence": [
+    "https://eodhd.com/financial-apis/api-for-historical-data-and-volumes",
+    "https://eodhd.com/financial-apis/exchanges-api-list-of-tickers-and-trading-hours",
+    "https://eodhd.com/financial-apis/commercial-vs-personal-license-use",
+    "https://eodhd.com/financial-apis/terms-conditions",
+    "https://eodhd.com/financial-summary/ANZ.AU",
+    "https://eodhd.com/financial-summary/BSL.AU",
+    "https://eodhd.com/financial-summary/BXB.AU",
+    "https://eodhd.com/financial-summary/CBA.AU",
+    "https://eodhd.com/financial-summary/NXT.AU",
+    "https://eodhd.com/financial-summary/PME.AU",
+    "https://eodhd.com/financial-summary/QAN.AU",
+    "https://eodhd.com/financial-summary/SDF.AU"
+  ],
+  "output_blobs": {
+    "docs/validation/P0_Frozen_1425_ASX8_EODHD_Entitlement_Acquisition_v0.51.md": "5a40787601cc2eaaf2f013c25531daca5c730f32",
+    "output_p0_frozen_1425_asx8_eodhd_v0_51/entitlement_precheck_v0.51.json": "f10a5fedef9df636f4074611d3e9db6bb1688297",
+    "output_p0_frozen_1425_asx8_eodhd_v0_51/provider_identity_v0.51.csv": "31e517b529d5830d10cba5745d4ce63d2dd64e84",
+    "output_p0_frozen_1425_asx8_eodhd_v0_51/rights_assessment_v0.51.csv": "bb10a90ea519f94fa8c0e21418073c7b596e2d7c",
+    "output_p0_frozen_1425_asx8_eodhd_v0_51/acquisition_log_v0.51.csv": "afcf15b851a780eb1bc8426184917785751ff180",
+    "output_p0_frozen_1425_asx8_eodhd_v0_51/per_security_verdicts_v0.51.csv": "7093b53e77021c50e1eb083d6436a66b25276148",
+    "output_p0_frozen_1425_asx8_eodhd_v0_51/rewrite_eligibility_v0.51.csv": "c2762cff3e4f0bf55a1a52c5ce5a24775e4ff483",
+    "output_p0_frozen_1425_asx8_eodhd_v0_51/summary_v0.51.json": "2d82224da124b23139d1c7d261320198c06fa25c",
+    "output_p0_frozen_1425_asx8_eodhd_v0_51/stage_checkpoint_v0.51.json": "af4eed1ca9bd2b6d607fe31dbcece0e1971d8c7b"
+  },
+  "omitted_files": {
+    "acquired_ohlc_v0.51.csv": "OMITTED_PHASE_A_BLOCKED_NO_ACQUISITION",
+    "cross_source_comparison_v0.51.csv": "OMITTED_PHASE_A_BLOCKED_NO_ACQUISITION"
+  },
+  "result": {
+    "status": "PASS_WITH_ACCESS_BLOCKED",
+    "credential_available": "NOT_VERIFIABLE",
+    "acquisition_authorized": false,
+    "provider_identities_verified": 8,
+    "licensed_rows_acquired": 0,
+    "licensed_raw_rows_persisted": 0,
+    "rewrite_ready": 0,
+    "cache_mutation": false,
+    "ready": 1417,
+    "quarantine": 8,
+    "eodhd_market_data_api_calls": 0,
+    "yahoo_yfinance_calls": 0,
+    "alpha_vantage_calls": 0,
+    "scalable_calls": 0,
+    "productive": false
+  }
+}

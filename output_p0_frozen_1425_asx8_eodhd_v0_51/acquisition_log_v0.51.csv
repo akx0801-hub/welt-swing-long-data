@@ -1,0 +1,5 @@
+Step,Status,Result,Market_Data_API_Calls,Raw_Licensed_Rows_Persisted,Notes
+PHASE_A_CREDENTIAL_PRECHECK,COMPLETE,CREDENTIAL_AVAILABLE_NOT_VERIFIABLE,0,0,No credential value accessed or exposed
+PHASE_A_RIGHTS_PRECHECK,COMPLETE,ACQUISITION_CRITICAL_RIGHTS_NOT_VERIFIED,0,0,Public provider terms reviewed; actual entitlement not identifiable
+PHASE_A_HARD_GATE,COMPLETE,ACQUISITION_AUTHORIZED_NO,0,0,Fail closed
+PHASE_B_EXACT_DATE_ACQUISITION,NOT_RUN,STOPPED_BY_PHASE_A,0,0,No EODHD market-data request issued

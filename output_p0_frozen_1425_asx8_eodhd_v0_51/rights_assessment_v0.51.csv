@@ -1,0 +1,9 @@
+Right,Status,Evidence_Basis,Gate_Implication
+API_ACCESS_ALLOWED,NOT_VERIFIED,No usable credential or identifiable entitled plan is established in the authorized execution environment,ACQUISITION_BLOCKED
+INTERNAL_RUNTIME_USE_ALLOWED,NOT_VERIFIED,Public provider terms distinguish personal and professional/commercial use but the applicable project use class/entitlement is not identified,ACQUISITION_BLOCKED
+RAW_REPOSITORY_PERSISTENCE_ALLOWED,NO,Repository is public and no explicit permission to publish/redistribute raw EODHD values in public Git has been established,DO_NOT_PERSIST_RAW
+REDISTRIBUTION_ALLOWED,NOT_VERIFIED,Public personal-use terms prohibit redistribution; no applicable commercial redistribution entitlement is identified,DO_NOT_REDISTRIBUTE
+HISTORICAL_ASX_EOD_PRODUCT_CAPABILITY,YES,Public EODHD documentation provides historical EOD API and ASX coverage,PRODUCT_CAPABILITY_ONLY
+TARGET_DATE_2024_11_15_PRODUCT_DEPTH,YES,Public EODHD documentation indicates deep history beyond the one-year free limit,PRODUCT_CAPABILITY_ONLY
+TARGET_DATE_2024_11_15_ACTUAL_ENTITLEMENT,NOT_VERIFIED,Actual account/plan is not identifiable,ACQUISITION_BLOCKED
+EXACT_EIGHT_SECURITY_SCOPE_TECHNICALLY_POSSIBLE,YES,EOD endpoint supports one provider symbol per request and exact provider identities are established,NO_SCOPE_BLOCKER

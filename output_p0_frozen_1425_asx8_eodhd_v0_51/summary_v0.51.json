@@ -1,0 +1,59 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_EODHD_ENTITLEMENT_PRECHECK_AND_CONDITIONAL_EXACT_DATE_ACQUISITION",
+  "version": "v0.51",
+  "mode": "ENTITLEMENT_PRECHECK_THEN_CONDITIONAL_BOUNDED_ACQUISITION",
+  "required_start_head": "24a59c988de4b7183877b456109d00c4833fde7d",
+  "status": "PASS_WITH_ACCESS_BLOCKED",
+  "scope": {
+    "date": "2024-11-15",
+    "securities": [
+      "ANZ",
+      "BSL",
+      "BXB",
+      "CBA",
+      "NXT",
+      "PME",
+      "QAN",
+      "SDF"
+    ],
+    "count": 8
+  },
+  "credential_available": "NOT_VERIFIABLE",
+  "rights": {
+    "API_ACCESS_ALLOWED": "NOT_VERIFIED",
+    "INTERNAL_RUNTIME_USE_ALLOWED": "NOT_VERIFIED",
+    "RAW_REPOSITORY_PERSISTENCE_ALLOWED": "NO",
+    "REDISTRIBUTION_ALLOWED": "NOT_VERIFIED"
+  },
+  "acquisition_authorized": false,
+  "provider_identities_verified": 8,
+  "acquired_complete_rows": 0,
+  "cross_source_comparison_run": false,
+  "pme_control_run": false,
+  "rewrite_ready_count": 0,
+  "final_cache": {
+    "READY": 1417,
+    "QUARANTINE": 8,
+    "total": 1425
+  },
+  "p0_price_cache_ready": false,
+  "runtime_authority": {
+    "version": "v0.48",
+    "sqlite_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "bytes": 144216064,
+    "mutated": false
+  },
+  "cache_mutation": false,
+  "frozen_mutation": false,
+  "provider_mapping_mutation": false,
+  "eodhd_market_data_api_calls": 0,
+  "yahoo_yfinance_calls": 0,
+  "alpha_vantage_calls": 0,
+  "scalable_calls": 0,
+  "p0_run": false,
+  "features_run_or_promoted": false,
+  "rs_run_or_promoted": false,
+  "parameters_promoted": false,
+  "productive": false,
+  "next_gate": "P0 ASX OHLC SOURCE-POLICY / QA-CONTRACT DECISION GATE"
+}

@@ -1,0 +1,45 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_EODHD_ENTITLEMENT_PRECHECK_AND_CONDITIONAL_EXACT_DATE_ACQUISITION",
+  "version": "v0.51",
+  "required_start_head": "24a59c988de4b7183877b456109d00c4833fde7d",
+  "start_head_verified": true,
+  "v050_validation": {
+    "status": "PASS_WITH_ACCESS_BLOCKED",
+    "tests_passed": 18,
+    "tests_total": 18,
+    "ready": 1417,
+    "quarantine": 8,
+    "frozen": 1425,
+    "p0_price_cache_ready": false
+  },
+  "credential_available": "NOT_VERIFIABLE",
+  "credential_check_basis": [
+    "No committed EODHD integration found",
+    "No approved EODHD environment-variable/secret contract found",
+    "No existing workflow reference to EODHD credential found",
+    "Connected GitHub interface does not expose sensitive secrets API",
+    "No speculative secret-name probing performed"
+  ],
+  "product_capability": {
+    "historical_asx_eod": "YES_BY_PUBLIC_PRODUCT_DOCS",
+    "target_date_product_depth": "YES_BY_PRODUCT_CAPABILITY",
+    "target_date_actual_entitlement": "NOT_VERIFIED",
+    "exact_eight_scope_technically_possible": true
+  },
+  "rights": {
+    "API_ACCESS_ALLOWED": "NOT_VERIFIED",
+    "INTERNAL_RUNTIME_USE_ALLOWED": "NOT_VERIFIED",
+    "RAW_REPOSITORY_PERSISTENCE_ALLOWED": "NO",
+    "REDISTRIBUTION_ALLOWED": "NOT_VERIFIED"
+  },
+  "repository_visibility": "PUBLIC",
+  "acquisition_authorized": false,
+  "stop_reason": "One or more acquisition-critical conditions are NOT_VERIFIED; fail closed.",
+  "eodhd_market_data_api_calls": 0,
+  "yahoo_yfinance_calls": 0,
+  "alpha_vantage_calls": 0,
+  "scalable_calls": 0,
+  "subscription_purchased": false,
+  "account_created": false,
+  "credential_exposed": false
+}
