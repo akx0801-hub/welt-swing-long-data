@@ -1,0 +1,68 @@
+{
+  "stage": "U3K_FREEZE_MATERIALIZATION_1425",
+  "version": "v0.42",
+  "start_head": "ed73e73ca77346f605d431c643ab9200d525615c",
+  "authorization_artifacts": {
+    "docs/validation/U3K_Freeze_Authorization_1425_v0.41.md": "68ef7b3b935c047494ec227846429ab669f4b1ec",
+    "output_u3k_freeze_authorization_1425_v0_41/summary_v0.41.json": "64dfcdd726a54312d88b30ce64bd19d97d5fd405",
+    "output_u3k_freeze_authorization_1425_v0_41/stage_checkpoint_v0.41.json": "d99cec0c54f0c2bfe9f27a88a443346582a40b68",
+    "output_u3k_freeze_authorization_1425_v0_41/manifest_v0.41.json": "3f1ecd872f7f2b4fd647a19993ea9bf493c97c2b"
+  },
+  "source_projection": {
+    "path": "output_u3k_freeze_preparation_1425_v0_40/prospective_u3k_membership_v0.40.csv",
+    "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+    "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "rows": 1425
+  },
+  "target_before": {
+    "path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+    "git_blob_sha": "6083e1335768e9414cb119d15369b71ebbc589d2",
+    "sha256": "fa8d2b9f26d0b76b3270036523ca850aca231294b3ae328ba370c30b78648d85",
+    "rows": 0
+  },
+  "target_after": {
+    "path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+    "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+    "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "rows": 1425,
+    "byte_identical_to_projection": true
+  },
+  "reconciliation": {
+    "missing": 0,
+    "unexpected": 0,
+    "duplicate_security_key": 0,
+    "duplicate_source_ws_id": 0,
+    "missing_required_identity": 0,
+    "fail_closed_leakage": 0,
+    "SOLS_present": 0,
+    "CTD_present": 0
+  },
+  "governance": {
+    "productive": false,
+    "P0": "NOT_RUN",
+    "P1": "NOT_RUN",
+    "P2_TRADEABILITY": "NOT_RUN",
+    "market_provider_calls": 0,
+    "scalable_calls": 0,
+    "alpha_vantage_used": false
+  },
+  "gates": {
+    "T01_START_HEAD_EXACT": "PASS",
+    "T02_V041_AUTHORIZATION_CHECKPOINT_PASS": "PASS",
+    "T03_MATERIALIZATION_AUTHORIZED_YES": "PASS",
+    "T04_AUTHORIZED_MEMBER_COUNT_1425": "PASS",
+    "T05_PROJECTION_COUNT_1425": "PASS",
+    "T06_PROJECTION_SHA256_EXACT": "PASS",
+    "T07_LINEAGE_V039_V040_V041_EXACT": "PASS",
+    "T08_PREWRITE_FROZEN_ZERO": "PASS",
+    "T09_PREWRITE_FROZEN_BLOB_EXACT": "PASS",
+    "T10_PROJECTION_IDENTITY_UNIQUE_COMPLETE": "PASS",
+    "T11_FAIL_CLOSED_LEAKAGE_ZERO": "PASS",
+    "T12_SOLS_ABSENT": "PASS",
+    "T13_CTD_ABSENT": "PASS",
+    "T14_EXACT_SOURCE_BLOB_MATERIALIZATION": "PASS",
+    "T15_POSTWRITE_COUNT_1425": "PASS",
+    "T16_POSTWRITE_EQUIVALENCE_EXPECTED_BY_IDENTICAL_BLOB": "PASS",
+    "T17_PRODUCTIVE_SEPARATION": "PASS"
+  }
+}
