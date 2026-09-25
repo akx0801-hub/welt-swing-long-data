@@ -1,0 +1,33 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_OFFICIAL_LICENSED_EOD_ACQUISITION",
+  "version": "v0.50",
+  "status": "PASS_WITH_ACCESS_BLOCKED",
+  "tests_collected": 18,
+  "tests_passed": 18,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "gates": {
+    "T01_START_HEAD_EXACT": "PASS",
+    "T02_SCOPE_SECURITIES_EXACT_8": "PASS",
+    "T03_SCOPE_DATE_EXACT": "PASS",
+    "T04_V048_RUNTIME_AUTHORITY_UNCHANGED": "PASS",
+    "T05_CACHE_MUTATION_ZERO": "PASS",
+    "T06_FROZEN_UNCHANGED": "PASS",
+    "T07_PROVIDER_MAPPINGS_UNCHANGED": "PASS",
+    "T08_READY_REMAINS_1417": "PASS",
+    "T09_QUARANTINE_REMAINS_8": "PASS",
+    "T10_ASX_OFFICIAL_ACCESS_INVESTIGATED": "PASS",
+    "T11_LICENSED_VENDOR_PATHS_VERIFIED_FROM_ASX_REGISTRY": "PASS",
+    "T12_NO_LICENSED_RAW_DATA_STORED_WITHOUT_RIGHTS": "PASS",
+    "T13_REWRITE_READY_COUNT_ZERO": "PASS",
+    "T14_ALPHA_VANTAGE_ZERO": "PASS",
+    "T15_SCALABLE_ZERO": "PASS",
+    "T16_P0_NOT_RUN": "PASS",
+    "T17_FEATURE_RS_PARAMETER_NOT_RUN_OR_PROMOTED": "PASS",
+    "T18_PRODUCTIVE_FALSE": "PASS"
+  },
+  "cache_rewrite_evidence_ready_count": 0,
+  "p0_price_cache_ready": false,
+  "final_ready": 1417,
+  "final_quarantine": 8
+}

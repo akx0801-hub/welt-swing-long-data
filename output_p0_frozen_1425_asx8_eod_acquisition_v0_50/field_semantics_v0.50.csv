@@ -1,0 +1,8 @@
+Finding_ID,Source_ID,Field_or_Topic,Finding,Implication
+F01,SRC_ASX_DOL,Snapshot composition,"Daily Official List snapshots contain first, high, low, last and cumulative volume/value trade-based fields.",Official product can supply coherent EOD trade fields needed for an OHLC authority row.
+F02,ASX_TRADE_REFRESH,Open/First,Opening price is the first on-market sale price of the series for the day.,First is the exchange trade-based analogue of raw Open.
+F03,ASX_TRADE_REFRESH,High,High is the highest on-market traded price of the series for the day.,A same-basis authoritative High must bound the last on-market traded price.
+F04,ASX_TRADE_REFRESH,Low,Low is the lowest on-market traded price of the series for the day.,A same-basis authoritative Low must bound the last on-market traded price.
+F05,SRC_ASX_DOL,Last/Close,Last/Previous Last is the last on-market price at which a sale occurred; last traded date/time identify whether it is current-day.,Official trade-based Last is not merely a valuation field.
+F06,SRC_EODHD,Vendor field basis,EODHD documents open/high/low/close as as-traded values with adjusted_close separate.,"If licensed exact-date rows are acquired, they are structurally suitable for strict raw-OHLC comparison."
+F07,SRC_EODDATA,Commercial feed schema,"EODData commercial feed documents Symbol, Date, Open, High, Low, Close, Volume.",It is technically capable of supplying the required core fields under an appropriate licence.

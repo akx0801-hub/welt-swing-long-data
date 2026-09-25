@@ -1,0 +1,86 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_OFFICIAL_LICENSED_EOD_ACQUISITION",
+  "version": "v0.50",
+  "mode": "BOUNDED_AUTHORITATIVE_LICENSED_EOD_DATA_ACQUISITION",
+  "required_start_head": "66df44cc466950692d00e0a05ae8259804e2decd",
+  "status": "PASS_WITH_ACCESS_BLOCKED",
+  "scope": {
+    "date": "2024-11-15",
+    "securities": [
+      "ANZ",
+      "BSL",
+      "BXB",
+      "CBA",
+      "NXT",
+      "PME",
+      "QAN",
+      "SDF"
+    ],
+    "count": 8
+  },
+  "runtime_authority": {
+    "version": "v0.48",
+    "run": 36183320195,
+    "artifact": 10885240894,
+    "sqlite_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "bytes": 144216064,
+    "READY": 1417,
+    "QUARANTINE": 8,
+    "mutated": false
+  },
+  "official_access": {
+    "asx_referencepoint": "OFFICIAL_DATA_ACCESS_BLOCKED",
+    "reason": "Exact historical DOL rows require authenticated/subscription/licensed access not present in current environment."
+  },
+  "licensed_paths": [
+    {
+      "provider": "EODData",
+      "asx_vendor_registry": true,
+      "complete_ohlcv_capability": true,
+      "exact_date_acquired": false,
+      "blocker": "paid historical entitlement/credentials and repository-use rights not present"
+    },
+    {
+      "provider": "EOD Historical Data (EODHD)",
+      "asx_vendor_registry": true,
+      "provider_claims_direct_redistribution_license": true,
+      "complete_ohlcv_capability": true,
+      "exact_date_acquired": false,
+      "blocker": "entitled API token/plan and applicable usage rights not present"
+    }
+  ],
+  "complete_rows_acquired": {
+    "official": 0,
+    "licensed": 0,
+    "secondary_independent": 1,
+    "secondary_identity": "WS:XASX:PME"
+  },
+  "partial_evidence": {
+    "CBA": "155.13 observed transaction price",
+    "QAN": "8.89 close corroboration"
+  },
+  "rewrite_evidence_ready_count": 0,
+  "per_security_verdict_counts": {
+    "OFFICIAL_DATA_ACCESS_BLOCKED": 5,
+    "PARTIAL_PRICE_EVIDENCE_ONLY": 2,
+    "INDEPENDENT_COMPLETE_OHLC_ACQUIRED_NOT_YET_REWRITE_AUTHORITY": 1
+  },
+  "p0_price_cache_ready": false,
+  "final_cache": {
+    "READY": 1417,
+    "QUARANTINE": 8,
+    "total": 1425
+  },
+  "cache_mutation": false,
+  "provider_mapping_mutation": false,
+  "frozen_mutation": false,
+  "market_provider_api_calls": 0,
+  "alpha_vantage_calls": 0,
+  "scalable_calls": 0,
+  "p0_run": false,
+  "features_run_or_promoted": false,
+  "rs_run_or_promoted": false,
+  "parameters_promoted": false,
+  "productive": false,
+  "next_gate": "P0 FROZEN-1425 ASX-8 EODHD LICENSED EXACT-DATE ENTITLEMENT / CREDENTIALLED ACQUISITION GATE"
+}

@@ -1,0 +1,57 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_OFFICIAL_LICENSED_EOD_ACQUISITION",
+  "version": "v0.50",
+  "start_head": "66df44cc466950692d00e0a05ae8259804e2decd",
+  "source_project_authorities": {
+    "v049_summary": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/summary_v0.49.json",
+      "git_blob_sha": "63c638c5548634b7d9260c9210756d6e91f1de90"
+    },
+    "v049_cross_source": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/cross_source_ohlc_v0.49.csv",
+      "git_blob_sha": "d738ed8ba2b0c8fab87bc1d496df11039f4533ff"
+    },
+    "v049_verdicts": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/per_security_verdicts_v0.49.csv",
+      "git_blob_sha": "0ab455c142c598ead71f113db024dfc3934b60c6"
+    },
+    "v049_final_cache": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/final_cache_state_v0.49.csv",
+      "git_blob_sha": "f933360680a4febbfcbe31365a0e9b610818508a",
+      "rows": 1425
+    },
+    "v049_runtime_hash": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/runtime_hash_binding_v0.49.json",
+      "git_blob_sha": "cd55308c32a0b41534c6a6d2e5a33e62a0a10fe7"
+    },
+    "frozen": {
+      "path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+      "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+      "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+      "rows": 1425
+    }
+  },
+  "external_authority_classes": [
+    "ASX_OFFICIAL",
+    "ASX_OFFICIAL_SPEC",
+    "ASX_VENDOR_REGISTRY",
+    "ASX_LISTED_VENDOR",
+    "SECONDARY_INDEPENDENT",
+    "SECONDARY_CORROBORATION"
+  ],
+  "licensed_raw_rows_persisted": 0,
+  "result": {
+    "status": "PASS_WITH_ACCESS_BLOCKED",
+    "official_complete_rows_acquired": 0,
+    "licensed_complete_rows_acquired": 0,
+    "secondary_complete_rows": 1,
+    "rewrite_ready": 0,
+    "cache_mutation": false,
+    "ready": 1417,
+    "quarantine": 8,
+    "market_provider_api_calls": 0,
+    "alpha_vantage_calls": 0,
+    "scalable_calls": 0,
+    "productive": false
+  }
+}

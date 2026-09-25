@@ -1,0 +1,5 @@
+Source_ID,Historical_Access,Authentication,Payment_or_Contract,Exact_Date_Accessed,Reason,Repository_Raw_Persistence,Assessment
+SRC_ASX_DOL,SUBSCRIPTION/ACCOUNT,ASX Online subscriber,YES,NO,No ASX Online entitlement/credential available in current environment,NOT_AUTHORIZED/NOT_VERIFIED,OFFICIAL_DATA_ACCESS_BLOCKED
+SRC_ASX_HIST,CONTACT/LICENSE,Commercial arrangement,LIKELY/ASX TAILORED SOLUTION,NO,Historical product requires ASX Information Services access arrangement,NOT_AUTHORIZED/NOT_VERIFIED,OFFICIAL_DATA_ACCESS_BLOCKED
+SRC_EODDATA,PAID_HISTORY/MEMBERSHIP,Username/API key,YES_FOR_OLD_HISTORY,NO,Target 2024-11-15 history is not exposed on public recent-price pages; paid historical access required,RESTRICTED_WITHOUT APPROPRIATE LICENSE,LICENSED_PATH_AVAILABLE_ACCESS_BLOCKED
+SRC_EODHD,API TOKEN/PAID EOD PACKAGE,API token,YES_FOR_HISTORY OLDER THAN ONE YEAR,NO,Free access only past year; DEMO limited to named non-ASX symbols; no entitled token connected,ONLY WITH APPLICABLE PERSONAL/COMMERCIAL/EXCHANGE RIGHTS,LICENSED_PATH_AVAILABLE_ACCESS_BLOCKED
