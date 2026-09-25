@@ -117,8 +117,11 @@ def main():
   rows=[r for r in rf if r["Source_WS_ID"]==ws and r["Date"]=="2024-11-15" and r["Repair"]=="false" and r["Fetch_Status"]=="OK"]
   assert len(rows)==1
   r=rows[0]
-  vals=[float(r[x]) for x in ["open","high","low","close","adj_close","volume"]]
-  assert vals==[float(x) for x in srcrow]
+  vals=[float(r[x]) for x in ["open","high","low","close","volume"]]
+  # Raw OHLC and volume must reproduce exactly. Adj Close may be retrospectively
+  # restated by Yahoo when later corporate-action factors change, so it is audited
+  # separately and cannot determine the raw OHLC relation result.
+  assert vals==[float(srcrow[i]) for i in [0,1,2,3,5]]
  for ws,e in EVENTS.items():
   ev=event_payload(con,ws,e)
   rows=[r for r in rf if r["Source_WS_ID"]==ws and r["Date"]==e["Event_Date"] and r["Repair"]=="false" and r["Fetch_Status"]=="OK"]
