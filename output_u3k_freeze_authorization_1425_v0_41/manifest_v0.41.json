@@ -1,0 +1,69 @@
+{
+  "stage": "U3K_FREEZE_AUTHORIZATION_1425",
+  "version": "v0.41",
+  "source_head": "41b894d96207ebf7ad7c88831a9ea96bd30ef518",
+  "source_artifacts": {
+    "docs/validation/U3K_Freeze_Preparation_1425_v0.40.md": {
+      "git_blob_sha": "6220bf29ecdf56f319d1dc964616f89939730281"
+    },
+    "output_u3k_freeze_preparation_1425_v0_40/prospective_u3k_membership_v0.40.csv": {
+      "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+      "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+      "rows": 1425
+    },
+    "output_u3k_freeze_preparation_1425_v0_40/summary_v0.40.json": {
+      "git_blob_sha": "f0f5dea7c283ebb1a97f6fb25496a732602796c6"
+    },
+    "output_u3k_freeze_preparation_1425_v0_40/manifest_v0.40.json": {
+      "git_blob_sha": "72232b2d54d7ec208f95a017e5604baf8087b006"
+    },
+    "output_u3k_freeze_preparation_1425_v0_40/stage_checkpoint_v0.40.json": {
+      "git_blob_sha": "89e5e8b4df97c42a5e52885a9818af9a5642ea2f"
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/u3k_input_plan_v0.39.csv": {
+      "git_blob_sha": "17fce49c585fd748bdf2088c20f94aaea328c835",
+      "sha256": "908197ab05c2c6409844c293e1bd4336c48a75a77a0a7dab33e424add3f2221c",
+      "rows": 1425
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/eligibility_dry_run_2527_v0.39.csv": {
+      "git_blob_sha": "c84be3d4c128358b9b74d96a93fb1ee5f444cbc7",
+      "sha256": "dcaee0fd97e15c1a1bb5c3ea45b8cc9bd02e301eb6a3b7d8a31f7c227c33053e",
+      "rows": 2527
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/summary_v0.39.json": {
+      "git_blob_sha": "5c8d6792ae0bd1b6a26121276f22c93a3b8cabb5"
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/manifest_v0.39.json": {
+      "git_blob_sha": "84972b4fd4c6705439b7a5c49dcd70345c6e4aaa"
+    },
+    "output_current_eligibility_dry_run_2527_v0_39/stage_checkpoint_v0.39.json": {
+      "git_blob_sha": "03f787399513fb4068bd971a3acd9b7097a21ffd"
+    },
+    "docs/validation/Current_Master_Research_Partial_2527_Current_Eligibility_Recomputation_and_U3K_Input_Plan_v0.39.md": {
+      "git_blob_sha": "4bbf5fc760e31ae523c496eb0d6a54d5876a0f65"
+    },
+    "universe/SWING_U3K_FROZEN_v0.5.csv": {
+      "git_blob_sha": "6083e1335768e9414cb119d15369b71ebbc589d2",
+      "rows": 0
+    }
+  },
+  "output_hashes": {
+    "docs/validation/U3K_Freeze_Authorization_1425_v0.41.md": {
+      "sha256": "c678a50a2886941ddec5de3ca5f4b0e929cc2009bd1998cc77a10142d9280434"
+    },
+    "output_u3k_freeze_authorization_1425_v0_41/summary_v0.41.json": {
+      "sha256": "75bfb1f23b41212aba36d1ad68b4d432a0b63dee60a2d9e40747a3f9952871ec"
+    },
+    "output_u3k_freeze_authorization_1425_v0_41/stage_checkpoint_v0.41.json": {
+      "sha256": "7eef5b6c303229c1aa144fa641b3c8fa97e25c7bc8854b4f9dcf27225cd31e44"
+    }
+  },
+  "authorization": {
+    "decision": "YES",
+    "exact_member_count": 1425,
+    "exact_projection_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+  },
+  "frozen_members_before_materialization": 0,
+  "universe_write": false,
+  "productive": false
+}

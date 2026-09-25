@@ -1,0 +1,83 @@
+{
+  "stage": "U3K_FREEZE_AUTHORIZATION_1425",
+  "version": "v0.41",
+  "mode": "BOUNDED_OFFLINE_GOVERNANCE_AUTHORIZATION_VALIDATION",
+  "source_head": "41b894d96207ebf7ad7c88831a9ea96bd30ef518",
+  "status": "PASS",
+  "authorization_decision": "U3K_FREEZE_MATERIALIZATION_AUTHORIZED",
+  "u3k_freeze_materialization_authorized": true,
+  "authorization_scope": {
+    "exact_member_count": 1425,
+    "exact_projection_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "exact_source_lineage": "v0.39 -> v0.40",
+    "invalidated_by": [
+      "HEAD_CHANGE",
+      "PROJECTION_BYTES_CHANGE",
+      "PROJECTION_HASH_CHANGE",
+      "MEMBER_COUNT_CHANGE",
+      "ELIGIBILITY_STATE_CHANGE",
+      "IDENTITY_CHANGE",
+      "SOURCE_LINEAGE_CHANGE"
+    ]
+  },
+  "reconciliation": {
+    "eligibility_pass_strict_candidate": 1425,
+    "prospective_membership": 1425,
+    "missing": 0,
+    "unexpected": 0,
+    "fail_closed_leakage": 0
+  },
+  "identity": {
+    "duplicate_security_key": 0,
+    "duplicate_source_ws_id": 0,
+    "missing_security_key": 0,
+    "missing_source_ws_id": 0,
+    "missing_primary_mic": 0,
+    "missing_primary_ticker": 0
+  },
+  "exclusions": {
+    "SOLS_present": false,
+    "CTD_present": false
+  },
+  "cap_ranking": {
+    "eligible_count": 1425,
+    "cap_required": false,
+    "ranking_exclusion_applied": false,
+    "quota_fill": false,
+    "replacement_securities": false
+  },
+  "pre_materialization": {
+    "frozen_members": 0,
+    "frozen_blob_sha": "6083e1335768e9414cb119d15369b71ebbc589d2",
+    "universe_write": false,
+    "productive": false
+  },
+  "operational_separation": {
+    "long_dev": "DEV / RESEARCH / SHADOW",
+    "productive_authority": "Welt-Swing v7.2 only",
+    "P0": "NOT_RUN",
+    "P1": "NOT_RUN",
+    "P2_TRADEABILITY": "NOT_RUN",
+    "market_provider_calls": 0,
+    "scalable_calls": 0,
+    "alpha_vantage_used": false
+  },
+  "gates": {
+    "T01_START_HEAD_EXACT": "PASS",
+    "T02_V040_CHECKPOINT_PASS_20_OF_20": "PASS",
+    "T03_PROJECTION_COUNT_1425": "PASS",
+    "T04_PROJECTION_SHA256_EXACT": "PASS",
+    "T05_SOURCE_LINEAGE_V039_TO_V040": "PASS",
+    "T06_MEMBERSHIP_ELIGIBILITY_RECONCILIATION_EXACT": "PASS",
+    "T07_FAIL_CLOSED_LEAKAGE_ZERO": "PASS",
+    "T08_IDENTITY_UNIQUE_AND_COMPLETE": "PASS",
+    "T09_SOLS_ABSENT": "PASS",
+    "T10_CTD_ABSENT": "PASS",
+    "T11_CAP_NOT_REQUIRED": "PASS",
+    "T12_RANKING_EXCLUSION_FALSE": "PASS",
+    "T13_REAL_FROZEN_PRESTATE_ZERO": "PASS",
+    "T14_PRODUCTIVE_SEPARATION": "PASS",
+    "T15_UNIVERSE_WRITE_FALSE": "PASS",
+    "T16_DETERMINISTIC_REPEAT": "PASS"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "stage": "U3K_FREEZE_AUTHORIZATION_1425",
+  "version": "v0.41",
+  "status": "PASS",
+  "tests_collected": 16,
+  "tests_passed": 16,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "gates": {
+    "T01_START_HEAD_EXACT": "PASS",
+    "T02_V040_CHECKPOINT_PASS_20_OF_20": "PASS",
+    "T03_PROJECTION_COUNT_1425": "PASS",
+    "T04_PROJECTION_SHA256_EXACT": "PASS",
+    "T05_SOURCE_LINEAGE_V039_TO_V040": "PASS",
+    "T06_MEMBERSHIP_ELIGIBILITY_RECONCILIATION_EXACT": "PASS",
+    "T07_FAIL_CLOSED_LEAKAGE_ZERO": "PASS",
+    "T08_IDENTITY_UNIQUE_AND_COMPLETE": "PASS",
+    "T09_SOLS_ABSENT": "PASS",
+    "T10_CTD_ABSENT": "PASS",
+    "T11_CAP_NOT_REQUIRED": "PASS",
+    "T12_RANKING_EXCLUSION_FALSE": "PASS",
+    "T13_REAL_FROZEN_PRESTATE_ZERO": "PASS",
+    "T14_PRODUCTIVE_SEPARATION": "PASS",
+    "T15_UNIVERSE_WRITE_FALSE": "PASS",
+    "T16_DETERMINISTIC_REPEAT": "PASS"
+  },
+  "u3k_freeze_materialization_authorized": true,
+  "exact_member_count": 1425,
+  "exact_projection_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "frozen_members_before_materialization": 0,
+  "universe_write": false,
+  "productive": false
+}
