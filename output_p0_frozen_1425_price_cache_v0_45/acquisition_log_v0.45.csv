@@ -1,0 +1,5 @@
+Phase,Target_Securities,Provider_Downloaded_Securities,Ready_After_Phase,NonReady_After_Phase,Batch_Invocations,Provider_Call_Count,Notes
+REUSE_CURRENT_522,431,0,423,8,0,0,reused rows=215934; source run=35905876433
+STALE_REFRESH_NORMAL,994,994,,,10,,initial missing symbols=0
+STALE_REFRESH_RESCUE,0,0,,0,0,,one grouped rescue wave
+STALE_REFRESH_REPAIR,2,2,992,2,1,11,"existing repair=True semantics, no symbol fallback"

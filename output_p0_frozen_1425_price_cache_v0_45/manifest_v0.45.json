@@ -1,0 +1,81 @@
+{
+  "execution_harness_head": "c2a4a3dea1ac8f821974496321edcb8edd78ead5",
+  "output_hashes": {
+    "output_p0_frozen_1425_price_cache_v0_45/acquisition_log_v0.45.csv": {
+      "bytes": 425,
+      "sha256": "11502fda61dfbf3db9b9313cfe1867bbc0dc9bf55baaf34083951361c231ff44"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/cache_state_v0.45.csv": {
+      "bytes": 250911,
+      "sha256": "7ad6cf3d54c3934fc0b0412ad1887851b8eadfe308074311c4f5b3c89eaa25ba"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/currentness_distribution_v0.45.csv": {
+      "bytes": 49,
+      "sha256": "ad67afd97cff05b1ad3ee4184a7e37cbf97af6efeb4187af24b256583bd6ad71"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/non_ready_v0.45.csv": {
+      "bytes": 2410,
+      "sha256": "abf8487dc750b93f9d329e0f14717f3a4f527365f864417f8f92a0ed509973b8"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/price_cache_status_counts_v0.45.csv": {
+      "bytes": 53,
+      "sha256": "23ed435f6b345a091c6d9b3b352b382f44912512ea6b0cb62a2b4ed363b00e52"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/provider_batch_log_v0.45.csv": {
+      "bytes": 1477,
+      "sha256": "68e3bf1c0cf889fe710d50f30f55e5236c04712373d935cb1aedef27d72ba261"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/provider_provenance_v0.45.csv": {
+      "bytes": 172852,
+      "sha256": "b8b874c7231e23efc997ee797ed5cc84c8ad61d42da09799f3d316ad341618ce"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/qa_results_v0.45.csv": {
+      "bytes": 178685,
+      "sha256": "dce0c2333f41478aee851d8861312d8a9e5daa95aede7f678fd56617221df824"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/stage_checkpoint_v0.45.json": {
+      "bytes": 1132,
+      "sha256": "87fdb6faebc1a1d8556be41fc749107564105ad9316c45de7dfcd73111bf6896"
+    },
+    "output_p0_frozen_1425_price_cache_v0_45/summary_v0.45.json": {
+      "bytes": 1969,
+      "sha256": "fe09d8f9e8475ff61809e26d2b67de1e5d3a0efa1fc1073742efcc113934f5ab"
+    }
+  },
+  "required_start_head": "87efb302406e8e6297b21a2ea8efdbf6ef19cbf6",
+  "result": {
+    "alpha_vantage_calls": 0,
+    "market_provider_calls": 11,
+    "nonready": 10,
+    "p0_price_cache_ready": false,
+    "productive": false,
+    "ready": 1415,
+    "universe_mutation": false
+  },
+  "runtime_artifact": {
+    "artifact_digest": "sha256:d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab",
+    "artifact_id": 10865594502,
+    "artifact_name": "p0-frozen-1425-price-cache-v0.45-36138138825",
+    "expires_at": "2026-10-09T13:01:36Z",
+    "runtime_cache_committed_to_repo": false,
+    "workflow_head_sha": "c2a4a3dea1ac8f821974496321edcb8edd78ead5",
+    "workflow_run_id": 36138138825
+  },
+  "runtime_cache": {
+    "bytes": 144216064,
+    "path_in_workflow_artifact": "runtime_cache/p0_frozen_1425_v0_45.sqlite",
+    "price_rows": 711204,
+    "sha256": "a245c23c7644589ef6c79195b61c13dfdd47bd8b89b9f3ee923de205a73541c0",
+    "states": 1425
+  },
+  "source_authorities": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "market_evidence_artifact_digest": "sha256:2b36605125f5c70354bcf7536eb52e0ecd0a11e631e422d8a21746df466ac161",
+    "market_evidence_artifact_id": 10771257237,
+    "market_evidence_run_id": 35905876433,
+    "v0_44_provider_audit": "output_p0_frozen_1425_readiness_v0_44/provider_mapping_audit_v0.44.csv",
+    "v0_44_readiness": "output_p0_frozen_1425_readiness_v0_44/readiness_matrix_v0.44.csv"
+  },
+  "stage": "P0_FROZEN_1425_PRICE_CACHE_CURRENTNESS_INGESTION_REMEDIATION",
+  "version": "v0.45"
+}
