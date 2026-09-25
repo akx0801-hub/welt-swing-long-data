@@ -122,9 +122,13 @@ def preflight(repository_sha: str) -> dict:
     head = git("rev-parse", "HEAD")
     if repository_sha and head != repository_sha:
         raise RuntimeError(f"checkout sha mismatch {head} != {repository_sha}")
-    parents = git("show", "-s", "--format=%P", "HEAD").split()
-    if REQUIRED_START_HEAD not in parents:
-        raise RuntimeError(f"execution harness is not directly based on required start head: {parents}")
+    anc = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", REQUIRED_START_HEAD, "HEAD"],
+        cwd=ROOT,
+        check=False,
+    )
+    if anc.returncode != 0:
+        raise RuntimeError("required start head is not an ancestor of execution harness")
 
     return {
         "frozen": frozen,
