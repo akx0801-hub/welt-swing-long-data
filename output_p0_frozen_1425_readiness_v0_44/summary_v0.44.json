@@ -1,0 +1,115 @@
+{
+  "stage": "P0_FROZEN_1425_DATA_CAPABILITY_READINESS",
+  "version": "v0.44",
+  "mode": "BOUNDED_OFFLINE_READINESS_AUDIT",
+  "start_head": "48a8bd391c653342b74781ad13fdb7161782d245",
+  "audit_date": "2026-09-25",
+  "status": "PASS",
+  "readiness_verdict": "NOT_READY_FOR_FULL_P0",
+  "frozen_authority": {
+    "members": 1425,
+    "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+    "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "stage_u_p0_input_ready": true
+  },
+  "price_cache_readiness": {
+    "READY": 0,
+    "WARMUP": 0,
+    "STALE": 622,
+    "QUARANTINE": 0,
+    "MAPPING_PENDING": 0,
+    "DOWNLOAD_FAILED": 0,
+    "NOT_AVAILABLE": 0,
+    "NOT_VERIFIED": 803,
+    "persisted_ready_but_now_stale": 622
+  },
+  "data_currentness": {
+    "CURRENT": 431,
+    "STALE": 994,
+    "NOT_VERIFIED": 0,
+    "market_asof_distribution": {
+      "2026-08-31": 622,
+      "2026-09-22": 431,
+      "NOT_VERIFIED": 372
+    },
+    "last_completed_session_distribution": {
+      "2026-08-28": 31,
+      "2026-08-31": 591,
+      "2026-09-21": 368,
+      "2026-09-22": 63,
+      "NOT_VERIFIED": 372
+    },
+    "fetch_date_distribution": {
+      "2026-09-01": 622,
+      "2026-09-05": 372,
+      "2026-09-23": 431
+    }
+  },
+  "feature_capability": {
+    "FEATURE_READY": 0,
+    "FEATURE_COMPUTABLE_FROM_READY_CACHE": 0,
+    "FEATURE_PARTIAL": 1425,
+    "FEATURE_NOT_VERIFIED": 0,
+    "FEATURE_BLOCKED": 0,
+    "note": "Historical v0.19 implementation is partial/threshold-neutral; canonical full P0 feature/decision contract is not frozen."
+  },
+  "provider_mapping": {
+    "PROVIDER_MAPPING_READY": 1425,
+    "MAPPING_PENDING": 0,
+    "MAPPING_CONFLICT": 0,
+    "PROVIDER_UNSUPPORTED": 0,
+    "NOT_VERIFIED": 0,
+    "evidence": {
+      "BASE_1633": "622 MAPPING_DATA_CONFIRMED in v0.38",
+      "US1": "372 YFINANCE_VERIFIED",
+      "US2_AU1": "431 covered by validated market-evidence-522 acquisition; 430 explicit + 1 project override (MOGA -> MOG-A)"
+    }
+  },
+  "benchmark_rs": {
+    "static_primary_universe_index_available": 1425,
+    "current_frozen_home_market_rs_ready": 0,
+    "current_frozen_home_market_rs_not_verified": 1425,
+    "historical_architecture": "v0.20 leave-one-out Primary_Universe_Index cohort median; not a current Frozen-1425 result"
+  },
+  "sector_rs": {
+    "SECTOR_RS_READY": 0,
+    "SECTOR_RS_NOT_VERIFIED": 1425,
+    "authority_state": "sector metadata contract PREPARED_NOT_POPULATED"
+  },
+  "parameter_readiness": {
+    "p0_parameter_set_ready": false,
+    "validation_status": "SHADOW_COMPONENT_VALIDATION_ONLY",
+    "numeric_pass_threshold_count": 0,
+    "promoted_lane_pass_rule_count": 0
+  },
+  "primary_readiness": {
+    "P0_DATA_READY": 0,
+    "P0_DATA_COMPUTABLE_LOCAL": 0,
+    "P0_DATA_STALE": 622,
+    "P0_DATA_MAPPING_BLOCKED": 0,
+    "P0_DATA_FEATURE_BLOCKED": 0,
+    "P0_DATA_RS_BLOCKED": 0,
+    "P0_DATA_NOT_VERIFIED": 803,
+    "sum": 1425
+  },
+  "secondary_blockers": {
+    "PRICE_CACHE_STALE": 622,
+    "PRICE_CACHE_STATUS_NOT_VERIFIED": 803,
+    "FRESH_PRICE_REFRESH_REQUIRED": 994,
+    "P0_CACHE_MATERIALIZATION_REQUIRED": 803,
+    "CURRENT_RAW_OHLCV_ARTIFACT_AVAILABLE_NOT_P0_CACHE": 431,
+    "FEATURE_CAPABILITY_PARTIAL": 1425,
+    "HOME_MARKET_RS_NOT_VERIFIED_CURRENT_FROZEN": 1425,
+    "SECTOR_RS_NOT_VERIFIED": 1425,
+    "P0_PARAMETER_SET_NOT_READY": 1425,
+    "PROVIDER_MAPPING_NOT_READY": 0
+  },
+  "p0_parameter_set_ready": false,
+  "full_p0_data_ready": false,
+  "next_gate": "P0 FROZEN-1425 PRICE-CACHE CURRENTNESS / INGESTION REMEDIATION GATE",
+  "no_p0_run": true,
+  "market_data_acquisition": false,
+  "universe_mutation": false,
+  "productive": false,
+  "alpha_vantage_used": false
+}
