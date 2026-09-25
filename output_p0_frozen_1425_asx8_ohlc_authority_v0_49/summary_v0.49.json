@@ -1,0 +1,61 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_OHLC_AUTHORITY_RESOLUTION",
+  "version": "v0.49",
+  "mode": "BOUNDED_ASX8_OHLC_AUTHORITY_RESOLUTION",
+  "required_start_head": "6d4831ef628c1eacb5e840e65059114569703767",
+  "status": "PASS_WITH_UNRESOLVED_ASX8",
+  "v048_runtime_validated": true,
+  "input": {
+    "expected": 8,
+    "matched": 8,
+    "missing": 0,
+    "unexpected": 0,
+    "blocker": "STRICT_OHLC_RELATION_FAIL",
+    "date": "2024-11-15"
+  },
+  "common_date_scan": {
+    "bars_on_date": 1340,
+    "affected": 8,
+    "mic_distribution": {
+      "XASX": 8
+    },
+    "additional_identities": 0
+  },
+  "root_cause": {
+    "floating_precision": "REJECTED",
+    "adjustment_mismatch": "NOT_SUPPORTED",
+    "issuer_specific_corporate_action": "NOT_SUPPORTED",
+    "timezone_boundary": "NOT_EVIDENCED",
+    "asx_official_session_mechanism": "CSPA/closing trade mechanism confirmed",
+    "challenged_provider_mixed_session_or_vendor_transformation": "PLAUSIBLE_AND_STRONGLY_SUPPORTED_BUT_NOT_FULLY_DOCUMENTED",
+    "exact_official_asx8_daily_ohlc": "NOT_RETRIEVED"
+  },
+  "verdict_counts": {
+    "PROVIDER_DATA_DEFECT_CONFIRMED": 1,
+    "PROVIDER_DATA_UNRESOLVED": 7
+  },
+  "defect_confirmed_identity": "WS:XASX:PME",
+  "data_corrections": 0,
+  "runtime_mutation": false,
+  "final_cache_status": {
+    "READY": 1417,
+    "QUARANTINE": 8
+  },
+  "p0_price_cache_ready": false,
+  "frozen": {
+    "members": 1425,
+    "git_blob": "018a03eb4614a197da9d2d566e77f32c61238dad",
+    "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+  },
+  "market_provider_calls": 0,
+  "alpha_vantage_calls": 0,
+  "scalable_calls": 0,
+  "external_research": "Bounded ASX official and independent historical evidence only",
+  "p0_run": false,
+  "features_promoted": false,
+  "rs_promoted": false,
+  "parameters_promoted": false,
+  "universe_mutation": false,
+  "productive": false,
+  "next_gate": "P0 FROZEN-1425 ASX-8 ASX DAILY OFFICIAL LIST / LICENSED EOD ACQUISITION GATE"
+}

@@ -1,0 +1,2 @@
+Scope,Date,Frozen_Bars_On_Date,Affected_Frozen_Securities,Affected_MIC,Affected_Identities,Additional_Identities,Assessment
+Frozen-1425 runtime diagnostic,2024-11-15,1340,8,XASX:8,WS:XASX:ANZ|WS:XASX:BSL|WS:XASX:BXB|WS:XASX:CBA|WS:XASX:NXT|WS:XASX:PME|WS:XASX:QAN|WS:XASX:SDF,NONE,No hidden same-date strict-OHLC failures outside exact ASX-8

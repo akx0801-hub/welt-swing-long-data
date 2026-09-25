@@ -1,0 +1,33 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_OHLC_AUTHORITY_RESOLUTION",
+  "version": "v0.49",
+  "status": "PASS_WITH_UNRESOLVED_ASX8",
+  "tests_collected": 19,
+  "tests_passed": 19,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "gates": {
+    "T01_START_HEAD_EXACT": "PASS",
+    "T02_V048_RUNTIME_AUTHORITY": "PASS",
+    "T03_ASX8_EXACT_INPUT": "PASS",
+    "T04_COMMON_DATE_SCAN_COMPLETE": "PASS",
+    "T05_NO_HIDDEN_COMMON_DATE_IDENTITIES": "PASS",
+    "T06_SESSION_SEMANTICS_RESEARCH": "PASS",
+    "T07_ADJUSTMENT_BASIS_TEST": "PASS",
+    "T08_CROSS_SOURCE_MATRIX": "PASS",
+    "T09_NO_QA_WEAKENING": "PASS",
+    "T10_NO_SYNTHETIC_CORRECTION": "PASS",
+    "T11_RUNTIME_UNCHANGED": "PASS",
+    "T12_FINAL_STATE_SUM_1425": "PASS",
+    "T13_FROZEN_UNCHANGED": "PASS",
+    "T14_PROVIDER_CALLS_ZERO": "PASS",
+    "T15_ALPHA_VANTAGE_ZERO": "PASS",
+    "T16_SCALABLE_ZERO": "PASS",
+    "T17_P0_NOT_RUN": "PASS",
+    "T18_FEATURE_RS_PARAMETER_NOT_PROMOTED": "PASS",
+    "T19_PRODUCTIVE_FALSE": "PASS"
+  },
+  "p0_price_cache_ready": false,
+  "final_ready": 1417,
+  "final_quarantine": 8
+}

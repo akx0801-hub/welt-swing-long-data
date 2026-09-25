@@ -1,0 +1,44 @@
+{
+  "stage": "P0_FROZEN_1425_ASX8_OHLC_AUTHORITY_RESOLUTION",
+  "version": "v0.49",
+  "start_head": "6d4831ef628c1eacb5e840e65059114569703767",
+  "source_authorities": {
+    "v048_summary": {
+      "path": "output_p0_frozen_1425_nonready10_resume_v0_48/summary_v0.48.json",
+      "git_blob_sha": "0943be7a988c1429601422d0419123b45784d51a"
+    },
+    "v048_final_cache": {
+      "path": "output_p0_frozen_1425_nonready10_resume_v0_48/final_cache_state_v0.48.csv",
+      "git_blob_sha": "f933360680a4febbfcbe31365a0e9b610818508a",
+      "rows": 1425
+    },
+    "frozen": {
+      "path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+      "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+      "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+      "rows": 1425
+    },
+    "runtime": {
+      "run_id": 36183320195,
+      "artifact_id": 10885240894,
+      "artifact_zip_sha256": "0be6ca06691f2715c7c663bd7abfacbe1d65553d5debed4b6ba87b766918cfab",
+      "sqlite_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+      "bytes": 144216064
+    }
+  },
+  "output_note": "final_cache_state_v0.49.csv reuses the exact unchanged v0.48 final-cache blob.",
+  "result": {
+    "status": "PASS_WITH_UNRESOLVED_ASX8",
+    "provider_data_defect_confirmed": 1,
+    "provider_data_unresolved": 7,
+    "data_corrections": 0,
+    "runtime_mutation": false,
+    "ready": 1417,
+    "quarantine": 8,
+    "p0_price_cache_ready": false,
+    "market_provider_calls": 0,
+    "alpha_vantage_calls": 0,
+    "scalable_calls": 0,
+    "productive": false
+  }
+}
