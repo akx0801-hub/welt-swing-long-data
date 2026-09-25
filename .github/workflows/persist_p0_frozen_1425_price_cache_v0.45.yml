@@ -1,0 +1,147 @@
+name: Persist P0 Frozen 1425 Price Cache v0.45 Evidence
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/persist_p0_frozen_1425_price_cache_v0.45.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify artifact authority and download
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10865594502 --jq .digest)"
+          test "$DIGEST" = "sha256:d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab"
+          rm -rf _v045_artifact
+          mkdir -p _v045_artifact
+          gh run download 36138138825             --repo "$GITHUB_REPOSITORY"             --name p0-frozen-1425-price-cache-v0.45-36138138825             --dir _v045_artifact
+          test -f _v045_artifact/output_p0_frozen_1425_price_cache_v0_45/summary_v0.45.json
+          test -f _v045_artifact/runtime_cache/p0_frozen_1425_v0_45.sqlite
+
+      - name: Validate and prepare bounded repository evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_price_cache_v0_45
+          cp -a _v045_artifact/output_p0_frozen_1425_price_cache_v0_45 ./output_p0_frozen_1425_price_cache_v0_45
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+
+          out=Path('output_p0_frozen_1425_price_cache_v0_45')
+          s=json.load(open(out/'summary_v0.45.json',encoding='utf-8'))
+          m=json.load(open(out/'manifest_v0.45.json',encoding='utf-8'))
+          c=json.load(open(out/'stage_checkpoint_v0.45.json',encoding='utf-8'))
+          non=list(csv.DictReader(open(out/'non_ready_v0.45.csv',encoding='utf-8')))
+          frozen=Path('universe/SWING_U3K_FROZEN_v0.5.csv').read_bytes()
+
+          assert s['status']=='PASS'
+          assert s['initial_population']=={'current_ingestion':431,'stale_refresh':994,'sum':1425}
+          assert s['final_price_cache_status_counts']=={'QUARANTINE':10,'READY':1415}
+          assert s['p0_price_cache_ready'] is False
+          assert len(non)==10
+          assert c['tests_passed']==18 and c['tests_failed']==0
+          assert hashlib.sha256(frozen).hexdigest()=='54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb'
+          assert s['alpha_vantage_calls']==0 and s['p0_run'] is False
+          assert s['feature_gate_promoted'] is False and s['rs_gate_promoted'] is False and s['parameter_promoted'] is False
+          assert s['universe_mutation'] is False and s['productive'] is False
+
+          m['runtime_artifact']={
+              'workflow_run_id':36138138825,
+              'workflow_head_sha':'c2a4a3dea1ac8f821974496321edcb8edd78ead5',
+              'artifact_id':10865594502,
+              'artifact_name':'p0-frozen-1425-price-cache-v0.45-36138138825',
+              'artifact_digest':'sha256:d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab',
+              'expires_at':'2026-10-09T13:01:36Z',
+              'runtime_cache_committed_to_repo':False,
+          }
+          (out/'manifest_v0.45.json').write_text(json.dumps(m,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+
+          lines=[]
+          lines.append('# P0 Frozen-1425 Price-Cache Currentness / Ingestion Remediation v0.45')
+          lines.append('')
+          lines.append('## Verdict')
+          lines.append('- Stage remediation: **PASS**')
+          lines.append('- P0_PRICE_CACHE_READY: **NO**')
+          lines.append('- Final cache: **1415 READY / 10 QUARANTINE**')
+          lines.append('- P0 was **NOT RUN**.')
+          lines.append('')
+          lines.append('## Authority and population')
+          lines.append('- Required start HEAD: `87efb302406e8e6297b21a2ea8efdbf6ef19cbf6`')
+          lines.append('- Frozen members: 1425')
+          lines.append('- Frozen SHA-256: `54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb`')
+          lines.append('- Current 522-evidence ingestion: 431')
+          lines.append('- Stale refresh population: 994')
+          lines.append('- Population reconciliation: 431 + 994 = 1425')
+          lines.append('')
+          lines.append('## Acquisition')
+          a=s['acquisition']
+          lines.append(f"- Refreshed via YFINANCE_FREE: {a['stale_refresh_attempted']} attempted, {a['stale_refresh_ready']} READY, {a['stale_refresh_nonready']} non-ready.")
+          lines.append(f"- Reused without market re-download: {a['reused_without_market_download']} members; {a['reused_ready']} READY, {a['reused_nonready']} non-ready.")
+          lines.append(f"- Provider batch calls including retries: {a['provider_batch_calls_including_retries']}.")
+          lines.append(f"- Rescue batches: {a['rescue_batches']}; repair symbol attempts: {a['repair_symbol_attempts']}.")
+          lines.append('- Alpha Vantage calls: 0.')
+          lines.append('')
+          lines.append('## Final cache states')
+          lines.append('- READY: 1415')
+          lines.append('- QUARANTINE: 10')
+          lines.append('- Missing Frozen identities: 0')
+          lines.append('- Unexpected identities: 0')
+          lines.append('')
+          lines.append('## Exact non-ready securities')
+          for r in non:
+              lines.append(f"- `{r['Security_Key']}` / `{r['Source_WS_ID']}` / {r['Primary_MIC']}:{r['Primary_Ticker']} / provider `{r['Provider_Symbol']}`: **{r['Blocking_Reason']}**.")
+          lines.append('')
+          lines.append('Eight AU1 rows are quarantined by the explicit strict OHLC relation check on persisted 522 evidence. Two US1 rows remain quarantined for suspicious returns after the bounded repair pass.')
+          lines.append('')
+          lines.append('## Governance')
+          lines.append('- Frozen membership unchanged.')
+          lines.append('- No P0/P1/P2 execution.')
+          lines.append('- No feature, Home-Market-RS, Sector-RS or parameter promotion.')
+          lines.append('- No Scalable calls.')
+          lines.append('- No Alpha Vantage.')
+          lines.append('- LONG DEV remains DEV / RESEARCH / SHADOW.')
+          lines.append('')
+          lines.append('## Runtime cache lineage')
+          lines.append('- Workflow run: `36138138825`')
+          lines.append('- Runtime artifact: `10865594502`')
+          lines.append('- Artifact digest: `sha256:d5dfeb8250949632d0982ad7272046e9dbca24f0ee650eb8a9c3ba7dc1c29fab`')
+          lines.append('- Runtime SQLite SHA-256: `a245c23c7644589ef6c79195b61c13dfdd47bd8b89b9f3ee923de205a73541c0`')
+          lines.append('- Runtime SQLite remains in the Actions artifact; it is not committed to the repository.')
+          lines.append('')
+          lines.append('## Next gate')
+          lines.append('**P0 FROZEN-1425 NON-READY 10 PRICE-QA EXACT REMEDIATION GATE**')
+          lines.append('')
+          lines.append('The next gate is limited to the exact ten quarantined identities. It must not run P0 or alter Frozen membership.')
+          Path('docs/validation/P0_Frozen_1425_Price_Cache_Remediation_v0.45.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+          PY
+          rm -rf _v045_artifact
+
+      - name: Commit bounded evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/P0_Frozen_1425_Price_Cache_Remediation_v0.45.md                   output_p0_frozen_1425_price_cache_v0_45/
+          test "$(git diff --cached --name-only | grep -c '^universe/SWING_U3K_FROZEN_v0.5.csv$' || true)" = "0"
+          git commit -m "Persist Frozen U3K 1425 price-cache remediation v0.45"
+          git push origin HEAD:main
