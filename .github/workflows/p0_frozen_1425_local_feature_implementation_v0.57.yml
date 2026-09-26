@@ -1,0 +1,161 @@
+name: P0 Frozen 1425 Local Feature Implementation Promotion v0.57
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/feature_builder.py
+      - scripts/p0_frozen_1425_local_feature_implementation_v0_57.py
+      - tests/test_p0_frozen_1425_local_feature_implementation_v0_57.py
+      - .github/workflows/p0_frozen_1425_local_feature_implementation_v0.57.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  implement-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout bounded implementation
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install bounded dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check "pandas==2.2.3" "numpy==2.1.3" "pytest==8.3.5"
+
+      - name: Verify v0.56 authority and exact price runtime artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 0287a10bf7a2938ed1517d79a47c296f3ea34c9d HEAD
+
+          D56="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10904166471 --jq .digest)"
+          test "$D56" = "sha256:17acd42edc06fe7311d88e27ee0a1a2052145e92440e487c2e0f0a47a10709ed"
+
+          python - <<'PY'
+          import json
+          s=json.load(open("output_p0_frozen_1425_local_feature_contract_v0_56/summary_v0.56.json",encoding="utf-8"))
+          assert s["status"]=="PASS_ALL8_CONTRACTS_DEFINED"
+          assert s["contract_artifact"]["workflow_run_id"]==36235568433
+          assert s["contract_artifact"]["artifact_id"]==10904166471
+          assert s["contract_artifact"]["artifact_digest"]=="sha256:17acd42edc06fe7311d88e27ee0a1a2052145e92440e487c2e0f0a47a10709ed"
+          assert s["frozen"]["members"]==1425
+          assert s["frozen"]["sha256"]=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert s["price_runtime"]["sha256"]=="bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          assert s["price_runtime"]["bytes"]==144539648
+          assert s["v055_authority"]["canonical_numeric_features"]==23
+          assert s["v055_authority"]["feature_ready"]==0
+          assert s["v055_authority"]["feature_partial"]==1425
+          assert s["p0_local_feature_layer_ready"] is False
+          assert s["v0_57_local_feature_implementation_authorized"] is True
+          print("v0.56 authority exact")
+          PY
+
+          D53="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10900287789 --jq .digest)"
+          test "$D53" = "sha256:f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95"
+          rm -rf runtime_input/v053
+          mkdir -p runtime_input/v053
+          gh run download 36225840648 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-filtered-invalid-bar-policy-v0.53-36225840648 \
+            --dir runtime_input/v053
+          test -f runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite
+          test "$(sha256sum runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite | awk '{print $1}')" = "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          test "$(stat -c %s runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite)" = "144539648"
+          test "$(sha256sum universe/SWING_U3K_FROZEN_v0.5.csv | awk '{print $1}')" = "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+
+      - name: Focused v0.57 contract implementation tests
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/feature_builder.py scripts/p0_frozen_1425_local_feature_implementation_v0_57.py
+          pytest -q tests/test_p0_frozen_1425_local_feature_implementation_v0_57.py
+
+      - name: Run full Frozen-1425 v0.57 materialization and regression
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_local_feature_implementation_v0_57
+          python scripts/p0_frozen_1425_local_feature_implementation_v0_57.py \
+            --source-sqlite runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite \
+            --output-dir output_p0_frozen_1425_local_feature_implementation_v0_57 \
+            --repository-sha "$GITHUB_SHA"
+
+      - name: Validate bounded v0.57 result
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_p0_frozen_1425_local_feature_implementation_v0_57")
+          s=json.load(open(out/"summary_preupload_v0.57.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_preupload_v0.57.json",encoding="utf-8"))
+          d=json.load(open(out/"determinism_v0.57.json",encoding="utf-8"))
+          mat=list(csv.DictReader(open(out/"feature_materialization_v0.57.csv",encoding="utf-8")))
+          cap=list(csv.DictReader(open(out/"capability_v0.57.csv",encoding="utf-8")))
+          old=list(csv.DictReader(open(out/"existing23_regression_v0.57.csv",encoding="utf-8")))
+          new=list(csv.DictReader(open(out/"new11_formula_regression_v0.57.csv",encoding="utf-8")))
+          asx=list(csv.DictReader(open(out/"asx8_regression_v0.57.csv",encoding="utf-8")))
+          temporal=list(csv.DictReader(open(out/"temporal_integrity_v0.57.csv",encoding="utf-8")))
+          nulls=list(csv.DictReader(open(out/"null_nonfinite_audit_v0.57.csv",encoding="utf-8")))
+          family=list(csv.DictReader(open(out/"semantic_family_binding_audit_v0.57.csv",encoding="utf-8")))
+          registry=list(csv.DictReader(open(out/"canonical_feature_registry_v0.57.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.57.csv",encoding="utf-8")))
+
+          assert s["status"] in {"PASS_LOCAL_FEATURE_LAYER_READY","PASS_WITH_LOCAL_FEATURE_BLOCKERS"}
+          assert len(mat)==1425 and len(cap)==1425
+          assert len({r["Security_Key"] for r in mat})==1425
+          assert len({r["Source_WS_ID"] for r in mat})==1425
+          assert s["features"]["existing_numeric"]==23
+          assert s["features"]["new_numeric"]==11
+          assert s["features"]["total_numeric"]==34
+          assert old[-1]["First_Mismatches"]=="81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc"
+          assert all(r["Result"]=="PASS" for r in old)
+          assert len(new)==1425*11 and all(r["Exact_Match"]=="True" for r in new)
+          assert len(asx)==8 and all(r["Result"]=="PASS" for r in asx)
+          assert len(temporal)==1425 and all(r["Result"]=="PASS" for r in temporal)
+          assert d["match"] is True
+          assert len(family)==1425
+          assert len([r for r in registry if r["registry_type"]=="FEATURE"])==34
+          assert len([r for r in registry if r["canonical_feature_name"]=="RECENT_IMPULSE_DESCRIPTORS"])==1
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert c["tests_failed"]==0
+          assert s["home_market_rs_ready"] is False and s["sector_rs_ready"] is False
+          assert s["p0_runs"]==0 and s["p1_p2_runs"]==0
+          assert s["market_provider_calls"]==0 and s["yahoo_yfinance_calls"]==0
+          assert s["eodhd_calls"]==0 and s["alpha_vantage_calls"]==0 and s["scalable_calls"]==0
+          assert sum(s["capability_counts"].values())==1425
+
+          if s["p0_local_feature_layer_ready"]:
+              assert s["capability_counts"]=={
+                "FEATURE_READY":1425,"FEATURE_PARTIAL":0,
+                "FEATURE_BLOCKED_INSUFFICIENT_HISTORY":0,"FEATURE_BLOCKED_INPUT":0,
+                "FEATURE_COMPUTATION_ERROR":0,"NOT_VERIFIED":0}
+              assert s["null_nonfinite"]["total"]==0
+              assert s["semantic_family_blocked"]==0
+
+          assert hashlib.sha256(Path("universe/SWING_U3K_FROZEN_v0.5.csv").read_bytes()).hexdigest()=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          print(json.dumps({"status":s["status"],"capability_counts":s["capability_counts"],"local_ready":s["p0_local_feature_layer_ready"],"semantic_sha256":s["full_frozen_materialization"]["semantic_sha256"],"tests":s["tests"]},sort_keys=True))
+          PY
+
+          test "$(sha256sum runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite | awk '{print $1}')" = "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          test "$(stat -c %s runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite)" = "144539648"
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.57 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-local-feature-implementation-v0.57-${{ github.run_id }}
+          path: output_p0_frozen_1425_local_feature_implementation_v0_57/
+          if-no-files-found: error
+          retention-days: 14
