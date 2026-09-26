@@ -1,0 +1,18 @@
+{
+  "Authorized_Alias_Source": "NONE_DISCOVERED_OR_USED",
+  "Gate": "E_SECURITY_IDENTITY",
+  "Gate_F_Classification_Use": "FORBIDDEN_IN_V0.70",
+  "Market_Context": "XNSE proven by official NSE/NSE Indices source class and Frozen Primary_MIC",
+  "Normalization_Rules": [
+    "Strip surrounding whitespace from identifiers",
+    "Uppercase Symbol identifier for exact comparison",
+    "Uppercase ISIN identifier for exact comparison",
+    "No company-name normalization or joins",
+    "No fuzzy matching"
+  ],
+  "Route_Precedence": [
+    "A: NIFTY exact ISIN -> Frozen exact ISIN; exact NIFTY Symbol must equal Frozen Primary_Ticker unless official alias evidence exists",
+    "B: If current NIFTY row absent, Frozen exact Primary_Ticker -> NSE EQUITY_L exact Symbol -> one distinct exact ISIN -> Frozen exact ISIN"
+  ],
+  "Version": "v0.70"
+}

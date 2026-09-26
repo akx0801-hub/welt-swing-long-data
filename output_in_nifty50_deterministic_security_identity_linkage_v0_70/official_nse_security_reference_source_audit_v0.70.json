@@ -1,0 +1,24 @@
+{
+  "Content_Type": "",
+  "Discovered_Candidates": [
+    "https://nsearchives.nseindia.com/content/equities/EQUITY_L.csv",
+    "https://nsearchives.nseindia.com/emerge/corporates/content/SME_EQUITY_L.csv"
+  ],
+  "Discovery_Page": "https://www.nseindia.com/static/market-data/securities-available-for-trading",
+  "Distinct_Symbols": 0,
+  "Field_Names": [],
+  "HTTP_Status": "",
+  "ISIN_Field": "NOT_VERIFIED",
+  "Raw_Bytes": 0,
+  "Raw_SHA256": "",
+  "Raw_Snapshot_Persisted": false,
+  "Raw_Snapshot_Persistence_Reason": "Redistribution rights not asserted; retained hash/schema/provenance and bounded derived identity evidence only.",
+  "Retrieval_Timestamp_UTC": "",
+  "Row_Count": 0,
+  "Schema_Status": "NOT_VERIFIED",
+  "Selected_Source_URL": "NOT_VERIFIED",
+  "Series_Field": "NOT_PRESENT",
+  "Source_Authority": "National Stock Exchange of India Limited",
+  "Symbol_Field": "NOT_VERIFIED",
+  "Symbols_With_Multiple_Distinct_ISIN": 0
+}

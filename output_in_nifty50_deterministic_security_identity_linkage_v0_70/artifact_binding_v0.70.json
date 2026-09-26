@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "a0e9b942970d510f7bc1042e7b93371b61662adb61cc972e557847046aa34ede",
+  "artifact_id": 10917150644,
+  "artifact_name": "in-nifty50-deterministic-security-identity-v0.70-36274393667",
+  "artifact_scope": "pre-persistence v0.70 IN_NIFTY50 Gate E deterministic official-source security identity linkage evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "2ada33bc305e8aaf0054ab484fcfab79b68f3ebf",
+  "workflow_run_id": 36274393667
+}

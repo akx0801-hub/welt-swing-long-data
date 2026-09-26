@@ -1,0 +1,19 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PASS",
+  "artifact_digest": "a0e9b942970d510f7bc1042e7b93371b61662adb61cc972e557847046aa34ede",
+  "artifact_id": 10917150644,
+  "blocker": "",
+  "conflict": 0,
+  "identity_route": "NIFTY.ISIN -> FROZEN.ISIN; NSE EQUITY_L audited as official reference",
+  "in_deterministic_ws_id_linkage_ready": true,
+  "linked": 45,
+  "next_gate": "IN_NIFTY50 EXACT FROZEN SECTOR CLASSIFICATION COVERAGE GATE",
+  "not_found": 0,
+  "not_verified": 0,
+  "stage": "IN_NIFTY50_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE",
+  "total": 45,
+  "verdict": "PASS_IN_NIFTY50_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE",
+  "version": "v0.70",
+  "workflow_run_id": 36274393667
+}

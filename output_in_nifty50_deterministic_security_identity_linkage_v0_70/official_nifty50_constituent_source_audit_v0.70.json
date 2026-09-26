@@ -1,0 +1,32 @@
+{
+  "Classification_Fields_Schema_Only": [
+    "Industry"
+  ],
+  "Classification_Population_Performed": false,
+  "Content_Type": "application/octet-stream",
+  "Discovered_Candidates": [
+    "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+  ],
+  "Discovery_Page": "https://www.niftyindices.com/indices/equity/broad-based-indices/NIFTY--50",
+  "Explicit_Source_AsOf": "NOT_VERIFIED_IN_FILE",
+  "Field_Names": [
+    "Company Name",
+    "Industry",
+    "Symbol",
+    "Series",
+    "ISIN Code"
+  ],
+  "HTTP_Status": 200,
+  "ISIN_Field": "ISIN Code",
+  "Raw_Bytes": 3352,
+  "Raw_SHA256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28",
+  "Raw_Snapshot_Persisted": false,
+  "Raw_Snapshot_Persistence_Reason": "Redistribution rights not asserted; retained hash/schema/provenance and bounded derived identity evidence only.",
+  "Retrieval_Timestamp_UTC": "2026-09-26T21:52:27Z",
+  "Row_Count": 50,
+  "Schema_Status": "PASS",
+  "Selected_Source_URL": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+  "Series_Field": "Series",
+  "Source_Authority": "NSE Indices Limited",
+  "Symbol_Field": "Symbol"
+}

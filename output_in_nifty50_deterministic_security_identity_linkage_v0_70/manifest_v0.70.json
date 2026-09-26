@@ -1,0 +1,117 @@
+{
+  "ambiguous": 0,
+  "artifact": {
+    "artifact_digest": "a0e9b942970d510f7bc1042e7b93371b61662adb61cc972e557847046aa34ede",
+    "artifact_id": 10917150644,
+    "artifact_name": "in-nifty50-deterministic-security-identity-v0.70-36274393667",
+    "artifact_scope": "pre-persistence v0.70 IN_NIFTY50 Gate E deterministic official-source security identity linkage evidence",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "2ada33bc305e8aaf0054ab484fcfab79b68f3ebf",
+    "workflow_run_id": 36274393667
+  },
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "conflict": 0,
+  "files": {
+    "artifact_binding_v0.70.json": {
+      "bytes": 465,
+      "sha256": "705d191045dea3942cc626554120f5871535a9df1df133b76d3b6e166ccb9fb7"
+    },
+    "docs/validation/IN_NIFTY50_Deterministic_Security_Identity_Linkage_Gate_v0.70.md": {
+      "bytes": 2584,
+      "sha256": "93a6e84db457aca6cd45160fac0b1dbc03485d2bd467c547361bb4c50680f9ac"
+    },
+    "external_request_ledger_v0.70.csv": {
+      "bytes": 1047,
+      "sha256": "9a8156af68fdeab22e86a05acd14926bed379babbc98b7cc83b5af3b1069340f"
+    },
+    "identity_ambiguity_audit_v0.70.json": {
+      "bytes": 31,
+      "sha256": "ec30ee7f611e450e9ae23168e964ba3b5578ea071834286eb2bfe7def61d7737"
+    },
+    "immutability_audit_v0.70.json": {
+      "bytes": 1236,
+      "sha256": "b19fedc53c54b5b6180311e5369fdbafe6263e5649efb99edc7116262ee57ba5"
+    },
+    "in_exact_45_identity_linkage_audit_v0.70.csv": {
+      "bytes": 11399,
+      "sha256": "0ab6330f37b436c643d695a71b2a6159b774b13a0da122497c732e779feef099"
+    },
+    "in_frozen_45_identity_target_v0.70.csv": {
+      "bytes": 3907,
+      "sha256": "26666c12c5f8e67ae9ddbfeb054c1870de75a3386b2c0d6e2136aefeabafa25b"
+    },
+    "in_frozen_ticker_consistency_audit_v0.70.csv": {
+      "bytes": 2497,
+      "sha256": "0bf4080a83e52763273e232d29fe6d444f134f7dceaeef59b7de363a0251996f"
+    },
+    "in_identity_join_contract_v0.70.json": {
+      "bytes": 842,
+      "sha256": "c07ee4e6c79db893a85c6a6d500f23b693e0bbdb89066acfa11b3aa97fa6f575"
+    },
+    "in_symbol_isin_bridge_audit_v0.70.csv": {
+      "bytes": 4570,
+      "sha256": "af717ab455ec455f1b6a94fe2f0d6eb665bf7530fa280f30f52d46d90c5fe709"
+    },
+    "manifest_preupload_v0.70.json": {
+      "bytes": 3277,
+      "sha256": "dae04669c402501445382396884fa30cc7ebf720b415bb7a5afba7ac7d88aa8c"
+    },
+    "official_nifty50_constituent_source_audit_v0.70.json": {
+      "bytes": 1152,
+      "sha256": "49712e512edf9bbdd866d1947ad36179067a93ceaa85818a45e3f9f71fb4e43f"
+    },
+    "official_nse_security_reference_source_audit_v0.70.json": {
+      "bytes": 939,
+      "sha256": "e95a314e9ad5fb53266ea08208f4e22c0eecbe0031f4307c9bf2d892c6e32f15"
+    },
+    "provider_call_audit_v0.70.json": {
+      "bytes": 457,
+      "sha256": "f807c60cc1746fe31420f4dd202aaaf0db212a2faa5d84eed656dbc76bf48bda"
+    },
+    "source_currentness_vs_frozen_identity_audit_v0.70.csv": {
+      "bytes": 4190,
+      "sha256": "32ee3950fa5fa6e35e00451c4381cd23ffdb84f7ce3d3cd05bc16727314778a0"
+    },
+    "stage_checkpoint_preupload_v0.70.json": {
+      "bytes": 548,
+      "sha256": "ceea94c91fb665941ea69c80a337aa7d4915dda64242886fbcd1d41bbb9e8114"
+    },
+    "stage_checkpoint_v0.70.json": {
+      "bytes": 691,
+      "sha256": "dc5ea680250476e8becf3689dd932e4c937f4a2cd8f72540462ad0add7ca2d49"
+    },
+    "summary_preupload_v0.70.json": {
+      "bytes": 1000,
+      "sha256": "c18c85c422f7a5148f72a2a7c603c86e5a006c2ee2904546070ddca13daf6b49"
+    },
+    "summary_v0.70.json": {
+      "bytes": 1486,
+      "sha256": "8f7f0a7cd15728c0950500bdcf22f5c2a4251be546667220a62d186d82ffaf12"
+    },
+    "test_results_v0.70.csv": {
+      "bytes": 1522,
+      "sha256": "5b903e15529978cea556b8810c9d7542553597096003c14a9a8636d7b4553538"
+    }
+  },
+  "gate_f_executions": 0,
+  "identity_route": "NIFTY.ISIN -> FROZEN.ISIN; NSE EQUITY_L audited as official reference",
+  "in_deterministic_ws_id_linkage_ready": true,
+  "linked": 45,
+  "next_gate": "IN_NIFTY50 EXACT FROZEN SECTOR CLASSIFICATION COVERAGE GATE",
+  "not_found": 0,
+  "not_verified": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "required_start_head": "357df447e225ab1fc839530b1d2b0d2d217fd652",
+  "sector_classification_population_rows": 0,
+  "sector_rs_runs": 0,
+  "stage": "IN_NIFTY50_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE",
+  "total": 45,
+  "verdict": "PASS_IN_NIFTY50_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE",
+  "version": "v0.70",
+  "workflow_head_sha": "2ada33bc305e8aaf0054ab484fcfab79b68f3ebf",
+  "workflow_run_id": 36274393667
+}
