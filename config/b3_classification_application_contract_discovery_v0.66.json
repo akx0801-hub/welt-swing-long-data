@@ -12,6 +12,6 @@
   "p0_allowed": false,
   "p1_p2_allowed": false,
   "productive": false,
-  "execution_attempt": 5,
-  "retry_reason": "ALLOW_BOUNDED_REFRESH_OF_EXISTING_V0_66_EVIDENCE_AFTER_CONTRACT_DETECTION_CORRECTION"
+  "execution_attempt": 6,
+  "retry_reason": "FIX_VALIDATION_LINE_BREAK_AFTER_TIGHTENED_CONTRACT_DETECTION"
 }
