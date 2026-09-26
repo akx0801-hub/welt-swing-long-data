@@ -1,0 +1,48 @@
+{
+  "authority_id": "G-SEC-02",
+  "version": "v0.62",
+  "authority_class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "scope": "SOURCE_NATIVE_TAXONOMY_ISOLATION_ARCHITECTURE",
+  "effective_stage": "FROZEN_1425_SOURCE_NATIVE_SECTOR_METADATA_COVERAGE_FEASIBILITY_GATE",
+  "predecessor_authority_preserved": "G-SEC-01",
+  "rules": {
+    "single_global_taxonomy_retest_in_v0_62": false,
+    "multiple_taxonomies_in_canonical_metadata_layer_allowed": true,
+    "sector_taxonomy_required_per_security": true,
+    "taxonomy_source_version_provenance_required": true,
+    "deterministic_ws_id_required": true,
+    "taxonomy_groups_semantically_isolated": true,
+    "peer_group_must_not_mix_sector_taxonomy": true,
+    "cross_taxonomy_comparison_forbidden": true,
+    "crosswalk_forbidden": true,
+    "missing_or_ambiguous_mapping_fail_closed": true,
+    "sector_rs_authorized": false,
+    "sector_mapping_population_authorized": false
+  },
+  "future_peer_group_key": ["Sector_Taxonomy", "Sector_Code"],
+  "same_sector_name_across_taxonomies_is_same_peer_group": false,
+  "accepted_source_classes_inherited_from_v0_21": [
+    "official index administrator bulk constituent/reference data",
+    "official primary exchange bulk reference data",
+    "official security registry bulk reference data",
+    "other explicitly approved bulk reference source after provenance review"
+  ],
+  "required_future_fields": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Code",
+    "Sector_Name",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "Mapping_Status"
+  ],
+  "success_requires": {
+    "frozen_members": 1425,
+    "provably_mappable": 1425,
+    "not_mappable": 0,
+    "not_verified": 0
+  },
+  "productive": false,
+  "alpha_vantage_allowed": false
+}
