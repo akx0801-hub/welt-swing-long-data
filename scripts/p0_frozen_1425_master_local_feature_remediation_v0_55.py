@@ -233,21 +233,40 @@ def value_equal(a:Any,b:Any)->bool:
     except Exception: return str(a)==str(b)
 
 def old21_regression(new:pd.DataFrame,old_path:Path)->list[dict[str,Any]]:
-    old=pd.read_csv(old_path,dtype={"Source_WS_ID":str})
-    n=new.set_index("Source_WS_ID")
-    o=old.set_index("Source_WS_ID")
-    if set(n.index)!=set(o.index): raise RuntimeError("v0.54/v0.55 identity mismatch")
-    rows=[]
-    mismatches=0
-    for feat in OLD21:
-        mm=[]
-        for ws in n.index:
-            if not value_equal(n.loc[ws,feat],o.loc[ws,feat]): mm.append(ws)
-        mismatches+=len(mm)
-        rows.append({"Feature":feat,"Rows":1425,"Mismatch_Count":len(mm),"Result":"PASS" if not mm else "FAIL","First_Mismatches":"|".join(mm[:10])})
+    # v0.54's feature_materialization file is itself the canonical semantic
+    # serialization used to declare V054_SEMANTIC_SHA256. Re-parsing its
+    # decimal strings into binary floats can introduce parser-roundtrip
+    # differences at the final bit, so equality authority is the byte-stable
+    # semantic digest, not a second float parser.
+    old_rows=read_csv(old_path)
+    old_ids=[r["Source_WS_ID"] for r in old_rows]
+    new_ids=new.sort_values("Projection_Order")["Source_WS_ID"].astype(str).tolist()
+    if old_ids!=new_ids:
+        raise RuntimeError("v0.54/v0.55 identity/order mismatch")
+    old_file_sha=sha256_file(old_path)
+    if old_file_sha!=V054_SEMANTIC_SHA256:
+        raise RuntimeError("v0.54 materialization file no longer matches canonical semantic authority")
     d=semantic_digest(new,OLD21)
-    if d!=V054_SEMANTIC_SHA256 or mismatches: raise RuntimeError(f"existing21 regression failed digest={d} mismatches={mismatches}")
-    rows.append({"Feature":"OLD21_SEMANTIC_DIGEST","Rows":1425,"Mismatch_Count":0,"Result":"PASS","First_Mismatches":d})
+    if d!=V054_SEMANTIC_SHA256:
+        raise RuntimeError(f"existing21 semantic regression failed digest={d}")
+    rows=[]
+    for feat in OLD21:
+        rows.append({
+            "Feature":feat,
+            "Rows":1425,
+            "Mismatch_Count":0,
+            "Result":"PASS",
+            "Comparison_Method":"FULL_OLD21_CANONICAL_SEMANTIC_DIGEST_MATCH",
+            "Authority_Digest":d,
+        })
+    rows.append({
+        "Feature":"OLD21_SEMANTIC_DIGEST",
+        "Rows":1425,
+        "Mismatch_Count":0,
+        "Result":"PASS",
+        "Comparison_Method":"BYTE_STABLE_SEMANTIC_DIGEST",
+        "Authority_Digest":d,
+    })
     return rows
 
 def load_prices(runtime:Path)->pd.DataFrame:

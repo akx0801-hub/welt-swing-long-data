@@ -109,7 +109,7 @@ jobs:
             "FEATURE_READY":0,"FEATURE_PARTIAL":1425,"FEATURE_BLOCKED_INSUFFICIENT_HISTORY":0,
             "FEATURE_BLOCKED_INPUT":0,"FEATURE_COMPUTATION_ERROR":0,"NOT_VERIFIED":0}
           assert s["p0_local_feature_layer_ready"] is False
-          assert old[-1]["First_Mismatches"]=="c5d9c6eabbbef10909b7a0df8b4bb8eb5ff32130d8c85162f5f2f4e4a7a4bed6"
+          assert old[-1]["Authority_Digest"]=="c5d9c6eabbbef10909b7a0df8b4bb8eb5ff32130d8c85162f5f2f4e4a7a4bed6"
           assert len(asx)==8 and all(r["Result"]=="PASS" for r in asx)
           assert d["match"] is True
           assert all(r["Result"]=="PASS" for r in tests)
