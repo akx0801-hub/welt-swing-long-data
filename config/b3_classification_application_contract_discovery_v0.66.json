@@ -12,6 +12,6 @@
   "p0_allowed": false,
   "p1_p2_allowed": false,
   "productive": false,
-  "execution_attempt": 2,
-  "retry_reason": "FIX_PROVIDER_AUDIT_INITIALIZATION_NO_SCOPE_CHANGE"
+  "execution_attempt": 3,
+  "retry_reason": "EXCLUDE_LOCALIZATION_ASSET_FALSE_POSITIVE_AND_TIGHTEN_CONTRACT_DETECTION"
 }
