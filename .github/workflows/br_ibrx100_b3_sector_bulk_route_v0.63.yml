@@ -1,0 +1,154 @@
+name: BR IBrX100 B3 Sector Bulk Route v0.63
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/br_ibrx100_b3_sector_bulk_route_v0.63.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  br-sector-route:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout bounded v0.63 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.63 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="c07c2aab9578971b523c9d39428bdff5758a8761"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/br_ibrx100_b3_sector_bulk_route_research_v0\.63\.json|scripts/br_ibrx100_b3_sector_bulk_route_v0_63\.py|scripts/persist_br_ibrx100_b3_sector_bulk_route_v0_63\.py|tests/test_br_ibrx100_b3_sector_bulk_route_v0_63\.py|\.github/workflows/br_ibrx100_b3_sector_bulk_route_v0\.63\.yml|config/br_ibrx100_b3_sector_bulk_route_v0\.63\.json)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.62 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10910376599 --jq .digest)"
+          test "$DIGEST" = "sha256:cc6c64baaf653830365a9cfaec9ab0d291523a49e02ad99714e2e8bb6606dcc7"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          s=json.load(open("output_frozen_1425_source_native_sector_coverage_v0_62/summary_v0.62.json",encoding="utf-8"))
+          c=json.load(open("output_frozen_1425_source_native_sector_coverage_v0_62/stage_checkpoint_v0.62.json",encoding="utf-8"))
+          rows=list(csv.DictReader(open("output_frozen_1425_source_native_sector_coverage_v0_62/cohort_sector_source_route_ledger_v0.62.csv",encoding="utf-8")))
+          br=[r for r in rows if r["Cohort"]=="BR_IBRX100"]
+          assert s["verdict"]=="BLOCKED_SOURCE_NATIVE_SECTOR_METADATA_COVERAGE"
+          assert s["source_native_sector_metadata_coverage_ready"] is False
+          assert (s["ready"],s["total"],s["not_mappable"],s["not_verified"])==(0,1425,0,1425)
+          assert s["cohort_counts"]["BR_IBRX100"]==37
+          assert s["cohort_blockers"]["BR_IBRX100"]=="OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND"
+          assert len(br)==1 and br[0]["Taxonomy_Identity"]=="B3_CLASSIFICACAO_SETORIAL"
+          assert br[0]["Earliest_Failed_Gate"]=="B" and br[0]["Earliest_Blocker"]=="OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND"
+          assert c["workflow_run_id"]==36255299126 and c["artifact_id"]==10910376599
+          assert "sha256:"+c["artifact_digest"]=="sha256:cc6c64baaf653830365a9cfaec9ab0d291523a49e02ad99714e2e8bb6606dcc7"
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+      - name: Verify research contract and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          r=json.load(open("config/br_ibrx100_b3_sector_bulk_route_research_v0.63.json",encoding="utf-8"))
+          t=json.load(open("config/br_ibrx100_b3_sector_bulk_route_v0.63.json",encoding="utf-8"))
+          assert r["scope_cohort"]=="BR_IBRX100" and r["frozen_rows"]==37
+          assert r["selected_route"]["br_official_sector_bulk_route_ready"] is True
+          assert r["selected_route"]["access_class"]=="PUBLIC_REPRODUCIBLE"
+          assert r["selected_route"]["classification_content"]=="PASS"
+          assert r["selected_route"]["sector_code"]=="NOT_AVAILABLE"
+          assert r["selected_route"]["blocker"]=="SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100"
+          assert all(v==0 for v in r["prohibited_requests"].values())
+          assert t["required_start_head"]=="c07c2aab9578971b523c9d39428bdff5758a8761"
+          assert t["scope_cohort"]=="BR_IBRX100"
+          assert t["alpha_vantage_allowed"] is False
+          assert t["mapping_population_allowed"] is False
+          assert t["other_cohorts_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/br_ibrx100_b3_sector_bulk_route_v0_63.py scripts/persist_br_ibrx100_b3_sector_bulk_route_v0_63.py
+          python3 tests/test_br_ibrx100_b3_sector_bulk_route_v0_63.py -v
+
+      - name: Run bounded BR-only gate
+        run: |
+          set -euo pipefail
+          rm -rf output_br_ibrx100_b3_sector_bulk_route_v0_63
+          python3 scripts/br_ibrx100_b3_sector_bulk_route_v0_63.py             --repository-sha "$GITHUB_SHA"             --output-dir output_br_ibrx100_b3_sector_bulk_route_v0_63
+
+      - name: Validate bounded result and immutability
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_br_ibrx100_b3_sector_bulk_route_v0_63")
+          s=json.load(open(out/"summary_preupload_v0.63.json",encoding="utf-8"))
+          d=json.load(open(out/"br_b3_sector_bulk_route_discovery_v0.63.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.63.csv",encoding="utf-8")))
+          assert s["verdict"]=="BLOCKED_SOURCE_NATIVE_SECTOR_CODE"
+          assert s["br_official_sector_bulk_route_ready"] is True
+          assert s["access_class"]=="PUBLIC_REPRODUCIBLE"
+          assert s["classification_content"]=="PASS"
+          assert s["sector_code"]=="NOT_AVAILABLE"
+          assert s["blocker"]=="SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100"
+          assert d["mapping_population_executed"] is False
+          assert d["other_cohorts_retested"] is False
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in s["prohibited_provider_calls"].values())
+          assert s["mapping_population_runs"]==0 and s["other_cohort_rechecks"]==0
+          assert s["sector_rs_runs"]==0 and s["crosswalk_runs"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.63 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: br-ibrx100-b3-sector-bulk-route-v0.63-${{ github.run_id }}
+          path: output_br_ibrx100_b3_sector_bulk_route_v0_63/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_br_ibrx100_b3_sector_bulk_route_v0_63.py             --output-dir output_br_ibrx100_b3_sector_bulk_route_v0_63             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "br-ibrx100-b3-sector-bulk-route-v0.63-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/BR_IBRX100_Official_Source_Native_Sector_Bulk_Route_Resolution_v0.63.md                   output_br_ibrx100_b3_sector_bulk_route_v0_63/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/BR_IBRX100_Official_Source_Native_Sector_Bulk_Route_Resolution_v0\.63\.md|output_br_ibrx100_b3_sector_bulk_route_v0_63/)' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist BR IBrX100 B3 sector route v0.63"
+          git push origin HEAD:main
