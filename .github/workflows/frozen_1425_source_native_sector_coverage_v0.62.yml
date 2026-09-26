@@ -1,0 +1,186 @@
+name: Frozen 1425 Source-Native Sector Coverage v0.62
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/frozen_1425_source_native_sector_coverage_v0.62.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  source-native-sector-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout bounded v0.62 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.62 lineage and bounded mutation scope
+        run: |
+          set -euo pipefail
+          START="2b9637887c2ace039f95adc74cdade28c5e7b4fe"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/manager_governance_authority_G_SEC_02_v0\.62\.json|config/source_native_sector_research_v0\.62\.json|scripts/frozen_1425_source_native_sector_coverage_v0_62\.py|scripts/persist_frozen_1425_source_native_sector_coverage_v0_62\.py|tests/test_frozen_1425_source_native_sector_coverage_v0_62\.py|\.github/workflows/frozen_1425_source_native_sector_coverage_v0\.62\.yml|config/frozen_1425_source_native_sector_coverage_v0\.62\.json)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.61 predecessor authority
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10909285736 --jq .digest)"
+          test "$DIGEST" = "sha256:21b17657591e739ce1e1528bb754d99468cf2763f730cff8e8e51a09e7fd9ffb"
+
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+
+          s=json.load(open("output_p0_frozen_1425_sector_taxonomy_selection_v0_61/summary_v0.61.json",encoding="utf-8"))
+          c=json.load(open("output_p0_frozen_1425_sector_taxonomy_selection_v0_61/stage_checkpoint_v0.61.json",encoding="utf-8"))
+          assert s["verdict"]=="BLOCKED_TAXONOMY_SOURCE_FEASIBILITY"
+          assert s["canonical_sector_taxonomy_selected"] is False
+          assert s["selected_taxonomy"]=="NONE"
+          assert s["feasible_count"]==0 and s["tested_count"]==2
+          assert s["blocker"]=="FULL_1425_COVERAGE_NOT_VERIFIED"
+          assert c["workflow_run_id"]==36251198020
+          assert c["artifact_id"]==10909285736
+          assert "sha256:"+c["artifact_digest"]=="sha256:21b17657591e739ce1e1528bb754d99468cf2763f730cff8e8e51a09e7fd9ffb"
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+
+          def sha(p):
+              return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+      - name: Verify G-SEC-02 and source-native research policy
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          a=json.load(open("config/manager_governance_authority_G_SEC_02_v0.62.json",encoding="utf-8"))
+          r=json.load(open("config/source_native_sector_research_v0.62.json",encoding="utf-8"))
+          t=json.load(open("config/frozen_1425_source_native_sector_coverage_v0.62.json",encoding="utf-8"))
+          assert a["authority_id"]=="G-SEC-02" and a["version"]=="v0.62"
+          assert a["predecessor_authority_preserved"]=="G-SEC-01"
+          assert a["rules"]["taxonomy_groups_semantically_isolated"] is True
+          assert a["rules"]["peer_group_must_not_mix_sector_taxonomy"] is True
+          assert a["rules"]["cross_taxonomy_comparison_forbidden"] is True
+          assert a["rules"]["crosswalk_forbidden"] is True
+          assert a["rules"]["sector_rs_authorized"] is False
+          assert a["rules"]["sector_mapping_population_authorized"] is False
+          assert a["future_peer_group_key"]==["Sector_Taxonomy","Sector_Code"]
+          assert r["cohort_authority"]["rows"]==1425
+          assert sum(r["cohort_authority"]["counts"].values())==1425
+          assert len(r["cohort_findings"])==8
+          assert all(v==0 for v in r["prohibited_requests"].values())
+          assert t["required_start_head"]=="2b9637887c2ace039f95adc74cdade28c5e7b4fe"
+          assert t["productive"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["mapping_population_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["crosswalk_allowed"] is False
+          assert t["p0_allowed"] is False
+          PY
+
+      - name: Compile and run focused v0.62 tests
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/frozen_1425_source_native_sector_coverage_v0_62.py scripts/persist_frozen_1425_source_native_sector_coverage_v0_62.py
+          python3 tests/test_frozen_1425_source_native_sector_coverage_v0_62.py -v
+
+      - name: Run bounded v0.62 source-native coverage gate
+        run: |
+          set -euo pipefail
+          rm -rf output_frozen_1425_source_native_sector_coverage_v0_62
+          python3 scripts/frozen_1425_source_native_sector_coverage_v0_62.py             --repository-sha "$GITHUB_SHA"             --output-dir output_frozen_1425_source_native_sector_coverage_v0_62
+
+      - name: Validate fail-closed cohort result
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_frozen_1425_source_native_sector_coverage_v0_62")
+          s=json.load(open(out/"summary_preupload_v0.62.json",encoding="utf-8"))
+          iso=json.load(open(out/"taxonomy_isolation_contract_v0.62.json",encoding="utf-8"))
+          cov=list(csv.DictReader(open(out/"frozen_1425_sector_coverage_feasibility_v0.62.csv",encoding="utf-8")))
+          routes=list(csv.DictReader(open(out/"cohort_sector_source_route_ledger_v0.62.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.62.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.62.csv",encoding="utf-8")))
+
+          assert s["verdict"]=="BLOCKED_SOURCE_NATIVE_SECTOR_METADATA_COVERAGE"
+          assert s["source_native_sector_metadata_coverage_ready"] is False
+          assert (s["ready"],s["total"],s["not_mappable"],s["not_verified"])==(0,1425,0,1425)
+          assert len(s["blocked_cohorts"])==8
+          assert s["global_smallest_blocker"]=="OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND"
+          assert s["global_smallest_blocker_cohort"]=="BR_IBRX100"
+          assert len(cov)==1425
+          assert all(r["Coverage_Feasibility"]=="NOT_VERIFIED" for r in cov)
+          assert all(r["Sector_Taxonomy_Value_Materialized"]=="NO" for r in cov)
+          assert all(r["Sector_Code_Value_Materialized"]=="NO" for r in cov)
+          assert all(r["Sector_Name_Value_Materialized"]=="NO" for r in cov)
+          assert len(routes)==8
+          assert any(r["Cohort"]=="BR_IBRX100" and r["Earliest_Blocker"]=="OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND" and r["Earliest_Failed_Gate"]=="B" for r in routes)
+          assert iso["future_peer_group_key"]==["Sector_Taxonomy","Sector_Code"]
+          assert iso["crosswalk_created"] is False
+          assert iso["sector_rs_authorized"] is False
+          assert len(ext)>0 and all(r["Allowed_Official_Source"]=="YES" for r in ext)
+          assert all(r["Per_Security_Fanout"]=="NO" for r in ext)
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in s["prohibited_provider_calls"].values())
+          assert s["sector_mapping_population_runs"]==0
+          assert s["sector_rs_runs"]==0
+          assert s["crosswalk_runs"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert s["immutability"]["frozen_unchanged"] is True
+          assert s["immutability"]["v057_feature_unchanged"] is True
+          assert s["immutability"]["v058_home_rs_unchanged"] is True
+
+          def sha(p):
+              return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git diff -- output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv)" = ""
+          test "$(git diff -- output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.62 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: frozen-1425-source-native-sector-coverage-v0.62-${{ github.run_id }}
+          path: output_frozen_1425_source_native_sector_coverage_v0_62/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistent v0.62 evidence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_frozen_1425_source_native_sector_coverage_v0_62.py             --output-dir output_frozen_1425_source_native_sector_coverage_v0_62             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "frozen-1425-source-native-sector-coverage-v0.62-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.62 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/Frozen_1425_Source_Native_Sector_Metadata_Coverage_Feasibility_v0.62.md                   output_frozen_1425_source_native_sector_coverage_v0_62/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/Frozen_1425_Source_Native_Sector_Metadata_Coverage_Feasibility_v0\.62\.md|output_frozen_1425_source_native_sector_coverage_v0_62/)' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist source-native sector coverage v0.62"
+          git push origin HEAD:main
