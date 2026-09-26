@@ -1,0 +1,94 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "B3_CLASSIFICATION_TREE_NOT_MACHINE_REPRODUCIBLE",
+  "br_exact_37_classification_coverage_ready": false,
+  "canonical_mapping_population_runs": 0,
+  "classification_nodes_queried": 0,
+  "distinct_setores": 0,
+  "files": {
+    "b3_classification_node_ledger_v0.65.csv": {
+      "bytes": 3793,
+      "sha256": "bcdd8bb1d745e15e14d516ed79c109d879a1f142830c491fc8661dabf116e381"
+    },
+    "b3_classification_tree_snapshot_v0.65.json": {
+      "bytes": 1302,
+      "sha256": "c8b8179c4974c72a290a57b39b9ff12cf7d7c1fd3b9618beef3abcdc43113905"
+    },
+    "b3_group_company_membership_v0.65.csv": {
+      "bytes": 197,
+      "sha256": "bd1918a02774033b2da73404f91f53bde9a9429eeaa40673eb25eb0ae5d1f9c0"
+    },
+    "b3_group_query_encoding_contract_v0.65.json": {
+      "bytes": 241,
+      "sha256": "1998239a1bc57f6c171560cb32884f060bfaa178564ef5079ae50ade5015e6ca"
+    },
+    "b3_group_query_encoding_examples_v0.65.csv": {
+      "bytes": 763,
+      "sha256": "24a40281f6a0ece07c47157d9200b7d51dda900ea8f7f182879a47c33b325b77"
+    },
+    "b3_group_request_ledger_v0.65.csv": {
+      "bytes": 270,
+      "sha256": "34e22c35c90e0d15f7730a5505da6992de8745f8bb3688f26bc0c35cb37573c7"
+    },
+    "br_distinct_sector_inventory_v0.65.csv": {
+      "bytes": 124,
+      "sha256": "99e58a5011d41cd6a5ea8141d02994018557358b5ce8ed98d4f96bc1aab80954"
+    },
+    "br_exact_37_classification_coverage_v0.65.csv": {
+      "bytes": 12550,
+      "sha256": "c7f406217cf3d47b8cf0d70b872794f158ab42abf0072a87c476a50eb57dd92e"
+    },
+    "external_request_ledger_v0.65.csv": {
+      "bytes": 1243,
+      "sha256": "ffcb83bc85fc372e5af6624eed28c8c7500f8436c7d6480320184951dca461cb"
+    },
+    "immutability_audit_v0.65.json": {
+      "bytes": 1143,
+      "sha256": "5d2adb9ad9e8bbf6321e05d6b0cf2debdcdb1143a6111d9777860f4b5a59afa6"
+    },
+    "pdsc_collision_audit_v0.65.json": {
+      "bytes": 230,
+      "sha256": "f620c8ea53339304f9bc1852f417256fbfa1edc4cb507b8bf645f244bd187cb7"
+    },
+    "pdsc_exact37_determinism_audit_v0.65.csv": {
+      "bytes": 201,
+      "sha256": "b19d712ff96a09f93049186b0368a40d7ec0125c1f765f7971ed44112f350589"
+    },
+    "provider_call_audit_v0.65.json": {
+      "bytes": 397,
+      "sha256": "8085d02e633bc7723bc3f558747522ce6a91bb4af47461c936d4de02f760f2c4"
+    },
+    "stage_checkpoint_preupload_v0.65.json": {
+      "bytes": 700,
+      "sha256": "26d92e572ca0b47c9d1f28feff8985982a80993678cd9bc60b012d024fd0f1cd"
+    },
+    "summary_preupload_v0.65.json": {
+      "bytes": 2565,
+      "sha256": "0fe539f206531a08638185c3f6b0f14269ff143c7d3165150d9735edc007a2c4"
+    },
+    "test_results_v0.65.csv": {
+      "bytes": 1645,
+      "sha256": "fbbee236e637186a69d385620ee71f02a68206e0f3c4245bfd63bd8e46f045cf"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "next_gate": "B3_CLASSIFICATION_TREE_NOT_MACHINE_REPRODUCIBLE",
+  "not_found": 0,
+  "not_verified": 37,
+  "other_cohort_rechecks": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "ready": 0,
+  "repository_sha": "c1ed721118558f608fa18dc5ae080f768c76946e",
+  "required_start_head": "4e8151225f19ad1748c203b295e3ff699eabb7bf",
+  "sector_rs_runs": 0,
+  "stage": "BR_IBRX100_B3_CLASSIFICATION_TREE_INVERSION_EXACT_37_SECTOR_COVERAGE_GATE",
+  "total": 37,
+  "v057_feature_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v058_home_rs_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "verdict": "BLOCKED_B3_CLASSIFICATION_TREE_MACHINE_REPRODUCIBILITY",
+  "version": "v0.65"
+}

@@ -1,0 +1,7 @@
+{
+  "complete_tree_dependency": "UNRESOLVED",
+  "examples_verified": 2,
+  "guessing_used": false,
+  "mechanism": "segment = URLENCODE(BASE64(UTF8(encodeURIComponent(exact official label))))",
+  "status": "PASS_FOR_KNOWN_OFFICIAL_EXAMPLES"
+}

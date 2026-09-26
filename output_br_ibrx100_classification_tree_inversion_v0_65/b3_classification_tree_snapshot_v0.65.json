@@ -1,0 +1,17 @@
+{
+  "capture_status": "INCOMPLETE_NOT_MACHINE_REPRODUCIBLE",
+  "classification_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br",
+  "complete_segment_count": "NOT_VERIFIED",
+  "complete_setor_count": "NOT_VERIFIED",
+  "complete_subsetor_count": "NOT_VERIFIED",
+  "coverage_traversal_authorized": false,
+  "reason": [
+    "The official root application was retrievable through the bounded web channel and exposed only a partial rendered subsetor/segment slice, not a complete sealed Setor Economico -> Subsetor -> Segmento tree.",
+    "The official /classification endpoint was directly reachable but the bounded machine-readable extraction returned an empty client-rendered shell, with no complete hierarchy payload to seal.",
+    "No official static taxonomy file, API response, or page-backed all-node payload was identified within the bounded official-only research performed for this stage.",
+    "Because the complete official hierarchy could not be captured, the set of necessary official leaf/query nodes cannot be proven complete. The stage stops before partial group traversal."
+  ],
+  "root_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/",
+  "sector_level": "SETOR_ECONOMICO",
+  "taxonomy": "B3_CLASSIFICACAO_SETORIAL"
+}

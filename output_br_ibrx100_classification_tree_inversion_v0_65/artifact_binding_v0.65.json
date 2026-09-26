@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "0fcc27756c32156da0fa4be605f8dee1a2fa52fa3bd88aac2ecfc07355058146",
+  "artifact_id": 10914042556,
+  "artifact_name": "br-ibrx100-classification-tree-inversion-v0.65-36266926685",
+  "artifact_scope": "pre-persistence v0.65 BR IBrX100 B3 classification-tree inversion evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "c1ed721118558f608fa18dc5ae080f768c76946e",
+  "workflow_run_id": 36266926685
+}

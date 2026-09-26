@@ -1,0 +1,3 @@
+Exact_Label,Encoded_Component_Expected,Encoded_Component_Calculated,Base64_Expected,Base64_Calculated,Query_Value_Expected,Query_Value_Calculated,Official_URL,Verification
+Agricultura,Agricultura,Agricultura,QWdyaWN1bHR1cmE=,QWdyaWN1bHR1cmE=,QWdyaWN1bHR1cmE%3D,QWdyaWN1bHR1cmE%3D,https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D,PASS
+Minerais Metálicos,Minerais%20Met%C3%A1licos,Minerais%20Met%C3%A1licos,TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw==,TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw==,TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw%3D%3D,TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw%3D%3D,https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw%3D%3D,PASS

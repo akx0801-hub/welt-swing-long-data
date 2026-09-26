@@ -1,0 +1,2 @@
+Setor_Economico_Raw,Generation_1,Generation_2,Determinism_Status,Reason
+NONE,NOT_EXECUTED,NOT_EXECUTED,NOT_APPLICABLE_NO_READY_ROWS,PDSC generation permitted only for PROVABLY_MAPPABLE exact-37 rows

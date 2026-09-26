@@ -1,0 +1,19 @@
+{
+  "alpha_vantage": 0,
+  "company_name_matching": 0,
+  "company_overview_requests_for_37": 0,
+  "crosswalk": 0,
+  "eodhd": 0,
+  "etf_holdings": 0,
+  "fuzzy_matching": 0,
+  "gics_icb_fallback": 0,
+  "news": 0,
+  "per_security_page_fanout": 0,
+  "price_ohlcv": 0,
+  "scalable": 0,
+  "third_party_databases": 0,
+  "trading_analysis": 0,
+  "tradingview": 0,
+  "wikipedia": 0,
+  "yahoo_yfinance": 0
+}
