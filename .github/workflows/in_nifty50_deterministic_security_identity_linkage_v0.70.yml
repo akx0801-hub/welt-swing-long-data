@@ -1,0 +1,180 @@
+name: IN NIFTY50 Deterministic Security Identity Linkage v0.70
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/in_nifty50_deterministic_security_identity_linkage_v0.70.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  in-nifty50-identity-linkage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.70 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.70 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="357df447e225ab1fc839530b1d2b0d2d217fd652"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/in_nifty50_deterministic_security_identity_linkage_spec_v0\.70\.json|scripts/in_nifty50_deterministic_security_identity_linkage_v0_70\.py|scripts/persist_in_nifty50_deterministic_security_identity_linkage_v0_70\.py|tests/test_in_nifty50_deterministic_security_identity_linkage_v0_70\.py|\.github/workflows/in_nifty50_deterministic_security_identity_linkage_v0\.70\.yml|config/in_nifty50_deterministic_security_identity_linkage_v0\.70\.json)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.69 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10915843724 --jq .digest)"
+          test "$DIGEST" = "sha256:55093cd80910864fdf7486167786f5ec3f503ce39294ae875745e82c652ef69a"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          s=json.load(open("output_frozen_1425_canonical_sector_reconciliation_v0_69/summary_v0.69.json",encoding="utf-8"))
+          c=json.load(open("output_frozen_1425_canonical_sector_reconciliation_v0_69/stage_checkpoint_v0.69.json",encoding="utf-8"))
+          sel=json.load(open("output_frozen_1425_canonical_sector_reconciliation_v0_69/selected_next_cohort_authority_v0.69.json",encoding="utf-8"))
+          matrix=list(csv.DictReader(open("output_frozen_1425_canonical_sector_reconciliation_v0_69/current_authority_cohort_gate_matrix_v0.69.csv",encoding="utf-8")))
+          assert s["verdict"]=="PASS_CANONICAL_SECTOR_METADATA_RECONCILIATION_NEXT_COHORT_SELECTED"
+          assert s["global_canonical_sector_metadata_ready"] is False
+          assert (s["global_ready"],s["global_total"])==(37,1425)
+          assert s["selected_next_cohort"]=="IN_NIFTY50"
+          assert s["resolved_gates_before_blocker"]==4
+          assert s["earliest_unresolved_gate"]=="E"
+          assert s["current_blocker"]=="DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED"
+          assert s["next_gate"]=="IN_NIFTY50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE"
+          assert c["workflow_run_id"]==36272572257 and c["artifact_id"]==10915843724
+          assert "sha256:"+c["artifact_digest"]=="sha256:55093cd80910864fdf7486167786f5ec3f503ce39294ae875745e82c652ef69a"
+          assert sel["Selected_Next_Cohort"]=="IN_NIFTY50" and sel["Frozen_Rows"]==45
+          m=next(r for r in matrix if r["Cohort"]=="IN_NIFTY50")
+          assert [m[x] for x in ["A","B","C","D","E","F","G","H"]]==["PASS_INHERITED","PASS_INHERITED","PASS_INHERITED","PASS_INHERITED","NOT_VERIFIED","NOT_EVALUATED","PASS_INHERITED","NOT_EVALUATED"]
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify v0.70 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/in_nifty50_deterministic_security_identity_linkage_spec_v0.70.json",encoding="utf-8"))
+          t=json.load(open("config/in_nifty50_deterministic_security_identity_linkage_v0.70.json",encoding="utf-8"))
+          assert s["required_start_head"]=="357df447e225ab1fc839530b1d2b0d2d217fd652"
+          assert s["scope_cohort"]=="IN_NIFTY50" and s["gate"]=="E_SECURITY_IDENTITY"
+          assert s["frozen_target_rows"]==45 and s["primary_mic"]=="XNSE"
+          assert set(s["allowed_hosts"]) <= {"www.niftyindices.com","niftyindices.com","www.nseindia.com","nseindia.com","nsearchives.nseindia.com"}
+          assert s["sector_classification_population_allowed"] is False
+          assert s["gate_f_execution_allowed"] is False
+          assert s["canonical_materialization_allowed"] is False
+          assert s["sector_rs_allowed"] is False
+          assert s["per_security_web_fanout_allowed"] is False
+          assert s["company_name_join_allowed"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert t["required_start_head"]=="357df447e225ab1fc839530b1d2b0d2d217fd652"
+          assert t["scope_cohort"]=="IN_NIFTY50"
+          assert t["gate_f_execution_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/in_nifty50_deterministic_security_identity_linkage_v0_70.py             scripts/persist_in_nifty50_deterministic_security_identity_linkage_v0_70.py
+          python3 tests/test_in_nifty50_deterministic_security_identity_linkage_v0_70.py -v
+
+      - name: Run bounded official-only Gate E
+        run: |
+          set -euo pipefail
+          rm -rf output_in_nifty50_deterministic_security_identity_linkage_v0_70
+          python3 scripts/in_nifty50_deterministic_security_identity_linkage_v0_70.py             --repository-sha "$GITHUB_SHA"             --output-dir output_in_nifty50_deterministic_security_identity_linkage_v0_70
+
+      - name: Validate Gate E result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_in_nifty50_deterministic_security_identity_linkage_v0_70")
+          s=json.load(open(out/"summary_preupload_v0.70.json",encoding="utf-8"))
+          na=json.load(open(out/"official_nifty50_constituent_source_audit_v0.70.json",encoding="utf-8"))
+          ea=json.load(open(out/"official_nse_security_reference_source_audit_v0.70.json",encoding="utf-8"))
+          prov=json.load(open(out/"provider_call_audit_v0.70.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.70.json",encoding="utf-8"))
+          target=list(csv.DictReader(open(out/"in_frozen_45_identity_target_v0.70.csv",encoding="utf-8")))
+          link=list(csv.DictReader(open(out/"in_exact_45_identity_linkage_audit_v0.70.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.70.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.70.csv",encoding="utf-8")))
+          assert len(target)==45 and len({r["WS_ID"] for r in target})==45
+          assert all(r["Primary_MIC"]=="XNSE" and r["WS_ID"]=="WS:ISIN:"+r["ISIN"] for r in target)
+          assert len(link)==45
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in prov.values())
+          assert all(r["Official_Source"]=="YES" and r["Per_Security_Fanout"]=="NO" for r in ext)
+          assert s["gate_f_executions"]==0 and s["sector_classification_population_rows"]==0
+          assert s["canonical_ready_rows"]==37
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/IN_NIFTY50_sector_metadata_v1.csv").exists()
+          if s["in_deterministic_ws_id_linkage_ready"]:
+              assert s["verdict"]=="PASS_IN_NIFTY50_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE"
+              assert (s["linked"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(45,45,0,0,0,0)
+              assert all(r["Gate_E_Status"]=="PROVABLY_LINKED" for r in link)
+              assert s["blocker"]==""
+              assert s["next_gate"]=="IN_NIFTY50 EXACT FROZEN SECTOR CLASSIFICATION COVERAGE GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_IN_NIFTY50_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE"
+              assert s["blocker"]!=""
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          PY
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.70 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: in-nifty50-deterministic-security-identity-v0.70-${{ github.run_id }}
+          path: output_in_nifty50_deterministic_security_identity_linkage_v0_70/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_in_nifty50_deterministic_security_identity_linkage_v0_70.py             --output-dir output_in_nifty50_deterministic_security_identity_linkage_v0_70             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "in-nifty50-deterministic-security-identity-v0.70-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.70 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/IN_NIFTY50_Deterministic_Security_Identity_Linkage_Gate_v0.70.md                   output_in_nifty50_deterministic_security_identity_linkage_v0_70/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/IN_NIFTY50_Deterministic_Security_Identity_Linkage_Gate_v0\.70\.md|output_in_nifty50_deterministic_security_identity_linkage_v0_70/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist IN NIFTY50 identity linkage v0.70"
+          git push origin HEAD:main
