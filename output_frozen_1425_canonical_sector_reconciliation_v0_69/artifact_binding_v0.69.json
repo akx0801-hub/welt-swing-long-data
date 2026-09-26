@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "55093cd80910864fdf7486167786f5ec3f503ce39294ae875745e82c652ef69a",
+  "artifact_id": 10915843724,
+  "artifact_name": "frozen-1425-canonical-sector-reconciliation-v0.69-36272572257",
+  "artifact_scope": "pre-persistence v0.69 canonical sector authority reconciliation and deterministic next-cohort selection evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "27e0f019bc2784d6323ec46d76bed0af4b0a22d1",
+  "workflow_run_id": 36272572257
+}

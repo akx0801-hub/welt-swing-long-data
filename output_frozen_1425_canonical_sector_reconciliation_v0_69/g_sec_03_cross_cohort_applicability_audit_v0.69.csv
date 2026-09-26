@@ -1,0 +1,8 @@
+Cohort,Historical_D_Status,Historical_Blocker,G_SEC_03_Applicability,Current_D_Status,Reason
+AU_SP_ASX200,NOT_EVALUATED,SOURCE_NATIVE_TAXONOMY_IDENTITY_NOT_VERIFIED,NOT_APPLICABLE,NOT_EVALUATED,G-SEC-03 cannot cure missing taxonomy identity.
+CN_CSI300,PASS,OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED,NOT_APPLICABLE,PASS_INHERITED,Historical D already PASS with source-native sector fields/code semantics; G-SEC-03 is not needed.
+IN_NIFTY50,PASS,DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED,NOT_APPLICABLE,PASS_INHERITED,Historical D already PASS with source-native sector fields/code semantics; G-SEC-03 is not needed.
+JP_N225,NOT_VERIFIED,SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE,NOT_VERIFIED,NOT_VERIFIED,"G-SEC-03 removes source-native-code necessity, but persisted v0.62 authority does not unambiguously bind one exact JP canonical Sector_Level between Nikkei industry and sector grouping. Exact classification names exist in the source rationale, yet the PDSC level required for deterministic canonical identity is not explicitly authorized. D remains NOT_VERIFIED."
+TW_TW50,PASS,OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED,NOT_APPLICABLE,PASS_INHERITED,Historical D already PASS with source-native sector fields/code semantics; G-SEC-03 is not needed.
+US_SP400,PASS,DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED,NOT_APPLICABLE,PASS_INHERITED,Historical D already PASS with source-native sector fields/code semantics; G-SEC-03 is not needed.
+US_SP500,PASS,DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED,NOT_APPLICABLE,PASS_INHERITED,Historical D already PASS with source-native sector fields/code semantics; G-SEC-03 is not needed.

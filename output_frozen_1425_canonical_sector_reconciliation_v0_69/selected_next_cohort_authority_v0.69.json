@@ -1,0 +1,23 @@
+{
+  "Current_Blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+  "Earliest_Unresolved_Gate": "E",
+  "Earliest_Unresolved_Gate_Name": "Security Identity",
+  "Frozen_Rows": 45,
+  "Next_Gate": "IN_NIFTY50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE",
+  "Proof": {
+    "depth_tie_cohorts": [
+      "IN_NIFTY50",
+      "US_SP400",
+      "US_SP500"
+    ],
+    "max_depth": 4,
+    "selected_is_smallest_row_count_in_max_depth": true
+  },
+  "Resolved_Gates_Before_Blocker": 4,
+  "Selected_Next_Cohort": "IN_NIFTY50",
+  "Selection_Rule": {
+    "primary": "greatest consecutive resolved A-H gates from A",
+    "tie_break_1": "smaller Frozen cohort row count",
+    "tie_break_2": "lexicographically ascending Cohort ID"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "Canonical_Promoted_Rows": 37,
+  "Expected_Ready": 37,
+  "Expected_Remaining": 1388,
+  "Expected_Total": 1425,
+  "Frozen_Total": 1425,
+  "GLOBAL_CANONICAL_SECTOR_METADATA_READY": false,
+  "Global_Remaining": 1388,
+  "No_Ready_Count_Increase": true,
+  "Registry_Agrees_v0_68_Global_Status": true,
+  "Status": "PASS"
+}

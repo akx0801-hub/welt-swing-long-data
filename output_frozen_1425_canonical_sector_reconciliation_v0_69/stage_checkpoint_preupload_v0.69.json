@@ -1,0 +1,15 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "current_blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+  "earliest_unresolved_gate": "E",
+  "global_canonical_sector_metadata_ready": false,
+  "global_ready": 37,
+  "global_total": 1425,
+  "next_gate": "IN_NIFTY50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE",
+  "resolved_gates_before_blocker": 4,
+  "selected_next_cohort": "IN_NIFTY50",
+  "stage": "FROZEN_1425_CANONICAL_SECTOR_METADATA_COVERAGE_RECONCILIATION_NEXT_COHORT_SELECTION_GATE",
+  "unresolved_cohorts": 7,
+  "verdict": "PASS_CANONICAL_SECTOR_METADATA_RECONCILIATION_NEXT_COHORT_SELECTED",
+  "version": "v0.69"
+}

@@ -1,0 +1,38 @@
+{
+  "artifact": {
+    "artifact_digest": "55093cd80910864fdf7486167786f5ec3f503ce39294ae875745e82c652ef69a",
+    "artifact_id": 10915843724,
+    "artifact_name": "frozen-1425-canonical-sector-reconciliation-v0.69-36272572257",
+    "artifact_scope": "pre-persistence v0.69 canonical sector authority reconciliation and deterministic next-cohort selection evidence",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "27e0f019bc2784d6323ec46d76bed0af4b0a22d1",
+    "workflow_run_id": 36272572257
+  },
+  "artifact_binding": "PASS",
+  "current_blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+  "earliest_unresolved_gate": "E",
+  "external_requests": 0,
+  "global_canonical_sector_metadata_ready": false,
+  "global_ready": 37,
+  "global_remaining": 1388,
+  "global_total": 1425,
+  "mapping_population_runs": 0,
+  "next_gate": "IN_NIFTY50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "provider_calls": 0,
+  "resolved_gates_before_blocker": 4,
+  "sector_rs_runs": 0,
+  "selected_next_cohort": "IN_NIFTY50",
+  "stage": "FROZEN_1425_CANONICAL_SECTOR_METADATA_COVERAGE_RECONCILIATION_NEXT_COHORT_SELECTION_GATE",
+  "tests": {
+    "failed": 0,
+    "passed": 32,
+    "total": 32
+  },
+  "unresolved_cohorts": 7,
+  "verdict": "PASS_CANONICAL_SECTOR_METADATA_RECONCILIATION_NEXT_COHORT_SELECTED",
+  "version": "v0.69"
+}

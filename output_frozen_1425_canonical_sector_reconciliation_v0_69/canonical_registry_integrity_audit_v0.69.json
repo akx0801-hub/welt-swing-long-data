@@ -1,0 +1,17 @@
+{
+  "BR_canonical_file_sha256": "83706c76baba6d9a4fcc557d170f0bcad6fd85c9ca90fbc9f062cd5765dcef28",
+  "BR_canonical_rows": 37,
+  "BR_file_sha_matches": true,
+  "BR_frozen_rows": 37,
+  "BR_row_present": true,
+  "BR_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+  "BR_semantic_sha_matches": true,
+  "BR_status": "READY",
+  "integrity_status": "PASS",
+  "promoted_cohorts": [
+    "BR_IBRX100"
+  ],
+  "registry_path": "sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",
+  "registry_rows": 1,
+  "unresolved_placeholder_rows": 0
+}

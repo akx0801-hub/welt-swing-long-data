@@ -1,0 +1,33 @@
+Test,Result,Detail
+V068_VERDICT,PASS,PASS_BR_CANONICAL_SECTOR_METADATA_MATERIALIZATION
+V068_BR_READY_37_37,PASS,37/37
+V068_GLOBAL_37_1425,PASS,37/1425/1388
+V068_HASHES,PASS,PASS
+REGISTRY_INTEGRITY,PASS,"{'registry_path': 'sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv', 'registry_rows': 1, 'promoted_cohorts': ['BR_IBRX100'], 'BR_row_present': True, 'BR_frozen_rows': 37, 'BR_canonical_rows': 37, 'BR_status': 'READY', 'BR_semantic_sha256': 'bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed', 'BR_canonical_file_sha256': '83706c76baba6d9a4fcc557d170f0bcad6fd85c9ca90fbc9f062cd5765dcef28', 'BR_semantic_sha_matches': True, 'BR_file_sha_matches': True, 'unresolved_placeholder_rows': 0, 'integrity_status': 'PASS'}"
+FROZEN_COUNTS,PASS,"{'BR_IBRX100': 37, 'IN_NIFTY50': 45, 'TW_TW50': 49, 'AU_SP_ASX200': 63, 'US_SP400': 368, 'US_SP500': 372, 'CN_CSI300': 294, 'JP_N225': 197}"
+FROZEN_TOTAL,PASS,1425
+UNRESOLVED_7,PASS,7
+BR_EXCLUDED,PASS,PASS
+HISTORICAL_BLOCKERS_PRESERVED,PASS,PASS
+JP_GSEC03_FAIL_CLOSED,PASS,NOT_VERIFIED
+JP_DEPTH_3,PASS,3
+IN_DEPTH_4,PASS,4
+US400_DEPTH_4,PASS,4
+US500_DEPTH_4,PASS,4
+SELECTED_ONE,PASS,1
+SELECTED_IN_NIFTY50,PASS,IN_NIFTY50
+SELECTED_EARLIEST_E,PASS,E
+SELECTED_BLOCKER,PASS,DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED
+NEXT_GATE,PASS,IN_NIFTY50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE
+GLOBAL_READY_UNCHANGED,PASS,"{'Frozen_Total': 1425, 'Canonical_Promoted_Rows': 37, 'Global_Remaining': 1388, 'GLOBAL_CANONICAL_SECTOR_METADATA_READY': False, 'Expected_Ready': 37, 'Expected_Total': 1425, 'Expected_Remaining': 1388, 'Registry_Agrees_v0_68_Global_Status': True, 'No_Ready_Count_Increase': True, 'Status': 'PASS'}"
+GLOBAL_NOT_READY,PASS,NO
+NO_PROVIDER_CALLS,PASS,"{'external_requests': 0, 'provider_calls': 0, 'market_reference_calls': 0, 'alpha_vantage': 0, 'b3_requests': 0, 'nikkei_requests': 0, 'nse_requests': 0, 'sec_requests': 0, 'asx_requests': 0, 'csi_requests': 0, 'twse_requests': 0, 'mapping_population': 0, 'sector_rs': 0, 'p0': 0, 'p1': 0, 'p2': 0}"
+FROZEN_IMMUTABLE,PASS,54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb
+V057_IMMUTABLE,PASS,177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9
+V058_IMMUTABLE,PASS,2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32
+BR_SEMANTIC_IMMUTABLE,PASS,bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed
+BR_FILE_IMMUTABLE,PASS,83706c76baba6d9a4fcc557d170f0bcad6fd85c9ca90fbc9f062cd5765dcef28
+NO_MAPPING_POPULATION,PASS,0
+SECTOR_RS_ZERO,PASS,0
+P0_P1_P2_ZERO,PASS,0/0/0
+NO_OTHER_COHORT_EXECUTION,PASS,0

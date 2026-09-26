@@ -1,0 +1,37 @@
+{
+  "Canonical_Promoted_Rows": 37,
+  "Canonical_Ready_Count_Changed": false,
+  "Canonical_Registry_Cohorts": [
+    "BR_IBRX100"
+  ],
+  "Current_Blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+  "Earliest_Unresolved_Gate": "E",
+  "Frozen_Cohort_Counts": {
+    "AU_SP_ASX200": 63,
+    "BR_IBRX100": 37,
+    "CN_CSI300": 294,
+    "IN_NIFTY50": 45,
+    "JP_N225": 197,
+    "TW_TW50": 49,
+    "US_SP400": 368,
+    "US_SP500": 372
+  },
+  "Frozen_Total": 1425,
+  "GLOBAL_CANONICAL_SECTOR_METADATA_READY": false,
+  "Global_Remaining": 1388,
+  "Next_Gate": "IN_NIFTY50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE",
+  "Resolved_Gates_Before_Blocker": 4,
+  "Selected_Next_Cohort": "IN_NIFTY50",
+  "Unresolved_Cohort_Count": 7,
+  "Unresolved_Cohorts": [
+    "AU_SP_ASX200",
+    "CN_CSI300",
+    "IN_NIFTY50",
+    "JP_N225",
+    "TW_TW50",
+    "US_SP400",
+    "US_SP500"
+  ],
+  "stage": "FROZEN_1425_CANONICAL_SECTOR_METADATA_COVERAGE_RECONCILIATION_NEXT_COHORT_SELECTION_GATE",
+  "version": "v0.69"
+}

@@ -1,0 +1,82 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "current_blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+  "earliest_unresolved_gate": "E",
+  "files": {
+    "canonical_registry_integrity_audit_v0.69.json": {
+      "bytes": 591,
+      "sha256": "f5c644addd575d01f6227098e962037722cad94e15a4e24bf1c59d5371bc3871"
+    },
+    "canonical_sector_metadata_global_reconciliation_v0.69.json": {
+      "bytes": 996,
+      "sha256": "7ba74261a1d9fcb3d29f70f122eedda5be156dfc538b07c5a4332ebd0dbddc25"
+    },
+    "current_authority_cohort_gate_matrix_v0.69.csv": {
+      "bytes": 2180,
+      "sha256": "72313741f0a708d09d887ae289e6c91fe97d330ea4f62a9fe1ee7e76c8f7e4e7"
+    },
+    "g_sec_03_cross_cohort_applicability_audit_v0.69.csv": {
+      "bytes": 1616,
+      "sha256": "a1707b4d6779d6301448b10d5ed6971b2e94604ad6b43ff44301a242cb2a72b4"
+    },
+    "global_coverage_integrity_audit_v0.69.json": {
+      "bytes": 321,
+      "sha256": "d0394f13866d20afb5180c8d497400e02d8ce21c3a33b540da234d610870780a"
+    },
+    "historical_vs_current_blocker_reconciliation_v0.69.csv": {
+      "bytes": 3614,
+      "sha256": "c78af74231821025a33dd4f22bee75b3d163a339d14d5cfa7435592dae4b3007"
+    },
+    "immutability_audit_v0.69.json": {
+      "bytes": 1764,
+      "sha256": "a1637e4a1eddf1040d3132a778184e24a8f5bcba653648df974092f91f4a5510"
+    },
+    "next_cohort_selection_calculation_v0.69.csv": {
+      "bytes": 817,
+      "sha256": "fcdbbcff8c2886514da5cc4126c0c363fb31b0f7eb0db1dac8ae40df0193b1d9"
+    },
+    "provider_call_audit_v0.69.json": {
+      "bytes": 333,
+      "sha256": "ed42f99565f3d0bb9add386ffad9afbeac23dc568718ec86bd5022f58d27c40c"
+    },
+    "selected_next_cohort_authority_v0.69.json": {
+      "bytes": 720,
+      "sha256": "408b2d97a2e7e436bb33e5e4215803bb5ed8c987b1935f76a3b29ef0e4e843cc"
+    },
+    "stage_checkpoint_preupload_v0.69.json": {
+      "bytes": 627,
+      "sha256": "cf7d14e454bdcb9a76b477841a44580660c4996dcc037d6261bf8a4ea273cb9b"
+    },
+    "summary_preupload_v0.69.json": {
+      "bytes": 899,
+      "sha256": "2dd59429e9e00ac596402395d3a105c5ccb5bc7dac14713f933fbcf16eba7027"
+    },
+    "test_results_v0.69.csv": {
+      "bytes": 2584,
+      "sha256": "24ab5fb70adf3700d11555c16febe0563e599e2f6256c97aa2cef201bf2adc86"
+    },
+    "unresolved_cohort_gate_depth_v0.69.csv": {
+      "bytes": 505,
+      "sha256": "5ce636e19bb4b1aba9d377304a3ce02a0a994d10b5946c03e354924724d55d0a"
+    }
+  },
+  "global_canonical_sector_metadata_ready": false,
+  "global_ready": 37,
+  "global_remaining": 1388,
+  "global_total": 1425,
+  "mapping_population_runs": 0,
+  "next_gate": "IN_NIFTY50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "repository_sha": "27e0f019bc2784d6323ec46d76bed0af4b0a22d1",
+  "required_start_head": "978404e766f7813819686835adf2254cd5071c62",
+  "resolved_gates_before_blocker": 4,
+  "sector_rs_runs": 0,
+  "selected_next_cohort": "IN_NIFTY50",
+  "stage": "FROZEN_1425_CANONICAL_SECTOR_METADATA_COVERAGE_RECONCILIATION_NEXT_COHORT_SELECTION_GATE",
+  "unresolved_cohorts": 7,
+  "verdict": "PASS_CANONICAL_SECTOR_METADATA_RECONCILIATION_NEXT_COHORT_SELECTED",
+  "version": "v0.69"
+}
