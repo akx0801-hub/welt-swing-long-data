@@ -1,0 +1,58 @@
+name: Persist P0 Frozen 1425 Local Feature Implementation v0.57
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/persist_p0_frozen_1425_local_feature_implementation_v0.57.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Download exact successful v0.57 evidence artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 0287a10bf7a2938ed1517d79a47c296f3ea34c9d HEAD
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10905448132 --jq .digest)"
+          test "$DIGEST" = "sha256:7f35e18264110c6a6a84205ab443a7b1c3cabcbaebdb3e6d6af79df6361e1c00"
+          rm -rf _v057_artifact
+          mkdir -p _v057_artifact/output_p0_frozen_1425_local_feature_implementation_v0_57
+          gh run download 36239952535 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-local-feature-implementation-v0.57-36239952535 \
+            --dir _v057_artifact/output_p0_frozen_1425_local_feature_implementation_v0_57
+          test -f _v057_artifact/output_p0_frozen_1425_local_feature_implementation_v0_57/summary_preupload_v0.57.json
+          test "$(sha256sum _v057_artifact/output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv | awk '{print $1}')" = "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+
+      - name: Prepare and validate final v0.57 authority
+        run: |
+          set -euo pipefail
+          python scripts/persist_p0_frozen_1425_local_feature_implementation_v0_57.py \
+            --artifact-dir _v057_artifact \
+            --repo-root .
+          rm -rf _v057_artifact
+
+      - name: Commit final bounded authority
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/P0_Frozen_1425_Local_Feature_Implementation_Promotion_v0.57.md \
+                  output_p0_frozen_1425_local_feature_implementation_v0_57/
+          test "$(git diff --cached --name-only | grep -c '^universe/' || true)" = "0"
+          test "$(git diff --cached --name-only | grep -c '^runtime_cache/' || true)" = "0"
+          git commit -m "Persist local feature implementation v0.57 authority"
+          git push origin HEAD:main
