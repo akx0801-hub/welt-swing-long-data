@@ -1,0 +1,123 @@
+name: P0 Frozen 1425 Filtered Invalid Bar Policy v0.53
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/p0_frozen_1425_filtered_invalid_bar_policy_v0_53.py
+      - tests/test_p0_frozen_1425_filtered_invalid_bar_policy_v0_53.py
+      - .github/workflows/p0_frozen_1425_filtered_invalid_bar_policy_v0.53.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  implement-regress-refreeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout bounded implementation
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install bounded offline dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check "pandas==2.2.3" "numpy==2.1.3" "pytest==8.3.5"
+
+      - name: Verify exact source runtime artifact authority
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "b8b9178385c58351910b2e61fe1f473d4f47af18"
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10885240894 --jq .digest)"
+          test "$DIGEST" = "sha256:0be6ca06691f2715c7c663bd7abfacbe1d65553d5debed4b6ba87b766918cfab"
+          rm -rf runtime_input/v048
+          mkdir -p runtime_input/v048
+          gh run download 36183320195 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-nonready10-resume-runtime-v0.48-36183320195 \
+            --dir runtime_input/v048
+          test -f runtime_input/v048/runtime_cache/p0_frozen_1425_v0_48.sqlite
+          test "$(sha256sum runtime_input/v048/runtime_cache/p0_frozen_1425_v0_48.sqlite | awk '{print $1}')" = "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063"
+          test "$(stat -c %s runtime_input/v048/runtime_cache/p0_frozen_1425_v0_48.sqlite)" = "144216064"
+
+      - name: Focused implementation tests
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/p0_frozen_1425_filtered_invalid_bar_policy_v0_53.py
+          pytest -q tests/test_p0_frozen_1425_filtered_invalid_bar_policy_v0_53.py
+
+      - name: Execute full Frozen-1425 generic regression and runtime refreeze
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_filtered_bar_policy_v0_53
+          rm -f runtime_cache/p0_frozen_1425_v0_53.sqlite*
+          python scripts/p0_frozen_1425_filtered_invalid_bar_policy_v0_53.py \
+            --source-sqlite runtime_input/v048/runtime_cache/p0_frozen_1425_v0_48.sqlite \
+            --target-sqlite runtime_cache/p0_frozen_1425_v0_53.sqlite \
+            --output-dir output_p0_frozen_1425_filtered_bar_policy_v0_53 \
+            --repository-sha "$GITHUB_SHA" \
+            --as-of 2026-09-26
+
+      - name: Validate pre-upload gate
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+          out=Path("output_p0_frozen_1425_filtered_bar_policy_v0_53")
+          s=json.load(open(out/"summary_preupload_v0.53.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_preupload_v0.53.json",encoding="utf-8"))
+          b=json.load(open(out/"runtime_hash_binding_preupload_v0.53.json",encoding="utf-8"))
+          full=list(csv.DictReader(open(out/"full_frozen_regression_v0.53.csv",encoding="utf-8")))
+          trans=list(csv.DictReader(open(out/"state_transitions_v0.53.csv",encoding="utf-8")))
+          asx=list(csv.DictReader(open(out/"asx8_validation_v0.53.csv",encoding="utf-8")))
+          assert s["status"]=="PREUPLOAD_PASS"
+          assert s["final_cache"]=={"READY":1425,"QUARANTINE":0,"total":1425}
+          assert s["p0_price_cache_ready_preupload"] is True
+          assert len(full)==1425
+          assert len({r["Security_Key"] for r in full})==1425
+          assert len({r["Source_WS_ID"] for r in full})==1425
+          assert s["full_frozen"]["ready_to_ready"]==1417
+          assert s["full_frozen"]["ready_to_quarantine"]==0
+          assert s["full_frozen"]["ready_to_other"]==0
+          assert len(trans)==8
+          assert len(asx)==8 and all(r["Validation_Result"]=="PASS" for r in asx)
+          assert s["raw_price_immutability"]["unchanged"] is True
+          assert s["raw_price_immutability"]["provider_mapping_unchanged"] is True
+          assert b["hash_after_close"] is True
+          assert b["prepackage_hash_repeat_equal"] is True
+          assert b["integrity_check"]=="ok"
+          assert b["price_daily_rows"]==711204
+          assert b["states"]==1425
+          assert b["status_counts"]=={"READY":1425}
+          assert c["tests_failed"]==0
+          assert hashlib.sha256(Path("universe/SWING_U3K_FROZEN_v0.5.csv").read_bytes()).hexdigest()=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert s["market_provider_calls"]==0 and s["yahoo_yfinance_calls"]==0 and s["eodhd_calls"]==0
+          assert s["alpha_vantage_calls"]==0 and s["scalable_calls"]==0
+          assert s["p0_run"] is False and s["feature_materialization"] is False
+          assert s["rs_materialization"] is False and s["parameter_promotion"] is False
+          assert s["universe_mutation"] is False and s["productive"] is False
+          print(json.dumps({"ready":1425,"quarantine":0,"transitions":len(trans),"runtime_sha256":b["declared_runtime_sha256"]},sort_keys=True))
+          PY
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload byte-bound v0.53 runtime and bounded evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-filtered-invalid-bar-policy-v0.53-${{ github.run_id }}
+          path: |
+            runtime_cache/p0_frozen_1425_v0_53.sqlite
+            output_p0_frozen_1425_filtered_bar_policy_v0_53/
+          if-no-files-found: error
+          retention-days: 14
