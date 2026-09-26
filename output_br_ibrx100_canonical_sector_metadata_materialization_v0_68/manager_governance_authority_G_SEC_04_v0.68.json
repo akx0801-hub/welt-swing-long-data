@@ -1,0 +1,44 @@
+{
+  "alpha_vantage_allowed": false,
+  "authority_class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "authority_id": "G-SEC-04",
+  "br_expected_state_after_success": {
+    "BR_CANONICAL_SECTOR_METADATA_READY": true,
+    "BR_READY": 37,
+    "BR_TOTAL": 37,
+    "GLOBAL_CANONICAL_SECTOR_METADATA_READY": false,
+    "GLOBAL_READY": 37,
+    "GLOBAL_REMAINING": 1388,
+    "GLOBAL_TOTAL": 1425
+  },
+  "canonical_partition_path": "sector_metadata/canonical/cohorts/BR_IBRX100_sector_metadata_v1.csv",
+  "effective_stage": "BR_IBRX100_CANONICAL_SECTOR_METADATA_MAPPING_MATERIALIZATION_GATE",
+  "predecessor_authorities_preserved": [
+    "G-SEC-01",
+    "G-SEC-02",
+    "G-SEC-03"
+  ],
+  "productive": false,
+  "registry_contract": {
+    "path": "sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",
+    "scope": "PROMOTED_CANONICAL_COHORT_PARTITIONS_ONLY",
+    "unresolved_cohorts": "OMITTED_UNTIL_PROMOTED"
+  },
+  "rules": {
+    "br_success_does_not_set_global_canonical_ready_yes": true,
+    "br_success_sets_br_canonical_ready_yes": true,
+    "canonical_metadata_cohort_partitioned_until_global_assembly_authority": true,
+    "canonical_sector_metadata_may_materialize_incrementally_by_complete_frozen_cohort": true,
+    "cohort_promotion_requires_every_frozen_member_verified": true,
+    "external_reference_requests_authorized": false,
+    "global_sector_metadata_ready_requires_all_1425_frozen_ws_ids": true,
+    "p0_authorized": false,
+    "p1_p2_authorized": false,
+    "partial_rows_inside_cohort_forbidden": true,
+    "sector_rs_authorized": false,
+    "unresolved_cohort_placeholder_rows_forbidden": true,
+    "ws_id_unique_within_canonical_cohort_partition": true
+  },
+  "scope": "CANONICAL_SECTOR_METADATA_INCREMENTAL_COMPLETE_COHORT_MATERIALIZATION",
+  "version": "v0.68"
+}

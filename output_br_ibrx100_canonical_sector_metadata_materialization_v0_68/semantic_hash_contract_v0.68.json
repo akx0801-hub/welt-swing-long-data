@@ -1,0 +1,21 @@
+{
+  "fields_in_order": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Level",
+    "Sector_Code",
+    "Sector_Name",
+    "Mapping_Status"
+  ],
+  "hash": "SHA-256",
+  "json_ensure_ascii": false,
+  "json_separators": [
+    ",",
+    ":"
+  ],
+  "name": "BR_CANONICAL_SECTOR_METADATA_SEMANTIC_SHA256",
+  "row_sort": "WS_ID_ASC_BYTEWISE_UNICODE_STRING_ORDER",
+  "serialization": "UTF8_COMPACT_JSON_ARRAY_OF_ARRAYS",
+  "trailing_newline_in_semantic_payload": false,
+  "version": "v0.68"
+}

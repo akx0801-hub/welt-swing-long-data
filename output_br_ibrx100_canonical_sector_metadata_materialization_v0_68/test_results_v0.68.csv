@@ -1,0 +1,31 @@
+Test,Result,Detail
+V067_VERDICT,PASS,PASS_BR_EXACT_37_CLASSIFICATION_COVERAGE
+V067_READY_37_37,PASS,37/37
+V067_ZERO_UNRESOLVED,PASS,0/0/0
+V067_GROUP_TRAVERSAL_86_86,PASS,86/86
+V067_DISTINCT_SECTORS_10,PASS,10
+V067_PDSC_COLLISIONS_0,PASS,0
+TREE_SHA_AUTHORITY,PASS,febe642ea5b713c7a8709d1bf314ea3bac84b6ccf21f155073bc315ffc0bd0bd
+FROZEN_BR_ROWS_37,PASS,37
+READY_ROWS_37,PASS,37
+CANONICAL_CANDIDATE_ROWS_37,PASS,37
+WS_ID_SET_EQUALITY,PASS,"{""Canonical_Candidate_Row_Count"": 37, ""Canonical_Candidate_Unique_WS_ID_Count"": 37, ""Canonical_Duplicates"": 0, ""Canonical_WS_ID_Set_SHA256"": ""bddfab9a2bc1390852914edd8dde82f0f5f01aea5b1204da1b076013a728c9d7"", ""Extra_In_Canonical"": [], ""Frozen_BR_Row_Count"": 37, ""Frozen_BR_Unique_WS_ID_Count"": 37, ""Frozen_Duplicates"": 0, ""Frozen_Missing_From_v067_READY"": [], ""Frozen_WS_ID_Set_SHA256"": ""bddfab9a2bc1390852914edd8dde82f0f5f01aea5b1204da1b076013a728c9d7"", ""Missing_From_Canonical"": [], ""Primary_MIC_BVMF_All"": true, ""Set_Equality"": true, ""v067_READY_Duplicates"": 0, ""v067_READY_Extra_Vs_Frozen"": [], ""v067_READY_Row_Count"": 37, ""v067_READY_Unique_WS_ID_Count"": 37, ""v067_READY_WS_ID_Set_SHA256"": ""bddfab9a2bc1390852914edd8dde82f0f5f01aea5b1204da1b076013a728c9d7""}"
+VALUE_EQUALITY,PASS,0
+PROVENANCE_COMPLETE,PASS,0
+PDSC_INTEGRITY,PASS,0
+DISTINCT_SECTORS_EXACT_10,PASS,10
+PDSC_COLLISION_ZERO,PASS,0
+MATERIALIZATION_DETERMINISTIC,PASS,True
+MAPPING_STATUS_FIXED,PASS,VERIFIED_CANONICAL
+SOURCE_SECTOR_CODE_NULL_LITERAL,PASS,NULL
+SOURCE_EFFECTIVE_ASOF_NOT_FABRICATED,PASS,PASS
+NO_EXTERNAL_REQUESTS,PASS,"{""alpha_vantage"": 0, ""b3_requests"": 0, ""company_name_matching"": 0, ""crosswalk"": 0, ""eodhd"": 0, ""external_market_reference_requests"": 0, ""fuzzy_matching"": 0, ""gics_icb_fallback"": 0, ""news"": 0, ""per_security_web_lookup"": 0, ""price_ohlcv"": 0, ""scalable"": 0, ""sector_inference"": 0, ""third_party_sector_databases"": 0, ""trading"": 0, ""tradingview"": 0, ""wikipedia"": 0, ""yahoo_yfinance"": 0}"
+FROZEN_IMMUTABLE,PASS,54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb
+V057_IMMUTABLE,PASS,177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9
+V058_IMMUTABLE,PASS,2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32
+SECTOR_RS_ZERO,PASS,0
+P0_P1_P2_ZERO,PASS,0/0/0
+CANONICAL_FILE_EXISTS,PASS,/home/runner/work/welt-swing-long-data/welt-swing-long-data/sector_metadata/canonical/cohorts/BR_IBRX100_sector_metadata_v1.csv
+CANONICAL_FILE_SHA,PASS,83706c76baba6d9a4fcc557d170f0bcad6fd85c9ca90fbc9f062cd5765dcef28
+REGISTRY_EXISTS,PASS,/home/runner/work/welt-swing-long-data/welt-swing-long-data/sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv
+GLOBAL_STATUS_37_1425,PASS,"{'version': 'v0.68', 'registry_scope': 'PROMOTED_CANONICAL_COHORT_PARTITIONS_ONLY', 'BR_CANONICAL_SECTOR_METADATA_READY': True, 'BR_READY': 37, 'BR_TOTAL': 37, 'GLOBAL_CANONICAL_SECTOR_METADATA_READY': False, 'GLOBAL_READY': 37, 'GLOBAL_TOTAL': 1425, 'GLOBAL_REMAINING': 1388, 'Sector_RS_Ready_Inferred': False, 'Unresolved_Cohorts': 'OMITTED_FROM_REGISTRY_UNTIL_PROMOTED'}"

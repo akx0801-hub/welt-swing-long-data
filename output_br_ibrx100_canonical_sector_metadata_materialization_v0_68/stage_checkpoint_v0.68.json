@@ -1,0 +1,22 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "e3acc96caff5715a5e09d123b3183137a0f84097afb1315b7c523a75d3f24e77",
+  "artifact_id": 10916176386,
+  "blocker": "",
+  "br_canonical_sector_metadata_ready": true,
+  "br_ready": 37,
+  "br_total": 37,
+  "distinct_setores": 10,
+  "global_canonical_sector_metadata_ready": false,
+  "global_ready": 37,
+  "global_total": 1425,
+  "next_gate": "FROZEN-1425 CANONICAL SECTOR METADATA COVERAGE RECONCILIATION / NEXT-COHORT SELECTION GATE",
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "sector_rs_runs": 0,
+  "semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+  "stage": "BR_IBRX100_CANONICAL_SECTOR_METADATA_MAPPING_MATERIALIZATION_GATE",
+  "verdict": "PASS_BR_CANONICAL_SECTOR_METADATA_MATERIALIZATION",
+  "version": "v0.68",
+  "workflow_run_id": 36271957458
+}

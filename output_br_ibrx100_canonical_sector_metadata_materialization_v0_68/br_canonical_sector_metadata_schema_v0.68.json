@@ -1,0 +1,60 @@
+{
+  "canonical_partition": "sector_metadata/canonical/cohorts/BR_IBRX100_sector_metadata_v1.csv",
+  "csv_null_literal": {
+    "Source_Sector_Code": "NULL"
+  },
+  "fields": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Code",
+    "Sector_Name",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "Mapping_Status",
+    "Primary_Universe_Index",
+    "Primary_MIC",
+    "Primary_Ticker",
+    "Sector_Level",
+    "Sector_Raw_Name",
+    "Source_Sector_Code",
+    "Sector_Code_Origin",
+    "Sector_Code_Method",
+    "B3_Company_Code",
+    "Evidence_Version",
+    "Evidence_Final_Commit",
+    "Tree_Snapshot_SHA256",
+    "Group_Query_Label",
+    "Group_Response_SHA256",
+    "Source_Retrieved_UTC",
+    "Source_Effective_AsOf_Status"
+  ],
+  "fixed_br_semantics": {
+    "Evidence_Final_Commit": "f27a8be1cea6ed38b3fe92a1ca3a15a54de6fd89",
+    "Evidence_Version": "v0.67",
+    "Mapping_Status": "VERIFIED_CANONICAL",
+    "Primary_Universe_Index": "BR_IBRX100",
+    "Sector_Code_Method": "PDSC_SHA256_V1",
+    "Sector_Code_Origin": "PROJECT_DERIVED_CANONICAL",
+    "Sector_Level": "SETOR_ECONOMICO",
+    "Sector_Taxonomy": "B3_CLASSIFICACAO_SETORIAL",
+    "Source_Sector_Code": "NULL",
+    "Tree_Snapshot_SHA256": "febe642ea5b713c7a8709d1bf314ea3bac84b6ccf21f155073bc315ffc0bd0bd"
+  },
+  "format": "CSV_UTF8_LF",
+  "required_v0_21_fields": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Code",
+    "Sector_Name",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "Mapping_Status"
+  ],
+  "sort_order": [
+    "WS_ID ASC"
+  ],
+  "source_effective_asof_policy": "Retrieval timestamps are provenance only and are not claimed as a B3 business-effective date.",
+  "version": "v0.68"
+}

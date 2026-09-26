@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "e3acc96caff5715a5e09d123b3183137a0f84097afb1315b7c523a75d3f24e77",
+  "artifact_id": 10916176386,
+  "artifact_name": "br-ibrx100-canonical-sector-metadata-v0.68-36271957458",
+  "artifact_scope": "pre-persistence v0.68 BR IBrX100 canonical sector metadata materialization evidence plus canonical partition and registry",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "1d5025a0f30cf94d3ee7561e8a09773f158f9f3d",
+  "workflow_run_id": 36271957458
+}

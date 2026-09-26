@@ -1,0 +1,13 @@
+{
+  "BR_CANONICAL_SECTOR_METADATA_READY": true,
+  "BR_READY": 37,
+  "BR_TOTAL": 37,
+  "GLOBAL_CANONICAL_SECTOR_METADATA_READY": false,
+  "GLOBAL_READY": 37,
+  "GLOBAL_REMAINING": 1388,
+  "GLOBAL_TOTAL": 1425,
+  "Sector_RS_Ready_Inferred": false,
+  "Unresolved_Cohorts": "OMITTED_FROM_REGISTRY_UNTIL_PROMOTED",
+  "registry_scope": "PROMOTED_CANONICAL_COHORT_PARTITIONS_ONLY",
+  "version": "v0.68"
+}

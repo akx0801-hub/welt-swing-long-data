@@ -1,0 +1,7 @@
+{
+  "alpha_vantage_requests": 0,
+  "b3_requests": 0,
+  "external_market_reference_requests": 0,
+  "materialization_source": "output_br_ibrx100_b3_classification_tree_execution_v0_67/br_exact_37_classification_coverage_v0.67.csv",
+  "source_research_performed": false
+}

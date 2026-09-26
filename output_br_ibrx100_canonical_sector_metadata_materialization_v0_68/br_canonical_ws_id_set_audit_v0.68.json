@@ -1,0 +1,20 @@
+{
+  "Canonical_Candidate_Row_Count": 37,
+  "Canonical_Candidate_Unique_WS_ID_Count": 37,
+  "Canonical_Duplicates": 0,
+  "Canonical_WS_ID_Set_SHA256": "bddfab9a2bc1390852914edd8dde82f0f5f01aea5b1204da1b076013a728c9d7",
+  "Extra_In_Canonical": [],
+  "Frozen_BR_Row_Count": 37,
+  "Frozen_BR_Unique_WS_ID_Count": 37,
+  "Frozen_Duplicates": 0,
+  "Frozen_Missing_From_v067_READY": [],
+  "Frozen_WS_ID_Set_SHA256": "bddfab9a2bc1390852914edd8dde82f0f5f01aea5b1204da1b076013a728c9d7",
+  "Missing_From_Canonical": [],
+  "Primary_MIC_BVMF_All": true,
+  "Set_Equality": true,
+  "v067_READY_Duplicates": 0,
+  "v067_READY_Extra_Vs_Frozen": [],
+  "v067_READY_Row_Count": 37,
+  "v067_READY_Unique_WS_ID_Count": 37,
+  "v067_READY_WS_ID_Set_SHA256": "bddfab9a2bc1390852914edd8dde82f0f5f01aea5b1204da1b076013a728c9d7"
+}

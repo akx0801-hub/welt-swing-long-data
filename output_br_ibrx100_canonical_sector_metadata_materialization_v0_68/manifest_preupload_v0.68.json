@@ -1,0 +1,102 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "",
+  "br_canonical_sector_metadata_ready": true,
+  "br_ready": 37,
+  "br_total": 37,
+  "canonical_file_sha256": "83706c76baba6d9a4fcc557d170f0bcad6fd85c9ca90fbc9f062cd5765dcef28",
+  "distinct_setores": 10,
+  "files": {
+    "br_canonical_sector_inventory_v0.68.csv": {
+      "bytes": 1285,
+      "sha256": "5a998214c628593f07f85ea9bb5c6c50e9f7f2bf3fc49f528236d7535cfee994"
+    },
+    "br_canonical_sector_metadata_materialization_metadata_v0.68.json": {
+      "bytes": 703,
+      "sha256": "8326cf7e63cf6116f279593bbd0cbd9d767b42d66555cc0c050b37d0bb89b0f7"
+    },
+    "br_canonical_sector_metadata_materialization_v0.68.csv": {
+      "bytes": 45147,
+      "sha256": "83706c76baba6d9a4fcc557d170f0bcad6fd85c9ca90fbc9f062cd5765dcef28"
+    },
+    "br_canonical_sector_metadata_schema_v0.68.json": {
+      "bytes": 1727,
+      "sha256": "d4b56ebcdedd11c48877ae6239db80030388902134eb6196129484fe3ad3d460"
+    },
+    "br_canonical_value_equality_audit_v0.68.csv": {
+      "bytes": 6493,
+      "sha256": "423df950704049fddd0a35db40134ffd624f95f9ba464acfcbfec186bd614fb2"
+    },
+    "br_canonical_ws_id_set_audit_v0.68.json": {
+      "bytes": 801,
+      "sha256": "84836a26b8390ee32438628d9cce3fd0a95394b67eb9424682c2fb2fe06bd5ee"
+    },
+    "br_pdsc_integrity_audit_v0.68.csv": {
+      "bytes": 2522,
+      "sha256": "271d825cca6aab589f0a1f51886a53b38a45f41a9c06c1d33d837e0e399b99ff"
+    },
+    "canonical_sector_metadata_cohort_registry_v0.68.csv": {
+      "bytes": 571,
+      "sha256": "8de749ae368d2a3e2a04072804001d6918fea36f346f0d1914f201c50bca0db6"
+    },
+    "external_request_audit_v0.68.json": {
+      "bytes": 269,
+      "sha256": "25536651ec7527a939ff6f042bf257a9d56364f4505f93afc8ef06daaa9b8170"
+    },
+    "global_sector_metadata_coverage_status_v0.68.json": {
+      "bytes": 398,
+      "sha256": "7afb75233c3bf58dab498a7974303053cf5ba429531ba0e58bdeb1fc3d199b33"
+    },
+    "immutability_audit_v0.68.json": {
+      "bytes": 1201,
+      "sha256": "c17e1cfc19d85ef7015a32150269f2bfa27c558541b7145587879e9494464faf"
+    },
+    "manager_governance_authority_G_SEC_04_v0.68.json": {
+      "bytes": 1793,
+      "sha256": "01e873109c19b251c751f912c32a8e6c82624e3c10b299097a0e1d381254d700"
+    },
+    "provider_call_audit_v0.68.json": {
+      "bytes": 420,
+      "sha256": "2961299f77078c398be90aeac9870cc722fdb8ab19a1d48109613c88032da81d"
+    },
+    "sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv": {
+      "bytes": 571,
+      "sha256": "8de749ae368d2a3e2a04072804001d6918fea36f346f0d1914f201c50bca0db6"
+    },
+    "sector_metadata/canonical/cohorts/BR_IBRX100_sector_metadata_v1.csv": {
+      "bytes": 45147,
+      "sha256": "83706c76baba6d9a4fcc557d170f0bcad6fd85c9ca90fbc9f062cd5765dcef28"
+    },
+    "semantic_hash_contract_v0.68.json": {
+      "bytes": 484,
+      "sha256": "263e16c8a8ed74b00624673d8b9d70f2f107dc29df9fc20c5f799645c0124ebb"
+    },
+    "stage_checkpoint_preupload_v0.68.json": {
+      "bytes": 689,
+      "sha256": "6c654da48ecdaf7b9c54ef8cb6079a1f03a31767b68b354db5e34f5b1cdd114a"
+    },
+    "summary_preupload_v0.68.json": {
+      "bytes": 1161,
+      "sha256": "e887323b0f9c24a51ae1444f5ffae4cf7db0ced05b141388c6bfc51108720680"
+    },
+    "test_results_v0.68.csv": {
+      "bytes": 3102,
+      "sha256": "4015b43c212ad712e9252ad3bdb512fda0cb7a8d425c62986ec82c3e3d4082cf"
+    }
+  },
+  "global_canonical_sector_metadata_ready": false,
+  "global_ready": 37,
+  "global_total": 1425,
+  "next_gate": "FROZEN-1425 CANONICAL SECTOR METADATA COVERAGE RECONCILIATION / NEXT-COHORT SELECTION GATE",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "repository_sha": "1d5025a0f30cf94d3ee7561e8a09773f158f9f3d",
+  "required_start_head": "f27a8be1cea6ed38b3fe92a1ca3a15a54de6fd89",
+  "sector_rs_runs": 0,
+  "semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+  "stage": "BR_IBRX100_CANONICAL_SECTOR_METADATA_MAPPING_MATERIALIZATION_GATE",
+  "verdict": "PASS_BR_CANONICAL_SECTOR_METADATA_MATERIALIZATION",
+  "version": "v0.68"
+}

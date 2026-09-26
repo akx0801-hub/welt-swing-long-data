@@ -1,0 +1,20 @@
+{
+  "alpha_vantage": 0,
+  "b3_requests": 0,
+  "company_name_matching": 0,
+  "crosswalk": 0,
+  "eodhd": 0,
+  "external_market_reference_requests": 0,
+  "fuzzy_matching": 0,
+  "gics_icb_fallback": 0,
+  "news": 0,
+  "per_security_web_lookup": 0,
+  "price_ohlcv": 0,
+  "scalable": 0,
+  "sector_inference": 0,
+  "third_party_sector_databases": 0,
+  "trading": 0,
+  "tradingview": 0,
+  "wikipedia": 0,
+  "yahoo_yfinance": 0
+}
