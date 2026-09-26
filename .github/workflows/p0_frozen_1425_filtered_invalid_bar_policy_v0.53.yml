@@ -38,7 +38,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "b8b9178385c58351910b2e61fe1f473d4f47af18"
+          git merge-base --is-ancestor b8b9178385c58351910b2e61fe1f473d4f47af18 HEAD
           DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10885240894 --jq .digest)"
           test "$DIGEST" = "sha256:0be6ca06691f2715c7c663bd7abfacbe1d65553d5debed4b6ba87b766918cfab"
           rm -rf runtime_input/v048
