@@ -1,0 +1,271 @@
+{
+  "version": "v0.61",
+  "research_date_utc": "2026-09-26",
+  "scope": "BOUNDED_OFFICIAL_TAXONOMY_INDEX_ADMINISTRATOR_EXCHANGE_REGISTRY_RESEARCH_ONLY",
+  "prohibited_provider_requests": {
+    "alpha_vantage": 0,
+    "yahoo_yfinance": 0,
+    "eodhd": 0,
+    "scalable": 0,
+    "price_ohlcv": 0,
+    "news_trading": 0,
+    "per_security_web_fanout": 0
+  },
+  "frozen_internal_profile": {
+    "members": 1425,
+    "primary_mic_counts": {
+      "BVMF": 37,
+      "XNSE": 45,
+      "XTAI": 49,
+      "XASX": 63,
+      "XNAS": 234,
+      "XNYS": 506,
+      "XSHE": 108,
+      "XSHG": 186,
+      "XTKS": 197
+    },
+    "note": "Derived from canonical Frozen repository file only; no external per-security lookups."
+  },
+  "candidate_findings": {
+    "GICS": {
+      "taxonomy_authority": "S&P Dow Jones Indices + MSCI",
+      "official_structure": "Four tiers; 11 Sectors, 25 Industry Groups, 74 Industries, 163 Sub-Industries; 8-digit hierarchical codes; current methodology April 2026.",
+      "official_bulk_route": "S&P Global GICS dataset / GICS Direct; current global company classifications; delivery channels include API, Cloud, Feed and SFTP; MSCI Data Explorer also describes a security-level GICS Direct module.",
+      "coverage_public_claim": "GICS Direct current classifications for over 50,000 active public companies in over 120 countries.",
+      "exact_frozen_1425_coverage": "NOT_VERIFIED",
+      "exact_identity_linkage": "NOT_VERIFIED",
+      "access_persistence": "NOT_VERIFIED_FOR_THIS_PUBLIC_DEV_REPOSITORY",
+      "access_reason": "Official materials describe licensed/subscription products and state restrictions on reproduction, distribution and database/retrieval-system storage absent permission. No project-specific GICS entitlement or written persistence/redistribution permission is present in repository authority.",
+      "earliest_failed_gate": "D_FROZEN_1425_COVERAGE_FEASIBILITY"
+    },
+    "ICB": {
+      "taxonomy_authority": "FTSE International Limited / FTSE Russell (LSEG)",
+      "official_structure": "Four tiers: Industry, Supersector, Sector, Subsector; 11 Industries, 20 Supersectors, 45 Sectors, 173 Subsectors; coded taxonomy and current Ground Rules.",
+      "official_bulk_route": "ICB Universe weekly files for roughly 85,000 equity securities globally plus daily update files; official index constituent files also carry ICB classifications.",
+      "coverage_public_claim": "Approximately 85,000 equity securities, over 80 countries, 150 active exchanges; coverage extends beyond FTSE Russell equity index universe.",
+      "exact_frozen_1425_coverage": "NOT_VERIFIED",
+      "exact_identity_linkage": "NOT_VERIFIED",
+      "access_persistence": "NOT_VERIFIED_FOR_THIS_PUBLIC_DEV_REPOSITORY",
+      "access_reason": "Official ICB materials state use/distribution requires licence and no further distribution without express written consent; public materials do not establish project-specific permission to persist a full mapping in this repository.",
+      "earliest_failed_gate": "D_FROZEN_1425_COVERAGE_FEASIBILITY"
+    }
+  },
+  "other_single_taxonomy_result": "NONE_ADDED; bounded official research did not establish a third concrete taxonomy satisfying the manager rule for candidate admission.",
+  "external_requests": [
+    [
+      "https://www.spglobal.com/spdji/en/landing/topic/gics/",
+      "OPENED",
+      "GICS official overview; global four-tier structure, current sector definitions, annual review, official methodology/structure links."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-gics.pdf",
+      "OPENED",
+      "April 2026 GICS methodology; global classification, sector hierarchy/codes, maintenance/governance, permission/licensing notices."
+    ],
+    [
+      "https://www.msci.com/indexes/index-resources/gics",
+      "OPENED",
+      "MSCI official GICS overview; globally applied four-tier standard, single classification per company, annual review."
+    ],
+    [
+      "https://www.marketplace.spglobal.com/en/datasets/gics-%2890%29",
+      "OPENED",
+      "Official GICS dataset page; 50,000+ active public companies, 120+ countries, API/Cloud/Feed/SFTP delivery."
+    ],
+    [
+      "https://www.spglobal.com/market-intelligence/en/solutions/differentiated-data",
+      "OPENED",
+      "Official GICS Direct/History and cross-reference services; global company-level classification linking."
+    ],
+    [
+      "https://dataexplorer.msci.com/ui/products",
+      "OPENED",
+      "MSCI Data Explorer lists GICS Direct as security-level module; access is product/client based."
+    ],
+    [
+      "https://developer.msci.com/apis/fileservice-msci-com",
+      "OPENED",
+      "MSCI client file service supports programmatic file downloads using client credentials; confirms licensed-file delivery architecture."
+    ],
+    [
+      "https://www.msci.com/documents/10199/5973a128-47f0-4317-b083-716a10207b50",
+      "SEARCH_RESULT_REVIEWED",
+      "Historical MSCI GICS FAQ describing GICS Direct coverage/licensing; retained only as historical corroboration, not current count authority."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/disclaimers/",
+      "OPENED",
+      "S&P DJI legal disclaimer; GICS proprietary; redistribution/reproduction restricted without written permission."
+    ],
+    [
+      "https://www.spglobal.com/market-intelligence/en/legal/disclosures",
+      "OPENED",
+      "S&P Global Market Intelligence citation/data policy; proprietary information and reproduction/distribution restrictions absent written consent."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/documents/index-policies/index-data-capabilities-brochure.pdf",
+      "SEARCH_RESULT_REVIEWED",
+      "Official S&P index-data brochure; licensed data packages can include constituents, identifiers and GICS sector classifications."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/governance/methodologies/",
+      "SEARCH_RESULT_REVIEWED",
+      "Official methodology library exposes current/historical GICS structure and methodology."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/governance/corporate-engagement/",
+      "SEARCH_RESULT_REVIEWED",
+      "Official GICS classification review process and support route."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/about-us/our-services/",
+      "SEARCH_RESULT_REVIEWED",
+      "Official S&P data/index licensing overview; subscribers use index data under licensing arrangements."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/landing/investment-themes/sectors/",
+      "SEARCH_RESULT_REVIEWED",
+      "Supplementary official GICS sector usage page; not decisive for global bulk coverage."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/landing/investment-themes/select-sector/",
+      "SEARCH_RESULT_REVIEWED",
+      "Supplementary S&P sector-index page using GICS; not used for Frozen global coverage claim."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/indices/equity/sp-500-industrials-sector/",
+      "SEARCH_RESULT_REVIEWED",
+      "Supplementary S&P 500 GICS constituent evidence; not used to claim full Frozen coverage."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/indices/equity/sp-500-materials-sector/",
+      "SEARCH_RESULT_REVIEWED",
+      "Supplementary S&P 500 GICS constituent evidence; not used to claim full Frozen coverage."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/indices/equity/sp-500-financials-sector/",
+      "SEARCH_RESULT_REVIEWED",
+      "Supplementary S&P 500 GICS constituent evidence; not used to claim full Frozen coverage."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/indices/equity/sp-global-1200-industrials-sector/",
+      "SEARCH_RESULT_REVIEWED",
+      "Supplementary global S&P GICS index evidence; not sufficient for Frozen 1425 row-level proof."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/indices/equity/sp-north-american-technology-sector-index/",
+      "SEARCH_RESULT_REVIEWED",
+      "Supplementary GICS sector-index evidence; not decisive."
+    ],
+    [
+      "https://www.lseg.com/en/ftse-russell/industry-classification-benchmark-icb",
+      "OPENED",
+      "Official ICB overview; governance, 11/20/45/173 hierarchy, global exchange adoption, source links."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/other/industry-classification-benchmark-product-overview-march-2020.pdf",
+      "OPENED",
+      "Official ICB product overview; ~85,000 securities, 80+ countries, 150 exchanges; weekly Universe files and daily updates; licensing/storage disclaimer."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/other/icb-taxonomy-overview-cut-sheet.pdf",
+      "OPENED",
+      "Official ICB taxonomy overview with coded Industry/Supersector/Sector/Subsector hierarchy."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/icb-ground-rules.pdf",
+      "OPENED",
+      "Official ICB Ground Rules v5.0 March 2026; classification governance and market coverage examples."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/other/ftse-icb-attribution.pdf",
+      "OPENED",
+      "Official ICB attribution requirements; no further distribution without FTSE express written consent."
+    ],
+    [
+      "https://www.lseg.com/en/ftse-russell/index-resources/attribution",
+      "OPENED",
+      "Official FTSE Russell attribution hub linking ICB attribution and additional data terms."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/other/information-provider-additional-terms-march.pdf",
+      "OPENED",
+      "Official additional terms, updated March 2026; license-dependent data use and identifier-provider restrictions."
+    ],
+    [
+      "https://www.lseg.com/en/ftse-russell/governance/classification-frameworks",
+      "OPENED",
+      "Official LSEG governance page states ICB is used for global equity security classification."
+    ],
+    [
+      "https://www.lseg.com/en/ftse-russell/indices/geis-icb-indices",
+      "SEARCH_RESULT_REVIEWED",
+      "Official global equity ICB index family; confirms global industry framework, not full Frozen row-level membership."
+    ],
+    [
+      "https://www.lseg.com/en/ftse-russell/indices/geisac",
+      "SEARCH_RESULT_REVIEWED",
+      "Official FTSE Global Equity Index Series uses ICB across global equity markets."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/policy-documents/icb-classification-data-form.pdf",
+      "SEARCH_RESULT_REVIEWED",
+      "Official ICB classification process form; current version evidence."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-china-a-style-index-series-ground-rules.pdf",
+      "SEARCH_RESULT_REVIEWED",
+      "Official FTSE China A rules explicitly classify constituents under ICB; example only, not Frozen-wide proof."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-jpx-net-zero-japan-index-series-ground-rules-japanese.pdf",
+      "SEARCH_RESULT_REVIEWED",
+      "Official Japan index rules use ICB; example only, not Frozen-wide proof."
+    ],
+    [
+      "https://www.lseg.com/en/ftse-russell/equity-country-classification",
+      "SEARCH_RESULT_REVIEWED",
+      "Official FTSE country-classification resource surfaced during bounded search; not used for sector selection."
+    ],
+    [
+      "https://www.lseg.com/en/ftse-russell/indices/russell-1000-icb-capped",
+      "SEARCH_RESULT_REVIEWED",
+      "Official Russell US ICB sector family; supplementary only."
+    ],
+    [
+      "https://www.lseg.com/en/ftse-russell/indices/cnbc",
+      "SEARCH_RESULT_REVIEWED",
+      "Official global/Asia index family using ICB; supplementary only."
+    ],
+    [
+      "https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse-bic-50-index-ground-rules.pdf",
+      "SEARCH_RESULT_REVIEWED",
+      "Official Brazil/India/China index rules surfaced; not sufficient for full Frozen classification proof."
+    ],
+    [
+      "https://www.spglobal.com/en/terms-of-use",
+      "SEARCH_RESULT_REVIEWED",
+      "Official S&P terms surfaced; reinforces license-dependent restrictions for third-party data."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/spice-terms-of-use/",
+      "SEARCH_RESULT_REVIEWED",
+      "Official S&P tool terms surfaced; supplementary licensing context only."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/governance/regulatory-information/",
+      "SEARCH_RESULT_REVIEWED",
+      "Official S&P governance resource surfaced; not decisive."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/governance/methodology-and-regulatory-status/",
+      "SEARCH_RESULT_REVIEWED",
+      "Official S&P methodology/regulatory database surfaced; not decisive."
+    ],
+    [
+      "https://www.spglobal.com/spdji/en/methodology/article/sp-us-indices-methodology/",
+      "SEARCH_RESULT_REVIEWED",
+      "Official S&P U.S. index methodology confirms GICS use for company classifications; not Frozen-wide proof."
+    ]
+  ]
+}
