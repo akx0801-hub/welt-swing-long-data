@@ -1,0 +1,18 @@
+{
+  "version": "v0.61",
+  "stage": "P0_FROZEN_1425_CANONICAL_SECTOR_TAXONOMY_SOURCE_FEASIBILITY_SELECTION_GATE",
+  "required_start_head": "b5fda059940710d4e07928b6a8bc7b0b5d536a57",
+  "manager_governance_authority": "G-SEC-01",
+  "candidate_minimum": ["GICS", "ICB"],
+  "frozen_members": 1425,
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "v057_feature_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v058_home_market_rs_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "alpha_vantage_allowed": false,
+  "mapping_population_allowed": false,
+  "sector_rs_allowed": false,
+  "crosswalk_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "productive": false
+}
