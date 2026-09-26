@@ -1,0 +1,56 @@
+name: Persist P0 Frozen 1425 Filtered Invalid Bar Policy v0.53
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/persist_p0_frozen_1425_filtered_invalid_bar_policy_v0.53.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Download exact successful v0.53 runtime artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor b8b9178385c58351910b2e61fe1f473d4f47af18 HEAD
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10900287789 --jq .digest)"
+          test "$DIGEST" = "sha256:f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95"
+          rm -rf _v053_artifact
+          mkdir -p _v053_artifact
+          gh run download 36225840648 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-filtered-invalid-bar-policy-v0.53-36225840648 \
+            --dir _v053_artifact
+          test -f _v053_artifact/runtime_cache/p0_frozen_1425_v0_53.sqlite
+          test -f _v053_artifact/output_p0_frozen_1425_filtered_bar_policy_v0_53/summary_preupload_v0.53.json
+
+      - name: Prepare and validate final bounded authority
+        run: |
+          set -euo pipefail
+          python scripts/persist_p0_frozen_1425_filtered_invalid_bar_policy_v0_53.py --artifact-dir _v053_artifact --repo-root .
+          rm -rf _v053_artifact
+
+      - name: Commit final bounded authority
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/P0_Frozen_1425_Filtered_Invalid_Bar_Policy_Implementation_v0.53.md \
+                  output_p0_frozen_1425_filtered_bar_policy_v0_53/
+          test "$(git diff --cached --name-only | grep -c '^universe/' || true)" = "0"
+          test "$(git diff --cached --name-only | grep -c '^runtime_cache/' || true)" = "0"
+          git commit -m "Persist canonical filtered invalid-bar policy v0.53 authority"
+          git push origin HEAD:main
