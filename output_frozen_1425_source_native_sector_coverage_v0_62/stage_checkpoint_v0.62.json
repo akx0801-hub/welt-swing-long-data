@@ -1,0 +1,33 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "cc6c64baaf653830365a9cfaec9ab0d291523a49e02ad99714e2e8bb6606dcc7",
+  "artifact_id": 10910376599,
+  "blocked_cohorts": [
+    "AU_SP_ASX200",
+    "BR_IBRX100",
+    "CN_CSI300",
+    "IN_NIFTY50",
+    "JP_N225",
+    "TW_TW50",
+    "US_SP400",
+    "US_SP500"
+  ],
+  "blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND",
+  "blocker_cohort": "BR_IBRX100",
+  "next_gate": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND:BR_IBRX100",
+  "not_mappable": 0,
+  "not_verified": 1425,
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "ready": 0,
+  "sector_mapping_population_runs": 0,
+  "sector_rs_runs": 0,
+  "source_native_sector_metadata_coverage_ready": false,
+  "stage": "FROZEN_1425_SOURCE_NATIVE_SECTOR_METADATA_COVERAGE_FEASIBILITY_GATE",
+  "tests_failed": 0,
+  "tests_passed": 25,
+  "total": 1425,
+  "verdict": "BLOCKED_SOURCE_NATIVE_SECTOR_METADATA_COVERAGE",
+  "version": "v0.62",
+  "workflow_run_id": 36255299126
+}

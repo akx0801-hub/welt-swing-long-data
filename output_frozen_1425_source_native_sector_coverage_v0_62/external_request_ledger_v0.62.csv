@@ -1,0 +1,27 @@
+Request_Order,URL,Allowed_Official_Source,Result,Per_Security_Fanout
+1,https://www.asx.com.au/markets/trade-our-cash-market/directory,YES,Official ASX company directory exposes Industry and an All ASX Listed Companies CSV; directory taxonomy identity not explicitly bound/versioned in retrieved evidence.,NO
+2,https://www.asx.com.au/markets/market-resources/asx-codes-and-descriptors,YES,Official ASX codes/ISIN resource confirms exchange identifiers and downloadable ISIN directory.,NO
+3,https://www.asx.com.au/markets/trade-our-cash-market/overview/indices,YES,Official ASX page states ASX adopted GICS for sector indices; not sufficient to bind company-directory Industry field to GICS.,NO
+4,https://www.asx.com.au/connectivity-and-data/information-services/reference-data,YES,Official ASX reference-data products page; no retrieved public row-level sector-code bulk route sufficient to cure taxonomy identity gap.,NO
+5,https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/classificacao-setorial/,YES,Official B3 sector-classification query; base stated as updated weekly.,NO
+6,https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/criterio-de-classificacao/,YES,Official B3 classification criteria establish B3's source-native classification methodology.,NO
+7,https://www.b3.com.br/main.jsp?doui_processActionId=setLocaleProcessAction&locale=pt_BR&lumA=1&lumII=8AE490CA9A5E21B5019AEBE12A9C42A6&lumPageId=8AE490CA9A5E21B5019AEBE12A684286,YES,Official B3 public-data hub lists sector classification but retrieved evidence did not establish a bulk classification file.,NO
+8,https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/up2data/dados-disponiveis/,YES,"Official B3 data-services page reviewed; listed-company packages described, but retrieved evidence did not verify a cohort sector-classification bulk route.",NO
+9,https://oss-ch.csindex.com.cn/industryClassification/%E4%B8%AD%E8%AF%81%E8%A1%8C%E4%B8%9A%E5%88%86%E7%B1%BB%E7%9A%84%E8%AF%B4%E6%98%8E.pdf,YES,Official CSI industry-classification standard shows coded multi-level hierarchy.,NO
+10,https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/en/000300factsheeten.pdf,YES,Official CSI 300 factsheet includes sector breakdown and sector labels for top constituents; not full row-level bulk coverage.,NO
+11,https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300_Index_Methodology_cn.pdf,YES,Official CSI 300 methodology states official publication channels including CSI data-service platform and website.,NO
+12,https://www.niftyindices.com/resources/industry-classification,YES,Official NSE Indices page defines four-tier source-native industry classification.,NO
+13,https://niftyindices.com/docs/default-source/default-document-library/nse-indices_industry-classification-structure-2022-11.pdf?sfvrsn=6df89434_2,YES,Official classification structure exposes MES/Sector/Industry/Basic-Industry codes and names.,NO
+14,https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,YES,Official NIFTY 50 page exposes Index Constituent download and sectoral distribution; exact current identifier schema not verified in retrieved evidence.,NO
+15,https://www.nseindia.com/static/market-data/securities-available-for-trading,YES,"Official NSE page exposes bulk security lists; used only as identity-route evidence, not as sector classification.",NO
+16,https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225,YES,"Official current Nikkei 225 component page, updated 2026-09-25, lists all components by industry under sector headings with security codes; no source-native classification code exposed.",NO
+17,https://indexes.nikkei.co.jp/en/nkave/factsheet?idx=nk225,YES,Official Nikkei 225 factsheet confirms named sectors and index governance.,NO
+18,https://indexes.nikkei.co.jp/en/nkave/newsroom?evt=10020&idxtag=&year=,YES,Official Nikkei industry-classification news/governance page; classification maintained by Nikkei.,NO
+19,https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf,YES,Official FTSE TWSE Taiwan Index Series rules use ICB Industry Group codes for sector/index qualification.,NO
+20,https://wwwc.twse.com.tw/en/indices/indices/series.html,YES,Official TWSE index-series page confirms ICB use in Taiwan sector/technology index definitions.,NO
+21,https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/2.08.html,YES,Official TWSE fact book provides exchange industry statistics; not row-level Taiwan 50 classification coverage.,NO
+22,https://www.sec.gov/search-filings/edgar-application-programming-interfaces,YES,Official SEC EDGAR API docs establish nightly bulk submissions ZIP and submissions metadata with ticker/exchange identity.,NO
+23,https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data,YES,Official SEC EDGAR access docs expose company_tickers_exchange.json for CIK/ticker/exchange associations.,NO
+24,https://www.sec.gov/search-filings,YES,Official SEC filing search identifies SIC as the standard classification used to indicate company type of business.,NO
+25,https://xbrl.sec.gov/sic/2026/,YES,Official SEC 2026 SIC taxonomy directory establishes a versioned SIC taxonomy artifact.,NO
+26,https://data.sec.gov/,YES,Official SEC data API landing page states public API access subject to SEC fair-access policy.,NO

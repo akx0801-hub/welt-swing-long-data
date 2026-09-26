@@ -1,0 +1,9 @@
+Cohort,Taxonomy_Identity,Source_Native_Candidate,Taxonomy_Status,Sector_Code_Status,Crosswalk_Used,Taxonomy_Isolated
+AU_SP_ASX200,NOT_VERIFIED,ASX company-directory Industry field,NOT_VERIFIED,NOT_EVALUATED,NO,YES
+BR_IBRX100,B3_CLASSIFICACAO_SETORIAL,B3 Classificacao Setorial,PASS,NOT_EVALUATED,NO,YES
+CN_CSI300,CSI_INDUSTRY_CLASSIFICATION,CSI Industry Classification,PASS,PASS,NO,YES
+IN_NIFTY50,NSE_INDICES_INDUSTRY_CLASSIFICATION,NSE Indices Industry Classification,PASS,PASS,NO,YES
+JP_N225,NIKKEI_36_INDUSTRY_AND_SECTOR,Nikkei 36 Industry / Nikkei sector grouping,PASS,NOT_VERIFIED,NO,YES
+TW_TW50,ICB,ICB within FTSE TWSE Taiwan Index Series,PASS,PASS,NO,YES
+US_SP400,SEC_SIC_2026,SEC Standard Industrial Classification via EDGAR bulk submissions,PASS,PASS,NO,YES
+US_SP500,SEC_SIC_2026,SEC Standard Industrial Classification via EDGAR bulk submissions,PASS,PASS,NO,YES

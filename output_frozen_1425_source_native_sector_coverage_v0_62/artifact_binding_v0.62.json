@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "cc6c64baaf653830365a9cfaec9ab0d291523a49e02ad99714e2e8bb6606dcc7",
+  "artifact_id": 10910376599,
+  "artifact_name": "frozen-1425-source-native-sector-coverage-v0.62-36255299126",
+  "artifact_scope": "pre-persistence v0.62 source-native sector coverage feasibility evidence package",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "0e7053baa9703b0c9c8254130961d1c0f28a03a6",
+  "workflow_run_id": 36255299126
+}

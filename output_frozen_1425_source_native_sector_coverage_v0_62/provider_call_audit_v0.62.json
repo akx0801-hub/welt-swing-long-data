@@ -1,0 +1,13 @@
+{
+  "alpha_vantage": 0,
+  "eodhd": 0,
+  "etf_holdings": 0,
+  "market_price_ohlcv": 0,
+  "news_trading": 0,
+  "per_security_web_fanout": 0,
+  "scalable": 0,
+  "screeners": 0,
+  "third_party_sector_databases": 0,
+  "wikipedia": 0,
+  "yahoo_yfinance": 0
+}

@@ -1,0 +1,30 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocked_cohorts": [
+    "AU_SP_ASX200",
+    "BR_IBRX100",
+    "CN_CSI300",
+    "IN_NIFTY50",
+    "JP_N225",
+    "TW_TW50",
+    "US_SP400",
+    "US_SP500"
+  ],
+  "blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND",
+  "blocker_cohort": "BR_IBRX100",
+  "next_gate": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND:BR_IBRX100",
+  "not_mappable": 0,
+  "not_verified": 1425,
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "ready": 0,
+  "sector_mapping_population_runs": 0,
+  "sector_rs_runs": 0,
+  "source_native_sector_metadata_coverage_ready": false,
+  "stage": "FROZEN_1425_SOURCE_NATIVE_SECTOR_METADATA_COVERAGE_FEASIBILITY_GATE",
+  "tests_failed": 0,
+  "tests_passed": 25,
+  "total": 1425,
+  "verdict": "BLOCKED_SOURCE_NATIVE_SECTOR_METADATA_COVERAGE",
+  "version": "v0.62"
+}

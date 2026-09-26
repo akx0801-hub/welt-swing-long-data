@@ -1,0 +1,16 @@
+{
+  "authority": "G-SEC-02",
+  "canonical_layer_allows_multiple_taxonomies": true,
+  "cross_taxonomy_comparison_authorized": false,
+  "crosswalk_created": false,
+  "future_peer_group_key": [
+    "Sector_Taxonomy",
+    "Sector_Code"
+  ],
+  "missing_or_ambiguous_fail_closed": true,
+  "required_row_taxonomy_field": "Sector_Taxonomy",
+  "same_name_cross_taxonomy_equivalence_forbidden": true,
+  "sector_code_alone_key_forbidden": true,
+  "sector_rs_authorized": false,
+  "version": "v0.62"
+}
