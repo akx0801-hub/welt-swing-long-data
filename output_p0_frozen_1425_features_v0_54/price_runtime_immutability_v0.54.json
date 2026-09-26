@@ -1,0 +1,24 @@
+{
+  "cache_state_counts_after": {
+    "QUARANTINE": 0,
+    "READY": 1425
+  },
+  "cache_state_counts_before": {
+    "QUARANTINE": 0,
+    "READY": 1425
+  },
+  "cache_state_counts_unchanged": true,
+  "integrity_check_after": "ok",
+  "price_daily_digest_after": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+  "price_daily_digest_before": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+  "price_daily_digest_unchanged": true,
+  "provider_mapping_digest_after": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+  "provider_mapping_digest_before": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+  "provider_mapping_digest_unchanged": true,
+  "sqlite_bytes_after": 144539648,
+  "sqlite_bytes_before": 144539648,
+  "sqlite_bytes_unchanged": true,
+  "sqlite_sha256_after": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "sqlite_sha256_before": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "sqlite_sha256_unchanged": true
+}

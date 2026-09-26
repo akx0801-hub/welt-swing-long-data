@@ -1,0 +1,14 @@
+{
+  "cross_security_contamination_result": "PASS",
+  "feature_duplicate_source_ws_id_rows": 0,
+  "group_key": "Source_WS_ID (not ticker)",
+  "price_duplicate_ws_id_date_rows": 0,
+  "same_ticker_multiple_mic_count": 5,
+  "same_ticker_multiple_mic_tickers": [
+    "ALL",
+    "CAR",
+    "CSL",
+    "NXT",
+    "ORI"
+  ]
+}

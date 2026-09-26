@@ -1,0 +1,40 @@
+Test,Result,Detail
+V053_RUNTIME_AUTHORITY_EXACT,PASS,"{""excluded_bars"": 8, ""integrity_check"": ""ok"", ""price_daily"": 711204, ""price_daily_digest"": ""1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea"", ""provider_mapping_digest"": ""d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e"", ""quarantine"": 0, ""ready"": 1425, ""source_defect_securities"": 8, ""states"": 1425}"
+FROZEN_IDENTITY_EXACT,PASS,1425 unique identities
+CANONICAL_FEATURE_INVENTORY_BOUND,PASS,"{""canonical_feature_count"": 21, ""home_market_rs_excluded_from_local_readiness"": true, ""master_local_blocking_gaps"": [""EMA20_SLOPE"", ""EMA50_SLOPE"", ""R1"", ""TRUE_RANGE_CURRENT"", ""RANGE_COMPRESSION_FAMILY"", ""RELATIVE_VOLUME_METRICS"", ""GAP_OVER_ATR"", ""DAILY_MOVE_IN_ATR"", ""RECENT_IMPULSE_DESCRIPTORS"", ""RUNUP_5_20_60_SEMANTICS"", ""RELEVANT_HIGH_DISTANCE_FAMILY""], ""sector_rs_excluded_from_local_readiness"": true}"
+WHOLE_BAR_EXCLUSION,PASS,all v0.53 defect bars excluded as whole bars
+SOURCE_DEFECT_8_REGRESSION,PASS,8/8 pass
+FEATURE_R5_FINITE_FULL_POPULATION,PASS,R5
+FEATURE_R20_FINITE_FULL_POPULATION,PASS,R20
+FEATURE_R60_FINITE_FULL_POPULATION,PASS,R60
+FEATURE_EMA20_FINITE_FULL_POPULATION,PASS,EMA20
+FEATURE_EMA50_FINITE_FULL_POPULATION,PASS,EMA50
+FEATURE_SMA200_FINITE_FULL_POPULATION,PASS,SMA200
+FEATURE_ATR14_Wilder_DEV_FINITE_FULL_POPULATION,PASS,ATR14_Wilder_DEV
+FEATURE_High20_FINITE_FULL_POPULATION,PASS,High20
+FEATURE_High60_FINITE_FULL_POPULATION,PASS,High60
+FEATURE_High252_FINITE_FULL_POPULATION,PASS,High252
+FEATURE_Low20_FINITE_FULL_POPULATION,PASS,Low20
+FEATURE_Low60_FINITE_FULL_POPULATION,PASS,Low60
+FEATURE_Range20_Pct_FINITE_FULL_POPULATION,PASS,Range20_Pct
+FEATURE_MedianVolume20_Tech_FINITE_FULL_POPULATION,PASS,MedianVolume20_Tech
+FEATURE_MedianTurnover20_Native_FINITE_FULL_POPULATION,PASS,MedianTurnover20_Native
+ALL_CURRENT_CANONICAL_FEATURES_FINITE,PASS,features=21
+RECURSIVE_EMA20_EXACT,PASS,1425/1425 exact
+RECURSIVE_EMA50_EXACT,PASS,1425/1425 exact
+RECURSIVE_ATR14_EXACT,PASS,1425/1425 exact
+MINIMUM_HISTORY_CURRENT_IMPLEMENTED,PASS,min_valid=293
+PER_SECURITY_ISOLATION,PASS,"{""cross_security_contamination_result"": ""PASS"", ""feature_duplicate_source_ws_id_rows"": 0, ""group_key"": ""Source_WS_ID (not ticker)"", ""price_duplicate_ws_id_date_rows"": 0, ""same_ticker_multiple_mic_count"": 5, ""same_ticker_multiple_mic_tickers"": [""ALL"", ""CAR"", ""CSL"", ""NXT"", ""ORI""]}"
+DATE_ORDERING,PASS,all input groups ordered
+DUPLICATE_DATE_HANDLING,PASS,zero duplicate ws_id/day rows
+NO_FORWARD_LEAKAGE,PASS,zero rows after feature as-of
+TEMPORAL_INTEGRITY,PASS,1425/1425
+TWO_PASS_SEMANTIC_DIGEST,PASS,"{""float_serialization"": ""%.17g"", ""null_serialization"": ""<NULL>"", ""pass1_semantic_sha256"": ""c5d9c6eabbbef10909b7a0df8b4bb8eb5ff32130d8c85162f5f2f4e4a7a4bed6"", ""pass2_semantic_sha256"": ""c5d9c6eabbbef10909b7a0df8b4bb8eb5ff32130d8c85162f5f2f4e4a7a4bed6"", ""row_order"": ""Projection_Order ascending"", ""semantic_columns"": [""Projection_Order"", ""Security_Key"", ""Source_WS_ID"", ""Primary_MIC"", ""Primary_Ticker"", ""feature_as_of_date"", ""valid_bar_count"", ""excluded_bar_count"", ""source_data_defect"", ""excluded_dates"", ""filtered_policy_version"", ""Close_Tech"", ""EMA20"", ""EMA50"", ""SMA200"", ""ATR14_Wilder_DEV"", ""ATR14_Pct_DEV"", ""R5"", ""R20"", ""R60"", ""High20"", ""High60"", ""High252"", ""Low20"", ""Low60"", ""Dist_EMA20"", ""Dist_EMA50"", ""Dist_SMA200"", ""Dist_High252"", ""Range20_Pct"", ""MedianVolume20_Tech"", ""MedianTurnover20_Native""], ""semantic_digest_match"": true}"
+PRICE_RUNTIME_IMMUTABILITY,PASS,"{""cache_state_counts_after"": {""QUARANTINE"": 0, ""READY"": 1425}, ""cache_state_counts_before"": {""QUARANTINE"": 0, ""READY"": 1425}, ""cache_state_counts_unchanged"": true, ""integrity_check_after"": ""ok"", ""price_daily_digest_after"": ""1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea"", ""price_daily_digest_before"": ""1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea"", ""price_daily_digest_unchanged"": true, ""provider_mapping_digest_after"": ""d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e"", ""provider_mapping_digest_before"": ""d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e"", ""provider_mapping_digest_unchanged"": true, ""sqlite_bytes_after"": 144539648, ""sqlite_bytes_before"": 144539648, ""sqlite_bytes_unchanged"": true, ""sqlite_sha256_after"": ""bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"", ""sqlite_sha256_before"": ""bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"", ""sqlite_sha256_unchanged"": true}"
+FROZEN_IMMUTABILITY,PASS,54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb
+MAPPING_IMMUTABILITY,PASS,d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e
+NO_RS_EXECUTION,PASS,home=false;sector=false
+PARAMETER_AUTHORITY_UNCHANGED,PASS,output_p0_lane_shadow_validation_v0_21/p0_lane_parameter_registry_v0.21.json
+NO_P0_CLASSIFICATION,PASS,p0_runs=0
+NO_PROVIDER_CALLS,PASS,all zero
+CAPABILITY_COUNTS_SUM_1425,PASS,"{""FEATURE_PARTIAL"": 1425}"

@@ -1,0 +1,25 @@
+{
+  "artifact_binding": "PENDING_WORKFLOW_UPLOAD",
+  "capability_counts": {
+    "FEATURE_BLOCKED_INPUT": 0,
+    "FEATURE_BLOCKED_INSUFFICIENT_HISTORY": 0,
+    "FEATURE_COMPUTATION_ERROR": 0,
+    "FEATURE_PARTIAL": 1425,
+    "FEATURE_READY": 0,
+    "NOT_VERIFIED": 0
+  },
+  "determinism_pass": true,
+  "frozen": 1425,
+  "materialization_semantic_sha256": "c5d9c6eabbbef10909b7a0df8b4bb8eb5ff32130d8c85162f5f2f4e4a7a4bed6",
+  "next_gate": "P0 FROZEN-1425 MASTER-REQUIRED LOCAL FEATURE IMPLEMENTATION / PROMOTION REMEDIATION GATE",
+  "p0_local_feature_layer_ready": false,
+  "p0_runs": 0,
+  "price_runtime_immutable": true,
+  "productive": false,
+  "stage": "P0_FROZEN_1425_FEATURE_MATERIALIZATION_CAPABILITY",
+  "status": "PASS_WITH_LOCAL_FEATURE_MODEL_GAPS",
+  "temporal_integrity_pass": true,
+  "tests_failed": 0,
+  "tests_passed": 39,
+  "version": "v0.54"
+}

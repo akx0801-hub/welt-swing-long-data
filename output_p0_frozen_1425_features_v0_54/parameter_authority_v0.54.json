@@ -1,0 +1,34 @@
+{
+  "current_frozen_pointer": "output_p0_lane_shadow_validation_v0_21/p0_lane_parameter_registry_v0.21.json",
+  "current_frozen_pointer_blob": "01ae47713cc722497fcc56585dd27466df8baa9c",
+  "p0_numeric_pass_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "registries_checked": [
+    {
+      "p0_numeric_pass_threshold_count": 0,
+      "path": "output_p0_feature_augmentation_v0_19/p0_parameter_registry_v0.19.json",
+      "promoted_lane_pass_rule_count": null,
+      "validation_status": "HYPOTHESIS_ONLY_NOT_VALIDATED"
+    },
+    {
+      "p0_numeric_pass_threshold_count": 0,
+      "path": "output_p0_lane_shadow_validation_v0_21/p0_lane_parameter_registry_v0.21.json",
+      "promoted_lane_pass_rule_count": 0,
+      "validation_status": "SHADOW_COMPONENT_VALIDATION_ONLY"
+    },
+    {
+      "p0_numeric_pass_threshold_count": 0,
+      "path": "output_p0_relative_strength_v0_20/p0_lane_parameter_registry_v0.20.json",
+      "promoted_lane_pass_rule_count": null,
+      "validation_status": "PARTIAL_SEMANTIC_VALIDATION_ONLY"
+    },
+    {
+      "p0_numeric_pass_threshold_count": 0,
+      "path": "output_p0_research_partial_v0_17/p0_parameter_registry_v0.17.json",
+      "promoted_lane_pass_rule_count": null,
+      "validation_status": "NOT_VALIDATED"
+    }
+  ],
+  "status": "UNCHANGED_NON_PROMOTED",
+  "validation_status": "SHADOW_COMPONENT_VALIDATION_ONLY"
+}
