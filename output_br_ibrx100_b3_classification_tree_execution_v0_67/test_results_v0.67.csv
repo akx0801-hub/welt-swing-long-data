@@ -1,0 +1,25 @@
+Test,Result,Detail
+V066_VERDICT,PASS,PASS_B3_CLASSIFICATION_TREE_CONTRACT
+V066_TREE_READY,PASS,YES
+V066_ALL_COMPANY_FALSE,PASS,NO
+V066_PUBLIC_REPRO,PASS,YES
+TREE_FETCH_COUNT,PASS,2
+TREE_STATE_FAIL_CLOSED,PASS,VALID
+TREE_COUNTS_CONSISTENT,PASS,"{'setor_count': 13, 'subsetor_count': 44, 'segmento_leaf_count': 90, 'distinct_segmento_label_count': 86}"
+EXPECTED_EQUALS_DISTINCT_SEGMENTS,PASS,86/86
+GROUP_EXECUTED_EXPECTED_OR_FAIL_CLOSED,PASS,86/86
+SECURITY_COMPANY_37,PASS,37
+COVERAGE_TOTAL_37,PASS,37
+PDSC_COLLISION_ZERO_IF_READY,PASS,0
+PDSC_DETERMINISM_IF_READY,PASS,True
+SAME_SECTOR_SAME_CODE,PASS,True
+NO_PROHIBITED_CALLS,PASS,"{""alpha_vantage"": 0, ""auth_bypass"": 0, ""captcha_bypass"": 0, ""company_name_joins"": 0, ""company_overview_calls"": 0, ""crosswalk"": 0, ""eodhd"": 0, ""fuzzy_matching"": 0, ""gics_icb_fallback"": 0, ""news"": 0, ""per_security_web_fanout"": 0, ""price_ohlcv"": 0, ""scalable"": 0, ""third_party_sector_databases"": 0, ""trading_analysis"": 0, ""tradingview"": 0, ""wikipedia"": 0, ""yahoo_yfinance"": 0}"
+NO_CANONICAL_MAPPING,PASS,0
+NO_SECTOR_RS,PASS,0
+NO_OTHER_COHORT,PASS,0
+FROZEN_IMMUTABLE,PASS,54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb
+V057_IMMUTABLE,PASS,177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9
+V058_IMMUTABLE,PASS,2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32
+P0_P1_P2_ZERO,PASS,0/0/0
+SUCCESS_37_37,PASS,"(37, 0, 0, 0)"
+TRAVERSAL_COMPLETE,PASS,"(86, 86, 86)"

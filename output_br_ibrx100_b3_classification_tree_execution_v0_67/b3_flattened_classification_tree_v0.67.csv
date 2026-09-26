@@ -1,0 +1,91 @@
+Setor_Economico_Raw,Setor_Economico_NFC,Subsetor_Raw,Subsetor_NFC,Segmento_Raw,Segmento_NFC
+Bens Industriais,Bens Industriais,Comércio,Comércio,Máquinas e Equipamentos,Máquinas e Equipamentos
+Bens Industriais,Bens Industriais,Comércio,Comércio,Material de Transporte,Material de Transporte
+Bens Industriais,Bens Industriais,Construção e Engenharia,Construção e Engenharia,Construção Pesada,Construção Pesada
+Bens Industriais,Bens Industriais,Construção e Engenharia,Construção e Engenharia,Engenharia Consultiva,Engenharia Consultiva
+Bens Industriais,Bens Industriais,Construção e Engenharia,Construção e Engenharia,Produtos para Construção,Produtos para Construção
+Bens Industriais,Bens Industriais,Construção e Engenharia,Construção e Engenharia,Serviços Diversos,Serviços Diversos
+Bens Industriais,Bens Industriais,Máquinas e Equipamentos,Máquinas e Equipamentos,Armas e Munições,Armas e Munições
+Bens Industriais,Bens Industriais,Máquinas e Equipamentos,Máquinas e Equipamentos,Máq. e Equip. Construção e Agrícolas,Máq. e Equip. Construção e Agrícolas
+Bens Industriais,Bens Industriais,Máquinas e Equipamentos,Máquinas e Equipamentos,Máq. e Equip. Industriais,Máq. e Equip. Industriais
+Bens Industriais,Bens Industriais,Máquinas e Equipamentos,Máquinas e Equipamentos,Motores . Compressores e Outros,Motores . Compressores e Outros
+Bens Industriais,Bens Industriais,Material de Transporte,Material de Transporte,Material Aeronáutico e de Defesa,Material Aeronáutico e de Defesa
+Bens Industriais,Bens Industriais,Material de Transporte,Material de Transporte,Material Rodoviário,Material Rodoviário
+Bens Industriais,Bens Industriais,Serviços,Serviços,Serviços Diversos,Serviços Diversos
+Bens Industriais,Bens Industriais,Transporte,Transporte,Exploração de Rodovias,Exploração de Rodovias
+Bens Industriais,Bens Industriais,Transporte,Transporte,Serviços de Apoio e Armazenagem,Serviços de Apoio e Armazenagem
+Bens Industriais,Bens Industriais,Transporte,Transporte,Transporte Aéreo,Transporte Aéreo
+Bens Industriais,Bens Industriais,Transporte,Transporte,Transporte Ferroviário,Transporte Ferroviário
+Bens Industriais,Bens Industriais,Transporte,Transporte,Transporte Hidroviário,Transporte Hidroviário
+Bens Industriais,Bens Industriais,Transporte,Transporte,Transporte Metroviário,Transporte Metroviário
+Bens Industriais,Bens Industriais,Transporte,Transporte,Transporte Rodoviário,Transporte Rodoviário
+Comunicações,Comunicações,Telecomunicações,Telecomunicações,Telecomunicações,Telecomunicações
+Consumo Cíclico,Consumo Cíclico,Automóveis e Motocicletas,Automóveis e Motocicletas,Automóveis e Motocicletas,Automóveis e Motocicletas
+Consumo Cíclico,Consumo Cíclico,Comércio,Comércio,Eletrodomésticos,Eletrodomésticos
+Consumo Cíclico,Consumo Cíclico,Comércio,Comércio,Produtos Diversos,Produtos Diversos
+Consumo Cíclico,Consumo Cíclico,Comércio,Comércio,Tecidos. Vestuário e Calçados,Tecidos. Vestuário e Calçados
+Consumo Cíclico,Consumo Cíclico,Construção Civil,Construção Civil,Incorporações,Incorporações
+Consumo Cíclico,Consumo Cíclico,Diversos,Diversos,Aluguel de carros,Aluguel de carros
+Consumo Cíclico,Consumo Cíclico,Diversos,Diversos,Programas de Fidelização,Programas de Fidelização
+Consumo Cíclico,Consumo Cíclico,Diversos,Diversos,Serviços Educacionais,Serviços Educacionais
+Consumo Cíclico,Consumo Cíclico,Hoteis e Restaurantes,Hoteis e Restaurantes,Hotelaria,Hotelaria
+Consumo Cíclico,Consumo Cíclico,Hoteis e Restaurantes,Hoteis e Restaurantes,Restaurante e Similares,Restaurante e Similares
+Consumo Cíclico,Consumo Cíclico,Tecidos. Vestuário e Calçados,Tecidos. Vestuário e Calçados,Acessórios,Acessórios
+Consumo Cíclico,Consumo Cíclico,Tecidos. Vestuário e Calçados,Tecidos. Vestuário e Calçados,Calçados,Calçados
+Consumo Cíclico,Consumo Cíclico,Tecidos. Vestuário e Calçados,Tecidos. Vestuário e Calçados,Fios e Tecidos,Fios e Tecidos
+Consumo Cíclico,Consumo Cíclico,Tecidos. Vestuário e Calçados,Tecidos. Vestuário e Calçados,Vestuário,Vestuário
+Consumo Cíclico,Consumo Cíclico,Utilidades Domésticas,Utilidades Domésticas,Eletrodomésticos,Eletrodomésticos
+Consumo Cíclico,Consumo Cíclico,Utilidades Domésticas,Utilidades Domésticas,Móveis,Móveis
+Consumo Cíclico,Consumo Cíclico,Utilidades Domésticas,Utilidades Domésticas,Utensílios Domésticos,Utensílios Domésticos
+Consumo Cíclico,Consumo Cíclico,Viagens e Lazer,Viagens e Lazer,Atividades Esportivas,Atividades Esportivas
+Consumo Cíclico,Consumo Cíclico,Viagens e Lazer,Viagens e Lazer,Bicicletas,Bicicletas
+Consumo Cíclico,Consumo Cíclico,Viagens e Lazer,Viagens e Lazer,Brinquedos e Jogos,Brinquedos e Jogos
+Consumo Cíclico,Consumo Cíclico,Viagens e Lazer,Viagens e Lazer,Produção de Eventos e Shows,Produção de Eventos e Shows
+Consumo Cíclico,Consumo Cíclico,Viagens e Lazer,Viagens e Lazer,Viagens e Turismo,Viagens e Turismo
+Consumo não Cíclico,Consumo não Cíclico,Agropecuária,Agropecuária,Agricultura,Agricultura
+Consumo não Cíclico,Consumo não Cíclico,Alimentos Processados,Alimentos Processados,Açucar e Alcool,Açucar e Alcool
+Consumo não Cíclico,Consumo não Cíclico,Alimentos Processados,Alimentos Processados,Alimentos Diversos,Alimentos Diversos
+Consumo não Cíclico,Consumo não Cíclico,Alimentos Processados,Alimentos Processados,Carnes e Derivados,Carnes e Derivados
+Consumo não Cíclico,Consumo não Cíclico,Alimentos Processados,Alimentos Processados,Laticínios,Laticínios
+Consumo não Cíclico,Consumo não Cíclico,Bebidas,Bebidas,Cervejas e Refrigerantes,Cervejas e Refrigerantes
+Consumo não Cíclico,Consumo não Cíclico,Comércio e Distribuição,Comércio e Distribuição,Alimentos,Alimentos
+Consumo não Cíclico,Consumo não Cíclico,Comércio e Distribuição,Comércio e Distribuição,Medicamentos,Medicamentos
+Consumo não Cíclico,Consumo não Cíclico,Produtos de Uso Pessoal e de Limpeza,Produtos de Uso Pessoal e de Limpeza,Produtos de Limpeza,Produtos de Limpeza
+Consumo não Cíclico,Consumo não Cíclico,Produtos de Uso Pessoal e de Limpeza,Produtos de Uso Pessoal e de Limpeza,Produtos de Uso Pessoal,Produtos de Uso Pessoal
+Financeiro,Financeiro,Exploração de Imóveis,Exploração de Imóveis,Exploração de Imóveis,Exploração de Imóveis
+Financeiro,Financeiro,Exploração de Imóveis,Exploração de Imóveis,Intermediação Imobiliária,Intermediação Imobiliária
+Financeiro,Financeiro,Holdings Diversificadas,Holdings Diversificadas,Holdings Diversificadas,Holdings Diversificadas
+Financeiro,Financeiro,Intermediários Financeiros,Intermediários Financeiros,Bancos,Bancos
+Financeiro,Financeiro,Intermediários Financeiros,Intermediários Financeiros,Outros Intermediarios Financeiros,Outros Intermediarios Financeiros
+Financeiro,Financeiro,Intermediários Financeiros,Intermediários Financeiros,Soc. Arrendamento Mercantil,Soc. Arrendamento Mercantil
+Financeiro,Financeiro,Previdência e Seguros,Previdência e Seguros,Corretoras de Seguros e Resseguros,Corretoras de Seguros e Resseguros
+Financeiro,Financeiro,Previdência e Seguros,Previdência e Seguros,Resseguradoras,Resseguradoras
+Financeiro,Financeiro,Previdência e Seguros,Previdência e Seguros,Seguradoras,Seguradoras
+Financeiro,Financeiro,Securitizadoras de Recebíveis,Securitizadoras de Recebíveis,Securitizadoras de Recebíveis,Securitizadoras de Recebíveis
+Financeiro,Financeiro,Serviços Diversos,Serviços Diversos,Serviços Diversos,Serviços Diversos
+Financeiro,Financeiro,Serviços Financeiros Diversos,Serviços Financeiros Diversos,Gestão de Recursos e Investimentos,Gestão de Recursos e Investimentos
+Financeiro,Financeiro,Serviços Financeiros Diversos,Serviços Financeiros Diversos,Serviços Financeiros Diversos,Serviços Financeiros Diversos
+Materiais Básicos,Materiais Básicos,Embalagens,Embalagens,Embalagens,Embalagens
+Materiais Básicos,Materiais Básicos,Madeira e Papel,Madeira e Papel,Madeira,Madeira
+Materiais Básicos,Materiais Básicos,Madeira e Papel,Madeira e Papel,Papel e Celulose,Papel e Celulose
+Materiais Básicos,Materiais Básicos,Materiais Diversos,Materiais Diversos,Materiais Diversos,Materiais Diversos
+Materiais Básicos,Materiais Básicos,Mineração,Mineração,Minerais Metálicos,Minerais Metálicos
+Materiais Básicos,Materiais Básicos,Químicos,Químicos,Fertilizantes e Defensivos,Fertilizantes e Defensivos
+Materiais Básicos,Materiais Básicos,Químicos,Químicos,Petroquímicos,Petroquímicos
+Materiais Básicos,Materiais Básicos,Químicos,Químicos,Químicos Diversos,Químicos Diversos
+Materiais Básicos,Materiais Básicos,Siderurgia e Metalurgia,Siderurgia e Metalurgia,Artefatos de Cobre,Artefatos de Cobre
+Materiais Básicos,Materiais Básicos,Siderurgia e Metalurgia,Siderurgia e Metalurgia,Artefatos de Ferro e Aço,Artefatos de Ferro e Aço
+Materiais Básicos,Materiais Básicos,Siderurgia e Metalurgia,Siderurgia e Metalurgia,Siderurgia,Siderurgia
+Outros,Outros,Outros,Outros,Outros,Outros
+Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Distribuição de Combustíveis,Distribuição de Combustíveis
+Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Equipamentos e Serviços,Equipamentos e Serviços
+Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis,Exploração. Refino e Distribuição,Exploração. Refino e Distribuição
+Saúde,Saúde,Comércio e Distribuição,Comércio e Distribuição,Medicamentos e Outros Produtos,Medicamentos e Outros Produtos
+Saúde,Saúde,Equipamentos,Equipamentos,Equipamentos,Equipamentos
+Saúde,Saúde,Medicamentos e Outros Produtos,Medicamentos e Outros Produtos,Medicamentos e Outros Produtos,Medicamentos e Outros Produtos
+Saúde,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos,Serv.Méd.Hospit..Análises e Diagnósticos,Serv.Méd.Hospit..Análises e Diagnósticos,Serv.Méd.Hospit..Análises e Diagnósticos
+Tecnologia da Informação,Tecnologia da Informação,Computadores e Equipamentos,Computadores e Equipamentos,Computadores e Equipamentos,Computadores e Equipamentos
+Tecnologia da Informação,Tecnologia da Informação,Programas e Serviços,Programas e Serviços,Programas e Serviços,Programas e Serviços
+Utilidade Pública,Utilidade Pública,Água e Saneamento,Água e Saneamento,Água e Saneamento,Água e Saneamento
+Utilidade Pública,Utilidade Pública,Energia Elétrica,Energia Elétrica,Energia Elétrica,Energia Elétrica
+Utilidade Pública,Utilidade Pública,Gás,Gás,Gás,Gás

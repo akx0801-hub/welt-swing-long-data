@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "84d16a51b33ec4ff29375017244f498ab844d4a8621ee56c3a4d1736d5af1510",
+  "artifact_id": 10914754106,
+  "artifact_name": "br-ibrx100-b3-classification-tree-execution-v0.67-36270129434",
+  "artifact_scope": "pre-persistence v0.67 BR IBrX100 B3 tree execution / exact-37 coverage evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "c3f0ff1a1232ee72bd193e66a0fc059954a47486",
+  "workflow_run_id": 36270129434
+}

@@ -1,0 +1,36 @@
+{
+  "api_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesProxy/CompanyCall/GetInitialCompanies/eyJsYW5ndWFnZSI6InB0LWJyIiwicGFnZU51bWJlciI6MSwicGFnZVNpemUiOjIwLCJzZWdtZW50IjoiQWNlc3MlQzMlQjNyaW9zIn0=",
+  "filter": {
+    "language": "pt-br",
+    "pageNumber": 1,
+    "pageSize": 20,
+    "segment": "Acess%C3%B3rios"
+  },
+  "group_page": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWNlc3MlQzMlQjNyaW9z",
+  "method": "GetInitialCompanies",
+  "observed": [
+    "https://sistemaswebb3-listados.b3.com.br/listedCompaniesProxy/CompanyCall/GetInitialCompanies/eyJsYW5ndWFnZSI6InB0LWJyIiwicGFnZU51bWJlciI6MSwicGFnZVNpemUiOjIwLCJzZWdtZW50IjoiQWNlc3MlQzMlQjNyaW9zIn0="
+  ],
+  "ok": true,
+  "sample_records": [
+    {
+      "B3_Company_Code": "MNDL",
+      "Code_Field": "issuingcompany",
+      "Official_Company_Label": "MUNDIAL S.A. - PRODUTOS DE CONSUMO",
+      "Response_Sector_Raw": ""
+    },
+    {
+      "B3_Company_Code": "TECN",
+      "Code_Field": "issuingcompany",
+      "Official_Company_Label": "TECHNOS S.A.",
+      "Response_Sector_Raw": ""
+    },
+    {
+      "B3_Company_Code": "VIVA",
+      "Code_Field": "issuingcompany",
+      "Official_Company_Label": "VIVARA PARTICIPAÇOES S.A",
+      "Response_Sector_Raw": ""
+    }
+  ],
+  "sample_response_hash": "55ef087c187e079920c8271d88b61b6d979303c12cd1ffc6371831872ecc2eeb"
+}

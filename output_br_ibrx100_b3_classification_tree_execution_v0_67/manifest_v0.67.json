@@ -1,0 +1,137 @@
+{
+  "ambiguous": 0,
+  "artifact": {
+    "artifact_digest": "84d16a51b33ec4ff29375017244f498ab844d4a8621ee56c3a4d1736d5af1510",
+    "artifact_id": 10914754106,
+    "artifact_name": "br-ibrx100-b3-classification-tree-execution-v0.67-36270129434",
+    "artifact_scope": "pre-persistence v0.67 BR IBrX100 B3 tree execution / exact-37 coverage evidence",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "c3f0ff1a1232ee72bd193e66a0fc059954a47486",
+    "workflow_run_id": 36270129434
+  },
+  "blocker": "",
+  "br_exact_37_classification_coverage_ready": true,
+  "canonical_mapping_population_runs": 0,
+  "distinct_setores": 10,
+  "executed_group_queries": 86,
+  "expected_group_queries": 86,
+  "failed_group_queries": 0,
+  "files": {
+    "artifact_binding_v0.67.json": {
+      "bytes": 441,
+      "sha256": "f6fd9df30c98d56db1fce04da9a820f0d315ba05c080fbcdf08f69e6051cdcd2"
+    },
+    "b3_execution_query_inventory_v0.67.csv": {
+      "bytes": 22830,
+      "sha256": "23a4b587917c5324b37797ae2e61451ad8ec0a71bf42d07e5fceb4603186a9f4"
+    },
+    "b3_execution_tree_snapshot_v0.67.json": {
+      "bytes": 10175,
+      "sha256": "b8201eb251f6973e7d244c9b79b08bb863154ab1f1b6b71a8cd146ae2c51d58a"
+    },
+    "b3_flattened_classification_tree_v0.67.csv": {
+      "bytes": 10895,
+      "sha256": "22678e4276671a113ff8686938a464e8f0c5aa99ea9d82ba57f9013fc32d08d8"
+    },
+    "b3_group_api_execution_contract_v0.67.json": {
+      "bytes": 1389,
+      "sha256": "7f8e7d129d6fb2b56a7e8fc9bd8b241086d24fa1347262468960c998ec7f4ed5"
+    },
+    "b3_group_company_membership_v0.67.csv": {
+      "bytes": 215566,
+      "sha256": "249b5d0e951557d4595f4cd1248b64efdc4ec84017770a73004a3b118d283492"
+    },
+    "b3_group_request_ledger_v0.67.csv": {
+      "bytes": 37095,
+      "sha256": "97d2ea6e0834d9ac81fb5f4bdc17be13d155c993646d2a28470a715142d63f3e"
+    },
+    "b3_group_response_hash_ledger_v0.67.csv": {
+      "bytes": 31035,
+      "sha256": "f7f5f59635770afe19ae7f1142a8bdaf772993e4ffb5f95c5e0e62db28e52675"
+    },
+    "b3_segment_label_collision_audit_v0.67.csv": {
+      "bytes": 7189,
+      "sha256": "196dde43eb4febb75ef8bb6133cb5add0bc7946a6a1127935ce6368836676469"
+    },
+    "br_distinct_sector_inventory_v0.67.csv": {
+      "bytes": 1179,
+      "sha256": "1240bcfda4aabd40755ea4125f11811d4c933e574ec2e55990530a26a8e12317"
+    },
+    "br_exact_37_classification_coverage_v0.67.csv": {
+      "bytes": 10791,
+      "sha256": "38d3674235ff49489a9e54b960e043350a2c81fb7c7e8ded4690a99956543c13"
+    },
+    "br_exact_37_group_hit_audit_v0.67.csv": {
+      "bytes": 13768,
+      "sha256": "e70f96a4fc1779e98509ccefc762a5b84c117202e4885eb3325cb01afa9eb350"
+    },
+    "docs/validation/BR_IBRX100_B3_Classification_Tree_Execution_Exact_37_Coverage_v0.67.md": {
+      "bytes": 2381,
+      "sha256": "3ca5b7b8ae014c8aba3d5fc6e6a3ab3575b0358f2d867a297c507b087fc6a32d"
+    },
+    "external_request_ledger_v0.67.csv": {
+      "bytes": 33489,
+      "sha256": "69b01ba3a2c862cff97462f80be458bfeb6221aa0824ca2484c9aa3db4ae95d9"
+    },
+    "immutability_audit_v0.67.json": {
+      "bytes": 1045,
+      "sha256": "110b8f1db0257a6c3d04475d8c7c476d7ed0d0dc7f27699b5d09202236d89e33"
+    },
+    "manifest_preupload_v0.67.json": {
+      "bytes": 4217,
+      "sha256": "8dac2eb2ff7aead20756a098d365a649e0494f7df2ba4157d8905fc5819a7d7c"
+    },
+    "pdsc_collision_audit_v0.67.json": {
+      "bytes": 144,
+      "sha256": "11e2760ad1b4807705cb29506ea92b2148af77e857c99745fe0dbd3701f9704f"
+    },
+    "pdsc_exact37_determinism_audit_v0.67.csv": {
+      "bytes": 1731,
+      "sha256": "eb85c794582196874c9c3f0f57b8d7b6cbfdf01a14bcbd0481c3087a442cb66e"
+    },
+    "provider_call_audit_v0.67.json": {
+      "bytes": 412,
+      "sha256": "d3d20dd9c6050d91aa0572f283b6cb03d7b885d169a4772b9cb3455213fd258e"
+    },
+    "stage_checkpoint_preupload_v0.67.json": {
+      "bytes": 722,
+      "sha256": "5c0cefc3e57eb10be61ff0cf7de4b41823317a1f4790b5b024c4fa43fce05b1c"
+    },
+    "stage_checkpoint_v0.67.json": {
+      "bytes": 865,
+      "sha256": "339584bc924905ac26c865e57a66681f44397c0b200eb48404c9d2723fb2c02e"
+    },
+    "summary_preupload_v0.67.json": {
+      "bytes": 2558,
+      "sha256": "e32db0e1f4f57c57324b16b68fdc142876e0725cfe854adccb5c9f3302c9dbf0"
+    },
+    "summary_v0.67.json": {
+      "bytes": 3020,
+      "sha256": "bed46f9badad95a1ba4bc4399949b31e51882641dc04eed1607c0fa36b3c5729"
+    },
+    "test_results_v0.67.csv": {
+      "bytes": 1493,
+      "sha256": "0ef0ce9be1425e11c44dd74e27d4efc96ec43ef7f853adedbc6f709ad38c4abc"
+    }
+  },
+  "next_gate": "BR_IBRX100 CANONICAL SECTOR METADATA MAPPING MATERIALIZATION GATE",
+  "not_found": 0,
+  "not_verified": 0,
+  "other_cohort_rechecks": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "pdsc_collisions": 0,
+  "productive": false,
+  "ready": 37,
+  "required_start_head": "a6c7e3db455d73c436142230bd466c64f2ac147d",
+  "sector_rs_runs": 0,
+  "stage": "BR_IBRX100_B3_CLASSIFICATION_TREE_EXECUTION_EXACT_37_COVERAGE_GATE",
+  "successful_group_queries": 86,
+  "total": 37,
+  "tree_nodes": 262,
+  "verdict": "PASS_BR_EXACT_37_CLASSIFICATION_COVERAGE",
+  "version": "v0.67",
+  "workflow_head_sha": "c3f0ff1a1232ee72bd193e66a0fc059954a47486",
+  "workflow_run_id": 36270129434
+}

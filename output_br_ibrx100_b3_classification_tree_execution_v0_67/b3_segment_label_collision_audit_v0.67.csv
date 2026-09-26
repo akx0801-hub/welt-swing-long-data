@@ -1,0 +1,87 @@
+Segmento_Raw,Occurrence_Count,Distinct_Setor_Count,Distinct_Subsetor_Count,Collision_Class,Setor_Parents,Subsetor_Parents
+Acessórios,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Tecidos. Vestuário e Calçados
+Agricultura,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Agropecuária
+Alimentos,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Comércio e Distribuição
+Alimentos Diversos,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Alimentos Processados
+Aluguel de carros,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Diversos
+Armas e Munições,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Máquinas e Equipamentos
+Artefatos de Cobre,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Siderurgia e Metalurgia
+Artefatos de Ferro e Aço,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Siderurgia e Metalurgia
+Atividades Esportivas,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Viagens e Lazer
+Automóveis e Motocicletas,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Automóveis e Motocicletas
+Açucar e Alcool,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Alimentos Processados
+Bancos,1,1,1,UNIQUE_GLOBAL,Financeiro,Intermediários Financeiros
+Bicicletas,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Viagens e Lazer
+Brinquedos e Jogos,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Viagens e Lazer
+Calçados,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Tecidos. Vestuário e Calçados
+Carnes e Derivados,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Alimentos Processados
+Cervejas e Refrigerantes,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Bebidas
+Computadores e Equipamentos,1,1,1,UNIQUE_GLOBAL,Tecnologia da Informação,Computadores e Equipamentos
+Construção Pesada,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Construção e Engenharia
+Corretoras de Seguros e Resseguros,1,1,1,UNIQUE_GLOBAL,Financeiro,Previdência e Seguros
+Distribuição de Combustíveis,1,1,1,UNIQUE_GLOBAL,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis
+Eletrodomésticos,2,1,2,DUPLICATE_SAME_SETOR,Consumo Cíclico,Comércio | Utilidades Domésticas
+Embalagens,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Embalagens
+Energia Elétrica,1,1,1,UNIQUE_GLOBAL,Utilidade Pública,Energia Elétrica
+Engenharia Consultiva,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Construção e Engenharia
+Equipamentos,1,1,1,UNIQUE_GLOBAL,Saúde,Equipamentos
+Equipamentos e Serviços,1,1,1,UNIQUE_GLOBAL,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis
+Exploração de Imóveis,1,1,1,UNIQUE_GLOBAL,Financeiro,Exploração de Imóveis
+Exploração de Rodovias,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Transporte
+Exploração. Refino e Distribuição,1,1,1,UNIQUE_GLOBAL,Petróleo. Gás e Biocombustíveis,Petróleo. Gás e Biocombustíveis
+Fertilizantes e Defensivos,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Químicos
+Fios e Tecidos,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Tecidos. Vestuário e Calçados
+Gestão de Recursos e Investimentos,1,1,1,UNIQUE_GLOBAL,Financeiro,Serviços Financeiros Diversos
+Gás,1,1,1,UNIQUE_GLOBAL,Utilidade Pública,Gás
+Holdings Diversificadas,1,1,1,UNIQUE_GLOBAL,Financeiro,Holdings Diversificadas
+Hotelaria,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Hoteis e Restaurantes
+Incorporações,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Construção Civil
+Intermediação Imobiliária,1,1,1,UNIQUE_GLOBAL,Financeiro,Exploração de Imóveis
+Laticínios,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Alimentos Processados
+Madeira,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Madeira e Papel
+Materiais Diversos,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Materiais Diversos
+Material Aeronáutico e de Defesa,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Material de Transporte
+Material Rodoviário,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Material de Transporte
+Material de Transporte,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Comércio
+Medicamentos,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Comércio e Distribuição
+Medicamentos e Outros Produtos,2,1,2,DUPLICATE_SAME_SETOR,Saúde,Comércio e Distribuição | Medicamentos e Outros Produtos
+Minerais Metálicos,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Mineração
+Motores . Compressores e Outros,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Máquinas e Equipamentos
+Máq. e Equip. Construção e Agrícolas,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Máquinas e Equipamentos
+Máq. e Equip. Industriais,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Máquinas e Equipamentos
+Máquinas e Equipamentos,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Comércio
+Móveis,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Utilidades Domésticas
+Outros,1,1,1,UNIQUE_GLOBAL,Outros,Outros
+Outros Intermediarios Financeiros,1,1,1,UNIQUE_GLOBAL,Financeiro,Intermediários Financeiros
+Papel e Celulose,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Madeira e Papel
+Petroquímicos,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Químicos
+Produtos Diversos,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Comércio
+Produtos de Limpeza,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Produtos de Uso Pessoal e de Limpeza
+Produtos de Uso Pessoal,1,1,1,UNIQUE_GLOBAL,Consumo não Cíclico,Produtos de Uso Pessoal e de Limpeza
+Produtos para Construção,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Construção e Engenharia
+Produção de Eventos e Shows,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Viagens e Lazer
+Programas de Fidelização,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Diversos
+Programas e Serviços,1,1,1,UNIQUE_GLOBAL,Tecnologia da Informação,Programas e Serviços
+Químicos Diversos,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Químicos
+Resseguradoras,1,1,1,UNIQUE_GLOBAL,Financeiro,Previdência e Seguros
+Restaurante e Similares,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Hoteis e Restaurantes
+Securitizadoras de Recebíveis,1,1,1,UNIQUE_GLOBAL,Financeiro,Securitizadoras de Recebíveis
+Seguradoras,1,1,1,UNIQUE_GLOBAL,Financeiro,Previdência e Seguros
+Serv.Méd.Hospit..Análises e Diagnósticos,1,1,1,UNIQUE_GLOBAL,Saúde,Serv.Méd.Hospit..Análises e Diagnósticos
+Serviços Diversos,3,2,3,DUPLICATE_CROSS_SETOR,Bens Industriais | Financeiro,Construção e Engenharia | Serviços | Serviços Diversos
+Serviços Educacionais,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Diversos
+Serviços Financeiros Diversos,1,1,1,UNIQUE_GLOBAL,Financeiro,Serviços Financeiros Diversos
+Serviços de Apoio e Armazenagem,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Transporte
+Siderurgia,1,1,1,UNIQUE_GLOBAL,Materiais Básicos,Siderurgia e Metalurgia
+Soc. Arrendamento Mercantil,1,1,1,UNIQUE_GLOBAL,Financeiro,Intermediários Financeiros
+Tecidos. Vestuário e Calçados,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Comércio
+Telecomunicações,1,1,1,UNIQUE_GLOBAL,Comunicações,Telecomunicações
+Transporte Aéreo,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Transporte
+Transporte Ferroviário,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Transporte
+Transporte Hidroviário,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Transporte
+Transporte Metroviário,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Transporte
+Transporte Rodoviário,1,1,1,UNIQUE_GLOBAL,Bens Industriais,Transporte
+Utensílios Domésticos,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Utilidades Domésticas
+Vestuário,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Tecidos. Vestuário e Calçados
+Viagens e Turismo,1,1,1,UNIQUE_GLOBAL,Consumo Cíclico,Viagens e Lazer
+Água e Saneamento,1,1,1,UNIQUE_GLOBAL,Utilidade Pública,Água e Saneamento
