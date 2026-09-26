@@ -1,0 +1,27 @@
+{
+  "artifact_binding": "PENDING_WORKFLOW_UPLOAD",
+  "asx8_regression": "PASS",
+  "capability_counts": {
+    "FEATURE_BLOCKED_INPUT": 0,
+    "FEATURE_BLOCKED_INSUFFICIENT_HISTORY": 0,
+    "FEATURE_COMPUTATION_ERROR": 0,
+    "FEATURE_PARTIAL": 0,
+    "FEATURE_READY": 1425,
+    "NOT_VERIFIED": 0
+  },
+  "determinism": "PASS",
+  "existing23_regression": "PASS",
+  "new11_formula_regression": "PASS",
+  "next_gate": "P0 FROZEN-1425 HOME-MARKET RS MATERIALIZATION / CAPABILITY GATE",
+  "null_nonfinite_total": 0,
+  "numeric_features": 34,
+  "p0_local_feature_layer_ready": true,
+  "p0_runs": 0,
+  "semantic_family_blocked": 0,
+  "stage": "P0_FROZEN_1425_LOCAL_FEATURE_CONTRACT_V056_IMPLEMENTATION_PROMOTION",
+  "status": "PASS_LOCAL_FEATURE_LAYER_READY",
+  "temporal_integrity": "PASS",
+  "tests_failed": 0,
+  "tests_passed": 22,
+  "version": "v0.57"
+}

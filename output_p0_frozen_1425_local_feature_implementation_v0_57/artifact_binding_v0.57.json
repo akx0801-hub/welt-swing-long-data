@@ -1,0 +1,14 @@
+{
+  "artifact_digest": "sha256:7f35e18264110c6a6a84205ab443a7b1c3cabcbaebdb3e6d6af79df6361e1c00",
+  "artifact_id": 10905448132,
+  "artifact_name": "p0-frozen-1425-local-feature-implementation-v0.57-36239952535",
+  "artifact_verified": "PASS",
+  "feature_runtime_database_created": false,
+  "materialization_file_bytes": 1110615,
+  "materialization_file_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "materialization_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "price_runtime_input_bytes": 144539648,
+  "price_runtime_input_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "workflow_head_sha": "d51e0bad6349fd69ba24555db0b84296ad99b157",
+  "workflow_run_id": 36239952535
+}

@@ -1,0 +1,14 @@
+{
+  "frozen_sha256_after": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "frozen_sha256_before": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "frozen_sha256_unchanged": true,
+  "provider_mapping_mutation": false,
+  "raw_ohlcv_mutation": false,
+  "runtime_bytes_after": 144539648,
+  "runtime_bytes_before": 144539648,
+  "runtime_bytes_unchanged": true,
+  "runtime_sha256_after": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "runtime_sha256_before": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "runtime_sha256_unchanged": true,
+  "security_identity_mutation": false
+}

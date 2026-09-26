@@ -1,0 +1,138 @@
+{
+  "artifact": {
+    "artifact_digest": "sha256:7f35e18264110c6a6a84205ab443a7b1c3cabcbaebdb3e6d6af79df6361e1c00",
+    "artifact_id": 10905448132,
+    "artifact_name": "p0-frozen-1425-local-feature-implementation-v0.57-36239952535",
+    "artifact_verified": "PASS",
+    "feature_runtime_database_created": false,
+    "materialization_file_bytes": 1110615,
+    "materialization_file_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "materialization_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "price_runtime_input_bytes": 144539648,
+    "price_runtime_input_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+    "workflow_head_sha": "d51e0bad6349fd69ba24555db0b84296ad99b157",
+    "workflow_run_id": 36239952535
+  },
+  "canonical_numeric_features": 34,
+  "capability_counts": {
+    "FEATURE_BLOCKED_INPUT": 0,
+    "FEATURE_BLOCKED_INSUFFICIENT_HISTORY": 0,
+    "FEATURE_COMPUTATION_ERROR": 0,
+    "FEATURE_PARTIAL": 0,
+    "FEATURE_READY": 1425,
+    "NOT_VERIFIED": 0
+  },
+  "existing23_semantic_sha256": "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc",
+  "files": {
+    "artifact_binding_v0.57.json": {
+      "bytes": 779,
+      "sha256": "65f552b08d41be08e455111cf154163ef759ebc18694354ea50c12be5ab4c8ec"
+    },
+    "asx8_regression_v0.57.csv": {
+      "bytes": 790,
+      "sha256": "bc54e0131ca55201f9e5edefbc9683166394320b44457cb24c154aefaaf5a5a8"
+    },
+    "canonical_feature_registry_v0.57.csv": {
+      "bytes": 15716,
+      "sha256": "3ea48abf1022fb2eb430cc6e8ae7a24fcb9ae56d9e8992c668c51ecc5967aed9"
+    },
+    "capability_v0.57.csv": {
+      "bytes": 210243,
+      "sha256": "42eb4d3c57c4115b4b557d1d51a40ab4a89e42639d1f81c4c9828146dc908d85"
+    },
+    "determinism_v0.57.json": {
+      "bytes": 354,
+      "sha256": "34b2a37254d9d607ca808bcebd2965751fc1730eed950a98a14407ba61955b82"
+    },
+    "docs/validation/P0_Frozen_1425_Local_Feature_Implementation_Promotion_v0.57.md": {
+      "bytes": 5039,
+      "sha256": "c348b684433e372b5c109974063f2152c4e94d6c9cecd36d1a74b25093608e2f"
+    },
+    "existing23_regression_v0.57.csv": {
+      "bytes": 710,
+      "sha256": "2541881f61af26c549aa604787026a8d215c7c0212710a2a5386df0ee8627356"
+    },
+    "feature_materialization_v0.57.csv": {
+      "bytes": 1110615,
+      "sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+    },
+    "implementation_promotion_audit_v0.57.csv": {
+      "bytes": 1486,
+      "sha256": "891b36cfc4cbf3c60f448a5978ea4df237e4db0de893dd540dd4a941291026c4"
+    },
+    "input_authority_validation_v0.57.json": {
+      "bytes": 2291,
+      "sha256": "87097def12e089405a39a3696e013d88e40606443b26d36fb7afe9e6222d252f"
+    },
+    "input_immutability_v0.57.json": {
+      "bytes": 666,
+      "sha256": "03a97b25276324eaf9cec2016bcf16836113f157bc46bd97a39b1c741396081a"
+    },
+    "manifest_preupload_v0.57.json": {
+      "bytes": 4093,
+      "sha256": "40559240262e5ddb03c26a52b1982d108f90a5916b69ce6f0e90dbdb5df31300"
+    },
+    "new11_formula_regression_v0.57.csv": {
+      "bytes": 1469070,
+      "sha256": "ce876ddffb78a3f72931a6cebff32be9b08d2b1d207c1238234c6a33b9e6462b"
+    },
+    "null_nonfinite_audit_v0.57.csv": {
+      "bytes": 936,
+      "sha256": "6b48def78288eb8c638ca09b94c84324db7fbf41a43de8d68e19e9b4ef503eea"
+    },
+    "null_nonfinite_by_security_v0.57.csv": {
+      "bytes": 67279,
+      "sha256": "5c966b1cb47b4ffe742d0c9634ccb9216e39a4524c48cafbf268aae24983c0d7"
+    },
+    "semantic_family_binding_audit_v0.57.csv": {
+      "bytes": 156922,
+      "sha256": "9cc19bb30c0528b3bcb4debc734b13761a0b748958501072cf4213c1b9e5a934"
+    },
+    "stage_checkpoint_preupload_v0.57.json": {
+      "bytes": 849,
+      "sha256": "f720abfb732ffc0b94af86a7beee7eda69141b0187a17737b9ed5ebe7174bb4f"
+    },
+    "stage_checkpoint_v0.57.json": {
+      "bytes": 990,
+      "sha256": "e6b642d34880d9878331e43278a4711b000a28bfbbf8bd59547d17851dc04a16"
+    },
+    "summary_preupload_v0.57.json": {
+      "bytes": 2870,
+      "sha256": "8ce4861522ad280726b2e448f7056e87705781e323fc5e9c2f51336a1c64aed4"
+    },
+    "summary_v0.57.json": {
+      "bytes": 4073,
+      "sha256": "dba57b920f5246761bc6a3af92d5a63cab81bc07e9008e4215e8ed4466379a5f"
+    },
+    "temporal_integrity_v0.57.csv": {
+      "bytes": 104373,
+      "sha256": "d46b27f1342adb52b6238cb95eb211d4e66478d0da3f252cc2e91f0071875360"
+    },
+    "test_results_v0.57.csv": {
+      "bytes": 1296,
+      "sha256": "7d7fb737782268be30f710fda961d9537a040ea29d43d41dbfcd7c376e0aedbb"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "home_market_rs_ready": false,
+  "implementation_head": "d51e0bad6349fd69ba24555db0b84296ad99b157",
+  "materialization_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "next_gate": "P0 FROZEN-1425 HOME-MARKET RS MATERIALIZATION / CAPABILITY GATE",
+  "p0_local_feature_layer_ready": true,
+  "p0_runs": 0,
+  "price_runtime_bytes": 144539648,
+  "price_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "productive": false,
+  "provider_calls": {
+    "alpha_vantage": 0,
+    "eodhd": 0,
+    "market": 0,
+    "scalable": 0,
+    "yahoo_yfinance": 0
+  },
+  "required_start_head": "0287a10bf7a2938ed1517d79a47c296f3ea34c9d",
+  "sector_rs_ready": false,
+  "stage": "P0_FROZEN_1425_LOCAL_FEATURE_CONTRACT_V056_IMPLEMENTATION_PROMOTION",
+  "successful_workflow_run_id": 36239952535,
+  "version": "v0.57"
+}
