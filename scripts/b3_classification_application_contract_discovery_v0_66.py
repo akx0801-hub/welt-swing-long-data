@@ -208,8 +208,42 @@ def summarize_json(obj: Any) -> dict[str, Any]:
 
 def json_contract_classification(obj: Any) -> dict[str, Any]:
     s = summarize_json(obj)
-    tree = bool(s["has_setor"] and s["has_subsetor"] and s["has_segmento"] and s["node_count"] >= 15)
-    all_company = bool(s["has_setor"] and s["has_company"] and s["has_company_code"] and s["node_count"] >= 100)
+    kl = {str(k).lower() for k in s["keys"]}
+    # A tree contract must expose structural hierarchy keys, not merely translation strings.
+    tree = bool(
+        ("sector" in kl or "setor" in kl)
+        and ("subsectors" in kl or "subsetores" in kl or "subsectors" in kl)
+        and ("segment" in kl or "segments" in kl or "segmento" in kl or "segmentos" in kl)
+        and s["node_count"] >= 15
+    )
+
+    code_keys = {"code", "codigo", "companycode", "issuingcompany", "cvm_code"}
+    sector_keys = {"sector", "setor", "setoreconomico", "setor_economico"}
+
+    def record_ok(x: Any) -> bool:
+        if not isinstance(x, dict):
+            return False
+        keys = {str(k).lower() for k in x.keys()}
+        return bool(keys & code_keys) and bool(keys & sector_keys)
+
+    collections: list[list[Any]] = []
+    if isinstance(obj, list):
+        collections.append(obj)
+    elif isinstance(obj, dict):
+        for v in obj.values():
+            if isinstance(v, list):
+                collections.append(v)
+
+    all_company = False
+    for seq in collections:
+        if len(seq) < 50:
+            continue
+        sample = seq[: min(len(seq), 100)]
+        good = sum(1 for x in sample if record_ok(x))
+        if good >= min(20, len(sample)) and good / max(1, len(sample)) >= 0.8:
+            all_company = True
+            break
+
     return {"summary": s, "tree_candidate": tree, "all_company_candidate": all_company}
 
 
@@ -448,6 +482,15 @@ def main() -> int:
     verified_company_contracts: list[dict[str, Any]] = []
 
     for u in candidate_urls[: int(spec["max_independent_candidate_probes"])]:
+        if "/assets/i18n/" in urllib.parse.urlparse(u).path:
+            candidate_contracts.append({
+                "Endpoint_Asset": u, "HTTP_Method": "GET", "Parameters": urllib.parse.urlparse(u).query or "NONE",
+                "Request_Body": "NONE", "Response_Content_Type": "LOCALIZATION_ASSET",
+                "Response_Schema": "I18N_TRANSLATION_RESOURCE_NOT_A_CLASSIFICATION_DATA_CONTRACT",
+                "Auth_Required": "NO", "Public_Reproducible": "YES",
+                "Completeness_Proof": "NO", "Contract_Type": "LOCALIZATION_ASSET_EXCLUDED"
+            })
+            continue
         if any(x in u for x in ("{", "}", "<", ">")):
             candidate_contracts.append({
                 "Endpoint_Asset": u, "HTTP_Method": "UNKNOWN", "Parameters": "TEMPLATED",
