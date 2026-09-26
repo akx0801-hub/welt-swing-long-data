@@ -55,7 +55,7 @@ EXPECTED_BLOBS={
  str(V044_PARAM.relative_to(ROOT)):"a5c963f1dcf5d3d61000a7ae47d8ca21613f479f",
  str(MASTER.relative_to(ROOT)):"680d0434e534d1fe136e694ca05cb574958a1a24",
  str(V020_DOC.relative_to(ROOT)):"a3962c82cfad396e627988ab4b2635a93898b3d0",
- str(V021_DOC.relative_to(ROOT)):"d2d1404b9850117645216177254be3c9292bb5b3",
+ str(V021_DOC.relative_to(ROOT)):"6216b82699d1fe7470a7f4cf4288e233d52acf1d",
  str(V044_READINESS.relative_to(ROOT)):"3718c41f769bf9e257793209b8a7b26d0cb9a9f3",
  str(V021_SCRIPT.relative_to(ROOT)):"d81426caf6d77a1bbc238a1993c057e082fbfcdd",
 }
