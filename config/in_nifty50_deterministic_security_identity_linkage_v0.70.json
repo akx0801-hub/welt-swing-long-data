@@ -1,0 +1,20 @@
+{
+  "version": "v0.70",
+  "stage": "IN_NIFTY50_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE",
+  "required_start_head": "357df447e225ab1fc839530b1d2b0d2d217fd652",
+  "scope_cohort": "IN_NIFTY50",
+  "gate": "E_SECURITY_IDENTITY",
+  "frozen_target_rows": 45,
+  "external_research_scope": "BOUNDED_OFFICIAL_ONLY_GATE_E",
+  "gate_f_execution_allowed": false,
+  "sector_classification_population_allowed": false,
+  "canonical_materialization_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "per_security_web_fanout_allowed": false,
+  "company_name_join_allowed": false,
+  "third_party_identity_source_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
