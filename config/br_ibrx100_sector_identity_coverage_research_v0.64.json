@@ -1,0 +1,165 @@
+{
+  "version": "v0.64",
+  "stage": "BR_IBRX100_CANONICAL_SECTOR_KEY_SECURITY_IDENTITY_EXACT_37_COVERAGE_GATE",
+  "research_date_utc": "2026-09-26",
+  "scope_cohort": "BR_IBRX100",
+  "frozen_rows": 37,
+  "predecessor": {
+    "final_commit": "f0a67388740b17dd62b47f1163df76d503a9c50b",
+    "workflow_run": 36258067350,
+    "artifact_id": 10911387342,
+    "artifact_digest": "sha256:0ec10e147c619ec999af1b8de3dcd34b93d4fff29c3f6a96dd672bcb05446535",
+    "route": "B3_LISTED_COMPANIES_CLASSIFICATION_SEARCH",
+    "taxonomy": "B3_CLASSIFICACAO_SETORIAL",
+    "route_ready": true,
+    "access_class": "PUBLIC_REPRODUCIBLE",
+    "classification_content": "PASS",
+    "source_native_sector_code": "NOT_AVAILABLE"
+  },
+  "repository_authority": {
+    "official_b3_ibrx100_source": "universe/segments/br_ibrx100_source_frozen_v0.32.csv",
+    "source_id": "B3_OFFICIAL_INDEXPROXY_GETPORTFOLIODAY",
+    "source_as_of": "2026-08-31",
+    "source_endpoint": "https://sistemaswebb3-listados.b3.com.br/indexProxy/indexCall/GetPortfolioDay",
+    "identity_semantics": "Official B3 security-level membership evidence provides exact B3 trading code, official security name, B3 type and Primary MIC BVMF.",
+    "prior_identity_gate": "PASS_PRIMARY_MIC_OFFICIAL_TICKER_STABLE_WSID_NO_ISIN_IN_MEMBERSHIP_SOURCE"
+  },
+  "official_identity_rule": {
+    "url": "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/mercado-de-acoes/operacoes-com-emprestimo-de-ativos-acoes-e-etf.htm",
+    "rule": "For shares, trading code is XXXXY; XXXX are four uppercase letters representing the issuer name and Y is the share type, with 3 for ordinary shares.",
+    "project_application": "All 37 Frozen BR rows are exact BVMF tickers ending in 3 and are already governed as ORDINARY_SHARE. Therefore Company_Code = first four characters of Primary_Ticker is a deterministic B3 issuer-code derivation, not a company-name join."
+  },
+  "classification_route_identity": {
+    "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D",
+    "evidence": "Official B3 classification-group result identifies companies by four-character Codigo values such as AGRO and SLCE, consistent with the B3 issuer-code convention.",
+    "route_research_repeated": false,
+    "used_for": "COMPANY_CODE_KEY_SEMANTICS_ONLY"
+  },
+  "sector_level_binding": {
+    "taxonomy": "B3_CLASSIFICACAO_SETORIAL",
+    "sector_level": "SETOR_ECONOMICO",
+    "source_level_label": "Setor Econômico",
+    "basis_urls": [
+      "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/criterio-de-classificacao/",
+      "https://www.b3.com.br/data/files/6F/85/17/65/37E00910CA8BA9F8DC0D8AA8/OC%20081-2024%20PRE%20Alteracao%20na%20Metodologia%20do%20Indice%20Carbono%20Eficiente%20%28ICO2%20B3%29%20%28PT%29.pdf"
+    ],
+    "basis": "B3 states its classification structure gives sector identification from the first level; official B3 material explicitly refers to performance relative to Setor Econômico using the B3 classification. For canonical Sector_* fields, v0.64 binds the first-level Setor Econômico and does not substitute Subsetor or Segmento.",
+    "subsetor_used": false,
+    "segmento_used": false
+  },
+  "exact_37_result": {
+    "security_to_company_rule_status": "PASS",
+    "security_to_company_rows": 37,
+    "company_to_classification_route_status": "PASS_AT_ROUTE_DESIGN_LEVEL",
+    "exact_row_level_sector_name_coverage_status": "NOT_VERIFIED",
+    "reason": "The existing public classification route is group/page-backed. In the bounded environment no row-complete, sealable all-company classification payload or official bulk export was materialized. The stage did not perform prohibited 37-security web fanout. Therefore exact official Sector_Name for each of the 37 rows is not proven.",
+    "ready": 0,
+    "ambiguous": 0,
+    "not_found": 0,
+    "not_verified": 37,
+    "blocker": "BR_EXACT_37_COVERAGE_INCOMPLETE"
+  },
+  "pdsc_validation_examples": [
+    {
+      "Sector_Name": "Consumo não Cíclico",
+      "source_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/main/23264/CODBOLSA/overview?language=pt-br",
+      "coverage_use": "METHOD_VECTOR_ONLY_NOT_COHORT_COVERAGE"
+    },
+    {
+      "Sector_Name": "Petróleo. Gás e Biocombustíveis",
+      "source_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/main/9512/CODBOLSA/overview?language=pt-br",
+      "coverage_use": "METHOD_VECTOR_ONLY_NOT_COHORT_COVERAGE"
+    },
+    {
+      "Sector_Name": "Materiais Básicos",
+      "source_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/main/4170/VALE/overview?language=pt-br",
+      "coverage_use": "METHOD_VECTOR_ONLY_NOT_COHORT_COVERAGE"
+    }
+  ],
+  "official_security_reference_support": [
+    {
+      "url": "https://www.b3.com.br/data/files/79/62/B2/71/8AA6A8103234E0A8AC094EA8/Glossario%20InstrumentsConsolidatedFile%202023.pdf",
+      "finding": "Official B3 listed-instrument glossary documents TckrSymb and ISIN in the public InstrumentsConsolidatedFile; retained as security-reference architecture support, not used for a name join."
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/market-data/historico/boletins-diarios/pesquisa-por-pregao/pesquisa-por-pregao/",
+      "finding": "Official B3 daily-file page lists BVBG.028.02 Instruments File as the listed instrument-reference dataset."
+    }
+  ],
+  "prohibited_requests": {
+    "alpha_vantage": 0,
+    "yahoo_yfinance": 0,
+    "eodhd": 0,
+    "scalable": 0,
+    "wikipedia": 0,
+    "tradingview": 0,
+    "screeners": 0,
+    "etf_holdings": 0,
+    "third_party_security_databases": 0,
+    "company_name_joins": 0,
+    "fuzzy_matching": 0,
+    "per_security_web_fanout": 0,
+    "gics_icb_fallback": 0,
+    "crosswalk": 0,
+    "price_ohlcv": 0,
+    "news": 0,
+    "trading_analysis": 0
+  },
+  "external_request_ledger": [
+    {
+      "url": "https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/market-data/historico/boletins-diarios/pesquisa-por-pregao/pesquisa-por-pregao/",
+      "result": "Official B3 daily file page confirms BVBG.028.02 Instruments File availability.",
+      "use": "SECURITY_REFERENCE_ROUTE_SUPPORT"
+    },
+    {
+      "url": "https://www.b3.com.br/data/files/79/62/B2/71/8AA6A8103234E0A8AC094EA8/Glossario%20InstrumentsConsolidatedFile%202023.pdf",
+      "result": "Official glossary confirms TckrSymb, ISIN, share specification and CorporationName fields in the listed-instrument file.",
+      "use": "SECURITY_REFERENCE_SCHEMA_SUPPORT"
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/mercado-de-acoes/operacoes-com-emprestimo-de-ativos-acoes-e-etf.htm",
+      "result": "Official B3 share code rule: XXXXY with XXXX representing issuer and 3 denoting ordinary shares.",
+      "use": "DETERMINISTIC_SECURITY_TO_COMPANY_RULE"
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/criterio-de-classificacao/",
+      "result": "Official classification criteria state first-level sector identification and periodic review of the B3 sector structure.",
+      "use": "SECTOR_LEVEL_BINDING"
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/classificacao-setorial/",
+      "result": "Official B3 classification route is weekly updated and embeds the listed-companies classification application.",
+      "use": "CLASSIFICATION_ROUTE_PROVENANCE"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br",
+      "result": "Official embedded classification application endpoint identified; available page-backed route, but no sealable all-company row-complete classification payload was exposed by bounded retrieval.",
+      "use": "EXACT_COVERAGE_ATTEMPT"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D",
+      "result": "Official group query returns multiple companies with four-character Codigo values in one request; used only to confirm company-code semantics.",
+      "use": "COMPANY_CODE_KEY_SEMANTICS"
+    },
+    {
+      "url": "https://www.b3.com.br/data/files/6F/85/17/65/37E00910CA8BA9F8DC0D8AA8/OC%20081-2024%20PRE%20Alteracao%20na%20Metodologia%20do%20Indice%20Carbono%20Eficiente%20%28ICO2%20B3%29%20%28PT%29.pdf",
+      "result": "Official B3 circular explicitly refers to Setor Econômico using B3 sector classification.",
+      "use": "SECTOR_LEVEL_TERMINOLOGY"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/main/23264/CODBOLSA/overview?language=pt-br",
+      "result": "Official example exposes first hierarchy label Consumo não Cíclico; method-vector only.",
+      "use": "PDSC_METHOD_VECTOR_ONLY"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/main/9512/CODBOLSA/overview?language=pt-br",
+      "result": "Official example exposes first hierarchy label Petróleo. Gás e Biocombustíveis; method-vector only.",
+      "use": "PDSC_METHOD_VECTOR_ONLY"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/main/4170/VALE/overview?language=pt-br",
+      "result": "Official example exposes first hierarchy label Materiais Básicos; method-vector only.",
+      "use": "PDSC_METHOD_VECTOR_ONLY"
+    }
+  ]
+}
