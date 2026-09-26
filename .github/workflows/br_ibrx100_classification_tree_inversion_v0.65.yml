@@ -1,0 +1,162 @@
+name: BR IBrX100 B3 Classification Tree Inversion v0.65
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/br_ibrx100_classification_tree_inversion_v0.65.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  br-classification-tree-inversion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout bounded v0.65 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.65 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="4e8151225f19ad1748c203b295e3ff699eabb7bf"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/br_ibrx100_classification_tree_inversion_research_v0\.65\.json|scripts/br_ibrx100_classification_tree_inversion_v0_65\.py|scripts/persist_br_ibrx100_classification_tree_inversion_v0_65\.py|tests/test_br_ibrx100_classification_tree_inversion_v0_65\.py|\.github/workflows/br_ibrx100_classification_tree_inversion_v0\.65\.yml|config/br_ibrx100_classification_tree_inversion_v0\.65\.json)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.64 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10913620188 --jq .digest)"
+          test "$DIGEST" = "sha256:970d4c510642f5803ca4228fe2715d10661fc8733c7eb7fee5e1ad94d700678c"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          s=json.load(open("output_br_ibrx100_sector_identity_coverage_v0_64/summary_v0.64.json",encoding="utf-8"))
+          c=json.load(open("output_br_ibrx100_sector_identity_coverage_v0_64/stage_checkpoint_v0.64.json",encoding="utf-8"))
+          ids=list(csv.DictReader(open("output_br_ibrx100_sector_identity_coverage_v0_64/br_security_company_identity_audit_v0.64.csv",encoding="utf-8")))
+          assert s["verdict"]=="BLOCKED_EXACT_37_CLASSIFICATION_COVERAGE"
+          assert s["br_sector_identity_coverage_ready"] is False
+          assert (s["ready"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"])==(0,37,0,0,37)
+          assert s["security_to_company_ready"]==37
+          assert s["sector_taxonomy"]=="B3_CLASSIFICACAO_SETORIAL"
+          assert s["sector_level"]=="SETOR_ECONOMICO"
+          assert s["sector_code_method"]=="PDSC_SHA256_V1"
+          assert s["blocker"]=="BR_EXACT_37_COVERAGE_INCOMPLETE"
+          assert c["workflow_run_id"]==36264343312 and c["artifact_id"]==10913620188
+          assert "sha256:"+c["artifact_digest"]=="sha256:970d4c510642f5803ca4228fe2715d10661fc8733c7eb7fee5e1ad94d700678c"
+          assert len(ids)==37 and all(r["Security_To_Company_Status"]=="PASS" for r in ids)
+          assert all(r["Company_Name_Join_Used"]=="NO" for r in ids)
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+      - name: Verify v0.65 research contract and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          r=json.load(open("config/br_ibrx100_classification_tree_inversion_research_v0.65.json",encoding="utf-8"))
+          t=json.load(open("config/br_ibrx100_classification_tree_inversion_v0.65.json",encoding="utf-8"))
+          assert r["scope_cohort"]=="BR_IBRX100" and r["frozen_rows"]==37
+          assert r["hierarchy_capture"]["result"]=="NOT_MACHINE_REPRODUCIBLE_COMPLETE"
+          assert r["encoding_contract"]["status"]=="VERIFIED_FOR_KNOWN_OFFICIAL_EXAMPLES"
+          assert r["coverage_execution"]["coverage_classification_nodes_queried"]==0
+          assert r["coverage_execution"]["exact37_ready"]==0
+          assert r["coverage_execution"]["not_verified"]==37
+          assert r["blocker"]=="B3_CLASSIFICATION_TREE_NOT_MACHINE_REPRODUCIBLE"
+          assert all(v==0 for v in r["prohibited_requests"].values())
+          assert t["required_start_head"]=="4e8151225f19ad1748c203b295e3ff699eabb7bf"
+          assert t["scope_cohort"]=="BR_IBRX100"
+          assert t["alpha_vantage_allowed"] is False
+          assert t["canonical_mapping_population_allowed"] is False
+          assert t["other_cohorts_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/br_ibrx100_classification_tree_inversion_v0_65.py scripts/persist_br_ibrx100_classification_tree_inversion_v0_65.py
+          python3 tests/test_br_ibrx100_classification_tree_inversion_v0_65.py -v
+
+      - name: Run bounded v0.65 gate
+        run: |
+          set -euo pipefail
+          rm -rf output_br_ibrx100_classification_tree_inversion_v0_65
+          python3 scripts/br_ibrx100_classification_tree_inversion_v0_65.py             --repository-sha "$GITHUB_SHA"             --output-dir output_br_ibrx100_classification_tree_inversion_v0_65
+
+      - name: Validate fail-closed tree result
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_br_ibrx100_classification_tree_inversion_v0_65")
+          s=json.load(open(out/"summary_preupload_v0.65.json",encoding="utf-8"))
+          tree=json.load(open(out/"b3_classification_tree_snapshot_v0.65.json",encoding="utf-8"))
+          enc=list(csv.DictReader(open(out/"b3_group_query_encoding_examples_v0.65.csv",encoding="utf-8")))
+          req=list(csv.DictReader(open(out/"b3_group_request_ledger_v0.65.csv",encoding="utf-8")))
+          cov=list(csv.DictReader(open(out/"br_exact_37_classification_coverage_v0.65.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.65.csv",encoding="utf-8")))
+          assert s["verdict"]=="BLOCKED_B3_CLASSIFICATION_TREE_MACHINE_REPRODUCIBILITY"
+          assert s["br_exact_37_classification_coverage_ready"] is False
+          assert (s["ready"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"])==(0,37,0,0,37)
+          assert s["classification_nodes_queried"]==0 and s["distinct_setores"]==0
+          assert s["blocker"]=="B3_CLASSIFICATION_TREE_NOT_MACHINE_REPRODUCIBLE"
+          assert tree["capture_status"]=="INCOMPLETE_NOT_MACHINE_REPRODUCIBLE"
+          assert len(enc)==2 and all(r["Verification"]=="PASS" for r in enc)
+          assert len(req)==1 and req[0]["Retrieval_Status"]=="STOPPED_BEFORE_PARTIAL_TRAVERSAL"
+          assert len(cov)==37 and all(r["Coverage_Status"]=="NOT_VERIFIED" for r in cov)
+          assert all(r["Sector_Code"]=="NOT_GENERATED_WITHOUT_PROVABLY_MAPPABLE_ROW" for r in cov)
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in s["prohibited_provider_calls"].values())
+          assert s["canonical_mapping_population_runs"]==0
+          assert s["sector_rs_runs"]==0 and s["other_cohort_rechecks"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.65 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: br-ibrx100-classification-tree-inversion-v0.65-${{ github.run_id }}
+          path: output_br_ibrx100_classification_tree_inversion_v0_65/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_br_ibrx100_classification_tree_inversion_v0_65.py             --output-dir output_br_ibrx100_classification_tree_inversion_v0_65             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "br-ibrx100-classification-tree-inversion-v0.65-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.65 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/BR_IBRX100_B3_Classification_Tree_Inversion_Exact_37_Sector_Coverage_v0.65.md                   output_br_ibrx100_classification_tree_inversion_v0_65/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/BR_IBRX100_B3_Classification_Tree_Inversion_Exact_37_Sector_Coverage_v0\.65\.md|output_br_ibrx100_classification_tree_inversion_v0_65/)' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist BR IBrX100 classification tree inversion v0.65"
+          git push origin HEAD:main
