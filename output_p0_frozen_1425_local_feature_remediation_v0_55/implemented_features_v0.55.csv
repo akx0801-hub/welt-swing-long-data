@@ -1,0 +1,4 @@
+Feature_or_Family,Implementation,Promotion_Status,Contract
+R1,new canonical column,CANONICAL_IMPLEMENTED_PROMOTED,CONTRACT_DERIVABLE
+TrueRange_Current,new canonical column exposing existing TR primitive,CANONICAL_IMPLEMENTED_PROMOTED,CONTRACT_DERIVABLE
+RUNUP_5_20_60_SEMANTICS,semantic binding to existing R5/R20/R60; no duplicate columns,CANONICAL_SEMANTIC_BINDING_PROMOTED_NO_NEW_COLUMN,CONTRACT_DERIVABLE

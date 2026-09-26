@@ -1,0 +1,10 @@
+{
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "frozen_unchanged": true,
+  "provider_mappings_unchanged": "READ_ONLY_RUNTIME_NO_WRITE",
+  "raw_ohlcv_mutation": false,
+  "runtime_bytes": 144539648,
+  "runtime_sha256_after": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "runtime_sha256_before": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "runtime_unchanged": true
+}

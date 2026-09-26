@@ -1,0 +1,42 @@
+{
+  "artifact_binding": "PENDING_WORKFLOW_UPLOAD",
+  "asx8_regression": "PASS",
+  "capability_counts": {
+    "FEATURE_BLOCKED_INPUT": 0,
+    "FEATURE_BLOCKED_INSUFFICIENT_HISTORY": 0,
+    "FEATURE_COMPUTATION_ERROR": 0,
+    "FEATURE_PARTIAL": 1425,
+    "FEATURE_READY": 0,
+    "NOT_VERIFIED": 0
+  },
+  "contract_counts": {
+    "CONTRACT_AMBIGUOUS": 8,
+    "CONTRACT_CONFLICT": 0,
+    "CONTRACT_DERIVABLE": 3,
+    "CONTRACT_EXACT": 0,
+    "CONTRACT_NOT_FOUND": 0
+  },
+  "determinism": "PASS",
+  "existing21_regression": "PASS",
+  "materialization_semantic_sha256": "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc",
+  "null_nonfinite": "PASS",
+  "p0_local_feature_layer_ready": false,
+  "p0_runs": 0,
+  "productive": false,
+  "remaining_contract_gaps": [
+    "EMA20_SLOPE",
+    "EMA50_SLOPE",
+    "RANGE_COMPRESSION_FAMILY",
+    "RELATIVE_VOLUME_METRICS",
+    "GAP_OVER_ATR",
+    "DAILY_MOVE_IN_ATR",
+    "RECENT_IMPULSE_DESCRIPTORS",
+    "RELEVANT_HIGH_DISTANCE_FAMILY"
+  ],
+  "stage": "P0_FROZEN_1425_MASTER_REQUIRED_LOCAL_FEATURE_REMEDIATION",
+  "status": "PASS_WITH_REMAINING_CONTRACT_GAPS",
+  "temporal_integrity": "PASS",
+  "tests_failed": 0,
+  "tests_passed": 23,
+  "version": "v0.55"
+}

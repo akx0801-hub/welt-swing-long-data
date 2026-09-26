@@ -1,0 +1,114 @@
+{
+  "artifact_binding": "PENDING_WORKFLOW_UPLOAD",
+  "contract_counts": {
+    "CONTRACT_AMBIGUOUS": 8,
+    "CONTRACT_CONFLICT": 0,
+    "CONTRACT_DERIVABLE": 3,
+    "CONTRACT_EXACT": 0,
+    "CONTRACT_NOT_FOUND": 0
+  },
+  "existing21_semantic_sha256": "c5d9c6eabbbef10909b7a0df8b4bb8eb5ff32130d8c85162f5f2f4e4a7a4bed6",
+  "files": {
+    "asx8_regression_v0.55.csv": {
+      "bytes": 970,
+      "sha256": "1ea2effffb4535d1750a5a2113de3fb063cfc121e1a8c368649233be61beec2a"
+    },
+    "canonical_feature_registry_v0.55.csv": {
+      "bytes": 10581,
+      "sha256": "60657fac15841a9fab4ad3ad6641efccfd9fa096e2a1e18e0bc1dfcf00777053"
+    },
+    "capability_v0.55.csv": {
+      "bytes": 167450,
+      "sha256": "9be11d69294d6193fb9dd1fb6d12798ebece4ce6273d4175bc89679ee4f722d1"
+    },
+    "contract_binding_v0.55.csv": {
+      "bytes": 6718,
+      "sha256": "e00a82534c7e36f8ebb5ea7b35d3cd838977b83dd30b1baa08d2cb3148c92a69"
+    },
+    "determinism_v0.55.json": {
+      "bytes": 356,
+      "sha256": "2f39c460263810e3ddab07495fea728160c1085169f0622ee959ac3cf72ca31f"
+    },
+    "existing21_regression_v0.55.csv": {
+      "bytes": 2949,
+      "sha256": "70fdedd7b10e628e0c33990af88f02a0bf0946aef9edfb46cd8ec53e0de5809b"
+    },
+    "feature_materialization_v0.55.csv": {
+      "bytes": 790293,
+      "sha256": "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc"
+    },
+    "historical_v019_mapping_v0.55.csv": {
+      "bytes": 1582,
+      "sha256": "215812abc21699aca31fd5d95792fe7ae2d002c2b7c8f59e1cd4e833cace2686"
+    },
+    "implemented_features_v0.55.csv": {
+      "bytes": 412,
+      "sha256": "8c45d8e35984a7aecd8b1b5603ef63a708e5d4efa35d1b1142566d1441b36c26"
+    },
+    "input_immutability_v0.55.json": {
+      "bytes": 460,
+      "sha256": "8b1ca37bcc8775eca0b0ecdccb319e7db2f9e9c39fd10d6ee842a6dd1d46ec52"
+    },
+    "master_gap_reconciliation_v0.55.csv": {
+      "bytes": 2203,
+      "sha256": "32f95feeca9007ff580057c88428ba0a8dac0f1c380e3a43f2cfdee06fc08525"
+    },
+    "new_feature_formula_regression_v0.55.csv": {
+      "bytes": 168857,
+      "sha256": "bf7e336fc3238c71ab512ea2c8d144af6f549600ddac8120e8522f45a4978721"
+    },
+    "null_nonfinite_audit_v0.55.csv": {
+      "bytes": 608,
+      "sha256": "0ce88f705a68ab31e8d6d53cf6f04ca8fe1422cb6223c6a9ec65808789278a4d"
+    },
+    "remaining_contract_gaps_v0.55.csv": {
+      "bytes": 556,
+      "sha256": "ff9487b74603e546a7a5d782d002ac20dbacfa65ef59b48a7c487a8ec24a0d18"
+    },
+    "stage_checkpoint_preupload_v0.55.json": {
+      "bytes": 1210,
+      "sha256": "b9dcca33af890cb6041a1d0e8ff41288d60e1aa7832fc5aa19efe829fb6f546e"
+    },
+    "summary_preupload_v0.55.json": {
+      "bytes": 3477,
+      "sha256": "774e06261bc8636bc916fbe0eb84c31984f88fa0f178369de58633852563959f"
+    },
+    "temporal_integrity_v0.55.csv": {
+      "bytes": 104355,
+      "sha256": "08cb1a04a1c13c117eac418fd27d3cfeaabe3565ac667a04abbf093577abba68"
+    },
+    "test_results_v0.55.csv": {
+      "bytes": 1426,
+      "sha256": "396962989e4472a551432a9aa74f6f20a375e8e923f30c6be37b5d8ce753d461"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "materialization_semantic_sha256": "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc",
+  "p0_local_feature_layer_ready": false,
+  "p0_runs": 0,
+  "productive": false,
+  "provider_calls": {
+    "alpha_vantage": 0,
+    "eodhd": 0,
+    "market": 0,
+    "scalable": 0,
+    "yahoo_yfinance": 0
+  },
+  "remaining_contract_gaps": [
+    "EMA20_SLOPE",
+    "EMA50_SLOPE",
+    "RANGE_COMPRESSION_FAMILY",
+    "RELATIVE_VOLUME_METRICS",
+    "GAP_OVER_ATR",
+    "DAILY_MOVE_IN_ATR",
+    "RECENT_IMPULSE_DESCRIPTORS",
+    "RELEVANT_HIGH_DISTANCE_FAMILY"
+  ],
+  "repository_sha": "af813390c92f95e35b71dde95e1f506d231743bb",
+  "required_start_head": "4fd2d914b2bbb0fcf2b347890f8d652ee80c4f00",
+  "stage": "P0_FROZEN_1425_MASTER_REQUIRED_LOCAL_FEATURE_REMEDIATION",
+  "v053_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "v054_artifact_digest": "sha256:0c6eec3a41a26940b4e1325532f2e7bf240f1d362f147f4b52a3943f6f5dfe47",
+  "v054_artifact_id": 10901437101,
+  "version": "v0.55"
+}

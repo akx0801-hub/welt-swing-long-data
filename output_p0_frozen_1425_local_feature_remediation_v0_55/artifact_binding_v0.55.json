@@ -1,0 +1,13 @@
+{
+  "artifact_digest": "sha256:a6faf3156763a9ff4d6eba5322aa6e62c1f97a75797b09b910fba762917184a8",
+  "artifact_id": 10902665790,
+  "artifact_name": "p0-frozen-1425-master-local-feature-remediation-v0.55-36230843835",
+  "artifact_verified": "PASS",
+  "feature_materialization_file_bytes": 790293,
+  "feature_materialization_file_sha256": "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc",
+  "feature_runtime_database_created": false,
+  "materialization_semantic_sha256": "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc",
+  "price_runtime_input_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "workflow_head_sha": "af813390c92f95e35b71dde95e1f506d231743bb",
+  "workflow_run_id": 36230843835
+}

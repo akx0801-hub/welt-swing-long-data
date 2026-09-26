@@ -1,0 +1,12 @@
+Master_Gap,Contract_Classification,Promotion_Status,Resolved,Reason
+EMA20_SLOPE,CONTRACT_AMBIGUOUS,BLOCKED_NOT_IMPLEMENTED,NO,Master requires a slope but does not bind horizon or normalization; v0.19 5-session percentage formula is historical evidence only; v0.21 validates sign only.
+EMA50_SLOPE,CONTRACT_AMBIGUOUS,BLOCKED_NOT_IMPLEMENTED,NO,Master does not bind 10-session percentage slope; historical v0.19 cannot promote it by itself.
+R1,CONTRACT_DERIVABLE,CANONICAL_IMPLEMENTED_PROMOTED,YES,Master explicitly places R1 in the same Rn family as canonical R5/R20/R60; unique extension of the already-canonical n-return primitive is n=1.
+TRUE_RANGE_CURRENT,CONTRACT_DERIVABLE,CANONICAL_IMPLEMENTED_PROMOTED,YES,"Canonical ATR14 already computes the exact TR primitive; Master separately requires True Range, so exposing the current value reuses the existing single source of truth."
+RANGE_COMPRESSION_FAMILY,CONTRACT_AMBIGUOUS,BLOCKED_NOT_IMPLEMENTED,NO,Current shadow relation does not uniquely bind a canonical feature set or normalization.
+RELATIVE_VOLUME_METRICS,CONTRACT_AMBIGUOUS,BLOCKED_NOT_IMPLEMENTED,NO,"Master names RVOL concept but does not define mean/median, lookback, or current inclusion; v0.19 is historical evidence only."
+GAP_OVER_ATR,CONTRACT_AMBIGUOUS,BLOCKED_NOT_IMPLEMENTED,NO,Master does not specify gap numerator or ATR denominator timing; same-bar denominator leakage cannot be guessed.
+DAILY_MOVE_IN_ATR,CONTRACT_AMBIGUOUS,BLOCKED_NOT_IMPLEMENTED,NO,Feature name alone does not identify numerator or ATR reference point.
+RECENT_IMPULSE_DESCRIPTORS,CONTRACT_AMBIGUOUS,BLOCKED_NOT_IMPLEMENTED,NO,"Master specifies the concept, not the impulse identification formula, lookback, directionality, or post-impulse window."
+RUNUP_5_20_60_SEMANTICS,CONTRACT_DERIVABLE,CANONICAL_SEMANTIC_BINDING_PROMOTED_NO_NEW_COLUMN,YES,The Run-up classification explicitly requires 5/20/60-day performance; this uniquely maps to already-canonical R5/R20/R60 without duplicate aliases.
+RELEVANT_HIGH_DISTANCE_FAMILY,CONTRACT_AMBIGUOUS,BLOCKED_NOT_IMPLEMENTED,NO,Repository evidence contains more than one plausible high-distance normalization/window; Master does not choose among them.

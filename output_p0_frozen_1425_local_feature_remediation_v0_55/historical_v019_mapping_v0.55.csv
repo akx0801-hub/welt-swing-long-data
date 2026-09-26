@@ -1,0 +1,12 @@
+Master_Gap,Historical_v019_Implementation,Historical_Formula,Authority_Use
+EMA20_SLOPE,EMA20_Slope5_Pct,EMA20[t]/EMA20[t-5]-1,IMPLEMENTATION_EVIDENCE_ONLY
+EMA50_SLOPE,EMA50_Slope10_Pct,EMA50[t]/EMA50[t-10]-1,IMPLEMENTATION_EVIDENCE_ONLY
+R1,none as output; shared n_return helper exists,"n_return(c,n)=c[t]/c[t-n]-1",IMPLEMENTATION_EVIDENCE_ONLY
+TRUE_RANGE_CURRENT,TrueRange_Current,"max(|H-L|,|H-prev valid Close|,|L-prev valid Close|)",IMPLEMENTATION_EVIDENCE_ONLY
+RANGE_COMPRESSION_FAMILY,Range5_Pct;Range10_Pct;Range20_Pct;Range5_to_Range20;TR_Mean5;TR_Mean20;TR_Mean5_to_20,rolling high-low/current close; TR means and ratios,IMPLEMENTATION_EVIDENCE_ONLY
+RELATIVE_VOLUME_METRICS,RVOL20_Current,current Volume_Tech / preceding 20-valid-session median Volume_Tech,IMPLEMENTATION_EVIDENCE_ONLY
+GAP_OVER_ATR,Gap_Pct only; no canonical Gap/ATR,Gap_Pct=Open[t]/Close[t-1]-1,IMPLEMENTATION_EVIDENCE_ONLY
+DAILY_MOVE_IN_ATR,TrueRange_ATR14_Ratio candidate only,current TR/current ATR14 in v0.19,IMPLEMENTATION_EVIDENCE_ONLY
+RECENT_IMPULSE_DESCRIPTORS,Impulse_Return20_Max;Impulse_Days_Ago;PostImpulse_Min_vs_ImpulseClose;PostImpulse_Latest_vs_ImpulseClose;PostImpulse_Range_Pct,strongest positive daily return in trailing 20 valid observations plus post-impulse descriptors,IMPLEMENTATION_EVIDENCE_ONLY
+RUNUP_5_20_60_SEMANTICS,R5;R20;R60 already present,Close_Tech[t]/Close_Tech[t-n]-1,IMPLEMENTATION_EVIDENCE_ONLY
+RELEVANT_HIGH_DISTANCE_FAMILY,Dist_High252 plus historical Distance_High20_ATR,current Close/High252-1 versus (High20-Close)/ATR14,IMPLEMENTATION_EVIDENCE_ONLY

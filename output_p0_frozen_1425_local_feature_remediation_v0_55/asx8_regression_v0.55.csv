@@ -1,0 +1,9 @@
+Security_Key,Source_WS_ID,Primary_MIC,Primary_Ticker,raw_bars,valid_bars,excluded_bar_count,excluded_date,raw_bar_present,excluded_from_feature_input,R1_filtered_exact,TrueRange_Current_filtered_exact,Runup_R5_R20_R60_filtered_finite,Result
+WSSEC:WS:XASX:ANZ,WS:XASX:ANZ,XASX,ANZ,507,506,1,2024-11-15,True,True,True,True,True,PASS
+WSSEC:WS:XASX:BSL,WS:XASX:BSL,XASX,BSL,507,506,1,2024-11-15,True,True,True,True,True,PASS
+WSSEC:WS:XASX:BXB,WS:XASX:BXB,XASX,BXB,507,506,1,2024-11-15,True,True,True,True,True,PASS
+WSSEC:WS:XASX:CBA,WS:XASX:CBA,XASX,CBA,507,506,1,2024-11-15,True,True,True,True,True,PASS
+WSSEC:WS:XASX:NXT,WS:XASX:NXT,XASX,NXT,507,506,1,2024-11-15,True,True,True,True,True,PASS
+WSSEC:WS:XASX:PME,WS:XASX:PME,XASX,PME,507,506,1,2024-11-15,True,True,True,True,True,PASS
+WSSEC:WS:XASX:QAN,WS:XASX:QAN,XASX,QAN,507,506,1,2024-11-15,True,True,True,True,True,PASS
+WSSEC:WS:XASX:SDF,WS:XASX:SDF,XASX,SDF,507,506,1,2024-11-15,True,True,True,True,True,PASS
