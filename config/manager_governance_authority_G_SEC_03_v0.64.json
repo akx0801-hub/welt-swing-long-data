@@ -1,0 +1,58 @@
+{
+  "authority_id": "G-SEC-03",
+  "version": "v0.64",
+  "authority_class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "scope": "PROJECT_DERIVED_CANONICAL_SECTOR_CODE_WHEN_SOURCE_NATIVE_CODE_ABSENT",
+  "effective_stage": "BR_IBRX100_CANONICAL_SECTOR_KEY_SECURITY_IDENTITY_EXACT_37_COVERAGE_GATE",
+  "historical_v0_63_evidence_rewritten": false,
+  "rules": {
+    "source_native_sector_code_preferred_when_officially_available": true,
+    "project_derived_canonical_sector_code_allowed_when_official_classification_exact_but_native_code_absent": true,
+    "identifier_derivation_only": true,
+    "classification_inference_forbidden": true,
+    "classification_guessing_forbidden": true,
+    "classification_modification_forbidden": true,
+    "source_sector_code_null_when_not_available": true,
+    "canonical_method_when_native_code_absent": "PDSC_SHA256_V1",
+    "company_name_join_forbidden": true,
+    "fuzzy_matching_forbidden": true,
+    "per_security_web_fanout_forbidden": true,
+    "crosswalk_forbidden": true,
+    "gics_icb_fallback_forbidden": true,
+    "sector_rs_authorized": false,
+    "canonical_mapping_population_authorized": false
+  },
+  "required_additional_audit_fields": [
+    "Source_Sector_Code",
+    "Sector_Code_Origin",
+    "Sector_Code_Method",
+    "Sector_Level",
+    "Sector_Raw_Name"
+  ],
+  "source_code_absent_values": {
+    "Source_Sector_Code": null,
+    "Sector_Code_Origin": "PROJECT_DERIVED_CANONICAL",
+    "Sector_Code_Method": "PDSC_SHA256_V1"
+  },
+  "pdsc_sha256_v1": {
+    "unicode_normalization": "NFC_ONLY",
+    "separator": "U+001F",
+    "input_order": ["Sector_Taxonomy", "Sector_Level", "Sector_Name"],
+    "encoding": "UTF-8",
+    "hash": "SHA-256",
+    "output_format": "PDSC1:<full-lowercase-sha256>",
+    "truncate": false,
+    "ordinal_numbering": false,
+    "company_name_input": false,
+    "industry_inference": false,
+    "semantic_normalization": false,
+    "translation": false
+  },
+  "br_binding": {
+    "Sector_Taxonomy": "B3_CLASSIFICACAO_SETORIAL",
+    "Sector_Level": "SETOR_ECONOMICO",
+    "level_basis": "B3 official sector classification is hierarchical; project canonical Sector uses the first / Setor Economico level, not Subsetor or Segmento."
+  },
+  "productive": false,
+  "alpha_vantage_allowed": false
+}
