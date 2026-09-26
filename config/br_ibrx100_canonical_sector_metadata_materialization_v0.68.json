@@ -1,0 +1,15 @@
+{
+  "version": "v0.68",
+  "stage": "BR_IBRX100_CANONICAL_SECTOR_METADATA_MAPPING_MATERIALIZATION_GATE",
+  "required_start_head": "f27a8be1cea6ed38b3fe92a1ca3a15a54de6fd89",
+  "scope_cohort": "BR_IBRX100",
+  "frozen_rows": 37,
+  "external_market_reference_requests_allowed": false,
+  "b3_requests_allowed": false,
+  "alpha_vantage_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "other_cohort_execution_allowed": false,
+  "productive": false
+}
