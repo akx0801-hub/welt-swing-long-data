@@ -1,0 +1,9 @@
+{
+  "executed": true,
+  "float_serialization": "%.17g",
+  "match": true,
+  "null_serialization": "<NULL>",
+  "pass1_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "pass2_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "row_order": "Projection_Order ascending"
+}

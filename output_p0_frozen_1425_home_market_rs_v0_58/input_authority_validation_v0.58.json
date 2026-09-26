@@ -1,0 +1,27 @@
+{
+  "authority_blobs": {
+    "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md": "680d0434e534d1fe136e694ca05cb574958a1a24",
+    "docs/validation/P0_Frozen_1425_Data_Capability_Readiness_v0.44.md": "3718c41f769bf9e257793209b8a7b26d0cb9a9f3",
+    "docs/validation/P0_Relative_Strength_Augmentation_v0.20.md": "a3962c82cfad396e627988ab4b2635a93898b3d0",
+    "output_p0_frozen_1425_local_feature_implementation_v0_57/capability_v0.57.csv": "08e854f8704da78413e7a6b997b7375d669e07a1",
+    "output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv": "47bbb681f01b40bfa027905567954cce16c06e24",
+    "output_p0_frozen_1425_local_feature_implementation_v0_57/manifest_v0.57.json": "ad65e2401f80b5dced51dfe57b842d4724978f22",
+    "output_p0_frozen_1425_local_feature_implementation_v0_57/summary_v0.57.json": "c31e5da19de8ee99b77dc343b9520839be102672",
+    "output_p0_frozen_1425_readiness_v0_44/benchmark_rs_audit_v0.44.csv": "1e2e2f5d43b6370f1337ef79236a8064afaa8863",
+    "output_p0_lane_shadow_validation_v0_21/p0_lane_parameter_registry_v0.21.json": "01ae47713cc722497fcc56585dd27466df8baa9c",
+    "scripts/p0_relative_strength_augmentation_v0_20.py": "ccdd41dda338e05752a752345cfcb23273deb8ee",
+    "universe/SWING_U3K_FROZEN_v0.5.csv": "018a03eb4614a197da9d2d566e77f32c61238dad"
+  },
+  "frozen_members": 1425,
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "price_runtime_bytes": 144539648,
+  "price_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "repository_sha": "964ba89cdf1ea764dd07b65d7f1e8010c09feb86",
+  "required_start_head": "80d80eee5e8a2e6ddad5f7b7b1231b9a3da21895",
+  "v057_artifact_digest": "sha256:7f35e18264110c6a6a84205ab443a7b1c3cabcbaebdb3e6d6af79df6361e1c00",
+  "v057_artifact_id": 10905448132,
+  "v057_canonical_numeric_features": 34,
+  "v057_feature_ready": 1425,
+  "v057_feature_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v057_workflow_run": 36239952535
+}

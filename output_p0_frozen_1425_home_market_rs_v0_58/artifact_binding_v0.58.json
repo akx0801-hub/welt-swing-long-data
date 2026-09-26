@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "54dc5168218c7a211c6a0d66fc236c1e95a7cfdabef2acadf79282c8f1b5ae1c",
+  "artifact_id": 10905869033,
+  "artifact_name": "p0-frozen-1425-home-market-rs-v0.58-36242803316",
+  "artifact_scope": "pre-persistence v0.58 evidence package",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "964ba89cdf1ea764dd07b65d7f1e8010c09feb86",
+  "workflow_run_id": 36242803316
+}

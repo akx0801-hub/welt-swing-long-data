@@ -1,0 +1,96 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "files": {
+    "benchmark_cohort_readiness_v0.58.csv": {
+      "bytes": 511,
+      "sha256": "d37d85bd77a4757e1703009d92182f82929e288742824b5dc50cf22066d0cff1"
+    },
+    "benchmark_mapping_input_readiness_v0.58.csv": {
+      "bytes": 133334,
+      "sha256": "a8d9178165ab97b87c938a87db838f3c6e5bca9ae390849248ddf31358d39563"
+    },
+    "benchmark_mapping_summary_v0.58.csv": {
+      "bytes": 357,
+      "sha256": "fb775beab7854bd9aeae17a7a7a2055f8e6c686fece4d56adec0c60f87b17aef"
+    },
+    "capability_v0.58.csv": {
+      "bytes": 134907,
+      "sha256": "6a8b0f0ee6284e743c930fc4b0adbef3b207970e83ed20bc88bbfd35cdf2a765"
+    },
+    "contract_binding_v0.58.json": {
+      "bytes": 2080,
+      "sha256": "cbae807ddae9ef8c8e3cf25e42cbfe459efa0aad2147788eef6652ad928033e0"
+    },
+    "cross_market_temporal_audit_v0.58.csv": {
+      "bytes": 551,
+      "sha256": "c2f5cbc97d7d46d11c53498debe1bafe93656563eb8752fe29d7b8feaa785f1c"
+    },
+    "determinism_v0.58.json": {
+      "bytes": 343,
+      "sha256": "270538e82d8b35edd13c3a7d104028887535f7898b69d7269a1302426e345db8"
+    },
+    "home_market_rs_materialization_v0.58.csv": {
+      "bytes": 367117,
+      "sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+    },
+    "input_authority_validation_v0.58.json": {
+      "bytes": 2045,
+      "sha256": "df0540d38b42e6468afbf7b777bed6509558b7464f04ca48c7118b7b1e6a3979"
+    },
+    "input_immutability_v0.58.json": {
+      "bytes": 863,
+      "sha256": "c0540668eb63f7998ad2c7d42af56a52a675e626577369633547626e0f6bf15e"
+    },
+    "null_nonfinite_audit_v0.58.csv": {
+      "bytes": 208,
+      "sha256": "7b869c56bdd3aa81e59057132b1fc277c6db4920cf23c2b3cf8e26ef78113367"
+    },
+    "provider_calls_v0.58.json": {
+      "bytes": 114,
+      "sha256": "05f3cf6d6bca9dcc899088eb12c8509e87206852185f4cc071af656fd017f56a"
+    },
+    "stage_checkpoint_preupload_v0.58.json": {
+      "bytes": 611,
+      "sha256": "e06fcb51db68131ff085945424afcde016380bc273db31d694d9c3bf0359296f"
+    },
+    "summary_preupload_v0.58.json": {
+      "bytes": 3812,
+      "sha256": "13e23d27231ceb036301b95256d409b7a9132a97f187962c2ba1879bee10a573"
+    },
+    "temporal_integrity_v0.58.csv": {
+      "bytes": 110369,
+      "sha256": "07d73dac77dd964aacf305788443f59d2f9091f3c1e9b17c647a073b3347ec02"
+    },
+    "test_results_v0.58.csv": {
+      "bytes": 1893,
+      "sha256": "bdffc6eb7c37b5d35d914683fda2d224bb5a1788af8467e77bef70ae0a21e9d3"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "home_market_rs_ready": true,
+  "next_gate": "P0 FROZEN-1425 SECTOR METADATA / SECTOR-RS AUTHORITY GATE",
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "price_runtime_bytes": 144539648,
+  "price_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "productive": false,
+  "provider_calls": {
+    "alpha_vantage": 0,
+    "eodhd": 0,
+    "market_data_provider_calls": 0,
+    "scalable": 0,
+    "yahoo_yfinance": 0
+  },
+  "ready_count": 1425,
+  "repository_sha": "964ba89cdf1ea764dd07b65d7f1e8010c09feb86",
+  "required_start_head": "80d80eee5e8a2e6ddad5f7b7b1231b9a3da21895",
+  "rs_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "sector_rs_ready": false,
+  "stage": "P0_FROZEN_1425_HOME_MARKET_RS_MATERIALIZATION_CAPABILITY",
+  "total": 1425,
+  "v057_artifact_digest": "sha256:7f35e18264110c6a6a84205ab443a7b1c3cabcbaebdb3e6d6af79df6361e1c00",
+  "v057_artifact_id": 10905448132,
+  "v057_feature_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "verdict": "PASS_HOME_MARKET_RS_READY",
+  "version": "v0.58"
+}

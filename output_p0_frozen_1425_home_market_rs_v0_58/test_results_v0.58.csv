@@ -1,0 +1,25 @@
+Test,Result,Detail
+START_HEAD_DIRECT_PARENT,PASS,80d80eee5e8a2e6ddad5f7b7b1231b9a3da21895
+V057_STATUS,PASS,PASS_LOCAL_FEATURE_LAYER_READY
+V057_FEATURE_READY_1425,PASS,1425
+V057_34_NUMERIC,PASS,34
+V057_ARTIFACT,PASS,sha256:7f35e18264110c6a6a84205ab443a7b1c3cabcbaebdb3e6d6af79df6361e1c00
+FROZEN_SHA,PASS,54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb
+PRICE_RUNTIME_SHA_BYTES,PASS,bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc
+LOCAL_FEATURE_IMMUTABLE,PASS,177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9
+CONTRACT_BOUND,PASS,LEAVE_ONE_OUT_PRIMARY_UNIVERSE_COHORT_MEDIAN
+MAPPING_1425,PASS,1425
+PRIMARY_UNIVERSE_INDEX_COMPLETE,PASS,0
+R20_R60_INPUT_FINITE,PASS,1425/1425
+SYNCHRONIZED_PEER_AVAILABLE,PASS,blockers=[]
+NO_GLOBAL_DATE_FORCED,PASS,reference cohorts keyed by Primary_Universe_Index + exact feature_as_of_date
+FULL_1425_MATERIALIZATION,PASS,1425
+TWO_PASS_DETERMINISM,PASS,2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32
+TEMPORAL_INTEGRITY,PASS,1425/1425
+NO_FUTURE_PEERS,PASS,0
+NO_RS_NONFINITE,PASS,"[{""Field"": ""HomeMarket_PeerMedian_R20_v0_58"", ""Rows"": 1425, ""NaN_or_Null"": 0, ""PosInf"": 0, ""NegInf"": 0}, {""Field"": ""HomeMarket_PeerMedian_R60_v0_58"", ""Rows"": 1425, ""NaN_or_Null"": 0, ""PosInf"": 0, ""NegInf"": 0}, {""Field"": ""HomeMarket_RS20_Excess_v0_58"", ""Rows"": 1425, ""NaN_or_Null"": 0, ""PosInf"": 0, ""NegInf"": 0}, {""Field"": ""HomeMarket_RS60_Excess_v0_58"", ""Rows"": 1425, ""NaN_or_Null"": 0, ""PosInf"": 0, ""NegInf"": 0}]"
+CAPABILITY_READY_COUNT,PASS,1425
+SECTOR_RS_NOT_RUN,PASS,sector_rs_ready=false
+PARAMETER_AUTHORITY_UNCHANGED,PASS,p0_numeric_pass_thresholds=[]; promoted_lane_pass_rules=[]
+P0_P1_P2_ZERO,PASS,0/0
+PROVIDER_CALLS_ZERO,PASS,"{""alpha_vantage"": 0, ""eodhd"": 0, ""market_data_provider_calls"": 0, ""scalable"": 0, ""yahoo_yfinance"": 0}"

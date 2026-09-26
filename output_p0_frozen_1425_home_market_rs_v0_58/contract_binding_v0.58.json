@@ -1,0 +1,28 @@
+{
+  "asof_calendar_rule": "for each security, reference peers must share the exact same feature_as_of_date; no artificial global date",
+  "authority_basis": [
+    "MASTER_EXPLICIT: 20-/60-day return difference to home market; reproducible internal peer/market groups permitted for early discovery",
+    "v0.20: leave-one-out median per Primary_Universe_Index among synchronized peers; fail closed when not synchronized/insufficient",
+    "v0.21: preserves LEAVE_ONE_OUT_PRIMARY_UNIVERSE_COHORT_MEDIAN and no official benchmark claim",
+    "v0.44: exact Frozen-1425 Primary_Universe_Index mapping persisted; current Frozen RS not yet bound",
+    "v0.58 gate: prohibits artificial global date, therefore exact same-date peer synchronization is the temporal binding"
+  ],
+  "benchmark_definition": "internal Frozen peer/market group; leave-one-out median; not an official index return",
+  "benchmark_mapping_authority": "output_p0_frozen_1425_readiness_v0_44/benchmark_rs_audit_v0.44.csv",
+  "different_trading_days": "different dates form separate synchronized subcohorts; never borrow a peer from a later date",
+  "formula_20": "HomeMarket_RS20_Excess = Security_R20 - leave-one-out median R20 of synchronized Primary_Universe_Index peers",
+  "formula_60": "HomeMarket_RS60_Excess = Security_R60 - leave-one-out median R60 of synchronized Primary_Universe_Index peers",
+  "home_market_definition": "current persisted Primary_Universe_Index mapping for the Frozen security",
+  "lookahead_rule": "peer feature_as_of_date must equal the security feature_as_of_date; future peer dates prohibited",
+  "missing_benchmark_behavior": "RS_NOT_VERIFIED; no substitute benchmark, ETF, MIC-country inference, zero fill or fallback",
+  "new_rs_semantics_invented": false,
+  "null_nonfinite_behavior": "any missing/non-finite Security R20/R60 or peer median => RS_NOT_VERIFIED",
+  "official_index_benchmark_claim": false,
+  "peer_semantics": "LEAVE_ONE_OUT_PRIMARY_UNIVERSE_COHORT_MEDIAN",
+  "return_horizons": [
+    20,
+    60
+  ],
+  "sector_rs_in_scope": false,
+  "status": "CONTRACT_BOUND"
+}
