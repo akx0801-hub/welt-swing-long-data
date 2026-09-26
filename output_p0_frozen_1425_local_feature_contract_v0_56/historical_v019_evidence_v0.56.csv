@@ -1,0 +1,9 @@
+Family,Historical_v0_19_Relationship,Authority_Role
+EMA20_SLOPE,HISTORICAL_DESIGN_EVIDENCE matches 5-observation percentage slope,DESIGN_EVIDENCE_ONLY
+EMA50_SLOPE,HISTORICAL_DESIGN_EVIDENCE matches 10-observation percentage slope,DESIGN_EVIDENCE_ONLY
+RANGE_COMPRESSION_FAMILY,"HISTORICAL_DESIGN_EVIDENCE includes Range5_Pct, Range10_Pct, Range20_Pct and Range5_to_Range20; TR-mean experimental family is not promoted",DESIGN_EVIDENCE_ONLY
+RELATIVE_VOLUME_METRICS,HISTORICAL_DESIGN_EVIDENCE uses current volume over preceding-20 median volume,DESIGN_EVIDENCE_ONLY
+GAP_OVER_ATR,HISTORICAL_DESIGN_EVIDENCE has signed Gap_Pct but no canonical Gap/ATR,DESIGN_EVIDENCE_ONLY
+DAILY_MOVE_IN_ATR,"HISTORICAL_DESIGN_EVIDENCE used current TrueRange/ATR, which is not adopted because it represents intrabar range rather than signed daily close movement",DESIGN_EVIDENCE_ONLY
+RECENT_IMPULSE_DESCRIPTORS,"HISTORICAL_DESIGN_EVIDENCE contains threshold-free strongest-return/post-impulse descriptors, but those experimental fields are not promoted wholesale",DESIGN_EVIDENCE_ONLY
+RELEVANT_HIGH_DISTANCE_FAMILY,"HISTORICAL_DESIGN_EVIDENCE includes an ATR-normalized High20 distance, but v0.56 rejects mixed normalization to keep the family coherent with existing Dist_High252",DESIGN_EVIDENCE_ONLY

@@ -1,0 +1,13 @@
+Canonical_Name,Minimum_Valid_Observations,Additional_Completeness
+EMA20_Slope_5,25,EMA20 must be defined at t and t-5
+EMA50_Slope_10,60,EMA50 must be defined at t and t-10
+Range5_Pct,5,valid OHLC
+Range10_Pct,10,valid OHLC
+RangeCompression_5_20,20,Range20_Pct nonzero
+RangeCompression_10_20,20,Range20_Pct nonzero
+RVOL20,21,current and previous 20 Volume_Tech all finite/nonnegative; previous median nonzero
+Gap_Over_ATR14,15,"Open[t], Close[t-1], ATR14[t-1] defined; prior ATR nonzero"
+DailyMove_Over_ATR14,15,"Close[t], Close[t-1], ATR14[t-1] defined; prior ATR nonzero"
+Dist_High20,20,High20 nonzero
+Dist_High60,60,High60 nonzero
+RECENT_IMPULSE_DESCRIPTORS,61,all constituents defined; RVOL volume completeness current+previous20

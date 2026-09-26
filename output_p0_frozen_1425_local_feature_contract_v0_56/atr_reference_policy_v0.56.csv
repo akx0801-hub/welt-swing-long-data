@@ -1,0 +1,4 @@
+Feature,ATR_Reference,Reason,Contract_Status
+ATR14_Wilder_DEV(existing),current t,descriptive current ATR remains unchanged,EXISTING_UNCHANGED
+Gap_Over_ATR14,ATR14[t-1 valid],current event magnitude normalized by volatility known before current bar,CONTRACT_DEFINED_NOT_IMPLEMENTED
+DailyMove_Over_ATR14,ATR14[t-1 valid],current event magnitude normalized by volatility known before current bar,CONTRACT_DEFINED_NOT_IMPLEMENTED

@@ -1,0 +1,20 @@
+{
+  "all8_defined": true,
+  "artifact_binding": "PENDING_WORKFLOW_UPLOAD",
+  "decision_counts": {
+    "CONTRACT_DEFERRED": 0,
+    "CONTRACT_DEFINED": 8,
+    "CONTRACT_PARTIALLY_DEFINED": 0,
+    "CONTRACT_REJECTED": 0
+  },
+  "feature_materialization_runs": 0,
+  "next_gate": "P0 FROZEN-1425 LOCAL FEATURE CONTRACT v0.56 BOUNDED IMPLEMENTATION / PROMOTION GATE v0.57",
+  "p0_local_feature_layer_ready": false,
+  "p0_runs": 0,
+  "stage": "P0_FROZEN_1425_LOCAL_FEATURE_CONTRACT_DEFINITION",
+  "status": "PASS_ALL8_CONTRACTS_DEFINED",
+  "tests_failed": 0,
+  "tests_passed": 24,
+  "v0_57_local_feature_implementation_authorized": true,
+  "version": "v0.56"
+}

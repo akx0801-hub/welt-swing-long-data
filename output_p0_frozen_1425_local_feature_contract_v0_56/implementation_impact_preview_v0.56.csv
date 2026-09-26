@@ -1,0 +1,10 @@
+Impact,Value,Detail
+NEW_NUMERIC_COLUMNS,11,EMA20_Slope_5;EMA50_Slope_10;Range5_Pct;Range10_Pct;RangeCompression_5_20;RangeCompression_10_20;RVOL20;Gap_Over_ATR14;DailyMove_Over_ATR14;Dist_High20;Dist_High60
+SEMANTIC_FAMILY_ONLY,1,RECENT_IMPULSE_DESCRIPTORS composition; no score/event column
+REUSE_EXISTING_PRIMITIVES,EMA20;EMA50;Range20_Pct;ATR14_Wilder_DEV;R5;R20;R60;High20;High60;High252;Dist_High252,single-source-of-truth reuse
+NEW_ROLLING_PRIMITIVES,High5/Low5;High10/Low10;previous-only MedianVolume20,implementation-stage internal primitives
+NEW_LAG_PRIMITIVES,EMA20 lag5; EMA50 lag10; ATR14 lag1; previous valid Close,all lags count canonical valid observations
+MAX_MIN_HISTORY_NEW_NUMERIC,60,EMA50_Slope_10 and Dist_High60
+MAX_MIN_HISTORY_NEW_SEMANTIC_FAMILY,61,RECENT_IMPULSE_DESCRIPTORS because R60 requires 61 valid closes
+GLOBAL_LAYER_HISTORY_CHANGE,NONE,existing canonical High252/Dist_High252 already require 252 valid observations
+FEATURE_MATERIALIZATION_RUNS,0,contract-only gate

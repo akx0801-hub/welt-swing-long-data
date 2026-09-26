@@ -1,0 +1,11 @@
+{
+  "artifact_digest": "sha256:17acd42edc06fe7311d88e27ee0a1a2052145e92440e487c2e0f0a47a10709ed",
+  "artifact_id": 10904166471,
+  "artifact_name": "p0-frozen-1425-local-feature-contract-v0.56-36235568433",
+  "artifact_verified": "PASS",
+  "feature_materialization_runs": 0,
+  "price_runtime_opened": false,
+  "price_runtime_write_attempts": 0,
+  "workflow_head_sha": "b069e568dd6f9642d0bdc9e34bedd8b8e659d26a",
+  "workflow_run_id": 36235568433
+}

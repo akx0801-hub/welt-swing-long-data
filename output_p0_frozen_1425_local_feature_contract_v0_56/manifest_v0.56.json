@@ -1,0 +1,124 @@
+{
+  "artifact": {
+    "artifact_digest": "sha256:17acd42edc06fe7311d88e27ee0a1a2052145e92440e487c2e0f0a47a10709ed",
+    "artifact_id": 10904166471,
+    "artifact_name": "p0-frozen-1425-local-feature-contract-v0.56-36235568433",
+    "artifact_verified": "PASS",
+    "feature_materialization_runs": 0,
+    "price_runtime_opened": false,
+    "price_runtime_write_attempts": 0,
+    "workflow_head_sha": "b069e568dd6f9642d0bdc9e34bedd8b8e659d26a",
+    "workflow_run_id": 36235568433
+  },
+  "decision_counts": {
+    "CONTRACT_DEFERRED": 0,
+    "CONTRACT_DEFINED": 8,
+    "CONTRACT_PARTIALLY_DEFINED": 0,
+    "CONTRACT_REJECTED": 0
+  },
+  "feature_materialization_runs": 0,
+  "files": {
+    "artifact_binding_v0.56.json": {
+      "bytes": 446,
+      "sha256": "63d420bbbec07371a761753931c471ee25d255bc6bb0c7ed9ec9843156ed633c"
+    },
+    "atr_reference_policy_v0.56.csv": {
+      "bytes": 431,
+      "sha256": "047241c9a9997e9eca0662d6ead6f5884fddb1febd8f821626355a9ecd835a58"
+    },
+    "canonical_feature_contract_registry_v0.56.csv": {
+      "bytes": 15495,
+      "sha256": "d658b64c9aa8ff1dddc4af3344699a46c6f3eeea7a9d23c0be5e13a79978e56f"
+    },
+    "contract_decisions_v0.56.csv": {
+      "bytes": 11881,
+      "sha256": "d9069a35f2011ebc9f707b764e52e555e65e0f7049c120276c97b5b43c7b10c2"
+    },
+    "current_bar_policy_v0.56.csv": {
+      "bytes": 1989,
+      "sha256": "1dd2544140d39f37e5cdde57674120c54eeb00d7320199aecaee19995c4d5f60"
+    },
+    "docs/validation/P0_Frozen_1425_Local_Feature_Contract_Definition_v0.56.md": {
+      "bytes": 4801,
+      "sha256": "51219e81a381cb4c5b19f5a3d6f06828546e1547a9d400878ec2b73dd4ad44d2"
+    },
+    "historical_v019_evidence_v0.56.csv": {
+      "bytes": 1289,
+      "sha256": "2d8f727653cc58cab83ac364b5bb54e0fb016ce006ab01a36a8bbe46a9f99307"
+    },
+    "implementation_impact_preview_v0.56.csv": {
+      "bytes": 1009,
+      "sha256": "cecf8a303c61607c2780bfcbfdeb369c60a41b9389b0216910095d8fef1fdb27"
+    },
+    "input_authority_validation_v0.56.json": {
+      "bytes": 2036,
+      "sha256": "b40a1f97794388810153a2d803bd45bfcada4ed14395e48f5127b6716fd493fd"
+    },
+    "manifest_preupload_v0.56.json": {
+      "bytes": 3534,
+      "sha256": "8328fadf339cc60938e9c4b599ef25563758931909cc3405d6183def260001ce"
+    },
+    "master_semantic_evidence_v0.56.csv": {
+      "bytes": 3320,
+      "sha256": "6f2c76a3d575793972f7db9cb1a0fb99db71796a65835b3bca3aad07f009f5bc"
+    },
+    "minimum_history_contract_v0.56.csv": {
+      "bytes": 745,
+      "sha256": "cb0585d1765e34562d19b4b3b1779c979936245cd9f04ccea8e437562e45eecb"
+    },
+    "null_zero_denominator_contract_v0.56.csv": {
+      "bytes": 2477,
+      "sha256": "981c9dffdd9ea1aa5f5fd9df368cde161675ca8172991ce98bf62ba68123448c"
+    },
+    "remaining8_reconciliation_v0.56.csv": {
+      "bytes": 826,
+      "sha256": "b8f31d5cdbe75aa451454dae92a6088fb9a87d4955e1633ae8c24dd1ec6d6d6f"
+    },
+    "remaining_ambiguities_v0.56.csv": {
+      "bytes": 25,
+      "sha256": "29de22724a3d181090e5d1e650e970cc532695d957ef47f3e1bb4689f5c8f113"
+    },
+    "stage_checkpoint_preupload_v0.56.json": {
+      "bytes": 653,
+      "sha256": "7cd770e7cf12083b2781e2ce10351a91d7cd2e5d6fd38cc91c87942d400bbf53"
+    },
+    "stage_checkpoint_v0.56.json": {
+      "bytes": 794,
+      "sha256": "7e487f881eb1d93d7f42493a45e6745839f5f4bb93584d7808ccfa9093b2b4bb"
+    },
+    "summary_preupload_v0.56.json": {
+      "bytes": 2568,
+      "sha256": "b8fa4a64a22f719d0a4d999aece1d711d27cdb770149ec7ff52eeb0a0cdaffb2"
+    },
+    "summary_v0.56.json": {
+      "bytes": 3375,
+      "sha256": "dd458b6fa8ee3305df7207a4cf94da1816b08599a515cd538db6157db1c2ce9b"
+    },
+    "test_results_v0.56.csv": {
+      "bytes": 1396,
+      "sha256": "8a128aaa32e7d2f7c0f44301c71ebcb727862ee522cc44b0c09a681ae6f8621d"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "implementation_head": "b069e568dd6f9642d0bdc9e34bedd8b8e659d26a",
+  "new_numeric_features_expected": 11,
+  "next_gate": "P0 FROZEN-1425 LOCAL FEATURE CONTRACT v0.56 BOUNDED IMPLEMENTATION / PROMOTION GATE v0.57",
+  "p0_local_feature_layer_ready": false,
+  "p0_runs": 0,
+  "price_runtime_bytes": 144539648,
+  "price_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "productive": false,
+  "provider_calls": {
+    "alpha_vantage": 0,
+    "eodhd": 0,
+    "market": 0,
+    "scalable": 0,
+    "yahoo_yfinance": 0
+  },
+  "required_start_head": "b6426f24c30c213949d436d205f9188f22c21d84",
+  "stage": "P0_FROZEN_1425_LOCAL_FEATURE_CONTRACT_DEFINITION",
+  "successful_workflow_run_id": 36235568433,
+  "v055_semantic_sha256": "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc",
+  "v0_57_local_feature_implementation_authorized": true,
+  "version": "v0.56"
+}

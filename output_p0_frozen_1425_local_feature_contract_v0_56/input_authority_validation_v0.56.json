@@ -1,0 +1,32 @@
+{
+  "authority_blobs": {
+    "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md": "680d0434e534d1fe136e694ca05cb574958a1a24",
+    "docs/validation/P0_Feature_Augmentation_v0.19.md": "2d49b4c153710569f84d488a3db1154ad21875bd",
+    "output_p0_frozen_1425_local_feature_remediation_v0_55/canonical_feature_registry_v0.55.csv": "f6acc0141ca346c8560514a12025c993c6845822",
+    "output_p0_frozen_1425_local_feature_remediation_v0_55/contract_binding_v0.55.csv": "9a166f460f382f7cba1638a008c592c146a5d0f5",
+    "output_p0_frozen_1425_local_feature_remediation_v0_55/manifest_v0.55.json": "1a8ab5985743f103288221172e08fd137ef28b01",
+    "output_p0_frozen_1425_local_feature_remediation_v0_55/summary_v0.55.json": "1ac453c9af6e3169120e5a5908dd78d39890ceb2",
+    "scripts/p0_feature_augmentation_v0_19.py": "62ced7a22abc6b1e1aaeb0a2f44690fd67956d95",
+    "universe/SWING_U3K_FROZEN_v0.5.csv": "018a03eb4614a197da9d2d566e77f32c61238dad"
+  },
+  "frozen_byte_sha256_verified": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "frozen_members": 1425,
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "p0_local_feature_layer_ready": false,
+  "price_runtime_bytes": 144539648,
+  "price_runtime_opened": false,
+  "price_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "price_runtime_write_attempts": 0,
+  "repository_sha": "b069e568dd6f9642d0bdc9e34bedd8b8e659d26a",
+  "required_start_head": "b6426f24c30c213949d436d205f9188f22c21d84",
+  "stage": "P0_FROZEN_1425_LOCAL_FEATURE_CONTRACT_DEFINITION",
+  "v055_artifact_digest": "sha256:a6faf3156763a9ff4d6eba5322aa6e62c1f97a75797b09b910fba762917184a8",
+  "v055_artifact_id": 10902665790,
+  "v055_canonical_numeric_features": 23,
+  "v055_feature_partial": 1425,
+  "v055_feature_ready": 0,
+  "v055_remaining_local_contract_gaps": 8,
+  "v055_semantic_materialization_sha256": "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc",
+  "v055_workflow_run": 36230843835,
+  "version": "v0.56"
+}
