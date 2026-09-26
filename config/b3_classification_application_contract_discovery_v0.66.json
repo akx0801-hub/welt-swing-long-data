@@ -1,0 +1,15 @@
+{
+  "version": "v0.66",
+  "stage": "B3_CLASSIFICATION_APPLICATION_API_ASSET_CONTRACT_DISCOVERY_GATE",
+  "required_start_head": "fb651c31f55f14a7fcb6bb3c83c5b25e3d69a4e6",
+  "scope_cohort": "BR_IBRX100",
+  "alpha_vantage_allowed": false,
+  "exact37_execution_allowed": false,
+  "pdsc_exact37_generation_allowed": false,
+  "canonical_mapping_population_allowed": false,
+  "other_cohorts_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "productive": false
+}
