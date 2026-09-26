@@ -1,0 +1,180 @@
+{
+  "version": "v0.63",
+  "stage": "BR_IBRX100_OFFICIAL_SOURCE_NATIVE_SECTOR_BULK_ROUTE_RESOLUTION_GATE",
+  "research_date_utc": "2026-09-26",
+  "scope_cohort": "BR_IBRX100",
+  "frozen_rows": 37,
+  "inherited_v062_evidence": [
+    {
+      "url": "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/classificacao-setorial/",
+      "status": "REFERENCED_FROM_V0_62",
+      "finding": "B3 official Classificacao Setorial public query; weekly-updated query base. Not claimed as a new v0.63 discovery."
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/criterio-de-classificacao/",
+      "status": "REFERENCED_FROM_V0_62",
+      "finding": "B3 official classification criteria establish B3_CLASSIFICACAO_SETORIAL taxonomy authority. Not reopened as a new discovery."
+    },
+    {
+      "url": "https://www.b3.com.br/main.jsp?doui_processActionId=setLocaleProcessAction&locale=pt_BR&lumA=1&lumII=8AE490CA9A5E21B5019AEBE12A9C42A6&lumPageId=8AE490CA9A5E21B5019AEBE12A684286",
+      "status": "REFERENCED_FROM_V0_62",
+      "finding": "B3 public-data hub route. Not claimed as a new v0.63 discovery."
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/up2data/dados-disponiveis/",
+      "status": "REFERENCED_AND_TECHNICALLY_EXPANDED_IN_V0_63",
+      "finding": "v0.62 already identified Up2Data generally; v0.63 followed the official Listed Companies sample/data-dictionary and access-policy links to resolve technical access characteristics."
+    }
+  ],
+  "resolved_routes": [
+    {
+      "route_id": "B3_LISTED_COMPANIES_CLASSIFICATION_SEARCH",
+      "official_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/",
+      "route_type": "OFFICIAL_PAGE_BACKED_DATA_ROUTE",
+      "officiality": "PASS",
+      "bulk_reproducibility": "PASS",
+      "access_class": "PUBLIC_REPRODUCIBLE",
+      "classification_content": "PASS",
+      "taxonomy_identity": "B3_CLASSIFICACAO_SETORIAL",
+      "sector_fields": {
+        "Sector_Taxonomy": "DERIVABLE_AS_CONSTANT_B3_CLASSIFICACAO_SETORIAL",
+        "Sector_Name": "AVAILABLE_AS_OFFICIAL_HIERARCHY_NAME",
+        "Sector_Code": "NOT_AVAILABLE"
+      },
+      "security_identity_schema": "RESULT_SET_EXPOSES_B3_COMPANY_CODE_TRADING_NAME_LEGAL_NAME_GOVERNANCE_SEGMENT; DOES_NOT_EXPOSE_BULK_ISIN_OR_FULL_SECURITY_CLASS_ID_IN_THE_RESOLVED_CLASSIFICATION_SEARCH_RESULT",
+      "evidence": [
+        "Main page exposes official Search by Industry Classification taxonomy hierarchy.",
+        "Official search URL accepts a classification label and returns multiple matching listed companies in one result set.",
+        "Observed official example: /listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D returns 9 companies for Agricultura in one request.",
+        "This is a bounded classification-group query, not per-security web fanout."
+      ]
+    },
+    {
+      "route_id": "UP2DATA_LISTED_COMPANIES",
+      "official_url": "https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/up2data/dados-disponiveis/",
+      "route_type": "OFFICIAL_DATA_PRODUCT",
+      "officiality": "PASS",
+      "bulk_reproducibility": "PASS",
+      "access_class": "ENTITLEMENT_REQUIRED",
+      "classification_content": "NOT_VERIFIED",
+      "taxonomy_identity": "B3_CLASSIFICACAO_SETORIAL_NOT_PROVEN_IN_SUMMARYDATA_SCHEMA",
+      "sector_fields": {
+        "Sector_Taxonomy": "NOT_VERIFIED",
+        "Sector_Name": "NOT_VERIFIED",
+        "Sector_Code": "NOT_VERIFIED"
+      },
+      "security_identity_schema": "NOT_VERIFIED_FROM_RETRIEVED_SAMPLE_SCHEMA",
+      "evidence": [
+        "Official Up2Data Listed Companies channel has FinancialData, OutstandingShares, PositionOfShareholders, SummaryData; SummaryData is described as company summary registration.",
+        "Official page links a Listed_Companies.zip sample and UP2DATA data dictionary.",
+        "The sample archive and XLSX dictionary links were identified but their binary contents were not machine-readable through the bounded retrieval path used in this stage.",
+        "No official text retrieved in this stage explicitly proves that SummaryData carries B3 Classificacao Setorial fields; therefore this route is not used to pass Classification Content."
+      ]
+    }
+  ],
+  "technical_assets": [
+    {
+      "url": "https://www.b3.com.br/data/files/DE/41/55/00/A0A9C910F37907C9AC094EA8/Listed_Companies.zip",
+      "asset": "Official UP2DATA Listed Companies sample archive",
+      "retrieval_result": "OFFICIAL_LINK_IDENTIFIED_BINARY_CONTENT_NOT_FETCHED_BY_BOUNDED_TOOL",
+      "new_in_v063": true
+    },
+    {
+      "url": "https://www.b3.com.br/data/files/90/B4/5F/7E/DC1A0A105BF9020AAC094EA8/Catalogo%20de%20Taxonomia%20-%20Portugues.xlsx",
+      "asset": "Official UP2DATA data dictionary XLSX",
+      "retrieval_result": "OFFICIAL_LINK_IDENTIFIED_BINARY_CONTENT_NOT_FETCHED_BY_BOUNDED_TOOL",
+      "new_in_v063": true
+    },
+    {
+      "url": "https://www.b3.com.br/data/files/44/20/90/B2/E7D5F910CEC024F9AC094EA8/UP2DATA_Politica_Comercial_2.4.5.pdf",
+      "asset": "Official UP2DATA Commercial Policy 2.4.5",
+      "retrieval_result": "TEXT_RETRIEVED",
+      "new_in_v063": true,
+      "access_finding": "Direct access requires Master UP2DATA contract; Listed Companies has a specific monthly access tariff; UP2DATA Client/Cloud use contracted access and access keys. Distribution/publication is separately governed and subject to B3 approval."
+    }
+  ],
+  "page_backed_example": {
+    "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D",
+    "decoded_classification_label": "Agricultura",
+    "result_count_observed": 9,
+    "result_fields_observed": [
+      "Razao Social",
+      "Nome de Pregao",
+      "Segmento",
+      "Codigo"
+    ],
+    "classification_membership_semantics": "All returned companies are members of the requested official B3 industry-classification label.",
+    "per_security_fanout": false
+  },
+  "sector_code_audit": {
+    "result": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE",
+    "basis": [
+      "The public official classification hierarchy and page-backed search use classification names/labels.",
+      "No stable B3 source-native sector/subsector/segment classification code was exposed by the resolved public classification route.",
+      "The official classification criteria and bounded technical evidence retrieved for this stage do not establish such a code.",
+      "The UP2DATA Listed Companies binary sample/data dictionary could not be inspected through the bounded retrieval channel, and no official text retrieved proves a classification code there.",
+      "Local hashing, ordinal numbering, normalized labels, or invented codes are prohibited and were not created."
+    ]
+  },
+  "selected_route": {
+    "route_id": "B3_LISTED_COMPANIES_CLASSIFICATION_SEARCH",
+    "br_official_sector_bulk_route_ready": true,
+    "access_class": "PUBLIC_REPRODUCIBLE",
+    "classification_content": "PASS",
+    "security_identity_schema": "B3_COMPANY_CODE_PLUS_COMPANY_METADATA_ONLY_SECURITY_LEVEL_ISIN_FULL_TICKER_NOT_IN_BULK_RESULT",
+    "sector_code": "NOT_AVAILABLE",
+    "blocker": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100",
+    "next_gate": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100"
+  },
+  "prohibited_requests": {
+    "alpha_vantage": 0,
+    "yahoo_yfinance": 0,
+    "eodhd": 0,
+    "scalable": 0,
+    "wikipedia": 0,
+    "etf_holdings": 0,
+    "screeners": 0,
+    "third_party_sector_database": 0,
+    "tradingview": 0,
+    "company_website_classification": 0,
+    "name_classification": 0,
+    "per_security_web_fanout": 0,
+    "gics_icb_fallback": 0,
+    "crosswalk": 0,
+    "price_ohlcv": 0,
+    "news": 0,
+    "trading_analysis": 0
+  },
+  "external_requests": [
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/",
+      "result": "Official B3 Listed Companies page exposes Search by Industry Classification and the source-native sector/subsector/segment hierarchy.",
+      "stage_use": "NEW_TECHNICAL_ROUTE_RESOLUTION"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D",
+      "result": "Official page-backed classification query returned 9 listed companies in one result set for Agricultura; result fields include legal name, trading name, governance segment and B3 company code.",
+      "stage_use": "NEW_REPRODUCIBILITY_EVIDENCE"
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/up2data/dados-disponiveis/",
+      "result": "Technical expansion of already-known Up2Data route: Listed Companies channel exposes SummaryData and official sample/data-dictionary links.",
+      "stage_use": "EXPANSION_OF_V062_ROUTE_NOT_NEW_ROUTE_CLAIM"
+    },
+    {
+      "url": "https://www.b3.com.br/data/files/DE/41/55/00/A0A9C910F37907C9AC094EA8/Listed_Companies.zip",
+      "result": "Official sample ZIP link resolved from B3 page; binary content was not retrievable through the bounded web text channel, so schema content was not inferred.",
+      "stage_use": "NEW_TECHNICAL_ASSET_REFERENCE"
+    },
+    {
+      "url": "https://www.b3.com.br/data/files/90/B4/5F/7E/DC1A0A105BF9020AAC094EA8/Catalogo%20de%20Taxonomia%20-%20Portugues.xlsx",
+      "result": "Official UP2DATA data dictionary XLSX link resolved; binary content was not retrievable through the bounded web text channel, so no classification field/code was inferred.",
+      "stage_use": "NEW_TECHNICAL_ASSET_REFERENCE"
+    },
+    {
+      "url": "https://www.b3.com.br/data/files/44/20/90/B2/E7D5F910CEC024F9AC094EA8/UP2DATA_Politica_Comercial_2.4.5.pdf",
+      "result": "Official policy confirms contracted UP2DATA Client/Cloud access, access keys, Listed Companies pricing, Master contract requirement and separate distribution/publication governance.",
+      "stage_use": "NEW_ACCESS_CLASSIFICATION_EVIDENCE"
+    }
+  ]
+}
