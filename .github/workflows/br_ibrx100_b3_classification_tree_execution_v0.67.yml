@@ -1,0 +1,173 @@
+name: BR IBrX100 B3 Classification Tree Execution v0.67
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/br_ibrx100_b3_classification_tree_execution_v0.67.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  br-b3-tree-execution:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout bounded v0.67 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.67 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="a6c7e3db455d73c436142230bd466c64f2ac147d"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/br_ibrx100_b3_classification_tree_execution_spec_v0\.67\.json|scripts/br_ibrx100_b3_classification_tree_execution_v0_67\.py|scripts/persist_br_ibrx100_b3_classification_tree_execution_v0_67\.py|tests/test_br_ibrx100_b3_classification_tree_execution_v0_67\.py|\.github/workflows/br_ibrx100_b3_classification_tree_execution_v0\.67\.yml|config/br_ibrx100_b3_classification_tree_execution_v0\.67\.json)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.66 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10915250534 --jq .digest)"
+          test "$DIGEST" = "sha256:af7fe53a42cd199ff2b1a1edd98cb73d7535131b1e2135977c45a0853d12b5ae"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          s=json.load(open("output_b3_classification_application_contract_discovery_v0_66/summary_v0.66.json",encoding="utf-8"))
+          c=json.load(open("output_b3_classification_application_contract_discovery_v0_66/stage_checkpoint_v0.66.json",encoding="utf-8"))
+          t=json.load(open("output_b3_classification_application_contract_discovery_v0_66/b3_tree_contract_v0.66.json",encoding="utf-8"))
+          ids=list(csv.DictReader(open("output_br_ibrx100_sector_identity_coverage_v0_64/br_security_company_identity_audit_v0.64.csv",encoding="utf-8")))
+          assert s["verdict"]=="PASS_B3_CLASSIFICATION_TREE_CONTRACT"
+          assert s["b3_classification_tree_machine_reproducible"] is True
+          assert s["b3_complete_company_classification_dataset_ready"] is False
+          assert s["public_reproducible"] is True
+          assert s["discovered_contract"]=="https://sistemaswebb3-listados.b3.com.br/listedCompaniesProxy/CompanyCall/GetIndustryClassification/eyJsYW5ndWFnZSI6InB0LWJyIn0="
+          assert c["workflow_run_id"]==36269159688 and c["artifact_id"]==10915250534
+          assert "sha256:"+c["artifact_digest"]=="sha256:af7fe53a42cd199ff2b1a1edd98cb73d7535131b1e2135977c45a0853d12b5ae"
+          assert t["verified_contracts"][0]["schema"]["node_count"]==262
+          assert len(ids)==37 and all(r["Security_To_Company_Status"]=="PASS" for r in ids)
+          assert all(r["Company_Name_Join_Used"]=="NO" for r in ids)
+          assert s["canonical_mapping_population_runs"]==0 and s["sector_rs_runs"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+      - name: Verify v0.67 execution spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/br_ibrx100_b3_classification_tree_execution_spec_v0.67.json",encoding="utf-8"))
+          t=json.load(open("config/br_ibrx100_b3_classification_tree_execution_v0.67.json",encoding="utf-8"))
+          assert s["required_start_head"]=="a6c7e3db455d73c436142230bd466c64f2ac147d"
+          assert s["scope_cohort"]=="BR_IBRX100" and s["frozen_rows"]==37
+          assert s["taxonomy"]=="B3_CLASSIFICACAO_SETORIAL"
+          assert s["sector_level"]=="SETOR_ECONOMICO"
+          assert s["sector_code_method"]=="PDSC_SHA256_V1"
+          assert s["tree_fetch_count"]==2
+          assert s["alpha_vantage_allowed"] is False
+          assert s["per_security_web_fanout_allowed"] is False
+          assert s["company_name_joins_allowed"] is False
+          assert s["authentication_bypass_allowed"] is False
+          assert s["canonical_mapping_population_allowed"] is False
+          assert t["required_start_head"]=="a6c7e3db455d73c436142230bd466c64f2ac147d"
+          assert t["scope_cohort"]=="BR_IBRX100"
+          assert t["alpha_vantage_allowed"] is False
+          assert t["canonical_mapping_population_allowed"] is False
+          assert t["other_cohorts_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/br_ibrx100_b3_classification_tree_execution_v0_67.py scripts/persist_br_ibrx100_b3_classification_tree_execution_v0_67.py
+          python3 tests/test_br_ibrx100_b3_classification_tree_execution_v0_67.py -v
+
+      - name: Execute bounded B3 tree traversal
+        run: |
+          set -euo pipefail
+          rm -rf output_br_ibrx100_b3_classification_tree_execution_v0_67
+          python3 scripts/br_ibrx100_b3_classification_tree_execution_v0_67.py             --repository-sha "$GITHUB_SHA"             --output-dir output_br_ibrx100_b3_classification_tree_execution_v0_67
+
+      - name: Validate v0.67 result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_br_ibrx100_b3_classification_tree_execution_v0_67")
+          s=json.load(open(out/"summary_preupload_v0.67.json",encoding="utf-8"))
+          snap=json.load(open(out/"b3_execution_tree_snapshot_v0.67.json",encoding="utf-8"))
+          pd=json.load(open(out/"pdsc_collision_audit_v0.67.json",encoding="utf-8"))
+          prov=json.load(open(out/"provider_call_audit_v0.67.json",encoding="utf-8"))
+          cov=list(csv.DictReader(open(out/"br_exact_37_classification_coverage_v0.67.csv",encoding="utf-8")))
+          inv=list(csv.DictReader(open(out/"b3_execution_query_inventory_v0.67.csv",encoding="utf-8")))
+          req=list(csv.DictReader(open(out/"b3_group_request_ledger_v0.67.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.67.csv",encoding="utf-8")))
+          assert len(cov)==37
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in prov.values())
+          assert s["total"]==37
+          assert s["ready"]+s["ambiguous"]+s["not_found"]+s["not_verified"]==37
+          assert s["pdsc_collisions"]==pd["collision_count"]
+          if s["br_exact_37_classification_coverage_ready"]:
+              assert s["verdict"]=="PASS_BR_EXACT_37_CLASSIFICATION_COVERAGE"
+              assert (s["ready"],s["ambiguous"],s["not_found"],s["not_verified"])==(37,0,0,0)
+              assert s["executed_group_queries"]==s["expected_group_queries"]
+              assert s["successful_group_queries"]==s["expected_group_queries"]
+              assert s["failed_group_queries"]==0
+              assert s["pdsc_collisions"]==0
+              assert s["blocker"]==""
+          else:
+              assert s["verdict"]=="BLOCKED_BR_EXACT_37_CLASSIFICATION_COVERAGE"
+              assert s["blocker"]!=""
+          assert s["canonical_mapping_population_runs"]==0
+          assert s["sector_rs_runs"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.67 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: br-ibrx100-b3-classification-tree-execution-v0.67-${{ github.run_id }}
+          path: output_br_ibrx100_b3_classification_tree_execution_v0_67/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_br_ibrx100_b3_classification_tree_execution_v0_67.py             --output-dir output_br_ibrx100_b3_classification_tree_execution_v0_67             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "br-ibrx100-b3-classification-tree-execution-v0.67-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.67 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/BR_IBRX100_B3_Classification_Tree_Execution_Exact_37_Coverage_v0.67.md                   output_br_ibrx100_b3_classification_tree_execution_v0_67/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/BR_IBRX100_B3_Classification_Tree_Execution_Exact_37_Coverage_v0\.67\.md|output_br_ibrx100_b3_classification_tree_execution_v0_67/)' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist BR IBrX100 B3 classification execution v0.67"
+          git push origin HEAD:main
