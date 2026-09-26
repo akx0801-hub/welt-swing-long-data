@@ -1,0 +1,35 @@
+{
+  "version": "v0.69",
+  "stage": "FROZEN_1425_CANONICAL_SECTOR_METADATA_COVERAGE_RECONCILIATION_NEXT_COHORT_SELECTION_GATE",
+  "required_start_head": "978404e766f7813819686835adf2254cd5071c62",
+  "canonical_ready_rows_expected": 37,
+  "frozen_total_expected": 1425,
+  "global_remaining_expected": 1388,
+  "unresolved_cohort_count_expected": 7,
+  "authoritative_inputs": [
+    "sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",
+    "output_br_ibrx100_canonical_sector_metadata_materialization_v0_68/global_sector_metadata_coverage_status_v0.68.json",
+    "output_frozen_1425_source_native_sector_coverage_v0_62/cohort_sector_source_route_ledger_v0.62.csv",
+    "output_frozen_1425_source_native_sector_coverage_v0_62/summary_v0.62.json",
+    "config/manager_governance_authority_G_SEC_02_v0.62.json",
+    "config/manager_governance_authority_G_SEC_03_v0.64.json",
+    "output_br_ibrx100_canonical_sector_metadata_materialization_v0_68/manager_governance_authority_G_SEC_04_v0.68.json"
+  ],
+  "selection_rule": {
+    "exclude_canonical_ready": true,
+    "primary": "MAX_CONSECUTIVE_RESOLVED_GATES_FROM_A",
+    "resolved_statuses": ["PASS_INHERITED", "PASS_BY_CURRENT_GOVERNANCE"],
+    "tie_break_1": "SMALLER_FROZEN_COHORT_ROW_COUNT",
+    "tie_break_2": "LEXICOGRAPHIC_ASCENDING_COHORT_ID"
+  },
+  "external_requests_allowed": false,
+  "provider_calls_allowed": false,
+  "mapping_population_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "canonical_materialization_allowed": false,
+  "other_cohort_execution_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
