@@ -1,0 +1,153 @@
+name: P0 Frozen 1425 Sector Authority v0.59
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/p0_frozen_1425_sector_authority_v0_59.py
+      - scripts/persist_p0_frozen_1425_sector_authority_v0_59.py
+      - tests/test_p0_frozen_1425_sector_authority_v0_59.py
+      - .github/workflows/p0_frozen_1425_sector_authority_v0.59.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  sector-authority:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout bounded v0.59 authority gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install bounded dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check "pandas==2.2.3" "pytest==8.3.5"
+
+      - name: Verify exact v0.58 start authority
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "4c12c2126bb3f8ba6c6f132f316041c83b91a02a"
+
+          D58="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10905869033 --jq .digest)"
+          test "$D58" = "sha256:54dc5168218c7a211c6a0d66fc236c1e95a7cfdabef2acadf79282c8f1b5ae1c"
+
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          s=json.load(open("output_p0_frozen_1425_home_market_rs_v0_58/summary_v0.58.json",encoding="utf-8"))
+          assert s["verdict"]=="PASS_HOME_MARKET_RS_READY"
+          assert s["home_market_rs_ready"] is True
+          assert s["ready_count"]==1425 and s["total"]==1425
+          assert s["artifact"]["workflow_run_id"]==36242803316
+          assert s["artifact"]["artifact_id"]==10905869033
+          assert "sha256:"+s["artifact"]["artifact_digest"]=="sha256:54dc5168218c7a211c6a0d66fc236c1e95a7cfdabef2acadf79282c8f1b5ae1c"
+          assert s["v057_authority"]["p0_local_feature_layer_ready"] is True
+          assert s["frozen"]["members"]==1425
+          assert s["frozen"]["sha256"]=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert hashlib.sha256(Path("universe/SWING_U3K_FROZEN_v0.5.csv").read_bytes()).hexdigest()=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert hashlib.sha256(Path("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv").read_bytes()).hexdigest()=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert hashlib.sha256(Path("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv").read_bytes()).hexdigest()=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          print("v0.58 authority exact")
+          PY
+
+      - name: Focused v0.59 tests
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/p0_frozen_1425_sector_authority_v0_59.py scripts/persist_p0_frozen_1425_sector_authority_v0_59.py
+          pytest -q tests/test_p0_frozen_1425_sector_authority_v0_59.py
+
+      - name: Run bounded Sector authority gate
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_sector_authority_v0_59
+          python scripts/p0_frozen_1425_sector_authority_v0_59.py             --repository-sha "$GITHUB_SHA"             --output-dir output_p0_frozen_1425_sector_authority_v0_59
+
+      - name: Validate blocker verdict and hard stop
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_p0_frozen_1425_sector_authority_v0_59")
+          s=json.load(open(out/"summary_preupload_v0.59.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_preupload_v0.59.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.59.csv",encoding="utf-8")))
+          cap=list(csv.DictReader(open(out/"capability_v0.59.csv",encoding="utf-8")))
+          mapping=list(csv.DictReader(open(out/"mapping_audit_v0.59.csv",encoding="utf-8")))
+
+          assert s["verdict"]=="PASS_WITH_SECTOR_METADATA_CONTRACT_BLOCKER"
+          assert s["sector_rs_ready"] is False
+          assert s["affected_count"]==1425
+          assert s["sector_metadata_contract_status"]=="PREPARED_NOT_POPULATED"
+          assert s["canonical_sector_taxonomy"]=="NOT_DEFINED"
+          assert s["canonical_sector_field"]=="NOT_DEFINED"
+          assert s["populated_mapping_authority"] is False
+          assert s["sector_rs_materialization_runs"]==0
+          assert s["capability_counts"]=={
+            "READY":0,"BLOCKED_METADATA":1425,"BLOCKED_MAPPING":0,
+            "BLOCKED_PEER_GROUP":0,"BLOCKED_HISTORY":0,
+            "COMPUTATION_ERROR":0,"NOT_VERIFIED":0}
+          assert len(cap)==1425 and len(mapping)==1425
+          assert all(r["Sector_RS_Capability"]=="BLOCKED_METADATA_CONTRACT" for r in cap)
+          assert all(r["Mapping_Status"]=="NOT_VERIFIED_CONTRACT_BLOCKED" for r in mapping)
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert c["tests_failed"]==0
+          assert s["home_market_rs_ready"] is True
+          assert s["p0_local_feature_layer_ready"] is True
+          assert s["p0_numeric_pass_thresholds"]==[] and s["promoted_lane_pass_rules"]==[]
+          assert s["p0_runs"]==0 and s["p1_p2_runs"]==0
+          assert all(v==0 for v in s["provider_calls"].values())
+          assert not (out/"sector_rs_materialization_v0.59.csv").exists()
+
+          assert hashlib.sha256(Path("universe/SWING_U3K_FROZEN_v0.5.csv").read_bytes()).hexdigest()=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert hashlib.sha256(Path("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv").read_bytes()).hexdigest()=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert hashlib.sha256(Path("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv").read_bytes()).hexdigest()=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          print(json.dumps({"verdict":s["verdict"],"sector_rs_ready":s["sector_rs_ready"],"affected":s["affected_count"],"next_gate":s["next_gate"]},sort_keys=True))
+          PY
+
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git diff -- output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv)" = ""
+          test "$(git diff -- output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.59 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-sector-authority-v0.59-${{ github.run_id }}
+          path: output_p0_frozen_1425_sector_authority_v0_59/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistent authority
+        run: |
+          set -euo pipefail
+          python scripts/persist_p0_frozen_1425_sector_authority_v0_59.py             --output-dir output_p0_frozen_1425_sector_authority_v0_59             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "p0-frozen-1425-sector-authority-v0.59-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.59 authority
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/P0_Frozen_1425_Sector_Metadata_Sector_RS_Authority_v0.59.md                   output_p0_frozen_1425_sector_authority_v0_59/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/P0_Frozen_1425_Sector_Metadata_Sector_RS_Authority_v0\.59\.md|output_p0_frozen_1425_sector_authority_v0_59/)' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist Sector metadata authority v0.59"
+          git push origin HEAD:main
