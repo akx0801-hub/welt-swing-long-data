@@ -1,0 +1,210 @@
+{
+  "version": "v0.65",
+  "stage": "BR_IBRX100_B3_CLASSIFICATION_TREE_INVERSION_EXACT_37_SECTOR_COVERAGE_GATE",
+  "research_date_utc": "2026-09-26",
+  "scope_cohort": "BR_IBRX100",
+  "frozen_rows": 37,
+  "predecessor": {
+    "final_commit": "4e8151225f19ad1748c203b295e3ff699eabb7bf",
+    "verdict": "BLOCKED_EXACT_37_CLASSIFICATION_COVERAGE",
+    "ready": 0,
+    "total": 37,
+    "ambiguous": 0,
+    "not_found": 0,
+    "not_verified": 37,
+    "security_to_company_ready": 37,
+    "sector_taxonomy": "B3_CLASSIFICACAO_SETORIAL",
+    "sector_level": "SETOR_ECONOMICO",
+    "sector_code_method": "PDSC_SHA256_V1",
+    "blocker": "BR_EXACT_37_COVERAGE_INCOMPLETE",
+    "workflow_run": 36264343312,
+    "artifact_id": 10913620188,
+    "artifact_digest": "sha256:970d4c510642f5803ca4228fe2715d10661fc8733c7eb7fee5e1ad94d700678c"
+  },
+  "scope_locks": {
+    "reopen_frozen_membership": false,
+    "reopen_exact_37_tickers": false,
+    "reopen_ticker_to_company_rule": false,
+    "reopen_security_to_company_identity": false,
+    "reopen_taxonomy_identity": false,
+    "reopen_bulk_route_officiality": false,
+    "reopen_sector_level_binding": false,
+    "reopen_source_native_code_absence": false,
+    "reopen_pdsc_method": false
+  },
+  "hierarchy_capture": {
+    "root_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/",
+    "classification_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br",
+    "result": "NOT_MACHINE_REPRODUCIBLE_COMPLETE",
+    "blocker": "B3_CLASSIFICATION_TREE_NOT_MACHINE_REPRODUCIBLE",
+    "evidence": [
+      "The official root application was retrievable through the bounded web channel and exposed only a partial rendered subsetor/segment slice, not a complete sealed Setor Economico -> Subsetor -> Segmento tree.",
+      "The official /classification endpoint was directly reachable but the bounded machine-readable extraction returned an empty client-rendered shell, with no complete hierarchy payload to seal.",
+      "No official static taxonomy file, API response, or page-backed all-node payload was identified within the bounded official-only research performed for this stage.",
+      "Because the complete official hierarchy could not be captured, the set of necessary official leaf/query nodes cannot be proven complete. The stage stops before partial group traversal."
+    ]
+  },
+  "partial_observed_slice": {
+    "parent_setor_economico": "NOT_EXPLICIT_IN_BOUNDED_CAPTURE",
+    "source": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/",
+    "subsetor_segment_rows": [
+      [
+        "Comércio",
+        "Máquinas e Equipamentos"
+      ],
+      [
+        "Comércio",
+        "Material de Transporte"
+      ],
+      [
+        "Construção e Engenharia",
+        "Construção Pesada"
+      ],
+      [
+        "Construção e Engenharia",
+        "Engenharia Consultiva"
+      ],
+      [
+        "Construção e Engenharia",
+        "Produtos para Construção"
+      ],
+      [
+        "Construção e Engenharia",
+        "Serviços Diversos"
+      ],
+      [
+        "Máquinas e Equipamentos",
+        "Armas e Munições"
+      ],
+      [
+        "Máquinas e Equipamentos",
+        "Máq. e Equip. Construção e Agrícolas"
+      ],
+      [
+        "Máquinas e Equipamentos",
+        "Máq. e Equip. Industriais"
+      ],
+      [
+        "Máquinas e Equipamentos",
+        "Motores . Compressores e Outros"
+      ],
+      [
+        "Material de Transporte",
+        "Material Aeronáutico e de Defesa"
+      ],
+      [
+        "Material de Transporte",
+        "Material Rodoviário"
+      ],
+      [
+        "Serviços",
+        "Serviços Diversos"
+      ],
+      [
+        "Transporte",
+        "Exploração de Rodovias"
+      ],
+      [
+        "Transporte",
+        "Serviços de Apoio e Armazenagem"
+      ],
+      [
+        "Transporte",
+        "Transporte Aéreo"
+      ],
+      [
+        "Transporte",
+        "Transporte Ferroviário"
+      ],
+      [
+        "Transporte",
+        "Transporte Hidroviário"
+      ],
+      [
+        "Transporte",
+        "Transporte Metroviário"
+      ],
+      [
+        "Transporte",
+        "Transporte Rodoviário"
+      ]
+    ],
+    "use": "PARTIAL_CAPTURE_ONLY_NOT_SUFFICIENT_FOR_INVERSION"
+  },
+  "encoding_contract": {
+    "status": "VERIFIED_FOR_KNOWN_OFFICIAL_EXAMPLES",
+    "mechanism": "segment = URLENCODE(BASE64(UTF8(encodeURIComponent(exact official label))))",
+    "examples": [
+      {
+        "exact_label": "Agricultura",
+        "encoded_component": "Agricultura",
+        "base64": "QWdyaWN1bHR1cmE=",
+        "query_value": "QWdyaWN1bHR1cmE%3D",
+        "official_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D",
+        "predecessor_result": "multi-company group result verified in v0.63"
+      },
+      {
+        "exact_label": "Minerais Metálicos",
+        "encoded_component": "Minerais%20Met%C3%A1licos",
+        "base64": "TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw==",
+        "query_value": "TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw%3D%3D",
+        "official_url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw%3D%3D",
+        "result": "multi-company group result verified by official B3 search result"
+      }
+    ],
+    "guessing_used": false
+  },
+  "coverage_execution": {
+    "complete_tree_nodes_identified": 0,
+    "coverage_classification_nodes_queried": 0,
+    "reason": "FAIL_CLOSED_BEFORE_PARTIAL_TRAVERSAL_COMPLETE_TREE_NOT_SEALED",
+    "exact37_ready": 0,
+    "ambiguous": 0,
+    "not_found": 0,
+    "not_verified": 37,
+    "distinct_setores_exact37": 0
+  },
+  "blocker": "B3_CLASSIFICATION_TREE_NOT_MACHINE_REPRODUCIBLE",
+  "next_gate": "B3_CLASSIFICATION_TREE_NOT_MACHINE_REPRODUCIBLE",
+  "prohibited_requests": {
+    "per_security_page_fanout": 0,
+    "company_overview_requests_for_37": 0,
+    "company_name_matching": 0,
+    "fuzzy_matching": 0,
+    "alpha_vantage": 0,
+    "yahoo_yfinance": 0,
+    "eodhd": 0,
+    "scalable": 0,
+    "wikipedia": 0,
+    "tradingview": 0,
+    "etf_holdings": 0,
+    "third_party_databases": 0,
+    "gics_icb_fallback": 0,
+    "crosswalk": 0,
+    "price_ohlcv": 0,
+    "news": 0,
+    "trading_analysis": 0
+  },
+  "external_requests": [
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/",
+      "result": "Official B3 listed-companies application retrievable; bounded extraction exposed a partial subsetor/segment slice only, not a complete sealed three-level taxonomy tree.",
+      "use": "TREE_CAPTURE_ATTEMPT"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br",
+      "result": "Official classification endpoint directly reachable, but bounded machine-readable extraction produced an empty client-rendered shell with no complete hierarchy payload.",
+      "use": "TREE_CAPTURE_ATTEMPT"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D",
+      "result": "Known official Agriculture group-query URL re-opened only to validate route/encoding behavior; it is an encoding example, not a coverage node traversal.",
+      "use": "ENCODING_CONTRACT_VALIDATION"
+    },
+    {
+      "url": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=TWluZXJhaXMlMjBNZXQlQzMlQTFsaWNvcw%3D%3D",
+      "result": "Known official Minerais Metálicos group-query URL re-opened only to validate the encoded-label mechanism; not used as a partial exact-37 traversal.",
+      "use": "ENCODING_CONTRACT_VALIDATION"
+    }
+  ]
+}
