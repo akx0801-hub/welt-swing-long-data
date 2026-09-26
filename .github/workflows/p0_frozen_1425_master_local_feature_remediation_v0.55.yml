@@ -1,0 +1,135 @@
+name: P0 Frozen 1425 Master Local Feature Remediation v0.55
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/feature_builder.py
+      - scripts/p0_frozen_1425_master_local_feature_remediation_v0_55.py
+      - tests/test_p0_frozen_1425_master_local_feature_remediation_v0_55.py
+      - .github/workflows/p0_frozen_1425_master_local_feature_remediation_v0.55.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  remediate-local-feature-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout bounded implementation
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install bounded offline dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check "pandas==2.2.3" "numpy==2.1.3" "pytest==8.3.5"
+
+      - name: Verify lineage and exact input artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 4fd2d914b2bbb0fcf2b347890f8d652ee80c4f00 HEAD
+
+          D53="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10900287789 --jq .digest)"
+          test "$D53" = "sha256:f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95"
+          rm -rf runtime_input/v053
+          mkdir -p runtime_input/v053
+          gh run download 36225840648 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-filtered-invalid-bar-policy-v0.53-36225840648 \
+            --dir runtime_input/v053
+          test -f runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite
+          test "$(sha256sum runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite | awk '{print $1}')" = "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          test "$(stat -c %s runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite)" = "144539648"
+
+          D54="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10901437101 --jq .digest)"
+          test "$D54" = "sha256:0c6eec3a41a26940b4e1325532f2e7bf240f1d362f147f4b52a3943f6f5dfe47"
+          rm -rf runtime_input/v054
+          mkdir -p runtime_input/v054
+          gh run download 36228518000 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-feature-materialization-v0.54-36228518000 \
+            --dir runtime_input/v054
+          test -f runtime_input/v054/feature_materialization_v0.54.csv
+          test "$(sha256sum runtime_input/v054/feature_materialization_v0.54.csv | awk '{print $1}')" = "c5d9c6eabbbef10909b7a0df8b4bb8eb5ff32130d8c85162f5f2f4e4a7a4bed6"
+          test -f runtime_input/v054/feature_formula_binding_v0.54.csv
+
+      - name: Focused v0.55 contract tests
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/feature_builder.py scripts/p0_frozen_1425_master_local_feature_remediation_v0_55.py
+          pytest -q tests/test_p0_frozen_1425_master_local_feature_remediation_v0_55.py
+
+      - name: Run bounded v0.55 remediation
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_local_feature_remediation_v0_55
+          python scripts/p0_frozen_1425_master_local_feature_remediation_v0_55.py \
+            --runtime runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite \
+            --v054-artifact-dir runtime_input/v054 \
+            --output-dir output_p0_frozen_1425_local_feature_remediation_v0_55 \
+            --repository-sha "$GITHUB_SHA"
+
+      - name: Validate bounded result
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_p0_frozen_1425_local_feature_remediation_v0_55")
+          s=json.load(open(out/"summary_preupload_v0.55.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_preupload_v0.55.json",encoding="utf-8"))
+          d=json.load(open(out/"determinism_v0.55.json",encoding="utf-8"))
+          contracts=list(csv.DictReader(open(out/"contract_binding_v0.55.csv",encoding="utf-8")))
+          caps=list(csv.DictReader(open(out/"capability_v0.55.csv",encoding="utf-8")))
+          mat=list(csv.DictReader(open(out/"feature_materialization_v0.55.csv",encoding="utf-8")))
+          old=list(csv.DictReader(open(out/"existing21_regression_v0.55.csv",encoding="utf-8")))
+          asx=list(csv.DictReader(open(out/"asx8_regression_v0.55.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.55.csv",encoding="utf-8")))
+          assert s["status"]=="PASS_WITH_REMAINING_CONTRACT_GAPS"
+          assert s["contract_counts"]=={
+            "CONTRACT_EXACT":0,"CONTRACT_DERIVABLE":3,"CONTRACT_AMBIGUOUS":8,
+            "CONTRACT_CONFLICT":0,"CONTRACT_NOT_FOUND":0}
+          assert len(contracts)==11
+          assert len(mat)==1425 and len(caps)==1425
+          assert s["canonical_feature_column_count"]==23
+          assert s["remaining_master_local_gaps"]==[
+            "EMA20_SLOPE","EMA50_SLOPE","RANGE_COMPRESSION_FAMILY","RELATIVE_VOLUME_METRICS",
+            "GAP_OVER_ATR","DAILY_MOVE_IN_ATR","RECENT_IMPULSE_DESCRIPTORS","RELEVANT_HIGH_DISTANCE_FAMILY"]
+          assert s["capability_counts"]=={
+            "FEATURE_READY":0,"FEATURE_PARTIAL":1425,"FEATURE_BLOCKED_INSUFFICIENT_HISTORY":0,
+            "FEATURE_BLOCKED_INPUT":0,"FEATURE_COMPUTATION_ERROR":0,"NOT_VERIFIED":0}
+          assert s["p0_local_feature_layer_ready"] is False
+          assert old[-1]["First_Mismatches"]=="c5d9c6eabbbef10909b7a0df8b4bb8eb5ff32130d8c85162f5f2f4e4a7a4bed6"
+          assert len(asx)==8 and all(r["Result"]=="PASS" for r in asx)
+          assert d["match"] is True
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert c["tests_failed"]==0
+          assert s["home_market_rs_ready"] is False and s["sector_rs_ready"] is False
+          assert s["p0_runs"]==0
+          assert s["market_provider_calls"]==0 and s["yahoo_yfinance_calls"]==0 and s["eodhd_calls"]==0
+          assert s["alpha_vantage_calls"]==0 and s["scalable_calls"]==0
+          assert hashlib.sha256(Path("universe/SWING_U3K_FROZEN_v0.5.csv").read_bytes()).hexdigest()=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          print(json.dumps({"status":s["status"],"contract_counts":s["contract_counts"],"semantic_sha256":s["full_frozen_materialization"]["semantic_sha256"],"tests":s["tests"]},sort_keys=True))
+          PY
+
+          test "$(sha256sum runtime_input/v053/runtime_cache/p0_frozen_1425_v0_53.sqlite | awk '{print $1}')" = "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.55 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-master-local-feature-remediation-v0.55-${{ github.run_id }}
+          path: output_p0_frozen_1425_local_feature_remediation_v0_55/
+          if-no-files-found: error
+          retention-days: 14

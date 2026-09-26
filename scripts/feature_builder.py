@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 
 
-
 def technical_valid_mask_for_features(df: pd.DataFrame) -> pd.Series:
     """Mirror price-cache hard bar validity; preserve raw cache, exclude bad bars from features."""
     o = pd.to_numeric(df["open"], errors="coerce")
@@ -31,7 +30,6 @@ def split_adjust_technical(df: pd.DataFrame) -> pd.DataFrame:
     x = df.copy().sort_values("day")
     split = pd.to_numeric(x["stock_splits"], errors="coerce").fillna(0.0)
     ratios = split.where(split > 0, 1.0)
-    # cumulative factor including current row, then exclude current split by shifting forward
     future_including = ratios.iloc[::-1].cumprod().iloc[::-1]
     factor = future_including.shift(-1, fill_value=1.0).replace(0, 1.0)
     for c in ["open", "high", "low", "close"]:
@@ -112,6 +110,7 @@ def build_features(db_path: str | Path, universe_csv: str | Path) -> pd.DataFram
         last_high20, last_high60, last_high252 = _safe_last(high20), _safe_last(high60), _safe_last(high252)
         last_low20, last_low60 = _safe_last(low20), _safe_last(low60)
         last_atr = _safe_last(atr14)
+        current_tr = _safe_last(tr)
 
         rows.append({
             "WS_ID": str(ws_id),
@@ -128,9 +127,11 @@ def build_features(db_path: str | Path, universe_csv: str | Path) -> pd.DataFram
             "SMA200": last_sma200,
             "ATR14_Wilder_DEV": last_atr,
             "ATR14_Pct_DEV": None if last_atr is None or last_close in (None,0) else float(last_atr/last_close),
+            "R1": _last_return(c, 1),
             "R5": _last_return(c, 5),
             "R20": _last_return(c, 20),
             "R60": _last_return(c, 60),
+            "TrueRange_Current": current_tr,
             "High20": last_high20,
             "High60": last_high60,
             "High252": last_high252,
