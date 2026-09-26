@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "ed79a1cad64fa409f72fd21d23669d77b720a99c6f12e379fd48c1573a1f4ab0",
+  "artifact_id": 10906513700,
+  "artifact_name": "p0-frozen-1425-sector-authority-v0.59-36243521798",
+  "artifact_scope": "pre-persistence v0.59 sector authority evidence package",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "ddc30f6666c6658fc7ef634aa1113261e7195c8c",
+  "workflow_run_id": 36243521798
+}

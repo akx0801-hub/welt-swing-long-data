@@ -1,0 +1,121 @@
+{
+  "affected_count": 1425,
+  "artifact": {
+    "artifact_digest": "ed79a1cad64fa409f72fd21d23669d77b720a99c6f12e379fd48c1573a1f4ab0",
+    "artifact_id": 10906513700,
+    "artifact_name": "p0-frozen-1425-sector-authority-v0.59-36243521798",
+    "artifact_scope": "pre-persistence v0.59 sector authority evidence package",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "ddc30f6666c6658fc7ef634aa1113261e7195c8c",
+    "workflow_run_id": 36243521798
+  },
+  "files": {
+    "artifact_binding_v0.59.json": {
+      "bytes": 405,
+      "sha256": "6a0e708cfa8bd0e86f496bb973b96012020c53a935fb0741ee10ad74ba9e4469"
+    },
+    "authority_validation_v0.59.json": {
+      "bytes": 2272,
+      "sha256": "fe49f8ded60b5dff1a87425cc698989d0207a4594f20c8b9be63b40320800701"
+    },
+    "capability_v0.59.csv": {
+      "bytes": 193097,
+      "sha256": "fea5d848bdc11a645be66c2738fc8fd321ac68cb9c97e84bbd26c526cfc20547"
+    },
+    "determinism_v0.59.json": {
+      "bytes": 128,
+      "sha256": "c5abca72cf22e8f355cb0f9510a20a6ec77e180ead583bfca1c9358326e3b9e3"
+    },
+    "docs/validation/P0_Frozen_1425_Sector_Metadata_Sector_RS_Authority_v0.59.md": {
+      "bytes": 3198,
+      "sha256": "9d82d2e44e7b4886982218695df23ad9fe5b59ddc38f9e1b6557e1f4dc79e235"
+    },
+    "input_immutability_v0.59.json": {
+      "bytes": 993,
+      "sha256": "d886ead2f1736dae3c90291eb0123b406203a7085fc1b2bc9a20fdf81aa36504"
+    },
+    "manifest_preupload_v0.59.json": {
+      "bytes": 3639,
+      "sha256": "5cd8fcfa94791da57cf8fbf682e0bb2ed51e449a9c0ca98139f683900cd43b71"
+    },
+    "mapping_audit_v0.59.csv": {
+      "bytes": 235548,
+      "sha256": "1a8a3fa90202734b024cd24f68074614da1ae65392f5d46f43f96b83e9c668e5"
+    },
+    "metadata_source_coverage_v0.59.csv": {
+      "bytes": 407,
+      "sha256": "ba7a320a939f290fb1cded177a4ffc74f69361ec1e1ca5f1684aa30569ccd351"
+    },
+    "peer_group_audit_v0.59.csv": {
+      "bytes": 458,
+      "sha256": "0c7e7bf4dd050c418a8c6c687f88c5d7b526f939013ce13b2405f3572953de0f"
+    },
+    "provider_calls_v0.59.json": {
+      "bytes": 99,
+      "sha256": "4f4ea64fa7dce71d77a4b1b4864b49f491df4f314bfde94d576cf6c03f2d6bf5"
+    },
+    "sector_metadata_contract_audit_v0.59.csv": {
+      "bytes": 340,
+      "sha256": "582ad685ea2473494816ace63c797cd4f1624ff5595d5e978df87d1c88ba0bf0"
+    },
+    "sector_metadata_contract_v0.59.json": {
+      "bytes": 1438,
+      "sha256": "0d9fc7e9dbe9f5493cae8b6cdb547747d78ce18e0b61be39ad76e37be7bdb904"
+    },
+    "sector_rs_contract_audit_v0.59.csv": {
+      "bytes": 750,
+      "sha256": "3295cbb3f88d94d0405908bfe8323b4f69d6d894ab9948d0ba6ecca73e76b3e8"
+    },
+    "sector_rs_contract_v0.59.json": {
+      "bytes": 847,
+      "sha256": "b177ac8b8bc48cec2635ccbf96c81cee1ffbf4f86dd0b70500b4cc945cb66afa"
+    },
+    "stage_checkpoint_preupload_v0.59.json": {
+      "bytes": 526,
+      "sha256": "6a49f0eb19c972489254d2ad9f6a63925e8928fba7b54ca95a5791672e94cb3c"
+    },
+    "stage_checkpoint_v0.59.json": {
+      "bytes": 669,
+      "sha256": "a78514f689ed8320f94e6d8c89454667bf07781ab203c5eea810f32dec85016c"
+    },
+    "summary_preupload_v0.59.json": {
+      "bytes": 3016,
+      "sha256": "8b6f9b535e408bf78a03a446aaee1514b3919031831ff9ec0dd264c83dc73c68"
+    },
+    "summary_v0.59.json": {
+      "bytes": 3442,
+      "sha256": "308987e3a5b9be877452c59b74b18901dc7c84d1e552732f295a569a5c6d1046"
+    },
+    "taxonomy_authority_v0.59.csv": {
+      "bytes": 221,
+      "sha256": "5c25825ca48160e3b78249d265f97984e42949b1187c4b1295acf71bb899e0f1"
+    },
+    "temporal_integrity_v0.59.csv": {
+      "bytes": 200,
+      "sha256": "37fc33cce25c3fe9ae9abe63349fab0444d0d57f8e90917ce8925502778046af"
+    },
+    "test_results_v0.59.csv": {
+      "bytes": 1792,
+      "sha256": "dce3e84c8934b86cd6b2ec6195ca3985540119a7726fb24604a25baac3cfc3c9"
+    }
+  },
+  "next_gate": "P0 FROZEN-1425 SECTOR METADATA CONTRACT DEFINITION GATE",
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "productive": false,
+  "provider_calls": {
+    "alpha_vantage": 0,
+    "eodhd": 0,
+    "market_data": 0,
+    "scalable": 0,
+    "yahoo_yfinance": 0
+  },
+  "required_start_head": "4c12c2126bb3f8ba6c6f132f316041c83b91a02a",
+  "sector_rs_materialization_runs": 0,
+  "sector_rs_ready": false,
+  "stage": "P0_FROZEN_1425_SECTOR_METADATA_SECTOR_RS_AUTHORITY",
+  "verdict": "PASS_WITH_SECTOR_METADATA_CONTRACT_BLOCKER",
+  "version": "v0.59",
+  "workflow_head_sha": "ddc30f6666c6658fc7ef634aa1113261e7195c8c",
+  "workflow_run_id": 36243521798
+}

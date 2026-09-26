@@ -1,0 +1,2 @@
+Scope,Status,Future_Observation_Risk,Detail
+SECTOR_RS,NOT_RUN_CONTRACT_BLOCKED,FAIL_CLOSED,No sector peer groups were constructed; therefore no cross-market alignment or forward-fill was attempted.

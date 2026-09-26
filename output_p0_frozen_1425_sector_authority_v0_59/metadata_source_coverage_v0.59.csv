@@ -1,0 +1,4 @@
+Source,Path,Rows,Detected_Sector_Columns,Detected_Sector_Column_Count,Current_Canonical_Sector_Metadata_Usable
+Frozen,universe/SWING_U3K_FROZEN_v0.5.csv,1425,,0,NO
+v0.57 Local Features,output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv,1425,,0,NO
+v0.58 Home-Market RS,output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv,1425,,0,NO

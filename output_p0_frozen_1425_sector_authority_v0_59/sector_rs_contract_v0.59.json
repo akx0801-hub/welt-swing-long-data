@@ -1,0 +1,15 @@
+{
+  "aggregation_mean_or_median": "NOT_DEFINED_FOR_SECTOR",
+  "blocker_code": "SECTOR_RS_EXECUTION_CONTRACT_NOT_FULLY_BOUND_AFTER_METADATA",
+  "contract_complete": false,
+  "cross_market_asof_alignment": "NOT_DEFINED_FOR_SECTOR",
+  "leave_one_out_rule": "NOT_DEFINED_FOR_SECTOR",
+  "master_requires_sector_relative_strength_where_valid": true,
+  "minimum_peer_group_size": "NOT_NUMERICALLY_DEFINED",
+  "note": "This is downstream of the earlier metadata-contract blocker and does not change the gate verdict precedence.",
+  "null_nonfinite_policy": "FAIL_CLOSED_PRINCIPLE_PRESENT_BUT_EXECUTABLE_SECTOR_RULE_NOT_BOUND",
+  "return_horizons_supported_by_master": "20/60 days in Relative Strength section",
+  "security_vs_sector_peer_return": "CONCEPT_PRESENT_NOT_EXECUTABLE",
+  "v020_sector_rs_materialized": false,
+  "v021_sector_rs_ready": false
+}

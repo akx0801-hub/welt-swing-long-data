@@ -1,0 +1,5 @@
+Check,Status,Detail
+Sector peer definition,BLOCKED,No canonical taxonomy/mapping authority; peer membership cannot be formed.
+Minimum peer-group size,NOT_DEFINED,v0.21 requires reliable size but no numeric executable minimum is promoted.
+Leave-one-out,NOT_DEFINED_FOR_SECTOR,Home-market leave-one-out does not silently transfer to Sector RS.
+As-of / temporal alignment,NOT_DEFINED_FOR_SECTOR,No executable cross-market sector alignment authority found.

@@ -1,0 +1,16 @@
+{
+  "affected_count": 1425,
+  "artifact_binding": "PENDING_UPLOAD",
+  "canonical_taxonomy": "NOT_DEFINED",
+  "materialization_runs": 0,
+  "next_gate": "P0 FROZEN-1425 SECTOR METADATA CONTRACT DEFINITION GATE",
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "sector_metadata_contract_status": "PREPARED_NOT_POPULATED",
+  "sector_rs_ready": false,
+  "stage": "P0_FROZEN_1425_SECTOR_METADATA_SECTOR_RS_AUTHORITY",
+  "tests_failed": 0,
+  "tests_passed": 17,
+  "verdict": "PASS_WITH_SECTOR_METADATA_CONTRACT_BLOCKER",
+  "version": "v0.59"
+}

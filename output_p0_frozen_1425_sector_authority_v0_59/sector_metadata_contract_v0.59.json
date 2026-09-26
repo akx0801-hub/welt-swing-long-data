@@ -1,0 +1,39 @@
+{
+  "accepted_source_classes": [
+    "official index administrator bulk constituent/reference data",
+    "official primary exchange bulk reference data",
+    "official security registry bulk reference data",
+    "other explicitly approved bulk reference source after provenance review"
+  ],
+  "blocker_code": "CANONICAL_SECTOR_TAXONOMY_AND_POPULATED_MAPPING_AUTHORITY_NOT_DEFINED",
+  "canonical_sector_field_selected": false,
+  "canonical_taxonomy_selected": false,
+  "contract_complete": false,
+  "evidence": "v0.21 is PREPARED_NOT_POPULATED; it permits source classes and requires provenance but does not select GICS/ICB/other taxonomy or populate a Frozen-1425 mapping.",
+  "mapping_authority_populated": false,
+  "mapping_requirements": [
+    "deterministic WS_ID linkage",
+    "taxonomy and source provenance recorded",
+    "as-of/version recorded",
+    "ambiguous mappings fail closed",
+    "sector peer group must be large enough for a reliable reference or RS_NOT_VERIFIED"
+  ],
+  "prohibited_methods": [
+    "per-security web lookup fanout",
+    "name-based guessed sector mapping",
+    "silent taxonomy mixing without crosswalk",
+    "unversioned sector labels",
+    "Alpha Vantage"
+  ],
+  "required_fields": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Code",
+    "Sector_Name",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "Mapping_Status"
+  ],
+  "v021_status": "PREPARED_NOT_POPULATED"
+}

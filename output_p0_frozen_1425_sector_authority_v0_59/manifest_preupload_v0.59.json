@@ -1,0 +1,97 @@
+{
+  "affected_count": 1425,
+  "artifact_binding": "PENDING_UPLOAD",
+  "files": {
+    "authority_validation_v0.59.json": {
+      "bytes": 2272,
+      "sha256": "fe49f8ded60b5dff1a87425cc698989d0207a4594f20c8b9be63b40320800701"
+    },
+    "capability_v0.59.csv": {
+      "bytes": 193097,
+      "sha256": "fea5d848bdc11a645be66c2738fc8fd321ac68cb9c97e84bbd26c526cfc20547"
+    },
+    "determinism_v0.59.json": {
+      "bytes": 128,
+      "sha256": "c5abca72cf22e8f355cb0f9510a20a6ec77e180ead583bfca1c9358326e3b9e3"
+    },
+    "input_immutability_v0.59.json": {
+      "bytes": 993,
+      "sha256": "d886ead2f1736dae3c90291eb0123b406203a7085fc1b2bc9a20fdf81aa36504"
+    },
+    "mapping_audit_v0.59.csv": {
+      "bytes": 235548,
+      "sha256": "1a8a3fa90202734b024cd24f68074614da1ae65392f5d46f43f96b83e9c668e5"
+    },
+    "metadata_source_coverage_v0.59.csv": {
+      "bytes": 407,
+      "sha256": "ba7a320a939f290fb1cded177a4ffc74f69361ec1e1ca5f1684aa30569ccd351"
+    },
+    "peer_group_audit_v0.59.csv": {
+      "bytes": 458,
+      "sha256": "0c7e7bf4dd050c418a8c6c687f88c5d7b526f939013ce13b2405f3572953de0f"
+    },
+    "provider_calls_v0.59.json": {
+      "bytes": 99,
+      "sha256": "4f4ea64fa7dce71d77a4b1b4864b49f491df4f314bfde94d576cf6c03f2d6bf5"
+    },
+    "sector_metadata_contract_audit_v0.59.csv": {
+      "bytes": 340,
+      "sha256": "582ad685ea2473494816ace63c797cd4f1624ff5595d5e978df87d1c88ba0bf0"
+    },
+    "sector_metadata_contract_v0.59.json": {
+      "bytes": 1438,
+      "sha256": "0d9fc7e9dbe9f5493cae8b6cdb547747d78ce18e0b61be39ad76e37be7bdb904"
+    },
+    "sector_rs_contract_audit_v0.59.csv": {
+      "bytes": 750,
+      "sha256": "3295cbb3f88d94d0405908bfe8323b4f69d6d894ab9948d0ba6ecca73e76b3e8"
+    },
+    "sector_rs_contract_v0.59.json": {
+      "bytes": 847,
+      "sha256": "b177ac8b8bc48cec2635ccbf96c81cee1ffbf4f86dd0b70500b4cc945cb66afa"
+    },
+    "stage_checkpoint_preupload_v0.59.json": {
+      "bytes": 526,
+      "sha256": "6a49f0eb19c972489254d2ad9f6a63925e8928fba7b54ca95a5791672e94cb3c"
+    },
+    "summary_preupload_v0.59.json": {
+      "bytes": 3016,
+      "sha256": "8b6f9b535e408bf78a03a446aaee1514b3919031831ff9ec0dd264c83dc73c68"
+    },
+    "taxonomy_authority_v0.59.csv": {
+      "bytes": 221,
+      "sha256": "5c25825ca48160e3b78249d265f97984e42949b1187c4b1295acf71bb899e0f1"
+    },
+    "temporal_integrity_v0.59.csv": {
+      "bytes": 200,
+      "sha256": "37fc33cce25c3fe9ae9abe63349fab0444d0d57f8e90917ce8925502778046af"
+    },
+    "test_results_v0.59.csv": {
+      "bytes": 1792,
+      "sha256": "dce3e84c8934b86cd6b2ec6195ca3985540119a7726fb24604a25baac3cfc3c9"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "next_gate": "P0 FROZEN-1425 SECTOR METADATA CONTRACT DEFINITION GATE",
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "price_runtime_bytes": 144539648,
+  "price_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "productive": false,
+  "provider_calls": {
+    "alpha_vantage": 0,
+    "eodhd": 0,
+    "market_data": 0,
+    "scalable": 0,
+    "yahoo_yfinance": 0
+  },
+  "repository_sha": "ddc30f6666c6658fc7ef634aa1113261e7195c8c",
+  "required_start_head": "4c12c2126bb3f8ba6c6f132f316041c83b91a02a",
+  "sector_rs_materialization_runs": 0,
+  "sector_rs_ready": false,
+  "stage": "P0_FROZEN_1425_SECTOR_METADATA_SECTOR_RS_AUTHORITY",
+  "v057_feature_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v058_home_rs_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "verdict": "PASS_WITH_SECTOR_METADATA_CONTRACT_BLOCKER",
+  "version": "v0.59"
+}
