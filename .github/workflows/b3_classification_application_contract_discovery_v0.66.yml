@@ -1,0 +1,173 @@
+name: B3 Classification Application Contract Discovery v0.66
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/b3_classification_application_contract_discovery_v0.66.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  b3-application-contract-discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.66 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.66 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="fb651c31f55f14a7fcb6bb3c83c5b25e3d69a4e6"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/b3_classification_application_contract_discovery_spec_v0\.66\.json|scripts/b3_classification_application_contract_discovery_v0_66\.py|scripts/persist_b3_classification_application_contract_discovery_v0_66\.py|tests/test_b3_classification_application_contract_discovery_v0_66\.py|\.github/workflows/b3_classification_application_contract_discovery_v0\.66\.yml|config/b3_classification_application_contract_discovery_v0\.66\.json)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.65 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10914042556 --jq .digest)"
+          test "$DIGEST" = "sha256:0fcc27756c32156da0fa4be605f8dee1a2fa52fa3bd88aac2ecfc07355058146"
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          s=json.load(open("output_br_ibrx100_classification_tree_inversion_v0_65/summary_v0.65.json",encoding="utf-8"))
+          c=json.load(open("output_br_ibrx100_classification_tree_inversion_v0_65/stage_checkpoint_v0.65.json",encoding="utf-8"))
+          assert s["verdict"]=="BLOCKED_B3_CLASSIFICATION_TREE_MACHINE_REPRODUCIBILITY"
+          assert s["br_exact_37_classification_coverage_ready"] is False
+          assert (s["ready"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"])==(0,37,0,0,37)
+          assert s["classification_nodes_queried"]==0
+          assert s["blocker"]=="B3_CLASSIFICATION_TREE_NOT_MACHINE_REPRODUCIBLE"
+          assert c["workflow_run_id"]==36266926685 and c["artifact_id"]==10914042556
+          assert "sha256:"+c["artifact_digest"]=="sha256:0fcc27756c32156da0fa4be605f8dee1a2fa52fa3bd88aac2ecfc07355058146"
+          assert s["canonical_mapping_population_runs"]==0 and s["sector_rs_runs"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+      - name: Verify v0.66 discovery spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/b3_classification_application_contract_discovery_spec_v0.66.json",encoding="utf-8"))
+          t=json.load(open("config/b3_classification_application_contract_discovery_v0.66.json",encoding="utf-8"))
+          assert s["required_start_head"]=="fb651c31f55f14a7fcb6bb3c83c5b25e3d69a4e6"
+          assert s["scope_cohort"]=="BR_IBRX100"
+          assert set(s["allowed_hosts"]) <= {"sistemaswebb3-listados.b3.com.br","www.b3.com.br","b3.com.br"}
+          assert s["public_only"] is True
+          assert s["authentication_bypass_allowed"] is False
+          assert s["captcha_bypass_allowed"] is False
+          assert s["per_security_fanout_allowed"] is False
+          assert s["exact37_execution_allowed"] is False
+          assert s["canonical_mapping_population_allowed"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert t["required_start_head"]=="fb651c31f55f14a7fcb6bb3c83c5b25e3d69a4e6"
+          assert t["scope_cohort"]=="BR_IBRX100"
+          assert t["alpha_vantage_allowed"] is False
+          assert t["exact37_execution_allowed"] is False
+          assert t["canonical_mapping_population_allowed"] is False
+          assert t["other_cohorts_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test discovery logic
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/b3_classification_application_contract_discovery_v0_66.py scripts/persist_b3_classification_application_contract_discovery_v0_66.py
+          python3 tests/test_b3_classification_application_contract_discovery_v0_66.py -v
+
+      - name: Run bounded public B3 application discovery
+        run: |
+          set -euo pipefail
+          rm -rf output_b3_classification_application_contract_discovery_v0_66
+          python3 scripts/b3_classification_application_contract_discovery_v0_66.py             --repository-sha "$GITHUB_SHA"             --output-dir output_b3_classification_application_contract_discovery_v0_66
+
+      - name: Validate discovery outcome and immutability
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_b3_classification_application_contract_discovery_v0_66")
+          s=json.load(open(out/"summary_preupload_v0.66.json",encoding="utf-8"))
+          tree=json.load(open(out/"b3_tree_contract_v0.66.json",encoding="utf-8"))
+          comp=json.load(open(out/"b3_all_company_classification_contract_v0.66.json",encoding="utf-8"))
+          repro=json.load(open(out/"public_reproducibility_audit_v0.66.json",encoding="utf-8"))
+          prov=json.load(open(out/"provider_call_audit_v0.66.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.66.csv",encoding="utf-8")))
+          net=list(csv.DictReader(open(out/"b3_public_network_request_ledger_v0.66.csv",encoding="utf-8")))
+          cand=list(csv.DictReader(open(out/"b3_candidate_data_contracts_v0.66.csv",encoding="utf-8")))
+
+          assert s["b3_classification_tree_machine_reproducible"]==tree["b3_classification_tree_machine_reproducible"]
+          assert s["b3_complete_company_classification_dataset_ready"]==comp["b3_complete_company_classification_dataset_ready"]
+          if s["verdict"]=="BLOCKED_B3_PUBLIC_APPLICATION_DATA_CONTRACT":
+              assert s["blocker"]=="B3_PUBLIC_CLASSIFICATION_DATA_CONTRACT_NOT_DISCOVERED"
+              assert s["b3_classification_tree_machine_reproducible"] is False
+              assert s["b3_complete_company_classification_dataset_ready"] is False
+              assert s["discovered_contract"]=="NONE"
+          else:
+              assert s["public_reproducible"] is True
+              assert s["discovered_contract"]!="NONE"
+              assert s["b3_classification_tree_machine_reproducible"] or s["b3_complete_company_classification_dataset_ready"]
+          assert len(net)>=2
+          assert len(cand)>=1
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in prov.values())
+          assert all(v==0 for v in s["prohibited_provider_calls"].values())
+          assert repro["cookies_tokens_secrets_persisted"] is False
+          assert repro["auth_bypass_used"] is False
+          assert repro["captcha_bypass_used"] is False
+          assert s["exact37_classification_execution_runs"]==0
+          assert s["pdsc_exact37_generation_runs"]==0
+          assert s["canonical_mapping_population_runs"]==0
+          assert s["sector_rs_runs"]==0 and s["other_cohort_rechecks"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.66 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: b3-classification-application-contract-discovery-v0.66-${{ github.run_id }}
+          path: output_b3_classification_application_contract_discovery_v0_66/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_b3_classification_application_contract_discovery_v0_66.py             --output-dir output_b3_classification_application_contract_discovery_v0_66             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "b3-classification-application-contract-discovery-v0.66-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.66 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/B3_Classification_Application_API_Asset_Contract_Discovery_v0.66.md                   output_b3_classification_application_contract_discovery_v0_66/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/B3_Classification_Application_API_Asset_Contract_Discovery_v0\.66\.md|output_b3_classification_application_contract_discovery_v0_66/)' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist B3 application contract discovery v0.66"
+          git push origin HEAD:main
