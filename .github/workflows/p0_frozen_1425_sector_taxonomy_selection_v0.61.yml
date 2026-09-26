@@ -1,0 +1,169 @@
+name: P0 Frozen 1425 Sector Taxonomy Selection v0.61
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/p0_frozen_1425_sector_taxonomy_selection_v0.61.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  sector-taxonomy-selection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout bounded v0.61 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.61 lineage and bounded mutation scope
+        run: |
+          set -euo pipefail
+          START="b5fda059940710d4e07928b6a8bc7b0b5d536a57"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/manager_governance_authority_G_SEC_01_v0\.61\.json|config/sector_taxonomy_source_research_v0\.61\.json|scripts/p0_frozen_1425_sector_taxonomy_selection_v0_61\.py|scripts/persist_p0_frozen_1425_sector_taxonomy_selection_v0_61\.py|tests/test_p0_frozen_1425_sector_taxonomy_selection_v0_61\.py|\.github/workflows/p0_frozen_1425_sector_taxonomy_selection_v0\.61\.yml|config/p0_frozen_1425_sector_taxonomy_selection_v0\.61\.json)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.60 predecessor authority
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10907812456 --jq .digest)"
+          test "$DIGEST" = "sha256:5caa8bd2a34b096e3b08e5ce9e41f3cabcea9b4b72d55060e20b8ec1bb78f500"
+
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+
+          s=json.load(open("output_p0_frozen_1425_sector_metadata_contract_v0_60/summary_v0.60.json",encoding="utf-8"))
+          c=json.load(open("output_p0_frozen_1425_sector_metadata_contract_v0_60/stage_checkpoint_v0.60.json",encoding="utf-8"))
+          assert s["verdict"]=="BLOCKED_GOVERNANCE_AUTHORITY_REQUIRED"
+          assert s["sector_metadata_contract_ready"] is False
+          assert s["blocker"]=="GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY"
+          assert c["workflow_run_id"]==36247871792
+          assert c["artifact_id"]==10907812456
+          assert "sha256:"+c["artifact_digest"]=="sha256:5caa8bd2a34b096e3b08e5ce9e41f3cabcea9b4b72d55060e20b8ec1bb78f500"
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+
+          def sha(p):
+              return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+      - name: Verify G-SEC-01 and source-research policy
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          a=json.load(open("config/manager_governance_authority_G_SEC_01_v0.61.json",encoding="utf-8"))
+          r=json.load(open("config/sector_taxonomy_source_research_v0.61.json",encoding="utf-8"))
+          t=json.load(open("config/p0_frozen_1425_sector_taxonomy_selection_v0.61.json",encoding="utf-8"))
+          assert a["authority_id"]=="G-SEC-01" and a["version"]=="v0.61"
+          assert a["rules"]["exactly_one_full_pass_required"] is True
+          assert a["rules"]["mixed_taxonomy_forbidden_in_v0_61"] is True
+          assert a["rules"]["crosswalk_forbidden_in_v0_61"] is True
+          assert r["candidate_findings"].keys() >= {"GICS","ICB"}
+          assert all(v==0 for v in r["prohibited_provider_requests"].values())
+          assert t["required_start_head"]=="b5fda059940710d4e07928b6a8bc7b0b5d536a57"
+          assert t["productive"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["mapping_population_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          PY
+
+      - name: Compile and run focused v0.61 tests
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/p0_frozen_1425_sector_taxonomy_selection_v0_61.py scripts/persist_p0_frozen_1425_sector_taxonomy_selection_v0_61.py
+          python3 tests/test_p0_frozen_1425_sector_taxonomy_selection_v0_61.py -v
+
+      - name: Run bounded v0.61 source-feasibility selection gate
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_sector_taxonomy_selection_v0_61
+          python3 scripts/p0_frozen_1425_sector_taxonomy_selection_v0_61.py             --repository-sha "$GITHUB_SHA"             --output-dir output_p0_frozen_1425_sector_taxonomy_selection_v0_61
+
+      - name: Validate fail-closed selection result
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_p0_frozen_1425_sector_taxonomy_selection_v0_61")
+          s=json.load(open(out/"summary_preupload_v0.61.json",encoding="utf-8"))
+          d=json.load(open(out/"taxonomy_selection_decision_v0.61.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.61.csv",encoding="utf-8")))
+          cov=list(csv.DictReader(open(out/"frozen_1425_coverage_feasibility_v0.61.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.61.csv",encoding="utf-8")))
+
+          assert s["verdict"]=="BLOCKED_TAXONOMY_SOURCE_FEASIBILITY"
+          assert s["canonical_sector_taxonomy_selected"] is False
+          assert s["selected_taxonomy"]=="NONE"
+          assert s["feasible_count"]==0 and s["tested_count"]==2
+          assert s["blocker"]=="FULL_1425_COVERAGE_NOT_VERIFIED"
+          assert d["earliest_common_failed_gate"]=="D_FROZEN_1425_COVERAGE_FEASIBILITY"
+          assert d["mapping_population_executed"] is False
+          assert d["sector_rs_executed"] is False
+          assert d["crosswalk_created"] is False
+          assert len(cov)==2850
+          assert all(r["Coverage_Feasibility"]=="NOT_VERIFIED" for r in cov)
+          assert all(r["Sector_Value_Materialized"]=="NO" for r in cov)
+          assert len(ext)>0
+          assert all(r["Allowed_Official_Source"]=="YES" for r in ext)
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in s["prohibited_provider_calls"].values())
+          assert s["mapping_population_runs"]==0 and s["sector_rs_runs"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert s["immutability"]["frozen_unchanged"] is True
+          assert s["immutability"]["v057_feature_unchanged"] is True
+          assert s["immutability"]["v058_home_rs_unchanged"] is True
+
+          def sha(p):
+              return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git diff -- output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv)" = ""
+          test "$(git diff -- output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.61 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-sector-taxonomy-selection-v0.61-${{ github.run_id }}
+          path: output_p0_frozen_1425_sector_taxonomy_selection_v0_61/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistent v0.61 evidence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_p0_frozen_1425_sector_taxonomy_selection_v0_61.py             --output-dir output_p0_frozen_1425_sector_taxonomy_selection_v0_61             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "p0-frozen-1425-sector-taxonomy-selection-v0.61-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.61 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/P0_Frozen_1425_Canonical_Sector_Taxonomy_Source_Feasibility_Selection_v0.61.md                   output_p0_frozen_1425_sector_taxonomy_selection_v0_61/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/P0_Frozen_1425_Canonical_Sector_Taxonomy_Source_Feasibility_Selection_v0\.61\.md|output_p0_frozen_1425_sector_taxonomy_selection_v0_61/)' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist canonical sector taxonomy feasibility v0.61"
+          git push origin HEAD:main
