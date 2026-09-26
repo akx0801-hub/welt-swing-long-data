@@ -1,0 +1,88 @@
+{
+  "alpha_vantage_calls": 0,
+  "canonical_contract": {
+    "history_max_invalid_bars": 2,
+    "history_max_invalid_share": 0.01,
+    "history_minimum_valid_after_filter": 260,
+    "history_policy_version": "WELT-SWING-HISTORY-QA-v1.0",
+    "max_invalid_bars": 2,
+    "max_invalid_share": 0.01,
+    "minimum_valid_bars_core": 252,
+    "minimum_valid_observations_after_filter": 260,
+    "stale_after_calendar_days": 10
+  },
+  "eodhd_calls": 0,
+  "feature_materialization": false,
+  "final_cache": {
+    "QUARANTINE": 0,
+    "READY": 1425,
+    "total": 1425
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "full_frozen": {
+    "ready_to_other": 0,
+    "ready_to_quarantine": 0,
+    "ready_to_ready": 1417,
+    "rows": 1425,
+    "source_data_defect_securities": 8,
+    "technical_bar_exclusions": 8,
+    "transitions": 8
+  },
+  "history_qa_reopened": false,
+  "implementation_commit": "b6f852e4248ec3f910efaeb18400a913885959b8",
+  "implementation_policy": "POLICY_F_CANONICAL_FILTERED_INVALID_BAR_SOURCE_DEFECT",
+  "liquidity_qa_reopened": false,
+  "market_provider_calls": 0,
+  "next_gate_if_byte_binding_passes": "P0 FROZEN-1425 FEATURE MATERIALIZATION / CAPABILITY GATE",
+  "p0_price_cache_ready": false,
+  "p0_price_cache_ready_preupload": true,
+  "p0_run": false,
+  "parameter_promotion": false,
+  "pending_only": "post-upload packaged runtime byte verification",
+  "productive": false,
+  "raw_price_immutability": {
+    "price_daily_digest_after_close": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+    "price_daily_digest_after_open_mutation": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+    "price_daily_digest_before": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+    "price_daily_rows_after_close": 711204,
+    "price_daily_rows_after_open_mutation": 711204,
+    "price_daily_rows_before": 711204,
+    "provider_mapping_digest_after_close": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+    "provider_mapping_digest_after_open_mutation": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+    "provider_mapping_digest_before": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+    "provider_mapping_unchanged": true,
+    "unchanged": true
+  },
+  "required_start_head": "b8b9178385c58351910b2e61fe1f473d4f47af18",
+  "rs_materialization": false,
+  "runtime_preupload": {
+    "declared_runtime_bytes": 144539648,
+    "declared_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+    "hash_after_close": true,
+    "hash_pass_1": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+    "hash_pass_2": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+    "integrity_check": "ok",
+    "journal_mode_before_close": "wal",
+    "packaged_runtime_bytes": "PENDING_POST_UPLOAD_VERIFICATION",
+    "packaged_runtime_sha256": "PENDING_POST_UPLOAD_VERIFICATION",
+    "prepackage_hash_repeat_equal": true,
+    "price_daily_rows": 711204,
+    "source_runtime_bytes": 144216064,
+    "source_runtime_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "states": 1425,
+    "status_counts": {
+      "READY": 1425
+    },
+    "wal_checkpoint_result": [
+      0,
+      0,
+      0
+    ]
+  },
+  "scalable_calls": 0,
+  "stage": "P0_FROZEN_1425_CANONICAL_FILTERED_INVALID_BAR_POLICY_F_IMPLEMENTATION",
+  "status": "PREUPLOAD_PASS",
+  "universe_mutation": false,
+  "version": "v0.53",
+  "yahoo_yfinance_calls": 0
+}

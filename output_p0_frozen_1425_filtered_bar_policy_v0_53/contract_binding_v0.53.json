@@ -1,0 +1,28 @@
+{
+  "canonical_contract": {
+    "history_max_invalid_bars": 2,
+    "history_max_invalid_share": 0.01,
+    "history_minimum_valid_after_filter": 260,
+    "history_policy_version": "WELT-SWING-HISTORY-QA-v1.0",
+    "max_invalid_bars": 2,
+    "max_invalid_share": 0.01,
+    "minimum_valid_bars_core": 252,
+    "minimum_valid_observations_after_filter": 260,
+    "stale_after_calendar_days": 10
+  },
+  "core_policy": "QA_Filtered_Bar_Policy_Promotion_v0.4",
+  "history_qa_reopened": false,
+  "implementation_policy": "POLICY_F_CANONICAL_FILTERED_INVALID_BAR_SOURCE_DEFECT",
+  "liquidity_qa_reopened": false,
+  "source_runtime": {
+    "bytes": 144216064,
+    "price_daily_rows": 711204,
+    "quarantine": 8,
+    "ready": 1417,
+    "sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+    "states": 1425
+  },
+  "stage": "P0_FROZEN_1425_CANONICAL_FILTERED_INVALID_BAR_POLICY_F_IMPLEMENTATION",
+  "threshold_changes": 0,
+  "version": "v0.53"
+}

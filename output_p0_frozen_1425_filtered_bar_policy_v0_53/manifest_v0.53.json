@@ -1,0 +1,122 @@
+{
+  "alpha_vantage_calls": 0,
+  "eodhd_calls": 0,
+  "feature_materialization": false,
+  "files": {
+    "asx8_validation_v0.53.csv": {
+      "bytes": 1642,
+      "sha256": "ff8ab0f202cbe692abd86e7278f68e72adc0866c7340735586290f9c686b1232"
+    },
+    "boundary_negative_tests_v0.53.csv": {
+      "bytes": 2991,
+      "sha256": "8f2a07d7c8a0e57c041083820963c2b0f84be3b33a7fceb7fce3ceb29ecd8ed5"
+    },
+    "boundary_tests_v0.53.csv": {
+      "bytes": 1584,
+      "sha256": "697e5c04471a291b41a06acf9bcab2f21ef69110ea235a06a4e45b35870be232"
+    },
+    "contract_binding_v0.53.json": {
+      "bytes": 961,
+      "sha256": "4ff4c722f7c3ddc11e259e4e6c05ea9f01e4827c0f1447361ae33f44be305593"
+    },
+    "defect_provenance_v0.53.csv": {
+      "bytes": 1448,
+      "sha256": "d023e22dac5d7a1c7a56c8dc9b389c1a626293f80586c84732103fecc2a0382a"
+    },
+    "docs/validation/P0_Frozen_1425_Filtered_Invalid_Bar_Policy_Implementation_v0.53.md": {
+      "bytes": 8828,
+      "sha256": "589bdd29562a958a3be11bdc0bfef3615f26b6c890765491f24ea8ed270fc91b"
+    },
+    "feature_path_regression_v0.53.csv": {
+      "bytes": 624,
+      "sha256": "4582237d234d23b31fc0f2b1bb043fa360c3a05575a82367c8a6aa4e0cfb7b42"
+    },
+    "final_cache_state_v0.53.csv": {
+      "bytes": 151329,
+      "sha256": "c6c899ee5c44cda2fac45799a72f4b34c6063609b3a815ba1cc77bf50b497232"
+    },
+    "full_frozen_regression_v0.53.csv": {
+      "bytes": 194836,
+      "sha256": "da1e6d269c9785ad40837ee0aeeddd7786ee3f4a0279bee7faf54ab5c7cf2e73"
+    },
+    "manifest_preupload_v0.53.json": {
+      "bytes": 2698,
+      "sha256": "cff1d92526d55495f9a26c60da81df6f57233f0be2ea3cb98b11c7237c4eee9d"
+    },
+    "negative_tests_v0.53.csv": {
+      "bytes": 1966,
+      "sha256": "cbc8bc83f97a09c19a3aab8fc2f41c5efc682aa5f73d9511a0e21d5d2ff753b7"
+    },
+    "raw_price_immutability_v0.53.json": {
+      "bytes": 836,
+      "sha256": "e2363522d92bb2c3afea6ed2443c118980ca04873395421e652bfe0d92e9a6db"
+    },
+    "runtime_hash_binding_preupload_v0.53.json": {
+      "bytes": 849,
+      "sha256": "42f614f75797e94d79d1b2f8db45fdf04056d9972accf9ca4feb60cee81ea6df"
+    },
+    "runtime_hash_binding_v0.53.json": {
+      "bytes": 1328,
+      "sha256": "cdc37dd147a96e853af9d3864ca9ca430b9303e09af2ee62f98620756fb3cdfa"
+    },
+    "stage_checkpoint_preupload_v0.53.json": {
+      "bytes": 453,
+      "sha256": "34073671232d3acc9a817eec445e71545f640c4bedd3c0ea13a4782bfe111322"
+    },
+    "stage_checkpoint_v0.53.json": {
+      "bytes": 674,
+      "sha256": "9041ca3f54e947c57528b3df5b21deadb26749229a678aa5c4c3e946f77ae62b"
+    },
+    "state_transitions_v0.53.csv": {
+      "bytes": 1815,
+      "sha256": "45d2cf802e81ab0772fbaa86cfc27991420e26f164f8742fc3ecead13d76f3d0"
+    },
+    "summary_preupload_v0.53.json": {
+      "bytes": 3563,
+      "sha256": "e5c8cd667e8bd058d4ee6a5c4fa142f44ff0004703dacfbf5e6e2ebd672fdf40"
+    },
+    "summary_v0.53.json": {
+      "bytes": 4621,
+      "sha256": "4fc71d1be07f0f3fe1c6a0b1291d14af5494f1e13e2beccdfd0f3980adb892b2"
+    },
+    "test_results_v0.53.csv": {
+      "bytes": 4782,
+      "sha256": "b809264da14da1037acbf5e9868786912d1ed81f605ceac5e2d0e51a217f18cc"
+    }
+  },
+  "final_cache": {
+    "QUARANTINE": 0,
+    "READY": 1425,
+    "total": 1425
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "history_qa_reopened": false,
+  "implementation_head": "b6f852e4248ec3f910efaeb18400a913885959b8",
+  "liquidity_qa_reopened": false,
+  "market_provider_calls": 0,
+  "next_gate": "P0 FROZEN-1425 FEATURE MATERIALIZATION / CAPABILITY GATE",
+  "p0_price_cache_ready": true,
+  "p0_run": false,
+  "parameter_promotion": false,
+  "price_daily_rows": 711204,
+  "productive": false,
+  "provider_mapping_digest": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+  "raw_price_digest": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+  "required_start_head": "b8b9178385c58351910b2e61fe1f473d4f47af18",
+  "rs_materialization": false,
+  "runtime_artifact": {
+    "artifact_digest": "sha256:f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95",
+    "artifact_id": 10900287789,
+    "artifact_name": "p0-frozen-1425-filtered-invalid-bar-policy-v0.53-36225840648",
+    "integrity_check": "ok",
+    "sqlite_bytes": 144539648,
+    "sqlite_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+  },
+  "scalable_calls": 0,
+  "stage": "P0_FROZEN_1425_CANONICAL_FILTERED_INVALID_BAR_POLICY_F_IMPLEMENTATION",
+  "successful_workflow_run_id": 36225840648,
+  "threshold_changes": 0,
+  "universe_mutation": false,
+  "version": "v0.53",
+  "yahoo_yfinance_calls": 0
+}

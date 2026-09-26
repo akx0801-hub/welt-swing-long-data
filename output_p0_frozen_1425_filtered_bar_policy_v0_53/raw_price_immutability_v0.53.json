@@ -1,0 +1,13 @@
+{
+  "price_daily_digest_after_close": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+  "price_daily_digest_after_open_mutation": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+  "price_daily_digest_before": "1c4f93c2ca5fb3a79e859b359cc3a192dc19187f6745ee5e458a6f3569d84aea",
+  "price_daily_rows_after_close": 711204,
+  "price_daily_rows_after_open_mutation": 711204,
+  "price_daily_rows_before": 711204,
+  "provider_mapping_digest_after_close": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+  "provider_mapping_digest_after_open_mutation": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+  "provider_mapping_digest_before": "d51ae152afeeaf81a92541b030efc4a32a9beae29b082b99397ba2f4131f861e",
+  "provider_mapping_unchanged": true,
+  "unchanged": true
+}

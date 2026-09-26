@@ -1,0 +1,23 @@
+{
+  "artifact_id": 10900287789,
+  "frozen_unchanged": true,
+  "integrity_check": "ok",
+  "p0_price_cache_ready": true,
+  "p0_run": false,
+  "pending_only": null,
+  "productive": false,
+  "provider_mapping_unchanged": true,
+  "quarantine": 0,
+  "raw_price_digest_unchanged": true,
+  "ready": 1425,
+  "runtime_byte_binding": "PASS",
+  "runtime_bytes": 144539648,
+  "runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "stage": "P0_FROZEN_1425_CANONICAL_FILTERED_INVALID_BAR_POLICY_F_IMPLEMENTATION",
+  "status": "PASS",
+  "tests_failed": 0,
+  "tests_passed": 29,
+  "tests_total": 29,
+  "version": "v0.53",
+  "workflow_run_id": 36225840648
+}

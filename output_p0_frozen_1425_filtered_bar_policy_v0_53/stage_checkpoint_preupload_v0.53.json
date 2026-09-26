@@ -1,0 +1,16 @@
+{
+  "frozen_unchanged": true,
+  "p0_run": false,
+  "pending_only": "post-upload packaged runtime byte verification",
+  "productive": false,
+  "provider_mapping_unchanged": true,
+  "quarantine": 0,
+  "raw_price_digest_unchanged": true,
+  "ready": 1425,
+  "stage": "P0_FROZEN_1425_CANONICAL_FILTERED_INVALID_BAR_POLICY_F_IMPLEMENTATION",
+  "status": "PREUPLOAD_PASS",
+  "tests_failed": 0,
+  "tests_passed": 29,
+  "tests_total": 29,
+  "version": "v0.53"
+}

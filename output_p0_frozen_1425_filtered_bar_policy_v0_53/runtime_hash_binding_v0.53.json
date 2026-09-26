@@ -1,0 +1,33 @@
+{
+  "artifact_digest": "sha256:f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95",
+  "artifact_id": 10900287789,
+  "artifact_name": "p0-frozen-1425-filtered-invalid-bar-policy-v0.53-36225840648",
+  "declared_equals_packaged_bytes": true,
+  "declared_equals_packaged_sha256": true,
+  "declared_runtime_bytes": 144539648,
+  "declared_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "hash_after_close": true,
+  "hash_pass_1": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "hash_pass_2": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "integrity_check": "ok",
+  "journal_mode_before_close": "wal",
+  "packaged_runtime_bytes": 144539648,
+  "packaged_runtime_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "postdownload_integrity_check": "ok",
+  "postupload_byte_binding": "PASS",
+  "prepackage_hash_repeat_equal": true,
+  "price_daily_rows": 711204,
+  "source_runtime_bytes": 144216064,
+  "source_runtime_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+  "states": 1425,
+  "status_counts": {
+    "READY": 1425
+  },
+  "wal_checkpoint_result": [
+    0,
+    0,
+    0
+  ],
+  "workflow_head_sha": "b6f852e4248ec3f910efaeb18400a913885959b8",
+  "workflow_run_id": 36225840648
+}
