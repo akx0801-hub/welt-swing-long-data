@@ -1,0 +1,39 @@
+{
+  "version": "v0.66",
+  "stage": "B3_CLASSIFICATION_APPLICATION_API_ASSET_CONTRACT_DISCOVERY_GATE",
+  "required_start_head": "fb651c31f55f14a7fcb6bb3c83c5b25e3d69a4e6",
+  "scope_cohort": "BR_IBRX100",
+  "allowed_hosts": [
+    "sistemaswebb3-listados.b3.com.br",
+    "www.b3.com.br",
+    "b3.com.br"
+  ],
+  "target_pages": [
+    "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/",
+    "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br"
+  ],
+  "known_routes_not_sufficient_by_themselves": [
+    "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/",
+    "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br",
+    "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D"
+  ],
+  "max_assets": 40,
+  "max_asset_bytes": 8000000,
+  "max_independent_candidate_probes": 30,
+  "browser_virtual_time_ms": 7000,
+  "source_map_probe": true,
+  "public_only": true,
+  "authentication_bypass_allowed": false,
+  "captcha_bypass_allowed": false,
+  "private_internal_unauthorized_endpoints_allowed": false,
+  "per_security_fanout_allowed": false,
+  "exact37_execution_allowed": false,
+  "pdsc_exact37_generation_allowed": false,
+  "canonical_mapping_population_allowed": false,
+  "other_cohorts_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
