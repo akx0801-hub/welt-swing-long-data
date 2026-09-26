@@ -1,0 +1,57 @@
+name: Persist P0 Frozen 1425 Feature Materialization v0.54
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/persist_p0_frozen_1425_feature_materialization_v0.54.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Download exact successful v0.54 evidence artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 8106f8d7a348b4000b504da6b9a82d9fd1db1c33 HEAD
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10901437101 --jq .digest)"
+          test "$DIGEST" = "sha256:0c6eec3a41a26940b4e1325532f2e7bf240f1d362f147f4b52a3943f6f5dfe47"
+          rm -rf _v054_artifact
+          mkdir -p _v054_artifact/output_p0_frozen_1425_features_v0_54
+          gh run download 36228518000 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-feature-materialization-v0.54-36228518000 \
+            --dir _v054_artifact/output_p0_frozen_1425_features_v0_54
+          test -f _v054_artifact/output_p0_frozen_1425_features_v0_54/summary_preupload_v0.54.json
+
+      - name: Prepare and validate final v0.54 authority
+        run: |
+          set -euo pipefail
+          python scripts/persist_p0_frozen_1425_feature_materialization_v0_54.py \
+            --artifact-dir _v054_artifact \
+            --repo-root .
+          rm -rf _v054_artifact
+
+      - name: Commit final bounded authority
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/P0_Frozen_1425_Feature_Materialization_Capability_v0.54.md \
+                  output_p0_frozen_1425_features_v0_54/
+          test "$(git diff --cached --name-only | grep -c '^universe/' || true)" = "0"
+          test "$(git diff --cached --name-only | grep -c '^runtime_cache/' || true)" = "0"
+          git commit -m "Persist Frozen 1425 feature capability v0.54 authority"
+          git push origin HEAD:main
