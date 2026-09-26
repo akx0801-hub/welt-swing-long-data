@@ -12,6 +12,6 @@
   "p0_allowed": false,
   "p1_p2_allowed": false,
   "productive": false,
-  "execution_attempt": 3,
-  "retry_reason": "EXCLUDE_LOCALIZATION_ASSET_FALSE_POSITIVE_AND_TIGHTEN_CONTRACT_DETECTION"
+  "execution_attempt": 4,
+  "retry_reason": "RESTORE_VALID_WORKFLOW_AFTER_SCOPE_REGEX_EDIT_AND_APPLY_TIGHTENED_CONTRACT_DETECTION"
 }
