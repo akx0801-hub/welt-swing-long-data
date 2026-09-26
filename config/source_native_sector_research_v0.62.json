@@ -1,0 +1,275 @@
+{
+  "version": "v0.62",
+  "stage": "FROZEN_1425_SOURCE_NATIVE_SECTOR_METADATA_COVERAGE_FEASIBILITY_GATE",
+  "research_date_utc": "2026-09-26",
+  "external_policy": "OFFICIAL_INDEX_ADMINISTRATOR_EXCHANGE_REGISTRY_ONLY",
+  "prohibited_requests": {
+    "alpha_vantage": 0,
+    "yahoo_yfinance": 0,
+    "eodhd": 0,
+    "scalable": 0,
+    "wikipedia": 0,
+    "etf_holdings": 0,
+    "screeners": 0,
+    "third_party_sector_databases": 0,
+    "per_security_web_fanout": 0,
+    "price_ohlcv": 0,
+    "news_trading": 0
+  },
+  "cohort_authority": {
+    "source": "output_p0_frozen_1425_home_market_rs_v0_58/capability_v0.58.csv",
+    "rows": 1425,
+    "counts": {
+      "AU_SP_ASX200": 63,
+      "BR_IBRX100": 37,
+      "CN_CSI300": 294,
+      "IN_NIFTY50": 45,
+      "JP_N225": 197,
+      "TW_TW50": 49,
+      "US_SP400": 368,
+      "US_SP500": 372
+    }
+  },
+  "cohort_findings": {
+    "AU_SP_ASX200": {
+      "source_native_candidate": "ASX company-directory Industry field",
+      "taxonomy_identity": "NOT_VERIFIED",
+      "gate_status": {
+        "A": "PASS",
+        "B": "PASS",
+        "C": "NOT_VERIFIED",
+        "D": "NOT_EVALUATED",
+        "E": "NOT_EVALUATED",
+        "F": "NOT_EVALUATED",
+        "G": "NOT_EVALUATED",
+        "H": "NOT_EVALUATED"
+      },
+      "earliest_blocker": "SOURCE_NATIVE_TAXONOMY_IDENTITY_NOT_VERIFIED",
+      "rationale": "ASX is an official primary exchange and exposes an All ASX Listed Companies CSV plus an Industry field. Retrieved official evidence does not bind that directory Industry field to a named/versioned source-native taxonomy. ASX separately documents GICS use for sector indices, while the directory page also discloses LSEG/Morningstar data; no silent assumption that the directory Industry field is GICS is allowed."
+    },
+    "BR_IBRX100": {
+      "source_native_candidate": "B3 Classificacao Setorial",
+      "taxonomy_identity": "B3_CLASSIFICACAO_SETORIAL",
+      "gate_status": {
+        "A": "PASS",
+        "B": "NOT_VERIFIED",
+        "C": "PASS",
+        "D": "NOT_EVALUATED",
+        "E": "NOT_EVALUATED",
+        "F": "NOT_EVALUATED",
+        "G": "NOT_EVALUATED",
+        "H": "NOT_EVALUATED"
+      },
+      "earliest_blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND",
+      "rationale": "B3 officially publishes its sector classification and says the query base is updated weekly. Bounded official research found the public query/hub and classification criteria, but did not establish a reproducible bulk constituent/reference download carrying the classification for the cohort."
+    },
+    "CN_CSI300": {
+      "source_native_candidate": "CSI Industry Classification",
+      "taxonomy_identity": "CSI_INDUSTRY_CLASSIFICATION",
+      "gate_status": {
+        "A": "PASS",
+        "B": "NOT_VERIFIED",
+        "C": "PASS",
+        "D": "PASS",
+        "E": "NOT_EVALUATED",
+        "F": "NOT_EVALUATED",
+        "G": "NOT_EVALUATED",
+        "H": "NOT_EVALUATED"
+      },
+      "earliest_blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+      "rationale": "CSI publishes a coded multi-level industry-classification standard and official CSI 300 sector information. Official index methodology says the CSI data-service platform publishes index data daily, but bounded evidence did not verify a bulk row-level constituent/reference route that includes the source-native industry code/name for the exact Frozen cohort."
+    },
+    "IN_NIFTY50": {
+      "source_native_candidate": "NSE Indices Industry Classification",
+      "taxonomy_identity": "NSE_INDICES_INDUSTRY_CLASSIFICATION",
+      "gate_status": {
+        "A": "PASS",
+        "B": "PASS",
+        "C": "PASS",
+        "D": "PASS",
+        "E": "NOT_VERIFIED",
+        "F": "NOT_EVALUATED",
+        "G": "PASS",
+        "H": "NOT_EVALUATED"
+      },
+      "earliest_blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+      "rationale": "NSE Indices officially defines a coded four-tier classification and the NIFTY 50 page exposes an Index Constituent download plus sectoral distribution. Current retrieved evidence did not verify the exact current bulk constituent schema/identifier fields needed to prove deterministic source-security to Source_WS_ID linkage for all 45 Frozen rows without relying on unstated assumptions."
+    },
+    "JP_N225": {
+      "source_native_candidate": "Nikkei 36 Industry / Nikkei sector grouping",
+      "taxonomy_identity": "NIKKEI_36_INDUSTRY_AND_SECTOR",
+      "gate_status": {
+        "A": "PASS",
+        "B": "PASS",
+        "C": "PASS",
+        "D": "NOT_VERIFIED",
+        "E": "PASS",
+        "F": "NOT_EVALUATED",
+        "G": "PASS",
+        "H": "NOT_EVALUATED"
+      },
+      "earliest_blocker": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE",
+      "rationale": "The official Nikkei 225 component page is a single reproducible current page (updated 2026-09-25) listing component security codes under named industries and sectors. The retrieved official source exposes classification names but no source-native sector/industry classification code; using a locally invented code is prohibited."
+    },
+    "TW_TW50": {
+      "source_native_candidate": "ICB within FTSE TWSE Taiwan Index Series",
+      "taxonomy_identity": "ICB",
+      "gate_status": {
+        "A": "PASS",
+        "B": "NOT_VERIFIED",
+        "C": "PASS",
+        "D": "PASS",
+        "E": "NOT_EVALUATED",
+        "F": "NOT_EVALUATED",
+        "G": "PASS",
+        "H": "NOT_EVALUATED"
+      },
+      "earliest_blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+      "rationale": "TWSE/FTSE Russell official rules explicitly use coded ICB Industry Groups for the Taiwan index series. Bounded official evidence did not verify a current row-level bulk constituent/reference route exposing ICB code/name for every exact Frozen Taiwan 50 security."
+    },
+    "US_SP400": {
+      "source_native_candidate": "SEC Standard Industrial Classification via EDGAR bulk submissions",
+      "taxonomy_identity": "SEC_SIC_2026",
+      "gate_status": {
+        "A": "PASS",
+        "B": "PASS",
+        "C": "PASS",
+        "D": "PASS",
+        "E": "NOT_VERIFIED",
+        "F": "NOT_EVALUATED",
+        "G": "PASS",
+        "H": "NOT_EVALUATED"
+      },
+      "earliest_blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+      "rationale": "SEC is an official registry. EDGAR documents a nightly bulk submissions ZIP, ticker/exchange association data, public SIC codes, and the 2026 SIC taxonomy. Frozen WS_ID uses ticker+Primary_MIC for these U.S. rows; retrieved evidence does not yet establish an auditable governed mapping from SEC exchange strings/CIK identity to the exact MIC-qualified Source_WS_ID for all 368 rows."
+    },
+    "US_SP500": {
+      "source_native_candidate": "SEC Standard Industrial Classification via EDGAR bulk submissions",
+      "taxonomy_identity": "SEC_SIC_2026",
+      "gate_status": {
+        "A": "PASS",
+        "B": "PASS",
+        "C": "PASS",
+        "D": "PASS",
+        "E": "NOT_VERIFIED",
+        "F": "NOT_EVALUATED",
+        "G": "PASS",
+        "H": "NOT_EVALUATED"
+      },
+      "earliest_blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+      "rationale": "SEC is an official registry. EDGAR documents a nightly bulk submissions ZIP, ticker/exchange association data, public SIC codes, and the 2026 SIC taxonomy. Frozen WS_ID uses ticker+Primary_MIC for these U.S. rows; retrieved evidence does not yet establish an auditable governed mapping from SEC exchange strings/CIK identity to the exact MIC-qualified Source_WS_ID for all 372 rows."
+    }
+  },
+  "global_smallest_blocker": {
+    "blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND",
+    "cohort": "BR_IBRX100",
+    "gate": "B_BULK_REPRODUCIBLE",
+    "reason": "Earliest concrete fail-closed gate among the affected cohorts."
+  },
+  "external_requests": [
+    {
+      "url": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+      "result": "Official ASX company directory exposes Industry and an All ASX Listed Companies CSV; directory taxonomy identity not explicitly bound/versioned in retrieved evidence."
+    },
+    {
+      "url": "https://www.asx.com.au/markets/market-resources/asx-codes-and-descriptors",
+      "result": "Official ASX codes/ISIN resource confirms exchange identifiers and downloadable ISIN directory."
+    },
+    {
+      "url": "https://www.asx.com.au/markets/trade-our-cash-market/overview/indices",
+      "result": "Official ASX page states ASX adopted GICS for sector indices; not sufficient to bind company-directory Industry field to GICS."
+    },
+    {
+      "url": "https://www.asx.com.au/connectivity-and-data/information-services/reference-data",
+      "result": "Official ASX reference-data products page; no retrieved public row-level sector-code bulk route sufficient to cure taxonomy identity gap."
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/classificacao-setorial/",
+      "result": "Official B3 sector-classification query; base stated as updated weekly."
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/criterio-de-classificacao/",
+      "result": "Official B3 classification criteria establish B3's source-native classification methodology."
+    },
+    {
+      "url": "https://www.b3.com.br/main.jsp?doui_processActionId=setLocaleProcessAction&locale=pt_BR&lumA=1&lumII=8AE490CA9A5E21B5019AEBE12A9C42A6&lumPageId=8AE490CA9A5E21B5019AEBE12A684286",
+      "result": "Official B3 public-data hub lists sector classification but retrieved evidence did not establish a bulk classification file."
+    },
+    {
+      "url": "https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/up2data/dados-disponiveis/",
+      "result": "Official B3 data-services page reviewed; listed-company packages described, but retrieved evidence did not verify a cohort sector-classification bulk route."
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/industryClassification/%E4%B8%AD%E8%AF%81%E8%A1%8C%E4%B8%9A%E5%88%86%E7%B1%BB%E7%9A%84%E8%AF%B4%E6%98%8E.pdf",
+      "result": "Official CSI industry-classification standard shows coded multi-level hierarchy."
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/en/000300factsheeten.pdf",
+      "result": "Official CSI 300 factsheet includes sector breakdown and sector labels for top constituents; not full row-level bulk coverage."
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300_Index_Methodology_cn.pdf",
+      "result": "Official CSI 300 methodology states official publication channels including CSI data-service platform and website."
+    },
+    {
+      "url": "https://www.niftyindices.com/resources/industry-classification",
+      "result": "Official NSE Indices page defines four-tier source-native industry classification."
+    },
+    {
+      "url": "https://niftyindices.com/docs/default-source/default-document-library/nse-indices_industry-classification-structure-2022-11.pdf?sfvrsn=6df89434_2",
+      "result": "Official classification structure exposes MES/Sector/Industry/Basic-Industry codes and names."
+    },
+    {
+      "url": "https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50",
+      "result": "Official NIFTY 50 page exposes Index Constituent download and sectoral distribution; exact current identifier schema not verified in retrieved evidence."
+    },
+    {
+      "url": "https://www.nseindia.com/static/market-data/securities-available-for-trading",
+      "result": "Official NSE page exposes bulk security lists; used only as identity-route evidence, not as sector classification."
+    },
+    {
+      "url": "https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225",
+      "result": "Official current Nikkei 225 component page, updated 2026-09-25, lists all components by industry under sector headings with security codes; no source-native classification code exposed."
+    },
+    {
+      "url": "https://indexes.nikkei.co.jp/en/nkave/factsheet?idx=nk225",
+      "result": "Official Nikkei 225 factsheet confirms named sectors and index governance."
+    },
+    {
+      "url": "https://indexes.nikkei.co.jp/en/nkave/newsroom?evt=10020&idxtag=&year=",
+      "result": "Official Nikkei industry-classification news/governance page; classification maintained by Nikkei."
+    },
+    {
+      "url": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf",
+      "result": "Official FTSE TWSE Taiwan Index Series rules use ICB Industry Group codes for sector/index qualification."
+    },
+    {
+      "url": "https://wwwc.twse.com.tw/en/indices/indices/series.html",
+      "result": "Official TWSE index-series page confirms ICB use in Taiwan sector/technology index definitions."
+    },
+    {
+      "url": "https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/2.08.html",
+      "result": "Official TWSE fact book provides exchange industry statistics; not row-level Taiwan 50 classification coverage."
+    },
+    {
+      "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "result": "Official SEC EDGAR API docs establish nightly bulk submissions ZIP and submissions metadata with ticker/exchange identity."
+    },
+    {
+      "url": "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+      "result": "Official SEC EDGAR access docs expose company_tickers_exchange.json for CIK/ticker/exchange associations."
+    },
+    {
+      "url": "https://www.sec.gov/search-filings",
+      "result": "Official SEC filing search identifies SIC as the standard classification used to indicate company type of business."
+    },
+    {
+      "url": "https://xbrl.sec.gov/sic/2026/",
+      "result": "Official SEC 2026 SIC taxonomy directory establishes a versioned SIC taxonomy artifact."
+    },
+    {
+      "url": "https://data.sec.gov/",
+      "result": "Official SEC data API landing page states public API access subject to SEC fair-access policy."
+    }
+  ]
+}
