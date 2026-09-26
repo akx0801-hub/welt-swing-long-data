@@ -50,7 +50,7 @@ def test_rvol_baseline_excludes_current():
     r=by_family("RELATIVE_VOLUME_METRICS")
     assert r["canonical_names"]=="RVOL20"
     assert "EXCLUDED" in r["current_bar_policy"]
-    assert "previous 20" in r["formula"]
+    assert "t-20 valid" in r["formula"] and "t-1 valid" in r["formula"]
 
 
 def test_atr_normalized_current_events_use_prior_atr():
@@ -58,8 +58,8 @@ def test_atr_normalized_current_events_use_prior_atr():
     move=by_family("DAILY_MOVE_IN_ATR")
     assert "ATR14[t-1 valid]" in gap["formula"]
     assert "ATR14[t-1 valid]" in move["formula"]
-    assert "signed" in gap["sign"]
-    assert "signed" in move["sign"]
+    assert "positive" in gap["sign"] and "negative" in gap["sign"]
+    assert "positive" in move["sign"] and "negative" in move["sign"]
 
 
 def test_recent_impulse_is_composition_not_score():
