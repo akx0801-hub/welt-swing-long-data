@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "detail": "Neither candidate has exact row-level official bulk coverage proof for all 1425 Frozen securities under an entitled source route.",
+      "id": "FULL_1425_COVERAGE_NOT_VERIFIED",
+      "priority": 1,
+      "status": "OPEN"
+    },
+    {
+      "detail": "Exact source identifier schema/linkage to Source_WS_ID remains unverified for both candidates.",
+      "id": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+      "priority": 2,
+      "status": "DOWNSTREAM_OPEN"
+    },
+    {
+      "detail": "Project-specific source entitlement and repository mapping-persistence rights are not verified for either candidate.",
+      "id": "SOURCE_ACCESS_OR_PERSISTENCE_NOT_VERIFIED",
+      "priority": 3,
+      "status": "DOWNSTREAM_OPEN"
+    }
+  ],
+  "primary_blocker": "FULL_1425_COVERAGE_NOT_VERIFIED"
+}

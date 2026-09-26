@@ -1,0 +1,90 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "FULL_1425_COVERAGE_NOT_VERIFIED",
+  "canonical_sector_taxonomy_selected": false,
+  "feasible_count": 0,
+  "files": {
+    "external_request_ledger_v0.61.csv": {
+      "bytes": 9165,
+      "sha256": "6a4d6f3879d3cf64c1d26344e050c18d2d73d2f2a175a46b1ad69e02318dc52e"
+    },
+    "frozen_1425_coverage_feasibility_v0.61.csv": {
+      "bytes": 400975,
+      "sha256": "9af86535ccfa1eb4e517ed56187d76f2425055935099c40e4c7d4e7b7b364b0f"
+    },
+    "frozen_1425_coverage_summary_v0.61.csv": {
+      "bytes": 125,
+      "sha256": "71c17e30b3c0cbfc24d42a6916029a478913442b326906fd9bfce6ea3a548174"
+    },
+    "immutability_audit_v0.61.json": {
+      "bytes": 1281,
+      "sha256": "eded5c5d5db83fb29241c082715cd15b4abe967f3af97b7b741c18c87fd69188"
+    },
+    "manager_governance_authority_G_SEC_01_v0.61.json": {
+      "bytes": 1478,
+      "sha256": "cfe6fd31b9e06e736cf3ef91159c40e496641c1f70496132f06237f0c20419c2"
+    },
+    "official_source_route_ledger_v0.61.csv": {
+      "bytes": 747,
+      "sha256": "8f8101f9d396bf2cb5455d1a060f7ac3bbe7f327c97938153f4860ec1163ab58"
+    },
+    "provider_call_audit_v0.61.json": {
+      "bytes": 159,
+      "sha256": "a6f77bd47da2bb0820f3c5c028a2e8474b3fb381efb1cd533792538d753a81fb"
+    },
+    "source_access_persistence_audit_v0.61.csv": {
+      "bytes": 427,
+      "sha256": "8f728e02b910eb8098d3bdec57f5c20aa99e175b82bb9b31f80017f0b6eccbdd"
+    },
+    "stage_checkpoint_preupload_v0.61.json": {
+      "bytes": 559,
+      "sha256": "4fd43d3f0a0f5815e509c7c23257b32766926889e674e1ba50ce0a7696831420"
+    },
+    "summary_preupload_v0.61.json": {
+      "bytes": 2649,
+      "sha256": "e34cc1b5ccc4dd387674e772cd819b37cf659d051bda7f0a38e17ca445846271"
+    },
+    "taxonomy_candidate_gate_matrix_v0.61.csv": {
+      "bytes": 2327,
+      "sha256": "ac36ebaa3c483f4146cf7a2c4f1ac036af19a4bb164f754cd780782b5bbbfa46"
+    },
+    "taxonomy_selection_decision_v0.61.json": {
+      "bytes": 803,
+      "sha256": "c1b10d5412f39a26d325799fb4ccd06397398729a4ccc95b156de9d9cb18e4ea"
+    },
+    "test_results_v0.61.csv": {
+      "bytes": 1411,
+      "sha256": "a2c54d5d898063a11bbc17648649caa8c1f8d516cd3fccc5d084217097538f39"
+    },
+    "unresolved_blockers_v0.61.json": {
+      "bytes": 828,
+      "sha256": "f979120485a425206604cf5ec41035d773de08204e0644be87820803f80db385"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "mapping_population_runs": 0,
+  "next_gate": "FULL_1425_COVERAGE_NOT_VERIFIED",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "prohibited_provider_calls": {
+    "alpha_vantage": 0,
+    "eodhd": 0,
+    "market_price_ohlcv": 0,
+    "news_trading": 0,
+    "per_security_web_fanout": 0,
+    "scalable": 0,
+    "yahoo_yfinance": 0
+  },
+  "repository_sha": "cd042d2199f5050940d54d567737da4b2272429e",
+  "required_start_head": "b5fda059940710d4e07928b6a8bc7b0b5d536a57",
+  "sector_rs_runs": 0,
+  "selected_taxonomy": "NONE",
+  "stage": "P0_FROZEN_1425_CANONICAL_SECTOR_TAXONOMY_SOURCE_FEASIBILITY_SELECTION_GATE",
+  "tested_count": 2,
+  "v057_feature_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v058_home_rs_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "verdict": "BLOCKED_TAXONOMY_SOURCE_FEASIBILITY",
+  "version": "v0.61"
+}

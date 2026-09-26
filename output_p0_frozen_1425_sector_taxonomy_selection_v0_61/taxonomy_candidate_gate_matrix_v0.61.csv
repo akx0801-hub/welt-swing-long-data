@@ -1,0 +1,15 @@
+Candidate,Gate,Status,Detail,Earliest_Blocker
+GICS,A_TAXONOMY_DEFINITION,PASS,Official S&P/MSCI authority; April-2026 methodology defines global four-tier hierarchy and stable numeric codes.,
+GICS,B_SOURCE_CLASS,PASS,Official index-administrator/reference-data route: S&P Global GICS Direct / MSCI GICS Direct.,
+GICS,C_BULK_REPRODUCIBILITY,PASS,Official dataset advertises API/Cloud/Feed/SFTP delivery; no per-security web fanout required.,
+GICS,D_FROZEN_1425_COVERAGE_FEASIBILITY,NOT_VERIFIED,Public global coverage claims do not prove exact membership for each Frozen-1425 security; no entitled bulk mapping file was accessed.,FULL_1425_COVERAGE_NOT_VERIFIED
+GICS,E_IDENTITY,NOT_VERIFIED,"Official cross-reference products exist, but the exact entitled identifier schema/path to Source_WS_ID was not verified for this project.",
+GICS,F_PROVENANCE,PASS,GICS taxonomy code/name plus project-required Source_Name/Reference/Version-or-AsOf/Mapping_Status/WS_ID fields are planable.,
+GICS,G_SOURCE_ACCESS_PERSISTENCE,NOT_VERIFIED,Official data is licensed/proprietary; repository-specific storage/redistribution permission or entitlement was not verified.,
+ICB,A_TAXONOMY_DEFINITION,PASS,Official FTSE Russell authority; ICB Ground Rules/taxonomy define coded Industry/Supersector/Sector/Subsector hierarchy.,
+ICB,B_SOURCE_CLASS,PASS,Official FTSE Russell ICB Universe and constituent reference-data files are an allowed index-administrator route.,
+ICB,C_BULK_REPRODUCIBILITY,PASS,Official ICB Universe weekly files plus daily update files provide reproducible bulk delivery.,
+ICB,D_FROZEN_1425_COVERAGE_FEASIBILITY,NOT_VERIFIED,Public 85k/80+ countries/150 exchanges claim does not prove exact membership for every Frozen-1425 security; no entitled Universe file was accessed.,FULL_1425_COVERAGE_NOT_VERIFIED
+ICB,E_IDENTITY,NOT_VERIFIED,Public product overview does not expose enough current Universe-file identity schema to prove deterministic Source identity to Source_WS_ID for all 1425.,
+ICB,F_PROVENANCE,PASS,ICB coded taxonomy plus project-required Source_Name/Reference/Version-or-AsOf/Mapping_Status/WS_ID fields are planable.,
+ICB,G_SOURCE_ACCESS_PERSISTENCE,NOT_VERIFIED,Official ICB materials require licence/permission for use/distribution; repository-specific persistence permission is not verified.,

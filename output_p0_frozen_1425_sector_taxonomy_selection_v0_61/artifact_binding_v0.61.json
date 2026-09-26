@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "21b17657591e739ce1e1528bb754d99468cf2763f730cff8e8e51a09e7fd9ffb",
+  "artifact_id": 10909285736,
+  "artifact_name": "p0-frozen-1425-sector-taxonomy-selection-v0.61-36251198020",
+  "artifact_scope": "pre-persistence v0.61 canonical sector taxonomy source-feasibility evidence package",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "cd042d2199f5050940d54d567737da4b2272429e",
+  "workflow_run_id": 36251198020
+}

@@ -1,0 +1,21 @@
+{
+  "authority": "G-SEC-01",
+  "blocker": "FULL_1425_COVERAGE_NOT_VERIFIED",
+  "canonical_sector_taxonomy_selected": false,
+  "crosswalk_created": false,
+  "earliest_common_failed_gate": "D_FROZEN_1425_COVERAGE_FEASIBILITY",
+  "feasible_candidates": [],
+  "feasible_count": 0,
+  "mapping_population_executed": false,
+  "other_single_taxonomy_reason": "NONE_ADDED; bounded official research did not establish a third concrete taxonomy satisfying the manager rule for candidate admission.",
+  "other_single_taxonomy_tested": false,
+  "productive": false,
+  "sector_rs_executed": false,
+  "selected_taxonomy": "NONE",
+  "selection_rule": "AUTO_SELECT_ONLY_IF_EXACTLY_ONE_CANDIDATE_PASSES_A_TO_G_AND_1425_OF_1425_PROVABLY_MAPPABLE",
+  "tested_candidates": [
+    "GICS",
+    "ICB"
+  ],
+  "tested_count": 2
+}

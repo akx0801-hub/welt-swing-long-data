@@ -1,0 +1,21 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "21b17657591e739ce1e1528bb754d99468cf2763f730cff8e8e51a09e7fd9ffb",
+  "artifact_id": 10909285736,
+  "blocker": "FULL_1425_COVERAGE_NOT_VERIFIED",
+  "canonical_sector_taxonomy_selected": false,
+  "feasible_count": 0,
+  "mapping_population_runs": 0,
+  "next_gate": "FULL_1425_COVERAGE_NOT_VERIFIED",
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "sector_rs_runs": 0,
+  "selected_taxonomy": "NONE",
+  "stage": "P0_FROZEN_1425_CANONICAL_SECTOR_TAXONOMY_SOURCE_FEASIBILITY_SELECTION_GATE",
+  "tested_count": 2,
+  "tests_failed": 0,
+  "tests_passed": 24,
+  "verdict": "BLOCKED_TAXONOMY_SOURCE_FEASIBILITY",
+  "version": "v0.61",
+  "workflow_run_id": 36251198020
+}

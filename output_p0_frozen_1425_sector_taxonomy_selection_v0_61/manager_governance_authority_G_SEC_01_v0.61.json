@@ -1,0 +1,37 @@
+{
+  "alpha_vantage_allowed": false,
+  "authority_class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "authority_id": "G-SEC-01",
+  "candidate_minimum": [
+    "GICS",
+    "ICB"
+  ],
+  "canonical_promotion_requires_frozen_1425": "1425/1425_PROVABLY_MAPPABLE",
+  "effective_stage": "P0_FROZEN_1425_CANONICAL_SECTOR_TAXONOMY_SOURCE_FEASIBILITY_SELECTION_GATE",
+  "hard_gates": [
+    "A_TAXONOMY_DEFINITION",
+    "B_SOURCE_CLASS",
+    "C_BULK_REPRODUCIBILITY",
+    "D_FROZEN_1425_COVERAGE_FEASIBILITY",
+    "E_IDENTITY",
+    "F_PROVENANCE",
+    "G_SOURCE_ACCESS_PERSISTENCE"
+  ],
+  "other_single_taxonomy_policy": "TEST_ONLY_IF_BOUNDED_AUTHORIZED_RESEARCH_FINDS_A_CONCRETE_OFFICIAL_GLOBALLY_USABLE_VERSIONABLE_TAXONOMY_WITH_A_REPRODUCIBLE_BULK_ROUTE",
+  "productive": false,
+  "rules": {
+    "crosswalk_forbidden_in_v0_61": true,
+    "exactly_one_full_pass_required": true,
+    "historical_partial_data_does_not_confer_authority": true,
+    "market_custom_does_not_confer_authority": true,
+    "mixed_taxonomy_forbidden_in_v0_61": true,
+    "multiple_full_pass_result": "GOVERNANCE_DECISION_REQUIRED_MULTIPLE_FEASIBLE_TAXONOMIES",
+    "no_preference_based_selection": true,
+    "personal_preference_does_not_confer_authority": true,
+    "plausibility_does_not_confer_authority": true,
+    "single_pass_auto_promotion_only": true,
+    "zero_full_pass_result": "FAIL_CLOSED_SMALLEST_PROVEN_BLOCKER"
+  },
+  "scope": "CANONICAL_SECTOR_TAXONOMY_SOURCE_FEASIBILITY_SELECTION",
+  "version": "v0.61"
+}

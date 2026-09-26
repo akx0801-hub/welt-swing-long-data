@@ -1,0 +1,3 @@
+Candidate,Official_Authority,Route,Source_Class,Bulk_Mode,Public_Coverage_Claim,Exact_Frozen_Coverage,Identity_Path,Access
+GICS,S&P Dow Jones Indices + MSCI,GICS Direct / S&P Global GICS dataset,official index administrator bulk/reference data,API|Cloud|Feed|SFTP,"50,000+ active public companies; 120+ countries; global",NOT_VERIFIED,NOT_VERIFIED_FOR_PROJECT,SUBSCRIPTION_OR_LICENSE_ROUTE_EXISTS_PROJECT_ENTITLEMENT_NOT_VERIFIED
+ICB,FTSE International Limited / FTSE Russell,ICB Universe weekly files + daily update files,official index administrator bulk/reference data,Universe files,"~85,000 equity securities; 80+ countries; 150 active exchanges",NOT_VERIFIED,NOT_VERIFIED_FOR_PROJECT,LICENSE_ROUTE_EXISTS_PROJECT_ENTITLEMENT_NOT_VERIFIED
