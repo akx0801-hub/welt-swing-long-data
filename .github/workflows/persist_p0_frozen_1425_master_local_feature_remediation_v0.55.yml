@@ -1,0 +1,58 @@
+name: Persist P0 Frozen 1425 Master Local Feature Remediation v0.55
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/persist_p0_frozen_1425_master_local_feature_remediation_v0.55.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Download exact successful v0.55 evidence artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 4fd2d914b2bbb0fcf2b347890f8d652ee80c4f00 HEAD
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10902665790 --jq .digest)"
+          test "$DIGEST" = "sha256:a6faf3156763a9ff4d6eba5322aa6e62c1f97a75797b09b910fba762917184a8"
+          rm -rf _v055_artifact
+          mkdir -p _v055_artifact
+          gh run download 36230843835 --repo "$GITHUB_REPOSITORY" \
+            --name p0-frozen-1425-master-local-feature-remediation-v0.55-36230843835 \
+            --dir _v055_artifact
+          test -f _v055_artifact/summary_preupload_v0.55.json
+          test "$(sha256sum _v055_artifact/feature_materialization_v0.55.csv | awk '{print $1}')" = "81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc"
+
+      - name: Prepare and validate final v0.55 authority
+        run: |
+          set -euo pipefail
+          python scripts/persist_p0_frozen_1425_master_local_feature_remediation_v0_55.py \
+            --artifact-dir _v055_artifact \
+            --repo-root .
+          rm -rf _v055_artifact
+
+      - name: Commit final bounded authority
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/P0_Frozen_1425_Master_Local_Feature_Remediation_v0.55.md \
+                  output_p0_frozen_1425_local_feature_remediation_v0_55/
+          test "$(git diff --cached --name-only | grep -c '^universe/' || true)" = "0"
+          test "$(git diff --cached --name-only | grep -c '^runtime_cache/' || true)" = "0"
+          git commit -m "Persist master local feature remediation v0.55 authority"
+          git push origin HEAD:main
