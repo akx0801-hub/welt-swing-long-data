@@ -1,0 +1,10 @@
+Feature_Group,Implemented_Lookback,Required_Fields,Observations_After_Anomaly,Anomaly_In_Current_Finite_Window,Current_Impact,Notes
+Close returns / return volatility / impulse,5/20/60 max,Close,467,NO,NOT_AFFECTED,Invalid bar excluded before calculations.
+Rolling highs/lows/ranges,20/60/252 max,High/Low/Close,467,NO,NOT_AFFECTED,252 is the longest explicit finite price-range lookback in historical feature implementation.
+SMA200,200,Close,467,NO,NOT_AFFECTED,Finite rolling mean.
+Volume/turnover/RVOL,20 plus current,Volume; Close for turnover,467,NO,NOT_AFFECTED,Does not establish historical volume correctness; only current participation.
+EMA20,RECURSIVE_EWM_SPAN_20,Close,467,N/A_NO_FINITE_CUTOFF,WINDOW_AFFECTED,Filtered-history omission has decaying but non-zero recursive influence.
+EMA50,RECURSIVE_EWM_SPAN_50,Close,467,N/A_NO_FINITE_CUTOFF,WINDOW_AFFECTED,Filtered-history omission has decaying but non-zero recursive influence.
+ATR14_Wilder_DEV,RECURSIVE_EWM_ALPHA_1_14,High/Low/Close/previous valid Close,467,N/A_NO_FINITE_CUTOFF,WINDOW_AFFECTED,Whole-bar exclusion also changes the next true-range adjacency.
+Home-market RS architecture,20/60 historical v0.20,Close returns + benchmark cohort,467,NO in historical architecture,UNKNOWN,Current Frozen-1425 RS not verified; no current RS result executed.
+Sector RS,NOT_CURRENTLY_READY,Sector metadata + returns,467,UNKNOWN,UNKNOWN,Sector RS not promoted/current for Frozen-1425.

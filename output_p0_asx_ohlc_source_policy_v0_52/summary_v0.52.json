@@ -1,0 +1,44 @@
+{
+  "stage": "P0_ASX_OHLC_SOURCE_POLICY_QA_CONTRACT_DECISION",
+  "version": "v0.52",
+  "mode": "BOUNDED_POLICY_QA_CONTRACT_DECISION",
+  "required_start_head": "073c4c423579480a746ca6e03165c1bdcf498539",
+  "status": "PASS_POLICY_SELECTED",
+  "authority_chain": {
+    "v048_runtime": "VALIDATED",
+    "v049_asx8_authority": "VALIDATED",
+    "v050_official_licensed_access": "VALIDATED",
+    "v051_eodhd_entitlement": "VALIDATED"
+  },
+  "qa_contract_finding": "Canonical core QA already permits governed exclusion of <=2 isolated invalid bars (<=1%, >=260 valid) while retaining raw rows. v0.45 introduced a stricter stage-local any-strict-invalid => security QUARANTINE override. The ASX-8 incident is therefore a source-data defect blocked by a stricter Frozen-cache gate, not evidence that the securities failed Stage-U eligibility.",
+  "selected_policy": "POLICY_F_CANONICAL_FILTERED_INVALID_BAR_SOURCE_DEFECT",
+  "policy_decision": "POLICY_SELECTED_FOR_IMPLEMENTATION",
+  "implementation_authorized": true,
+  "active_lookback": {
+    "observations_after_anomaly": 467,
+    "finite_windows_max_252_contains_anomaly": false,
+    "recursive_ema20_ema50_atr14": "INDIRECT_FILTERED_HISTORY_DEPENDENCY",
+    "current_frozen_rs": "NOT_VERIFIED",
+    "sector_rs": "NOT_VERIFIED"
+  },
+  "history_qa_reopen": false,
+  "liquidity_qa_reopen": false,
+  "current_cache": {
+    "READY": 1417,
+    "QUARANTINE": 8,
+    "total": 1425
+  },
+  "p0_price_cache_ready": false,
+  "runtime_sha256": "8973ff393db23c7e2d456502c2a71f085f17407dc5ed244dcc04d566c87d4063",
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "cache_mutation": false,
+  "frozen_mutation": false,
+  "mapping_mutation": false,
+  "market_data_acquisition": false,
+  "provider_calls": 0,
+  "alpha_vantage_calls": 0,
+  "scalable_calls": 0,
+  "p0_run": false,
+  "productive": false,
+  "next_gate": "BOUNDED IMPLEMENTATION GATE FOR POLICY_F_CANONICAL_FILTERED_INVALID_BAR_SOURCE_DEFECT"
+}

@@ -1,0 +1,145 @@
+{
+  "stage": "P0_ASX_OHLC_SOURCE_POLICY_QA_CONTRACT_DECISION",
+  "version": "v0.52",
+  "start_head": "073c4c423579480a746ca6e03165c1bdcf498539",
+  "start_tree": "038d5b66ce4c8f0a5e70a1b4420e4552d00771b5",
+  "mode": "BOUNDED_POLICY_QA_CONTRACT_DECISION",
+  "source_project_authorities": {
+    "v048_summary": {
+      "path": "output_p0_frozen_1425_nonready10_resume_v0_48/summary_v0.48.json",
+      "git_blob_sha": "0943be7a988c1429601422d0419123b45784d51a"
+    },
+    "v048_report": {
+      "path": "docs/validation/P0_Frozen_1425_NonReady10_Price_QA_Resume_v0.48.md",
+      "git_blob_sha": "09a3b345feaa1f1e14ab2416118fefbbce690215"
+    },
+    "v048_runtime_state": {
+      "path": "output_p0_frozen_1425_nonready10_resume_v0_48/final_cache_state_v0.48.csv",
+      "git_blob_sha": "f933360680a4febbfcbe31365a0e9b610818508a"
+    },
+    "v049_summary": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/summary_v0.49.json",
+      "git_blob_sha": "63c638c5548634b7d9260c9210756d6e91f1de90"
+    },
+    "v049_cross_source": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/cross_source_ohlc_v0.49.csv",
+      "git_blob_sha": "d738ed8ba2b0c8fab87bc1d496df11039f4533ff"
+    },
+    "v049_adjustment": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/adjustment_analysis_v0.49.csv",
+      "git_blob_sha": "edd7b05aad16ec86356604dd8bd599b4d6763ed7"
+    },
+    "v049_common_date": {
+      "path": "output_p0_frozen_1425_asx8_ohlc_authority_v0_49/common_date_scan_v0.49.csv",
+      "git_blob_sha": "315b57813993db7cebb3025ebaa09ce6cb1c0f67"
+    },
+    "v050_summary": {
+      "path": "output_p0_frozen_1425_asx8_eod_acquisition_v0_50/summary_v0.50.json",
+      "git_blob_sha": "eabe2cb20b6d0101bfa94451d4daaa4786968749"
+    },
+    "v051_summary": {
+      "path": "output_p0_frozen_1425_asx8_eodhd_v0_51/summary_v0.51.json",
+      "git_blob_sha": "2d82224da124b23139d1c7d261320198c06fa25c"
+    },
+    "core_price_cache": {
+      "path": "scripts/price_cache.py",
+      "git_blob_sha": "454a1036e02c8ea73504921163aad1438a7e9f9d"
+    },
+    "core_feature_builder": {
+      "path": "scripts/feature_builder.py",
+      "git_blob_sha": "f6e14fedaa874bc89b6d33f51d6730e175c2b60e"
+    },
+    "v045_frozen_remediation": {
+      "path": "scripts/p0_frozen_1425_price_cache_remediation_v0_45.py",
+      "git_blob_sha": "c3ad241a1ba1336a05f782af1f5cf559dfaa5bdf"
+    },
+    "market_evidence_522_adapter": {
+      "path": "scripts/acquire_market_evidence_522_v1.py",
+      "git_blob_sha": "f643e30d365ce38f3d7d0160b8609d723243861b"
+    },
+    "qa_filtered_policy_report": {
+      "path": "docs/validation/QA_Filtered_Bar_Policy_Promotion_v0.4.md",
+      "git_blob_sha": "8e7fe9eb01d2d55e5e6c5b3c56cf5debbf1dac4b"
+    },
+    "p0_feature_v019": {
+      "path": "scripts/p0_feature_augmentation_v0_19.py",
+      "git_blob_sha": "62ced7a22abc6b1e1aaeb0a2f44690fd67956d95"
+    },
+    "p0_lane_capability_v019": {
+      "path": "output_p0_feature_augmentation_v0_19/p0_lane_feature_capability_v0.19.csv",
+      "git_blob_sha": "f61187cc5157c36b4d1b49f7f6d11ba13e8f1d70"
+    },
+    "p0_lane_registry_v021": {
+      "path": "output_p0_lane_shadow_validation_v0_21/p0_lane_parameter_registry_v0.21.json",
+      "git_blob_sha": "01ae47713cc722497fcc56585dd27466df8baa9c"
+    },
+    "history_qa_policy": {
+      "path": "config/history_qa_v1_policy.json",
+      "git_blob_sha": "5bb727e0780c74878977584fb6f709213b80db20"
+    },
+    "history_qa_authority": {
+      "path": "docs/spec/History_QA_v1_Partial_Coverage_Implementation_Gate.md",
+      "git_blob_sha": "916b429833352aecaec6ab048e7a3db949883f49"
+    },
+    "liquidity_qa_policy": {
+      "path": "config/liquidity_qa_v1_policy.json",
+      "git_blob_sha": "1e2dc1d04e39744cd14ff08bb035cf53bc38a81c"
+    },
+    "liquidity_qa_authority": {
+      "path": "docs/spec/Liquidity_QA_v1_Bounded_Implementation_Gate.md",
+      "git_blob_sha": "6e6b8defaaeac3e25c616fba7a5944ad9c9f0111"
+    }
+  },
+  "runtime_readonly_inspection": {
+    "source_run": 36183320195,
+    "artifact_id": 10885240894,
+    "sqlite_bytes": 144216064,
+    "expected_sha256": "8973ff393db23c7e2d456109d00c4833fde7d4063",
+    "rehashed_sha256": "8973ff393db23c7e2d456109d00c4833fde7d4063",
+    "mode": "READ_ONLY_EXISTING_ARTIFACT_NO_PROVIDER_CALL",
+    "asx8_each_raw_bars": 507,
+    "asx8_each_valid_bars": 506,
+    "asx8_each_suspicious_returns": 0,
+    "asx8_each_observations_after_2024_11_15": 467,
+    "last_bar_date": "2026-09-22"
+  },
+  "frozen": {
+    "path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+    "git_blob_sha": "018a03eb4614a197da9d2d566e77f32c61238dad",
+    "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "rows": 1425,
+    "mutated": false
+  },
+  "output_blobs": {
+    "docs/validation/P0_ASX_OHLC_Source_Policy_QA_Contract_Decision_v0.52.md": "2accce07b3b5860016cacc7e8aa4ac1b3a191fa0",
+    "output_p0_asx_ohlc_source_policy_v0_52/contract_analysis_v0.52.csv": "89b8210abe3ec2bd68a1be00a8be9d5eca2c88c5",
+    "output_p0_asx_ohlc_source_policy_v0_52/feature_field_dependencies_v0.52.csv": "31218ff28f9b09b4ff088f4e9cf5f5e80f2d7fff",
+    "output_p0_asx_ohlc_source_policy_v0_52/active_lookback_analysis_v0.52.csv": "9dfe9a7bccf8806a62cc0a7ff694cc1f18f4bf1e",
+    "output_p0_asx_ohlc_source_policy_v0_52/policy_options_v0.52.csv": "6211eeffd73a5d4e42a529716cb65d4f03af2683",
+    "output_p0_asx_ohlc_source_policy_v0_52/source_defect_state_model_v0.52.csv": "6e49b82e35ec19e242d45f8042e11959fb59f6a9",
+    "output_p0_asx_ohlc_source_policy_v0_52/history_liquidity_interaction_v0.52.csv": "486eeb5db2db9d099ea27ade499bd7d2affa9710",
+    "output_p0_asx_ohlc_source_policy_v0_52/decision_v0.52.json": "c03fdc4d85a6416b7a5d938f0c9fe518bdbfdf99",
+    "output_p0_asx_ohlc_source_policy_v0_52/summary_v0.52.json": "5512cdb14628dd7f60ed098f564dd00d8d1e8858",
+    "output_p0_asx_ohlc_source_policy_v0_52/stage_checkpoint_v0.52.json": "6dbbc3deb147d10c6235f33e8eed212b8472e13b"
+  },
+  "result": {
+    "status": "PASS_POLICY_SELECTED",
+    "policy_decision": "POLICY_SELECTED_FOR_IMPLEMENTATION",
+    "selected_policy": "POLICY_F_CANONICAL_FILTERED_INVALID_BAR_SOURCE_DEFECT",
+    "implementation_authorized": true,
+    "ready": 1417,
+    "quarantine": 8,
+    "total": 1425,
+    "p0_price_cache_ready": false,
+    "cache_mutation": false,
+    "frozen_mutation": false,
+    "mapping_mutation": false,
+    "market_data_calls": 0,
+    "alpha_vantage_calls": 0,
+    "scalable_calls": 0,
+    "p0_run": false,
+    "features_materialized": false,
+    "productive": false,
+    "next_gate": "BOUNDED IMPLEMENTATION GATE FOR POLICY_F_CANONICAL_FILTERED_INVALID_BAR_SOURCE_DEFECT"
+  }
+}
