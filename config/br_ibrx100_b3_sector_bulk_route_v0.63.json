@@ -1,0 +1,18 @@
+{
+  "version": "v0.63",
+  "stage": "BR_IBRX100_OFFICIAL_SOURCE_NATIVE_SECTOR_BULK_ROUTE_RESOLUTION_GATE",
+  "required_start_head": "c07c2aab9578971b523c9d39428bdff5758a8761",
+  "scope_cohort": "BR_IBRX100",
+  "frozen_rows": 37,
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "v057_feature_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v058_home_market_rs_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "alpha_vantage_allowed": false,
+  "mapping_population_allowed": false,
+  "other_cohorts_allowed": false,
+  "sector_rs_allowed": false,
+  "crosswalk_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "productive": false
+}
