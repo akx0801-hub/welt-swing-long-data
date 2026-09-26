@@ -1,0 +1,21 @@
+{
+  "version": "v0.60",
+  "stage": "P0_FROZEN_1425_SECTOR_METADATA_CONTRACT_DEFINITION_GATE",
+  "mode": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "required_start_head": "3327e1245b0b0bf387445d78bfd2a3c66077538a",
+  "predecessor_workflow_run": 36243521798,
+  "predecessor_artifact_id": 10906513700,
+  "predecessor_artifact_digest": "sha256:ed79a1cad64fa409f72fd21d23669d77b720a99c6f12e379fd48c1573a1f4ab0",
+  "frozen_members": 1425,
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "v057_feature_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v058_home_market_rs_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "alpha_vantage_allowed": false,
+  "external_market_or_reference_requests_allowed": false,
+  "sector_metadata_population_allowed": false,
+  "sector_rs_materialization_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "productive": false,
+  "fail_closed_on_missing_taxonomy_authority": true
+}
