@@ -253,17 +253,30 @@ def discover_group_api(segment_raw:str,virtual_ms:int,max_bytes:int)->dict[str,A
         trials.append(trial)
     return {"ok":False,"blocker":"GROUP_COMPANY_API_NOT_IDENTIFIED","group_page":page,"observed":urls,"trials":trials}
 
-def build_group_api(prefix_url:str,template:dict[str,Any],segment_raw:str,page_size:int)->tuple[str,dict[str,Any]]:
+def build_group_api(prefix_url:str,template:dict[str,Any],segment_raw:str,page_number:int=1)->tuple[str,dict[str,Any]]:
     f=dict(template)
     enc=encode_segment(segment_raw)
-    f["segment"]=enc["component"]
-    if "language" in f:f["language"]="pt-br"
-    if "pageNumber" in f:f["pageNumber"]=1
-    if "pageSize" in f:f["pageSize"]=page_size
+    def set_existing(norm_name:str,value:Any,default_key:str|None=None):
+        for k in list(f.keys()):
+            if normalize_key(str(k))==norm_name:
+                f[k]=value
+                return
+        if default_key is not None:
+            f[default_key]=value
+    set_existing("segment",enc["component"],"segment")
+    set_existing("language","pt-br")
+    set_existing("pagenumber",page_number)
     payload=json.dumps(f,ensure_ascii=False,separators=(",",":")).encode("utf-8")
     b64=base64.b64encode(payload).decode("ascii")
     prefix=prefix_url.rsplit("/",1)[0]+"/"
     return prefix+b64,f
+
+def filter_int_value(f:dict[str,Any],norm_name:str)->int|None:
+    for k,v in f.items():
+        if normalize_key(str(k))==norm_name:
+            try:return int(v)
+            except:return None
+    return None
 
 def provider_calls()->dict[str,int]:
     return {"alpha_vantage":0,"yahoo_yfinance":0,"eodhd":0,"scalable":0,"wikipedia":0,"tradingview":0,
@@ -360,44 +373,77 @@ def main()->int:
         group_blocker="B3_GROUP_QUERY_EXECUTION_INCOMPLETE"
 
     if api_contract:
+        template_page_size=filter_int_value(api_contract[1],"pagesize")
         for q in inventory:
             executed+=1
-            url,filt=build_group_api(api_contract[0],api_contract[1],q["Segmento_Raw"],int(spec["group_page_api_page_size"]))
-            fr=fetch(url,int(spec["max_group_bytes"]))
-            ext.append({"Request_Order":len(ext)+1,"Request_Type":"GROUP_CLASSIFICATION_API","URL":url,"Status":fr.get("status",""),
-                        "Content_Type":fr.get("content_type",""),"SHA256":fr.get("sha256",""),"Official_B3":"YES","Per_Security_Fanout":"NO",
-                        "Result":"OK" if fr.get("ok") else fr.get("error","FAILED")})
-            row={"Segmento_Raw":q["Segmento_Raw"],"Encoded_Query_Value":q["Encoded_Query_Value"],"Setor_Parent_Candidates":q["Setor_Parent_Candidates"],
-                 "Subsetor_Parent_Candidates":q["Subsetor_Parent_Candidates"],"Request_URL":url,"HTTP_Status":fr.get("status",""),
-                 "Content_Type":fr.get("content_type",""),"Returned_Company_Count":0,"Parser_Status":"FAIL","Completeness_Status":"NOT_VERIFIED",
-                 "Response_SHA256":fr.get("sha256","")}
-            hash_ledger.append({"Segmento_Raw":q["Segmento_Raw"],"Request_URL":url,"Response_SHA256":fr.get("sha256",""),"Bytes":fr.get("bytes",0),
-                                "Timestamp_UTC":fr.get("timestamp_utc",""),"HTTP_Status":fr.get("status","")})
-            if not fr.get("ok") or fr.get("truncated"):
-                failed+=1;request_ledger.append(row);continue
-            try:
-                obj=parse_json_bytes(fr["body"]);recs=extract_company_records(obj);total=find_total_records(obj)
-                row["Returned_Company_Count"]=len(recs);row["Parser_Status"]="PASS" if recs or total==0 else "FAIL"
-                complete=(total is not None and len({r["B3_Company_Code"] for r in recs})>=total) or (total is None and len(recs)<int(spec["group_page_api_page_size"]) and len(recs)>0)
-                if total==0 and len(recs)==0:complete=True;row["Parser_Status"]="PASS"
-                row["Completeness_Status"]="PASS" if complete and row["Parser_Status"]=="PASS" else "NOT_VERIFIED"
-                if row["Completeness_Status"]=="PASS":
-                    successful+=1
-                    parent_pairs=segmap[q["Segmento_Raw"]]
-                    sectors=sorted({p[0] for p in parent_pairs});subs=sorted({p[1] for p in parent_pairs})
+            all_records={}
+            physical=0
+            page=1
+            total=None
+            group_ok=True
+            parser_notes=[]
+            response_hashes=[]
+            request_urls=[]
+            while page<=100:
+                url,filt=build_group_api(api_contract[0],api_contract[1],q["Segmento_Raw"],page)
+                fr=fetch(url,int(spec["max_group_bytes"]))
+                physical+=1;request_urls.append(url);response_hashes.append(fr.get("sha256",""))
+                ext.append({"Request_Order":len(ext)+1,"Request_Type":"GROUP_CLASSIFICATION_API","URL":url,"Status":fr.get("status",""),
+                            "Content_Type":fr.get("content_type",""),"SHA256":fr.get("sha256",""),"Official_B3":"YES","Per_Security_Fanout":"NO",
+                            "Result":"OK" if fr.get("ok") else fr.get("error","FAILED")})
+                hash_ledger.append({"Segmento_Raw":q["Segmento_Raw"],"Logical_Group_Query":executed,"Physical_Page":page,
+                                    "Request_URL":url,"Response_SHA256":fr.get("sha256",""),"Bytes":fr.get("bytes",0),
+                                    "Timestamp_UTC":fr.get("timestamp_utc",""),"HTTP_Status":fr.get("status","")})
+                if not fr.get("ok") or fr.get("truncated"):
+                    group_ok=False;parser_notes.append("HTTP_OR_TRUNCATION_FAILURE");break
+                try:
+                    obj=parse_json_bytes(fr["body"]);recs=extract_company_records(obj);page_total=find_total_records(obj)
+                    if total is None and page_total is not None:total=page_total
+                    before=len(all_records)
                     for rr in recs:
-                        resp_sector=rr["Response_Sector_Raw"]
-                        if resp_sector and resp_sector in sectors:
-                            sector_candidates=[resp_sector]
-                        else:
-                            sector_candidates=sectors
-                        members.append({"Segmento_Raw":q["Segmento_Raw"],"B3_Company_Code":rr["B3_Company_Code"],
-                                        "Official_Company_Label":rr["Official_Company_Label"],"Code_Field":rr["Code_Field"],
-                                        "Response_Sector_Raw":resp_sector,"Setor_Parent_Candidates":" | ".join(sector_candidates),
-                                        "Subsetor_Parent_Candidates":" | ".join(subs),"Source_URL":url,"Response_SHA256":fr["sha256"],"Parser_Status":"PASS"})
-                else:failed+=1
-            except Exception as e:
-                failed+=1;row["Parser_Status"]=f"FAIL:{type(e).__name__}:{e}"
+                        all_records[(rr["B3_Company_Code"],rr["Response_Sector_Raw"],rr["Official_Company_Label"])]=rr
+                    added=len(all_records)-before
+                    if total is not None and len({r["B3_Company_Code"] for r in all_records.values()})>=total:
+                        break
+                    if total==0:
+                        break
+                    ps=filter_int_value(filt,"pagesize") or template_page_size
+                    if total is None:
+                        if recs and ps and len(recs)<ps:break
+                        if recs and not ps:break
+                        group_ok=False;parser_notes.append("TOTAL_NOT_VERIFIED");break
+                    if added==0:
+                        group_ok=False;parser_notes.append("PAGINATION_NO_PROGRESS");break
+                    page+=1
+                except Exception as e:
+                    group_ok=False;parser_notes.append(f"PARSE:{type(e).__name__}:{e}");break
+
+            recs=list(all_records.values())
+            unique_codes=len({r["B3_Company_Code"] for r in recs})
+            complete=group_ok and ((total is not None and unique_codes>=total) or (total is None and len(recs)>0))
+            if total==0 and len(recs)==0 and group_ok:complete=True
+            row={"Segmento_Raw":q["Segmento_Raw"],"Encoded_Query_Value":q["Encoded_Query_Value"],"Setor_Parent_Candidates":q["Setor_Parent_Candidates"],
+                 "Subsetor_Parent_Candidates":q["Subsetor_Parent_Candidates"],"Request_URL":request_urls[0] if request_urls else "",
+                 "Physical_Request_Count":physical,"HTTP_Status":"PASS" if group_ok else "FAIL",
+                 "Content_Type":"PUBLIC_B3_JSON_PROXY","Returned_Company_Count":unique_codes,
+                 "Reported_Total_Records":"" if total is None else total,
+                 "Parser_Status":"PASS" if group_ok else ("FAIL:"+" | ".join(parser_notes)),
+                 "Completeness_Status":"PASS" if complete else "NOT_VERIFIED",
+                 "Response_SHA256":" | ".join(response_hashes)}
+            if complete:
+                successful+=1
+                parent_pairs=segmap[q["Segmento_Raw"]]
+                sectors=sorted({p[0] for p in parent_pairs});subs=sorted({p[1] for p in parent_pairs})
+                for rr in recs:
+                    resp_sector=rr["Response_Sector_Raw"]
+                    sector_candidates=[resp_sector] if resp_sector and resp_sector in sectors else sectors
+                    members.append({"Segmento_Raw":q["Segmento_Raw"],"B3_Company_Code":rr["B3_Company_Code"],
+                                    "Official_Company_Label":rr["Official_Company_Label"],"Code_Field":rr["Code_Field"],
+                                    "Response_Sector_Raw":resp_sector,"Setor_Parent_Candidates":" | ".join(sector_candidates),
+                                    "Subsetor_Parent_Candidates":" | ".join(subs),"Source_URL":request_urls[0] if request_urls else "",
+                                    "Response_SHA256":" | ".join(response_hashes),"Parser_Status":"PASS"})
+            else:
+                failed+=1
             request_ledger.append(row)
         if failed>0:group_blocker="B3_GROUP_QUERY_EXECUTION_INCOMPLETE"
     writecsv(out/"b3_group_request_ledger_v0.67.csv",request_ledger if request_ledger else [{"Segmento_Raw":"","Encoded_Query_Value":"","Setor_Parent_Candidates":"","Subsetor_Parent_Candidates":"","Request_URL":"","HTTP_Status":"","Content_Type":"","Returned_Company_Count":0,"Parser_Status":"NOT_EXECUTED","Completeness_Status":"NOT_VERIFIED","Response_SHA256":""}])
@@ -521,7 +567,7 @@ def main()->int:
              "setor_count":counts["setor_count"],"subsetor_count":counts["subsetor_count"],"segmento_leaf_count":counts["segmento_leaf_count"],
              "distinct_segmento_labels":counts["distinct_segmento_label_count"],"expected_group_queries":expected,"executed_group_queries":executed,
              "successful_group_queries":successful,"failed_group_queries":failed,"distinct_setores":len(resolved_sectors),"pdsc_collisions":collisions,
-             "blocker":blocker,"provider_calls":provider,"immutability":imm,"tests":{"total":len(tests),"passed":len(tests),"failed":0},
+             "blocker":blocker,"provider_calls":provider,"canonical_mapping_population_runs":0,"sector_rs_runs":0,"other_cohort_rechecks":0,"p0_runs":0,"p1_runs":0,"p2_runs":0,"immutability":imm,"tests":{"total":len(tests),"passed":len(tests),"failed":0},
              "artifact_binding":"PENDING_UPLOAD","productive":False,"next_gate":next_gate}
     checkpoint={"stage":STAGE,"version":VERSION,"verdict":verdict,"br_exact_37_classification_coverage_ready":success,
                 "ready":ready,"total":37,"ambiguous":ambiguous,"not_found":not_found,"not_verified":not_verified,
