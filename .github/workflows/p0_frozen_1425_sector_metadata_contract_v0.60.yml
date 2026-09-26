@@ -1,0 +1,165 @@
+name: P0 Frozen 1425 Sector Metadata Contract v0.60
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/p0_frozen_1425_sector_metadata_contract_v0.60.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  sector-metadata-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout bounded v0.60 contract gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.60 stage lineage and scope
+        run: |
+          set -euo pipefail
+          START="3327e1245b0b0bf387445d78bfd2a3c66077538a"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(scripts/p0_frozen_1425_sector_metadata_contract_v0_60.py|scripts/persist_p0_frozen_1425_sector_metadata_contract_v0_60.py|tests/test_p0_frozen_1425_sector_metadata_contract_v0_60.py|\.github/workflows/p0_frozen_1425_sector_metadata_contract_v0\.60\.yml|config/p0_frozen_1425_sector_metadata_contract_v0\.60\.json)$' || true)"
+          test -z "$BAD"
+          python3 - <<'PY'
+          import json
+          c=json.load(open("config/p0_frozen_1425_sector_metadata_contract_v0.60.json",encoding="utf-8"))
+          assert c["version"]=="v0.60"
+          assert c["stage"]=="P0_FROZEN_1425_SECTOR_METADATA_CONTRACT_DEFINITION_GATE"
+          assert c["required_start_head"]=="3327e1245b0b0bf387445d78bfd2a3c66077538a"
+          assert c["alpha_vantage_allowed"] is False
+          assert c["external_market_or_reference_requests_allowed"] is False
+          assert c["sector_metadata_population_allowed"] is False
+          assert c["sector_rs_materialization_allowed"] is False
+          assert c["p0_allowed"] is False
+          assert c["productive"] is False
+          PY
+
+      - name: Verify exact v0.59 predecessor authority
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10906513700 --jq .digest)"
+          test "$DIGEST" = "sha256:ed79a1cad64fa409f72fd21d23669d77b720a99c6f12e379fd48c1573a1f4ab0"
+
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+
+          s=json.load(open("output_p0_frozen_1425_sector_authority_v0_59/summary_v0.59.json",encoding="utf-8"))
+          c=json.load(open("output_p0_frozen_1425_sector_authority_v0_59/stage_checkpoint_v0.59.json",encoding="utf-8"))
+          assert s["verdict"]=="PASS_WITH_SECTOR_METADATA_CONTRACT_BLOCKER"
+          assert s["sector_rs_ready"] is False
+          assert s["capability_counts"]["BLOCKED_METADATA"]==1425
+          assert s["affected_count"]==1425
+          assert s["sector_rs_materialization_runs"]==0
+          assert c["materialization_runs"]==0
+          assert c["workflow_run_id"]==36243521798
+          assert c["artifact_id"]==10906513700
+          assert "sha256:"+c["artifact_digest"]=="sha256:ed79a1cad64fa409f72fd21d23669d77b720a99c6f12e379fd48c1573a1f4ab0"
+
+          s58=json.load(open("output_p0_frozen_1425_home_market_rs_v0_58/summary_v0.58.json",encoding="utf-8"))
+          assert s58["home_market_rs_ready"] is True
+          assert s58["ready_count"]==1425 and s58["total"]==1425
+
+          def sha(p):
+              return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+      - name: Compile and run focused v0.60 tests
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/p0_frozen_1425_sector_metadata_contract_v0_60.py scripts/persist_p0_frozen_1425_sector_metadata_contract_v0_60.py
+          python3 tests/test_p0_frozen_1425_sector_metadata_contract_v0_60.py -v
+
+      - name: Run bounded authority-first contract gate
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_sector_metadata_contract_v0_60
+          python3 scripts/p0_frozen_1425_sector_metadata_contract_v0_60.py             --repository-sha "$GITHUB_SHA"             --output-dir output_p0_frozen_1425_sector_metadata_contract_v0_60
+
+      - name: Validate fail-closed governance blocker and immutability
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          out=Path("output_p0_frozen_1425_sector_metadata_contract_v0_60")
+          s=json.load(open(out/"summary_preupload_v0.60.json",encoding="utf-8"))
+          c=json.load(open(out/"sector_metadata_contract_v0.60.json",encoding="utf-8"))
+          u=json.load(open(out/"unresolved_governance_items_v0.60.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.60.csv",encoding="utf-8")))
+
+          assert s["verdict"]=="BLOCKED_GOVERNANCE_AUTHORITY_REQUIRED"
+          assert s["sector_metadata_contract_ready"] is False
+          assert s["ready"]==0 and s["total"]==1425
+          assert s["affected_count"]==1425
+          assert s["blocker"]=="GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY"
+          assert s["last_successful_step"]=="AUTHORITATIVE_REPOSITORY_CONTRACT_DISCOVERY_COMPLETE"
+          assert c["canonical_taxonomy"]=="NOT_DEFINED"
+          assert c["canonical_sector_field"]=="NOT_DEFINED"
+          assert c["population_permitted"] is False
+          assert c["sector_rs_materialization_permitted"] is False
+          assert u["smallest_next_gate"]=="GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY"
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in s["provider_calls"].values())
+          assert s["sector_metadata_population_runs"]==0
+          assert s["sector_rs_materialization_runs"]==0
+          assert s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert s["input_immutability"]["frozen_unchanged"] is True
+          assert s["input_immutability"]["v057_feature_unchanged"] is True
+          assert s["input_immutability"]["v058_home_rs_unchanged"] is True
+          assert not (out/"sector_metadata_mapping_v0.60.csv").exists()
+          assert not (out/"sector_rs_materialization_v0.60.csv").exists()
+
+          def sha(p):
+              return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          PY
+
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git diff -- output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv)" = ""
+          test "$(git diff -- output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.60 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-sector-metadata-contract-v0.60-${{ github.run_id }}
+          path: output_p0_frozen_1425_sector_metadata_contract_v0_60/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistent v0.60 evidence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_p0_frozen_1425_sector_metadata_contract_v0_60.py             --output-dir output_p0_frozen_1425_sector_metadata_contract_v0_60             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "p0-frozen-1425-sector-metadata-contract-v0.60-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.60 governance result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/P0_Frozen_1425_Sector_Metadata_Contract_Definition_v0.60.md                   output_p0_frozen_1425_sector_metadata_contract_v0_60/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/P0_Frozen_1425_Sector_Metadata_Contract_Definition_v0\.60\.md|output_p0_frozen_1425_sector_metadata_contract_v0_60/)' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist sector metadata contract governance v0.60"
+          git push origin HEAD:main
