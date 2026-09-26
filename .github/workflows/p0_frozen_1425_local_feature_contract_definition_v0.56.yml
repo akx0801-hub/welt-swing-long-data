@@ -1,0 +1,135 @@
+name: P0 Frozen 1425 Local Feature Contract Definition v0.56
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/p0_frozen_1425_local_feature_contract_definition_v0_56.py
+      - tests/test_p0_frozen_1425_local_feature_contract_definition_v0_56.py
+      - .github/workflows/p0_frozen_1425_local_feature_contract_definition_v0.56.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  define-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout bounded contract work
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pytest only
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check "pytest==8.3.5"
+
+      - name: Verify start lineage and v0.55 authority
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor b6426f24c30c213949d436d205f9188f22c21d84 HEAD
+
+          D55="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10902665790 --jq .digest)"
+          test "$D55" = "sha256:a6faf3156763a9ff4d6eba5322aa6e62c1f97a75797b09b910fba762917184a8"
+
+          test "$(sha256sum universe/SWING_U3K_FROZEN_v0.5.csv | awk '{print $1}')" = "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+
+          python - <<'PY'
+          import json
+          s=json.load(open("output_p0_frozen_1425_local_feature_remediation_v0_55/summary_v0.55.json",encoding="utf-8"))
+          assert s["status"]=="PASS_WITH_REMAINING_CONTRACT_GAPS"
+          assert s["feature_artifact"]["workflow_run_id"]==36230843835
+          assert s["feature_artifact"]["artifact_id"]==10902665790
+          assert s["feature_artifact"]["artifact_digest"]=="sha256:a6faf3156763a9ff4d6eba5322aa6e62c1f97a75797b09b910fba762917184a8"
+          assert s["full_frozen_materialization"]["semantic_sha256"]=="81f52fc0098c72d0836d014bf17975b8fcc729489a9eb67f146005be913ac2bc"
+          assert s["canonical_feature_column_count"]==23
+          assert s["capability_counts"]["FEATURE_READY"]==0
+          assert s["capability_counts"]["FEATURE_PARTIAL"]==1425
+          assert len(s["remaining_master_local_gaps"])==8
+          assert s["p0_local_feature_layer_ready"] is False
+          assert s["price_runtime"]["sha256"]=="bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          assert s["price_runtime"]["bytes"]==144539648
+          assert s["price_runtime"]["ready"]==1425
+          assert s["price_runtime"]["quarantine"]==0
+          print("v0.55 authority exact")
+          PY
+
+      - name: Focused contract tests
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/p0_frozen_1425_local_feature_contract_definition_v0_56.py
+          pytest -q tests/test_p0_frozen_1425_local_feature_contract_definition_v0_56.py
+
+      - name: Generate contract-only evidence
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_frozen_1425_local_feature_contract_v0_56
+          python scripts/p0_frozen_1425_local_feature_contract_definition_v0_56.py \
+            --output-dir output_p0_frozen_1425_local_feature_contract_v0_56 \
+            --repository-sha "$GITHUB_SHA"
+
+      - name: Validate contract-only scope
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_p0_frozen_1425_local_feature_contract_v0_56")
+          s=json.load(open(out/"summary_preupload_v0.56.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_preupload_v0.56.json",encoding="utf-8"))
+          decisions=list(csv.DictReader(open(out/"contract_decisions_v0.56.csv",encoding="utf-8")))
+          reg=list(csv.DictReader(open(out/"canonical_feature_contract_registry_v0.56.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.56.csv",encoding="utf-8")))
+          assert s["status"]=="PASS_ALL8_CONTRACTS_DEFINED"
+          assert s["decision_counts"]=={
+              "CONTRACT_DEFINED":8,
+              "CONTRACT_PARTIALLY_DEFINED":0,
+              "CONTRACT_DEFERRED":0,
+              "CONTRACT_REJECTED":0,
+          }
+          assert len(decisions)==8 and all(r["decision_state"]=="CONTRACT_DEFINED" for r in decisions)
+          assert s["new_numeric_features_expected"]==11
+          assert s["v0_57_local_feature_implementation_authorized"] is True
+          assert s["p0_local_feature_layer_ready"] is False
+          assert s["home_market_rs_ready"] is False
+          assert s["sector_rs_ready"] is False
+          assert s["feature_materialization_runs"]==0
+          assert s["p0_runs"]==0 and s["p1_p2_runs"]==0
+          assert s["market_provider_calls"]==0 and s["yahoo_yfinance_calls"]==0
+          assert s["eodhd_calls"]==0 and s["alpha_vantage_calls"]==0 and s["scalable_calls"]==0
+          assert s["price_runtime"]["opened"] is False
+          assert s["price_runtime"]["write_attempts"]==0
+          assert not (out/"feature_materialization_v0.56.csv").exists()
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert c["tests_failed"]==0
+          old=[r for r in reg if r["promotion_version"]!="v0.56"]
+          new=[r for r in reg if r["promotion_version"]=="v0.56"]
+          assert len([r for r in old if r["registry_type"]=="FEATURE"])==23
+          assert len([r for r in new if r["registry_type"]=="FEATURE"])==11
+          assert len([r for r in new if r["registry_type"]=="SEMANTIC_FAMILY"])==1
+          assert all(r["promotion_status"]=="CONTRACT_DEFINED_NOT_IMPLEMENTED" for r in new)
+          print(json.dumps({"status":s["status"],"decision_counts":s["decision_counts"],"new_numeric":s["new_numeric_features_expected"],"tests":s["tests"]},sort_keys=True))
+          PY
+
+          test "$(git diff -- scripts/feature_builder.py)" = ""
+          test "$(git diff -- universe/SWING_U3K_FROZEN_v0.5.csv)" = ""
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.56 contract evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-frozen-1425-local-feature-contract-v0.56-${{ github.run_id }}
+          path: output_p0_frozen_1425_local_feature_contract_v0_56/
+          if-no-files-found: error
+          retention-days: 14
