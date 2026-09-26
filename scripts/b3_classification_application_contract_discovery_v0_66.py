@@ -592,6 +592,14 @@ def main() -> int:
         "other_cohort_rechecks": 0, "sector_rs_runs": 0, "p0_runs": 0, "p1_runs": 0, "p2_runs": 0
     }
     (out / "immutability_audit_v0.66.json").write_text(json.dumps(imm, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    prohibited = {
+        "alpha_vantage": 0, "yahoo_yfinance": 0, "eodhd": 0, "scalable": 0,
+        "wikipedia": 0, "tradingview": 0, "third_party_databases": 0,
+        "per_security_fanout": 0, "company_name_matching": 0, "fuzzy_matching": 0,
+        "gics_icb_fallback": 0, "price_ohlcv": 0, "news": 0, "trading_analysis": 0,
+        "auth_bypass": 0, "captcha_bypass": 0
+    }
+    (out / "provider_call_audit_v0.66.json").write_text(json.dumps(prohibited, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     tests: list[dict[str, str]] = []
     def t(name: str, ok: bool, detail: Any) -> None:
