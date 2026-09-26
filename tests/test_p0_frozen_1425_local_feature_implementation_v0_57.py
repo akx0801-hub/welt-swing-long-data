@@ -32,13 +32,13 @@ def test_slope_minimum_history_semantics():
     assert len(ema20)==24
     assert _lag_ratio_return(ema20,5) is None
     ema20=pd.concat([ema20,pd.Series([105.0])],ignore_index=True)
-    assert _lag_ratio_return(ema20,5)==0.05
+    assert _lag_ratio_return(ema20,5)==(105.0/100.0-1.0)
 
     ema50=pd.Series([np.nan]*49+[100.0]*10)
     assert len(ema50)==59
     assert _lag_ratio_return(ema50,10) is None
     ema50=pd.concat([ema50,pd.Series([110.0])],ignore_index=True)
-    assert _lag_ratio_return(ema50,10)==0.10
+    assert _lag_ratio_return(ema50,10)==(110.0/100.0-1.0)
 
 
 def test_safe_divide_fail_closed():
