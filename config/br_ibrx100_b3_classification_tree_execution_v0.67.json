@@ -19,5 +19,7 @@
   "sector_rs_allowed": false,
   "p0_allowed": false,
   "p1_p2_allowed": false,
-  "productive": false
+  "productive": false,
+  "execution_attempt": 2,
+  "retry_reason": "FIX_SUMMARY_SCOPE_FIELDS_AND_USE_OBSERVED_GROUP_API_PAGINATION"
 }
