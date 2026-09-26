@@ -1,0 +1,84 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "b3_classification_tree_machine_reproducible": true,
+  "b3_complete_company_classification_dataset_ready": true,
+  "blocker": "",
+  "canonical_mapping_population_runs": 0,
+  "discovered_contract": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/assets/i18n/pt-br.json",
+  "exact37_classification_execution_runs": 0,
+  "files": {
+    "b3_all_company_classification_contract_v0.66.json": {
+      "bytes": 5176,
+      "sha256": "519405a93c656d8fe992b673dc81c1a1ed5ae44c355092cbe184f53ae75f0bd7"
+    },
+    "b3_application_asset_ledger_v0.66.csv": {
+      "bytes": 3718,
+      "sha256": "452af16eef29b6b7e4570ddef48cef8e3be9f42b265750e87bf2d6a5d57fbb81"
+    },
+    "b3_browser_render_audit_v0.66.csv": {
+      "bytes": 424,
+      "sha256": "159c45ab8aad9f3c7734fe1542185a953a65c9ca394666c5ba2d4511018512b2"
+    },
+    "b3_candidate_data_contracts_v0.66.csv": {
+      "bytes": 4759,
+      "sha256": "fd2b5f5aa9043164529ed23e3c48b014f0b201f39babab85876fdb92c0afe510"
+    },
+    "b3_js_bundle_endpoint_discovery_v0.66.csv": {
+      "bytes": 46994,
+      "sha256": "9f5f6786f17ec36f2955c60a2c66c1fb1aeef7b5d36b761d538e17de46dd033d"
+    },
+    "b3_public_network_request_ledger_v0.66.csv": {
+      "bytes": 9554,
+      "sha256": "7fa6d469af5580646f5f54c4f83db95e791caf8feddb2b12ce0ab040b6fcadb9"
+    },
+    "b3_tree_contract_v0.66.json": {
+      "bytes": 5754,
+      "sha256": "c8ad37945b868348b3eb754b0a5b5dc26ecfa7a43b8cada6eff52fb9834230e8"
+    },
+    "external_request_ledger_v0.66.csv": {
+      "bytes": 8975,
+      "sha256": "4774914fbb450b6b8d9601d8ccb208bd35587f1cde6054d257f0a5332935e75b"
+    },
+    "immutability_audit_v0.66.json": {
+      "bytes": 1128,
+      "sha256": "dc901bc799622290fca584e7152092ac7df01e2dc27787bd00a0857d3eb2c8e7"
+    },
+    "provider_call_audit_v0.66.json": {
+      "bytes": 355,
+      "sha256": "e9d464d3129280a66ad45ba80af2c2e014efaa969a3cb9cbdb41a474d2b1054c"
+    },
+    "public_reproducibility_audit_v0.66.json": {
+      "bytes": 506,
+      "sha256": "d83e011334a29ddf4be3510e3b72a8aed84fb10598025527463ad4794fbad4d7"
+    },
+    "stage_checkpoint_preupload_v0.66.json": {
+      "bytes": 747,
+      "sha256": "9c92417a2bba85015a90d26058befe3f1d4de78aa15ad98d9e0a8129f3304cf6"
+    },
+    "summary_preupload_v0.66.json": {
+      "bytes": 2580,
+      "sha256": "382d71c00dba2ed2cda1eebaea235945fff675c052fcf4c250ba19a0663ec876"
+    },
+    "test_results_v0.66.csv": {
+      "bytes": 1314,
+      "sha256": "fe8497f84692afdf95e2e1841c37e47aad298c67d32fb30d5ac5444af4e53f5d"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "next_gate": "BR_IBRX100 B3 CLASSIFICATION TREE EXECUTION / EXACT-37 COVERAGE GATE",
+  "other_cohort_rechecks": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "pdsc_exact37_generation_runs": 0,
+  "productive": false,
+  "public_reproducible": true,
+  "repository_sha": "897d445af33191f8020dac126d644dcaffff8415",
+  "required_start_head": "fb651c31f55f14a7fcb6bb3c83c5b25e3d69a4e6",
+  "sector_rs_runs": 0,
+  "stage": "B3_CLASSIFICATION_APPLICATION_API_ASSET_CONTRACT_DISCOVERY_GATE",
+  "v057_feature_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v058_home_rs_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "verdict": "PASS_B3_CLASSIFICATION_TREE_CONTRACT",
+  "version": "v0.66"
+}

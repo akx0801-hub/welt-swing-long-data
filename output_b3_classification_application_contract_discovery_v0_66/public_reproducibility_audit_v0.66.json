@@ -1,0 +1,16 @@
+{
+  "all_company_contracts_verified": 1,
+  "auth_bypass_used": false,
+  "browser_binary": "/usr/bin/google-chrome",
+  "browser_binary_available": true,
+  "browser_observed_public_requests": 25,
+  "candidate_contracts_probed": 9,
+  "captcha_bypass_used": false,
+  "cookies_tokens_secrets_persisted": false,
+  "direct_target_fetches_ok": 2,
+  "direct_target_fetches_total": 2,
+  "public_reproducible": true,
+  "static_assets_discovered": 8,
+  "static_assets_fetched_ok": 16,
+  "tree_contracts_verified": 2
+}

@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "d2d5d58d76cef566fba654863abcb883765d914b62d2b2a3b79a77878df156f5",
+  "artifact_id": 10914254491,
+  "artifact_name": "b3-classification-application-contract-discovery-v0.66-36268882980",
+  "artifact_scope": "pre-persistence v0.66 B3 public classification application asset/API contract discovery evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "897d445af33191f8020dac126d644dcaffff8415",
+  "workflow_run_id": 36268882980
+}
