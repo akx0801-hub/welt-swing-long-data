@@ -448,7 +448,7 @@ def main()->int:
     t("CONTRACT_CLASSIFICATION_COUNTS",cc=={"CONTRACT_EXACT":0,"CONTRACT_DERIVABLE":3,"CONTRACT_AMBIGUOUS":8,"CONTRACT_CONFLICT":0,"CONTRACT_NOT_FOUND":0},json.dumps(cc,sort_keys=True))
     t("NO_AMBIGUOUS_IMPLEMENTATION",all(r["promotion_status"].startswith("BLOCKED") for r in CONTRACT_ROWS if r["contract_classification"]=="CONTRACT_AMBIGUOUS"),"8/8 blocked")
     t("FORMULA_REGISTRY_COMPLETE",len(reg)==24,"21 retained +2 new +1 semantic family")
-    t("EXISTING21_REGRESSION",oldreg[-1]["First_Mismatches"]==V054_SEMANTIC_SHA256,V054_SEMANTIC_SHA256)
+    t("EXISTING21_REGRESSION",oldreg[-1]["Authority_Digest"]==V054_SEMANTIC_SHA256,V054_SEMANTIC_SHA256)
     t("R1_FORMULA_FULL_FROZEN",all(r["R1_Exact"] for r in newreg),"1425/1425")
     t("TRUE_RANGE_FORMULA_FULL_FROZEN",all(r["TrueRange_Current_Exact"] for r in newreg),"1425/1425")
     t("R1_MIN_HISTORY",_last_return(pd.Series([100.0]),1) is None,"1 obs -> None")
