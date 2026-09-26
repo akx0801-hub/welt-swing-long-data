@@ -616,6 +616,7 @@ def main() -> int:
     t("V057_IMMUTABLE", imm["v057_unchanged"], V057_SHA)
     t("V058_IMMUTABLE", imm["v058_unchanged"], V058_SHA)
     t("P0_P1_P2_ZERO", imm["p0_runs"] == imm["p1_runs"] == imm["p2_runs"] == 0, "0/0/0")
+    t("PROHIBITED_PROVIDER_CALLS_ZERO", all(v == 0 for v in prohibited.values()), json.dumps(prohibited, sort_keys=True))
     if verdict == FAIL_VERDICT:
         t("FAIL_BLOCKER_EXACT", blocker == FAIL_BLOCKER, blocker)
     else:
@@ -639,6 +640,7 @@ def main() -> int:
         "sector_rs_runs": 0,
         "other_cohort_rechecks": 0,
         "p0_runs": 0, "p1_runs": 0, "p2_runs": 0,
+        "prohibited_provider_calls": prohibited,
         "immutability": imm,
         "tests": {"total": len(tests), "passed": len(tests), "failed": 0},
         "artifact_binding": "PENDING_UPLOAD",
