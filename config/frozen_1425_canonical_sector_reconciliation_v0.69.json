@@ -1,0 +1,15 @@
+{
+  "version": "v0.69",
+  "stage": "FROZEN_1425_CANONICAL_SECTOR_METADATA_COVERAGE_RECONCILIATION_NEXT_COHORT_SELECTION_GATE",
+  "required_start_head": "978404e766f7813819686835adf2254cd5071c62",
+  "external_requests_allowed": false,
+  "provider_calls_allowed": false,
+  "mapping_population_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "canonical_materialization_allowed": false,
+  "other_cohort_execution_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
