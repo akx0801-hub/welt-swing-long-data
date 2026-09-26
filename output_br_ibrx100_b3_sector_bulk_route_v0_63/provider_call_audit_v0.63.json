@@ -1,0 +1,19 @@
+{
+  "alpha_vantage": 0,
+  "company_website_classification": 0,
+  "crosswalk": 0,
+  "eodhd": 0,
+  "etf_holdings": 0,
+  "gics_icb_fallback": 0,
+  "name_classification": 0,
+  "news": 0,
+  "per_security_web_fanout": 0,
+  "price_ohlcv": 0,
+  "scalable": 0,
+  "screeners": 0,
+  "third_party_sector_database": 0,
+  "trading_analysis": 0,
+  "tradingview": 0,
+  "wikipedia": 0,
+  "yahoo_yfinance": 0
+}

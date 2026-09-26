@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "0ec10e147c619ec999af1b8de3dcd34b93d4fff29c3f6a96dd672bcb05446535",
+  "artifact_id": 10911387342,
+  "artifact_name": "br-ibrx100-b3-sector-bulk-route-v0.63-36258067350",
+  "artifact_scope": "pre-persistence v0.63 BR IBrX100 B3 sector bulk-route resolution evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "04ba63d4303b627a46a31098cfb7d3acd73183ee",
+  "workflow_run_id": 36258067350
+}

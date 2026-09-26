@@ -1,0 +1,22 @@
+{
+  "access_class": "PUBLIC_REPRODUCIBLE",
+  "artifact_binding": "PASS",
+  "artifact_digest": "0ec10e147c619ec999af1b8de3dcd34b93d4fff29c3f6a96dd672bcb05446535",
+  "artifact_id": 10911387342,
+  "blocker": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100",
+  "br_official_sector_bulk_route_ready": true,
+  "classification_content": "PASS",
+  "mapping_population_runs": 0,
+  "next_gate": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100",
+  "other_cohort_rechecks": 0,
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "sector_code": "NOT_AVAILABLE",
+  "security_identity_schema": "B3_COMPANY_CODE_PLUS_COMPANY_METADATA_ONLY_SECURITY_LEVEL_ISIN_FULL_TICKER_NOT_IN_BULK_RESULT",
+  "stage": "BR_IBRX100_OFFICIAL_SOURCE_NATIVE_SECTOR_BULK_ROUTE_RESOLUTION_GATE",
+  "tests_failed": 0,
+  "tests_passed": 21,
+  "verdict": "BLOCKED_SOURCE_NATIVE_SECTOR_CODE",
+  "version": "v0.63",
+  "workflow_run_id": 36258067350
+}

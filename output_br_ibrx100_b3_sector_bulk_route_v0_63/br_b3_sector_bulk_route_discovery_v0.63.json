@@ -1,0 +1,17 @@
+{
+  "access_class": "PUBLIC_REPRODUCIBLE",
+  "blocker": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100",
+  "br_official_sector_bulk_route_ready": true,
+  "bulk_reproducibility": "PASS",
+  "classification_content": "PASS",
+  "frozen_rows": 37,
+  "mapping_population_executed": false,
+  "officiality": "PASS",
+  "other_cohorts_retested": false,
+  "predecessor_blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_FOUND",
+  "resolved_route_id": "B3_LISTED_COMPANIES_CLASSIFICATION_SEARCH",
+  "scope_cohort": "BR_IBRX100",
+  "sector_code": "NOT_AVAILABLE",
+  "security_identity_schema": "B3_COMPANY_CODE_PLUS_COMPANY_METADATA_ONLY_SECURITY_LEVEL_ISIN_FULL_TICKER_NOT_IN_BULK_RESULT",
+  "taxonomy_identity": "B3_CLASSIFICACAO_SETORIAL"
+}

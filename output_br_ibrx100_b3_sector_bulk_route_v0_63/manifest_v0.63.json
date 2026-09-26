@@ -1,0 +1,101 @@
+{
+  "access_class": "PUBLIC_REPRODUCIBLE",
+  "artifact": {
+    "artifact_digest": "0ec10e147c619ec999af1b8de3dcd34b93d4fff29c3f6a96dd672bcb05446535",
+    "artifact_id": 10911387342,
+    "artifact_name": "br-ibrx100-b3-sector-bulk-route-v0.63-36258067350",
+    "artifact_scope": "pre-persistence v0.63 BR IBrX100 B3 sector bulk-route resolution evidence",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "04ba63d4303b627a46a31098cfb7d3acd73183ee",
+    "workflow_run_id": 36258067350
+  },
+  "blocker": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100",
+  "br_official_sector_bulk_route_ready": true,
+  "classification_content": "PASS",
+  "crosswalk_runs": 0,
+  "files": {
+    "artifact_binding_v0.63.json": {
+      "bytes": 423,
+      "sha256": "4bd8d0e671afa7d874388fe9eea496716c8cd912b946432a608c860ab2e59335"
+    },
+    "br_b3_classification_schema_audit_v0.63.csv": {
+      "bytes": 401,
+      "sha256": "5a970a21059d2b4a784967cafadc99d6bc9b446f4cdb96a210e011458f0e3fbf"
+    },
+    "br_b3_data_product_access_classification_v0.63.csv": {
+      "bytes": 227,
+      "sha256": "808e006707e4adc943631a63e63594d1a49dc3e396eb6f7d049bd3ed1edb4b35"
+    },
+    "br_b3_official_endpoint_ledger_v0.63.csv": {
+      "bytes": 2959,
+      "sha256": "0ea20e494a252c041b5686f04143d2aeb4d38e26b5c100a3cc7b1db810d440d3"
+    },
+    "br_b3_sector_bulk_route_discovery_v0.63.json": {
+      "bytes": 728,
+      "sha256": "de766c3a5c67a3aa62e9d967c9a65ea886424db4f5a7119bc2de45657f663c44"
+    },
+    "br_b3_sector_code_audit_v0.63.json": {
+      "bytes": 896,
+      "sha256": "76665cf0921788628f590a530257e4f3a9f8dfa28f0978c1d3cfef040dbec9fe"
+    },
+    "br_b3_security_identity_schema_audit_v0.63.csv": {
+      "bytes": 356,
+      "sha256": "345b77585de7ec0e40fe706e1878458d948095384cbe4fea91382eda9b50e536"
+    },
+    "docs/validation/BR_IBRX100_Official_Source_Native_Sector_Bulk_Route_Resolution_v0.63.md": {
+      "bytes": 3375,
+      "sha256": "40c38ed5067795f19d021e0ff9bd47ee4c50fdc589dae85345e1a20daf6fea83"
+    },
+    "external_request_ledger_v0.63.csv": {
+      "bytes": 1895,
+      "sha256": "d6a411411edc30ff16eb9ab953f56fa858f718e2bf50162548d741e4884dc902"
+    },
+    "immutability_audit_v0.63.json": {
+      "bytes": 1068,
+      "sha256": "37f7023873870a29a4ce81ce59cb4aef991e9b18495648d6fd6683f487d83ad7"
+    },
+    "manifest_preupload_v0.63.json": {
+      "bytes": 2974,
+      "sha256": "af81ef80d835594d6a140c949b8b26d2cfae732dbde5a8c04adc66a0f60dbb48"
+    },
+    "provider_call_audit_v0.63.json": {
+      "bytes": 393,
+      "sha256": "1514df80bd1e5f3b4cb90ee4a7500de4ca52ef0e35f6431ebff0f64076ef5ea7"
+    },
+    "stage_checkpoint_preupload_v0.63.json": {
+      "bytes": 758,
+      "sha256": "18e728204e1e9af043fa759c085ee8be3b903cb0d5ad2f503e275ed4b20f5d50"
+    },
+    "stage_checkpoint_v0.63.json": {
+      "bytes": 901,
+      "sha256": "96c3983663c0d8ede367442b5350c2a72b53d7630bd9ac4fe204e911ab30d91a"
+    },
+    "summary_preupload_v0.63.json": {
+      "bytes": 2478,
+      "sha256": "349a5bc401913d2739eb3a4740375c758b9d0e3a162e320ced7b8b1f5aa1a264"
+    },
+    "summary_v0.63.json": {
+      "bytes": 2922,
+      "sha256": "9b5f14a13c38d0b631a76d137dbc2c3f6cfbdcee232f2e2b71bd68117daaa328"
+    },
+    "test_results_v0.63.csv": {
+      "bytes": 1389,
+      "sha256": "c5f0d9e27681fb43dcb69ab84b5143e44a58ba5b9b0fcda53c202af4f921c76a"
+    }
+  },
+  "mapping_population_runs": 0,
+  "next_gate": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100",
+  "other_cohort_rechecks": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "required_start_head": "c07c2aab9578971b523c9d39428bdff5758a8761",
+  "sector_code": "NOT_AVAILABLE",
+  "sector_rs_runs": 0,
+  "stage": "BR_IBRX100_OFFICIAL_SOURCE_NATIVE_SECTOR_BULK_ROUTE_RESOLUTION_GATE",
+  "verdict": "BLOCKED_SOURCE_NATIVE_SECTOR_CODE",
+  "version": "v0.63",
+  "workflow_head_sha": "04ba63d4303b627a46a31098cfb7d3acd73183ee",
+  "workflow_run_id": 36258067350
+}

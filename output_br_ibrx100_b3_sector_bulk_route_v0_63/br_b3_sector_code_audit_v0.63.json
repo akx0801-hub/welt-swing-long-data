@@ -1,0 +1,13 @@
+{
+  "basis": [
+    "The public official classification hierarchy and page-backed search use classification names/labels.",
+    "No stable B3 source-native sector/subsector/segment classification code was exposed by the resolved public classification route.",
+    "The official classification criteria and bounded technical evidence retrieved for this stage do not establish such a code.",
+    "The UP2DATA Listed Companies binary sample/data dictionary could not be inspected through the bounded retrieval channel, and no official text retrieved proves a classification code there.",
+    "Local hashing, ordinal numbering, normalized labels, or invented codes are prohibited and were not created."
+  ],
+  "blocker": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE:BR_IBRX100",
+  "local_code_invented": false,
+  "sector_code_status": "NOT_AVAILABLE",
+  "taxonomy_identity": "B3_CLASSIFICACAO_SETORIAL"
+}
