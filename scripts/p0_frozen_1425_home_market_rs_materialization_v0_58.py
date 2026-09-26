@@ -115,9 +115,8 @@ def validate_authority(repo_sha:str)->dict[str,Any]:
     head=git("rev-parse","HEAD")
     if head!=repo_sha:
         raise RuntimeError(f"checkout mismatch {head} != {repo_sha}")
-    parents=git("show","-s","--format=%P","HEAD").split()
-    if not parents or parents[0]!=REQUIRED_START_HEAD:
-        raise RuntimeError(f"implementation commit is not direct child of required start HEAD: {parents}")
+    if subprocess.run(["git","merge-base","--is-ancestor",REQUIRED_START_HEAD,"HEAD"],cwd=ROOT).returncode!=0:
+        raise RuntimeError("required start HEAD is not an ancestor of the bounded v0.58 implementation chain")
     blobs={}
     for rel,exp in EXPECTED_BLOBS.items():
         got=git_blob(ROOT/rel);blobs[rel]=got

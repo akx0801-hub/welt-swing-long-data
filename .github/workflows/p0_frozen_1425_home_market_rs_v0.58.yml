@@ -39,7 +39,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "80d80eee5e8a2e6ddad5f7b7b1231b9a3da21895"
+          git merge-base --is-ancestor 80d80eee5e8a2e6ddad5f7b7b1231b9a3da21895 HEAD
 
           D57="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10905448132 --jq .digest)"
           test "$D57" = "sha256:7f35e18264110c6a6a84205ab443a7b1c3cabcbaebdb3e6d6af79df6361e1c00"

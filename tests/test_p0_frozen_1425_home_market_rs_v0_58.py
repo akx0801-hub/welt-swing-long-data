@@ -26,7 +26,7 @@ def test_leave_one_out_median_exact():
     out=mod.peer_median_leave_one_out(s)
     assert out.loc[0]==0.25
     assert out.loc[1]==0.20
-    assert out.loc[2]==0.15
+    assert out.loc[2]==((0.10+0.20)/2.0)
 
 
 def test_singleton_has_no_reference():
