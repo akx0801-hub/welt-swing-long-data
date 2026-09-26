@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "id": "GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY",
+      "priority": 1,
+      "required_decision": "Explicit governance authority must select the canonical sector taxonomy or explicitly authorize a taxonomy-selection rule.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CANONICAL_SECTOR_FIELD_BINDING",
+      "priority": 2,
+      "required_decision": "Bind canonical sector field/code/name semantics after taxonomy selection.",
+      "status": "DOWNSTREAM_BLOCKED"
+    },
+    {
+      "id": "CROSSWALK_AUTHORITY_IF_NEEDED",
+      "priority": 3,
+      "required_decision": "If multiple source taxonomies are allowed, define and version an authoritative crosswalk; otherwise prohibit mixing.",
+      "status": "DOWNSTREAM_BLOCKED"
+    }
+  ],
+  "primary_blocker": "GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY",
+  "smallest_next_gate": "GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY"
+}

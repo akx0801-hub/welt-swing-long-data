@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "5caa8bd2a34b096e3b08e5ce9e41f3cabcea9b4b72d55060e20b8ec1bb78f500",
+  "artifact_id": 10907812456,
+  "artifact_name": "p0-frozen-1425-sector-metadata-contract-v0.60-36247871792",
+  "artifact_scope": "pre-persistence v0.60 sector metadata contract governance evidence package",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "d5df814be4e212ab78c0a0a6fe797685efc45005",
+  "workflow_run_id": 36247871792
+}

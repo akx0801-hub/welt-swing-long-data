@@ -1,0 +1,7 @@
+{
+  "blocked_by": "GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY",
+  "canonical_sector_field": "NOT_DEFINED",
+  "decision": "NOT_SELECTED",
+  "reason": "The authoritative contract requires normalized Sector_Taxonomy/Sector_Code/Sector_Name fields but does not bind one canonical taxonomy/source field.",
+  "source_field_crosswalk_created": false
+}

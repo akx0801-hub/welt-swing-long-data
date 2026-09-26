@@ -1,0 +1,18 @@
+{
+  "affected_count": 1425,
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY",
+  "last_successful_step": "AUTHORITATIVE_REPOSITORY_CONTRACT_DISCOVERY_COMPLETE",
+  "materialization_runs": 0,
+  "next_gate": "GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY",
+  "p0_runs": 0,
+  "p1_p2_runs": 0,
+  "ready": 0,
+  "sector_metadata_contract_ready": false,
+  "stage": "P0_FROZEN_1425_SECTOR_METADATA_CONTRACT_DEFINITION_GATE",
+  "tests_failed": 0,
+  "tests_passed": 18,
+  "total": 1425,
+  "verdict": "BLOCKED_GOVERNANCE_AUTHORITY_REQUIRED",
+  "version": "v0.60"
+}

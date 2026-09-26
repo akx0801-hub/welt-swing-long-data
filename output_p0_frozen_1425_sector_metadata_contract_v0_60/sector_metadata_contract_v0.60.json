@@ -1,0 +1,102 @@
+{
+  "alpha_vantage_allowed": false,
+  "canonical_sector_field": "NOT_DEFINED",
+  "canonical_taxonomy": "NOT_DEFINED",
+  "contract_semantics": {
+    "allowed_source_classes": {
+      "authority": "v0.21",
+      "status": "BOUND"
+    },
+    "asof_version_semantics": {
+      "authority": "v0.21",
+      "field": "Source_Version_or_AsOf",
+      "status": "BOUND_AT_FIELD_REQUIREMENT_LEVEL"
+    },
+    "canonical_sector_field": {
+      "authority": "NONE",
+      "note": "Required normalized fields do not themselves select a source taxonomy field.",
+      "status": "NOT_BOUND"
+    },
+    "canonical_sector_taxonomy": {
+      "authority": "NONE",
+      "status": "NOT_BOUND"
+    },
+    "mapping_status": {
+      "authority": "v0.21",
+      "field": "Mapping_Status",
+      "status": "BOUND_AT_FIELD_REQUIREMENT_LEVEL"
+    },
+    "missing_or_ambiguous_mapping": {
+      "authority": "v0.20/v0.21",
+      "behavior": "No guessed mapping; ambiguous mappings fail closed; absent metadata remains not verified.",
+      "status": "FAIL_CLOSED_BOUND"
+    },
+    "provenance": {
+      "authority": "v0.21",
+      "required": [
+        "Source_Name",
+        "Source_Reference",
+        "Source_Version_or_AsOf"
+      ],
+      "status": "BOUND"
+    },
+    "taxonomy_mixing_crosswalk": {
+      "authority": "v0.21",
+      "behavior": "Silent taxonomy mixing is prohibited; no canonical crosswalk authority or selection rule is defined.",
+      "status": "PARTIALLY_BOUND_NOT_EXECUTABLE"
+    },
+    "ws_id_linkage": {
+      "authority": "v0.21",
+      "required_identity_key": "WS_ID",
+      "status": "BOUND"
+    }
+  },
+  "dependency_order": [
+    "CANONICAL_TAXONOMY",
+    "CANONICAL_SECTOR_FIELD_BINDING",
+    "MAPPING_POPULATION_AUTHORITY",
+    "OPTIONAL_CROSSWALK_AUTHORITY_IF_REQUIRED"
+  ],
+  "inherited_explicit_authority": {
+    "accepted_source_classes": [
+      "official index administrator bulk constituent/reference data",
+      "official primary exchange bulk reference data",
+      "official security registry bulk reference data",
+      "other explicitly approved bulk reference source after provenance review"
+    ],
+    "mapping_requirements": [
+      "deterministic WS_ID linkage",
+      "taxonomy and source provenance recorded",
+      "as-of/version recorded",
+      "ambiguous mappings fail closed",
+      "sector peer group must be large enough for a reliable reference or RS_NOT_VERIFIED"
+    ],
+    "prohibited_methods": [
+      "per-security web lookup fanout",
+      "name-based guessed sector mapping",
+      "silent taxonomy mixing without crosswalk",
+      "unversioned sector labels",
+      "Alpha Vantage"
+    ],
+    "required_fields": [
+      "WS_ID",
+      "Sector_Taxonomy",
+      "Sector_Code",
+      "Sector_Name",
+      "Source_Name",
+      "Source_Reference",
+      "Source_Version_or_AsOf",
+      "Mapping_Status"
+    ],
+    "required_identity_key": "WS_ID"
+  },
+  "p0_permitted_by_this_stage": false,
+  "population_permitted": false,
+  "primary_blocker": "GOVERNANCE_DECISION_REQUIRED_CANONICAL_SECTOR_TAXONOMY",
+  "productive": false,
+  "schema": "WELT_SWING_SECTOR_METADATA_CONTRACT_V0_60",
+  "sector_metadata_contract_ready": false,
+  "sector_rs_materialization_permitted": false,
+  "status": "BLOCKED_AUTHORITY_REQUIRED",
+  "version": "v0.60"
+}

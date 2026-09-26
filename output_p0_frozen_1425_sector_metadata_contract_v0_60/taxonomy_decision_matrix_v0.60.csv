@@ -1,0 +1,5 @@
+Taxonomy_Candidate,Explicit_Selection_Authority,Existing_Evidence,Decision_v0_60,Reason
+GICS,NO,HISTORICAL_US_SOURCE_SPECIFIC_ONLY,NOT_AUTHORIZED_TO_SELECT,v0.59 explicitly says historical US GICS is not promoted as global authority.
+ICB,NO,NONE_PROMOTED,NOT_AUTHORIZED_TO_SELECT,No authoritative file selects ICB.
+OTHER_SINGLE_TAXONOMY,NO,NONE_PROMOTED,NOT_AUTHORIZED_TO_SELECT,No authoritative file selects another taxonomy.
+MIXED_TAXONOMIES_WITH_CROSSWALK,NO,SILENT_MIXING_PROHIBITED,NOT_AUTHORIZED_TO_CREATE_CROSSWALK,v0.21 prohibits silent mixing without crosswalk but does not authorize or define a canonical crosswalk.

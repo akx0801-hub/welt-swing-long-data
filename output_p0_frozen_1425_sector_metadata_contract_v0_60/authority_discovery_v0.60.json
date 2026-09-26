@@ -1,0 +1,45 @@
+{
+  "master_mentions_sector_d0": true,
+  "master_requires_sector_rs_where_valid": true,
+  "v020_fail_closed_no_sector_metadata": true,
+  "v021_accepted_source_classes": [
+    "official index administrator bulk constituent/reference data",
+    "official primary exchange bulk reference data",
+    "official security registry bulk reference data",
+    "other explicitly approved bulk reference source after provenance review"
+  ],
+  "v021_contract_status": "PREPARED_NOT_POPULATED",
+  "v021_mapping_requirements": [
+    "deterministic WS_ID linkage",
+    "taxonomy and source provenance recorded",
+    "as-of/version recorded",
+    "ambiguous mappings fail closed",
+    "sector peer group must be large enough for a reliable reference or RS_NOT_VERIFIED"
+  ],
+  "v021_policy_requires_versioned_sourced_mapping": true,
+  "v021_prohibited_methods": [
+    "per-security web lookup fanout",
+    "name-based guessed sector mapping",
+    "silent taxonomy mixing without crosswalk",
+    "unversioned sector labels",
+    "Alpha Vantage"
+  ],
+  "v021_required_fields": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Code",
+    "Sector_Name",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "Mapping_Status"
+  ],
+  "v021_required_identity_key": "WS_ID",
+  "v044_preserves_prepared_not_populated": true,
+  "v057_sector_rs_ready": false,
+  "v059_canonical_sector_field_selected": false,
+  "v059_canonical_taxonomy_selected": false,
+  "v059_historical_us_gics_not_promoted": true,
+  "v059_mapping_authority_populated": false,
+  "v059_taxonomy_matrix_blocks_selection": true
+}
