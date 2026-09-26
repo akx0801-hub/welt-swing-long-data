@@ -1,67 +1,67 @@
 {
   "artifact": {
-    "artifact_digest": "d2d5d58d76cef566fba654863abcb883765d914b62d2b2a3b79a77878df156f5",
-    "artifact_id": 10914254491,
-    "artifact_name": "b3-classification-application-contract-discovery-v0.66-36268882980",
+    "artifact_digest": "af7fe53a42cd199ff2b1a1edd98cb73d7535131b1e2135977c45a0853d12b5ae",
+    "artifact_id": 10915250534,
+    "artifact_name": "b3-classification-application-contract-discovery-v0.66-36269159688",
     "artifact_scope": "pre-persistence v0.66 B3 public classification application asset/API contract discovery evidence",
     "artifact_verified": "PASS",
-    "workflow_head_sha": "897d445af33191f8020dac126d644dcaffff8415",
-    "workflow_run_id": 36268882980
+    "workflow_head_sha": "ae8ddc94dadc249eec1e90aecb651c4db0729b8f",
+    "workflow_run_id": 36269159688
   },
   "b3_classification_tree_machine_reproducible": true,
-  "b3_complete_company_classification_dataset_ready": true,
+  "b3_complete_company_classification_dataset_ready": false,
   "blocker": "",
   "canonical_mapping_population_runs": 0,
-  "discovered_contract": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/assets/i18n/pt-br.json",
+  "discovered_contract": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesProxy/CompanyCall/GetIndustryClassification/eyJsYW5ndWFnZSI6InB0LWJyIn0=",
   "exact37_classification_execution_runs": 0,
   "files": {
     "artifact_binding_v0.66.json": {
       "bytes": 463,
-      "sha256": "8a6e670aa9f1cba1542a3faa7ef3a85e3d2d4e94d699383c86086202fee00710"
+      "sha256": "cf40b40c02378e35ae04dfe2d5fc58b957741b0ee8d82a3db585a4e6f6fe00df"
     },
     "b3_all_company_classification_contract_v0.66.json": {
-      "bytes": 5176,
-      "sha256": "519405a93c656d8fe992b673dc81c1a1ed5ae44c355092cbe184f53ae75f0bd7"
+      "bytes": 209,
+      "sha256": "4aaefbc9a6e72d076f0aa5d3ed26f86a94bdf5a4a7d816de965cbb6fd81a4df8"
     },
     "b3_application_asset_ledger_v0.66.csv": {
       "bytes": 3718,
-      "sha256": "452af16eef29b6b7e4570ddef48cef8e3be9f42b265750e87bf2d6a5d57fbb81"
+      "sha256": "e5245b1a5a322f16031c38068bb4ff6a5655df9439745c1c01725091b5d61933"
     },
     "b3_browser_render_audit_v0.66.csv": {
       "bytes": 424,
-      "sha256": "159c45ab8aad9f3c7734fe1542185a953a65c9ca394666c5ba2d4511018512b2"
+      "sha256": "740f3a9b1109400da953a774db70a3ea4e9b3eb983aa731bf1532734f964e7ae"
     },
     "b3_candidate_data_contracts_v0.66.csv": {
-      "bytes": 4759,
-      "sha256": "fd2b5f5aa9043164529ed23e3c48b014f0b201f39babab85876fdb92c0afe510"
+      "bytes": 3455,
+      "sha256": "22037fee3f2595a2e4007db0b743beb721cd863112fb6e8a12ab498d042ed0d5"
     },
     "b3_js_bundle_endpoint_discovery_v0.66.csv": {
       "bytes": 46994,
-      "sha256": "9f5f6786f17ec36f2955c60a2c66c1fb1aeef7b5d36b761d538e17de46dd033d"
+      "sha256": "4148b35a482ec5d351bff1627e7eded98de1155da110453397373932f65dfd46"
     },
     "b3_public_network_request_ledger_v0.66.csv": {
-      "bytes": 9554,
-      "sha256": "7fa6d469af5580646f5f54c4f83db95e791caf8feddb2b12ce0ab040b6fcadb9"
+      "bytes": 9403,
+      "sha256": "43117117b309f460a7537a3b941c07c4905eed9c9d399ba01a631449d637b92b"
     },
     "b3_tree_contract_v0.66.json": {
-      "bytes": 5754,
-      "sha256": "c8ad37945b868348b3eb754b0a5b5dc26ecfa7a43b8cada6eff52fb9834230e8"
+      "bytes": 788,
+      "sha256": "b4816f32ed660dc68dc0dffadf1104ecb7486975baaced179d19427207394143"
     },
     "docs/validation/B3_Classification_Application_API_Asset_Contract_Discovery_v0.66.md": {
-      "bytes": 2653,
-      "sha256": "33729c18064f9922a4d41623e1067a75bb3e4bbcf47e8e063a98cf6977ba85d7"
+      "bytes": 2697,
+      "sha256": "629c2a6d58bef61f573c83e1bf24f524aa9eccb120f6cfba081865d8638b74d7"
     },
     "external_request_ledger_v0.66.csv": {
-      "bytes": 8975,
-      "sha256": "4774914fbb450b6b8d9601d8ccb208bd35587f1cde6054d257f0a5332935e75b"
+      "bytes": 8822,
+      "sha256": "66f6cd0515df992aecf399d7cf7aaf2925dff163f3cf933916d96d8c4818b733"
     },
     "immutability_audit_v0.66.json": {
       "bytes": 1128,
       "sha256": "dc901bc799622290fca584e7152092ac7df01e2dc27787bd00a0857d3eb2c8e7"
     },
     "manifest_preupload_v0.66.json": {
-      "bytes": 3405,
-      "sha256": "88ffea7b5e5d3136213c45f24a8679fddf011c068c06ad49abd89c993e5ac1e2"
+      "bytes": 3449,
+      "sha256": "d08ffac578d364a65121e9d2383ee9848da9684c9f982c6ee3c3ee0567bb7a91"
     },
     "provider_call_audit_v0.66.json": {
       "bytes": 355,
@@ -69,27 +69,27 @@
     },
     "public_reproducibility_audit_v0.66.json": {
       "bytes": 506,
-      "sha256": "d83e011334a29ddf4be3510e3b72a8aed84fb10598025527463ad4794fbad4d7"
+      "sha256": "ab4c01939a20c8d79d3883d69c502559f8a15f464db51d49a39f4f8884796a7a"
     },
     "stage_checkpoint_preupload_v0.66.json": {
-      "bytes": 747,
-      "sha256": "9c92417a2bba85015a90d26058befe3f1d4de78aa15ad98d9e0a8129f3304cf6"
+      "bytes": 793,
+      "sha256": "df840427fd29253b407e6f6e63359ab8e3066fb227ff12a1e8f78308a4327712"
     },
     "stage_checkpoint_v0.66.json": {
-      "bytes": 890,
-      "sha256": "16c174fcdbea447b231e8bea203e5aeb46f9d508260d21a83c5f8fee407061f8"
+      "bytes": 936,
+      "sha256": "2a2fa3c9aedc889e74b2445298bfb16c2a003035aed1d26a503460d37ac09eff"
     },
     "summary_preupload_v0.66.json": {
-      "bytes": 2580,
-      "sha256": "382d71c00dba2ed2cda1eebaea235945fff675c052fcf4c250ba19a0663ec876"
+      "bytes": 2626,
+      "sha256": "aac0cd07458ce531e4d05d6fbc10a82a39d139f95627092592f14b9ede908bfd"
     },
     "summary_v0.66.json": {
-      "bytes": 3064,
-      "sha256": "d86cd0ae1a93d9a2f2594d6c73e653b046fadabfb1afc81fda3ea530a0bcd075"
+      "bytes": 3110,
+      "sha256": "f59927b9e835264bb129e265c4e1b1e74b13d3f84c18ae5e2a7fe36e3d929e48"
     },
     "test_results_v0.66.csv": {
-      "bytes": 1314,
-      "sha256": "fe8497f84692afdf95e2e1841c37e47aad298c67d32fb30d5ac5444af4e53f5d"
+      "bytes": 1315,
+      "sha256": "3823fcfe7854eca48a57d4633809d66b810550f17ff9318e134c3327d923678a"
     }
   },
   "next_gate": "BR_IBRX100 B3 CLASSIFICATION TREE EXECUTION / EXACT-37 COVERAGE GATE",
@@ -105,6 +105,6 @@
   "stage": "B3_CLASSIFICATION_APPLICATION_API_ASSET_CONTRACT_DISCOVERY_GATE",
   "verdict": "PASS_B3_CLASSIFICATION_TREE_CONTRACT",
   "version": "v0.66",
-  "workflow_head_sha": "897d445af33191f8020dac126d644dcaffff8415",
-  "workflow_run_id": 36268882980
+  "workflow_head_sha": "ae8ddc94dadc249eec1e90aecb651c4db0729b8f",
+  "workflow_run_id": 36269159688
 }

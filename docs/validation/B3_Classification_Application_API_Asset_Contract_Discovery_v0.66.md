@@ -4,8 +4,8 @@
 **PASS_B3_CLASSIFICATION_TREE_CONTRACT**
 
 B3_CLASSIFICATION_TREE_MACHINE_REPRODUCIBLE = **YES**.
-B3_COMPLETE_COMPANY_CLASSIFICATION_DATASET_READY = **YES**.
-DISCOVERED CONTRACT = **https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/assets/i18n/pt-br.json**.
+B3_COMPLETE_COMPANY_CLASSIFICATION_DATASET_READY = **NO**.
+DISCOVERED CONTRACT = **https://sistemaswebb3-listados.b3.com.br/listedCompaniesProxy/CompanyCall/GetIndustryClassification/eyJsYW5ndWFnZSI6InB0LWJyIn0=**.
 PUBLIC REPRODUCIBLE = **YES**.
 
 ## Predecessor
@@ -24,8 +24,8 @@ A complete public machine-readable B3 taxonomy/tree contract was verified.
 - Candidate contracts independently classified/probed: 9.
 - Browser binary available: True (/usr/bin/google-chrome).
 - Direct target fetches successful: 2 / 2.
-- Verified tree contracts: 2.
-- Verified all-company contracts: 1.
+- Verified tree contracts: 1.
+- Verified all-company contracts: 0.
 
 ## Evidence boundaries
 Only unauthenticated public B3 application behavior and B3-hosted assets/endpoints were used. No cookies, tokens, headers containing secrets, credentials, captcha bypass, authentication bypass or private unauthorized endpoint state was persisted.
@@ -43,11 +43,11 @@ The discovery evidence stores bounded asset hashes and endpoint-relevant excerpt
 - v0.58 Home-Market-RS SHA unchanged: 2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32.
 
 ## Artifact binding
-- Workflow run: 36268882980
-- Workflow head: 897d445af33191f8020dac126d644dcaffff8415
-- Artifact: 10914254491
-- Artifact name: b3-classification-application-contract-discovery-v0.66-36268882980
-- Artifact digest: d2d5d58d76cef566fba654863abcb883765d914b62d2b2a3b79a77878df156f5
+- Workflow run: 36269159688
+- Workflow head: ae8ddc94dadc249eec1e90aecb651c4db0729b8f
+- Artifact: 10915250534
+- Artifact name: b3-classification-application-contract-discovery-v0.66-36269159688
+- Artifact digest: af7fe53a42cd199ff2b1a1edd98cb73d7535131b1e2135977c45a0853d12b5ae
 
 ## Next gate
 **BR_IBRX100 B3 CLASSIFICATION TREE EXECUTION / EXACT-37 COVERAGE GATE**

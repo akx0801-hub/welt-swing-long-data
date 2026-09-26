@@ -1,3 +1,3 @@
 Page,Browser,Return_Code,DOM_Bytes,DOM_SHA256,Network_Log_Present
-https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/,/usr/bin/google-chrome,0,37962,cca82c9cd20a1574f1b99a34256daec061f09ba975dc566e6e6d360e84a43a92,True
-https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br,/usr/bin/google-chrome,0,30831,0841a0363762d6030b891cd0b907cc7fb140aca63250bbe9403ac30ea901dd75,True
+https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/,/usr/bin/google-chrome,0,37959,8760515457ed4c1d68385c3d3374ce9ca28dad43a3f9a145750a71fb83ee2346,True
+https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br,/usr/bin/google-chrome,0,30934,8f5a07ed181c67108d6a354c5d3e395c8d301f7cb86f7f75bd5693b5c5928bb7,True

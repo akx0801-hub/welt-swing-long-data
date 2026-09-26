@@ -1,12 +1,12 @@
 {
   "artifact_binding": "PASS",
-  "artifact_digest": "d2d5d58d76cef566fba654863abcb883765d914b62d2b2a3b79a77878df156f5",
-  "artifact_id": 10914254491,
+  "artifact_digest": "af7fe53a42cd199ff2b1a1edd98cb73d7535131b1e2135977c45a0853d12b5ae",
+  "artifact_id": 10915250534,
   "b3_classification_tree_machine_reproducible": true,
-  "b3_complete_company_classification_dataset_ready": true,
+  "b3_complete_company_classification_dataset_ready": false,
   "blocker": "",
   "canonical_mapping_population_runs": 0,
-  "discovered_contract": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/assets/i18n/pt-br.json",
+  "discovered_contract": "https://sistemaswebb3-listados.b3.com.br/listedCompaniesProxy/CompanyCall/GetIndustryClassification/eyJsYW5ndWFnZSI6InB0LWJyIn0=",
   "exact37_classification_execution_runs": 0,
   "next_gate": "BR_IBRX100 B3 CLASSIFICATION TREE EXECUTION / EXACT-37 COVERAGE GATE",
   "p0_runs": 0,
@@ -18,5 +18,5 @@
   "tests_passed": 21,
   "verdict": "PASS_B3_CLASSIFICATION_TREE_CONTRACT",
   "version": "v0.66",
-  "workflow_run_id": 36268882980
+  "workflow_run_id": 36269159688
 }
