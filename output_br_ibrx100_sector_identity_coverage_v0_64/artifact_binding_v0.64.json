@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "970d4c510642f5803ca4228fe2715d10661fc8733c7eb7fee5e1ad94d700678c",
+  "artifact_id": 10913620188,
+  "artifact_name": "br-ibrx100-sector-identity-coverage-v0.64-36264343312",
+  "artifact_scope": "pre-persistence v0.64 BR IBrX100 canonical sector key / exact-37 identity coverage evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "29bb27937d4ce043f0ec280c5107ac4316dae349",
+  "workflow_run_id": 36264343312
+}

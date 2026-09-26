@@ -1,0 +1,6 @@
+Route,Authority,Scope,Status,Reference
+REPOSITORY_B3_IBRX100_SOURCE_V0_32,B3,exact official ticker/name/type/BVMF membership,PASS,universe/segments/br_ibrx100_source_frozen_v0.32.csv
+B3_SHARE_TICKER_XXXXY_RULE,B3,ticker -> issuer/company code,PASS,https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/mercado-de-acoes/operacoes-com-emprestimo-de-ativos-acoes-e-etf.htm
+B3_BVBG_028_02_INSTRUMENTS_FILE,B3,security reference ticker/ISIN architecture,PASS_REFERENCE_SUPPORT_ONLY,https://www.b3.com.br/data/files/79/62/B2/71/8AA6A8103234E0A8AC094EA8/Glossario%20InstrumentsConsolidatedFile%202023.pdf
+B3_LISTED_COMPANIES_CLASSIFICATION_SEARCH,B3,company code -> classification route,PASS_ROUTE_DESIGN,https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/search?language=pt-br&segment=QWdyaWN1bHR1cmE%3D
+B3_ROW_COMPLETE_CLASSIFICATION_PAYLOAD,B3,exact 37 company code -> sector name coverage,NOT_VERIFIED,https://sistemaswebb3-listados.b3.com.br/listedCompaniesPage/classification?language=pt-br

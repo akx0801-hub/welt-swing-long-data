@@ -1,0 +1,81 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "BR_EXACT_37_COVERAGE_INCOMPLETE",
+  "br_sector_identity_coverage_ready": false,
+  "canonical_mapping_population_runs": 0,
+  "files": {
+    "br_b3_sector_level_binding_v0.64.json": {
+      "bytes": 892,
+      "sha256": "1c017fca0f24521866dbfa36457b34fe210a0b14f6268c15d5d67aacebf642e2"
+    },
+    "br_exact_37_coverage_audit_v0.64.csv": {
+      "bytes": 14006,
+      "sha256": "9547d82df208b30a6d78369f27903e3b7d20d0acd16f3484d4ae17d08cfb84e2"
+    },
+    "br_security_company_identity_audit_v0.64.csv": {
+      "bytes": 6258,
+      "sha256": "b5b0276a506ddb0cc0046712de91de2685239da570da9544fd62bb3e20dea2c5"
+    },
+    "br_security_reference_route_ledger_v0.64.csv": {
+      "bytes": 1026,
+      "sha256": "87f871b90f0b55cba3b4850ea8630bb79f97e0a9e38d9f8ed38df066b8fbf30c"
+    },
+    "canonical_sector_code_collision_audit_v0.64.json": {
+      "bytes": 142,
+      "sha256": "a64a7bb55954eb47236c483d910ebc733a5421b926b292fc33bd5639d6c5afaf"
+    },
+    "canonical_sector_code_contract_v0.64.json": {
+      "bytes": 695,
+      "sha256": "c05035c1c1dd7cfb902df8dfb9d1f06f31e641bbe465a0bf0e123c2f6e91fb91"
+    },
+    "canonical_sector_code_determinism_test_v0.64.csv": {
+      "bytes": 1274,
+      "sha256": "6fd00d565508906bd073c677765f1f2a9c77453a34b9a7203c75c9f50b0c04c5"
+    },
+    "external_request_ledger_v0.64.csv": {
+      "bytes": 3063,
+      "sha256": "62648bd8f95f76ee3a2ef44328223dde78c715c6a39d72dfa0d92eb0a30111b0"
+    },
+    "immutability_audit_v0.64.json": {
+      "bytes": 1143,
+      "sha256": "5d2adb9ad9e8bbf6321e05d6b0cf2debdcdb1143a6111d9777860f4b5a59afa6"
+    },
+    "provider_call_audit_v0.64.json": {
+      "bytes": 379,
+      "sha256": "55cbca7aaabf3ec45e2b8459285542c476815869cdcd6c9afceea9f646b1aa21"
+    },
+    "stage_checkpoint_preupload_v0.64.json": {
+      "bytes": 625,
+      "sha256": "6703aa3afb10d12e2dd63e03cedeb423b4039e016158f2401a74455bcb4c7b93"
+    },
+    "summary_preupload_v0.64.json": {
+      "bytes": 2492,
+      "sha256": "f690fe20cd50a0a786fbd7acd3129a7ebf2a3bb667c5d7ee95a38cac40e6eb33"
+    },
+    "test_results_v0.64.csv": {
+      "bytes": 1639,
+      "sha256": "995404392b68aa0d5ec21ff67f1192ad40cc1eee547674a2540720304f8e6af3"
+    }
+  },
+  "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "next_gate": "BR_EXACT_37_COVERAGE_INCOMPLETE",
+  "not_found": 0,
+  "not_verified": 37,
+  "other_cohort_rechecks": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "ready": 0,
+  "repository_sha": "29bb27937d4ce043f0ec280c5107ac4316dae349",
+  "required_start_head": "f0a67388740b17dd62b47f1163df76d503a9c50b",
+  "sector_code_method": "PDSC_SHA256_V1",
+  "sector_rs_runs": 0,
+  "stage": "BR_IBRX100_CANONICAL_SECTOR_KEY_SECURITY_IDENTITY_EXACT_37_COVERAGE_GATE",
+  "total": 37,
+  "v057_feature_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+  "v058_home_rs_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+  "verdict": "BLOCKED_EXACT_37_CLASSIFICATION_COVERAGE",
+  "version": "v0.64"
+}

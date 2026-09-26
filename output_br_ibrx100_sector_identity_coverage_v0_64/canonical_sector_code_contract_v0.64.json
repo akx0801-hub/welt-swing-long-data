@@ -1,0 +1,26 @@
+{
+  "Authority": "G-SEC-03",
+  "Classification_Inference": "NO",
+  "Company_Name_Input": "NO",
+  "Contract": "PDSC_SHA256_V1",
+  "Encoding": "UTF-8",
+  "Hash": "SHA-256",
+  "Input": [
+    "Sector_Taxonomy",
+    "U+001F",
+    "Sector_Level",
+    "U+001F",
+    "Sector_Name"
+  ],
+  "Ordinal_Numbering": "NO",
+  "Output": "PDSC1:<full-lowercase-sha256>",
+  "Sector_Code_Method": "PDSC_SHA256_V1",
+  "Sector_Code_Origin": "PROJECT_DERIVED_CANONICAL",
+  "Sector_Level": "SETOR_ECONOMICO",
+  "Sector_Taxonomy": "B3_CLASSIFICACAO_SETORIAL",
+  "Semantic_Normalization": "NO",
+  "Source_Sector_Code_When_Absent": null,
+  "Translation": "NO",
+  "Truncation": "NO",
+  "Unicode_Normalization": "NFC_ONLY"
+}

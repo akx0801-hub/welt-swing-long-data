@@ -1,0 +1,13 @@
+{
+  "Basis": "B3 states its classification structure gives sector identification from the first level; official B3 material explicitly refers to performance relative to Setor Econômico using the B3 classification. For canonical Sector_* fields, v0.64 binds the first-level Setor Econômico and does not substitute Subsetor or Segmento.",
+  "Basis_URLs": [
+    "https://www.b3.com.br/pt_br/produtos-e-servicos/negociacao/renda-variavel/acoes/consultas/criterio-de-classificacao/",
+    "https://www.b3.com.br/data/files/6F/85/17/65/37E00910CA8BA9F8DC0D8AA8/OC%20081-2024%20PRE%20Alteracao%20na%20Metodologia%20do%20Indice%20Carbono%20Eficiente%20%28ICO2%20B3%29%20%28PT%29.pdf"
+  ],
+  "Binding_Status": "PASS",
+  "Sector_Level": "SETOR_ECONOMICO",
+  "Sector_Taxonomy": "B3_CLASSIFICACAO_SETORIAL",
+  "Segmento_Used": "NO",
+  "Source_Level_Label": "Setor Econômico",
+  "Subsetor_Used": "NO"
+}
