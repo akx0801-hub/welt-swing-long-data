@@ -1,0 +1,124 @@
+{
+  "version": "v0.83",
+  "stage": "AU_SP_ASX200_V082_EVIDENCE_COMPLETENESS_REPAIR_FINAL_FIELD_PROVENANCE_TAXONOMY_IDENTITY_GATE_C_CLOSURE",
+  "required_start_head": "5629089262fa1915c0f83e8281fe4f13509f2a08",
+  "role": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "fail_closed": true,
+  "predecessor": {
+    "final_commit": "5629089262fa1915c0f83e8281fe4f13509f2a08",
+    "workflow_run_id": 36343815405,
+    "artifact_id": 10939892682,
+    "artifact_digest": "sha256:091e8d6d8ba19995a8f3c29b0f16d59d33907dd1744faf6eef13c5bdf5be921f",
+    "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+    "blocker": "ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED",
+    "tests": "25/25 PASS"
+  },
+  "accepted_v082_authority": {
+    "directory_data_route_ready": true,
+    "public_browser_reproducible": true,
+    "direct_http_replay": "PASS",
+    "data_route_type": "DETERMINISTIC_FINITE_PAGINATION",
+    "runtime_host": "asx.api.cmfyapp.com",
+    "runtime_path": "/asx-research/1.0/companies/directory",
+    "complete_directory_count_observed": 1830,
+    "retrieved_records": 1830,
+    "unique_symbols": 1811,
+    "classification_field": "industry",
+    "classification_null_count": 0,
+    "distinct_industry_values": 27,
+    "current_route_authority_impact": "CURRENT_ROUTE_REPRODUCED",
+    "historical_gate_b": "PASS_INHERITED",
+    "live_directory_mutation_observed": true,
+    "count_drift_observed": [
+      1830,
+      1832
+    ]
+  },
+  "scope": {
+    "repair_v082_evidence_contract": true,
+    "final_gate_c_provenance_attempt": true,
+    "fresh_browser_contexts_max": 1,
+    "complete_74_page_rerun_allowed_only_for_actual_inconsistency": false,
+    "ui_filter_test_options_max": 1,
+    "download_control_activations_max": 1,
+    "au_gate_d_allowed": false,
+    "au_gate_e_allowed": false,
+    "au_gate_f_allowed": false,
+    "canonical_materialization_allowed": false,
+    "au_parking_execution_allowed": false,
+    "reselection_execution_allowed": false,
+    "next_cohort_execution_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_p1_p2_allowed": false,
+    "productive": false
+  },
+  "targets": {
+    "directory_url": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+    "runtime_api_prefix": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory",
+    "current_gics_context_url": "https://www.asx.com.au/markets/trade-our-cash-market/overview/indices",
+    "historical_asx_shares_module7_url": "https://www.asx.com.au/content/dam/asx/investors/investment-tools-and-resources/online-courses/shares/shares-course-7.pdf",
+    "preferred_filter_value": "Banks",
+    "classification_field": "industry"
+  },
+  "proof_hierarchy": {
+    "level1": "CURRENT_DIRECT_FIELD_EVIDENCE",
+    "level2": "CURRENT_UI_RUNTIME_CAUSAL_BINDING_PLUS_CURRENT_OFFICIAL_ASX_TAXONOMY_SEMANTICS",
+    "level3": "HISTORICAL_OFFICIAL_ASX_SEMANTIC_EVIDENCE_SUPPORTING_ONLY",
+    "level4": "LABEL_SET_CONSISTENCY_SUPPORTING_ONLY"
+  },
+  "required_v082_repair_files": [
+    "v081_blocker_authority_v0.83.json",
+    "au_dynamic_directory_route_capture_environment_v0.83.json",
+    "au_dynamic_directory_rendered_dom_audit_v0.83.json",
+    "au_dynamic_directory_interaction_audit_v0.83.json",
+    "asx_upstream_provider_attribution_audit_v0.83.json",
+    "au_taxonomy_candidate_inventory_v0.83.csv",
+    "v082_required_evidence_completeness_audit_v0.83.csv"
+  ],
+  "terminal_rule": {
+    "if_pass": "AU_SP_ASX200 SECTOR FIELD / SOURCE-NATIVE CODE FEASIBILITY GATE D",
+    "if_blocked": "AU_SP_ASX200 TAXONOMY-PROVENANCE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+    "no_further_au_gate_c_provenance_loop": true
+  },
+  "parked_cohorts": {
+    "IN_NIFTY50": "PARKED_EXTERNAL_AUTHORIZATION",
+    "JP_N225": "PARKED_EXTERNAL_AUTHORIZATION",
+    "US_SP400": "PARKED_SOURCE_ACCESS",
+    "US_SP500": "PARKED_SHARED_SOURCE_PREREQUISITE"
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "tradingview": true,
+    "wikipedia": true,
+    "etf_holdings": true,
+    "third_party_security_sector_databases": true,
+    "semantic_sector_inference": true,
+    "fuzzy_matching": true,
+    "cross_taxonomy_mapping": true,
+    "company_name_linkage_for_frozen": true,
+    "pdsc": true,
+    "price_ohlcv": true,
+    "news": true,
+    "trading_analysis": true,
+    "per_security_fanout": true,
+    "au_gate_d": true,
+    "au_gate_e": true,
+    "au_gate_f": true
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "in_gate_f": "45/45",
+    "jp_gate_f": "197/197",
+    "canonical_ready": "37/1425",
+    "sector_rs": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0
+  }
+}
