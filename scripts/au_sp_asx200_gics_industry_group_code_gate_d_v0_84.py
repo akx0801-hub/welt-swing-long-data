@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import argparse, csv, hashlib, html, importlib.util, io, json, re, shutil, subprocess, tempfile, time, unicodedata
+import argparse, base64, csv, hashlib, html, importlib.util, io, json, re, shutil, subprocess, tempfile, time, unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -86,11 +86,58 @@ def pdf_text(raw:bytes)->tuple[str,list[str]]:
     r=PdfReader(io.BytesIO(raw));pages=[p.extract_text() or "" for p in r.pages]
     return "\n".join(pages),pages
 
+def browser_fetch(url:str,max_bytes:int=15_000_000)->dict[str,Any]:
+    chrome=v82.find_chrome()
+    if not chrome:return {"ok":False,"status":"","content_type":"","bytes":0,"sha256":"","timestamp_utc":now(),"resolved_url":url,"body":b"","error":"CHROME_NOT_AVAILABLE"}
+    port=v82.free_port();proc=ud=cdp=None
+    try:
+        proc,ud,ws=v82.start_chrome(chrome,port,Path(tempfile.mkdtemp(prefix="v084-fetch-download-")));cdp=v82.CDP(ws)
+        cdp.command("Network.enable",{"maxTotalBufferSize":100000000,"maxResourceBufferSize":20000000});cdp.command("Page.enable")
+        cdp.command("Page.navigate",{"url":url},timeout=20);cdp.pump_until_idle(12,2)
+        candidates=[]
+        for rid,resp in cdp.responses.items():
+            ru=resp.get("url","");mime=(resp.get("mimeType") or "").lower()
+            if "pdf" not in mime and not ru.lower().endswith(".pdf") and ".pdf?" not in ru.lower():continue
+            body=cdp.command("Network.getResponseBody",{"requestId":rid},timeout=8).get("result")
+            if not body:continue
+            try:
+                raw=base64.b64decode(body.get("body","")) if body.get("base64Encoded") else body.get("body","").encode("latin-1",errors="ignore")
+            except Exception:continue
+            if 0<len(raw)<=max_bytes:
+                candidates.append((len(raw),rid,resp,raw))
+        if not candidates:return {"ok":False,"status":"","content_type":"","bytes":0,"sha256":"","timestamp_utc":now(),"resolved_url":url,"body":b"","error":"PDF_BODY_NOT_CAPTURED"}
+        _,rid,resp,raw=max(candidates,key=lambda x:x[0])
+        return {"ok":True,"status":int(resp.get("status",200) or 200),"content_type":resp.get("mimeType","application/pdf"),"bytes":len(raw),
+                "sha256":sha_bytes(raw),"timestamp_utc":now(),"resolved_url":resp.get("url",url),"body":raw,"error":""}
+    finally:
+        if cdp:cdp.close()
+        if proc:
+            try:proc.terminate();proc.wait(timeout=3)
+            except Exception:
+                try:proc.kill()
+                except Exception:pass
+        if ud:shutil.rmtree(ud,ignore_errors=True)
+
 def fetch(url:str,max_bytes:int=15_000_000)->dict[str,Any]:
-    r=v82.fetch_direct(url,"GET","",max_bytes)
+    attempts=[]
+    r=v82.fetch_direct(url,"GET","",max_bytes);attempts.append({"Method":"DIRECT_HTTP","HTTP_Status":r.get("status",""),"Error":r.get("error","")})
+    if not r.get("ok"):
+        try:
+            cp=subprocess.run(["curl","-L","--fail","--silent","--show-error","--max-time","60","-A",v82.UA,
+                               "-H","Accept: application/pdf,text/html;q=0.9,*/*;q=0.8",url],capture_output=True,timeout=70)
+            if cp.returncode==0 and cp.stdout and len(cp.stdout)<=max_bytes:
+                raw=cp.stdout
+                r={"ok":True,"status":200,"content_type":"application/pdf" if raw.startswith(b"%PDF") else "application/octet-stream",
+                   "bytes":len(raw),"sha256":sha_bytes(raw),"timestamp_utc":now(),"resolved_url":url,"body":raw,"error":""}
+                attempts.append({"Method":"CURL_PUBLIC","HTTP_Status":200,"Error":""})
+            else:attempts.append({"Method":"CURL_PUBLIC","HTTP_Status":"","Error":clean(cp.stderr.decode("utf-8",errors="replace"))[:500]})
+        except Exception as e:attempts.append({"Method":"CURL_PUBLIC","HTTP_Status":"","Error":type(e).__name__+":"+str(e)})
+    if not r.get("ok") and ".pdf" in url.lower():
+        br=browser_fetch(url,max_bytes);attempts.append({"Method":"PUBLIC_CHROME_CDP","HTTP_Status":br.get("status",""),"Error":br.get("error","")})
+        if br.get("ok"):r=br
     return {"URL":url,"Resolved_URL":r.get("resolved_url",""),"HTTP_Status":r.get("status",""),"Content_Type":r.get("content_type",""),
             "Bytes":r.get("bytes",0),"SHA256":r.get("sha256",""),"Retrieval_Timestamp_UTC":r.get("timestamp_utc",""),
-            "Error":r.get("error",""),"Raw":r.get("body",b"")}
+            "Error":r.get("error",""),"Access_Attempts":attempts,"Raw":r.get("body",b"")}
 
 CLICK_DL=r"""(()=>{const e=[...document.querySelectorAll('a,button,[role="button"]')].find(x=>((x.innerText||x.textContent||'')+'').trim().toLowerCase().includes('all asx listed companies'));if(!e)return {status:'NOT_OBSERVED'};const t=((e.innerText||e.textContent||'')+'').trim().replace(/\s+/g,' ');e.click();return {status:'CLICKED_ONCE',text:t,tag:e.tagName,href:e.href||''};})()"""
 
