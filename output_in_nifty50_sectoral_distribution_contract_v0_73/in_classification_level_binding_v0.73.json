@@ -1,33 +1,36 @@
 {
   "Application_Contract_Status": "PASS",
-  "Complete_Explaining_Levels": [],
+  "Complete_Explaining_Levels": [
+    "MACRO_ECONOMIC_SECTOR",
+    "SECTOR"
+  ],
   "Level_Assignment_Stats": {
     "BASIC_INDUSTRY": {
-      "complete_security_count": 0,
-      "deterministic_raw_label_node_count": 0,
+      "complete_security_count": 45,
+      "deterministic_raw_label_node_count": 5,
       "explains_all_45": false,
-      "raw_label_count": 0
+      "raw_label_count": 15
     },
     "INDUSTRY": {
-      "complete_security_count": 0,
-      "deterministic_raw_label_node_count": 0,
+      "complete_security_count": 45,
+      "deterministic_raw_label_node_count": 9,
       "explains_all_45": false,
-      "raw_label_count": 0
+      "raw_label_count": 15
     },
     "MACRO_ECONOMIC_SECTOR": {
-      "complete_security_count": 0,
-      "deterministic_raw_label_node_count": 0,
-      "explains_all_45": false,
-      "raw_label_count": 0
+      "complete_security_count": 45,
+      "deterministic_raw_label_node_count": 15,
+      "explains_all_45": true,
+      "raw_label_count": 15
     },
     "SECTOR": {
-      "complete_security_count": 0,
-      "deterministic_raw_label_node_count": 0,
-      "explains_all_45": false,
-      "raw_label_count": 0
+      "complete_security_count": 45,
+      "deterministic_raw_label_node_count": 15,
+      "explains_all_45": true,
+      "raw_label_count": 15
     }
   },
-  "Level_Binding_Status": "NOT_VERIFIED",
+  "Level_Binding_Status": "AMBIGUOUS",
   "Level_Parameter_Contract_PASS_Count": 4,
   "Mixed_Level_Interpretation_Used": false,
   "Official_Taxonomy_Level": "NOT_VERIFIED",

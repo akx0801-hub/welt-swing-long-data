@@ -21,7 +21,7 @@ Only public NSE Indices application assets and requests are permitted. Browser i
 ## Application contract evidence
 - Browser capture status: PASS
 - Candidate public application contracts: 4
-- Derived application membership rows: 0
+- Derived application membership rows: 180
 - Independent public replay: PASS
 
 The level parameter contract, response schema, security membership, CSV-vs-application assignments, application node identities, and node-to-taxonomy code bindings are persisted separately. Raw response bodies are not persisted.
@@ -37,16 +37,16 @@ No company-name joins, fuzzy matching, semantic inference, cross-taxonomy mappin
 - Canonical READY remains 37/1425.
 
 ## Blocker
-**NIFTY_SECURITY_CATEGORY_MEMBERSHIP_NOT_REPRODUCIBLE**.
+**NIFTY_CLASSIFICATION_LEVEL_AMBIGUOUS**.
 
 ## Artifact binding
-- Workflow run: 36312324586
-- Workflow head: 8b4c7479774d08382a671b417f5cd67f6986af17
-- Artifact: 10928868468
-- Artifact name: in-nifty50-sectoral-distribution-contract-v0.73-36312324586
-- Artifact digest: 3ccfe23226841406430e2044bda6378168e5894fc0777448cbb66d76b0e9ab79
+- Workflow run: 36312582008
+- Workflow head: 3402ed0ac29bd600e9b5936558eb5ad76a1e27b1
+- Artifact: 10929612133
+- Artifact name: in-nifty50-sectoral-distribution-contract-v0.73-36312582008
+- Artifact digest: 3928fc11a3d8353da51c781f764b7cf9a34d9b043448e1ce991020b4ad396426
 
 ## Next gate
-**NIFTY_SECURITY_CATEGORY_MEMBERSHIP_NOT_REPRODUCIBLE**
+**NIFTY_CLASSIFICATION_LEVEL_AMBIGUOUS**
 
 Hard stop: no Gate H, canonical materialization, Sector RS, P0/P1/P2, or next cohort execution.
