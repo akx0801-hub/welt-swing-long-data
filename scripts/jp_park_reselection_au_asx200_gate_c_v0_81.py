@@ -116,6 +116,10 @@ def _normalize_embedded_url(value:str,base:str)->str:
     if not v:return ""
     return urllib.parse.urljoin(base,v)
 
+def is_official_asx_url(url:str)->bool:
+    host=(urllib.parse.urlparse(url).hostname or "").lower()
+    return host=="asx.com.au" or host.endswith(".asx.com.au")
+
 def discover_bulk_url(page:dict[str,Any],parser:PageParser)->dict[str,Any]:
     base=page.get("resolved_url") or page.get("url") or DIRECTORY_URL
     raw=page.get("body",b"").decode("utf-8",errors="replace")
@@ -160,8 +164,7 @@ def discover_bulk_url(page:dict[str,Any],parser:PageParser)->dict[str,Any]:
         src=clean(d.get("src",""))
         if not src:continue
         u=_normalize_embedded_url(src,base)
-        host=(urllib.parse.urlparse(u).hostname or "").lower()
-        if host in {"www.asx.com.au","asx.com.au"}:script_urls.append(u)
+        if is_official_asx_url(u):script_urls.append(u)
     script_urls=list(dict.fromkeys(script_urls))[:12]
     dedup={}
     for score,url,txt,src in candidates:
@@ -414,7 +417,8 @@ def main()->int:
     asset_audits=[]
     if discovery["status"]!="FOUND":
         for script_url in discovery.get("official_script_urls",[])[:6]:
-            asset=logged_fetch(script_url,"ASX_DIRECTORY_DISCOVERED_SCRIPT_ASSET",asx_hosts)
+            script_host=(urllib.parse.urlparse(script_url).hostname or "").lower()
+            asset=logged_fetch(script_url,"ASX_DIRECTORY_DISCOVERED_SCRIPT_ASSET",{script_host})
             audit=discover_bulk_in_asset(asset,script_url) if asset.get("ok") else {"asset_url":script_url,"candidates":[],"bounded_markers":[]}
             asset_audits.append(audit)
             if audit.get("candidates"):
@@ -431,9 +435,13 @@ def main()->int:
       "No_Guessed_Stale_Endpoint":True
     })
     bulk=None
-    if discovery["status"]=="FOUND":
-        bulk=logged_fetch(discovery["selected_url"],"ASX_DIRECTORY_DISCOVERED_BULK",None)
+    if discovery["status"]=="FOUND" and is_official_asx_url(discovery.get("selected_url","")):
+        bulk_host=(urllib.parse.urlparse(discovery["selected_url"]).hostname or "").lower()
+        bulk=logged_fetch(discovery["selected_url"],"ASX_DIRECTORY_DISCOVERED_BULK",{bulk_host})
     else:
+        if discovery["status"]=="FOUND":
+            discovery["rejected_non_asx_url"]=discovery.get("selected_url","")
+            discovery["status"]="NOT_FOUND";discovery["selected_url"]="";discovery["discovery_mode"]="REJECTED_NON_ASX_HOST"
         bulk={"ok":False,"url":"","resolved_url":"","status":"","content_type":"","bytes":0,"sha256":"","body":b"","timestamp_utc":"","error":"NOT_DISCOVERED"}
     indices=logged_fetch(INDICES_URL,"ASX_GICS_CONTEXT",asx_hosts)
     reference=logged_fetch(REFERENCE_URL,"ASX_REFERENCE_DATA_CONTEXT",asx_hosts)
