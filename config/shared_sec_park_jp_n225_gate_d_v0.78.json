@@ -1,0 +1,19 @@
+{
+  "version": "v0.78",
+  "stage": "SHARED_SEC_SOURCE_ACCESS_PARKING_POST_PARK_RESELECTION_JP_N225_GATE_D",
+  "required_start_head": "c567c86f08ffd0b98aea83f0f01246335b7b9443",
+  "selected_cohort": "JP_N225",
+  "in_nifty50_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "us_sp400_park_state": "PARKED_SOURCE_ACCESS",
+  "us_sp500_park_state": "PARKED_SHARED_SOURCE_PREREQUISITE",
+  "sec_requests_allowed": false,
+  "jp_gate_e_allowed": false,
+  "jp_gate_f_allowed": false,
+  "canonical_materialization_allowed": false,
+  "other_cohort_research_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
