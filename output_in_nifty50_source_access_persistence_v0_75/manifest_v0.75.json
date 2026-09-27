@@ -1,0 +1,121 @@
+{
+  "artifact": {
+    "artifact_digest": "670a2246c1186dddb7604b9eb9f349d980049a5e9f9f192540769aeb6fb25d4a",
+    "artifact_id": 10931349603,
+    "artifact_name": "in-nifty50-source-access-persistence-v0.75-36319329798",
+    "artifact_scope": "pre-persistence v0.75 IN_NIFTY50 Gate-H public access, bounded evidence persistence, and official policy review evidence",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "37e4becf0a29c4e66ba73862ce16a6aa338592bf",
+    "workflow_run_id": 36319329798
+  },
+  "blocker": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "canonical_evidence_persistable": "NOT_VERIFIED",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "files": {
+    "artifact_binding_v0.75.json": {
+      "bytes": 475,
+      "sha256": "2fda08890f125d0a88b8947b5e00892f9d595acc9118c3597493d1436fcf4742"
+    },
+    "docs/validation/IN_NIFTY50_Source_Access_Evidence_Persistence_Gate_v0.75.md": {
+      "bytes": 3660,
+      "sha256": "d867287ae5b47e51335330507eba2c0c5a502c13f120f8a00fb00d5145223916"
+    },
+    "external_request_ledger_v0.75.csv": {
+      "bytes": 650,
+      "sha256": "f91830604d80b3b15ec58ec682b73e1fbb4e92b31679ae04c5f08c1f4ecbbe70"
+    },
+    "immutability_audit_v0.75.json": {
+      "bytes": 1310,
+      "sha256": "2b13e0b7307e1897693a0cf8c5655b7d3a6c93484eb2547e56e14e63587fb864"
+    },
+    "in_bounded_evidence_persistence_audit_v0.75.csv": {
+      "bytes": 1026,
+      "sha256": "09fa1a5f53eeb5737cd4d61d2be3b3cd4bd171c2685b5d5f34eece65f9909151"
+    },
+    "in_canonical_metadata_evidence_persistability_v0.75.json": {
+      "bytes": 518,
+      "sha256": "25a7505459d7c327e20bfc525d30e18050cc812848a412abcfd559b86c0fbe83"
+    },
+    "in_future_provenance_contract_v0.75.json": {
+      "bytes": 774,
+      "sha256": "073335f52b720903e4355c0cabc5c56296d38f2aa98ac0d21c66566840a09f85"
+    },
+    "in_gate_h_source_inventory_v0.75.csv": {
+      "bytes": 1641,
+      "sha256": "09dd6528071bfab09fc5cbb285fe0664b493e13c10273c6140de8956be926582"
+    },
+    "in_official_terms_policy_review_v0.75.csv": {
+      "bytes": 1672,
+      "sha256": "9d22d9911a0c2a06405a0e935442d6c5f87fc9e73b330464a802ed32624d44f0"
+    },
+    "in_public_access_reproducibility_audit_v0.75.csv": {
+      "bytes": 1119,
+      "sha256": "2dd618b2d0ac9080e49845f773b903c9f89dd6a4fed012d790bc14788ec002f7"
+    },
+    "in_raw_persistence_requirement_audit_v0.75.csv": {
+      "bytes": 660,
+      "sha256": "1da25d77a7a613870385980b90664d93359434cfcc788b07a694ed947f4b2428"
+    },
+    "in_source_drift_audit_v0.75.csv": {
+      "bytes": 1190,
+      "sha256": "a2ca36deadd7fbcc200e21b0c9e3bce3aa7fb06d12131b7949d6b4e12d15ee7e"
+    },
+    "in_source_name_reference_contract_v0.75.csv": {
+      "bytes": 771,
+      "sha256": "7b757d0a38113a084d7d23219ded52b2b2b035c5f2b87c28307cca95866cd84a"
+    },
+    "manager_governance_authority_G_SEC_05_v0.75.json": {
+      "bytes": 2128,
+      "sha256": "6c1c8fdf748e9ed4991b3888882104bcd2616891c8045941ee473e659ea91beb"
+    },
+    "manifest_preupload_v0.75.json": {
+      "bytes": 3589,
+      "sha256": "1740efe3b5ae589c946dee2e5bcd4eb5ffeb34f351c17f4f6e18dc9850388c1d"
+    },
+    "provider_call_audit_v0.75.json": {
+      "bytes": 659,
+      "sha256": "bdc6c6ed6a103be5e8e74708708e657df111aac4c52f06e426ab31459fcf4cf1"
+    },
+    "stage_checkpoint_preupload_v0.75.json": {
+      "bytes": 566,
+      "sha256": "24ba9b151ca3a70331836f5471f4365ea4d7556a31a381c6a9a075360e087d76"
+    },
+    "stage_checkpoint_v0.75.json": {
+      "bytes": 709,
+      "sha256": "93b8703f7a368153830ba49b3000a2039bc89a263a3a230bae5ce1f67c658f40"
+    },
+    "summary_preupload_v0.75.json": {
+      "bytes": 965,
+      "sha256": "c3448d16a4d7cb1ef76ee7f910084df457853465eece2dfc53b6abb25700ea9a"
+    },
+    "summary_v0.75.json": {
+      "bytes": 1461,
+      "sha256": "7d32ce33ec610fe9ca04491776818ca0bbc1575a398d6b0e3a91128bf60cf0f6"
+    },
+    "test_results_v0.75.csv": {
+      "bytes": 1100,
+      "sha256": "52666bb5ac17d54f9d204950057c0e44d07d6712738c94f002bc0bb9ee0a36bb"
+    }
+  },
+  "in_gate_f_classified": 45,
+  "in_source_access_persistence_ready": false,
+  "next_gate": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "official_policy_review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "other_cohort_runs": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "public_sources_ready": true,
+  "raw_persistence_required": false,
+  "registry_updates": 0,
+  "required_start_head": "b3c0110e1c4f0441447c9ad90515daeb36ac41ff",
+  "sector_rs_runs": 0,
+  "stage": "IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "verdict": "BLOCKED_IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE",
+  "version": "v0.75",
+  "workflow_head_sha": "37e4becf0a29c4e66ba73862ce16a6aa338592bf",
+  "workflow_run_id": 36319329798
+}

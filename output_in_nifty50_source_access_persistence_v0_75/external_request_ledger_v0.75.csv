@@ -1,0 +1,3 @@
+Request_Order,Request_Type,URL,Resolved_URL,Method,Status,Content_Type,Bytes,SHA256,Timestamp_UTC,Official_Source,Per_Security_Fanout,Raw_Body_Persisted,Result
+1,OFFICIAL_POLICY_REVIEW,https://www.niftyindices.com/terms-of-use,https://www.niftyindices.com/terms-of-use,GET,200,text/html; charset=utf-8,93775,4edac9737bf20cee4b577e39daeb7bcf4699e41ca380e7906be231b9c1509d0a,2026-09-27T12:32:36Z,YES,NO,NO,OK
+2,OFFICIAL_POLICY_REVIEW,https://www.niftyindices.com/disclaimer,https://www.niftyindices.com/disclaimer,GET,200,text/html; charset=utf-8,91650,26b8395a59d9b7c6539ce7b14e5b01c93e5354d4b64d2ea965d5b10d12e573cf,2026-09-27T12:32:53Z,YES,NO,NO,OK

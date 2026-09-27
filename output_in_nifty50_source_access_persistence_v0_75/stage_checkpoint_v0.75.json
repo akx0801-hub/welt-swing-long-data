@@ -1,0 +1,16 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "670a2246c1186dddb7604b9eb9f349d980049a5e9f9f192540769aeb6fb25d4a",
+  "artifact_id": 10931349603,
+  "blocker": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "canonical_evidence_persistable": "NOT_VERIFIED",
+  "in_source_access_persistence_ready": false,
+  "next_gate": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "official_policy_review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "public_sources_ready": true,
+  "raw_persistence_required": false,
+  "stage": "IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "verdict": "BLOCKED_IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE",
+  "version": "v0.75",
+  "workflow_run_id": 36319329798
+}

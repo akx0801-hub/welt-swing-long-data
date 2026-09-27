@@ -1,0 +1,9 @@
+{
+  "CANONICAL_METADATA_EVIDENCE_PERSISTABLE": "NOT_VERIFIED",
+  "Canonical_Materialization_Performed": false,
+  "Complete_Raw_Redistribution_Required": false,
+  "Legal_Conclusion": false,
+  "Official_Policy_Review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "Reason": "Technical bounded evidence is sufficient, but explicit official restrictions materially affect automated retrieval and repository persistence; no written consent/license authority is persisted.",
+  "Technical_Bounded_Evidence_Sufficient": true
+}

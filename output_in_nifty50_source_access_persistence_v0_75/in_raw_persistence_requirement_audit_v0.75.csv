@@ -1,0 +1,4 @@
+Source_Class,Source_Name,RAW_PERSISTENCE_REQUIRED_FOR_AUDIT,RAW_PERSISTENCE_RIGHTS,RAW_SOURCE_CURRENTLY_PERSISTED,G_SEC_05_Treatment
+A,NSE_INDICES_NIFTY50_CONSTITUENTS,NO,NOT_VERIFIED,NO,Unknown raw redistribution rights alone do not fail Gate H because complete raw storage is not technically required.
+B,NSE_INDICES_SECTORAL_DISTRIBUTION,NO,NOT_VERIFIED,NO,Unknown raw redistribution rights alone do not fail Gate H because complete raw storage is not technically required.
+C,NSE_INDICES_INDUSTRY_CLASSIFICATION_STRUCTURE,NO,NOT_VERIFIED,NO,Unknown raw redistribution rights alone do not fail Gate H because complete raw storage is not technically required.

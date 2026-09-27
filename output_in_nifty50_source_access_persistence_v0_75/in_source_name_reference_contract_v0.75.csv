@@ -1,0 +1,4 @@
+Source_Class,Canonical_Source_Name,Canonical_Source_Reference,Canonical_Use,Activation_Status
+A,NSE_INDICES_NIFTY50_CONSTITUENTS,https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv,identity and constituent source-classification evidence,BLOCKED_PENDING_GATE_H
+B,NSE_INDICES_SECTORAL_DISTRIBUTION,https://liveindexsa.niftyindices.com/jsonfiles/Sector/SectorialIndexDataNIFTY%2050_Sector.js,SECTOR-level semantics and official security membership,BLOCKED_PENDING_GATE_H
+C,NSE_INDICES_INDUSTRY_CLASSIFICATION_STRUCTURE,https://www.niftyindices.com/docs/default-source/default-document-library/industry-classification/nse-indices_industry-classification-structure-2023-07.pdf?sfvrsn=c89dd39_1,source-native Sector code/name and hierarchy,BLOCKED_PENDING_GATE_H

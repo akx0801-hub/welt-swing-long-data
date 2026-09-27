@@ -1,0 +1,11 @@
+{
+  "Evidence_Final_Commit_rule": "Use the final persisted commit that supplies the authoritative classification evidence consumed by materialization.",
+  "Mapping_Status_future_rule": "May be promoted only by a later authorized canonical materialization gate after Gate H PASS.",
+  "Source_Retrieved_UTC_rule": "Record actual retrieval timestamp as retrieval provenance only; never represent it as an NSE business-effective date.",
+  "Source_Version_or_AsOf_rule": {
+    "retrieval_time_substitution_for_business_as_of": "FORBIDDEN",
+    "when_explicit_business_as_of_exists": "persist exact published source as-of/effective value",
+    "when_no_explicit_business_as_of_exists": "SOURCE_SNAPSHOT_SHA256:<raw_or_response_sha256>"
+  },
+  "status": "PREPARED_NOT_ACTIVATED"
+}

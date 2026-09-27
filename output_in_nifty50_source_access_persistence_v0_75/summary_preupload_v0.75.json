@@ -1,0 +1,31 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "canonical_evidence_persistable": "NOT_VERIFIED",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "core_source_refetches": 0,
+  "in_gate_f_classified": 45,
+  "in_source_access_persistence_ready": false,
+  "next_gate": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "official_policy_review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "other_cohort_runs": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "policy_requests": 2,
+  "productive": false,
+  "public_sources_ready": true,
+  "raw_persistence_required": false,
+  "registry_updates": 0,
+  "sector_rs_runs": 0,
+  "stage": "IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "tests": {
+    "failed": 0,
+    "passed": 24,
+    "total": 24
+  },
+  "verdict": "BLOCKED_IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE",
+  "version": "v0.75"
+}

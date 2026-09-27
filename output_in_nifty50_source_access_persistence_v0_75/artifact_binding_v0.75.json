@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "670a2246c1186dddb7604b9eb9f349d980049a5e9f9f192540769aeb6fb25d4a",
+  "artifact_id": 10931349603,
+  "artifact_name": "in-nifty50-source-access-persistence-v0.75-36319329798",
+  "artifact_scope": "pre-persistence v0.75 IN_NIFTY50 Gate-H public access, bounded evidence persistence, and official policy review evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "37e4becf0a29c4e66ba73862ce16a6aa338592bf",
+  "workflow_run_id": 36319329798
+}

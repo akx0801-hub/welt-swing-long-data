@@ -1,0 +1,13 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "canonical_evidence_persistable": "NOT_VERIFIED",
+  "in_source_access_persistence_ready": false,
+  "next_gate": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "official_policy_review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "public_sources_ready": true,
+  "raw_persistence_required": false,
+  "stage": "IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "verdict": "BLOCKED_IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE",
+  "version": "v0.75"
+}
