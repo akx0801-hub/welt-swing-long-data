@@ -1,0 +1,17 @@
+{
+  "version": "v0.77",
+  "stage": "US_SP400_SEC_COMPANY_TICKERS_EXCHANGE_DIRECT_BULK_ROUTE_REPAIR_GATE_E_COMPLETION",
+  "required_start_head": "17c21283f6c4fbdf524bc80324235c029018b6d6",
+  "scope_cohort": "US_SP400",
+  "direct_sec_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+  "in_nifty50_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "us_gate_f_allowed": false,
+  "us_sp500_allowed": false,
+  "canonical_materialization_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "nifty_requests_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
