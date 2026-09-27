@@ -327,15 +327,95 @@ def largest_record_list(obj:Any)->list[dict[str,Any]]:
 
 def json_meta(obj:Any)->dict[str,Any]:
     out={}
-    def walk(x:Any,depth:int=0):
-        if depth>4 or not isinstance(x,dict):return
-        for k,v in x.items():
-            nk=keynorm(k)
-            if nk in {"total","totalcount","recordcount","totalrecords","pages","totalpages","pagesize","page","pagenumber"} and isinstance(v,(int,float,str)):
-                out[nk]=v
-            if isinstance(v,dict):walk(v,depth+1)
+    def walk(x:Any,path:str="",depth:int=0):
+        if depth>8:return
+        if isinstance(x,dict):
+            for k,v in x.items():
+                nk=keynorm(k);p=(path+"."+str(k)).strip(".")
+                if isinstance(v,(int,float,str,bool)) and any(t in nk for t in ("total","count","page","pages","size","limit","offset","itemsperpage")):
+                    out[p]=v
+                elif isinstance(v,(dict,list)):walk(v,p,depth+1)
+        elif isinstance(x,list):
+            for i,v in enumerate(x[:100]):
+                if isinstance(v,(dict,list)):walk(v,path+"[]",depth+1)
     walk(obj)
     return out
+
+def pagination_contract(selected:dict[str,Any]|None)->dict[str,Any]:
+    if not selected:return {"Detected":False,"Explicit_Contract":False}
+    url=selected.get("Resolved_URL") or selected.get("Request_URL") or ""
+    p=urllib.parse.urlparse(url);q=dict(urllib.parse.parse_qsl(p.query,keep_blank_values=True))
+    page_key=next((k for k in q if keynorm(k) in {"page","pagenumber","pageindex"}),None)
+    size_key=next((k for k in q if keynorm(k) in {"itemsperpage","pagesize","limit"}),None)
+    if not page_key or not size_key:return {"Detected":False,"Explicit_Contract":False}
+    try:page_size=int(q[size_key])
+    except Exception:page_size=0
+    meta=(selected.get("parsed") or {}).get("meta",{})
+    total_count=None;total_count_path=""
+    total_pages=None;total_pages_path=""
+    for path,v in meta.items():
+        leaf=keynorm(path.split(".")[-1].replace("[]",""))
+        try:num=int(float(v))
+        except Exception:continue
+        if total_count is None and any(x in leaf for x in ("totalcount","totalitems","totalrecords","totalresults","recordcount")):
+            total_count=num;total_count_path=path
+        if total_pages is None and any(x in leaf for x in ("totalpages","pagecount","numberofpages","pagescount")):
+            total_pages=num;total_pages_path=path
+    if total_pages is None and total_count is not None and page_size>0:
+        total_pages=(total_count+page_size-1)//page_size
+        total_pages_path="DERIVED_FROM_EXPLICIT_TOTAL_COUNT_AND_OBSERVED_PAGE_SIZE"
+    explicit=bool(page_size>0 and (total_pages is not None or total_count is not None))
+    return {
+      "Detected":True,"Explicit_Contract":explicit,"Page_Parameter":page_key,"Page_Size_Parameter":size_key,
+      "Observed_Page_Value":q.get(page_key,""),"Observed_Page_Size":page_size,
+      "Explicit_Total_Count":total_count,"Explicit_Total_Count_Path":total_count_path,
+      "Explicit_Total_Pages":total_pages,"Explicit_Total_Pages_Path":total_pages_path,
+      "Observed_Meta":meta
+    }
+
+def complete_paginated_route(selected:dict[str,Any]|None,max_pages:int=100)->dict[str,Any]:
+    pc=pagination_contract(selected)
+    if not selected:return {"Status":"NOT_APPLICABLE","Complete":False,"Records":[],"Pages":[],"Contract":pc}
+    if not pc.get("Detected"):
+        return {"Status":"NOT_PAGINATED","Complete":True,"Records":selected.get("parsed",{}).get("records",[]),"Pages":[],"Contract":pc}
+    if not pc.get("Explicit_Contract"):
+        return {"Status":"FAIL_EXPLICIT_PAGE_COUNT_CONTRACT_NOT_FOUND","Complete":False,"Records":[],"Pages":[],"Contract":pc}
+    total_pages=int(pc.get("Explicit_Total_Pages") or 0)
+    if total_pages<=0 or total_pages>max_pages:
+        return {"Status":"FAIL_PAGE_COUNT_OUT_OF_BOUNDS","Complete":False,"Records":[],"Pages":[],"Contract":pc}
+    rawurl=selected.get("Resolved_URL") or selected.get("Request_URL") or ""
+    if "<REDACTED>" in rawurl:
+        return {"Status":"FAIL_EPHEMERAL_URL_REDACTED","Complete":False,"Records":[],"Pages":[],"Contract":pc}
+    p=urllib.parse.urlparse(rawurl);pairs=urllib.parse.parse_qsl(p.query,keep_blank_values=True)
+    page_key=pc["Page_Parameter"]
+    schema_sig=selected.get("schema_signature","")
+    pages=[];records=[]
+    for page_no in range(total_pages):
+        qp=[(k,str(page_no) if k==page_key else v) for k,v in pairs]
+        u=urllib.parse.urlunparse((p.scheme,p.netloc,p.path,p.params,urllib.parse.urlencode(qp,doseq=True),p.fragment))
+        r=fetch_direct(u,"GET","",8_000_000)
+        parsed=parse_dataset(r.get("body",b""),r.get("content_type",""),r.get("resolved_url","")) if r.get("ok") else None
+        sig=sha_bytes(json.dumps(sorted(parsed.get("schema",[])),ensure_ascii=False).encode("utf-8")) if parsed else ""
+        ok=bool(r.get("ok") and parsed and sig==schema_sig)
+        rc=len(parsed.get("records",[])) if parsed else 0
+        pages.append({"Page":page_no,"URL":sanitize_url(u),"HTTP_Status":r.get("status",""),"Content_Type":r.get("content_type",""),
+                      "Bytes":r.get("bytes",0),"Response_SHA256":r.get("sha256",""),"Record_Count":rc,
+                      "Schema_Signature":sig,"Status":"PASS" if ok else "FAIL"})
+        if not ok:
+            return {"Status":"FAIL_PAGE_RETRIEVAL","Complete":False,"Records":[],"Pages":pages,"Contract":pc}
+        records.extend(parsed.get("records",[]))
+    ana=selected.get("analysis",{})
+    code=ana.get("code_fields",[""])[0] if ana.get("code_fields") else ""
+    name=ana.get("name_fields",[""])[0] if ana.get("name_fields") else ""
+    seen=set();ded=[]
+    for r in records:
+        key=(clean(r.get(code)) if code else "",clean(r.get(name)) if name else "",json.dumps(r,sort_keys=True,ensure_ascii=False))
+        if key not in seen:seen.add(key);ded.append(r)
+    total_count=pc.get("Explicit_Total_Count")
+    complete=all(x["Status"]=="PASS" for x in pages) and (total_count is None or len(ded)==int(total_count))
+    status="PASS_COMPLETE" if complete else "FAIL_RECORD_COUNT_MISMATCH"
+    return {"Status":status,"Complete":complete,"Records":ded,"Pages":pages,"Contract":pc,
+            "Retrieved_Record_Count":len(records),"Unique_Record_Count":len(ded)}
 
 def parse_json_dataset(raw:bytes)->dict[str,Any]|None:
     try:obj=json.loads(raw.decode("utf-8-sig"))
@@ -454,6 +534,7 @@ def score_candidate(row:dict[str,Any])->tuple[int,dict[str,Any]|None]:
     if ana["classification_fields"]:score+=25
     if row.get("Resource_Type") in {"XHR","Fetch","Download"}:score+=10
     if any(k in (row.get("Resolved_URL","").lower()) for k in ("compan","listed","directory","issuer")):score+=15
+    if "includefilteroptions=true" in (row.get("Resolved_URL","").lower()):score+=5
     if row.get("First_Party_or_External")!="UNVERIFIED_EXTERNAL":score+=5
     return score,ana
 
@@ -471,21 +552,10 @@ def choose_candidate(rows:list[dict[str,Any]])->dict[str,Any]|None:
     out["schema_signature"]=sha_bytes(json.dumps(sorted(out["schema"]),ensure_ascii=False).encode("utf-8"))
     out["logical_route"]=logical_route(r.get("Resolved_URL") or r.get("Request_URL"),r.get("Method","GET"))
     out["route_type"]="CSV" if parsed.get("format")=="CSV" else "BULK_API"
-    meta=parsed.get("meta",{})
-    total=None
-    for k in ("total","totalcount","recordcount","totalrecords"):
-        if k in meta:
-            try:total=int(meta[k]);break
-            except Exception:pass
-    if total and total>out["record_count"]:
-        pages=None
-        for k in ("totalpages","pages"):
-            if k in meta:
-                try:pages=int(meta[k]);break
-                except Exception:pass
-        if pages and 1<pages<=50:out["route_type"]="DETERMINISTIC_FINITE_PAGINATION"
-        else:out["pagination_incomplete"]=True
-    else:out["pagination_incomplete"]=False
+    pc=pagination_contract(out)
+    if pc.get("Detected"):out["route_type"]="DETERMINISTIC_FINITE_PAGINATION"
+    out["pagination_contract"]=pc
+    out["pagination_incomplete"]=bool(pc.get("Detected") and not pc.get("Explicit_Contract"))
     return out
 
 def dom_snapshot(cdp:CDP)->dict[str,Any]:
@@ -582,7 +652,7 @@ def browser_session(run_no:int,spec:dict[str,Any],out:Path)->dict[str,Any]:
 def public_candidate(row:dict[str,Any]|None)->dict[str,Any]:
     if not row:return {}
     keep=["Request_Order","Phase","Request_URL","Resolved_URL","Method","Initiator","Resource_Type","HTTP_Status","Content_Type","Bytes","Response_SHA256",
-          "First_Party_or_External","Candidate_Reason","score","record_count","schema","schema_signature","logical_route","route_type","pagination_incomplete"]
+          "First_Party_or_External","Candidate_Reason","score","record_count","schema","schema_signature","logical_route","route_type","pagination_incomplete","pagination_contract"]
     out={k:row.get(k) for k in keep}
     ana=row.get("analysis",{})
     out["code_fields"]=ana.get("code_fields",[]);out["name_fields"]=ana.get("name_fields",[]);out["classification_fields"]=ana.get("classification_fields",[])
@@ -748,28 +818,50 @@ def main()->int:
 
     same_route=bool(s1 and s2 and s1.get("logical_route")==s2.get("logical_route"))
     same_schema=bool(s1 and s2 and s1.get("schema_signature")==s2.get("schema_signature"))
-    no_pagination_gap=bool(s1 and s2 and not s1.get("pagination_incomplete") and not s2.get("pagination_incomplete"))
-    public_browser_repro=bool(run1.get("status")=="PASS" and run2.get("status")=="PASS" and same_route and same_schema and no_pagination_gap)
+    browser_contract_repro=bool(run1.get("status")=="PASS" and run2.get("status")=="PASS" and same_route and same_schema)
+    pagination1=complete_paginated_route(s1,100) if browser_contract_repro else {"Status":"NOT_APPLICABLE","Complete":False,"Records":[],"Pages":[],"Contract":{}}
+    pagination2_contract=pagination_contract(s2) if s2 else {"Detected":False,"Explicit_Contract":False}
+    pagination_contract_same=bool(
+      (not pagination1.get("Contract",{}).get("Detected") and not pagination2_contract.get("Detected")) or
+      (pagination1.get("Contract",{}).get("Detected") and pagination2_contract.get("Detected") and
+       pagination1.get("Contract",{}).get("Page_Parameter")==pagination2_contract.get("Page_Parameter") and
+       pagination1.get("Contract",{}).get("Page_Size_Parameter")==pagination2_contract.get("Page_Size_Parameter") and
+       pagination1.get("Contract",{}).get("Observed_Page_Size")==pagination2_contract.get("Observed_Page_Size"))
+    )
+    pagination_complete=bool(pagination1.get("Complete") and pagination_contract_same)
+    public_browser_repro=bool(browser_contract_repro and pagination_complete)
     route_ready=public_browser_repro
+    full_records=pagination1.get("Records",[]) if route_ready else []
+    write_csv(out/"au_directory_pagination_completion_audit_v0.82.csv",pagination1.get("Pages",[]),
+              ["Page","URL","HTTP_Status","Content_Type","Bytes","Response_SHA256","Record_Count","Schema_Signature","Status"])
+    write_json(out/"au_directory_pagination_contract_v0.82.json",{
+      "RUN_1_Contract":pagination1.get("Contract",{}),"RUN_2_Contract":pagination2_contract,
+      "Contract_Reproduced_In_Two_Browser_Contexts":pagination_contract_same,
+      "Completion_Status":pagination1.get("Status",""),"Complete":pagination_complete,
+      "Retrieved_Record_Count":pagination1.get("Retrieved_Record_Count",len(full_records)),
+      "Unique_Record_Count":pagination1.get("Unique_Record_Count",len(full_records))
+    })
 
     route_contract={
       "ASX_DIRECTORY_DATA_ROUTE_READY":"YES" if route_ready else "NO",
       "PUBLIC_BROWSER_REPRODUCIBLE":"YES" if public_browser_repro else "NO",
       "RUN_1":pub1,"RUN_2":pub2,"Same_Logical_Endpoint":same_route,"Same_Schema_Contract":same_schema,
-      "No_Incomplete_Pagination":no_pagination_gap,"No_Per_Security_Fanout":True,
+      "Pagination_Contract_Reproduced":pagination_contract_same,"Pagination_Completion_Status":pagination1.get("Status",""),
+      "No_Incomplete_Pagination":pagination_complete,"No_Per_Security_Fanout":True,
       "Selected_Route":pub1.get("Resolved_URL","") if route_ready else "",
       "Logical_Route":pub1.get("logical_route","") if route_ready else "",
-      "Data_Route_Type":pub1.get("route_type","NOT_VERIFIED") if route_ready else "NOT_VERIFIED",
+      "Data_Route_Type":pub1.get("route_type","NOT_VERIFIED") if browser_contract_repro else "NOT_VERIFIED",
       "Data_Records_RUN1":pub1.get("record_count",0),"Data_Records_RUN2":pub2.get("record_count",0),
+      "Complete_Directory_Record_Count":len(full_records),
       "Session_Requirements":{"Authentication":"NONE","Fresh_Profile":"YES","Preexisting_Cookies":"NO","Proxy":"NONE"}
     }
     write_json(out/"au_directory_selected_data_route_contract_v0.82.json",route_contract)
 
-    replay=direct_replay(s1 if route_ready else None)
+    replay=direct_replay(s1 if browser_contract_repro else None)
     write_json(out/"au_directory_direct_replay_audit_v0.82.json",replay)
 
     # Schema and classification field audits.
-    schema_stats=(s1 or {}).get("analysis",{}).get("field_stats",[]) if route_ready else []
+    schema_stats=schema_analysis((s1 or {}).get("schema",[]),full_records).get("field_stats",[]) if route_ready else []
     write_csv(out/"au_directory_runtime_schema_audit_v0.82.csv",schema_stats,
               ["Field_Name","Field_Position_or_Key","Data_Type","Null_Count","Distinct_Value_Count"])
     classification_fields=(s1 or {}).get("analysis",{}).get("classification_fields",[]) if route_ready else []
@@ -784,7 +876,7 @@ def main()->int:
 
     labels=[]
     if route_ready and classification_fields and s1:
-        records=s1["parsed"].get("records",[])
+        records=full_records
         for f in classification_fields:
             vals=sorted({clean(r.get(f)) for r in records if clean(r.get(f))},key=lambda x:x.casefold())
             for v in vals:labels.append({"Field_Name":f,"Distinct_Label":v})
@@ -860,7 +952,7 @@ def main()->int:
     final_decision={
       "Cohort":"AU_SP_ASX200","Frozen_Rows":63,"ASX_DIRECTORY_DATA_ROUTE_READY":"YES" if route_ready else "NO",
       "PUBLIC_BROWSER_REPRODUCIBLE":"YES" if public_browser_repro else "NO","DIRECT_HTTP_REPLAY":replay["DIRECT_HTTP_REPLAY"],
-      "Data_Route_Type":route_contract["Data_Route_Type"],"Data_Records":route_contract["Data_Records_RUN1"],
+      "Data_Route_Type":route_contract["Data_Route_Type"],"Data_Records":route_contract["Complete_Directory_Record_Count"],
       "Classification_Field":decision["classification_field"] or "NOT_AVAILABLE",
       "AU_SOURCE_NATIVE_TAXONOMY_IDENTITY_READY":"YES" if ready else "NO",
       "Taxonomy_Identity":decision["taxonomy_identity"],"Taxonomy_Owner":decision["taxonomy_owner"],
@@ -941,7 +1033,8 @@ def main()->int:
     test("HISTORICAL_GATE_B_PRESERVED",hist["HISTORICAL_GATE_B"]=="PASS_INHERITED" and hist["Historical_Evidence_Rewritten"]=="NO",hist["CURRENT_AUTHORITY_IMPACT"])
     if route_ready:
         test("ROUTE_TWO_RUN_REPRO",public_browser_repro and same_route and same_schema,"YES")
-        test("ROUTE_RECORDS",route_contract["Data_Records_RUN1"]>0 and route_contract["Data_Records_RUN2"]>0,f"{route_contract['Data_Records_RUN1']}/{route_contract['Data_Records_RUN2']}")
+        test("ROUTE_RECORDS",route_contract["Data_Records_RUN1"]>0 and route_contract["Data_Records_RUN2"]>0 and route_contract["Complete_Directory_Record_Count"]>0,f"{route_contract['Data_Records_RUN1']}/{route_contract['Data_Records_RUN2']}/complete={route_contract['Complete_Directory_Record_Count']}")
+        test("PAGINATION_COMPLETE",route_contract["No_Incomplete_Pagination"] is True,route_contract["Pagination_Completion_Status"])
     else:
         test("ROUTE_FAIL_BLOCKER",blocker=="ASX_DIRECTORY_DYNAMIC_DATA_ROUTE_NOT_REPRODUCIBLE",blocker)
         test("ROUTE_FAIL_NEXT_GATE",next_gate=="AU_SP_ASX200 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",next_gate)
@@ -956,7 +1049,7 @@ def main()->int:
       "dynamic_directory_route":"PASS" if route_ready else "FAIL",
       "public_browser_reproducible":"YES" if public_browser_repro else "NO",
       "direct_http_replay":replay["DIRECT_HTTP_REPLAY"],
-      "data_route_type":route_contract["Data_Route_Type"],"data_records":route_contract["Data_Records_RUN1"],
+      "data_route_type":route_contract["Data_Route_Type"],"data_records":route_contract["Complete_Directory_Record_Count"],
       "classification_field":final_decision["Classification_Field"],"taxonomy_identity":final_decision["Taxonomy_Identity"],
       "taxonomy_owner":final_decision["Taxonomy_Owner"],"formal_level":final_decision["Classification_Level"],
       "version_status":final_decision["Taxonomy_Version_Status"],"field_to_taxonomy_binding":final_decision["Field_to_Taxonomy_Binding"],
