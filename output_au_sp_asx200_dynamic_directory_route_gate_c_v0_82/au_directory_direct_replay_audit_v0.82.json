@@ -1,4 +1,26 @@
 {
-  "DIRECT_HTTP_REPLAY": "NOT_APPLICABLE",
-  "Reason": "PAGINATED_BROWSER_CONTRACT_NOT_REPLAYED_IN_GATE_C"
+  "Bytes": 6627,
+  "Content_Type": "application/json; charset=utf-8",
+  "DIRECT_HTTP_REPLAY": "PASS",
+  "Error": "",
+  "HTTP_Status": 200,
+  "Method": "GET",
+  "Parsed_Record_Count": 25,
+  "Privileged_Browser_State_Used": "NO",
+  "Requested_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
+  "Resolved_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
+  "Response_SHA256": "c24bba97a16e40e89ed8e5bac71cd00226dc3311c6261838b8f775c4ef64ea43",
+  "Retrieval_Timestamp_UTC": "2026-09-27T19:15:13Z",
+  "Schema": [
+    "symbol",
+    "displayName",
+    "industry",
+    "dateListed",
+    "marketCap",
+    "xid",
+    "priceChangeFiveDayPercent",
+    "isRecentListing",
+    "statusCode"
+  ],
+  "Schema_Matches_Browser": true
 }

@@ -5,7 +5,7 @@
   "Classification_Field": "NOT_AVAILABLE",
   "Classification_Level": "NOT_VERIFIED",
   "Cohort": "AU_SP_ASX200",
-  "DIRECT_HTTP_REPLAY": "NOT_APPLICABLE",
+  "DIRECT_HTTP_REPLAY": "PASS",
   "Data_Records": 0,
   "Data_Route_Type": "DETERMINISTIC_FINITE_PAGINATION",
   "Field_to_Taxonomy_Binding": "NOT_VERIFIED",

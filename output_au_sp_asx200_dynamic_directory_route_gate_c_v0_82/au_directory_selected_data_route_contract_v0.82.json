@@ -8,7 +8,7 @@
   "No_Incomplete_Pagination": false,
   "No_Per_Security_Fanout": true,
   "PUBLIC_BROWSER_REPRODUCIBLE": "YES",
-  "Pagination_Completion_Status": "FAIL_EXPLICIT_PAGE_COUNT_CONTRACT_NOT_FOUND",
+  "Pagination_Completion_Status": "FAIL_RECORD_COUNT_MISMATCH",
   "Pagination_Contract_Reproduced": true,
   "RUN_1": {
     "Bytes": 6627,
@@ -19,11 +19,11 @@
     "Initiator": "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-dependencies.lc-9833f1d2e692aa09edfea690e231b110-lc.min.js",
     "Method": "GET",
     "Phase": "PASSIVE",
-    "Request_Order": 52,
+    "Request_Order": 51,
     "Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
     "Resolved_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
     "Resource_Type": "XHR",
-    "Response_SHA256": "338857e2baae2bcaae4cc456b7288020bc63449b1f95f9180bc406ba68afae90",
+    "Response_SHA256": "c24bba97a16e40e89ed8e5bac71cd00226dc3311c6261838b8f775c4ef64ea43",
     "classification_fields": [
       "industry"
     ],
@@ -36,20 +36,22 @@
     ],
     "pagination_contract": {
       "Detected": true,
-      "Explicit_Contract": false,
-      "Explicit_Total_Count": null,
-      "Explicit_Total_Count_Path": "",
-      "Explicit_Total_Pages": null,
-      "Explicit_Total_Pages_Path": "",
+      "Explicit_Contract": true,
+      "Explicit_Total_Count": 1832,
+      "Explicit_Total_Count_Path": "data.count",
+      "Explicit_Total_Pages": 74,
+      "Explicit_Total_Pages_Path": "DERIVED_FROM_EXPLICIT_TOTAL_COUNT_AND_OBSERVED_PAGE_SIZE",
       "Observed_Meta": {
-        "data.count": 1830
+        "data.count": 1832
       },
       "Observed_Page_Size": 25,
       "Observed_Page_Value": "0",
       "Page_Parameter": "page",
-      "Page_Size_Parameter": "itemsPerPage"
+      "Page_Size_Parameter": "itemsPerPage",
+      "Records_Parent_Path": "data",
+      "Records_Path": "data.items"
     },
-    "pagination_incomplete": true,
+    "pagination_incomplete": false,
     "record_count": 25,
     "route_type": "DETERMINISTIC_FINITE_PAGINATION",
     "schema": [
@@ -79,7 +81,7 @@
     "Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
     "Resolved_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
     "Resource_Type": "XHR",
-    "Response_SHA256": "c24bba97a16e40e89ed8e5bac71cd00226dc3311c6261838b8f775c4ef64ea43",
+    "Response_SHA256": "338857e2baae2bcaae4cc456b7288020bc63449b1f95f9180bc406ba68afae90",
     "classification_fields": [
       "industry"
     ],
@@ -92,20 +94,22 @@
     ],
     "pagination_contract": {
       "Detected": true,
-      "Explicit_Contract": false,
-      "Explicit_Total_Count": null,
-      "Explicit_Total_Count_Path": "",
-      "Explicit_Total_Pages": null,
-      "Explicit_Total_Pages_Path": "",
+      "Explicit_Contract": true,
+      "Explicit_Total_Count": 1830,
+      "Explicit_Total_Count_Path": "data.count",
+      "Explicit_Total_Pages": 74,
+      "Explicit_Total_Pages_Path": "DERIVED_FROM_EXPLICIT_TOTAL_COUNT_AND_OBSERVED_PAGE_SIZE",
       "Observed_Meta": {
-        "data.count": 1832
+        "data.count": 1830
       },
       "Observed_Page_Size": 25,
       "Observed_Page_Value": "0",
       "Page_Parameter": "page",
-      "Page_Size_Parameter": "itemsPerPage"
+      "Page_Size_Parameter": "itemsPerPage",
+      "Records_Parent_Path": "data",
+      "Records_Path": "data.items"
     },
-    "pagination_incomplete": true,
+    "pagination_incomplete": false,
     "record_count": 25,
     "route_type": "DETERMINISTIC_FINITE_PAGINATION",
     "schema": [

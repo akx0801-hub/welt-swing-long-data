@@ -1,37 +1,41 @@
 {
   "Complete": false,
-  "Completion_Status": "FAIL_EXPLICIT_PAGE_COUNT_CONTRACT_NOT_FOUND",
+  "Completion_Status": "FAIL_RECORD_COUNT_MISMATCH",
   "Contract_Reproduced_In_Two_Browser_Contexts": true,
   "RUN_1_Contract": {
     "Detected": true,
-    "Explicit_Contract": false,
-    "Explicit_Total_Count": null,
-    "Explicit_Total_Count_Path": "",
-    "Explicit_Total_Pages": null,
-    "Explicit_Total_Pages_Path": "",
-    "Observed_Meta": {
-      "data.count": 1830
-    },
-    "Observed_Page_Size": 25,
-    "Observed_Page_Value": "0",
-    "Page_Parameter": "page",
-    "Page_Size_Parameter": "itemsPerPage"
-  },
-  "RUN_2_Contract": {
-    "Detected": true,
-    "Explicit_Contract": false,
-    "Explicit_Total_Count": null,
-    "Explicit_Total_Count_Path": "",
-    "Explicit_Total_Pages": null,
-    "Explicit_Total_Pages_Path": "",
+    "Explicit_Contract": true,
+    "Explicit_Total_Count": 1832,
+    "Explicit_Total_Count_Path": "data.count",
+    "Explicit_Total_Pages": 74,
+    "Explicit_Total_Pages_Path": "DERIVED_FROM_EXPLICIT_TOTAL_COUNT_AND_OBSERVED_PAGE_SIZE",
     "Observed_Meta": {
       "data.count": 1832
     },
     "Observed_Page_Size": 25,
     "Observed_Page_Value": "0",
     "Page_Parameter": "page",
-    "Page_Size_Parameter": "itemsPerPage"
+    "Page_Size_Parameter": "itemsPerPage",
+    "Records_Parent_Path": "data",
+    "Records_Path": "data.items"
   },
-  "Retrieved_Record_Count": 0,
-  "Unique_Record_Count": 0
+  "RUN_2_Contract": {
+    "Detected": true,
+    "Explicit_Contract": true,
+    "Explicit_Total_Count": 1830,
+    "Explicit_Total_Count_Path": "data.count",
+    "Explicit_Total_Pages": 74,
+    "Explicit_Total_Pages_Path": "DERIVED_FROM_EXPLICIT_TOTAL_COUNT_AND_OBSERVED_PAGE_SIZE",
+    "Observed_Meta": {
+      "data.count": 1830
+    },
+    "Observed_Page_Size": 25,
+    "Observed_Page_Value": "0",
+    "Page_Parameter": "page",
+    "Page_Size_Parameter": "itemsPerPage",
+    "Records_Parent_Path": "data",
+    "Records_Path": "data.items"
+  },
+  "Retrieved_Record_Count": 1830,
+  "Unique_Record_Count": 1799
 }

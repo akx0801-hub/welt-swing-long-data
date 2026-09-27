@@ -1,5 +1,9 @@
 {
   "Exact_Field_Provider_Attribution": "NOT_VERIFIED",
+  "Generic_ASX_Directory_Context": {
+    "LSEG_Observed": true,
+    "Morningstar_Observed": true
+  },
   "Generic_ASX_Reference_Context": {
     "LSEG_Observed": false,
     "Morningstar_Observed": false

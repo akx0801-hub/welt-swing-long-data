@@ -12,7 +12,7 @@
   "current_route_reproducibility": "FAIL",
   "data_records": 0,
   "data_route_type": "DETERMINISTIC_FINITE_PAGINATION",
-  "direct_http_replay": "NOT_APPLICABLE",
+  "direct_http_replay": "PASS",
   "dynamic_directory_route": "FAIL",
   "field_to_taxonomy_binding": "NOT_VERIFIED",
   "formal_level": "NOT_VERIFIED",

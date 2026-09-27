@@ -1,18 +1,18 @@
 {
   "artifact_binding": "PASS",
-  "artifact_digest": "sha256:1c401854687ebd9cbe4af89422960ed6cbea2817bb90c5771cca3ee7032110c0",
-  "artifact_id": 10940220470,
+  "artifact_digest": "sha256:c88d67d91360530a6a09c577f508fde8a48a23ea17c39838a4f0260ba73a18eb",
+  "artifact_id": 10940211022,
   "au_source_native_taxonomy_identity_ready": false,
   "blocker": "ASX_DIRECTORY_DYNAMIC_DATA_ROUTE_NOT_REPRODUCIBLE",
   "canonical_ready_rows": 37,
   "canonical_total_rows": 1425,
-  "direct_http_replay": "NOT_APPLICABLE",
+  "direct_http_replay": "PASS",
   "dynamic_directory_route": "FAIL",
   "next_gate": "AU_SP_ASX200 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
   "public_browser_reproducible": "YES",
   "stage": "AU_SP_ASX200_DYNAMIC_DIRECTORY_DATA_ROUTE_REPAIR_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C_COMPLETION",
   "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
   "version": "v0.82",
-  "workflow_head_sha": "4776342d524bdc096bcf8786fd4bfe3533bb0ba2",
-  "workflow_run_id": 36343377368
+  "workflow_head_sha": "c631adc4e9e72e62e2c0ec39b816b50cca6f5643",
+  "workflow_run_id": 36343595672
 }

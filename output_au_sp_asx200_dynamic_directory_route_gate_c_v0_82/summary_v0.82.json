@@ -1,12 +1,12 @@
 {
   "artifact": {
-    "artifact_digest": "sha256:1c401854687ebd9cbe4af89422960ed6cbea2817bb90c5771cca3ee7032110c0",
-    "artifact_id": 10940220470,
-    "artifact_name": "au-asx200-dynamic-directory-gate-c-v0.82-36343377368",
+    "artifact_digest": "sha256:c88d67d91360530a6a09c577f508fde8a48a23ea17c39838a4f0260ba73a18eb",
+    "artifact_id": 10940211022,
+    "artifact_name": "au-asx200-dynamic-directory-gate-c-v0.82-36343595672",
     "artifact_scope": "pre-persistence v0.82 AU_SP_ASX200 two-clean-session dynamic directory runtime capture and Gate-C taxonomy identity evidence",
     "artifact_verified": "PASS",
-    "workflow_head_sha": "4776342d524bdc096bcf8786fd4bfe3533bb0ba2",
-    "workflow_run_id": 36343377368
+    "workflow_head_sha": "c631adc4e9e72e62e2c0ec39b816b50cca6f5643",
+    "workflow_run_id": 36343595672
   },
   "artifact_binding": "PASS",
   "au_gate_d": "NOT_EVALUATED",
@@ -21,7 +21,7 @@
   "current_route_reproducibility": "FAIL",
   "data_records": 0,
   "data_route_type": "DETERMINISTIC_FINITE_PAGINATION",
-  "direct_http_replay": "NOT_APPLICABLE",
+  "direct_http_replay": "PASS",
   "dynamic_directory_route": "FAIL",
   "field_to_taxonomy_binding": "NOT_VERIFIED",
   "formal_level": "NOT_VERIFIED",

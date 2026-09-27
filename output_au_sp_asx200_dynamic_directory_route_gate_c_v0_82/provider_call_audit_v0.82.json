@@ -1,5 +1,5 @@
 {
-  "ASX_context_requests": 2,
+  "ASX_context_requests": 3,
   "AU_Gate_D": 0,
   "AU_Gate_E": 0,
   "AU_Gate_F": 0,
@@ -18,7 +18,7 @@
   "TradingView": 0,
   "Wikipedia": 0,
   "Yahoo_yfinance": 0,
-  "bounded_direct_replays": 0,
+  "bounded_direct_replays": 75,
   "company_name_joins": 0,
   "cross_taxonomy_mapping": 0,
   "fuzzy_matching": 0,

@@ -4,7 +4,7 @@
   "blocker": "ASX_DIRECTORY_DYNAMIC_DATA_ROUTE_NOT_REPRODUCIBLE",
   "canonical_ready_rows": 37,
   "canonical_total_rows": 1425,
-  "direct_http_replay": "NOT_APPLICABLE",
+  "direct_http_replay": "PASS",
   "dynamic_directory_route": "FAIL",
   "next_gate": "AU_SP_ASX200 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
   "public_browser_reproducible": "YES",
