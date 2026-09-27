@@ -1,0 +1,49 @@
+{
+  "Bulk_Candidates": [
+    {
+      "marker": "Listed Company Services",
+      "mode": "ANCHOR",
+      "score": 20,
+      "url": "https://www.asx.com.au/content/asx/home/issuers/listed-company-services.html"
+    },
+    {
+      "marker": "Get in touch with the Listed Company Services Team",
+      "mode": "ANCHOR",
+      "score": 20,
+      "url": "https://www.asx.com.au/content/asx/home/issuers/listed-company-services/contact-listed-company-services.html"
+    },
+    {
+      "marker": "Education",
+      "mode": "ANCHOR",
+      "score": 20,
+      "url": "https://www.asx.com.au/content/asx/home/issuers/listed-company-services/education.html"
+    },
+    {
+      "marker": "Investor Engagement",
+      "mode": "ANCHOR",
+      "score": 20,
+      "url": "https://www.asx.com.au/content/asx/home/issuers/listed-company-services/investor-engagement.html"
+    },
+    {
+      "marker": "Tools and resources",
+      "mode": "ANCHOR",
+      "score": 20,
+      "url": "https://www.asx.com.au/content/asx/home/issuers/listed-company-services/tools-and-resources.html"
+    }
+  ],
+  "Bulk_Discovery_Mode": "ANCHOR",
+  "Bulk_Discovery_Status": "FOUND",
+  "Bulk_Link_Text": "Listed Company Services",
+  "Bulk_URL": "https://www.asx.com.au/content/asx/home/issuers/listed-company-services.html",
+  "Bytes": 135651,
+  "Complete_Raw_Page_Persisted": false,
+  "Content_Type": "text/html;charset=utf-8",
+  "Directory_URL": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+  "HTTP_Status": 200,
+  "Market_Data_Credit_LSEG_Observed": true,
+  "Market_Data_Credit_Morningstar_Observed": true,
+  "Public_Request_Reproducible": true,
+  "Resolved_URL": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+  "Retrieval_Timestamp_UTC": "2026-09-27T17:25:20Z",
+  "SHA256": "efc001855c21e5d40e3ebca4b579fb357efcbe49a718391e03cd37e2691f2ec7"
+}

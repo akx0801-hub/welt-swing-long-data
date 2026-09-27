@@ -1,0 +1,10 @@
+{
+  "Exact_Label_Matches": "NOT_EVALUATED",
+  "Labels_Not_Used_To_Infer_Taxonomy": true,
+  "Missing_Official_Labels": "NOT_EVALUATED",
+  "Observed_Label_Count": 0,
+  "Observed_Labels_File": "asx_directory_industry_distinct_label_inventory_v0.81.csv",
+  "Official_Level_Label_Count": "NOT_AVAILABLE_IN_BOUNDED_ASX_HTML_EVIDENCE",
+  "Status": "SUPPORTING_ONLY_NOT_REQUIRED_FOR_IDENTITY",
+  "Unmatched_Observed_Labels": "NOT_EVALUATED"
+}

@@ -1,0 +1,17 @@
+{
+  "Classification_Level": "NOT_VERIFIED",
+  "Cohort": "AU_SP_ASX200",
+  "Current_Blocker": "ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "Field": "NOT_AVAILABLE",
+  "Field_Binding_Status": "NOT_VERIFIED",
+  "Gate_A": "PASS_INHERITED",
+  "Gate_B": "PASS_INHERITED",
+  "Gate_C": "BLOCKED",
+  "Gate_D": "NOT_EVALUATED",
+  "Gate_E": "NOT_EVALUATED",
+  "Gate_F": "NOT_EVALUATED",
+  "Gate_G": "NOT_EVALUATED",
+  "Gate_H": "NOT_EVALUATED",
+  "Historical_Blocker": "SOURCE_NATIVE_TAXONOMY_IDENTITY_NOT_VERIFIED",
+  "Taxonomy_Identity": "NOT_VERIFIED"
+}

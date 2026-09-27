@@ -1,0 +1,14 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "au_gate_c": "BLOCKED",
+  "au_source_native_taxonomy_identity_ready": false,
+  "blocker": "ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "jp_n225_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "next_gate": "NONE_WHILE_GATE_C_BLOCKED",
+  "selected_cohort": "AU_SP_ASX200",
+  "stage": "JP_N225_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_AU_SP_ASX200_GATE_C",
+  "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+  "version": "v0.81"
+}

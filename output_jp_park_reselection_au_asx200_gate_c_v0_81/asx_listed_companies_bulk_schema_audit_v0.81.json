@@ -1,0 +1,16 @@
+{
+  "Bulk_URL": "https://www.asx.com.au/content/asx/home/issuers/listed-company-services.html",
+  "Bytes": 147101,
+  "CSV_Parse_Status": "FAIL",
+  "Content_Type": "text/html;charset=utf-8",
+  "Discovery_From_Official_Directory_Page": true,
+  "Encoding": "utf-8-sig",
+  "HTTP_Status": 200,
+  "Header_Line_Index_Zero_Based": null,
+  "Raw_Source_Persisted": false,
+  "Resolved_URL": "https://www.asx.com.au/issuers/listed-company-services",
+  "Retrieval_Timestamp_UTC": "2026-09-27T17:25:22Z",
+  "Row_Count": 0,
+  "SHA256": "1f7abdea3aed024f8031eaa4dfd9ab31291257cd01b6129e5904c95805841417",
+  "Schema": []
+}

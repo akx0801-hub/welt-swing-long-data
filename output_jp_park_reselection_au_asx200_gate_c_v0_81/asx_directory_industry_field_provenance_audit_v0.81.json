@@ -1,0 +1,9 @@
+{
+  "Crosswalk_Used": "NO",
+  "Direct_Field_Provenance_Status": "NOT_VERIFIED",
+  "Directory_to_Bulk_Link": "PASS",
+  "Evidence": "Official ASX directory/bulk evidence does not itself bind the observed Industry-like field to a named taxonomy and exact formal level.",
+  "Raw_Field_Name": "NOT_AVAILABLE",
+  "Schema_Self_Identifies_Taxonomy_and_Level": "NO",
+  "Semantic_Inference_Used": "NO"
+}

@@ -1,0 +1,21 @@
+{
+  "AU_SOURCE_NATIVE_TAXONOMY_IDENTITY_READY": false,
+  "Blocker": "ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "Classification_Level": "NOT_VERIFIED",
+  "Cohort": "AU_SP_ASX200",
+  "Directory_Field": "NOT_AVAILABLE",
+  "Field_Binding_Status": "NOT_VERIFIED",
+  "Frozen_Rows": 63,
+  "Gate_C": "BLOCKED",
+  "Gate_D": "NOT_EVALUATED",
+  "Gate_E": "NOT_EVALUATED",
+  "Gate_F": "NOT_EVALUATED",
+  "Next_Gate": "NONE_WHILE_GATE_C_BLOCKED",
+  "No_Crosswalk": true,
+  "No_Mixed_Taxonomy": true,
+  "No_Semantic_Inference": true,
+  "Taxonomy_Identity": "NOT_VERIFIED",
+  "Taxonomy_Name": "NOT_VERIFIED",
+  "Taxonomy_Owner": "NOT_VERIFIED",
+  "Taxonomy_Version_Status": "NOT_VERIFIED"
+}

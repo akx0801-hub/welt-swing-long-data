@@ -1,0 +1,9 @@
+{
+  "ASX_Sector_Indices_GICS_Context": "PASS",
+  "Binding_Basis": "no direct official directory-field binding",
+  "Context_Is_Not_Used_As_Substitute_For_Field_Binding": true,
+  "Direct_GICS_Field_Binding": "NOT_VERIFIED",
+  "Directory_Field": "NOT_AVAILABLE",
+  "GICS_FIELD_BINDING": "NOT_VERIFIED",
+  "No_Silent_GICS_Assumption": true
+}

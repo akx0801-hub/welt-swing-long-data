@@ -1,0 +1,12 @@
+{
+  "Directory_General_Market_Data_Attribution": {
+    "LSEG_Data_Analytics": "OBSERVED",
+    "Morningstar": "OBSERVED"
+  },
+  "Exact_Industry_Field_Attribution_To_LSEG": "NOT_VERIFIED",
+  "Exact_Industry_Field_Attribution_To_Morningstar": "NOT_VERIFIED",
+  "Exact_Industry_Field_Attribution_To_Other_Provider": "NOT_VERIFIED",
+  "Provider_Documentation_Requests": 0,
+  "Reason": "General directory market-data credit is not treated as field-specific attribution. Provider evidence is unnecessary if the official ASX bulk schema directly identifies GICS Industry Group.",
+  "UPSTREAM_PROVIDER_FIELD_ATTRIBUTION": "NOT_VERIFIED"
+}

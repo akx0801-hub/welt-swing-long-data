@@ -1,0 +1,18 @@
+{
+  "Active_Cohorts": [
+    "AU_SP_ASX200",
+    "CN_CSI300",
+    "TW_TW50"
+  ],
+  "Calculation_Not_Hard_Coded": true,
+  "Current_Blocker": "SOURCE_NATIVE_TAXONOMY_IDENTITY_NOT_VERIFIED",
+  "Earliest_Unresolved_Gate": "C",
+  "Frozen_Rows": 63,
+  "Resolved_Gates_Before_Blocker": 2,
+  "Selected_Cohort": "AU_SP_ASX200",
+  "Selection_Rule": {
+    "primary": "greatest consecutive resolved A-H gates from A",
+    "tie_break_1": "smaller Frozen cohort row count",
+    "tie_break_2": "lexicographically ascending Cohort ID"
+  }
+}
