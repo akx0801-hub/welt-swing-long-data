@@ -1,0 +1,228 @@
+name: IN NIFTY50 NSE Classification Structure Repair v0.72
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/in_nifty50_nse_classification_structure_repair_v0.72.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  in-nifty50-gate-f-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.72 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.72 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="f6be8b4a3182728ba9976b58410f91e031146348"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/in_nifty50_nse_classification_structure_repair_spec_v0\.72\.json|scripts/in_nifty50_nse_classification_structure_repair_v0_72\.py|scripts/persist_in_nifty50_nse_classification_structure_repair_v0_72\.py|tests/test_in_nifty50_nse_classification_structure_repair_v0_72\.py|\.github/workflows/in_nifty50_nse_classification_structure_repair_v0\.72\.yml|config/in_nifty50_nse_classification_structure_repair_v0\.72\.json|docs/validation/IN_NIFTY50_NSE_Classification_Structure_Extraction_Level_Code_Binding_Gate_F_Repair_v0\.72\.md|output_in_nifty50_nse_classification_structure_repair_v0_72/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.71 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10928267335 --jq .digest)"
+          test "$DIGEST" = "sha256:9de669cf670be62f99f325ae7deedb2af8028d6222d6b725af8d71a94e3244ed"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71")
+          s=json.load(open(out/"summary_v0.71.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.71.json",encoding="utf-8"))
+          level=json.load(open(out/"in_classification_level_binding_v0.71.json",encoding="utf-8"))
+          tax=json.load(open(out/"nse_industry_taxonomy_contract_audit_v0.71.json",encoding="utf-8"))
+          src=json.load(open(out/"official_nifty50_classification_source_audit_v0.71.json",encoding="utf-8"))
+          cov=list(csv.DictReader(open(out/"in_exact_45_classification_coverage_v0.71.csv",encoding="utf-8")))
+          inv=list(csv.DictReader(open(out/"in_distinct_classification_inventory_v0.71.csv",encoding="utf-8")))
+          link70=list(csv.DictReader(open("output_in_nifty50_deterministic_security_identity_linkage_v0_70/in_exact_45_identity_linkage_audit_v0.70.csv",encoding="utf-8")))
+          assert s["verdict"]=="BLOCKED_IN_NIFTY50_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE"
+          assert s["in_exact_45_sector_classification_coverage_ready"] is False
+          assert (s["classified"],s["total"],s["not_verified"])==(0,45,45)
+          assert s["taxonomy"]=="NSE_INDICES_INDUSTRY_CLASSIFICATION"
+          assert s["bound_classification_level"]=="NOT_VERIFIED"
+          assert s["distinct_classifications"]==15 and s["source_native_code_coverage"]==0
+          assert s["blocker"]=="NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED"
+          assert c["workflow_run_id"]==36308429404 and c["artifact_id"]==10928267335
+          assert "sha256:"+c["artifact_digest"]=="sha256:9de669cf670be62f99f325ae7deedb2af8028d6222d6b725af8d71a94e3244ed"
+          assert src["Raw_SHA256"]=="9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28"
+          assert tax["Structure_Raw_SHA256"]=="8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b"
+          assert tax["Selected_Structure_URL"]=="https://www.niftyindices.com/docs/default-source/default-document-library/industry-classification/nse-indices_industry-classification-structure-2023-07.pdf?sfvrsn=c89dd39_1"
+          assert level["Exact_Unique_Industry_Code_Bindings"]==0
+          assert level["Level_Binding_Status"]=="NOT_VERIFIED"
+          bad_sentence="Every distinct non-empty current NIFTY Industry value for the Frozen-45 exact ISIN rows is exact-match bound to one unique Ind_Code in the official classification structure."
+          assert bad_sentence in level["Level_Binding_Evidence"]
+          assert len(cov)==45 and all(r["Current_NIFTY_ISIN_Match_Count"]=="1" and r["Source_Classification_Raw"] for r in cov)
+          assert len(inv)==15
+          assert len(link70)==45 and all(r["Gate_E_Status"]=="PROVABLY_LINKED" for r in link70)
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify v0.72 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/in_nifty50_nse_classification_structure_repair_spec_v0.72.json",encoding="utf-8"))
+          t=json.load(open("config/in_nifty50_nse_classification_structure_repair_v0.72.json",encoding="utf-8"))
+          assert s["required_start_head"]=="f6be8b4a3182728ba9976b58410f91e031146348"
+          assert s["scope_cohort"]=="IN_NIFTY50" and s["scope_gate"]=="GATE_F_REPAIR_ONLY"
+          assert s["taxonomy"]=="NSE_INDICES_INDUSTRY_CLASSIFICATION"
+          assert s["expected_v071_pdf_sha256"]=="8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b"
+          assert s["pdf_parser"]["package"]=="pypdf" and s["pdf_parser"]["required_version"]=="5.9.0"
+          assert len(s["expected_observed_labels"])==15
+          assert s["nifty_constituent_refetch_allowed"] is False
+          assert s["nse_equity_l_allowed"] is False
+          assert s["ocr_allowed"] is False
+          assert s["manual_transcription_allowed"] is False
+          assert s["pdsc_fallback_allowed"] is False
+          assert s["gate_h_allowed"] is False
+          assert s["canonical_materialization_allowed"] is False
+          assert s["sector_rs_allowed"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert t["required_start_head"]=="f6be8b4a3182728ba9976b58410f91e031146348"
+          assert t["scope_cohort"]=="IN_NIFTY50"
+          assert t["gate_h_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Prepare deterministic PDF parser
+        run: |
+          set -euo pipefail
+          if python3 -c 'import pypdf' >/dev/null 2>&1; then
+            echo "V072_PDF_PARSER_AVAILABLE_PREINSTALL=YES" >> "$GITHUB_ENV"
+          else
+            echo "V072_PDF_PARSER_AVAILABLE_PREINSTALL=NO" >> "$GITHUB_ENV"
+          fi
+          INSTALL_CMD='python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple pypdf==5.9.0'
+          echo "V072_PDF_DEPENDENCY_INSTALL_COMMAND=$INSTALL_CMD" >> "$GITHUB_ENV"
+          echo "V072_PDF_PACKAGE_SOURCE_CLASS=PYPI_PUBLIC_PACKAGE_INDEX" >> "$GITHUB_ENV"
+          $INSTALL_CMD
+          python3 - <<'PY'
+          import importlib.metadata
+          assert importlib.metadata.version("pypdf")=="5.9.0"
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/in_nifty50_nse_classification_structure_repair_v0_72.py             scripts/persist_in_nifty50_nse_classification_structure_repair_v0_72.py
+          python3 tests/test_in_nifty50_nse_classification_structure_repair_v0_72.py -v
+
+      - name: Run bounded Gate-F repair
+        run: |
+          set -euo pipefail
+          rm -rf output_in_nifty50_nse_classification_structure_repair_v0_72
+          python3 scripts/in_nifty50_nse_classification_structure_repair_v0_72.py             --repository-sha "$GITHUB_SHA"             --output-dir output_in_nifty50_nse_classification_structure_repair_v0_72
+
+      - name: Validate bounded result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_in_nifty50_nse_classification_structure_repair_v0_72")
+          s=json.load(open(out/"summary_preupload_v0.72.json",encoding="utf-8"))
+          env=json.load(open(out/"nse_pdf_extraction_environment_v0.72.json",encoding="utf-8"))
+          repro=json.load(open(out/"nse_pdf_extraction_reproducibility_audit_v0.72.json",encoding="utf-8"))
+          inc=json.load(open(out/"v071_predecessor_evidence_inconsistency_audit_v0.72.json",encoding="utf-8"))
+          level=json.load(open(out/"in_classification_level_binding_v0.72.json",encoding="utf-8"))
+          cov=list(csv.DictReader(open(out/"in_exact_45_classification_coverage_v0.72.csv",encoding="utf-8")))
+          bind=list(csv.DictReader(open(out/"in_source_native_code_binding_v0.72.csv",encoding="utf-8")))
+          inv=list(csv.DictReader(open(out/"in_distinct_classification_inventory_v0.72.csv",encoding="utf-8")))
+          match=list(csv.DictReader(open(out/"in_15_label_cross_level_match_audit_v0.72.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.72.csv",encoding="utf-8")))
+          prov=json.load(open(out/"provider_call_audit_v0.72.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.72.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.72.csv",encoding="utf-8")))
+          assert env["Installed_Version"]=="5.9.0"
+          assert inc["Authority_Treatment"]=="NON_AUTHORITATIVE_ERRONEOUS_NARRATIVE_TEXT"
+          assert inc["Historical_v071_Files_Rewritten"] is False
+          assert len(cov)==45 and len(bind)==15 and len(inv)==15 and len(match)==15
+          assert len(ext)==1
+          assert ext[0]["Request_Type"]=="NSE_INDICES_CLASSIFICATION_STRUCTURE_PDF"
+          assert ext[0]["Per_Security_Fanout"]=="NO"
+          assert all(v==0 for v in prov.values())
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert s["nifty_constituent_refetches"]==0
+          assert s["gate_h_promotions"]==0 and s["canonical_materialization_runs"]==0
+          assert s["canonical_ready_rows"]==37
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/IN_NIFTY50_sector_metadata_v1.csv").exists()
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          if s["in_exact_45_sector_classification_coverage_ready"]:
+              assert s["verdict"]=="PASS_IN_NIFTY50_GATE_F_REPAIR_EXACT_CLASSIFICATION_COVERAGE"
+              assert (s["classified"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(45,45,0,0,0,0)
+              assert s["bound_classification_level"]!="NOT_VERIFIED"
+              assert s["distinct_classifications"]==15 and s["source_native_code_coverage"]==45
+              assert repro["Deterministic_Extracted_Text"] is True and repro["Deterministic_Structural_Output"] is True
+              assert len(level["Complete_Set_Satisfying_Levels"])==1
+              assert all(r["Code_Binding_Status"]=="PASS" for r in bind)
+              assert all(r["Classification_Status"]=="PROVABLY_CLASSIFIED" for r in cov)
+              assert all(r["Unique_Code_Status"]=="PASS" for r in inv)
+              assert s["blocker"]==""
+              assert s["next_gate"]=="IN_NIFTY50 SOURCE ACCESS / PERSISTENCE GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_IN_NIFTY50_GATE_F_REPAIR"
+              assert s["blocker"]!=""
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          PY
+          BAD_WORKTREE="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_in_nifty50_nse_classification_structure_repair_v0_72/.*|docs/validation/IN_NIFTY50_NSE_Classification_Structure_Extraction_Level_Code_Binding_Gate_F_Repair_v0\.72\.md)$' || true)"
+          test -z "$BAD_WORKTREE"
+
+      - name: Upload bounded v0.72 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: in-nifty50-nse-classification-structure-repair-v0.72-${{ github.run_id }}
+          path: output_in_nifty50_nse_classification_structure_repair_v0_72/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_in_nifty50_nse_classification_structure_repair_v0_72.py             --output-dir output_in_nifty50_nse_classification_structure_repair_v0_72             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "in-nifty50-nse-classification-structure-repair-v0.72-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.72 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/IN_NIFTY50_NSE_Classification_Structure_Extraction_Level_Code_Binding_Gate_F_Repair_v0.72.md                   output_in_nifty50_nse_classification_structure_repair_v0_72/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/IN_NIFTY50_NSE_Classification_Structure_Extraction_Level_Code_Binding_Gate_F_Repair_v0\.72\.md|output_in_nifty50_nse_classification_structure_repair_v0_72/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist IN NIFTY50 Gate F repair v0.72"
+          git push origin HEAD:main
