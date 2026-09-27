@@ -1,0 +1,29 @@
+{
+  "Evidence_Status": "RECONSTRUCTED_FROM_PERSISTED_V082_EVIDENCE",
+  "Fresh_v083_Interactions": {
+    "Download_Control": {
+      "attributes": {
+        "class": "btn text-upper button-download pull-right-md btn-info",
+        "href": "javascript:void(0);"
+      },
+      "href": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory/file?access_token=83ff96335c2d45a094df02a206a39ff4",
+      "status": "CLICKED_ONCE",
+      "tag": "A",
+      "text": "All asx listed companies .csv"
+    },
+    "Evidence_Status": "FRESH_V083_OBSERVATION",
+    "Industry_Filter": {
+      "control_label": "Industries",
+      "id": "",
+      "name": "",
+      "selected_text": "Banks",
+      "selected_value": "Banks",
+      "status": "SELECT_CHANGED",
+      "tag": "SELECT"
+    }
+  },
+  "Historical_Interpretation": "NO_V082_INTERACTION_ROWS_PERSISTED",
+  "Persisted_v082_Rows": [],
+  "Source_File": "output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/au_dynamic_directory_interaction_audit_v0.82.csv",
+  "Source_SHA256": "0a43f7b94d7dcf53752e0112d255035f7489e708d32b94fb6344baf031885eae"
+}

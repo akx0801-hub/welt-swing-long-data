@@ -1,0 +1,30 @@
+{
+  "Evidence_Status": "RECONSTRUCTED_FROM_PERSISTED_V082_EVIDENCE",
+  "Exact_Industry_Field_Attribution_To_LSEG": "NOT_VERIFIED",
+  "Exact_Industry_Field_Attribution_To_Morningstar": "NOT_VERIFIED",
+  "Exact_Industry_Field_Attribution_To_Other": "NOT_VERIFIED",
+  "Fresh_v083_Assessment": {
+    "Evidence_Status": "FRESH_V083_OBSERVATION",
+    "Exact_Industry_Field_Attribution_To_LSEG": "NOT_VERIFIED",
+    "Exact_Industry_Field_Attribution_To_Morningstar": "NOT_VERIFIED",
+    "Exact_Industry_Field_Attribution_To_Other": "NOT_VERIFIED",
+    "Provider_Documentation_Queries": 0,
+    "Reason": "GENERAL_DIRECTORY_CREDITS_ARE_NOT_EXACT_FIELD_PROVENANCE"
+  },
+  "Source_File": "output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/asx_upstream_provider_attribution_audit_v0_82.json",
+  "Source_SHA256": "cf46f6ba9fa13e5090fa6d49bd671ba8bfc7c9d619d65b6191b04bc917ca5a5c",
+  "v082_Authority": {
+    "Exact_Field_Provider_Attribution": "NOT_VERIFIED",
+    "Generic_ASX_Directory_Context": {
+      "LSEG_Observed": true,
+      "Morningstar_Observed": true
+    },
+    "Generic_ASX_Reference_Context": {
+      "LSEG_Observed": false,
+      "Morningstar_Observed": false
+    },
+    "Generic_Credit_Is_Not_Field_Attribution": true,
+    "Provider_Security_Level_Queries": 0,
+    "Route_Host_Classification": "ASX_PAGE_INVOKED_EXTERNAL_PROVIDER"
+  }
+}

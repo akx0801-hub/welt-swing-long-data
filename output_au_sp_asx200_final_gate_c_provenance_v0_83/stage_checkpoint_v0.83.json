@@ -1,0 +1,16 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:2534f3e6be146e6bc46e36c1d39e90c82392a57408d3c684a44f7f8656fd983d",
+  "artifact_id": 10940184410,
+  "au_source_native_taxonomy_identity_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "AU_SP_ASX200 SECTOR FIELD / SOURCE-NATIVE CODE FEASIBILITY GATE D",
+  "stage": "AU_SP_ASX200_V082_EVIDENCE_COMPLETENESS_REPAIR_FINAL_FIELD_PROVENANCE_TAXONOMY_IDENTITY_GATE_C_CLOSURE",
+  "v082_evidence_completeness_repaired": true,
+  "verdict": "PASS_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+  "version": "v0.83",
+  "workflow_head_sha": "7572c8dad204ec9d97ca32f960191161adbcf77f",
+  "workflow_run_id": 36345799341
+}

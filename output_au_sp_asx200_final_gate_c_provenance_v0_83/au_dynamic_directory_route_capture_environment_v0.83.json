@@ -1,0 +1,31 @@
+{
+  "Evidence_Status": "RECONSTRUCTED_FROM_PERSISTED_V082_EVIDENCE",
+  "Source_File": "output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/au_dynamic_directory_route_capture_environment_v0.82.json",
+  "Source_SHA256": "20142bc64b25d3dc05151151d184de0890cdc6eec8a5fc7397809469ad18729b",
+  "v082_Capture_Environment": {
+    "Authentication": "NONE",
+    "Authentication_Bypass": "NO",
+    "Browser_Name": "Chrome/Chromium",
+    "Browser_Version": "Google Chrome 153.0.8010.52",
+    "CAPTCHA_Bypass": "NO",
+    "Capture_Method": "CHROMIUM_CDP_NETWORK_RUNTIME",
+    "Cookies_Preexisting": "NO",
+    "External_Scraping_Service": "NO",
+    "Fresh_Profile": "YES_EACH_RUN",
+    "Proxy": "NONE",
+    "Proxy_Rotation": "NO",
+    "Required_Fresh_Runs": 2,
+    "User_Agent_Target": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36 WeltSwingLongDev-v0.82"
+  },
+  "v083_Fresh_Capture_Environment": {
+    "Authentication": "NONE",
+    "Browser_Name": "Chrome/Chromium",
+    "Browser_Version": "Google Chrome 153.0.8010.52",
+    "Capture_Method": "CHROMIUM_CDP_NETWORK_RUNTIME",
+    "Cookies_Preexisting": "NO",
+    "Evidence_Status": "FRESH_V083_OBSERVATION",
+    "Fresh_Profile": "YES",
+    "Proxy": "NONE",
+    "User_Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36"
+  }
+}

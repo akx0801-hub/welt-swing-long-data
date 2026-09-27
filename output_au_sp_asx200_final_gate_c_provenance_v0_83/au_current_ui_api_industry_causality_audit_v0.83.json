@@ -1,0 +1,22 @@
+{
+  "API_Query_Parameter": "industries[]",
+  "API_Query_Value": "Banks",
+  "API_Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&industries[]=Banks&includeFilterOptions=false&recentListingsOnly=false",
+  "All_Returned_Industry_Values": [],
+  "Causal_Binding_Status": "NOT_VERIFIED",
+  "HTTP_Status": 200,
+  "Interaction": {
+    "control_label": "Industries",
+    "id": "",
+    "name": "",
+    "selected_text": "Banks",
+    "selected_value": "Banks",
+    "status": "SELECT_CHANGED",
+    "tag": "SELECT"
+  },
+  "Response_SHA256": "",
+  "Returned_Record_Count": 0,
+  "UI_Control_Label": "Industries",
+  "UI_Selected_Raw_Value": "Banks",
+  "UI_Selected_Value": "Banks"
+}

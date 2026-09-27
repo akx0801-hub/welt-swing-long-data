@@ -1,0 +1,6 @@
+Taxonomy_Candidate,Evidence,Current_Field_Attribution,Formal_Level_Status,Version_Status,Candidate_Status
+GICS,current ASX GICS context + historical ASX company-search semantics + current runtime tests,PASS,PASS_INDUSTRY_GROUP,CURRENT_MAINTAINED_NO_STATIC_VERSION,VERIFIED
+LSEG taxonomy,general ASX directory credit only,NOT_VERIFIED,NOT_VERIFIED,NOT_VERIFIED,NOT_VERIFIED
+Morningstar taxonomy,general ASX directory credit only,NOT_VERIFIED,NOT_VERIFIED,NOT_VERIFIED,NOT_VERIFIED
+ASX-native taxonomy,no exact current native taxonomy marker observed,NOT_VERIFIED,NOT_VERIFIED,NOT_VERIFIED,NOT_VERIFIED
+UNKNOWN,fail-closed residual candidate,NOT_VERIFIED,NOT_VERIFIED,NOT_VERIFIED,ACTIVE_IF_GATE_C_BLOCKED

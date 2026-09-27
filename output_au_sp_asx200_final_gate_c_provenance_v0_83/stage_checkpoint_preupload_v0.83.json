@@ -1,0 +1,12 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "au_source_native_taxonomy_identity_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "AU_SP_ASX200 SECTOR FIELD / SOURCE-NATIVE CODE FEASIBILITY GATE D",
+  "stage": "AU_SP_ASX200_V082_EVIDENCE_COMPLETENESS_REPAIR_FINAL_FIELD_PROVENANCE_TAXONOMY_IDENTITY_GATE_C_CLOSURE",
+  "v082_evidence_completeness_repaired": true,
+  "verdict": "PASS_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+  "version": "v0.83"
+}

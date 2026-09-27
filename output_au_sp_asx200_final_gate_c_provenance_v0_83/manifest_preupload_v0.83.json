@@ -1,0 +1,130 @@
+{
+  "au_gate_d_runs": 0,
+  "au_gate_e_runs": 0,
+  "au_gate_f_runs": 0,
+  "au_parking_executions": 0,
+  "au_source_native_taxonomy_identity_ready": true,
+  "blocker": "",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "files": {
+    "asx_gics_field_binding_audit_v0.83.json": {
+      "bytes": 3219,
+      "sha256": "cf16aa507feeb23cab2ea77f8a1d552a037eb9272a6294bf8be3b781300dacc9"
+    },
+    "asx_historical_current_semantic_continuity_audit_v0.83.json": {
+      "bytes": 489,
+      "sha256": "3b58f43bedea6addc0c38e519b680e3e433e08ba91790b46fcf32aec1c70c4bd"
+    },
+    "asx_official_company_search_semantic_source_inventory_v0.83.csv": {
+      "bytes": 2243,
+      "sha256": "d10fd1cc5937ebe8562c83b0fa7ca49a8189896ca3fc1e82513a156ab610867c"
+    },
+    "asx_upstream_provider_attribution_audit_v0.83.json": {
+      "bytes": 1346,
+      "sha256": "30dd033c7679d096914c88b7a207d62a8c2c523baa80cb633a34828bc219aaca"
+    },
+    "au_api_filter_options_metadata_audit_v0.83.json": {
+      "bytes": 4691,
+      "sha256": "4435449950233594ca11499205ccb7470fa02fd827867463c12c34d5570784aa"
+    },
+    "au_classification_sentinel_value_audit_v0.83.csv": {
+      "bytes": 378,
+      "sha256": "d567fe70039919366973b6b596d741468f3b8bdf713e4303e65df4f518533b4e"
+    },
+    "au_current_appclass_manifest_semantic_audit_v0.83.csv": {
+      "bytes": 19840,
+      "sha256": "e8921bd9972862f5494af525c3fdc7d17d5a7e87f6e9a0480b2548a357c277e8"
+    },
+    "au_current_directory_download_control_audit_v0.83.json": {
+      "bytes": 893,
+      "sha256": "7a79cd42eaf41013086eaf3ce28ede47baaafb97d40bd1b9be932b85e5113d70"
+    },
+    "au_current_directory_download_schema_audit_v0.83.json": {
+      "bytes": 320,
+      "sha256": "13e2db998411ecc237cc4c44bddf3e2cd42f5526f666eb0fda2206e343584e75"
+    },
+    "au_current_ui_api_industry_causality_audit_v0.83.json": {
+      "bytes": 757,
+      "sha256": "87679bef896b3bef5594894d4fb2ee0060310304b8603d45029e3ef6cb5df1fd"
+    },
+    "au_dynamic_directory_interaction_audit_v0.83.json": {
+      "bytes": 1094,
+      "sha256": "7f0d6576def3e6db4b16439bae97d5b5c90f1e44f0bc83cc60ea53ea319da902"
+    },
+    "au_dynamic_directory_rendered_dom_audit_v0.83.json": {
+      "bytes": 3448,
+      "sha256": "7f54a3a8c8fe5646768cb15f97d6d723b666a2e59b0d8d1cdcdb25c3b724854b"
+    },
+    "au_dynamic_directory_route_capture_environment_v0.83.json": {
+      "bytes": 1364,
+      "sha256": "9670ef43a1ddb931042c6b589c6e8ff3691fae2334bd1a4dd3de490831a7b764"
+    },
+    "au_source_native_taxonomy_identity_decision_v0.83.json": {
+      "bytes": 1431,
+      "sha256": "a77ddcbe84726fddea51e8a0c8597984e56f3fe4e31cd8b27594ebf74254b51a"
+    },
+    "au_taxonomy_candidate_inventory_v0.83.csv": {
+      "bytes": 704,
+      "sha256": "6f399f64025b7baba3dfe2c2a9b59175bccab5c2690759d14e6481d9d2f96e62"
+    },
+    "au_taxonomy_formal_level_audit_v0.83.json": {
+      "bytes": 247,
+      "sha256": "a39bb2b28f15a72ef941320d30e1b2c91de221724892445a1558adb1137a2caa"
+    },
+    "au_taxonomy_owner_audit_v0.83.json": {
+      "bytes": 233,
+      "sha256": "c6b915c46811ca28354d943f5b739e43dc6a8bca2c698b194358687b726e1e3c"
+    },
+    "au_taxonomy_version_contract_v0.83.json": {
+      "bytes": 633,
+      "sha256": "06ec7e8058bf6552d34e97671da87fe68f36c561c29392d33cf2274a92adc180"
+    },
+    "external_request_ledger_v0.83.csv": {
+      "bytes": 5089,
+      "sha256": "ce7f985873c3d02365a675ddea9786fb18f64b002066d0b1ea06397ca6471073"
+    },
+    "immutability_audit_v0.83.json": {
+      "bytes": 1588,
+      "sha256": "c8ba0afa5b6c03edb6c9cfbb108bafca0f6d75adcaed0a59f0960e6dcde80fc4"
+    },
+    "provider_call_audit_v0.83.json": {
+      "bytes": 629,
+      "sha256": "b7bf181759abf11cd58c6078b4f82bcbc92f47470d0b061121e364caf2f86a31"
+    },
+    "stage_checkpoint_preupload_v0.83.json": {
+      "bytes": 517,
+      "sha256": "6833fdcead83d3d7911f280be52bbf7d64c12fbdc4a19d098d8e837cf64019a8"
+    },
+    "summary_preupload_v0.83.json": {
+      "bytes": 1561,
+      "sha256": "8497e6d42277a696589b5e5b67eda25d80080d4347acf64d2e18820b6ef65332"
+    },
+    "test_results_v0.83.csv": {
+      "bytes": 1063,
+      "sha256": "669f55a495987cafd89275e0e56963ce2aeeeeee62047c2a90f79554fa775148"
+    },
+    "v081_blocker_authority_v0.83.json": {
+      "bytes": 1028,
+      "sha256": "deb657ced13a7991e997109ecbe4e04b5d4e5bfa8d06d50bb9dd46b520db3b74"
+    },
+    "v082_required_evidence_completeness_audit_v0.83.csv": {
+      "bytes": 1844,
+      "sha256": "0e7d007b928411152187a07d4ed4fa0b92319394e5e616b49b08d509963c520f"
+    }
+  },
+  "next_cohort_executions": 0,
+  "next_gate": "AU_SP_ASX200 SECTOR FIELD / SOURCE-NATIVE CODE FEASIBILITY GATE D",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "repository_sha": "7572c8dad204ec9d97ca32f960191161adbcf77f",
+  "required_start_head": "5629089262fa1915c0f83e8281fe4f13509f2a08",
+  "reselection_executions": 0,
+  "sector_rs_runs": 0,
+  "stage": "AU_SP_ASX200_V082_EVIDENCE_COMPLETENESS_REPAIR_FINAL_FIELD_PROVENANCE_TAXONOMY_IDENTITY_GATE_C_CLOSURE",
+  "v082_evidence_completeness_repaired": true,
+  "verdict": "PASS_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+  "version": "v0.83"
+}

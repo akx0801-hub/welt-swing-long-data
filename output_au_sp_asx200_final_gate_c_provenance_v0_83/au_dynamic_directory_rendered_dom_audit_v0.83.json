@@ -1,0 +1,72 @@
+{
+  "Evidence_Status": "RECONSTRUCTED_FROM_PERSISTED_V082_EVIDENCE",
+  "Fresh_v083_Current_DOM": {
+    "Evidence_Status": "FRESH_V083_OBSERVATION",
+    "Rows": [
+      {
+        "Accessible_Name": "Industries",
+        "Attributes": "{\"aria-label\": \"Industries\"}",
+        "Backing_Component": "com_asx_company_directory f2-app-container",
+        "Element": "SELECT",
+        "Observed_Status": "OBSERVED",
+        "Visible_Label": "Automobiles & Components Banks Capital Goods Class Pend Commercial & Professional Services Consumer Discretionary Distribution & Retail Consumer Durables & Apparel Consumer Services Consumer Staples Distribution & Retail Energy Equity Real Estate Investment Trusts (REITs) Financial Services Food, Beverage & Tobacco Health Care Equipment & Services Household & Personal Products Insurance Materials Media & Entertainment Not Applic Pharmaceuticals, Biotechnology & Life Sciences Real Estate Management & Development Semiconductors & Semiconductor Equipment Software & Services Technology Hardware & Equipment Telecommunication Services Transportation Utilities"
+      },
+      {
+        "Accessible_Name": "",
+        "Attributes": "{\"value\": \"Banks\"}",
+        "Backing_Component": "com_asx_company_directory f2-app-container",
+        "Element": "OPTION",
+        "Observed_Status": "OBSERVED",
+        "Visible_Label": "Banks"
+      },
+      {
+        "Accessible_Name": "",
+        "Attributes": "{\"data-value\": \"Banks\", \"href\": \"javascript: void(0);\", \"id\": \"mkc8c4889d1\", \"role\": \"option\"}",
+        "Backing_Component": "com_asx_company_directory f2-app-container",
+        "Element": "A",
+        "Observed_Status": "OBSERVED",
+        "Visible_Label": "Banks"
+      },
+      {
+        "Accessible_Name": "All ASX listed companies (CSV download)",
+        "Attributes": "{\"aria-label\": \"All ASX listed companies (CSV download)\", \"href\": \"javascript:void(0);\"}",
+        "Backing_Component": "com_asx_company_directory f2-app-container",
+        "Element": "A",
+        "Observed_Status": "OBSERVED",
+        "Visible_Label": "All asx listed companies .csv"
+      },
+      {
+        "Accessible_Name": "",
+        "Attributes": "{\"href\": \"javascript:void(0);\", \"role\": \"button\"}",
+        "Backing_Component": "com_asx_company_directory f2-app-container",
+        "Element": "A",
+        "Observed_Status": "OBSERVED",
+        "Visible_Label": "Industry"
+      }
+    ]
+  },
+  "Persisted_v082_Rows": [
+    {
+      "Data_Attributes": "{\"href\": \"javascript:void(0);\"}",
+      "Discovery_Status": "RENDERED_MATCH",
+      "Element_Type": "A",
+      "Event_Target": "btn text-upper button-download pull-right-md btn-info",
+      "Href_or_Action": "javascript:void(0);",
+      "Phase": "PASSIVE",
+      "Rendered_Text": "All asx listed companies .csv",
+      "Run": "1"
+    },
+    {
+      "Data_Attributes": "{\"href\": \"javascript:void(0);\"}",
+      "Discovery_Status": "RENDERED_MATCH",
+      "Element_Type": "A",
+      "Event_Target": "btn text-upper button-download pull-right-md btn-info",
+      "Href_or_Action": "javascript:void(0);",
+      "Phase": "PASSIVE",
+      "Rendered_Text": "All asx listed companies .csv",
+      "Run": "2"
+    }
+  ],
+  "Source_File": "output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/au_dynamic_directory_rendered_dom_audit_v0.82.csv",
+  "Source_SHA256": "411ac9e9a697ae1fb21a536a9af50b98883b8c5eceb7d992985b4d281eec7129"
+}

@@ -1,0 +1,164 @@
+{
+  "Evidence_Status": "FRESH_V083_OBSERVATION",
+  "Metadata": {
+    "data": {
+      "count": 1830,
+      "filterOptions": [
+        {
+          "input": "industries",
+          "options": [
+            "Automobiles & Components",
+            "Banks",
+            "Capital Goods",
+            "Class Pend",
+            "Commercial & Professional Services",
+            "Consumer Discretionary Distribution & Retail",
+            "Consumer Durables & Apparel",
+            "Consumer Services",
+            "Consumer Staples Distribution & Retail",
+            "Energy",
+            "Equity Real Estate Investment Trusts (REITs)",
+            "Financial Services",
+            "Food, Beverage & Tobacco",
+            "Health Care Equipment & Services",
+            "Household & Personal Products",
+            "Insurance",
+            "Materials",
+            "Media & Entertainment",
+            "Not Applic",
+            "Pharmaceuticals, Biotechnology & Life Sciences",
+            "Real Estate Management & Development",
+            "Semiconductors & Semiconductor Equipment",
+            "Software & Services",
+            "Technology Hardware & Equipment",
+            "Telecommunication Services",
+            "Transportation",
+            "Utilities"
+          ]
+        }
+      ],
+      "items": {
+        "ROW_ARRAY_OMITTED": true,
+        "Row_Count": 25
+      }
+    }
+  },
+  "Parse_Status": "PASS",
+  "Relevant_Markers": [
+    {
+      "Path": "data.filterOptions[0].input",
+      "Value": "industries"
+    },
+    {
+      "Path": "data.filterOptions[0].options[0]",
+      "Value": "Automobiles & Components"
+    },
+    {
+      "Path": "data.filterOptions[0].options[1]",
+      "Value": "Banks"
+    },
+    {
+      "Path": "data.filterOptions[0].options[2]",
+      "Value": "Capital Goods"
+    },
+    {
+      "Path": "data.filterOptions[0].options[3]",
+      "Value": "Class Pend"
+    },
+    {
+      "Path": "data.filterOptions[0].options[4]",
+      "Value": "Commercial & Professional Services"
+    },
+    {
+      "Path": "data.filterOptions[0].options[5]",
+      "Value": "Consumer Discretionary Distribution & Retail"
+    },
+    {
+      "Path": "data.filterOptions[0].options[6]",
+      "Value": "Consumer Durables & Apparel"
+    },
+    {
+      "Path": "data.filterOptions[0].options[7]",
+      "Value": "Consumer Services"
+    },
+    {
+      "Path": "data.filterOptions[0].options[8]",
+      "Value": "Consumer Staples Distribution & Retail"
+    },
+    {
+      "Path": "data.filterOptions[0].options[9]",
+      "Value": "Energy"
+    },
+    {
+      "Path": "data.filterOptions[0].options[10]",
+      "Value": "Equity Real Estate Investment Trusts (REITs)"
+    },
+    {
+      "Path": "data.filterOptions[0].options[11]",
+      "Value": "Financial Services"
+    },
+    {
+      "Path": "data.filterOptions[0].options[12]",
+      "Value": "Food, Beverage & Tobacco"
+    },
+    {
+      "Path": "data.filterOptions[0].options[13]",
+      "Value": "Health Care Equipment & Services"
+    },
+    {
+      "Path": "data.filterOptions[0].options[14]",
+      "Value": "Household & Personal Products"
+    },
+    {
+      "Path": "data.filterOptions[0].options[15]",
+      "Value": "Insurance"
+    },
+    {
+      "Path": "data.filterOptions[0].options[16]",
+      "Value": "Materials"
+    },
+    {
+      "Path": "data.filterOptions[0].options[17]",
+      "Value": "Media & Entertainment"
+    },
+    {
+      "Path": "data.filterOptions[0].options[18]",
+      "Value": "Not Applic"
+    },
+    {
+      "Path": "data.filterOptions[0].options[19]",
+      "Value": "Pharmaceuticals, Biotechnology & Life Sciences"
+    },
+    {
+      "Path": "data.filterOptions[0].options[20]",
+      "Value": "Real Estate Management & Development"
+    },
+    {
+      "Path": "data.filterOptions[0].options[21]",
+      "Value": "Semiconductors & Semiconductor Equipment"
+    },
+    {
+      "Path": "data.filterOptions[0].options[22]",
+      "Value": "Software & Services"
+    },
+    {
+      "Path": "data.filterOptions[0].options[23]",
+      "Value": "Technology Hardware & Equipment"
+    },
+    {
+      "Path": "data.filterOptions[0].options[24]",
+      "Value": "Telecommunication Services"
+    },
+    {
+      "Path": "data.filterOptions[0].options[25]",
+      "Value": "Transportation"
+    },
+    {
+      "Path": "data.filterOptions[0].options[26]",
+      "Value": "Utilities"
+    }
+  ],
+  "Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
+  "Response_SHA256": "338857e2baae2bcaae4cc456b7288020bc63449b1f95f9180bc406ba68afae90",
+  "Taxonomy_Marker_Status": "NOT_VERIFIED"
+}

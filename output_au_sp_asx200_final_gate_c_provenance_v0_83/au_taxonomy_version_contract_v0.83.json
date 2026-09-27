@@ -1,0 +1,11 @@
+{
+  "Classification_Level_Contract": "INDUSTRY_GROUP",
+  "Current_Runtime_Schema_Authority_SHA256": "434b44ed091497e64b5c024d3be1473200e8ecf7635f1b852f6cfbb3f6960d30",
+  "Static_Version_Number_Asserted": false,
+  "Taxonomy_Authority_Response_SHA256": "08b16e6a2de3ed68e7b7766f2683b1512c48626c5319e1d091323e20eb8b6c4b",
+  "Taxonomy_Authority_Retrieval_Timestamp_UTC": "2026-09-27T19:50:30Z",
+  "Taxonomy_Authority_Source": "https://www.asx.com.au/markets/trade-our-cash-market/overview/indices",
+  "Taxonomy_Identity": "GICS",
+  "Taxonomy_Version_Status": "CURRENT_MAINTAINED_NO_STATIC_VERSION",
+  "Version_Contract_Status": "PASS"
+}

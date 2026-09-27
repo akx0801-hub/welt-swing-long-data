@@ -1,0 +1,21 @@
+{
+  "Authority": {
+    "AU_Frozen_Rows": 63,
+    "AU_SOURCE_NATIVE_TAXONOMY_IDENTITY_READY": "NO",
+    "Artifact": 10937766315,
+    "Artifact_Digest": "sha256:0c63ab9a508b7de35da35761d9e3d48f8285940c6a9193ca63f2a6777fe885e0",
+    "Blocker": "ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE",
+    "Directory_Bulk_Route": "FAIL",
+    "Directory_Industry_Field": "NOT_AVAILABLE",
+    "Directory_Page_HTTP": "200 / reproducible",
+    "Final_Commit": "c7fed3a3e4463229f17cb515d4abac5860cfc809",
+    "Interpretation": "STATIC_DISCOVERY_FAILED_ONLY; DOES_NOT_PROVE_NO_RUNTIME_DIRECTORY_DATASET",
+    "Taxonomy_Identity": "NOT_VERIFIED",
+    "Tests": "26/26 PASS",
+    "Verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+    "Workflow": 36337443965
+  },
+  "Evidence_Status": "RECONSTRUCTED_FROM_PERSISTED_V082_EVIDENCE",
+  "Source_File": "output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/v081_blocker_authority_v0.82.json",
+  "Source_SHA256": "225f5b920eaa035259eff93efd934046875a160c983b7e40c50f18cefff5a085"
+}

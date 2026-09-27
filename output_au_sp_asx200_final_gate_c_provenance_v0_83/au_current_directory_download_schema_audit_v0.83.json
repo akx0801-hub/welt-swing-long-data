@@ -1,0 +1,14 @@
+{
+  "Classification_Header": "GICs industry group",
+  "Download_Status": "PASS",
+  "Evidence_Status": "FRESH_V083_OBSERVATION",
+  "Explicit_GICS_Industry_Group_Header": "YES",
+  "Record_Count": 1832,
+  "Schema": [
+    "ASX code",
+    "Company name",
+    "GICs industry group",
+    "Listing date",
+    "Market Cap"
+  ]
+}

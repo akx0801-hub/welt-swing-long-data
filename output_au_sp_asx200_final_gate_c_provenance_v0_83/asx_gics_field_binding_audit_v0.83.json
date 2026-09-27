@@ -1,0 +1,35 @@
+{
+  "Current_API_Filter_Metadata_Binding": "NOT_VERIFIED",
+  "Current_ASX_GICS_Bounded_Markers": [
+    {
+      "Needle": "Global Industry Classification Standard",
+      "Offset": 8147,
+      "Snippet": "s In partnership with S&P Dow Jones Indices, ASX provides a range of indices and related products, enabling investors to gain exposure to a region, market sector, asset class or strategy. Sector indices Jointly developed by S&P Dow Jones Indices and MSCI, the Global Industry Classification Standard (GICS®) sets out 11 standardised industry definitions used by share markets around the world. The ASX adopted GICS in 2002, allowing investors to easily analyse and compare the Australian market and its global peers. As well as the 11 GICS sectors, the ASX an"
+    },
+    {
+      "Needle": "GICS",
+      "Offset": 8188,
+      "Snippet": "es, ASX provides a range of indices and related products, enabling investors to gain exposure to a region, market sector, asset class or strategy. Sector indices Jointly developed by S&P Dow Jones Indices and MSCI, the Global Industry Classification Standard (GICS®) sets out 11 standardised industry definitions used by share markets around the world. The ASX adopted GICS in 2002, allowing investors to easily analyse and compare the Australian market and its global peers. As well as the 11 GICS sectors, the ASX and S&P"
+    },
+    {
+      "Needle": "MSCI",
+      "Offset": 8137,
+      "Snippet": "als Indices In partnership with S&P Dow Jones Indices, ASX provides a range of indices and related products, enabling investors to gain exposure to a region, market sector, asset class or strategy. Sector indices Jointly developed by S&P Dow Jones Indices and MSCI, the Global Industry Classification Standard (GICS®) sets out 11 standardised industry definitions used by share markets around the world. The ASX adopted GICS in 2002, allowing investors to easily analyse and compare the Australian market and its global peer"
+    },
+    {
+      "Needle": "S&P Dow Jones",
+      "Offset": 7909,
+      "Snippet": "een sent to {{verificationEmail}}. Please check your inbox. WELCOME Sign up at ASX An account with your email already exists. You might already have an ASX account with another platform. Please log in with your existing credentials Indices In partnership with S&P Dow Jones Indices, ASX provides a range of indices and related products, enabling investors to gain exposure to a region, market sector, asset class or strategy. Sector indices Jointly developed by S&P Dow Jones Indices and MSCI, the Global Industry Classification Stan"
+    }
+  ],
+  "Current_ASX_GICS_URL": "https://www.asx.com.au/markets/trade-our-cash-market/overview/indices",
+  "Current_Appclass_Manifest_Binding": "NOT_VERIFIED",
+  "Current_Download_Header_Binding": "PASS",
+  "DIRECTORY_FIELD_BINDING_FROM_INDEX_PAGE": "NO",
+  "GICS_FIELD_BINDING": "PASS_CURRENT_DIRECT_EVIDENCE",
+  "GICS_TAXONOMY_IDENTITY_CONTEXT": "PASS",
+  "Historical_ASX_Company_Search_GICS_Semantics": "PASS_SUPPORTING_ONLY",
+  "Response_SHA256": "08b16e6a2de3ed68e7b7766f2683b1512c48626c5319e1d091323e20eb8b6c4b",
+  "Retrieval_Timestamp_UTC": "2026-09-27T19:50:30Z",
+  "UI_API_Industry_Causality": "NOT_VERIFIED"
+}

@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:2534f3e6be146e6bc46e36c1d39e90c82392a57408d3c684a44f7f8656fd983d",
+  "artifact_id": 10940184410,
+  "artifact_name": "au-asx200-final-gate-c-provenance-v0.83-36345799341",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "7572c8dad204ec9d97ca32f960191161adbcf77f",
+  "workflow_run_id": 36345799341
+}

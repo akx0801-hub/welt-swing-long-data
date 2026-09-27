@@ -1,0 +1,20 @@
+{
+  "Bytes": 134845,
+  "Content_Type": "text/csv",
+  "Control": {
+    "attributes": {
+      "class": "btn text-upper button-download pull-right-md btn-info",
+      "href": "javascript:void(0);"
+    },
+    "href": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory/file?access_token=83ff96335c2d45a094df02a206a39ff4",
+    "status": "CLICKED_ONCE",
+    "tag": "A",
+    "text": "All asx listed companies .csv"
+  },
+  "Control_Status": "CLICKED_ONCE",
+  "Download_Status": "PASS",
+  "Download_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory/file?access_token=83ff96335c2d45a094df02a206a39ff4",
+  "Evidence_Status": "FRESH_V083_OBSERVATION",
+  "Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory/file?access_token=83ff96335c2d45a094df02a206a39ff4",
+  "SHA256": "ce74721f4e4328ee0a5c7b14746fa1b267291a1dfc7a19f9bc6dcc1b916d0b08"
+}
