@@ -1,0 +1,21 @@
+{
+  "version": "v0.75",
+  "stage": "IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "required_start_head": "b3c0110e1c4f0441447c9ad90515daeb36ac41ff",
+  "scope_cohort": "IN_NIFTY50",
+  "scope_gate": "H_ACCESS_PERSISTENCE_ONLY",
+  "policy_first_fail_closed": true,
+  "core_source_refetch_if_explicit_policy_restriction_found": false,
+  "gate_f_rerun_allowed": false,
+  "canonical_materialization_allowed": false,
+  "registry_update_allowed": false,
+  "other_cohort_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "pdsc_allowed": false,
+  "authentication_bypass_allowed": false,
+  "captcha_bypass_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
