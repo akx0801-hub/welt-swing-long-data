@@ -1,0 +1,269 @@
+name: AU SP ASX200 Dynamic Directory Gate C v0.82
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/au_sp_asx200_dynamic_directory_route_gate_c_v0.82.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  au-asx200-dynamic-gate-c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout bounded v0.82 stage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="c7fed3a3e4463229f17cb515d4abac5860cfc809"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/au_sp_asx200_dynamic_directory_route_gate_c_spec_v0\.82\.json|scripts/au_sp_asx200_dynamic_directory_route_gate_c_v0_82\.py|scripts/persist_au_sp_asx200_dynamic_directory_route_gate_c_v0_82\.py|tests/test_au_sp_asx200_dynamic_directory_route_gate_c_v0_82\.py|\.github/workflows/au_sp_asx200_dynamic_directory_route_gate_c_v0\.82\.yml|config/au_sp_asx200_dynamic_directory_route_gate_c_v0\.82\.json|docs/validation/AU_SP_ASX200_Dynamic_Directory_Data_Route_Gate_C_Completion_v0\.82\.md|output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.81 predecessor and artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10937766315 --jq .digest)"
+          test "$DIGEST" = "sha256:0c63ab9a508b7de35da35761d9e3d48f8285940c6a9193ca63f2a6777fe885e0"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_jp_park_reselection_au_asx200_gate_c_v0_81")
+          s=json.load(open(out/"summary_v0.81.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.81.json",encoding="utf-8"))
+          m=json.load(open(out/"manifest_v0.81.json",encoding="utf-8"))
+          d=json.load(open(out/"au_source_native_taxonomy_identity_decision_v0.81.json",encoding="utf-8"))
+          assert s["verdict"]=="BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C"
+          assert s["au_source_native_taxonomy_identity_ready"] is False
+          assert s["directory_bulk_route"]=="FAIL"
+          assert s["directory_industry_field"]=="NOT_AVAILABLE"
+          assert s["taxonomy_identity"]=="NOT_VERIFIED"
+          assert s["blocker"]=="ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE"
+          assert s["tests"]=={"failed":0,"passed":26,"total":26}
+          assert c["workflow_run_id"]==36337443965
+          assert c["artifact_id"]==10937766315
+          assert c["artifact_digest"]=="sha256:0c63ab9a508b7de35da35761d9e3d48f8285940c6a9193ca63f2a6777fe885e0"
+          assert m["workflow_run_id"]==36337443965 and m["artifact_id"]==10937766315
+          assert d["Frozen_Rows"]==63
+          assert d["Gate_D"]=="NOT_EVALUATED" and d["Gate_E"]=="NOT_EVALUATED" and d["Gate_F"]=="NOT_EVALUATED"
+          park=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          by={r["Cohort"]:r for r in park}
+          assert by["IN_NIFTY50"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert by["JP_N225"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert by["US_SP400"]["Execution_State"]=="PARKED_SOURCE_ACCESS"
+          assert by["US_SP500"]["Execution_State"]=="PARKED_SHARED_SOURCE_PREREQUISITE"
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd"
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify v0.82 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/au_sp_asx200_dynamic_directory_route_gate_c_spec_v0.82.json",encoding="utf-8"))
+          t=json.load(open("config/au_sp_asx200_dynamic_directory_route_gate_c_v0.82.json",encoding="utf-8"))
+          assert s["required_start_head"]=="c7fed3a3e4463229f17cb515d4abac5860cfc809"
+          assert s["scope"]["cohort"]=="AU_SP_ASX200"
+          assert s["scope"]["dynamic_directory_route_repair"] is True
+          assert s["scope"]["gate_c_completion_if_route_ready"] is True
+          assert s["scope"]["au_gate_d_allowed"] is False
+          assert s["scope"]["au_gate_e_allowed"] is False
+          assert s["scope"]["au_gate_f_allowed"] is False
+          assert s["scope"]["canonical_materialization_allowed"] is False
+          assert s["scope"]["park_reselection_execution_allowed"] is False
+          assert s["scope"]["next_cohort_execution_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert s["forbidden"]["per_security_requests"] is True
+          assert s["forbidden"]["pdsc"] is True
+          assert t["version"]=="v0.82"
+          assert t["required_start_head"]==s["required_start_head"]
+          assert t["dynamic_directory_route_repair_authorized"] is True
+          assert t["gate_c_completion_authorized"] is True
+          assert t["au_gate_d_allowed"] is False
+          assert t["au_gate_e_f_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["park_reselection_execution_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_p1_p2_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Prepare browser tooling
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple websocket-client==1.8.0
+          python3 - <<'PY'
+          import importlib.metadata,shutil
+          from pathlib import Path
+          assert importlib.metadata.version("websocket-client")=="1.8.0"
+          chrome=next((p for p in ["/usr/bin/google-chrome","/usr/bin/google-chrome-stable","/usr/bin/chromium","/usr/bin/chromium-browser"] if Path(p).exists()),None)
+          if not chrome: chrome=shutil.which("google-chrome") or shutil.which("chromium")
+          assert chrome, "Chrome/Chromium not available"
+          print("CHROME="+chrome)
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/au_sp_asx200_dynamic_directory_route_gate_c_v0_82.py scripts/persist_au_sp_asx200_dynamic_directory_route_gate_c_v0_82.py
+          python3 tests/test_au_sp_asx200_dynamic_directory_route_gate_c_v0_82.py -v
+
+      - name: Run bounded ASX dynamic directory Gate C
+        run: |
+          set -euo pipefail
+          rm -rf output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82
+          python3 scripts/au_sp_asx200_dynamic_directory_route_gate_c_v0_82.py             --repository-sha "$GITHUB_SHA"             --output-dir output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82")
+          required=[
+            "v081_blocker_authority_v0.82.json",
+            "au_dynamic_directory_route_capture_environment_v0.82.json",
+            "au_dynamic_directory_rendered_dom_audit_v0.82.csv",
+            "au_dynamic_directory_network_capture_run1_v0.82.csv",
+            "au_dynamic_directory_network_capture_run2_v0.82.csv",
+            "au_dynamic_directory_interaction_audit_v0.82.csv",
+            "au_directory_candidate_route_inventory_v0.82.csv",
+            "au_directory_selected_data_route_contract_v0.82.json",
+            "au_directory_direct_replay_audit_v0.82.json",
+            "au_directory_runtime_schema_audit_v0.82.csv",
+            "au_directory_classification_field_audit_v0.82.csv",
+            "au_directory_classification_label_inventory_v0.82.csv",
+            "asx_directory_field_provenance_audit_v0_82.json",
+            "asx_gics_field_binding_audit_v0_82.json",
+            "asx_upstream_provider_attribution_audit_v0_82.json",
+            "au_taxonomy_candidate_inventory_v0_82.csv",
+            "au_taxonomy_formal_level_audit_v0_82.json",
+            "au_taxonomy_version_contract_v0_82.json",
+            "au_source_native_taxonomy_identity_decision_v0_82.json",
+            "historical_vs_current_asx_bulk_route_audit_v0.82.json",
+            "external_request_ledger_v0.82.csv",
+            "provider_call_audit_v0.82.json",
+            "immutability_audit_v0.82.json",
+            "test_results_v0.82.csv",
+            "summary_preupload_v0.82.json",
+            "stage_checkpoint_preupload_v0.82.json",
+            "manifest_preupload_v0.82.json"
+          ]
+          assert all((out/x).exists() for x in required)
+          s=json.load(open(out/"summary_preupload_v0.82.json",encoding="utf-8"))
+          route=json.load(open(out/"au_directory_selected_data_route_contract_v0.82.json",encoding="utf-8"))
+          replay=json.load(open(out/"au_directory_direct_replay_audit_v0.82.json",encoding="utf-8"))
+          dec=json.load(open(out/"au_source_native_taxonomy_identity_decision_v0_82.json",encoding="utf-8"))
+          hist=json.load(open(out/"historical_vs_current_asx_bulk_route_audit_v0.82.json",encoding="utf-8"))
+          env=json.load(open(out/"au_dynamic_directory_route_capture_environment_v0.82.json",encoding="utf-8"))
+          prov=json.load(open(out/"provider_call_audit_v0.82.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.82.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.82.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.82.csv",encoding="utf-8")))
+          assert env["Fresh_Profile"]=="YES_EACH_RUN"
+          assert env["Authentication"]=="NONE" and env["Proxy"]=="NONE"
+          assert all(r["Per_Security_Request"]=="NO" and r["Authentication"]=="NONE" for r in ext)
+          zero_keys=["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings",
+                     "third_party_security_sector_databases","company_name_joins","fuzzy_matching","semantic_classification_inference",
+                     "cross_taxonomy_mapping","PDSC","price_OHLCV","news","trading_analysis","per_security_requests",
+                     "AU_Gate_D","AU_Gate_E","AU_Gate_F","Sector_RS","P0","P1","P2","NSE_requests","SEC_requests","Nikkei_classification_requests"]
+          assert all(prov[k]==0 for k in zero_keys)
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert hist["HISTORICAL_GATE_B"]=="PASS_INHERITED"
+          assert hist["Historical_Evidence_Rewritten"]=="NO"
+          assert dec["Gate_D"]=="NOT_EVALUATED" and dec["Gate_E"]=="NOT_EVALUATED" and dec["Gate_F"]=="NOT_EVALUATED"
+          assert dec["No_Frozen_63_Linkage"] is True and dec["No_PDSC"] is True
+          assert imm["Frozen_Unchanged"] is True and imm["v057_Unchanged"] is True and imm["v058_Unchanged"] is True
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["Parked_Cohort_Registry_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          assert imm["AU_Canonical_Rows_After"]==0
+          assert imm["Park_Reselection_Executions"]==0 and imm["Next_Cohort_Executions"]==0
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          if s["dynamic_directory_route"]=="FAIL":
+              assert s["public_browser_reproducible"]=="NO"
+              assert s["blocker"]=="ASX_DIRECTORY_DYNAMIC_DATA_ROUTE_NOT_REPRODUCIBLE"
+              assert s["next_gate"]=="AU_SP_ASX200 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE"
+              assert hist["CURRENT_ROUTE_REPRODUCIBILITY"]=="FAIL"
+              assert hist["CURRENT_AUTHORITY_IMPACT"]=="SOURCE_ROUTE_REVIEW_REQUIRED"
+          else:
+              assert route["ASX_DIRECTORY_DATA_ROUTE_READY"]=="YES"
+              assert route["PUBLIC_BROWSER_REPRODUCIBLE"]=="YES"
+              assert route["Data_Records_RUN1"]>0 and route["Data_Records_RUN2"]>0
+              assert replay["DIRECT_HTTP_REPLAY"] in {"PASS","FAIL","NOT_APPLICABLE"}
+              if s["au_source_native_taxonomy_identity_ready"]:
+                  assert s["verdict"]=="PASS_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C"
+                  assert s["taxonomy_identity"]!="NOT_VERIFIED"
+                  assert s["taxonomy_owner"]!="NOT_VERIFIED"
+                  assert s["formal_level"]!="NOT_VERIFIED"
+                  assert s["version_status"]!="NOT_VERIFIED"
+                  assert s["field_to_taxonomy_binding"]!="NOT_VERIFIED"
+                  assert s["blocker"]==""
+                  assert s["next_gate"]=="AU_SP_ASX200 SECTOR FIELD / SOURCE-NATIVE CODE FEASIBILITY GATE D"
+              else:
+                  assert s["verdict"]=="BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C"
+                  assert s["blocker"] in {
+                    "ASX_DIRECTORY_DATA_SCHEMA_NOT_VERIFIED",
+                    "ASX_DIRECTORY_CLASSIFICATION_FIELD_NOT_AVAILABLE",
+                    "ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED",
+                    "ASX_DIRECTORY_INDUSTRY_TAXONOMY_NOT_IDENTIFIED",
+                    "ASX_DIRECTORY_INDUSTRY_FORMAL_LEVEL_NOT_VERIFIED",
+                    "ASX_DIRECTORY_TAXONOMY_VERSION_NOT_VERIFIABLE",
+                    "UPSTREAM_PROVIDER_FIELD_ATTRIBUTION_NOT_VERIFIED",
+                    "SOURCE_NATIVE_TAXONOMY_IDENTITY_NOT_VERIFIED"
+                  }
+          PY
+          BAD="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/.*|docs/validation/AU_SP_ASX200_Dynamic_Directory_Data_Route_Gate_C_Completion_v0\.82\.md)$' || true)"
+          test -z "$BAD"
+
+      - name: Upload bounded v0.82 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: au-asx200-dynamic-directory-gate-c-v0.82-${{ github.run_id }}
+          path: output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_au_sp_asx200_dynamic_directory_route_gate_c_v0_82.py             --output-dir output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "au-asx200-dynamic-directory-gate-c-v0.82-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.82 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/AU_SP_ASX200_Dynamic_Directory_Data_Route_Gate_C_Completion_v0.82.md                   output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/AU_SP_ASX200_Dynamic_Directory_Data_Route_Gate_C_Completion_v0\.82\.md|output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          test ! -e sector_metadata/canonical/cohorts/AU_SP_ASX200_sector_metadata_v1.csv
+          git commit -m "Persist AU ASX200 dynamic directory Gate C v0.82"
+          git push origin HEAD:main
