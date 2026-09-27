@@ -1,0 +1,130 @@
+{
+  "au_gate_d_runs": 0,
+  "au_gate_e_runs": 0,
+  "au_gate_f_runs": 0,
+  "au_source_native_taxonomy_identity_ready": false,
+  "blocker": "ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "dynamic_directory_route": "PASS",
+  "files": {
+    "asx_directory_field_provenance_audit_v0_82.json": {
+      "bytes": 332,
+      "sha256": "7d3d2cb966cc76015069ea70ecb376db4aaf85de5fd25ea6c331a70e0b4c1866"
+    },
+    "asx_gics_field_binding_audit_v0_82.json": {
+      "bytes": 423,
+      "sha256": "45fd1993fa94d59a9c88c4cbb5516d77af649f4114aff91dfe35eccfc81074fd"
+    },
+    "asx_upstream_provider_attribution_audit_v0_82.json": {
+      "bytes": 321,
+      "sha256": "7374aebdc46224aeef564da568c28bac7dbb2754ef1baaf537a8b0cbfb10dbd8"
+    },
+    "au_directory_candidate_route_inventory_v0.82.csv": {
+      "bytes": 9343,
+      "sha256": "4c227f127f9ff8f56bd51353682bfe9c412051ee88894a6c7369e99f46276a12"
+    },
+    "au_directory_classification_field_audit_v0.82.csv": {
+      "bytes": 130,
+      "sha256": "1f4eba7cdae6265069c85bd2ce5efa902efec6b03830e99e713346294376db85"
+    },
+    "au_directory_classification_label_inventory_v0.82.csv": {
+      "bytes": 490,
+      "sha256": "2cf0631a76034c1bf504552781bf2bf805e6c780b99ff9ae95b024152f2f0733"
+    },
+    "au_directory_direct_replay_audit_v0.82.json": {
+      "bytes": 989,
+      "sha256": "cc7d9a7abd956d404710bc8ddc4a6228544899afe268ecf4b42e258aa3a62008"
+    },
+    "au_directory_runtime_schema_audit_v0.82.csv": {
+      "bytes": 291,
+      "sha256": "f1534933eb96052e322a154f89d595fee9c36db44b74b48f1f17975def90dc35"
+    },
+    "au_directory_selected_data_route_contract_v0.82.json": {
+      "bytes": 4189,
+      "sha256": "9e887cd3ccf78bf2c4bdb82cb029b04bbc4b177cac80e2d55e5b6f706276bb02"
+    },
+    "au_dynamic_directory_interaction_audit_v0.82.csv": {
+      "bytes": 99,
+      "sha256": "0a43f7b94d7dcf53752e0112d255035f7489e708d32b94fb6344baf031885eae"
+    },
+    "au_dynamic_directory_network_capture_run1_v0.82.csv": {
+      "bytes": 21734,
+      "sha256": "1d8ecae62ae67836dc9aab8b71e96fd8776c5125198671af4b84fe5198618fd0"
+    },
+    "au_dynamic_directory_network_capture_run2_v0.82.csv": {
+      "bytes": 21922,
+      "sha256": "2ae783c3cb3b0a4424d7cc8ff9ec34f1ae3c140cddd2afc9af3a4eb6ccc98c8d"
+    },
+    "au_dynamic_directory_rendered_dom_audit_v0.82.csv": {
+      "bytes": 436,
+      "sha256": "411ac9e9a697ae1fb21a536a9af50b98883b8c5eceb7d992985b4d281eec7129"
+    },
+    "au_dynamic_directory_route_capture_environment_v0.82.json": {
+      "bytes": 532,
+      "sha256": "20142bc64b25d3dc05151151d184de0890cdc6eec8a5fc7397809469ad18729b"
+    },
+    "au_source_native_taxonomy_identity_decision_v0_82.json": {
+      "bytes": 985,
+      "sha256": "6532d6dee9e180e8433fc5ae394fb6ac1a3811d582070583d3654ce1bc39db2d"
+    },
+    "au_taxonomy_candidate_inventory_v0_82.csv": {
+      "bytes": 216,
+      "sha256": "65bb70397ae46d1ddb6b4e6a0526d42acc8c589a76ede6dfbcd40ecca2a4edac"
+    },
+    "au_taxonomy_formal_level_audit_v0_82.json": {
+      "bytes": 155,
+      "sha256": "cb856a872f25948f37df65930ce11b49960e70dab5a35d88aad6bee8b3addb08"
+    },
+    "au_taxonomy_version_contract_v0_82.json": {
+      "bytes": 573,
+      "sha256": "b2322dd80f39965e68ec2a9e4715f9d7143f6c5934ce24f542004c6e136cdbae"
+    },
+    "external_request_ledger_v0.82.csv": {
+      "bytes": 22213,
+      "sha256": "e314c737d189fd1c1f8306ffd780af1a3ca7fcf3c5ab699786ae1f13a92c0c85"
+    },
+    "historical_vs_current_asx_bulk_route_audit_v0.82.json": {
+      "bytes": 272,
+      "sha256": "eeec7a14fda81d4c104c3fe716efc8bbe17e42a1e64c571c9f1b24204ecb9896"
+    },
+    "immutability_audit_v0.82.json": {
+      "bytes": 1894,
+      "sha256": "b560e294a18cb10a99faa4d806de7908ff23d61f213303bc44c3a12202c248bd"
+    },
+    "provider_call_audit_v0.82.json": {
+      "bytes": 690,
+      "sha256": "bd3474a9bac015c12020d1c0c8a57b9218c6e2b6a1d513077af9289e245c0317"
+    },
+    "stage_checkpoint_preupload_v0.82.json": {
+      "bytes": 591,
+      "sha256": "7b71fd01ab1d16e2d39a9a4ed31352534c2f6688b4ba2adcdd6b486203f9cbaf"
+    },
+    "summary_preupload_v0.82.json": {
+      "bytes": 1368,
+      "sha256": "112b3257c1a173f7b0dd74c870ed50e0596ec7e451f7c542aa477e85a3911358"
+    },
+    "test_results_v0.82.csv": {
+      "bytes": 1082,
+      "sha256": "9535aba50cc9b8bdf7b17b8458031202618de57dc73ca196e8c9376563237295"
+    },
+    "v081_blocker_authority_v0.82.json": {
+      "bytes": 714,
+      "sha256": "225f5b920eaa035259eff93efd934046875a160c983b7e40c50f18cefff5a085"
+    }
+  },
+  "next_cohort_executions": 0,
+  "next_gate": "NONE_WHILE_GATE_C_BLOCKED",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "park_reselection_executions": 0,
+  "public_browser_reproducible": "YES",
+  "repository_sha": "7a30b9fdfc401fa047bd6a2e2fb12f6d5a460bea",
+  "required_start_head": "c7fed3a3e4463229f17cb515d4abac5860cfc809",
+  "sector_rs_runs": 0,
+  "stage": "AU_SP_ASX200_DYNAMIC_DIRECTORY_DATA_ROUTE_REPAIR_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C_COMPLETION",
+  "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+  "version": "v0.82"
+}

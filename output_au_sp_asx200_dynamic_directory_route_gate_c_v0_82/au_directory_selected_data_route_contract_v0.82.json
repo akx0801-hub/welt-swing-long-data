@@ -1,0 +1,101 @@
+{
+  "ASX_DIRECTORY_DATA_ROUTE_READY": "YES",
+  "Data_Records_RUN1": 25,
+  "Data_Records_RUN2": 25,
+  "Data_Route_Type": "BULK_API",
+  "Logical_Route": "GET https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory ?includeFilterOptions&itemsPerPage&order&orderBy&page&recentListingsOnly",
+  "No_Incomplete_Pagination": true,
+  "No_Per_Security_Fanout": true,
+  "PUBLIC_BROWSER_REPRODUCIBLE": "YES",
+  "RUN_1": {
+    "Bytes": 5858,
+    "Candidate_Reason": "XHR|JSON_CONTENT|URL_COMPAN|URL_DIRECTORY",
+    "Content_Type": "application/json",
+    "First_Party_or_External": "ASX_PAGE_INVOKED_EXTERNAL_PROVIDER",
+    "HTTP_Status": 200,
+    "Initiator": "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-dependencies.lc-9833f1d2e692aa09edfea690e231b110-lc.min.js",
+    "Method": "GET",
+    "Phase": "PASSIVE",
+    "Request_Order": 55,
+    "Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=false&recentListingsOnly=false",
+    "Resolved_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=false&recentListingsOnly=false",
+    "Resource_Type": "XHR",
+    "Response_SHA256": "e64433d1b86621d47e7fec9a001931923e3c8dea3c502db1b70b2b7f02f0f03c",
+    "classification_fields": [
+      "industry"
+    ],
+    "code_fields": [
+      "symbol"
+    ],
+    "logical_route": "GET https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory ?includeFilterOptions&itemsPerPage&order&orderBy&page&recentListingsOnly",
+    "name_fields": [
+      "displayName"
+    ],
+    "pagination_incomplete": false,
+    "record_count": 25,
+    "route_type": "BULK_API",
+    "schema": [
+      "symbol",
+      "displayName",
+      "industry",
+      "dateListed",
+      "marketCap",
+      "xid",
+      "priceChangeFiveDayPercent",
+      "isRecentListing",
+      "statusCode"
+    ],
+    "schema_signature": "f91ebaf91531f92b88b975ea75538953dc5c02f9bce9420de2e043c3dab30851",
+    "score": 175
+  },
+  "RUN_2": {
+    "Bytes": 5858,
+    "Candidate_Reason": "XHR|JSON_CONTENT|URL_COMPAN|URL_DIRECTORY",
+    "Content_Type": "application/json",
+    "First_Party_or_External": "ASX_PAGE_INVOKED_EXTERNAL_PROVIDER",
+    "HTTP_Status": 200,
+    "Initiator": "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-dependencies.lc-9833f1d2e692aa09edfea690e231b110-lc.min.js",
+    "Method": "GET",
+    "Phase": "PASSIVE",
+    "Request_Order": 60,
+    "Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=false&recentListingsOnly=false",
+    "Resolved_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=false&recentListingsOnly=false",
+    "Resource_Type": "XHR",
+    "Response_SHA256": "e64433d1b86621d47e7fec9a001931923e3c8dea3c502db1b70b2b7f02f0f03c",
+    "classification_fields": [
+      "industry"
+    ],
+    "code_fields": [
+      "symbol"
+    ],
+    "logical_route": "GET https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory ?includeFilterOptions&itemsPerPage&order&orderBy&page&recentListingsOnly",
+    "name_fields": [
+      "displayName"
+    ],
+    "pagination_incomplete": false,
+    "record_count": 25,
+    "route_type": "BULK_API",
+    "schema": [
+      "symbol",
+      "displayName",
+      "industry",
+      "dateListed",
+      "marketCap",
+      "xid",
+      "priceChangeFiveDayPercent",
+      "isRecentListing",
+      "statusCode"
+    ],
+    "schema_signature": "f91ebaf91531f92b88b975ea75538953dc5c02f9bce9420de2e043c3dab30851",
+    "score": 175
+  },
+  "Same_Logical_Endpoint": true,
+  "Same_Schema_Contract": true,
+  "Selected_Route": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=false&recentListingsOnly=false",
+  "Session_Requirements": {
+    "Authentication": "NONE",
+    "Fresh_Profile": "YES",
+    "Preexisting_Cookies": "NO",
+    "Proxy": "NONE"
+  }
+}

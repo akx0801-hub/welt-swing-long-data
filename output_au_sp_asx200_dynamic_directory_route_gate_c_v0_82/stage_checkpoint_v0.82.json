@@ -1,0 +1,18 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:a9d8fd151680e365276f0baec48152ac252e4c727e8e49055741b5981d2613bd",
+  "artifact_id": 10940115519,
+  "au_source_native_taxonomy_identity_ready": false,
+  "blocker": "ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "direct_http_replay": "PASS",
+  "dynamic_directory_route": "PASS",
+  "next_gate": "NONE_WHILE_GATE_C_BLOCKED",
+  "public_browser_reproducible": "YES",
+  "stage": "AU_SP_ASX200_DYNAMIC_DIRECTORY_DATA_ROUTE_REPAIR_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C_COMPLETION",
+  "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+  "version": "v0.82",
+  "workflow_head_sha": "7a30b9fdfc401fa047bd6a2e2fb12f6d5a460bea",
+  "workflow_run_id": 36343098663
+}

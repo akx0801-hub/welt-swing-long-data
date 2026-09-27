@@ -1,0 +1,15 @@
+{
+  "Authentication": "NONE",
+  "Authentication_Bypass": "NO",
+  "Browser_Name": "Chrome/Chromium",
+  "Browser_Version": "Google Chrome 153.0.8010.52",
+  "CAPTCHA_Bypass": "NO",
+  "Capture_Method": "CHROMIUM_CDP_NETWORK_RUNTIME",
+  "Cookies_Preexisting": "NO",
+  "External_Scraping_Service": "NO",
+  "Fresh_Profile": "YES_EACH_RUN",
+  "Proxy": "NONE",
+  "Proxy_Rotation": "NO",
+  "Required_Fresh_Runs": 2,
+  "User_Agent_Target": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36 WeltSwingLongDev-v0.82"
+}

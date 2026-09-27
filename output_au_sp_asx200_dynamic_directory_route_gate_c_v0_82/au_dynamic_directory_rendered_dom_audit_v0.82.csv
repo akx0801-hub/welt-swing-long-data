@@ -1,0 +1,3 @@
+Run,Phase,Rendered_Text,Element_Type,Href_or_Action,Event_Target,Data_Attributes,Discovery_Status
+1,PASSIVE,All asx listed companies .csv,A,javascript:void(0);,btn text-upper button-download pull-right-md btn-info,"{""href"": ""javascript:void(0);""}",RENDERED_MATCH
+2,PASSIVE,All asx listed companies .csv,A,javascript:void(0);,btn text-upper button-download pull-right-md btn-info,"{""href"": ""javascript:void(0);""}",RENDERED_MATCH

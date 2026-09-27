@@ -1,0 +1,10 @@
+{
+  "Exact_Field_Provider_Attribution": "NOT_VERIFIED",
+  "Generic_ASX_Reference_Context": {
+    "LSEG_Observed": false,
+    "Morningstar_Observed": false
+  },
+  "Generic_Credit_Is_Not_Field_Attribution": true,
+  "Provider_Security_Level_Queries": 0,
+  "Route_Host_Classification": "ASX_PAGE_INVOKED_EXTERNAL_PROVIDER"
+}
