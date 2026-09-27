@@ -1,14 +1,14 @@
 {
-  "ASX_DIRECTORY_DATA_ROUTE_READY": "NO",
-  "Complete_Directory_Record_Count": 0,
+  "ASX_DIRECTORY_DATA_ROUTE_READY": "YES",
+  "Complete_Directory_Record_Count": 1830,
   "Data_Records_RUN1": 25,
   "Data_Records_RUN2": 25,
   "Data_Route_Type": "DETERMINISTIC_FINITE_PAGINATION",
-  "Logical_Route": "",
-  "No_Incomplete_Pagination": false,
+  "Logical_Route": "GET https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory ?includeFilterOptions&itemsPerPage&order&orderBy&page&recentListingsOnly",
+  "No_Incomplete_Pagination": true,
   "No_Per_Security_Fanout": true,
   "PUBLIC_BROWSER_REPRODUCIBLE": "YES",
-  "Pagination_Completion_Status": "FAIL_RECORD_COUNT_MISMATCH",
+  "Pagination_Completion_Status": "PASS_COMPLETE_DYNAMIC_COUNT_BAND",
   "Pagination_Contract_Reproduced": true,
   "RUN_1": {
     "Bytes": 6627,
@@ -19,11 +19,11 @@
     "Initiator": "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-dependencies.lc-9833f1d2e692aa09edfea690e231b110-lc.min.js",
     "Method": "GET",
     "Phase": "PASSIVE",
-    "Request_Order": 51,
+    "Request_Order": 48,
     "Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
     "Resolved_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
     "Resource_Type": "XHR",
-    "Response_SHA256": "c24bba97a16e40e89ed8e5bac71cd00226dc3311c6261838b8f775c4ef64ea43",
+    "Response_SHA256": "338857e2baae2bcaae4cc456b7288020bc63449b1f95f9180bc406ba68afae90",
     "classification_fields": [
       "industry"
     ],
@@ -37,12 +37,12 @@
     "pagination_contract": {
       "Detected": true,
       "Explicit_Contract": true,
-      "Explicit_Total_Count": 1832,
+      "Explicit_Total_Count": 1830,
       "Explicit_Total_Count_Path": "data.count",
       "Explicit_Total_Pages": 74,
       "Explicit_Total_Pages_Path": "DERIVED_FROM_EXPLICIT_TOTAL_COUNT_AND_OBSERVED_PAGE_SIZE",
       "Observed_Meta": {
-        "data.count": 1832
+        "data.count": 1830
       },
       "Observed_Page_Size": 25,
       "Observed_Page_Value": "0",
@@ -77,7 +77,7 @@
     "Initiator": "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-dependencies.lc-9833f1d2e692aa09edfea690e231b110-lc.min.js",
     "Method": "GET",
     "Phase": "PASSIVE",
-    "Request_Order": 53,
+    "Request_Order": 38,
     "Request_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
     "Resolved_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
     "Resource_Type": "XHR",
@@ -128,7 +128,7 @@
   },
   "Same_Logical_Endpoint": true,
   "Same_Schema_Contract": true,
-  "Selected_Route": "",
+  "Selected_Route": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&order=ascending&orderBy=companyName&includeFilterOptions=true&recentListingsOnly=false",
   "Session_Requirements": {
     "Authentication": "NONE",
     "Fresh_Profile": "YES",

@@ -1,1 +1,10 @@
 Field_Name,Field_Position_or_Key,Data_Type,Null_Count,Distinct_Value_Count
+symbol,1,str,0,1811
+displayName,2,str,0,1806
+industry,3,str,0,27
+dateListed,4,str,0,1550
+marketCap,5,int|str,3,1744
+xid,6,str,0,1811
+priceChangeFiveDayPercent,7,float|int,368,1040
+isRecentListing,8,bool,1795,1
+statusCode,9,str,1500,11

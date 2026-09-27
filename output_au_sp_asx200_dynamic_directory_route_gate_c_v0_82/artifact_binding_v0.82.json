@@ -1,9 +1,9 @@
 {
-  "artifact_digest": "sha256:c88d67d91360530a6a09c577f508fde8a48a23ea17c39838a4f0260ba73a18eb",
-  "artifact_id": 10940211022,
-  "artifact_name": "au-asx200-dynamic-directory-gate-c-v0.82-36343595672",
+  "artifact_digest": "sha256:091e8d6d8ba19995a8f3c29b0f16d59d33907dd1744faf6eef13c5bdf5be921f",
+  "artifact_id": 10939892682,
+  "artifact_name": "au-asx200-dynamic-directory-gate-c-v0.82-36343815405",
   "artifact_scope": "pre-persistence v0.82 AU_SP_ASX200 two-clean-session dynamic directory runtime capture and Gate-C taxonomy identity evidence",
   "artifact_verified": "PASS",
-  "workflow_head_sha": "c631adc4e9e72e62e2c0ec39b816b50cca6f5643",
-  "workflow_run_id": 36343595672
+  "workflow_head_sha": "128a05f0d51de843d8e0bf51c361c6c0e8d11ec6",
+  "workflow_run_id": 36343815405
 }

@@ -4,12 +4,12 @@
 **BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C**
 
 AU_SOURCE_NATIVE_TAXONOMY_IDENTITY_READY = **NO**.
-DYNAMIC DIRECTORY ROUTE = **FAIL**.
+DYNAMIC DIRECTORY ROUTE = **PASS**.
 PUBLIC BROWSER REPRODUCIBLE = **YES**.
 DIRECT HTTP REPLAY = **PASS**.
 DATA ROUTE TYPE = **DETERMINISTIC_FINITE_PAGINATION**.
-DATA RECORDS = **0**.
-CLASSIFICATION FIELD = **NOT_AVAILABLE**.
+DATA RECORDS = **1830**.
+CLASSIFICATION FIELD = **industry**.
 TAXONOMY IDENTITY = **NOT_VERIFIED**.
 TAXONOMY OWNER = **NOT_VERIFIED**.
 FORMAL LEVEL = **NOT_VERIFIED**.
@@ -29,24 +29,24 @@ Gate C remains fail-closed. No generic Industry-like field, provider credit or A
 
 ## Historical Gate B / current route
 HISTORICAL_GATE_B = **PASS_INHERITED**.
-CURRENT_ROUTE_REPRODUCIBILITY = **FAIL**.
-CURRENT_AUTHORITY_IMPACT = **SOURCE_ROUTE_REVIEW_REQUIRED**.
+CURRENT_ROUTE_REPRODUCIBILITY = **PASS**.
+CURRENT_AUTHORITY_IMPACT = **CURRENT_ROUTE_REPRODUCED**.
 Historical evidence was not rewritten.
 
 ## Hard scope
 AU Gate D/E/F remain NOT_EVALUATED. No Frozen-63 linkage, classification attachment, PDSC, canonical materialization, park/reselection execution, next cohort, Sector RS or P0/P1/P2 occurred. IN_NIFTY50, JP_N225, US_SP400 and US_SP500 park states are unchanged. Global canonical READY remains 37/1425.
 
 ## Blocker
-**ASX_DIRECTORY_DYNAMIC_DATA_ROUTE_NOT_REPRODUCIBLE**.
+**ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED**.
 
 ## Artifact binding
-- Workflow run: 36343595672
-- Workflow head: c631adc4e9e72e62e2c0ec39b816b50cca6f5643
-- Artifact: 10940211022
-- Artifact name: au-asx200-dynamic-directory-gate-c-v0.82-36343595672
-- Artifact digest: sha256:c88d67d91360530a6a09c577f508fde8a48a23ea17c39838a4f0260ba73a18eb
+- Workflow run: 36343815405
+- Workflow head: 128a05f0d51de843d8e0bf51c361c6c0e8d11ec6
+- Artifact: 10939892682
+- Artifact name: au-asx200-dynamic-directory-gate-c-v0.82-36343815405
+- Artifact digest: sha256:091e8d6d8ba19995a8f3c29b0f16d59d33907dd1744faf6eef13c5bdf5be921f
 
 ## Next gate
-**AU_SP_ASX200 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE**
+**NONE_WHILE_GATE_C_BLOCKED**
 
 Hard stop applied after persistence and artifact binding.

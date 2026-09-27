@@ -3,19 +3,19 @@
   "au_gate_e_runs": 0,
   "au_gate_f_runs": 0,
   "au_source_native_taxonomy_identity_ready": false,
-  "blocker": "ASX_DIRECTORY_DYNAMIC_DATA_ROUTE_NOT_REPRODUCIBLE",
+  "blocker": "ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED",
   "canonical_materialization_runs": 0,
   "canonical_ready_rows": 37,
   "canonical_total_rows": 1425,
-  "dynamic_directory_route": "FAIL",
+  "dynamic_directory_route": "PASS",
   "files": {
     "asx_directory_field_provenance_audit_v0_82.json": {
-      "bytes": 354,
-      "sha256": "6a1605f4ca1d9faaf9e2c404ee4ca2b45ae46891ff129daf127c6a1bba3dd741"
+      "bytes": 332,
+      "sha256": "7d3d2cb966cc76015069ea70ecb376db4aaf85de5fd25ea6c331a70e0b4c1866"
     },
     "asx_gics_field_binding_audit_v0_82.json": {
-      "bytes": 428,
-      "sha256": "05cc1e560b4384b4e71484a29c7e9b62379c5d442d8f194b428a014f077a934c"
+      "bytes": 423,
+      "sha256": "cc31d3bb6c5019c4ede8791bd944f7d09faf100fabacd463f62c72f9ccdcaa7b"
     },
     "asx_upstream_provider_attribution_audit_v0_82.json": {
       "bytes": 423,
@@ -23,47 +23,47 @@
     },
     "au_directory_candidate_route_inventory_v0.82.csv": {
       "bytes": 9343,
-      "sha256": "1e82393a4e7199f80700b467bddbebb7aa127cd4d3082d7a98974c08fa3a2377"
+      "sha256": "fa0988b4d9b72c1e4fc19b82c8d67f03d90a1c73e54477ec233a9d0192321c5b"
     },
     "au_directory_classification_field_audit_v0.82.csv": {
-      "bytes": 107,
-      "sha256": "2aecc7907efe469349b87455b13fbef2ce18e55fea371d1c69b5ce0c339587a0"
+      "bytes": 130,
+      "sha256": "e67ab3a82d0218d6f659da8d25fd4d823f27d2d2a22b03ec21be8eadf4bdde61"
     },
     "au_directory_classification_label_inventory_v0.82.csv": {
-      "bytes": 26,
-      "sha256": "16129a4e5e671fceb90370551dbf55520a18060a97d45a134700b8b947f816c7"
+      "bytes": 935,
+      "sha256": "075fc003880aeac8b5eb228296eb383d249d7249cf0e1b698bb3416be1f0b7c1"
     },
     "au_directory_direct_replay_audit_v0.82.json": {
       "bytes": 987,
-      "sha256": "657ffc468606f0bc0d97995a714bfab52117083994cfb8e687c14ea25ccfe0b4"
+      "sha256": "f1e095f0cc9212261767112e22d734aee85800f33f615c5471908b6f4a68b77c"
     },
     "au_directory_pagination_completion_audit_v0.82.csv": {
-      "bytes": 26564,
-      "sha256": "9a7826a47b57589c286ea3e24c8255ceb33b7deca2ba220241a432c7bc4fb7ff"
+      "bytes": 27198,
+      "sha256": "440aefc3e1e417e4be9364e2ad462ec41005c43388f636488c16cd7883c9215b"
     },
     "au_directory_pagination_contract_v0.82.json": {
-      "bytes": 1285,
-      "sha256": "f45fea31b13411439c7e334a773724448e17e80facd989002c69904a697926fb"
+      "bytes": 1633,
+      "sha256": "33a7bca3f08d65175829489bce0947f93623ce406d07825d05fa249a1d88d18f"
     },
     "au_directory_runtime_schema_audit_v0.82.csv": {
-      "bytes": 75,
-      "sha256": "f73fc32e8be7c3b7999a01912c7c4b1f69050c2e48eefae8c62035b3c0f35710"
+      "bytes": 310,
+      "sha256": "434b44ed091497e64b5c024d3be1473200e8ecf7635f1b852f6cfbb3f6960d30"
     },
     "au_directory_selected_data_route_contract_v0.82.json": {
-      "bytes": 5250,
-      "sha256": "b6202a44c14cfc1b201f044b086c41d3b6ef1104bf38a0f5d514c9eecdb6eee8"
+      "bytes": 5574,
+      "sha256": "17a7b0f0f8e988f65eed76f1db97f96a67ce7848bf04901508e16c84f84decd1"
     },
     "au_dynamic_directory_interaction_audit_v0.82.csv": {
       "bytes": 99,
       "sha256": "0a43f7b94d7dcf53752e0112d255035f7489e708d32b94fb6344baf031885eae"
     },
     "au_dynamic_directory_network_capture_run1_v0.82.csv": {
-      "bytes": 21536,
-      "sha256": "23c46c1770d8e14c92e27b63cf20ef0c7e16b621563723cc8901bc4a0ec4dd35"
+      "bytes": 21590,
+      "sha256": "af3c958304dfe6018ba0f3f328447293feff5e8357ced185d2cf5d0903f583b0"
     },
     "au_dynamic_directory_network_capture_run2_v0.82.csv": {
-      "bytes": 21904,
-      "sha256": "da7c880be42e1eb65c8cfce1493cd30466e755731dc0ff484cb1c0f376b45b5e"
+      "bytes": 21452,
+      "sha256": "9c2be2b9ce184bfd963a56bd18611d06baf66d33edb0d125befb0681709c2c7e"
     },
     "au_dynamic_directory_rendered_dom_audit_v0.82.csv": {
       "bytes": 436,
@@ -74,28 +74,28 @@
       "sha256": "20142bc64b25d3dc05151151d184de0890cdc6eec8a5fc7397809469ad18729b"
     },
     "au_source_native_taxonomy_identity_decision_v0_82.json": {
-      "bytes": 1054,
-      "sha256": "f369bf911ee747a6b62b0991bda03dd892909f4c1217fe70b91b85eb3e573fa8"
+      "bytes": 1010,
+      "sha256": "abaf0ddd3eaa8265cf3c6b44a25ebe93a230da7a80434b9b8db3bf50ea675385"
     },
     "au_taxonomy_candidate_inventory_v0_82.csv": {
       "bytes": 216,
       "sha256": "65bb70397ae46d1ddb6b4e6a0526d42acc8c589a76ede6dfbcd40ecca2a4edac"
     },
     "au_taxonomy_formal_level_audit_v0_82.json": {
-      "bytes": 160,
-      "sha256": "eeae6dd65ee804c8f6656f178ac5dd3e0a419857b22467426fb928466d966aca"
+      "bytes": 155,
+      "sha256": "cb856a872f25948f37df65930ce11b49960e70dab5a35d88aad6bee8b3addb08"
     },
     "au_taxonomy_version_contract_v0_82.json": {
       "bytes": 573,
-      "sha256": "3a6af10b1abaf5f72362cb3fc1fc93dff1c04d91cd60be861e8d727cc5488dd1"
+      "sha256": "5f69b79ae1cde10cee176028b23d197fb8e23b6173eb11d76eaed747e67dee09"
     },
     "external_request_ledger_v0.82.csv": {
-      "bytes": 49434,
-      "sha256": "11cf310a19368e327d1ceeaa9c577a637986fe219aefaf8ed0314f3a5c15cc11"
+      "bytes": 49235,
+      "sha256": "d0f75d3c812fd456b5d4cd2de501cd941ca341747f0c709dd98618b1bce3d7fd"
     },
     "historical_vs_current_asx_bulk_route_audit_v0.82.json": {
-      "bytes": 276,
-      "sha256": "d52108af67b3f36ae8d25cfa74a04089db020052910a56dc390199c8bfcb5d07"
+      "bytes": 272,
+      "sha256": "eeec7a14fda81d4c104c3fe716efc8bbe17e42a1e64c571c9f1b24204ecb9896"
     },
     "immutability_audit_v0.82.json": {
       "bytes": 1894,
@@ -106,16 +106,16 @@
       "sha256": "6f9ef7ee6fe870e589bf55380108130b305808e46ac877c7bbcea186fcd721ee"
     },
     "stage_checkpoint_preupload_v0.82.json": {
-      "bytes": 634,
-      "sha256": "a579d688d439e694ead5957326f29bdb06bfcfdc31ac987a6cb3137fe79cdc5a"
+      "bytes": 591,
+      "sha256": "7b71fd01ab1d16e2d39a9a4ed31352534c2f6688b4ba2adcdd6b486203f9cbaf"
     },
     "summary_preupload_v0.82.json": {
-      "bytes": 1442,
-      "sha256": "7edf03b510f7cfb38a6c04dc4d6d573adfbf9b059ed85f3c83c7e868774ead6f"
+      "bytes": 1393,
+      "sha256": "2736e744a89007a1154ba29fcdb618e198931b633863b3f364e3355f23d96527"
     },
     "test_results_v0.82.csv": {
-      "bytes": 1204,
-      "sha256": "d96d5df28b6d17cf84d333ad9bb8b49acbb416494d6a6996dd793bdf4e92d9df"
+      "bytes": 1154,
+      "sha256": "6758dd9471f7c7d14ca5dd4783acf646b86bd9b11253a4d433424697df007ee0"
     },
     "v081_blocker_authority_v0.82.json": {
       "bytes": 714,
@@ -123,13 +123,13 @@
     }
   },
   "next_cohort_executions": 0,
-  "next_gate": "AU_SP_ASX200 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "next_gate": "NONE_WHILE_GATE_C_BLOCKED",
   "p0_runs": 0,
   "p1_runs": 0,
   "p2_runs": 0,
   "park_reselection_executions": 0,
   "public_browser_reproducible": "YES",
-  "repository_sha": "c631adc4e9e72e62e2c0ec39b816b50cca6f5643",
+  "repository_sha": "128a05f0d51de843d8e0bf51c361c6c0e8d11ec6",
   "required_start_head": "c7fed3a3e4463229f17cb515d4abac5860cfc809",
   "sector_rs_runs": 0,
   "stage": "AU_SP_ASX200_DYNAMIC_DIRECTORY_DATA_ROUTE_REPAIR_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C_COMPLETION",

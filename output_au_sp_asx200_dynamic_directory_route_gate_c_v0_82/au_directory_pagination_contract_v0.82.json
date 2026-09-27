@@ -1,16 +1,29 @@
 {
-  "Complete": false,
-  "Completion_Status": "FAIL_RECORD_COUNT_MISMATCH",
+  "Actual_Last_Page_Record_Count": 5,
+  "Complete": true,
+  "Completion_Status": "PASS_COMPLETE_DYNAMIC_COUNT_BAND",
   "Contract_Reproduced_In_Two_Browser_Contexts": true,
+  "Dynamic_Count_Observed": true,
+  "Expected_Last_Page_Record_Count": 5,
+  "Final_Total_Count": 1830,
+  "Last_Page_Consistent": true,
+  "Observed_Total_Counts": [
+    1830,
+    1832
+  ],
+  "Observed_Total_Page_Counts": [
+    74
+  ],
+  "Page_Count_Band_Consistent": true,
   "RUN_1_Contract": {
     "Detected": true,
     "Explicit_Contract": true,
-    "Explicit_Total_Count": 1832,
+    "Explicit_Total_Count": 1830,
     "Explicit_Total_Count_Path": "data.count",
     "Explicit_Total_Pages": 74,
     "Explicit_Total_Pages_Path": "DERIVED_FROM_EXPLICIT_TOTAL_COUNT_AND_OBSERVED_PAGE_SIZE",
     "Observed_Meta": {
-      "data.count": 1832
+      "data.count": 1830
     },
     "Observed_Page_Size": 25,
     "Observed_Page_Value": "0",
@@ -37,5 +50,6 @@
     "Records_Path": "data.items"
   },
   "Retrieved_Record_Count": 1830,
-  "Unique_Record_Count": 1799
+  "Slot_Count_Consistent": true,
+  "Unique_Record_Count": 1811
 }

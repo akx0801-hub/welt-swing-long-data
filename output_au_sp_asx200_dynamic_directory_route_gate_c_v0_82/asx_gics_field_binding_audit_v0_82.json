@@ -1,8 +1,8 @@
 {
-  "ASX_GICS_Context_SHA256": "3e83d00dcba0a76f97b3415ae78d6008491fd1b01cee3ce34cf2d341a5445e18",
+  "ASX_GICS_Context_SHA256": "93d3d4a24ed14889daf8933c49434c8b254c1ae49656c61b2b944ae0bb8f87d1",
   "ASX_GICS_Context_URL": "https://www.asx.com.au/markets/trade-our-cash-market/overview/indices",
   "ASX_GICS_Expanded": true,
-  "Classification_Field": "NOT_AVAILABLE",
+  "Classification_Field": "industry",
   "Context_Alone_Not_Used_As_Field_Binding": true,
   "GICS_FIELD_BINDING": "NOT_VERIFIED",
   "MSCI_Observed": true,

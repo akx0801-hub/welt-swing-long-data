@@ -1,6 +1,6 @@
 {
-  "CURRENT_AUTHORITY_IMPACT": "SOURCE_ROUTE_REVIEW_REQUIRED",
-  "CURRENT_ROUTE_REPRODUCIBILITY": "FAIL",
+  "CURRENT_AUTHORITY_IMPACT": "CURRENT_ROUTE_REPRODUCED",
+  "CURRENT_ROUTE_REPRODUCIBILITY": "PASS",
   "HISTORICAL_GATE_B": "PASS_INHERITED",
   "Historical_Authority": "v0.62 official ASX company-directory bulk route observed",
   "Historical_Evidence_Rewritten": "NO"
