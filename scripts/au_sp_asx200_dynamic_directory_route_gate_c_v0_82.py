@@ -311,19 +311,24 @@ def parse_csv_dataset(raw:bytes)->dict[str,Any]|None:
         return {"format":"CSV","encoding":enc,"records":recs,"schema":header}
     return None
 
-def largest_record_list(obj:Any)->list[dict[str,Any]]:
-    best=[]
-    def walk(x:Any,depth:int=0):
-        nonlocal best
+def largest_record_list_with_path(obj:Any)->tuple[list[dict[str,Any]],str]:
+    best=[];best_path=""
+    def walk(x:Any,path:str="",depth:int=0):
+        nonlocal best,best_path
         if depth>8:return
         if isinstance(x,list):
             dicts=[v for v in x if isinstance(v,dict)]
-            if len(dicts)>len(best):best=dicts
-            for v in x[:100]:walk(v,depth+1)
+            if len(dicts)>len(best):best=dicts;best_path=path
+            for v in x[:100]:
+                if isinstance(v,(dict,list)):walk(v,path+"[]",depth+1)
         elif isinstance(x,dict):
-            for v in x.values():walk(v,depth+1)
+            for k,v in x.items():
+                if isinstance(v,(dict,list)):walk(v,(path+"."+str(k)).strip("."),depth+1)
     walk(obj)
-    return best
+    return best,best_path
+
+def largest_record_list(obj:Any)->list[dict[str,Any]]:
+    return largest_record_list_with_path(obj)[0]
 
 def json_meta(obj:Any)->dict[str,Any]:
     out={}
@@ -353,11 +358,16 @@ def pagination_contract(selected:dict[str,Any]|None)->dict[str,Any]:
     meta=(selected.get("parsed") or {}).get("meta",{})
     total_count=None;total_count_path=""
     total_pages=None;total_pages_path=""
+    records_path=(selected.get("parsed") or {}).get("records_path","")
+    records_parent=".".join(records_path.split(".")[:-1]) if records_path else ""
     for path,v in meta.items():
         leaf=keynorm(path.split(".")[-1].replace("[]",""))
+        parent=".".join(path.split(".")[:-1])
         try:num=int(float(v))
         except Exception:continue
-        if total_count is None and any(x in leaf for x in ("totalcount","totalitems","totalrecords","totalresults","recordcount")):
+        explicit_total_name=any(x in leaf for x in ("totalcount","totalitems","totalrecords","totalresults","recordcount"))
+        structural_sibling_count=(leaf=="count" and bool(records_parent) and parent==records_parent)
+        if total_count is None and (explicit_total_name or structural_sibling_count):
             total_count=num;total_count_path=path
         if total_pages is None and any(x in leaf for x in ("totalpages","pagecount","numberofpages","pagescount")):
             total_pages=num;total_pages_path=path
@@ -370,7 +380,7 @@ def pagination_contract(selected:dict[str,Any]|None)->dict[str,Any]:
       "Observed_Page_Value":q.get(page_key,""),"Observed_Page_Size":page_size,
       "Explicit_Total_Count":total_count,"Explicit_Total_Count_Path":total_count_path,
       "Explicit_Total_Pages":total_pages,"Explicit_Total_Pages_Path":total_pages_path,
-      "Observed_Meta":meta
+      "Records_Path":records_path,"Records_Parent_Path":records_parent,"Observed_Meta":meta
     }
 
 def complete_paginated_route(selected:dict[str,Any]|None,max_pages:int=100)->dict[str,Any]:
@@ -420,14 +430,13 @@ def complete_paginated_route(selected:dict[str,Any]|None,max_pages:int=100)->dic
 def parse_json_dataset(raw:bytes)->dict[str,Any]|None:
     try:obj=json.loads(raw.decode("utf-8-sig"))
     except Exception:return None
-    recs=largest_record_list(obj)
+    recs,records_path=largest_record_list_with_path(obj)
     if not recs:return None
-    schema=[]
-    seen=set()
+    schema=[];seen=set()
     for r in recs[:200]:
         for k in r.keys():
             if k not in seen:seen.add(k);schema.append(str(k))
-    return {"format":"JSON","records":recs,"schema":schema,"meta":json_meta(obj)}
+    return {"format":"JSON","records":recs,"records_path":records_path,"schema":schema,"meta":json_meta(obj)}
 
 def parse_dataset(raw:bytes,content_type:str,url:str)->dict[str,Any]|None:
     ct=(content_type or "").lower();low=url.lower()
@@ -660,8 +669,6 @@ def public_candidate(row:dict[str,Any]|None)->dict[str,Any]:
 
 def direct_replay(selected:dict[str,Any]|None)->dict[str,Any]:
     if not selected:return {"DIRECT_HTTP_REPLAY":"NOT_APPLICABLE","Reason":"NO_SELECTED_ROUTE"}
-    if selected.get("route_type")=="DETERMINISTIC_FINITE_PAGINATION":
-        return {"DIRECT_HTTP_REPLAY":"NOT_APPLICABLE","Reason":"PAGINATED_BROWSER_CONTRACT_NOT_REPLAYED_IN_GATE_C"}
     rawurl=selected.get("Resolved_URL") or selected.get("Request_URL") or ""
     if "<REDACTED>" in rawurl:return {"DIRECT_HTTP_REPLAY":"NOT_APPLICABLE","Reason":"REDACTED_EPHEMERAL_PARAMETER"}
     method=selected.get("Method","GET").upper()
@@ -884,6 +891,7 @@ def main()->int:
 
     gics_ctx=context_fetch(GICS_CONTEXT_URL)
     ref_ctx=context_fetch(REFERENCE_URL)
+    directory_ctx=context_fetch(DIRECTORY_URL)
     decision=field_taxonomy_decision(s1 if route_ready else None,gics_ctx,ref_ctx)
 
     write_json(out/"asx_directory_field_provenance_audit_v0_82.json",{
@@ -904,6 +912,7 @@ def main()->int:
     write_json(out/"asx_upstream_provider_attribution_audit_v0_82.json",{
       "Exact_Field_Provider_Attribution":decision["upstream_provider_attribution"],
       "Route_Host_Classification":pub1.get("First_Party_or_External","NOT_VERIFIED"),
+      "Generic_ASX_Directory_Context":{"LSEG_Observed":directory_ctx.get("LSEG_Observed",False),"Morningstar_Observed":directory_ctx.get("Morningstar_Observed",False)},
       "Generic_ASX_Reference_Context":{"LSEG_Observed":ref_ctx.get("LSEG_Observed",False),"Morningstar_Observed":ref_ctx.get("Morningstar_Observed",False)},
       "Generic_Credit_Is_Not_Field_Attribution":True,"Provider_Security_Level_Queries":0
     })
@@ -967,7 +976,7 @@ def main()->int:
 
     # Provider/method and external request ledger.
     pagination_request_count=len(pagination1.get("Pages",[]))
-    prov=provider_audit(2,(1 if replay["DIRECT_HTTP_REPLAY"]!="NOT_APPLICABLE" else 0)+pagination_request_count,2)
+    prov=provider_audit(2,(1 if replay["DIRECT_HTTP_REPLAY"]!="NOT_APPLICABLE" else 0)+pagination_request_count,3)
     write_json(out/"provider_call_audit_v0.82.json",prov)
     ext=[]
     n=0
@@ -978,7 +987,7 @@ def main()->int:
                         "Method":row.get("Method",""),"HTTP_Status":row.get("HTTP_Status",""),"Content_Type":row.get("Content_Type",""),
                         "Bytes":row.get("Bytes",""),"Response_SHA256":row.get("Response_SHA256",""),
                         "Per_Security_Request":"NO","Authentication":"NONE","Candidate_Reason":row.get("Candidate_Reason","")})
-    for ctx in (gics_ctx,ref_ctx):
+    for ctx in (gics_ctx,ref_ctx,directory_ctx):
         n+=1;ext.append({"Request_Order":n,"Execution_Mode":"DIRECT_ASX_CONTEXT","URL":ctx["URL"],"Method":"GET","HTTP_Status":ctx["HTTP_Status"],
                          "Content_Type":ctx["Content_Type"],"Bytes":ctx["Bytes"],"Response_SHA256":ctx["SHA256"],
                          "Per_Security_Request":"NO","Authentication":"NONE","Candidate_Reason":"OFFICIAL_ASX_TAXONOMY_CONTEXT"})
