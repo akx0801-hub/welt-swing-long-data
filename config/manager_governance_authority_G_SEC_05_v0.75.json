@@ -1,0 +1,46 @@
+{
+  "authority_id": "G-SEC-05",
+  "title": "Evidence Persistence Without Raw Redistribution",
+  "effective_forward_from": "v0.75",
+  "authority_type": "MANAGER_GOVERNANCE",
+  "gate": "H_ACCESS_PERSISTENCE",
+  "legal_opinion": false,
+  "rules": {
+    "gate_h_operational_not_legal": true,
+    "raw_source_storage_not_required_for_pass": true,
+    "unknown_raw_redistribution_rights_alone_do_not_fail_when_raw_not_required": true,
+    "canonical_facts_must_remain_bounded_metadata_not_disguised_raw_dataset": true,
+    "explicit_official_operational_restriction_requires_fail_closed": true
+  },
+  "pass_conditions": [
+    "authoritative source is publicly and reproducibly accessible",
+    "no authentication, paid entitlement, CAPTCHA bypass, private token, privileged session, or prohibited access mechanism is required",
+    "repository can persist sufficient bounded audit evidence without full raw-source redistribution",
+    "future canonical rows can be traced to the official source contract",
+    "complete raw-source redistribution is not technically required for deterministic audit or reproduction",
+    "bounded review discovers no explicit official statement blocking the specific project behavior required for canonical metadata"
+  ],
+  "minimum_bounded_evidence": [
+    "official URL",
+    "source authority",
+    "retrieval timestamp",
+    "content/schema metadata",
+    "raw or response SHA256",
+    "explicit source version/as-of when supplied",
+    "bounded derived evidence",
+    "deterministic transformation or mapping evidence",
+    "source-native code and name",
+    "final canonical provenance fields"
+  ],
+  "raw_persistence_rights_statuses": [
+    "VERIFIED_ALLOWED",
+    "VERIFIED_RESTRICTED",
+    "NOT_VERIFIED",
+    "NOT_APPLICABLE"
+  ],
+  "provenance_time_rule": {
+    "Source_Retrieved_UTC_is_business_effective_date": false,
+    "when_no_explicit_as_of": "use deterministic source snapshot identifier such as SOURCE_SNAPSHOT_SHA256:<sha256>; preserve Source_Retrieved_UTC separately"
+  },
+  "scope": "forward authority; does not rewrite historical G-SEC-01/G-SEC-02/G-SEC-03/G-SEC-04 evidence"
+}
