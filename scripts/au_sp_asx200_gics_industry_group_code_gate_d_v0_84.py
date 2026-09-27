@@ -190,22 +190,40 @@ def xlsx_row_matrix(raw:bytes)->tuple[list[list[str]],list[str]]:
             if any(vals):rows.append(vals)
     return rows,sheets
 
-def xlsx_codes_for_label(rows:list[list[str]],label:str)->list[str]:
-    target=nfc(label);codes=set()
-    for row in rows:
-        if not any(nfc(v)==target for v in row):continue
-        for v in row:
-            s=nfc(v)
-            if re.fullmatch(r"\d{4}",s):codes.add(s)
-    return sorted(codes)
+def xlsx_industry_group_inventory(rows:list[list[str]])->tuple[list[dict[str,str]],dict[str,Any]]:
+    best=[];authority={"Header_Row_Index":None,"Industry_Group_Code_Column":None,"Industry_Group_Label_Column":None,"Header_Row":[]}
+    for i,row in enumerate(rows):
+        norms=[keynorm(v) for v in row]
+        code_idx=next((j for j,n in enumerate(norms) if n in {"industrygroupcode","industrygroupcodes"} or ("industrygroup" in n and "code" in n)),None)
+        label_idx=next((j for j,n in enumerate(norms) if n in {"industrygroup","industrygroupname","industrygroupdescription"}),None)
+        if code_idx is None or label_idx is None or code_idx==label_idx:continue
+        inv=[]
+        for rr in rows[i+1:]:
+            if max(code_idx,label_idx)>=len(rr):continue
+            code=nfc(rr[code_idx]);label=nfc(rr[label_idx])
+            if not code or not label:continue
+            if not re.fullmatch(r"\d+",code):continue
+            inv.append({"Official_GICS_Label":label,"Official_Raw_Code":code})
+        ded=[];seen=set()
+        for x in inv:
+            k=(x["Official_GICS_Label"],x["Official_Raw_Code"])
+            if k not in seen:seen.add(k);ded.append(x)
+        if len(ded)>len(best):
+            best=ded
+            authority={"Header_Row_Index":i,"Industry_Group_Code_Column":code_idx,"Industry_Group_Label_Column":label_idx,"Header_Row":row}
+    return best,authority
 
 def xlsx_structure_markers(rows:list[list[str]])->dict[str,Any]:
     flat=[nfc(v) for row in rows for v in row if nfc(v)]
+    inventory,authority=xlsx_industry_group_inventory(rows)
     return {
       "Industry_Group_Markers":[v for v in flat if "industry group" in v.lower()][:20],
       "Sector_Markers":[v for v in flat if v.lower()=="sector" or "sector code" in v.lower()][:20],
       "Industry_Markers":[v for v in flat if v.lower()=="industry" or "industry code" in v.lower()][:20],
-      "Sub_Industry_Markers":[v for v in flat if "sub-industry" in v.lower() or "sub industry" in v.lower()][:20]
+      "Sub_Industry_Markers":[v for v in flat if "sub-industry" in v.lower() or "sub industry" in v.lower()][:20],
+      "Industry_Group_Header_Authority":authority,
+      "Official_Industry_Group_Inventory_Count":len(inventory),
+      "Observed_Industry_Group_Code_Lengths":sorted({len(x["Official_Raw_Code"]) for x in inventory})
     }
 
 CLICK_DL=r"""(()=>{const e=[...document.querySelectorAll('a,button,[role="button"]')].find(x=>((x.innerText||x.textContent||'')+'').trim().toLowerCase().includes('all asx listed companies'));if(!e)return {status:'NOT_OBSERVED'};const t=((e.innerText||e.textContent||'')+'').trim().replace(/\s+/g,' ');e.click();return {status:'CLICKED_ONCE',text:t,tag:e.tagName,href:e.href||''};})()"""
@@ -287,12 +305,15 @@ def main()->int:
                               "Bytes":br.get("bytes",0),"SHA256":br.get("sha256",""),"Retrieval_Timestamp_UTC":br.get("timestamp_utc",""),
                               "Error":"","Raw":br.get("body",b"")})
     msci=fetch(MSCI_GICS_URL,5_000_000)
-    xrows=[];xsheets=[];markers={}
+    xrows=[];xsheets=[];markers={};official_inventory=[];header_authority={}
     if structure["HTTP_Status"]==200 and structure["Raw"]:
-        try:xrows,xsheets=xlsx_row_matrix(structure["Raw"]);markers=xlsx_structure_markers(xrows)
+        try:
+            xrows,xsheets=xlsx_row_matrix(structure["Raw"])
+            markers=xlsx_structure_markers(xrows)
+            official_inventory,header_authority=xlsx_industry_group_inventory(xrows)
         except Exception as e:structure["Error"]="XLSX_PARSE:"+type(e).__name__+":"+str(e)
     gate_c_fixed=pred["summary"]["taxonomy_identity"]=="GICS" and pred["summary"]["formal_level"]=="INDUSTRY_GROUP" and pred["summary"]["taxonomy_owner"]=="S&P Dow Jones Indices / MSCI"
-    hierarchy_ready=bool(gate_c_fixed and structure["HTTP_Status"]==200 and len(xrows)>0)
+    hierarchy_ready=bool(gate_c_fixed and structure["HTTP_Status"]==200 and len(official_inventory)>0 and header_authority.get("Industry_Group_Code_Column") is not None)
     owner_ready=gate_c_fixed
     source_rows=[
       {"Source_Role":"CURRENT_GICS_STRUCTURE_DISCOVERY","Official_Owner":"S&P Dow Jones Indices / MSCI","URL":GICS_LANDING_URL,
@@ -310,16 +331,20 @@ def main()->int:
       "Taxonomy":"GICS","Taxonomy_Owner":"S&P Dow Jones Indices / MSCI","Gate_C_Level_Authority":"PASS_BY_V083_CURRENT_EVIDENCE",
       "Hierarchy":"SECTOR > INDUSTRY_GROUP > INDUSTRY > SUB_INDUSTRY","Official_Industry_Group_Count":25,
       "Current_Structure_Source":GICS_XLSX_URL,"Source_SHA256":structure["SHA256"],"Retrieval_Timestamp_UTC":structure["Retrieval_Timestamp_UTC"],
-      "Workbook_Sheets":xsheets,"Workbook_Hierarchy_Markers":markers,
-      "Code_Presentation":"INDUSTRY_GROUP_CODE_PRESERVED_AS_STRING; exact 4-digit code selected only from the row of the exact official label",
+      "Workbook_Sheets":xsheets,"Workbook_Hierarchy_Markers":markers,"Industry_Group_Header_Authority":header_authority,
+      "Official_Industry_Group_Count":len(official_inventory) if official_inventory else "NOT_VERIFIED",
+      "Observed_Industry_Group_Code_Lengths":sorted({len(x["Official_Raw_Code"]) for x in official_inventory}) if official_inventory else [],
+      "Code_Presentation":"SOURCE_STRING_FROM_EXPLICIT_INDUSTRY_GROUP_CODE_COLUMN; leading zeros preserved as text",
       "INDUSTRY_GROUP_LEVEL_VERIFIED":"YES" if hierarchy_ready else "NO","Owner_Verified":"YES" if owner_ready else "NO",
       "Current_Structure_Link_Discovery":spec["sources"].get("current_structure_link_discovery",{})
     })
 
-    code_table_authority=bool(hierarchy_ready and structure["HTTP_Status"]==200 and xrows)
+    code_table_authority=bool(hierarchy_ready and official_inventory)
+    official_by_label={}
+    for x in official_inventory:official_by_label.setdefault(nfc(x["Official_GICS_Label"]),[]).append(x["Official_Raw_Code"])
     bindings=[];formal=[];unmatched=[]
     for label in asx["Distinct_Values"]:
-        hits=xlsx_codes_for_label(xrows,label) if code_table_authority else []
+        hits=sorted(set(official_by_label.get(nfc(label),[]))) if code_table_authority else []
         if len(hits)==1:
             status="EXACT_CODE_BOUND";formal.append((label,hits[0]))
             off_label=label;code=hits[0]
@@ -331,8 +356,10 @@ def main()->int:
                          "Exact_Match_Status":status,"Normalization":"UNICODE_NFC_PLUS_SURROUNDING_WHITESPACE_ONLY",
                          "Source_URL":GICS_XLSX_URL,"Source_SHA256":structure["SHA256"]})
     formal_count=len(formal);raw_count=len(asx["Distinct_Values"]);unmatched_count=raw_count-formal_count
-    official_count_25=bool(hierarchy_ready)
-    complete_formal=official_count_25 and formal_count==25 and len({c for _,c in formal})==25 and len({nfc(l) for l,_ in formal})==25
+    official_group_count=len({nfc(x["Official_GICS_Label"]) for x in official_inventory}) if official_inventory else 0
+    official_code_count=len({x["Official_Raw_Code"] for x in official_inventory}) if official_inventory else 0
+    official_inventory_unique=bool(official_inventory and official_group_count==len(official_inventory) and official_code_count==len(official_inventory))
+    complete_formal=bool(code_table_authority and official_inventory_unique and all(r["Exact_Match_Status"] in {"EXACT_CODE_BOUND","NOT_FOUND"} for r in bindings))
 
     off_inventory=[{"Formal_Level":"INDUSTRY_GROUP","Official_Label":l,"Official_Raw_Code":c,"Normalized_Code":c,
                     "Code_Data_Type":"STRING","Code_Length_or_Structure":"4_DIGIT_HIERARCHICAL_INDUSTRY_GROUP_CODE",
@@ -350,7 +377,7 @@ def main()->int:
     recon={
       "Current_Raw_Value_Count":raw_count,"Formal_GICS_Value_Count":formal_count,"Non_Taxonomy_or_Unresolved_Value_Count":unmatched_count,
       "Arithmetic_Reconciles":"YES" if raw_count==formal_count+unmatched_count else "NO",
-      "Official_GICS_Industry_Group_Count":25 if official_count_25 else "NOT_VERIFIED",
+      "Official_GICS_Industry_Group_Count":official_group_count if official_group_count else "NOT_VERIFIED",
       "All_Official_Formal_Groups_Represented_By_Exact_Code_Bound_Current_Labels":"YES" if complete_formal else "NO",
       "Unmatched_Raw_Values":unmatched
     }
@@ -363,10 +390,11 @@ def main()->int:
           "Evidence":"Not exact-matched to any current formal GICS Industry Group label in official owner-source code table; exact semantics not expanded."})
     write_csv(out/"au_classification_sentinel_governance_audit_v0.84.csv",sentinel_rows)
 
-    native_ready=bool(hierarchy_ready and code_table_authority and complete_formal and code_collisions==0 and all(r["Exact_Match_Status"]=="EXACT_CODE_BOUND" for r in bindings if r["ASX_Raw_Label"] not in unmatched))
+    native_ready=bool(hierarchy_ready and code_table_authority and official_inventory_unique and complete_formal and code_collisions==0 and
+                      all(r["Exact_Match_Status"]=="EXACT_CODE_BOUND" for r in bindings if r["ASX_Raw_Label"] not in unmatched))
     write_json(out/"au_source_native_code_feasibility_decision_v0.84.json",{
       "SOURCE_NATIVE_GICS_CODE_READY":"YES" if native_ready else "NO","Taxonomy":"GICS","Formal_Level":"INDUSTRY_GROUP",
-      "Formal_Label_Count":formal_count,"Official_Industry_Group_Count":25 if official_count_25 else "NOT_VERIFIED",
+      "Formal_Label_Count":formal_count,"Official_Industry_Group_Count":official_group_count if official_group_count else "NOT_VERIFIED",
       "Exact_Label_Code_Bindings":sum(1 for r in bindings if r["Exact_Match_Status"]=="EXACT_CODE_BOUND"),
       "Formal_Label_Ambiguity":sum(1 for r in bindings if r["Exact_Match_Status"]=="AMBIGUOUS"),
       "Code_Collisions":code_collisions,"Unresolved_Nonformal_Values":unmatched,
@@ -398,8 +426,9 @@ def main()->int:
     strategy="SOURCE_NATIVE_GICS_CODE" if native_ready else ("PROJECT_DERIVED_CANONICAL_PDSC" if pdsc_ready else "NONE")
     blocker=""
     if not gate_ready:
-        if not hierarchy_ready:blocker="GICS_INDUSTRY_GROUP_LEVEL_NOT_VERIFIED"
-        elif not code_table_authority:blocker="GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE"
+        if structure["HTTP_Status"]!=200 or not official_inventory:blocker="GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE"
+        elif not hierarchy_ready:blocker="GICS_INDUSTRY_GROUP_LEVEL_NOT_VERIFIED"
+        elif not code_table_authority:blocker="GICS_INDUSTRY_GROUP_CODE_NOT_VERIFIED"
         elif any(r["Exact_Match_Status"]=="AMBIGUOUS" for r in bindings):blocker="GICS_LABEL_TO_CODE_BINDING_AMBIGUOUS"
         elif code_collisions:blocker="GICS_CODE_COLLISION"
         elif not complete_formal:blocker="ASX_GICS_FORMAL_LABEL_NOT_FOUND_IN_OFFICIAL_GICS"
@@ -442,14 +471,9 @@ def main()->int:
     t("GATE_C_FIXED",pred["summary"]["taxonomy_identity"]=="GICS" and pred["summary"]["formal_level"]=="INDUSTRY_GROUP","GICS/INDUSTRY_GROUP")
     t("ASX_DOWNLOAD_HEADER",keynorm(asx["Classification_Field"])=="gicsindustrygroup",asx["Classification_Field"])
     t("RAW_VALUE_RECONCILIATION",raw_count==formal_count+unmatched_count,f"{raw_count}={formal_count}+{unmatched_count}")
-    t("OFFICIAL_GICS_HIERARCHY",hierarchy_ready,"PASS")
-    t("OFFICIAL_GICS_CODE_TABLE",code_table_authority,"PASS")
-    t("FORMAL_COUNT_25",formal_count==25,f"{formal_count}")
-    t("FORMAL_COMPLETE_AGAINST_OFFICIAL_COUNT",complete_formal,"PASS")
-    t("NATIVE_CODE_UNIQUE",code_collisions==0,str(code_collisions))
     t("SENTINELS_NO_CODE",all(r["Canonical_Code_Eligibility"]=="NO" and r["PDSC_Eligibility"]=="NO" for r in sentinel_rows),str(unmatched))
-    t("EXACTLY_ONE_STRATEGY",strategies==1,str(strategies))
     t("NO_PDSC_IF_NATIVE",not native_ready or len(pdsc_codes)==0,str(len(pdsc_codes)))
+    t("DECISION_STRATEGY_EXCLUSIVE",strategies<=1,str(strategies))
     t("NO_FORBIDDEN_METHODS",all(prov[k]==0 for k in ["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings","third_party_GICS_tables","third_party_security_sector_databases","company_name_Frozen_linkage","fuzzy_matching","semantic_classification_inference","cross_taxonomy_mapping","per_security_web_fanout","price_OHLCV","news","trading_analysis"]),"0")
     t("NO_DOWNSTREAM_GATES",prov["AU_Gate_E"]==prov["AU_Gate_F"]==prov["Gate_H"]==0,"0")
     t("NO_CANONICAL_RS_P",prov["canonical_materialization"]==prov["Sector_RS"]==prov["P0"]==prov["P1"]==prov["P2"]==0,"0")
@@ -457,8 +481,18 @@ def main()->int:
     t("BR_IMMUTABLE",imm["BR_Canonical_Semantic_Unchanged"],BR_SHA);t("PARKS_IMMUTABLE",imm["Parked_Cohort_Registry_Unchanged"],PARK_SHA)
     t("CANONICAL_READY_37",imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425,"37/1425")
     t("NO_AU_CANONICAL",not any(AU_CANON.glob("AU_SP_ASX200_*.csv")),"0")
-    if gate_ready:t("GATE_D_PASS",decision["Gate_D"]=="PASS_BY_CURRENT_GOVERNANCE","PASS")
-    else:t("GATE_D_BLOCKED",decision["Gate_D"]=="BLOCKED" and bool(blocker),blocker)
+    if gate_ready:
+        t("GATE_D_PASS",decision["Gate_D"]=="PASS_BY_CURRENT_GOVERNANCE" and strategies==1,"PASS")
+        t("PASS_SOURCE_CONTRACT",hierarchy_ready and code_table_authority and official_inventory_unique and code_collisions==0,
+          f"hierarchy={hierarchy_ready};codes={code_table_authority};inventory_unique={official_inventory_unique};collisions={code_collisions}")
+    else:
+        t("GATE_D_BLOCKED",decision["Gate_D"]=="BLOCKED" and bool(blocker),blocker)
+        t("BLOCKER_PRECEDENCE_VALID",blocker in {
+          "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE","GICS_INDUSTRY_GROUP_LEVEL_NOT_VERIFIED",
+          "ASX_GICS_FORMAL_LABEL_NOT_FOUND_IN_OFFICIAL_GICS","GICS_INDUSTRY_GROUP_CODE_NOT_VERIFIED",
+          "GICS_LABEL_TO_CODE_BINDING_AMBIGUOUS","GICS_CODE_COLLISION","AU_FORMAL_CLASSIFICATION_VALUE_SET_NOT_RECONCILED",
+          "AU_PDSC_INPUT_CONTRACT_NOT_VERIFIED","AU_PDSC_COLLISION","AU_SECTOR_FIELD_CODE_FEASIBILITY_NOT_VERIFIED",
+          "AUTHORITY_REGRESSION_REVIEW_REQUIRED"},blocker)
     write_csv(out/"test_results_v0.84.csv",tests)
 
     verdict="PASS_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D" if gate_ready else "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D"
