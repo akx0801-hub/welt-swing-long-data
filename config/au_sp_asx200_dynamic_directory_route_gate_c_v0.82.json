@@ -13,6 +13,6 @@
   "p0_p1_p2_allowed": false,
   "alpha_vantage_allowed": false,
   "productive": false,
-  "retry_attempt": 2,
-  "retry_reason": "structural sibling data.count pagination contract"
+  "retry_attempt": 3,
+  "retry_reason": "stable pagination-band completion with bounded live count drift"
 }
