@@ -624,18 +624,20 @@ def main()->int:
     # Public independent replay of candidate browser requests, without cookies/auth.
     replay=[]
     for c in candidate_contracts[:20]:
-        req=bc["requests"].get(c["request_id"],{})
-        body=(req.get("postData","") or "").encode("utf-8") if req.get("postData") else None
+        req=bc.get("requests",{}).get(c["request_id"],{})
+        method=req.get("method",c.get("method","GET"))
+        post=req.get("postData",c.get("request_body",""))
+        body=(post or "").encode("utf-8") if post else None
         hs=req.get("headers",{})
-        fr=fetch(c["endpoint"],method=req.get("method","GET"),body=body,headers=hs)
+        fr=fetch(c["endpoint"],method=method,body=body,headers=hs)
         sch=body_schema(fr.get("body",b""),fr.get("content_type","")) if fr.get("ok") else {"parse_type":"","json_keys":[]}
         replay.append({
-          "Endpoint":c["endpoint"],"Method":req.get("method","GET"),"Phase":c["phase"],"Browser_Response_SHA256":c["response_sha256"],
+          "Endpoint":c["endpoint"],"Method":method,"Phase":c["phase"],"Browser_Response_SHA256":c["response_sha256"],
           "Replay_HTTP_Status":fr.get("status",""),"Replay_SHA256":fr.get("sha256",""),"Replay_Content_Type":fr.get("content_type",""),
           "Replay_Parse_Type":sch.get("parse_type",""),"Replay_Schema_Keys":" | ".join(sch.get("json_keys",[])[:200]),
           "Replay_Without_Cookies_Or_Auth":"YES","Public_Reproducibility_Status":"PASS" if fr.get("ok") else "NOT_VERIFIED"
         })
-        external.append({"Request_Order":len(external)+1,"Request_Type":"PUBLIC_CONTRACT_REPLAY","URL":c["endpoint"],"Method":req.get("method","GET"),
+        external.append({"Request_Order":len(external)+1,"Request_Type":"PUBLIC_CONTRACT_REPLAY","URL":c["endpoint"],"Method":method,
                          "Status":fr.get("status",""),"Content_Type":fr.get("content_type",""),"Bytes":fr.get("bytes",0),"SHA256":fr.get("sha256",""),
                          "Timestamp_UTC":fr.get("timestamp_utc",""),"Official_Source":"YES","Per_Security_Fanout":"NO",
                          "Result":"OK" if fr.get("ok") else fr.get("error","FAILED")})
@@ -648,20 +650,21 @@ def main()->int:
 
     # Level parameter contract: controlled UI select is authoritative app value, plus observed network delta if present.
     sel=bc.get("level_select") or {}
-    level_contract=[]
+    level_contract=[dict(r) for r in static_level_contract_rows]
     optmap={norm(o.get("text","")):o.get("value","") for o in sel.get("options",[])}
-    for display in LEVEL_LABELS.values():
+    for row in level_contract:
+        display=row["Official_Displayed_Label"]
         phase="LEVEL:"+display
         phase_reqs=[r for r in net_rows if r["Phase"]==phase and r["HTTP_Method"] in {"GET","POST"} and r["Endpoint"]]
-        level_contract.append({
-          "Official_Displayed_Label":display,"Internal_Formal_Level":DISPLAY_TO_LEVEL[display],
-          "Application_Raw_Level_Value":optmap.get(display,"NOT_VERIFIED"),
-          "UI_Select_ID":sel.get("id",""),"UI_Select_Name":sel.get("name",""),
-          "Controlled_Level_Phase_Request_Count":len(phase_reqs),
-          "Observed_Request_Endpoints":" | ".join(sorted({r["Endpoint"] for r in phase_reqs})),
-          "Observed_Request_Bodies":" | ".join(sorted({r["Request_Body"] for r in phase_reqs if r["Request_Body"]}))[:8000],
-          "Level_Parameter_Status":"PASS_UI_APPLICATION_CONSTANT" if display in optmap else "NOT_VERIFIED"
-        })
+        if display in optmap:
+            row["Application_Raw_Level_Value"]=optmap[display]
+            row["UI_Select_ID"]=sel.get("id","")
+            row["UI_Select_Name"]=sel.get("name","")
+            row["Level_Parameter_Status"]="PASS_UI_APPLICATION_CONSTANT"
+        if phase_reqs:
+            row["Controlled_Level_Phase_Request_Count"]=len(phase_reqs)
+            row["Observed_Request_Endpoints"]=" | ".join(sorted({r["Endpoint"] for r in phase_reqs}))
+            row["Observed_Request_Bodies"]=" | ".join(sorted({r["Request_Body"] for r in phase_reqs if r["Request_Body"]}))[:8000]
     write_csv(out/"nifty_classification_level_parameter_contract_v0.73.csv",level_contract)
 
     # Candidate schema.
@@ -830,7 +833,9 @@ def main()->int:
     not_verified=counts["NOT_VERIFIED"];conflict=counts["CONFLICT"]
     code_cov=sum(r["Classification_Status"]=="PROVABLY_CLASSIFIED" and r["Source_Native_Code"]!="NOT_VERIFIED" for r in repaired)
 
-    contract_discovered=bool(candidate_contracts)
+    static_contract_complete=sum(r["Payload_Parse_Status"]=="PASS" and r["Application_Code_Proof"]=="PASS" for r in static_level_payloads)==4
+    browser_contract_present=any(not str(x.get("request_id","")).startswith("STATIC:") for x in candidate_contracts)
+    contract_discovered=static_contract_complete or browser_contract_present
     level_param_verified=all(param_pass.values()) if param_pass else False
     membership_repro=len(membership_rows)>0
     public_repro=sum(r["Public_Reproducibility_Status"]=="PASS" for r in replay)>0
