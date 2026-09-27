@@ -1,0 +1,228 @@
+name: US SP400 SEC Identity Linkage Gate v0.76
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/us_sp400_sec_identity_linkage_v0.76.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  us-sp400-sec-identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout bounded v0.76 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.76 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="40f261b29dd0e92dc79b976a0970f6ae8970e9e8"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/manager_governance_authority_G_SEC_06_v0\.76\.json|config/us_sp400_sec_identity_linkage_spec_v0\.76\.json|scripts/us_sp400_sec_identity_linkage_v0_76\.py|scripts/persist_us_sp400_sec_identity_linkage_v0_76\.py|tests/test_us_sp400_sec_identity_linkage_v0_76\.py|\.github/workflows/us_sp400_sec_identity_linkage_v0\.76\.yml|config/us_sp400_sec_identity_linkage_v0\.76\.json|docs/validation/US_SP400_Deterministic_SEC_Security_Identity_Linkage_Gate_v0\.76\.md|output_us_sp400_sec_identity_linkage_v0_76/.*|sector_metadata/governance/parked_cohort_registry_v1\.csv)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.75 predecessor and selection authority
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10931349603 --jq .digest)"
+          test "$DIGEST" = "sha256:670a2246c1186dddb7604b9eb9f349d980049a5e9f9f192540769aeb6fb25d4a"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          s=json.load(open("output_in_nifty50_source_access_persistence_v0_75/summary_v0.75.json",encoding="utf-8"))
+          c=json.load(open("output_in_nifty50_source_access_persistence_v0_75/stage_checkpoint_v0.75.json",encoding="utf-8"))
+          assert s["verdict"]=="BLOCKED_IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE"
+          assert s["in_source_access_persistence_ready"] is False
+          assert s["blocker"]=="EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+          assert s["in_gate_f_classified"]==45
+          assert s["canonical_ready_rows"]==37 and s["canonical_total_rows"]==1425
+          assert c["workflow_run_id"]==36319329798 and c["artifact_id"]==10931349603
+          assert "sha256:"+c["artifact_digest"]=="sha256:670a2246c1186dddb7604b9eb9f349d980049a5e9f9f192540769aeb6fb25d4a"
+
+          cov=list(csv.DictReader(open("output_in_nifty50_remaining_3_sector_closure_v0_74/in_exact_45_classification_coverage_v0.74.csv",encoding="utf-8")))
+          assert len(cov)==45 and all(r["Classification_Status"]=="PROVABLY_CLASSIFIED" for r in cov)
+
+          matrix=list(csv.DictReader(open("output_frozen_1425_canonical_sector_reconciliation_v0_69/current_authority_cohort_gate_matrix_v0.69.csv",encoding="utf-8")))
+          by={r["Cohort"]:r for r in matrix}
+          assert by["US_SP400"]["Consecutive_Resolved_Gates"]=="4"
+          assert by["US_SP400"]["Current_Earliest_Unresolved_Gate"]=="E"
+          assert by["US_SP400"]["Current_Blocker"]=="DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED"
+          assert by["US_SP400"]["Frozen_Rows"]=="368"
+          assert by["US_SP500"]["Consecutive_Resolved_Gates"]=="4"
+          assert by["US_SP500"]["Frozen_Rows"]=="372"
+          assert by["JP_N225"]["Consecutive_Resolved_Gates"]=="3"
+
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify G-SEC-06, spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          g=json.load(open("config/manager_governance_authority_G_SEC_06_v0.76.json",encoding="utf-8"))
+          s=json.load(open("config/us_sp400_sec_identity_linkage_spec_v0.76.json",encoding="utf-8"))
+          t=json.load(open("config/us_sp400_sec_identity_linkage_v0.76.json",encoding="utf-8"))
+          assert g["authority_id"]=="G-SEC-06"
+          assert g["effective_forward_from"]=="v0.76"
+          assert g["in_nifty50_authority"]["execution_state"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert g["in_nifty50_authority"]["gate_F_classified"]==45
+          assert g["in_nifty50_authority"]["canonical_rows"]==0
+          assert g["rules"]["parked_cohort_excluded_from_active_next_cohort_selection"] is True
+          assert g["rules"]["restriction_circumvention_via_mirrors_reproductions_caches_or_third_party_copies_forbidden"] is True
+
+          assert s["required_start_head"]=="40f261b29dd0e92dc79b976a0970f6ae8970e9e8"
+          assert s["primary_scope_cohort"]=="US_SP400"
+          assert s["primary_scope_gate"]=="E_SECURITY_IDENTITY_ONLY"
+          assert s["expected_frozen_rows"]==368
+          assert s["taxonomy"]=="SEC_SIC_2026"
+          assert s["sec_documentation"]["discover_company_tickers_exchange_from_docs"] is True
+          assert s["mic_authority"]["discover_mic_file_from_landing_page"] is True
+          assert s["identifier_rules"]["company_name_join_allowed"] is False
+          assert s["identifier_rules"]["fuzzy_matching_allowed"] is False
+          assert s["scope_boundaries"]["us_gate_f_allowed"] is False
+          assert s["scope_boundaries"]["canonical_materialization_allowed"] is False
+          assert s["scope_boundaries"]["us_sp500_execution_allowed"] is False
+          assert s["scope_boundaries"]["nifty_requests_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+
+          assert t["required_start_head"]=="40f261b29dd0e92dc79b976a0970f6ae8970e9e8"
+          assert t["selected_cohort"]=="US_SP400"
+          assert t["in_nifty50_park_state"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert t["us_gate_f_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["us_sp500_execution_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Prepare parser dependency
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple openpyxl==3.1.5
+          python3 - <<'PY'
+          import importlib.metadata
+          assert importlib.metadata.version("openpyxl")=="3.1.5"
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/us_sp400_sec_identity_linkage_v0_76.py             scripts/persist_us_sp400_sec_identity_linkage_v0_76.py
+          python3 tests/test_us_sp400_sec_identity_linkage_v0_76.py -v
+
+      - name: Run bounded US_SP400 Gate E
+        run: |
+          set -euo pipefail
+          rm -rf output_us_sp400_sec_identity_linkage_v0_76
+          python3 scripts/us_sp400_sec_identity_linkage_v0_76.py             --repository-sha "$GITHUB_SHA"             --output-dir output_us_sp400_sec_identity_linkage_v0_76
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_us_sp400_sec_identity_linkage_v0_76")
+          s=json.load(open(out/"summary_preupload_v0.76.json",encoding="utf-8"))
+          target=list(csv.DictReader(open(out/"us_sp400_frozen_368_identity_target_v0.76.csv",encoding="utf-8")))
+          links=list(csv.DictReader(open(out/"us_sp400_exact_368_identity_linkage_v0.76.csv",encoding="utf-8")))
+          micmap=list(csv.DictReader(open(out/"sec_exchange_to_mic_mapping_v0.76.csv",encoding="utf-8")))
+          park=list(csv.DictReader(open(out/"parked_cohort_registry_v0.76.csv",encoding="utf-8")))
+          calc=list(csv.DictReader(open(out/"post_park_next_cohort_selection_calculation_v0.76.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.76.csv",encoding="utf-8")))
+          prov=json.load(open(out/"provider_call_audit_v0.76.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.76.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.76.csv",encoding="utf-8")))
+          assert len(target)==368 and len(links)==368
+          assert len({r["WS_ID"] for r in target})==368
+          assert len({r["Security_Key"] for r in target})==368
+          assert len(park)==1 and park[0]["Cohort"]=="IN_NIFTY50"
+          assert park[0]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert park[0]["Gate_F_Classified"]=="45" and park[0]["Canonical_Rows"]=="0"
+          by={r["Cohort"]:r for r in calc}
+          assert by["IN_NIFTY50"]["Selection_Status"]=="EXCLUDED_PARKED_EXTERNAL_AUTHORIZATION"
+          assert s["selected_cohort"]=="US_SP400"
+          assert s["in_nifty50_park_state"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert s["in_gate_f_classified"]==45 and s["in_canonical_rows"]==0
+          assert s["canonical_ready_rows"]==37 and s["canonical_total_rows"]==1425
+          assert all(r["Per_Security_Fanout"]=="NO" for r in ext)
+          assert sum(1 for r in ext if r["Source_Class"]=="SEC" and r["Request_Type"] in {"SEC_API_DOCUMENTATION","SEC_ACCESS_DOCUMENTATION"})<=2
+          assert sum(1 for r in ext if r["Request_Type"]=="SEC_TICKER_EXCHANGE_BULK")<=1
+          assert sum(1 for r in ext if r["Request_Type"]=="ISO_MIC_LANDING")<=1
+          assert sum(1 for r in ext if r["Request_Type"]=="ISO_10383_MIC_DATASET")<=1
+          assert all(v==0 for v in prov.values())
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert s["us_gate_f_runs"]==0 and s["canonical_materialization_runs"]==0
+          assert s["us_sp500_runs"]==0 and s["other_cohort_runs"]==0
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/US_SP400_sector_metadata_v1.csv").exists()
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          if s["us_sp400_deterministic_sec_identity_ready"]:
+              assert s["verdict"]=="PASS_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE"
+              assert (s["linked"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(368,368,0,0,0,0)
+              assert all(r["Gate_E_Status"]=="PROVABLY_LINKED" for r in links)
+              assert micmap and all(r["Mapping_Status"]=="PASS" for r in micmap)
+              assert s["blocker"]==""
+              assert s["next_gate"]=="US_SP400 EXACT FROZEN SEC SIC CLASSIFICATION COVERAGE GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE"
+              assert s["blocker"]!=""
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["IN_Gate_F_Classified_Before"]==imm["IN_Gate_F_Classified_After"]==45
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          PY
+          BAD_WORKTREE="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_us_sp400_sec_identity_linkage_v0_76/.*|docs/validation/US_SP400_Deterministic_SEC_Security_Identity_Linkage_Gate_v0\.76\.md|sector_metadata/governance/parked_cohort_registry_v1\.csv)$' || true)"
+          test -z "$BAD_WORKTREE"
+
+      - name: Upload bounded v0.76 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-sp400-sec-identity-linkage-v0.76-${{ github.run_id }}
+          path: output_us_sp400_sec_identity_linkage_v0_76/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_us_sp400_sec_identity_linkage_v0_76.py             --output-dir output_us_sp400_sec_identity_linkage_v0_76             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "us-sp400-sec-identity-linkage-v0.76-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.76 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/US_SP400_Deterministic_SEC_Security_Identity_Linkage_Gate_v0.76.md                   output_us_sp400_sec_identity_linkage_v0_76/                   sector_metadata/governance/parked_cohort_registry_v1.csv
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/US_SP400_Deterministic_SEC_Security_Identity_Linkage_Gate_v0\.76\.md|output_us_sp400_sec_identity_linkage_v0_76/.*|sector_metadata/governance/parked_cohort_registry_v1\.csv)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist US SP400 SEC identity linkage v0.76"
+          git push origin HEAD:main
