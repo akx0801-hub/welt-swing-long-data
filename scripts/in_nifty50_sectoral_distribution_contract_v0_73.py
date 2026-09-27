@@ -255,13 +255,19 @@ def start_chrome(chrome:str,port:int)->tuple[subprocess.Popen,str,str]:
     ud=tempfile.mkdtemp(prefix="v073-chrome-")
     args=[chrome,"--headless=new",f"--remote-debugging-port={port}","--remote-allow-origins=*",
           f"--user-data-dir={ud}","--no-sandbox","--disable-dev-shm-usage","--disable-gpu",
-          "--disable-background-networking","--disable-component-update","--disable-sync","--no-first-run","about:blank"]
+          "--disable-background-networking","--disable-component-update","--disable-sync","--disable-extensions",
+          "--no-first-run","--no-default-browser-check","about:blank"]
     p=subprocess.Popen(args,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,text=True)
     for _ in range(60):
         try:
             with urllib.request.urlopen(f"http://127.0.0.1:{port}/json/list",timeout=1) as r:
                 tabs=json.load(r)
-                if tabs:return p,ud,tabs[0]["webSocketDebuggerUrl"]
+            pages=[t for t in tabs if t.get("type")=="page" and not str(t.get("url","")).startswith("chrome-extension://")]
+            if pages:return p,ud,pages[0]["webSocketDebuggerUrl"]
+            req=urllib.request.Request(f"http://127.0.0.1:{port}/json/new?about:blank",method="PUT")
+            with urllib.request.urlopen(req,timeout=1) as r:
+                t=json.load(r)
+                if t.get("type")=="page":return p,ud,t["webSocketDebuggerUrl"]
         except Exception:pass
         time.sleep(.25)
     err=""
@@ -423,7 +429,7 @@ def main()->int:
                      "Content_Type":page.get("content_type",""),"Bytes":page.get("bytes",0),"SHA256":page.get("sha256",""),
                      "Timestamp_UTC":page.get("timestamp_utc",""),"Official_Source":"YES","Per_Security_Fanout":"NO",
                      "Result":"OK" if page.get("ok") else page.get("error","FAILED")})
-    asset_rows=[];candidate_strings=[]
+    asset_rows=[];candidate_strings=[];context_rows=[]
     if page.get("ok"):
         hp=AssetParser();hp.feed(page["body"].decode("utf-8",errors="replace"))
         assets=[];seen=set()
@@ -438,6 +444,14 @@ def main()->int:
                              "Timestamp_UTC":fr.get("timestamp_utc",""),"Official_Source":"YES","Per_Security_Fanout":"NO",
                              "Result":"OK" if fr.get("ok") else fr.get("error","FAILED")})
             txt=fr.get("body",b"").decode("utf-8",errors="replace")
+            for kw in ["SectorialIndexData","sectorDropdown","selectedinSectorial","_Sector.js","Macro Economic Sector","Basic Industry","sectoralDistibution"]:
+                pos=0
+                while True:
+                    p=txt.find(kw,pos)
+                    if p<0:break
+                    context_rows.append({"Source_Asset":u,"Keyword":kw,"Context":txt[max(0,p-700):min(len(txt),p+1400)].replace("\r"," ").replace("\n"," ")})
+                    pos=p+len(kw)
+                    if sum(1 for x in context_rows if x["Source_Asset"]==u and x["Keyword"]==kw)>=12:break
             rel=[s for s in re.findall(r'''(?:"|')([^"'\n]{3,300})(?:"|')''',txt)
                  if any(k in s.lower() for k in ("sector","industry","distribution","classification","ajax","api","chart"))][:100]
             candidate_strings.extend((u,s) for s in rel)
@@ -456,6 +470,9 @@ def main()->int:
         string_rows.append({"Source_Asset":src,"Relevant_String":s})
     write_csv(out/"nifty_application_asset_relevant_strings_v0.73.csv",string_rows if string_rows else [{
       "Source_Asset":"","Relevant_String":""
+    }])
+    write_csv(out/"nifty_application_asset_context_snippets_v0.73.csv",context_rows if context_rows else [{
+      "Source_Asset":"","Keyword":"","Context":""
     }])
 
     # Browser network capture.
