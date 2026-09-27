@@ -1,0 +1,113 @@
+{
+  "version": "v0.79",
+  "stage": "JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_GATE",
+  "required_start_head": "4a5c2f5914f57e5333c68f7a8616dfd1b50adceb",
+  "scope_cohort": "JP_N225",
+  "scope_gate": "F_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_ONLY",
+  "taxonomy": "NIKKEI_36_INDUSTRY_AND_SECTOR",
+  "sector_level": "SECTOR",
+  "official_level_name": "Sector",
+  "expected_frozen_rows": 197,
+  "expected_primary_mic": "XTKS",
+  "component_source": {
+    "url": "https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225",
+    "allowed_hosts": ["indexes.nikkei.co.jp"],
+    "max_requests": 1,
+    "v0_78_sha256": "7c3dd31f7987c6ea0fc21b5ee61054dbafb6c5c1fcce376dd63025cfdeb7043b",
+    "v0_78_explicit_update": "Sep/25/2026",
+    "expected_hierarchy": "SECTOR -> INDUSTRY -> SECURITY_CODE",
+    "expected_current_component_count": 225,
+    "expected_sector_count": 6,
+    "expected_industry_count": 36
+  },
+  "authorized_sector_labels": [
+    "Technology",
+    "Financials",
+    "Consumer Goods",
+    "Materials",
+    "Capital Goods/Others",
+    "Transportation and Utilities"
+  ],
+  "authorized_pdsc": {
+    "Technology": "PDSC1:2eb3437c8c82dad4cca3468ea713f244dd11c166ecd04a2a03bb2e010229c093",
+    "Financials": "PDSC1:0587309eb18ea75e0cd9964b23533cc25604f934902824576f82f9850c2c40be",
+    "Consumer Goods": "PDSC1:78be66233d528b6397fc234995d241e69913ed571321c6bf6e1d7d8a1d3541ca",
+    "Materials": "PDSC1:e3962e390df45617e19fea135091e814d14ced1f767bc1e4dbd543a4ccfcfef7",
+    "Capital Goods/Others": "PDSC1:49d729022c336d8e7d9819f30f8a587fea2c0d4dce2e63142d469f187a131176",
+    "Transportation and Utilities": "PDSC1:2fa8886dfeff0c0077ad4c1e75bdde490b6b2b67df89fdf035a9cb9d92dde596"
+  },
+  "pdsc_sha256_v1": {
+    "input_order": ["Sector_Taxonomy", "Sector_Level", "Sector_Name"],
+    "separator": "U+001F",
+    "unicode_normalization": "NFC_ONLY",
+    "encoding": "UTF-8",
+    "hash": "SHA-256",
+    "output_format": "PDSC1:<full-lowercase-sha256>",
+    "truncate": false
+  },
+  "identity_contract": {
+    "historical_gate_e": "PASS_INHERITED",
+    "official_source_field": "Code",
+    "frozen_field": "Primary_Ticker",
+    "comparison": "exact string after surrounding-whitespace removal",
+    "numeric_casting_allowed": false,
+    "zero_padding_allowed": false,
+    "company_name_join_allowed": false,
+    "fuzzy_matching_allowed": false
+  },
+  "target_reconstruction": {
+    "frozen_file": "universe/SWING_U3K_FROZEN_v0.5.csv",
+    "cohort_label_authority_file": "output_p0_frozen_1425_home_market_rs_v0_58/capability_v0.58.csv",
+    "cohort_join_key": "Security_Key",
+    "note": "Physical Frozen v0.5 projection has no Primary_Universe_Index column; Frozen rows remain the target authority and the persisted capability sidecar supplies the cohort label by exact Security_Key."
+  },
+  "limited_fallback": {
+    "only_if_current_absence": true,
+    "repository_evidence_first": true,
+    "official_nikkei_only": true,
+    "security_code_based": true,
+    "same_hierarchy_required": true,
+    "per_security_fanout_allowed": false,
+    "broad_alternate_source_hunt_allowed": false
+  },
+  "parked_cohort_immutability": {
+    "IN_NIFTY50": "PARKED_EXTERNAL_AUTHORIZATION",
+    "US_SP400": "PARKED_SOURCE_ACCESS",
+    "US_SP500": "PARKED_SHARED_SOURCE_PREREQUISITE",
+    "sec_requests_allowed": false,
+    "nse_requests_allowed": false
+  },
+  "scope_boundaries": {
+    "gate_h_allowed": false,
+    "canonical_materialization_allowed": false,
+    "canonical_registry_readiness_update_allowed": false,
+    "other_cohort_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_allowed": false,
+    "p1_p2_allowed": false,
+    "productive": false
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "wikipedia": true,
+    "bloomberg": true,
+    "reuters": true,
+    "tradingview": true,
+    "etf_holdings": true,
+    "third_party_historical_constituent_lists": true,
+    "company_name_joins": true,
+    "fuzzy_matching": true,
+    "numeric_ticker_casting": true,
+    "zero_padding_transformation": true,
+    "per_security_web_fanout": true,
+    "mixed_classification_level": true,
+    "sec_requests": true,
+    "nse_requests": true,
+    "price_ohlcv": true,
+    "news": true,
+    "trading_analysis": true
+  }
+}
