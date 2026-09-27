@@ -416,8 +416,8 @@ def main()->int:
 
     ledger=[
       {"Request_Order":1,"Source_Class":"OFFICIAL_ASX","URL":ASX_URL,"Purpose":"ONE_FRESH_CURRENT_DIRECTORY_DOWNLOAD","HTTP_Status":"BROWSER_PUBLIC","SHA256":asx["SHA256"],"Per_Security_Request":"NO"},
-      {"Request_Order":2,"Source_Class":"OFFICIAL_GICS_OWNER_SP_DJI","URL":GICS_METHOD_URL,"Purpose":"GICS_HIERARCHY_LEVEL_AND_CODE_FORMAT","HTTP_Status":method["HTTP_Status"],"SHA256":method["SHA256"],"Per_Security_Request":"NO"},
-      {"Request_Order":3,"Source_Class":"OFFICIAL_GICS_OWNER_SP_DJI","URL":GICS_CODES_URL,"Purpose":"GICS_INDUSTRY_GROUP_LABEL_CODE_TABLE","HTTP_Status":codes["HTTP_Status"],"SHA256":codes["SHA256"],"Per_Security_Request":"NO"},
+      {"Request_Order":2,"Source_Class":"OFFICIAL_GICS_OWNER_SP_DJI","URL":GICS_LANDING_URL,"Purpose":"CURRENT_GICS_STRUCTURE_DISCOVERY","HTTP_Status":landing["HTTP_Status"],"SHA256":landing["SHA256"],"Per_Security_Request":"NO"},
+      {"Request_Order":3,"Source_Class":"OFFICIAL_GICS_OWNER_SP_DJI","URL":GICS_XLSX_URL,"Purpose":"CURRENT_GICS_STRUCTURE_LABEL_CODE_WORKBOOK","HTTP_Status":structure["HTTP_Status"],"SHA256":structure["SHA256"],"Per_Security_Request":"NO"},
       {"Request_Order":4,"Source_Class":"OFFICIAL_GICS_OWNER_MSCI","URL":MSCI_GICS_URL,"Purpose":"OWNER_CONTEXT_CORROBORATION","HTTP_Status":msci["HTTP_Status"],"SHA256":msci["SHA256"],"Per_Security_Request":"NO"}
     ]
     write_csv(out/"external_request_ledger_v0.84.csv",ledger)
