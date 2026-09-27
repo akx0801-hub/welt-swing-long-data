@@ -1,0 +1,16 @@
+{
+  "version": "v0.82",
+  "stage": "AU_SP_ASX200_DYNAMIC_DIRECTORY_DATA_ROUTE_REPAIR_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C_COMPLETION",
+  "required_start_head": "c7fed3a3e4463229f17cb515d4abac5860cfc809",
+  "dynamic_directory_route_repair_authorized": true,
+  "gate_c_completion_authorized": true,
+  "au_gate_d_allowed": false,
+  "au_gate_e_f_allowed": false,
+  "canonical_materialization_allowed": false,
+  "park_reselection_execution_allowed": false,
+  "next_cohort_execution_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
