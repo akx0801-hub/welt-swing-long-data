@@ -1,0 +1,18 @@
+{
+  "version": "v0.80",
+  "stage": "JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "required_start_head": "954c7272b575c0d0c3ae9633db073ad2e126daa7",
+  "scope_cohort": "JP_N225",
+  "gate_h_authorized": true,
+  "gate_f_rerun_allowed": false,
+  "canonical_materialization_allowed": false,
+  "canonical_registry_readiness_update_allowed": false,
+  "other_cohort_allowed": false,
+  "sec_requests_allowed": false,
+  "nse_requests_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
