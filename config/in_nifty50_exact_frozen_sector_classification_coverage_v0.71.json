@@ -17,6 +17,6 @@
   "third_party_sector_source_allowed": false,
   "alpha_vantage_allowed": false,
   "productive": false,
-  "execution_attempt": 3,
-  "retry_reason": "ADD_PURE_PYTHON_PDF_TEXT_FALLBACK_AND_COMPLETE_RAW_DISTINCT_INVENTORY"
+  "execution_attempt": 4,
+  "retry_reason": "REPAIR_WORKFLOW_AND_USE_BOUNDED_PDF_STREAM_FALLBACK"
 }
