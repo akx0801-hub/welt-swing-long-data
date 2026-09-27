@@ -70,6 +70,18 @@ class V082Tests(unittest.TestCase):
         self.assertTrue(a["directory_like"])
         self.assertIn("industry",a["classification_fields"])
 
+    def test_pagination_contract_from_meta(self):
+        selected={
+          "Resolved_URL":"https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25",
+          "Request_URL":"https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25",
+          "parsed":{"meta":{"pagination.totalCount":101}}
+        }
+        p=mod.pagination_contract(selected)
+        self.assertTrue(p["Detected"])
+        self.assertTrue(p["Explicit_Contract"])
+        self.assertEqual(p["Observed_Page_Size"],25)
+        self.assertEqual(p["Explicit_Total_Pages"],5)
+
     def test_explicit_gics_field_contract(self):
         selected={"analysis":{"classification_fields":["GICS Industry Group"]}}
         ctx={"GICS_Expanded":True,"SPDJI_Observed":True,"MSCI_Observed":True}
