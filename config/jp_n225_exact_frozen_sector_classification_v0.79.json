@@ -1,0 +1,17 @@
+{
+  "version": "v0.79",
+  "stage": "JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_GATE",
+  "required_start_head": "4a5c2f5914f57e5333c68f7a8616dfd1b50adceb",
+  "scope_cohort": "JP_N225",
+  "scope_gate": "F_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_ONLY",
+  "gate_h_allowed": false,
+  "canonical_materialization_allowed": false,
+  "other_cohort_allowed": false,
+  "sec_requests_allowed": false,
+  "nse_requests_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
