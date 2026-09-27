@@ -3,8 +3,12 @@
   "blocker": "ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE",
   "canonical_ready_rows": 37,
   "canonical_total_rows": 1425,
-  "external_requests": 4,
+  "external_requests": 9,
   "files": {
+    "asx_directory_bulk_discovery_markers_v0.81.json": {
+      "bytes": 2082,
+      "sha256": "2062b2115093d3b6969f181d6c4395f9c65397d2a78a95153029dba1a80471d3"
+    },
     "asx_directory_industry_distinct_label_inventory_v0.81.csv": {
       "bytes": 30,
       "sha256": "30740009c59f90b45de6cc4ba2488894edc40d052f334818db17309b0a4a5855"
@@ -15,19 +19,19 @@
     },
     "asx_directory_industry_field_provenance_audit_v0.81.json": {
       "bytes": 394,
-      "sha256": "92fd4c5f3acd09dcab51394d9e27a242a6d9488dd2c2d83783de8dd8e654513a"
+      "sha256": "3770eb1910c3c2e84ff403005578dadb244f34bb0b45c04a2c9ed53c2c7a70ae"
     },
     "asx_directory_source_audit_v0.81.json": {
-      "bytes": 1846,
-      "sha256": "f1c685b1c755e8f43c52cc728023605d7bc4fbfa573303cb84fba8e4f8a35dbd"
+      "bytes": 779,
+      "sha256": "6168a852acaf130bc03131c337d9c00bb742b3f8d501a5509c36c51a17c441da"
     },
     "asx_gics_field_binding_audit_v0.81.json": {
       "bytes": 338,
       "sha256": "57ba8c432e7daca81817c1e34584cba185a0004566edaa7446f707a758fea278"
     },
     "asx_listed_companies_bulk_schema_audit_v0.81.json": {
-      "bytes": 606,
-      "sha256": "5fc21bc2ac8db6372544d7205b1a262c23d855ecf62022194a096f3a7f590365"
+      "bytes": 355,
+      "sha256": "a51287f29102e4d2d121f9dcb38b2d0152ae0e871840ee6ffbf0f957ec23210e"
     },
     "asx_upstream_provider_attribution_audit_v0.81.json": {
       "bytes": 630,
@@ -54,20 +58,20 @@
       "sha256": "b4d5d2be0be60f2b5f07e003091fb72c90ccc04d0f31cce28b269ce26ab27cb2"
     },
     "au_taxonomy_version_contract_v0.81.json": {
-      "bytes": 393,
-      "sha256": "9207692cd68f658f82b9eaf2dc3fe79a609dd5478663ca5a51d1598668d24bfc"
+      "bytes": 329,
+      "sha256": "cac875dfc9408c178482a69ca898645b78ad42ce9de72643806f8bfbe05ed76a"
     },
     "external_request_ledger_v0.81.csv": {
-      "bytes": 1459,
-      "sha256": "70e43a7365989a290c250c848622cd1ba2ba35868833524d90c78a70e6c8a41c"
+      "bytes": 3663,
+      "sha256": "440a9a683b974b3af4a3a73d45e40233a6ebf8ad25e62ae4b7c177f1e754fa11"
     },
     "immutability_audit_v0.81.json": {
       "bytes": 2160,
       "sha256": "a922bea9aa3a8ca854361deea603391036eac4ba7e10361e9854e018679b3b43"
     },
     "jp_n225_external_authorization_park_application_v0_81.json": {
-      "bytes": 678,
-      "sha256": "ca90d87a03257eb2243d01f05d59ec307a5b2b19e3211c613e447949e7ae696f"
+      "bytes": 787,
+      "sha256": "557f462821a15ec7678f135ea31e83b3e64bded8d92427ad33fab4dad585125b"
     },
     "parked_cohort_registry_update_v0_81.csv": {
       "bytes": 726,
@@ -83,7 +87,7 @@
     },
     "provider_call_audit_v0.81.json": {
       "bytes": 701,
-      "sha256": "be980a71e071390f25210c7b750545dea1538b693f7c071de7664616d4fc226b"
+      "sha256": "60c2f2e7fe50e8f3ceb252851775b624e39eb61691ef2de5cdf09420f72563f5"
     },
     "stage_checkpoint_preupload_v0.81.json": {
       "bytes": 570,
@@ -103,7 +107,7 @@
   "p1_runs": 0,
   "p2_runs": 0,
   "park_registry_sha256_after": "38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd",
-  "repository_sha": "f1d1b5adc8d07632b717e0ae1033814746e1e061",
+  "repository_sha": "9b464a692d944087a5dfe1e40962917b409ace24",
   "required_start_head": "a6b5a2e1f946bc8cd8615e37fe26efd82b77eb53",
   "sector_rs_runs": 0,
   "selected_cohort": "AU_SP_ASX200",

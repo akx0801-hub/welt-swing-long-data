@@ -1,6 +1,6 @@
 {
   "Authority": "G-SEC-06",
-  "Authority_Action": "APPLIED_EXISTING_RULE_NO_NEW_GOVERNANCE",
+  "Authority_Action": "ALREADY_APPLIED_IDEMPOTENT",
   "Authority_Title": "External Authorization Blocker Parking",
   "Canonical_Readiness": "NO",
   "Canonical_Rows": 0,
@@ -10,7 +10,8 @@
   "Gate_H": "BLOCKED",
   "Gate_H_Blocker": "EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
   "Park_Registry_SHA256_After": "38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd",
-  "Park_Registry_SHA256_Before": "d367957506fd357e22b7cc9c62479a0dfa46ddf54b04ed862a71fdb50b87b2db",
+  "Park_Registry_SHA256_Before_This_Run": "38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd",
+  "Park_Registry_SHA256_Original_Pre_v0_81": "d367957506fd357e22b7cc9c62479a0dfa46ddf54b04ed862a71fdb50b87b2db",
   "Reopen_Automatically": "NO",
   "Technical_Gates_A_G": "PASS"
 }

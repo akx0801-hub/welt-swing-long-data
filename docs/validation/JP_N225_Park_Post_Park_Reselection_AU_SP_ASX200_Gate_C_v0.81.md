@@ -38,11 +38,11 @@ G-SEC-02 taxonomy isolation is preserved. No crosswalk, semantic label inference
 **ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE**.
 
 ## Artifact binding
-- Workflow run: 36336863155
-- Workflow head: f1d1b5adc8d07632b717e0ae1033814746e1e061
-- Artifact: 10937945914
-- Artifact name: jp-park-reselection-au-asx200-gate-c-v0.81-36336863155
-- Artifact digest: sha256:9f63741bd08d11b9a04a57a7857fc59937f57ace2aa4d13cc85710dbb5c5a480
+- Workflow run: 36337366779
+- Workflow head: 9b464a692d944087a5dfe1e40962917b409ace24
+- Artifact: 10937741236
+- Artifact name: jp-park-reselection-au-asx200-gate-c-v0.81-36337366779
+- Artifact digest: sha256:95a0049ecb57c4ba24fe2a4e2b24841f7aa404810a3ed83e49fc82ca7014c7d5
 
 ## Next gate
 **NONE_WHILE_GATE_C_BLOCKED**

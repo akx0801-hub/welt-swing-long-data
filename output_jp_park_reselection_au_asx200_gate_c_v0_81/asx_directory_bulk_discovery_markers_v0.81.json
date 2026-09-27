@@ -1,0 +1,46 @@
+{
+  "Directory_Bounded_Markers": [],
+  "No_Guessed_Stale_Endpoint": true,
+  "Official_Script_URLs_Considered": [
+    "https://www.asx.com.au/.rum/@adobe/helix-rum-js@%5E2/dist/micro.js",
+    "https://www.asx.com.au/etc.clientlibs/clientlibs/granite/jquery.lc-7842899024219bcbdb5e72c946870b79-lc.min.js",
+    "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-dependencies.lc-9833f1d2e692aa09edfea690e231b110-lc.min.js",
+    "https://www.asx.com.au/etc.clientlibs/core/wcm/components/commons/site/clientlibs/container.lc-0a6aff292f5cc42142779cde92054524-lc.min.js",
+    "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-base-98.0.1.lc-9173ee95bdef7ee95d183254eb75e888-lc.min.js",
+    "https://www.asx.com.au/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=721148476"
+  ],
+  "Script_Asset_Audits": [
+    {
+      "asset_url": "https://www.asx.com.au/.rum/@adobe/helix-rum-js@%5E2/dist/micro.js",
+      "bounded_markers": [],
+      "candidates": []
+    },
+    {
+      "asset_url": "https://www.asx.com.au/etc.clientlibs/clientlibs/granite/jquery.lc-7842899024219bcbdb5e72c946870b79-lc.min.js",
+      "bounded_markers": [],
+      "candidates": []
+    },
+    {
+      "asset_url": "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-dependencies.lc-9833f1d2e692aa09edfea690e231b110-lc.min.js",
+      "bounded_markers": [],
+      "candidates": []
+    },
+    {
+      "asset_url": "https://www.asx.com.au/etc.clientlibs/core/wcm/components/commons/site/clientlibs/container.lc-0a6aff292f5cc42142779cde92054524-lc.min.js",
+      "bounded_markers": [],
+      "candidates": []
+    },
+    {
+      "asset_url": "https://www.asx.com.au/etc.clientlibs/asx/clientlibs/clientlib-base-98.0.1.lc-9173ee95bdef7ee95d183254eb75e888-lc.min.js",
+      "bounded_markers": [],
+      "candidates": []
+    },
+    {
+      "asset_url": "https://www.asx.com.au/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=721148476",
+      "bounded_markers": [],
+      "candidates": []
+    }
+  ],
+  "Selected_URL": "",
+  "Status": "NOT_FOUND"
+}

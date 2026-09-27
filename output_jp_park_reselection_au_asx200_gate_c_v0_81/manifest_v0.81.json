@@ -1,6 +1,6 @@
 {
-  "artifact_digest": "sha256:9f63741bd08d11b9a04a57a7857fc59937f57ace2aa4d13cc85710dbb5c5a480",
-  "artifact_id": 10937945914,
+  "artifact_digest": "sha256:95a0049ecb57c4ba24fe2a4e2b24841f7aa404810a3ed83e49fc82ca7014c7d5",
+  "artifact_id": 10937741236,
   "au_gate_d_runs": 0,
   "au_gate_e_runs": 0,
   "au_gate_f_runs": 0,
@@ -12,7 +12,11 @@
   "files": {
     "artifact_binding_v0.81.json": {
       "bytes": 488,
-      "sha256": "0a1a015ef380151ef243be4db30523a9bbaa7a6868a9d3081f6da2781acc4d0f"
+      "sha256": "3874eb3f873d4e76ac2715ce97f055841f0940c9f9409ca8c0dd245592a75a68"
+    },
+    "asx_directory_bulk_discovery_markers_v0.81.json": {
+      "bytes": 2082,
+      "sha256": "2062b2115093d3b6969f181d6c4395f9c65397d2a78a95153029dba1a80471d3"
     },
     "asx_directory_industry_distinct_label_inventory_v0.81.csv": {
       "bytes": 30,
@@ -24,19 +28,19 @@
     },
     "asx_directory_industry_field_provenance_audit_v0.81.json": {
       "bytes": 394,
-      "sha256": "92fd4c5f3acd09dcab51394d9e27a242a6d9488dd2c2d83783de8dd8e654513a"
+      "sha256": "3770eb1910c3c2e84ff403005578dadb244f34bb0b45c04a2c9ed53c2c7a70ae"
     },
     "asx_directory_source_audit_v0.81.json": {
-      "bytes": 1846,
-      "sha256": "f1c685b1c755e8f43c52cc728023605d7bc4fbfa573303cb84fba8e4f8a35dbd"
+      "bytes": 779,
+      "sha256": "6168a852acaf130bc03131c337d9c00bb742b3f8d501a5509c36c51a17c441da"
     },
     "asx_gics_field_binding_audit_v0.81.json": {
       "bytes": 338,
       "sha256": "57ba8c432e7daca81817c1e34584cba185a0004566edaa7446f707a758fea278"
     },
     "asx_listed_companies_bulk_schema_audit_v0.81.json": {
-      "bytes": 606,
-      "sha256": "5fc21bc2ac8db6372544d7205b1a262c23d855ecf62022194a096f3a7f590365"
+      "bytes": 355,
+      "sha256": "a51287f29102e4d2d121f9dcb38b2d0152ae0e871840ee6ffbf0f957ec23210e"
     },
     "asx_upstream_provider_attribution_audit_v0.81.json": {
       "bytes": 630,
@@ -63,28 +67,28 @@
       "sha256": "b4d5d2be0be60f2b5f07e003091fb72c90ccc04d0f31cce28b269ce26ab27cb2"
     },
     "au_taxonomy_version_contract_v0.81.json": {
-      "bytes": 393,
-      "sha256": "9207692cd68f658f82b9eaf2dc3fe79a609dd5478663ca5a51d1598668d24bfc"
+      "bytes": 329,
+      "sha256": "cac875dfc9408c178482a69ca898645b78ad42ce9de72643806f8bfbe05ed76a"
     },
     "docs/validation/JP_N225_Park_Post_Park_Reselection_AU_SP_ASX200_Gate_C_v0.81.md": {
       "bytes": 3346,
-      "sha256": "f8dd029a811ea6df78bcde95eff84a57464fb2eae7f0b8c01e321109247a8dc2"
+      "sha256": "6a84bb6dd3c32582d84a8c7bce46b1a31a8d4d4db585ea1f6130458e55edf7ed"
     },
     "external_request_ledger_v0.81.csv": {
-      "bytes": 1459,
-      "sha256": "70e43a7365989a290c250c848622cd1ba2ba35868833524d90c78a70e6c8a41c"
+      "bytes": 3663,
+      "sha256": "440a9a683b974b3af4a3a73d45e40233a6ebf8ad25e62ae4b7c177f1e754fa11"
     },
     "immutability_audit_v0.81.json": {
       "bytes": 2160,
       "sha256": "a922bea9aa3a8ca854361deea603391036eac4ba7e10361e9854e018679b3b43"
     },
     "jp_n225_external_authorization_park_application_v0_81.json": {
-      "bytes": 678,
-      "sha256": "ca90d87a03257eb2243d01f05d59ec307a5b2b19e3211c613e447949e7ae696f"
+      "bytes": 787,
+      "sha256": "557f462821a15ec7678f135ea31e83b3e64bded8d92427ad33fab4dad585125b"
     },
     "manifest_preupload_v0.81.json": {
-      "bytes": 4540,
-      "sha256": "0f675e6958b4ad98fc7bfaa122695368d550d6aec57a0ae338ec0df56412d9f6"
+      "bytes": 4707,
+      "sha256": "884bdf6803d714188de598833f08fe1f9aaaf0f4485c863f1e8b1a89d0b6ccc3"
     },
     "parked_cohort_registry_update_v0_81.csv": {
       "bytes": 726,
@@ -100,7 +104,7 @@
     },
     "provider_call_audit_v0.81.json": {
       "bytes": 701,
-      "sha256": "be980a71e071390f25210c7b750545dea1538b693f7c071de7664616d4fc226b"
+      "sha256": "60c2f2e7fe50e8f3ceb252851775b624e39eb61691ef2de5cdf09420f72563f5"
     },
     "sector_metadata/governance/parked_cohort_registry_v1.csv": {
       "bytes": 726,
@@ -112,7 +116,7 @@
     },
     "stage_checkpoint_v0.81.json": {
       "bytes": 787,
-      "sha256": "b705fb46bcb074dfdd799e1d1bbeeb33c2008b9d6ff3fc4fb33fb1d0ee2a69b2"
+      "sha256": "b1280247c8fd83803dcb9a93d7d0c34b793347bc79e86c0b91446df1e4dbb63d"
     },
     "summary_preupload_v0.81.json": {
       "bytes": 1281,
@@ -120,7 +124,7 @@
     },
     "summary_v0.81.json": {
       "bytes": 1790,
-      "sha256": "6ca987b07191c3627b2c71764fe609a18737a3d7b4d9b75d1f5615555554a1e9"
+      "sha256": "e4e7e12b57940af148b753a223211c71480cff216859148355d34d11a87db86e"
     },
     "test_results_v0.81.csv": {
       "bytes": 1334,
@@ -137,6 +141,6 @@
   "stage": "JP_N225_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_AU_SP_ASX200_GATE_C",
   "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
   "version": "v0.81",
-  "workflow_head_sha": "f1d1b5adc8d07632b717e0ae1033814746e1e061",
-  "workflow_run_id": 36336863155
+  "workflow_head_sha": "9b464a692d944087a5dfe1e40962917b409ace24",
+  "workflow_run_id": 36337366779
 }
