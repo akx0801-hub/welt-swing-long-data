@@ -179,16 +179,16 @@ def validate_predecessor(repo_sha:str)->dict[str,Any]:
     return {"summary":s,"coverage":cov,"identity":link,"match":match,"repro":r}
 
 def extract_hidden_input_value(html_text:str,element_id:str)->str:
-    m=re.search(r"<input\\b[^>]*\\bid=[\"']"+re.escape(element_id)+r"[\"'][^>]*>",html_text,re.I)
+    m=re.search(r"<input\b[^>]*\bid=[\"']"+re.escape(element_id)+r"[\"'][^>]*>",html_text,re.I)
     if not m:return ""
-    v=re.search(r"\\bvalue=[\"']([^\"']*)[\"']",m.group(0),re.I)
+    v=re.search(r"\bvalue=[\"']([^\"']*)[\"']",m.group(0),re.I)
     return norm(v.group(1)) if v else ""
 
 def parse_foamtree_payload(raw:bytes)->tuple[Any|None,str]:
     text=raw.decode("utf-8",errors="replace").strip()
     if not text:return None,"EMPTY"
-    cleaned=re.sub(r",\\s*([\\]}])",r"\\1",text)
-    cleaned=re.sub(r"([{,]\\s*)([A-Za-z_][A-Za-z0-9_]*)\\s*:",r'\\1"\\2":',cleaned)
+    cleaned=re.sub(r",\s*([\]}])",r"\1",text)
+    cleaned=re.sub(r"([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:",r'\1"\2":',cleaned)
     l=cleaned.find("(");r=cleaned.rfind(")")
     inner=cleaned[l+1:r] if l>=0 and r>l else cleaned
     start=inner.find("{")
@@ -199,7 +199,7 @@ def parse_foamtree_payload(raw:bytes)->tuple[Any|None,str]:
     for i,ch in enumerate(inner[start:],start):
         if quote:
             if esc:esc=False
-            elif ch=="\\\\":esc=True
+            elif ch=="\\":esc=True
             elif ch==quote:quote=""
             continue
         if ch in ("\"","'"):quote=ch;continue
