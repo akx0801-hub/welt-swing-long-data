@@ -1,0 +1,123 @@
+{
+  "version": "v0.80",
+  "stage": "JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "required_start_head": "954c7272b575c0d0c3ae9633db073ad2e126daa7",
+  "scope_cohort": "JP_N225",
+  "scope_gate": "H_ACCESS_PERSISTENCE_ONLY",
+  "governance_authority": "config/manager_governance_authority_G_SEC_05_v0.75.json",
+  "predecessor": {
+    "final_commit": "954c7272b575c0d0c3ae9633db073ad2e126daa7",
+    "verdict": "PASS_JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE",
+    "workflow_run_id": 36330409269,
+    "artifact_id": 10935786239,
+    "artifact_digest": "sha256:9d96c111cc3f6ec779013fc6294f634f65c04adae5ba356ec56045edebc3461a",
+    "classified": 197,
+    "total": 197,
+    "current_source_matches": 197,
+    "pdsc_coverage": 197,
+    "pdsc_collisions": 0
+  },
+  "taxonomy": "NIKKEI_36_INDUSTRY_AND_SECTOR",
+  "sector_level": "SECTOR",
+  "source_native_sector_code_available": false,
+  "sector_code_origin": "PROJECT_DERIVED_CANONICAL",
+  "sector_code_method": "PDSC_SHA256_V1",
+  "sources": {
+    "A": {
+      "necessity": "REQUIRED",
+      "canonical_name": "NIKKEI_INDEXES_NIKKEI225_COMPONENTS",
+      "legacy_evidence_name": "NIKKEI_225_COMPONENTS",
+      "url": "https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225",
+      "v0_79_sha256": "7cde320f69115a6e4f7c8d3d2ba8170a8c76a97a825f58cbc9682c8226adfa04",
+      "v0_78_sha256": "7c3dd31f7987c6ea0fc21b5ee61054dbafb6c5c1fcce376dd63025cfdeb7043b",
+      "source_update_raw": "Update：Sep/25/2026"
+    },
+    "B": {
+      "necessity": "REQUIRED",
+      "canonical_name": "NIKKEI_INDEXES_NIKKEI225_PROFILE",
+      "legacy_evidence_name": "NIKKEI_225_PROFILE",
+      "url": "https://indexes.nikkei.co.jp/en/nkave/index/profile?idx=nk225",
+      "v0_78_sha256": "d537eee86b7d39464eddcec3fd64d3e060e2aedf5a633a9749265dc32d330ffa"
+    },
+    "C": {
+      "necessity": "CORROBORATING_ONLY",
+      "legacy_evidence_name": "NIKKEI_225_FACTSHEET",
+      "url": "https://indexes.nikkei.co.jp/en/nkave/factsheet?idx=nk225",
+      "v0_78_sha256": "2792128b23eeed9382966027dcac22947632211631a026e937a80989b03c86b3"
+    }
+  },
+  "policy_pages": [
+    "https://indexes.nikkei.co.jp/nkave/data/index.en.html",
+    "https://indexes.nikkei.co.jp/nkave/license/non-display_usage.en.html",
+    "https://indexes.nikkei.co.jp/nkave/license/display_usage.en.html"
+  ],
+  "allowed_hosts": ["indexes.nikkei.co.jp"],
+  "access_evidence_rule": "same-day exact v0.78/v0.79 ordinary unauthenticated public GET evidence may be inherited; no core-source refetch is required",
+  "source_drift_rule": {
+    "byte_stable_html_required": false,
+    "separate": ["BYTE_DRIFT", "STRUCTURAL_DRIFT", "CLASSIFICATION_DRIFT"],
+    "authority_regression_only_for_material_structural_or_classification_contradiction": true
+  },
+  "raw_persistence": {
+    "required_for_audit": false,
+    "persist_full_raw_sources": false
+  },
+  "future_canonical_metadata_fields": [
+    "WS_ID","Primary_MIC","Primary_Ticker","Sector_Taxonomy","Sector_Level","Sector_Code",
+    "Source_Sector_Code","Sector_Name","Sector_Code_Origin","Sector_Code_Method","Source_Name",
+    "Source_Reference","Source_Update_Raw","Source_Retrieved_UTC","Source_SHA256",
+    "Mapping_Status","Evidence_Final_Commit"
+  ],
+  "parked_cohort_immutability": {
+    "IN_NIFTY50": "PARKED_EXTERNAL_AUTHORIZATION",
+    "US_SP400": "PARKED_SOURCE_ACCESS",
+    "US_SP500": "PARKED_SHARED_SOURCE_PREREQUISITE"
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_feature_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_home_market_rs_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "canonical_ready_rows": 37,
+    "canonical_total_rows": 1425
+  },
+  "failure_precedence": [
+    "NIKKEI_COMPONENT_PUBLIC_ACCESS_NOT_REPRODUCIBLE",
+    "NIKKEI_PROFILE_PUBLIC_ACCESS_NOT_REPRODUCIBLE",
+    "AUTH_OR_ENTITLEMENT_REQUIRED",
+    "JP_BOUNDED_EVIDENCE_PERSISTENCE_INSUFFICIENT",
+    "JP_CANONICAL_METADATA_EVIDENCE_PERSISTENCE_NOT_VERIFIED",
+    "EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+    "AUTHORITY_REGRESSION_REVIEW_REQUIRED"
+  ],
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "wikipedia": true,
+    "tradingview": true,
+    "bloomberg": true,
+    "reuters": true,
+    "etf_holdings": true,
+    "third_party_classification_databases": true,
+    "company_name_joins": true,
+    "fuzzy_matching": true,
+    "per_security_web_fanout": true,
+    "price_ohlcv": true,
+    "news": true,
+    "trading_analysis": true,
+    "captcha_bypass": true,
+    "authentication_bypass": true,
+    "legal_rights_fabrication": true,
+    "sec_requests": true,
+    "nse_requests": true,
+    "gate_f_rerun": true,
+    "canonical_materialization": true,
+    "canonical_registry_readiness_update": true,
+    "other_cohort": true,
+    "sector_rs": true,
+    "p0_p1_p2": true
+  },
+  "productive": false
+}
