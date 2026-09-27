@@ -1,0 +1,1089 @@
+Macro_Economic_Sector_Code,Macro_Economic_Sector_Name_RawExtracted,Macro_Economic_Sector_Name,Sector_Code,Sector_Name_RawExtracted,Sector_Name,Industry_Code,Industry_Name_RawExtracted,Industry_Name,Basic_Industry_Code,Basic_Industry_Name_RawExtracted,Basic_Industry_Name
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101001,"Commodity                   Manufacturers of
+Chemicals                   chemicals like sy
+organic and inorg",Commodity Manufacturers of Chemicals chemicals like sy organic and inorg
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101002,"Specialty                   Manufacturers of
+Chemicals                   manufacture of a
+fine chemicals, a
+polymers, explosi
+inks, sealants, d
+etc.","Specialty Manufacturers of Chemicals manufacture of a fine chemicals, a polymers, explosi inks, sealants, d etc."
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101003,Carbon Black                Manufacturers of,Carbon Black Manufacturers of
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101004,"Dyes And Pigments           Manufacturer, sup
+dyes and pigments","Dyes And Pigments Manufacturer, sup dyes and pigments"
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101005,"Explosives                  Manufacturer, sup
+commercial explos
+accessories","Explosives Manufacturer, sup commercial explos accessories"
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101006,"Petrochemicals              Manufacturer, sup
+petrochemical pro
+oxide, propylene
+Also includes man
+polyester and acr
+covered under Pla
+Consumer under Co
+and Plastic Produ
+Manufacturing) et","Petrochemicals Manufacturer, sup petrochemical pro oxide, propylene Also includes man polyester and acr covered under Pla Consumer under Co and Plastic Produ Manufacturing) et"
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101007,"Printing Inks               Manufacturers and
+inks and allied m",Printing Inks Manufacturers and inks and allied m
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101008,"Trading - Chemicals         Trading companies
+chemicals",Trading - Chemicals Trading companies chemicals
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010101,"Chemicals &
+Petrochemicals",Chemicals & Petrochemicals,IN010101009,Industrial Gases            Producer or suppl,Industrial Gases Producer or suppl
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010102,"Fertilizers &
+Agrochemicals",Fertilizers & Agrochemicals,IN010102001,Fertilizers                 Manufacturers of,Fertilizers Manufacturers of
+IN01,Commodities,Commodities,IN0101,Chemicals,Chemicals,IN010102,"Fertilizers &
+Agrochemicals",Fertilizers & Agrochemicals,IN010102002,"Pesticides &               Manufacturers of ag
+Agrochemicals              pesticides",Pesticides & Manufacturers of ag Agrochemicals pesticides
+IN01,Commodities,Commodities,IN0102,"Construction
+Materials",Construction Materials,IN010203,"Cement & Cement
+Products",Cement & Cement Products,IN010203001,"Cement & Cement            Manufacturer, suppl
+Products                   cement, cement prod","Cement & Cement Manufacturer, suppl Products cement, cement prod"
+IN01,Commodities,Commodities,IN0102,"Construction
+Materials",Construction Materials,IN010204,"Other
+Construction
+Materials",Other Construction Materials,IN010204001,"Other Construction         Other construction
+Materials                  supplier of sand et
+companies dealing w
+etc. which are clas
+industry under Cons",Other Construction Other construction Materials supplier of sand et companies dealing w etc. which are clas industry under Cons
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010301,Ferrous Metals,Ferrous Metals,IN010301001,"Ferro & Silica             Manufacturers and d
+Manganese                  silico manganese li
+briquette, fly ash","Ferro & Silica Manufacturers and d Manganese silico manganese li briquette, fly ash"
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010301,Ferrous Metals,Ferrous Metals,IN010301002,Pig Iron                   Manufacturers and d,Pig Iron Manufacturers and d
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010301,Ferrous Metals,Ferrous Metals,IN010301003,"Sponge Iron                Manufacturers and d
+iron",Sponge Iron Manufacturers and d iron
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010301,Ferrous Metals,Ferrous Metals,IN010301004,Iron & Steel               Manufacturers of Ir,Iron & Steel Manufacturers of Ir
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010302,"Non - Ferrous
+Metals",Non - Ferrous Metals,IN010302001,"Aluminium                  Mining, processing,
+distributing the al","Aluminium Mining, processing, distributing the al"
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010302,"Non - Ferrous
+Metals",Non - Ferrous Metals,IN010302002,Copper                     Producer and distri,Copper Producer and distri
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010302,"Non - Ferrous
+Metals",Non - Ferrous Metals,IN010302003,Zinc                       Producer and distri,Zinc Producer and distri
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010302,"Non - Ferrous
+Metals",Non - Ferrous Metals,IN010302004,"Precious Metals            Mining, manufacturi
+precious materials
+platinum etc.  Incl
+where underlying is
+precious metals","Precious Metals Mining, manufacturi precious materials platinum etc. Incl where underlying is precious metals"
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010303,Diversified Metals,Diversified Metals,IN010303001,"Diversified Metals         Companies engaged i
+mining of diversifi",Diversified Metals Companies engaged i mining of diversifi
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010304,Minerals & Mining,Minerals & Mining,IN010304001,"Industrial Minerals        Mining, producing a
+industrial material
+has been classified","Industrial Minerals Mining, producing a industrial material has been classified"
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010305,"Metals & Minerals
+Trading",Metals & Minerals Trading,IN010305001,"Trading - Metals           Trading companies a
+metals (excluding p",Trading - Metals Trading companies a metals (excluding p
+IN01,Commodities,Commodities,IN0103,"Metals &
+Mining",Metals & Mining,IN010305,"Metals & Minerals
+Trading",Metals & Minerals Trading,IN010305002,"Trading - Minerals          Trading companies an
+industrial minerals
+which has been class",Trading - Minerals Trading companies an industrial minerals which has been class
+IN01,Commodities,Commodities,IN0104,"Forest
+Materials",Forest Materials,IN010401,"Paper, Forest &
+Jute Products","Paper, Forest & Jute Products",IN010401001,"Paper & Paper               Manufacturers of pap
+Products",Paper & Paper Manufacturers of pap Products
+IN01,Commodities,Commodities,IN0104,"Forest
+Materials",Forest Materials,IN010401,"Paper, Forest &
+Jute Products","Paper, Forest & Jute Products",IN010401002,"Forest Products             Companies dealing wi
+Soil, Pulp, Firewood
+Laminated Timber exc
+laminates which is c
+Home Furnishing, Flo
+Consumer Discretiona","Forest Products Companies dealing wi Soil, Pulp, Firewood Laminated Timber exc laminates which is c Home Furnishing, Flo Consumer Discretiona"
+IN01,Commodities,Commodities,IN0104,"Forest
+Materials",Forest Materials,IN010401,"Paper, Forest &
+Jute Products","Paper, Forest & Jute Products",IN010401003,"Jute & Jute                 Manufacturers of jut
+Products",Jute & Jute Manufacturers of jut Products
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0201,"Automobile
+and Auto
+Components",Automobile and Auto Components,IN020101,Automobiles,Automobiles,IN020101001,"Passenger Cars &            Manufacturer of pass
+Utility Vehicles            vehicles including c
+rickshaws etc.",Passenger Cars & Manufacturer of pass Utility Vehicles vehicles including c rickshaws etc.
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0201,"Automobile
+and Auto
+Components",Automobile and Auto Components,IN020101,Automobiles,Automobiles,IN020101002,"2/3 Wheelers                Manufacturers of mot
+three-wheelers (does
+and tricycles)",2/3 Wheelers Manufacturers of mot three-wheelers (does and tricycles)
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0201,"Automobile
+and Auto
+Components",Automobile and Auto Components,IN020101,Automobiles,Automobiles,IN020101004,"Auto Dealer                 Trading and distribu
+utility vehicles, 2/","Auto Dealer Trading and distribu utility vehicles, 2/"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0201,"Automobile
+and Auto
+Components",Automobile and Auto Components,IN020102,Auto Components,Auto Components,IN020102001,"Auto Components             Manufacturers and di
+& Equipments                accessories for auto
+fasteners, gas cylin
+etc.","Auto Components Manufacturers and di & Equipments accessories for auto fasteners, gas cylin etc."
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0201,"Automobile
+and Auto
+Components",Automobile and Auto Components,IN020102,Auto Components,Auto Components,IN020102006,"Tyres & Rubber              Manufacturers and di
+Products                    and rubber products",Tyres & Rubber Manufacturers and di Products and rubber products
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0201,"Automobile
+and Auto
+Components",Automobile and Auto Components,IN020102,Auto Components,Auto Components,IN020102007,"Trading - Auto              Trading and distribu
+Components                  components",Trading - Auto Trading and distribu Components components
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201002,"Cycles                      Manufacturers and di
+and tricycles",Cycles Manufacturers and di and tricycles
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201003,"Consumer                    Manufacturers and di
+Electronics                 consumer electronics",Consumer Manufacturers and di Electronics consumer electronics
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201005,"Gems, Jewellery             Manufacturers and
+And Watches                 jewellery, watches
+and accessories in
+engaged into cutti
+diamonds","Gems, Jewellery Manufacturers and And Watches jewellery, watches and accessories in engaged into cutti diamonds"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201006,"Glass - Consumer            Manufacturers and
+consumer glass pro",Glass - Consumer Manufacturers and consumer glass pro
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201007,"Household                   Manufacturers of e
+Appliances                  appliances like ai
+food processors, m","Household Manufacturers of e Appliances appliances like ai food processors, m"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201008,"Houseware                   Manufacturers and
+household durable
+cookware, cutlery,
+specialties not cl","Houseware Manufacturers and household durable cookware, cutlery, specialties not cl"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201009,"Leather And                 Manufacturers and
+Leather Products            products such as b
+types of footwear",Leather And Manufacturers and Leather Products products such as b types of footwear
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201010,"Leisure Products            Manufacturers of l
+equipment includin
+gift articles, toy","Leisure Products Manufacturers of l equipment includin gift articles, toy"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201011,"Plastic Products -          Manufacturers and
+Consumer                    products used in h
+suitcase, briefcas","Plastic Products - Manufacturers and Consumer products used in h suitcase, briefcas"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201012,"Plywood Boards/             Manufacturers and d
+Laminates                   plywood, laminates","Plywood Boards/ Manufacturers and d Laminates plywood, laminates"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201013,"Sanitary Ware               Manufacturer of san
+ceramic plumbing fi
+lavatories, or toil","Sanitary Ware Manufacturer of san ceramic plumbing fi lavatories, or toil"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201015,"Paints                      Manufacturers and d
+and exterior paints",Paints Manufacturers and d and exterior paints
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201016,"Diversified                 Any other consumer
+consumer products           above",Diversified Any other consumer consumer products above
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201017,"Footwear                    Companies engaged i
+trading and distrib
+footwear and relate",Footwear Companies engaged i trading and distrib footwear and relate
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201018,"Furniture, Home             Manufacturer/ dist
+Furnishing                  carpets, curtains
+furnishing product","Furniture, Home Manufacturer/ dist Furnishing carpets, curtains furnishing product"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201019,"Ceramics                    Manufacturer/ dist
+wall tiles",Ceramics Manufacturer/ dist wall tiles
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0202,"Consumer
+Durables",Consumer Durables,IN020201,"Consumer
+Durables",Consumer Durables,IN020201020,"Granites & Marbles          Manufacturer/ dist
+marbles",Granites & Marbles Manufacturer/ dist marbles
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0203,Textiles,Textiles,IN020301,"Textiles &
+Apparels",Textiles & Apparels,IN020301001,"Garments &                  Manufacturers & dis
+Apparels                    garments, knitwears","Garments & Manufacturers & dis Apparels garments, knitwears"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0203,Textiles,Textiles,IN020301,"Textiles &
+Apparels",Textiles & Apparels,IN020301002,"Other Textile               Manufacturers & dis
+Products                    fabrics, yarn, silk
+texturized yarn and
+Includes spinning o
+other yarn and comp
+cotton ginning oper","Other Textile Manufacturers & dis Products fabrics, yarn, silk texturized yarn and Includes spinning o other yarn and comp cotton ginning oper"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0203,Textiles,Textiles,IN020301,"Textiles &
+Apparels",Textiles & Apparels,IN020301003,"Trading - Textile           Trading and Distrib
+Products                    apparels' and 'othe
+where a revenue fro
+cannot be determine",Trading - Textile Trading and Distrib Products apparels' and 'othe where a revenue fro cannot be determine
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020401,Media,Media,IN020401001,"Advertising &               Companies providing
+Media Agencies              relations and marke
+includes billboard
+telemarketers.",Advertising & Companies providing Media Agencies relations and marke includes billboard telemarketers.
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020401,Media,Media,IN020401002,"Electronic Media            Publisher of newspa
+other periodicals t
+medium",Electronic Media Publisher of newspa other periodicals t medium
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020401,Media,Media,IN020401003,"Web based media            Companies engaged in
+and service                media, search engine
+networking etc. Excl
+operating in online
+under E-Retail/ E-Co
+companies providing
+suppliers and potent
+products/ merchandis
+Internet & Catalogue","Web based media Companies engaged in and service media, search engine networking etc. Excl operating in online under E-Retail/ E-Co companies providing suppliers and potent products/ merchandis Internet & Catalogue"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020401,Media,Media,IN020401004,"Print Media                Publisher of newspap
+other periodicals th",Print Media Publisher of newspap other periodicals th
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020402,Entertainment,Entertainment,IN020402001,"Film Production,           Producers and distri
+Distribution &             Includes theatres an
+Exhibition","Film Production, Producers and distri Distribution & Includes theatres an Exhibition"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020402,Entertainment,Entertainment,IN020402002,"Digital                    Producers and distri
+Entertainment              other entertainment
+through digital, Ove
+platform.","Digital Producers and distri Entertainment other entertainment through digital, Ove platform."
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020402,Entertainment,Entertainment,IN020402003,"Media &                    Producers and distri
+Entertainment              entertainment produc
+includes companies e
+production, distribu
+television shows, pr
+distributors of musi
+excludes production
+movies which is clas
+Production, Distribu","Media & Producers and distri Entertainment entertainment produc includes companies e production, distribu television shows, pr distributors of musi excludes production movies which is clas Production, Distribu"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020402,Entertainment,Entertainment,IN020402004,"TV Broadcasting &          Owners of TV channel
+Software                   broadcasting of TV s
+Production                 operators and DTH se",TV Broadcasting & Owners of TV channel Software broadcasting of TV s Production operators and DTH se
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0204,"Media,
+Entertainment
+& Publication","Media, Entertainment & Publication",IN020403,"Printing &
+Publication",Printing & Publication,IN020403001,"Printing &                 Companies providing
+Publication                commercial printing,
+commercial documents","Printing & Companies providing Publication commercial printing, commercial documents"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0205,Realty,Realty,IN020501,Realty,Realty,IN020501001,"Residential,                Companies engaged
+Commercial                  construction of re
+Projects                    (offices/shops etc","Residential, Companies engaged Commercial construction of re Projects (offices/shops etc"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0205,Realty,Realty,IN020501,Realty,Realty,IN020501002,"Real Estate related         Companies engaged
+services                    estate related ser
+agents, real estat
+data analytics etc","Real Estate related Companies engaged services estate related ser agents, real estat data analytics etc"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0205,Realty,Realty,IN020501,Realty,Realty,IN020501003,"Real Estate                 Companies or Trust
+Investment Trusts           ownership, acquisi
+(REITs)                     management and ope","Real Estate Companies or Trust Investment Trusts ownership, acquisi (REITs) management and ope"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020601,Leisure Services,Leisure Services,IN020601001,"Hotels & Resorts            Owners and operato
+etc.  Includes inv
+underlying is 'Hot",Hotels & Resorts Owners and operato etc. Includes inv underlying is 'Hot
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020601,Leisure Services,Leisure Services,IN020601002,"Restaurants                 Owners and operato
+recreation clubs,
+food, catering ser","Restaurants Owners and operato recreation clubs, food, catering ser"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020601,Leisure Services,Leisure Services,IN020601003,"Amusement Parks/            Owners and operato
+Other Recreation            parks, Casinos and
+facilities not cov","Amusement Parks/ Owners and operato Other Recreation parks, Casinos and facilities not cov"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020601,Leisure Services,Leisure Services,IN020601004,"Wellness                    Owners and operato
+facilities such as
+beauty parlours, s","Wellness Owners and operato facilities such as beauty parlours, s"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020601,Leisure Services,Leisure Services,IN020601005,"Tour, Travel                Companies engaged
+Related Services            travel related ser
+operators, ticketi
+and vehicle bookin
+companies that pro
+through digital me","Tour, Travel Companies engaged Related Services travel related ser operators, ticketi and vehicle bookin companies that pro through digital me"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020602,"Other Consumer
+Services",Other Consumer Services,IN020602001,"Education                   Any stream of educ
+education or any s
+provided in classr",Education Any stream of educ education or any s provided in classr
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020602,"Other Consumer
+Services",Other Consumer Services,IN020602002,"E-Learning                  Any stream of educ
+education or any s",E-Learning Any stream of educ education or any s
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020602,"Other Consumer
+Services",Other Consumer Services,IN020602003,"Food Storage               Companies engaged in
+Facilities                 storage facility",Food Storage Companies engaged in Facilities storage facility
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020602,"Other Consumer
+Services",Other Consumer Services,IN020602004,"Other Consumer             Companies providing
+Services                   services not classif
+includes event manag
+services, housekeepi","Other Consumer Companies providing Services services not classif includes event manag services, housekeepi"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020603,Retailing,Retailing,IN020603001,"Speciality Retail          Owners and operators
+comprising a single
+apparels, electronic","Speciality Retail Owners and operators comprising a single apparels, electronic"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020603,Retailing,Retailing,IN020603002,"Pharmacy Retail            Companies engaged in
+pharmaceutical, prov
+related products and
+electronic medium","Pharmacy Retail Companies engaged in pharmaceutical, prov related products and electronic medium"
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020603,Retailing,Retailing,IN020603003,"Diversified Retail         Owners and operators
+multiple range of pr
+(department stores)",Diversified Retail Owners and operators multiple range of pr (department stores)
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020603,Retailing,Retailing,IN020603004,"E-Retail/ E-               Companies that earn
+Commerce                   from provision of pr
+predominantly throug
+such as internet.",E-Retail/ E- Companies that earn Commerce from provision of pr predominantly throug such as internet.
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020603,Retailing,Retailing,IN020603005,"Internet &                 Companies providing
+Catalogue Retail           suppliers and potent
+products/ merchandis",Internet & Companies providing Catalogue Retail suppliers and potent products/ merchandis
+IN02,"Consumer
+Discretionary",Consumer Discretionary,IN0206,"Consumer
+Services",Consumer Services,IN020603,Retailing,Retailing,IN020603006,"Distributors               Distributors and who
+merchandise not clas",Distributors Distributors and who merchandise not clas
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030101,Gas,Gas,IN030101001,"Gas                        Companies engaged in
+Transmission/Mark          transportation of ga
+eting",Gas Companies engaged in Transmission/Mark transportation of ga eting
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030101,Gas,Gas,IN030101003,"LPG/CNG/PNG/LN             Companies engaged in
+G Supplier                 CNG, PNG and LNG","LPG/CNG/PNG/LN Companies engaged in G Supplier CNG, PNG and LNG"
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030101,Gas,Gas,IN030101004,"Trading - Gas               Companies engaged
+trading in gas",Trading - Gas Companies engaged trading in gas
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030102,Oil,Oil,IN030102001,"Oil Exploration &           Companies engaged
+Production                  and production of",Oil Exploration & Companies engaged Production and production of
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030102,Oil,Oil,IN030102002,"Offshore Support            Companies providi
+Solution Drilling           services to oil c",Offshore Support Companies providi Solution Drilling services to oil c
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030102,Oil,Oil,IN030102003,"Oil Storage &               Companies engaged
+Transportation              and transportatio
+companies",Oil Storage & Companies engaged Transportation and transportatio companies
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030102,Oil,Oil,IN030102004,"Oil Equipment &             Manufacturers of
+Services                    providers of serv
+industry",Oil Equipment & Manufacturers of Services providers of serv industry
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030103,"Petroleum
+Products",Petroleum Products,IN030103001,"Refineries &                Companies engaged
+Marketing                   marketing of oil,
+products","Refineries & Companies engaged Marketing marketing of oil, products"
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030103,"Petroleum
+Products",Petroleum Products,IN030103002,"Lubricants                  Manufacturers and
+lubricants",Lubricants Manufacturers and lubricants
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030104,Consumable Fuels,Consumable Fuels,IN030104001,"Coal                        Companies engaged
+and distribution
+etc.",Coal Companies engaged and distribution etc.
+IN03,Energy,Energy,IN0301,"Oil, Gas &
+Consumable
+Fuels","Oil, Gas & Consumable Fuels",IN030104,Consumable Fuels,Consumable Fuels,IN030104002,"Trading - Coal              Companies engaged
+distribution of c",Trading - Coal Companies engaged distribution of c
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040101,"Agricultural Food
+& other Products",Agricultural Food & other Products,IN040101001,Edible Oil                  Producers and dis,Edible Oil Producers and dis
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040101,"Agricultural Food
+& other Products",Agricultural Food & other Products,IN040101002,"Sugar                       Producers and dis
+allied products",Sugar Producers and dis allied products
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040101,"Agricultural Food
+& other Products",Agricultural Food & other Products,IN040101003,"Tea & Coffee                Producers and dis
+coffee",Tea & Coffee Producers and dis coffee
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040101,"Agricultural Food
+& other Products",Agricultural Food & other Products,IN040101004,"Other Agricultural          Producers and dis
+Products                    products not clas",Other Agricultural Producers and dis Products products not clas
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040102,"Beverages
+I",Beverages I,IN040102001,"Breweries &                 Manufacturers of
+Distilleries                Includes distille",Breweries & Manufacturers of Distilleries Includes distille
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040102,"Beverages
+I",Beverages I,IN040102002,Other Beverages            Manufacturers of non-a,Other Beverages Manufacturers of non-a
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040103,"Cigarettes &              I
+Tobacco Products",Cigarettes & I Tobacco Products,IN040103001,"Cigarettes &               Manufacturers and dist
+Tobacco Products           cigarettes and other t",Cigarettes & Manufacturers and dist Tobacco Products cigarettes and other t
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040104,"Food Products             I
+I",Food Products I I,IN040104001,"Animal Feed                Manufacturers and dist
+feed",Animal Feed Manufacturers and dist feed
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040104,"Food Products             I
+I",Food Products I I,IN040104002,"Dairy Products             Producers and distribu
+products",Dairy Products Producers and distribu products
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040104,"Food Products             I
+I",Food Products I I,IN040104003,"Other Food                 Producers and distribu
+Products                   products not classifie",Other Food Producers and distribu Products products not classifie
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040104,"Food Products             I
+I",Food Products I I,IN040104004,"Packaged Foods             Producers & distributo
+foods including biscui
+etc.",Packaged Foods Producers & distributo foods including biscui etc.
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040104,"Food Products             I
+I",Food Products I I,IN040104005,"Seafood                    Culture and processors
+other sea/ freshwater",Seafood Culture and processors other sea/ freshwater
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040104,"Food Products             I
+I",Food Products I I,IN040104006,"Meat Products              Processors of meat and
+including Poultry          processors of chicken",Meat Products Processors of meat and including Poultry processors of chicken
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040105,Personal Products         I,Personal Products I,IN040105001,"Personal Care              Manufacturers and dist
+personal products such
+shampoo, perfume, cosm","Personal Care Manufacturers and dist personal products such shampoo, perfume, cosm"
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040106,"Household                 I
+Products
+I",Household I Products I,IN040106001,"Household                  Manufacturers and dist
+Products                   household products suc
+foils, detergents, mat
+tissues, soaps etc., m
+distributors of batter
+appliances. Excludes a
+batteries classified u
+Discretionary', manufa
+distributors of photog","Household Manufacturers and dist Products household products suc foils, detergents, mat tissues, soaps etc., m distributors of batter appliances. Excludes a batteries classified u Discretionary', manufa distributors of photog"
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040106,"Household                 I
+Products
+I",Household I Products I,IN040106004,"Stationary                 Manufacturers and dist
+stationary such as pen
+etc.",Stationary Manufacturers and dist stationary such as pen etc.
+IN04,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN0401,"Fast Moving
+Consumer
+Goods",Fast Moving Consumer Goods,IN040107,Diversified FMCG          I,Diversified FMCG I,IN040107001,"Diversified FMCG           Companies engaged into
+products, where no sin","Diversified FMCG Companies engaged into products, where no sin"
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050101,Finance,Finance,IN050101001,"Financial                  Financial Institutio
+Institution                Section 4(1) of the",Financial Financial Institutio Institution Section 4(1) of the
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050101,Finance,Finance,IN050101002,"Housing Finance            Companies providing
+Company                    housing and commerci",Housing Finance Companies providing Company housing and commerci
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050101,Finance,Finance,IN050101003,"Investment                 Companies which earn
+Company                    from interest, capit
+investments made. It
+rental income which
+'Diversified Commerc","Investment Companies which earn Company from interest, capit investments made. It rental income which 'Diversified Commerc"
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050101,Finance,Finance,IN050101004,"Non Banking                Non Banking Financia
+Financial Company          may be specified by
+(NBFC)                     India (RBI).  It exc
+classified under bas
+'Microfinance Instit",Non Banking Non Banking Financia Financial Company may be specified by (NBFC) India (RBI). It exc classified under bas 'Microfinance Instit
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050101,Finance,Finance,IN050101005,"Other Financial            Companies providing
+Services                   covered elsewhere un
+Services'",Other Financial Companies providing Services covered elsewhere un Services'
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050101,Finance,Finance,IN050101006,"Holding Company            Holding companies wi
+more in other compan",Holding Company Holding companies wi more in other compan
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050101,Finance,Finance,IN050101007,"Microfinance               Microfinance compani
+Institutions               specified by the Res
+(RBI).",Microfinance Microfinance compani Institutions specified by the Res (RBI).
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050101,Finance,Finance,IN050101008,"Securitisation             Trusts that issue pa
+which include asset-
+mortgage-backed secu
+assets-backed securi
+securitisation trans",Securitisation Trusts that issue pa which include asset- mortgage-backed secu assets-backed securi securitisation trans
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050102,Banks,Banks,IN050102001,"Public Sector Bank         Banks sponsored by
+government in India
+sector bank by Rese",Public Sector Bank Banks sponsored by government in India sector bank by Rese
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050102,Banks,Banks,IN050102002,"Private Sector Bank        Banks categorized a
+by Reserve Bank of",Private Sector Bank Banks categorized a by Reserve Bank of
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050102,Banks,Banks,IN050102003,"Other Bank                 Other banks not cla
+Sector Bank and Pri
+above. Includes for
+banks, small banks","Other Bank Other banks not cla Sector Bank and Pri above. Includes for banks, small banks"
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050103,Capital Markets,Capital Markets,IN050103001,"Asset Management           Companies engaged i
+Company                    activities i.e. com
+funds, open-end mut
+mutual funds etc.","Asset Management Companies engaged i Company activities i.e. com funds, open-end mut mutual funds etc."
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050103,Capital Markets,Capital Markets,IN050103002,"Depositories,              Companies providing
+Clearing Houses            Includes clearing h
+and Other                  corporations, regis
+Intermediaries             agents, custodians
+covered elsewhere u
+Markets'","Depositories, Companies providing Clearing Houses Includes clearing h and Other corporations, regis Intermediaries agents, custodians covered elsewhere u Markets'"
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050103,Capital Markets,Capital Markets,IN050103003,"Financial Products         Companies engaged i
+Distributor                financial products",Financial Products Companies engaged i Distributor financial products
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050103,Capital Markets,Capital Markets,IN050103004,Ratings                    Companies providing,Ratings Companies providing
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050103,Capital Markets,Capital Markets,IN050103005,"Exchange and Data          Companies providing
+Platform                   of equity, commodit
+income securities,
+classified under 'E
+Companies providing
+dissemination are c
+Platform'","Exchange and Data Companies providing Platform of equity, commodit income securities, classified under 'E Companies providing dissemination are c Platform'"
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050103,Capital Markets,Capital Markets,IN050103006,"Stockbroking &             Companies engaged i
+Allied                     brokerage services
+activities such as
+services etc.",Stockbroking & Companies engaged i Allied brokerage services activities such as services etc.
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050103,Capital Markets,Capital Markets,IN050103007,"Other Capital              Other Capital Market
+Market related             classified elsewhere
+Services",Other Capital Other Capital Market Market related classified elsewhere Services
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050104,Insurance,Insurance,IN050104001,General Insurance          Companies providing g,General Insurance Companies providing g
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050104,Insurance,Insurance,IN050104002,Life Insurance             Companies providing l,Life Insurance Companies providing l
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050104,Insurance,Insurance,IN050104003,"Other Insurance            Insurance companies o
+Companies                  of insurance such as
+general insurance, me","Other Insurance Insurance companies o Companies of insurance such as general insurance, me"
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050104,Insurance,Insurance,IN050104004,"Insurance                  Companies engaged int
+Distributors               insurance products",Insurance Companies engaged int Distributors insurance products
+IN05,"Financial
+Services",Financial Services,IN0501,"Financial
+Services",Financial Services,IN050105,"Financial
+Technology
+(Fintech)",Financial Technology (Fintech),IN050105001,"Financial                  Fintechs providing se
+Technology                 payment processing, b
+(Fintech)                  aggregation and distr
+products and services","Financial Fintechs providing se Technology payment processing, b (Fintech) aggregation and distr products and services"
+IN06,Healthcare,Healthcare,IN0601,Healthcare,Healthcare,IN060101,"Pharmaceuticals
+& Biotechnology",Pharmaceuticals & Biotechnology,IN060101001,"Pharmaceuticals            Manufacturers and dis
+pharmaceuticals and c
+in research & develop
+pharmaceuticals",Pharmaceuticals Manufacturers and dis pharmaceuticals and c in research & develop pharmaceuticals
+IN06,Healthcare,Healthcare,IN0601,Healthcare,Healthcare,IN060101,"Pharmaceuticals
+& Biotechnology",Pharmaceuticals & Biotechnology,IN060101002,"Biotechnology              Companies engaged in
+manufacturing or mark
+distribution of produ
+biotechnology",Biotechnology Companies engaged in manufacturing or mark distribution of produ biotechnology
+IN06,Healthcare,Healthcare,IN0601,Healthcare,Healthcare,IN060102,"Healthcare
+Equipment &
+Supplies",Healthcare Equipment & Supplies,IN060102001,"Medical Equipment          Manufacturers and dis
+& Supplies                 equipments such as bl
+monitoring machine, X
+scanners, and supplie
+needles, syringe, glo","Medical Equipment Manufacturers and dis & Supplies equipments such as bl monitoring machine, X scanners, and supplie needles, syringe, glo"
+IN06,Healthcare,Healthcare,IN0601,Healthcare,Healthcare,IN060103,"Healthcare
+Services",Healthcare Services,IN060103001,"Hospital                   Owners and operators
+facilities. It includ
+homes and veterinary
+investment trusts whe
+'Hospitals'",Hospital Owners and operators facilities. It includ homes and veterinary investment trusts whe 'Hospitals'
+IN06,Healthcare,Healthcare,IN0601,Healthcare,Healthcare,IN060103,"Healthcare
+Services",Healthcare Services,IN060103002,"Healthcare Service         Owners and operators
+Provider                   services such as pat
+X-Ray and MRI scan c",Healthcare Service Owners and operators Provider services such as pat X-Ray and MRI scan c
+IN06,Healthcare,Healthcare,IN0601,Healthcare,Healthcare,IN060103,"Healthcare
+Services",Healthcare Services,IN060103003,"Healthcare                 Companies providing
+Research, Analytics        and analytics relate
+& Technology","Healthcare Companies providing Research, Analytics and analytics relate & Technology"
+IN07,Industrials,Industrials,IN0701,Construction,Construction,IN070101,Construction,Construction,IN070101001,"Civil Construction         Companies engaged in
+construction and mai
+bridges, canals, dam
+companies engaged in
+procurement and cons
+projects.  It exclud
+in construction of r
+commercial buildings
+as 'Realty' under 'C
+Discretionary'.   In
+where underlying is","Civil Construction Companies engaged in construction and mai bridges, canals, dam companies engaged in procurement and cons projects. It exclud in construction of r commercial buildings as 'Realty' under 'C Discretionary'. In where underlying is"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070201,"Aerospace &
+Defense",Aerospace & Defense,IN070201001,"Aerospace &                Manufacturers of civ
+Defense                    aerospace and equipm
+equipments, defense
+products thereof","Aerospace & Manufacturers of civ Defense aerospace and equipm equipments, defense products thereof"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070202,"Agricultural,
+Commercial &
+Construction
+Vehicles","Agricultural, Commercial & Construction Vehicles",IN070202001,"Tractors                   Manufacturers of tra
+vehicles",Tractors Manufacturers of tra vehicles
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070202,"Agricultural,
+Commercial &
+Construction
+Vehicles","Agricultural, Commercial & Construction Vehicles",IN070202002,"Commercial                 Manufacturers of com
+Vehicles                   trucks, dumpers etc.","Commercial Manufacturers of com Vehicles trucks, dumpers etc."
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070202,"Agricultural,
+Commercial &
+Construction
+Vehicles","Agricultural, Commercial & Construction Vehicles",IN070202003,"Construction               Manufacturers of con
+Vehicles                   like cranes, bulldoz","Construction Manufacturers of con Vehicles like cranes, bulldoz"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070202,"Agricultural,
+Commercial &
+Construction
+Vehicles","Agricultural, Commercial & Construction Vehicles",IN070202004,"Dealers–                   Trading and distribu
+Commercial                 commercial vehicles,
+Vehicles, Tractors,        construction vehicle
+equipment","Dealers– Trading and distribu Commercial commercial vehicles, Vehicles, Tractors, construction vehicle equipment"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070203,"Electrical
+Equipment",Electrical Equipment,IN070203001,"Heavy Electrical           Manufacturers and di
+Equipment                  generating equipment
+electrical equipment
+turbines, transmissi
+electrical machinery","Heavy Electrical Manufacturers and di Equipment generating equipment electrical equipment turbines, transmissi electrical machinery"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070203,"Electrical
+Equipment",Electrical Equipment,IN070203002,"Other Electrical           Manufactures and dis
+Equipment                  electrical component
+classified under Hea
+Equipment",Other Electrical Manufactures and dis Equipment electrical component classified under Hea Equipment
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070204,"Industrial
+Manufacturing",Industrial Manufacturing,IN070204005,"Railway Wagons             Manufacturers of rai
+EMU coaches",Railway Wagons Manufacturers of rai EMU coaches
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070204,"Industrial
+Manufacturing",Industrial Manufacturing,IN070204006,"Ship Building &            Companies engaged in
+Allied Services            providing allied ser",Ship Building & Companies engaged in Allied Services providing allied ser
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070204,"Industrial
+Manufacturing",Industrial Manufacturing,IN070204008,"Industrial Products        Manufacturers & dist
+electronics like CC
+access control syste
+multi-apartment vide
+door phones, intrude
+fingerprint locks, a
+services etc. It inc
+distributor of indus
+elevators, escalator
+manufacturers & dist
+engineering and cons
+products, industrial
+machinery & other in","Industrial Products Manufacturers & dist electronics like CC access control syste multi-apartment vide door phones, intrude fingerprint locks, a services etc. It inc distributor of indus elevators, escalator manufacturers & dist engineering and cons products, industrial machinery & other in"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205003,"Cables - Electricals       Manufacturers and di
+electrical cables/ w
+cables which are cla
+Equipment & Accessor
+'Telecommunication'",Cables - Electricals Manufacturers and di electrical cables/ w cables which are cla Equipment & Accessor 'Telecommunication'
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205004,"Castings & Forgings         Manufacturers and
+and forgings. Exc
+generating majori
+automobile segmen
+classified as 'Au
+Equipments' class
+Discretionary'",Castings & Forgings Manufacturers and and forgings. Exc generating majori automobile segmen classified as 'Au Equipments' class Discretionary'
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205008,"Packaging                   Manufacturers and
+packaging materia
+bags, boxes, cans
+and glass","Packaging Manufacturers and packaging materia bags, boxes, cans and glass"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205009,"Plastic Products -          Manufacturers and
+Industrial                  industrial plasti
+pipes etc.",Plastic Products - Manufacturers and Industrial industrial plasti pipes etc.
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205011,"Rubber                      Manufacturers and
+and rubber produc
+classified as 'Ty
+under 'Consumer D",Rubber Manufacturers and and rubber produc classified as 'Ty under 'Consumer D
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205012,"Other Industrial            Manufacturers and
+Products                    industrial produc
+elsewhere",Other Industrial Manufacturers and Products industrial produc elsewhere
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205013,"Glass - Industrial          Manufacturers and
+industrial glasse
+glass classified
+Discretionary'",Glass - Industrial Manufacturers and industrial glasse glass classified Discretionary'
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205014,"Aluminium, Copper           Manufacturers and
+& Zinc Products             aluminium, copper","Aluminium, Copper Manufacturers and & Zinc Products aluminium, copper"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205015,"Iron & Steel                Manufacturers and
+Products                    and steel product",Iron & Steel Manufacturers and Products and steel product
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205016,"Abrasives &                 Manufactures and
+Bearings                    abrasives and bea
+used for automobi",Abrasives & Manufactures and Bearings abrasives and bea used for automobi
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205017,"Compressors,               Manufacturers and distr
+Pumps & Diesel             compressors, diesel eng
+Engines                    engines used for automo
+classified as 'Auto Com
+Equipments' under Consu
+Discretionary","Compressors, Manufacturers and distr Pumps & Diesel compressors, diesel eng Engines engines used for automo classified as 'Auto Com Equipments' under Consu Discretionary"
+IN07,Industrials,Industrials,IN0702,Capital Goods,Capital Goods,IN070205,"Industrial
+Products
+IN",Industrial Products IN,IN070205018,"Electrodes &               Manufacturers and distr
+Refractories               electrodes and refracto",Electrodes & Manufacturers and distr Refractories electrodes and refracto
+IN08,"Information          I
+Technology",Information I Technology,IN0801,"Information           I
+Technology
+I",Information I Technology I,IN080101,"IT - Software             IN
+IN",IT - Software IN IN,IN080101001,"Computers -                Companies engaged in so
+Software &                 development, IT consult
+Consulting                 analytics","Computers - Companies engaged in so Software & development, IT consult Consulting analytics"
+IN08,"Information          I
+Technology",Information I Technology,IN0801,"Information           I
+Technology
+I",Information I Technology I,IN080101,"IT - Software             IN
+IN",IT - Software IN IN,IN080101002,"Software Products          Companies engaged in de
+software products that
+used by individuals and",Software Products Companies engaged in de software products that used by individuals and
+IN08,"Information          I
+Technology",Information I Technology,IN0801,"Information           I
+Technology
+I",Information I Technology I,IN080102,IT - Services             IN,IT - Services IN,IN080102001,"IT Enabled Services        Companies engaged in pr
+for business automation
+of IT infrastructure.",IT Enabled Services Companies engaged in pr for business automation of IT infrastructure.
+IN08,"Information          I
+Technology",Information I Technology,IN0801,"Information           I
+Technology
+I",Information I Technology I,IN080103,IT - Hardware             IN,IT - Hardware IN,IN080103001,"Computers                  Manufactures and distri
+Hardware &                 computer hardware and e
+Equipments                 as personal computers,
+motherboards, networkin
+printers, photo copiers","Computers Manufactures and distri Hardware & computer hardware and e Equipments as personal computers, motherboards, networkin printers, photo copiers"
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090101,"Engineering               IN
+Services",Engineering IN Services,IN090101001,"Dredging                   Companies providing dre
+services",Dredging Companies providing dre services
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090102,"Transport Services        IN
+IN",Transport Services IN IN,IN090102001,"Airline                    Owners and operators of
+airlines",Airline Owners and operators of airlines
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090102,"Transport Services        IN
+IN",Transport Services IN IN,IN090102002,"Logistics Solution         Companies providing log
+Provider                   courier, movers & packe","Logistics Solution Companies providing log Provider courier, movers & packe"
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090102,"Transport Services        IN
+IN",Transport Services IN IN,IN090102003,"Railways                   Companies providing pas
+transportation through",Railways Companies providing pas transportation through
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090102,"Transport Services        IN
+IN",Transport Services IN IN,IN090102004,"Road Transport             Companies providing
+transportation thro",Road Transport Companies providing transportation thro
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090102,"Transport Services        IN
+IN",Transport Services IN IN,IN090102005,"Shipping                   Companies providing
+transportation thro",Shipping Companies providing transportation thro
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090102,"Transport Services        IN
+IN",Transport Services IN IN,IN090102006,"Transport Related          Other transport rel
+Services                   covered elsewhere",Transport Related Other transport rel Services covered elsewhere
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090103,"Transport
+Infrastructure",Transport Infrastructure,IN090103001,"Airport & Airport          Owners and operator
+services                   companies providing
+services",Airport & Airport Owners and operator services companies providing services
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090103,"Transport
+Infrastructure",Transport Infrastructure,IN090103002,"Port & Port                Owners and operator
+services                   and related service
+engineering service",Port & Port Owners and operator services and related service engineering service
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090103,"Transport
+Infrastructure",Transport Infrastructure,IN090103004,"Road Assets–Toll,          Operators of bridge
+Annuity, Hybrid-           etc. Does not inclu
+Annuity                    into construction o
+highways which are
+Construction' under","Road Assets–Toll, Operators of bridge Annuity, Hybrid- etc. Does not inclu Annuity into construction o highways which are Construction' under"
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090104,"Commercial
+Services &
+Supplies
+I",Commercial Services & Supplies I,IN090104001,"Trading &                  Companies engaged i
+Distributors               distribution of goo
+elsewhere",Trading & Companies engaged i Distributors distribution of goo elsewhere
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090104,"Commercial
+Services &
+Supplies
+I",Commercial Services & Supplies I,IN090104002,"Consulting Services        Companies engaged i
+consulting services",Consulting Services Companies engaged i consulting services
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090104,"Commercial
+Services &
+Supplies
+I",Commercial Services & Supplies I,IN090104003,"Data Processing            Companies engaged i
+Services                   commercial electron
+services",Data Processing Companies engaged i Services commercial electron services
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090104,"Commercial
+Services &
+Supplies
+I",Commercial Services & Supplies I,IN090104004,"Diversified                Companies providing
+Commercial                 consumer services n
+Services                   elsewhere. Includes
+related services, e
+and pollution contr
+security services,
+services, trade and
+services etc.","Diversified Companies providing Commercial consumer services n Services elsewhere. Includes related services, e and pollution contr security services, services, trade and services etc."
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090104,"Commercial
+Services &
+Supplies
+I",Commercial Services & Supplies I,IN090104005,"Business Process           Companies engaged in
+Outsourcing (BPO)/         Process Outsourcing (
+Knowledge Process          Process Outsourcing (
+Outsourcing (KPO)",Business Process Companies engaged in Outsourcing (BPO)/ Process Outsourcing ( Knowledge Process Process Outsourcing ( Outsourcing (KPO)
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090105,"Public Services           I
+I",Public Services I I,IN090105001,"Urban Local Bodies         Local bodies that adm
+city or a town",Urban Local Bodies Local bodies that adm city or a town
+IN09,Services             I,Services I,IN0901,"Services              I
+I",Services I I,IN090105,"Public Services           I
+I",Public Services I I,IN090105002,"Development                Development authority
+Authority",Development Development authority Authority
+IN10,"Telecommunic
+ation",Telecommunic ation,IN1001,"Telecommunic
+ation",Telecommunic ation,IN100101,"Telecom - Services        I
+I",Telecom - Services I I,IN100101001,"Telecom - Cellular         Companies providing f
+& Fixed line               cellular telecom serv
+services",Telecom - Cellular Companies providing f & Fixed line cellular telecom serv services
+IN10,"Telecommunic
+ation",Telecommunic ation,IN1001,"Telecommunic
+ation",Telecommunic ation,IN100101,"Telecom - Services        I
+I",Telecom - Services I I,IN100101002,"Telecom -                  Companies engaged int
+Infrastructure             telecom instruments a
+infrastructure servic",Telecom - Companies engaged int Infrastructure telecom instruments a infrastructure servic
+IN10,"Telecommunic
+ation",Telecommunic ation,IN1001,"Telecommunic
+ation",Telecommunic ation,IN100101,"Telecom - Services        I
+I",Telecom - Services I I,IN100101003,"Other Telecom              Companies engaged int
+Services                   broad band internet s
+telecom related servi
+elsewhere",Other Telecom Companies engaged int Services broad band internet s telecom related servi elsewhere
+IN10,"Telecommunic
+ation",Telecommunic ation,IN1001,"Telecommunic
+ation",Telecommunic ation,IN100102,"Telecom -                 I
+Equipment &
+Accessories",Telecom - I Equipment & Accessories,IN100102001,"Telecom -                  Manufacturers and dis
+Equipment &                equipments, cables an
+Accessories                Includes investment t
+underlying is telecom
+telephone instruments","Telecom - Manufacturers and dis Equipment & equipments, cables an Accessories Includes investment t underlying is telecom telephone instruments"
+IN11,Utilities,Utilities,IN1101,Power,Power,IN110101,"Power                     I
+I",Power I I,IN110101002,"Power Trading              Companies engaged int
+electricity",Power Trading Companies engaged int electricity
+IN11,Utilities,Utilities,IN1101,Power,Power,IN110101,"Power                     I
+I",Power I I,IN110101003,"Power -                     Companies engaged int
+Transmission                electricity. Includes
+where underlying is p",Power - Companies engaged int Transmission electricity. Includes where underlying is p
+IN11,Utilities,Utilities,IN1101,Power,Power,IN110101,"Power                     I
+I",Power I I,IN110101004,"Power Generation           Companies engaged in
+renewable and non-ren
+Includes investment t
+underlying is power g",Power Generation Companies engaged in renewable and non-ren Includes investment t underlying is power g
+IN11,Utilities,Utilities,IN1101,Power,Power,IN110101,"Power                     I
+I",Power I I,IN110101005,"Integrated Power           Companies / investmen
+Utilities                  presence across multi
+as power generation,
+distribution","Integrated Power Companies / investmen Utilities presence across multi as power generation, distribution"
+IN11,Utilities,Utilities,IN1101,Power,Power,IN110101,"Power                     I
+I",Power I I,IN110101006,"Power Distribution          Companies engaged in
+of power. Includes in
+where underlying is p",Power Distribution Companies engaged in of power. Includes in where underlying is p
+IN11,Utilities,Utilities,IN1102,Utilities,Utilities,IN110201,"Other Utilities           I
+I",Other Utilities I I,IN110201001,"Water Supply &              Companies engaged int
+Management                  management",Water Supply & Companies engaged int Management management
+IN11,Utilities,Utilities,IN1102,Utilities,Utilities,IN110201,"Other Utilities           I
+I",Other Utilities I I,IN110201002,"Waste                       Companies engaged int
+Management                  management",Waste Companies engaged int Management management
+IN11,Utilities,Utilities,IN1102,Utilities,Utilities,IN110201,"Other Utilities           I
+I",Other Utilities I I,IN110201003,"Emergency                   Companies engaged int
+Services                    emergency services li
+management etc.",Emergency Companies engaged int Services emergency services li management etc.
+IN11,Utilities,Utilities,IN1102,Utilities,Utilities,IN110201,"Other Utilities           I
+I",Other Utilities I I,IN110201004,"Multi Utilities             Companies providing m
+utilities",Multi Utilities Companies providing m utilities
+IN11,Utilities,Utilities,IN1102,Utilities,Utilities,IN110201,"Other Utilities           I
+I",Other Utilities I I,IN110201005,"Other Utilities             Companies providing u
+elsewhere",Other Utilities Companies providing u elsewhere
+IN12,Diversified,Diversified,IN1201,Diversified,Diversified,IN120101,Diversified               I,Diversified I,IN120101001,"Diversified                 Companies engaged int
+segment, where no sin
+segment contributes m
+companies' total reve
+more segments each co
+20% of total revenue","Diversified Companies engaged int segment, where no sin segment contributes m companies' total reve more segments each co 20% of total revenue"

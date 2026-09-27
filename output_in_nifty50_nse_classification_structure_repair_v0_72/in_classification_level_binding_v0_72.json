@@ -1,0 +1,16 @@
+{
+  "CSV_Header_Privileged": false,
+  "Complete_Set_Satisfying_Levels": [],
+  "Evidence_References": [
+    "https://www.niftyindices.com/docs/default-source/default-document-library/industry-classification/nse-indices_industry-classification-structure-2023-07.pdf?sfvrsn=c89dd39_1",
+    "https://www.niftyindices.com/resources/industry-classification",
+    "v0.71 derived exact-45 Source_Classification_Raw evidence"
+  ],
+  "Level_Binding_Status": "NOT_VERIFIED",
+  "Observed_Label_Count": 15,
+  "Official_Taxonomy_Level": "NOT_VERIFIED",
+  "Rule": "Exactly one formal level must contain exactly one exact node for each of all 15 observed labels.",
+  "Semantic_Inference_Used": false,
+  "Source_Field_Name": "Industry",
+  "Taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION"
+}

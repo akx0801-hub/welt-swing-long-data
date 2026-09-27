@@ -1,0 +1,100 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED",
+  "bound_classification_level": "NOT_VERIFIED",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "classified": 0,
+  "conflict": 0,
+  "distinct_classifications": 15,
+  "files": {
+    "external_request_ledger_v0.72.csv": {
+      "bytes": 675,
+      "sha256": "2d039e55d80972b7c995def040e03982d9f22dc8085bffab7800f059bb4d9fea"
+    },
+    "immutability_audit_v0.72.json": {
+      "bytes": 1275,
+      "sha256": "a689099c20fc93b87dc5d603e40392f2c2c24eb18f914ab06f426fce4ae89ae7"
+    },
+    "in_15_label_cross_level_match_audit_v0.72.csv": {
+      "bytes": 739,
+      "sha256": "857140a9bdfae6e9391671d5e15f2e80011b54e2796364056fa9884e478905fb"
+    },
+    "in_classification_level_binding_v0_72.json": {
+      "bytes": 774,
+      "sha256": "b05e07762857261702c6264f1d253d5d1dd5385104ec6b0a381c46712118658c"
+    },
+    "in_code_uniqueness_collision_audit_v0.72.csv": {
+      "bytes": 122,
+      "sha256": "e6138cf2724c6298116cb9781d747172459c3f17d1d660d25532d675cb1a757c"
+    },
+    "in_distinct_classification_inventory_v0.72.csv": {
+      "bytes": 993,
+      "sha256": "2f3b6e05839ef7f75ff9ec4d9705140b987736af7429e1f64cca986ff474c000"
+    },
+    "in_exact_45_classification_coverage_v0.72.csv": {
+      "bytes": 19895,
+      "sha256": "ab47502543fccae71cd027fba2871581711d6fdd8d08897cf58ce835fbf2fcdd"
+    },
+    "in_source_native_code_binding_v0.72.csv": {
+      "bytes": 4032,
+      "sha256": "4f7337dcf011e25f58b9d429d59eea8453c4c91c878e43b315c98beb3c2cc658"
+    },
+    "nse_industry_classification_structured_table_v0.72.csv": {
+      "bytes": 67133,
+      "sha256": "890217f380586ff42e26520225c8e858f803886bed61c2938c09293a252f3453"
+    },
+    "nse_pdf_extraction_environment_v0.72.json": {
+      "bytes": 485,
+      "sha256": "c7575f4b0c61426fd6d807c57ee0787947e972c4228be9e37e3b5d75d555f4b5"
+    },
+    "nse_pdf_extraction_reproducibility_audit_v0.72.json": {
+      "bytes": 1439,
+      "sha256": "94701bac6d8198bba11b49c24b9ff52900729eca98223aeeb19b2559281bce99"
+    },
+    "nse_taxonomy_level_inventory_v0.72.csv": {
+      "bytes": 217,
+      "sha256": "e6d41505274cfaed98a0b47fdd5a6cd64a40ff9162cc5b75be33f6eeb13bcc73"
+    },
+    "provider_call_audit_v0.72.json": {
+      "bytes": 572,
+      "sha256": "4899669089a78da27acecfc601814a2c465e4ea1986ad3ed1215df2bbb4c3519"
+    },
+    "stage_checkpoint_preupload_v0.72.json": {
+      "bytes": 784,
+      "sha256": "88f13f0d84e949fef6770c2cb51e641dbc3dc9268fc1f9f613b155a161642d67"
+    },
+    "summary_preupload_v0.72.json": {
+      "bytes": 1254,
+      "sha256": "bdb4f050164eb85d1d00fd8b8f5f2e969966e9ee0f988707512b67b13a020521"
+    },
+    "test_results_v0.72.csv": {
+      "bytes": 930,
+      "sha256": "35ff1103f4d1a237fcff583233e97b7ddcb7f911675ba3ee2f49fd3cbb787e24"
+    },
+    "v071_predecessor_evidence_inconsistency_audit_v0.72.json": {
+      "bytes": 594,
+      "sha256": "e52cc511a802febf37deb04d020987d815fd93c4c0a986950b9d5d66a943281b"
+    }
+  },
+  "gate_h_promotions": 0,
+  "in_exact_45_sector_classification_coverage_ready": false,
+  "next_gate": "NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED",
+  "nifty_constituent_refetches": 0,
+  "not_found": 0,
+  "not_verified": 45,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "pdf_extraction": "PASS: pypdf 5.9.0, 23 pages, deterministic structural SHA d431587f5f686b8432bc57755a8fe6aef232fed49fb858cf7e905b3318687173",
+  "productive": false,
+  "repository_sha": "4407febe03589fe8b6e22925c51b10e0501d7458",
+  "required_start_head": "f6be8b4a3182728ba9976b58410f91e031146348",
+  "sector_rs_runs": 0,
+  "source_native_code_coverage": 0,
+  "stage": "IN_NIFTY50_NSE_INDICES_CLASSIFICATION_STRUCTURE_EXTRACTION_LEVEL_CODE_BINDING_GATE_F_REPAIR",
+  "total": 45,
+  "verdict": "BLOCKED_IN_NIFTY50_GATE_F_REPAIR",
+  "version": "v0.72"
+}

@@ -1,0 +1,12 @@
+{
+  "Extraction_Method": "PdfReader page.extract_text(extraction_mode=layout)",
+  "Installation_Command": "python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple pypdf==5.9.0",
+  "Installed_Version": "5.9.0",
+  "Manual_Transcription_Used": false,
+  "OCR_Used": false,
+  "Package": "pypdf",
+  "Package_Source_Class": "PYPI_PUBLIC_PACKAGE_INDEX",
+  "Parser_Available_Preinstall": "NO",
+  "Required_Version": "5.9.0",
+  "Screenshot_Evidence_Used": false
+}

@@ -1,0 +1,5 @@
+Taxonomy_Level,Node_Count,Distinct_Name_Count,Duplicate_Name_Count,Source_Native_Code_Count,Empty_Name_Count
+MACRO_ECONOMIC_SECTOR,12,12,0,12,0
+SECTOR,22,22,0,22,0
+INDUSTRY,59,59,0,59,0
+BASIC_INDUSTRY,197,197,0,197,0

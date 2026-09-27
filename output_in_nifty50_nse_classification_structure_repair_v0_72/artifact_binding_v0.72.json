@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "8c3fb77305adcb7e2321aed34805ab5525afc176d3a7b7b4fa26420ca649ebba",
+  "artifact_id": 10929365141,
+  "artifact_name": "in-nifty50-nse-classification-structure-repair-v0.72-36309975985",
+  "artifact_scope": "pre-persistence v0.72 NSE classification PDF extraction, level/code binding and Gate-F repair evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "4407febe03589fe8b6e22925c51b10e0501d7458",
+  "workflow_run_id": 36309975985
+}

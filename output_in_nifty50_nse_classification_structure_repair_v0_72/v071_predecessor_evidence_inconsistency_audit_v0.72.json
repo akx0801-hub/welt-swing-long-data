@@ -1,0 +1,12 @@
+{
+  "Authority_Treatment": "NON_AUTHORITATIVE_ERRONEOUS_NARRATIVE_TEXT",
+  "Erroneous_Narrative_Text": "Every distinct non-empty current NIFTY Industry value for the Frozen-45 exact ISIN rows is exact-match bound to one unique Ind_Code in the official classification structure.",
+  "Historical_v071_Files_Rewritten": false,
+  "Predecessor": "v0.71",
+  "Structured_Evidence_Prevails": true,
+  "Structured_Exact_Unique_Industry_Code_Bindings": 0,
+  "Structured_Level_Binding_Status": "NOT_VERIFIED",
+  "Version": "v0.72",
+  "v071_Not_Verified_Rows": 45,
+  "v071_Source_Native_Code_Coverage": 0
+}
