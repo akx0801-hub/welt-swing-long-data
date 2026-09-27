@@ -1,0 +1,251 @@
+name: JP Park Reselection AU ASX200 Gate C v0.81
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/jp_park_reselection_au_asx200_gate_c_v0.81.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  jp-park-au-gate-c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.81 stage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="a6b5a2e1f946bc8cd8615e37fe26efd82b77eb53"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/jp_park_reselection_au_asx200_gate_c_spec_v0\.81\.json|scripts/jp_park_reselection_au_asx200_gate_c_v0_81\.py|scripts/persist_jp_park_reselection_au_asx200_gate_c_v0_81\.py|tests/test_jp_park_reselection_au_asx200_gate_c_v0_81\.py|\.github/workflows/jp_park_reselection_au_asx200_gate_c_v0\.81\.yml|config/jp_park_reselection_au_asx200_gate_c_v0\.81\.json|sector_metadata/governance/parked_cohort_registry_v1\.csv|docs/validation/JP_N225_Park_Post_Park_Reselection_AU_SP_ASX200_Gate_C_v0\.81\.md|output_jp_park_reselection_au_asx200_gate_c_v0_81/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.80 predecessor and artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10936936683 --jq .digest)"
+          test "$DIGEST" = "sha256:a309d2edf8b3997009c98e40bc8e3fd0cf4f98606618eaa4f27967e4d3878d56"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_jp_n225_source_access_evidence_persistence_v0_80")
+          s=json.load(open(out/"summary_v0.80.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.80.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.80.json",encoding="utf-8"))
+          assert s["verdict"]=="BLOCKED_JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE"
+          assert s["jp_source_access_persistence_ready"] is False
+          assert s["jp_gate_h"]=="FAIL"
+          assert s["blocker"]=="EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+          assert (s["jp_gate_f_classified"],s["jp_gate_f_total"])==(197,197)
+          assert s["required_public_sources_ready"] is True
+          assert s["raw_persistence_required"] is False
+          assert s["technical_bounded_evidence_sufficient"] is True
+          assert s["canonical_evidence_persistable"]=="NO"
+          assert c["workflow_run_id"]==36333946734
+          assert c["artifact_id"]==10936936683
+          assert c["artifact_digest"]=="sha256:a309d2edf8b3997009c98e40bc8e3fd0cf4f98606618eaa4f27967e4d3878d56"
+          assert imm["JP_Gate_F_Classified_After"]==197 and imm["JP_Gate_F_Total_After"]==197
+          assert imm["IN_Gate_F_Classified_After"]==45 and imm["IN_Gate_F_Total_After"]==45
+          assert imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          reg=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          assert {r["Cohort"]:r["Execution_State"] for r in reg}=={
+            "IN_NIFTY50":"PARKED_EXTERNAL_AUTHORIZATION",
+            "US_SP400":"PARKED_SOURCE_ACCESS",
+            "US_SP500":"PARKED_SHARED_SOURCE_PREREQUISITE"
+          }
+          PY
+
+      - name: Verify governance, spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          g6=json.load(open("config/manager_governance_authority_G_SEC_06_v0.76.json",encoding="utf-8"))
+          g2=json.load(open("config/manager_governance_authority_G_SEC_02_v0.62.json",encoding="utf-8"))
+          s=json.load(open("config/jp_park_reselection_au_asx200_gate_c_spec_v0.81.json",encoding="utf-8"))
+          t=json.load(open("config/jp_park_reselection_au_asx200_gate_c_v0.81.json",encoding="utf-8"))
+          assert g6["authority_id"]=="G-SEC-06"
+          assert g6["rules"]["external_consent_license_contractual_blocker_may_be_parked"] is True
+          assert g6["rules"]["parking_does_not_downgrade_proven_technical_gates"] is True
+          assert g2["authority_id"]=="G-SEC-02"
+          assert g2["rules"]["crosswalk_forbidden"] is True
+          assert s["required_start_head"]=="a6b5a2e1f946bc8cd8615e37fe26efd82b77eb53"
+          assert s["scope"]["jp_park"] is True and s["scope"]["post_park_reselection"] is True
+          assert s["scope"]["au_gate_c_only"] is True
+          assert s["scope"]["au_gate_d_allowed"] is False
+          assert s["scope"]["au_gate_e_allowed"] is False
+          assert s["scope"]["au_gate_f_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert s["forbidden"]["pdsc"] is True
+          assert s["forbidden"]["sec_requests"] is True and s["forbidden"]["nse_requests"] is True
+          assert t["version"]=="v0.81" and t["required_start_head"]==s["required_start_head"]
+          assert t["jp_park_authorized"] is True and t["post_park_reselection_authorized"] is True
+          assert t["au_gate_c_authorized"] is True
+          assert t["au_gate_d_allowed"] is False and t["au_gate_e_f_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False and t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/jp_park_reselection_au_asx200_gate_c_v0_81.py scripts/persist_jp_park_reselection_au_asx200_gate_c_v0_81.py
+          python3 tests/test_jp_park_reselection_au_asx200_gate_c_v0_81.py -v
+
+      - name: Run JP park reselection and AU Gate C
+        run: |
+          set -euo pipefail
+          rm -rf output_jp_park_reselection_au_asx200_gate_c_v0_81
+          python3 scripts/jp_park_reselection_au_asx200_gate_c_v0_81.py \
+            --repository-sha "$GITHUB_SHA" \
+            --output-dir output_jp_park_reselection_au_asx200_gate_c_v0_81
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_jp_park_reselection_au_asx200_gate_c_v0_81")
+          required=[
+            "jp_n225_external_authorization_park_application_v0_81.json",
+            "parked_cohort_registry_update_v0_81.csv",
+            "post_jp_park_next_cohort_selection_calculation_v0_81.csv",
+            "post_jp_park_selected_cohort_authority_v0_81.json",
+            "au_gate_c_authority_v0.81.json",
+            "asx_directory_source_audit_v0.81.json",
+            "asx_listed_companies_bulk_schema_audit_v0.81.json",
+            "asx_directory_industry_distinct_label_inventory_v0.81.csv",
+            "asx_directory_industry_field_audit_v0.81.json",
+            "asx_directory_industry_field_provenance_audit_v0.81.json",
+            "asx_gics_field_binding_audit_v0.81.json",
+            "asx_upstream_provider_attribution_audit_v0.81.json",
+            "au_taxonomy_candidate_inventory_v0.81.csv",
+            "au_taxonomy_formal_level_audit_v0.81.json",
+            "au_taxonomy_version_contract_v0.81.json",
+            "au_observed_vs_official_label_set_audit_v0.81.json",
+            "au_source_native_taxonomy_identity_decision_v0.81.json",
+            "external_request_ledger_v0.81.csv","provider_call_audit_v0.81.json",
+            "immutability_audit_v0.81.json","test_results_v0.81.csv",
+            "summary_preupload_v0.81.json","stage_checkpoint_preupload_v0.81.json",
+            "manifest_preupload_v0.81.json"
+          ]
+          assert all((out/x).exists() for x in required)
+          s=json.load(open(out/"summary_preupload_v0.81.json",encoding="utf-8"))
+          park=json.load(open(out/"jp_n225_external_authorization_park_application_v0_81.json",encoding="utf-8"))
+          sel=json.load(open(out/"post_jp_park_selected_cohort_authority_v0_81.json",encoding="utf-8"))
+          dec=json.load(open(out/"au_source_native_taxonomy_identity_decision_v0.81.json",encoding="utf-8"))
+          directory=json.load(open(out/"asx_directory_source_audit_v0.81.json",encoding="utf-8"))
+          bulk=json.load(open(out/"asx_listed_companies_bulk_schema_audit_v0.81.json",encoding="utf-8"))
+          field=json.load(open(out/"asx_directory_industry_field_audit_v0.81.json",encoding="utf-8"))
+          prov=json.load(open(out/"provider_call_audit_v0.81.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.81.json",encoding="utf-8"))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.81.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.81.csv",encoding="utf-8")))
+          parks=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          pby={r["Cohort"]:r for r in parks}
+          assert park["Authority"]=="G-SEC-06"
+          assert park["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert park["Technical_Gates_A_G"]=="PASS" and park["Gate_F"]=="197/197"
+          assert pby["JP_N225"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert pby["JP_N225"]["Gate_H"]=="BLOCKED"
+          assert pby["JP_N225"]["Gate_H_Blocker"]=="EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+          assert pby["JP_N225"]["Reopen_Automatically"]=="NO"
+          assert pby["IN_NIFTY50"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert pby["US_SP400"]["Execution_State"]=="PARKED_SOURCE_ACCESS"
+          assert pby["US_SP500"]["Execution_State"]=="PARKED_SHARED_SOURCE_PREREQUISITE"
+          assert sel["Calculation_Not_Hard_Coded"] is True
+          assert sel["Selected_Cohort"]=="AU_SP_ASX200" and sel["Frozen_Rows"]==63
+          assert sel["Resolved_Gates_Before_Blocker"]==2 and sel["Earliest_Unresolved_Gate"]=="C"
+          assert dec["Gate_D"]=="NOT_EVALUATED" and dec["Gate_E"]=="NOT_EVALUATED" and dec["Gate_F"]=="NOT_EVALUATED"
+          assert field["No_Frozen_Join_Performed"] is True
+          assert all(r["Per_Security_Fanout"]=="NO" and r["SEC_Request"]=="NO" and r["NSE_Request"]=="NO" for r in ext)
+          assert prov["alpha_vantage"]==0 and prov["sec_requests"]==0 and prov["nse_requests"]==0
+          assert prov["pdsc"]==0 and prov["cross_taxonomy_mapping"]==0 and prov["semantic_sector_inference"]==0
+          assert prov["au_gate_d"]==prov["au_gate_e"]==prov["au_gate_f"]==0
+          assert prov["canonical_materialization"]==0 and prov["sector_rs"]==0
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert imm["Frozen_Unchanged"] is True and imm["v057_Unchanged"] is True and imm["v058_Unchanged"] is True
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True and imm["Shared_Source_Registry_Unchanged"] is True
+          assert imm["IN_Gate_F_Classified_After"]==45 and imm["JP_Gate_F_Classified_After"]==197
+          assert imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          assert imm["AU_Canonical_Rows_After"]==0 and imm["JP_Canonical_Rows_After"]==0
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          if s["au_source_native_taxonomy_identity_ready"]:
+              assert s["verdict"]=="PASS_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C"
+              assert s["directory_bulk_route"]=="PASS"
+              assert s["taxonomy_identity"]=="GICS"
+              assert s["taxonomy_owner"]=="S&P Dow Jones Indices and MSCI"
+              assert s["formal_level"]=="Industry Group"
+              assert s["version_status"]=="CURRENT_MAINTAINED_NO_STATIC_VERSION"
+              assert s["field_to_taxonomy_binding"]=="PASS"
+              assert s["gics_field_binding"]=="PASS"
+              assert s["blocker"]==""
+              assert s["next_gate"]=="AU_SP_ASX200 SECTOR FIELD / SOURCE-NATIVE CODE FEASIBILITY GATE D"
+          else:
+              assert s["verdict"]=="BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C"
+              assert s["blocker"] in {
+                "ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE",
+                "ASX_DIRECTORY_INDUSTRY_FIELD_NOT_AVAILABLE",
+                "ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED",
+                "ASX_DIRECTORY_INDUSTRY_TAXONOMY_NOT_IDENTIFIED",
+                "ASX_DIRECTORY_INDUSTRY_FORMAL_LEVEL_NOT_VERIFIED",
+                "ASX_DIRECTORY_TAXONOMY_VERSION_NOT_VERIFIABLE",
+                "UPSTREAM_PROVIDER_FIELD_ATTRIBUTION_NOT_VERIFIED",
+                "SOURCE_NATIVE_TAXONOMY_IDENTITY_NOT_VERIFIED",
+                "AUTHORITY_REGRESSION_REVIEW_REQUIRED"
+              }
+          PY
+          BAD="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(sector_metadata/governance/parked_cohort_registry_v1\.csv|output_jp_park_reselection_au_asx200_gate_c_v0_81/.*|docs/validation/JP_N225_Park_Post_Park_Reselection_AU_SP_ASX200_Gate_C_v0\.81\.md)$' || true)"
+          test -z "$BAD"
+
+      - name: Upload bounded v0.81 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: jp-park-reselection-au-asx200-gate-c-v0.81-${{ github.run_id }}
+          path: output_jp_park_reselection_au_asx200_gate_c_v0_81/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_jp_park_reselection_au_asx200_gate_c_v0_81.py \
+            --output-dir output_jp_park_reselection_au_asx200_gate_c_v0_81 \
+            --artifact-id "${{ steps.upload.outputs.artifact-id }}" \
+            --artifact-digest "${{ steps.upload.outputs.artifact-digest }}" \
+            --artifact-name "jp-park-reselection-au-asx200-gate-c-v0.81-${{ github.run_id }}" \
+            --workflow-run-id "${{ github.run_id }}" \
+            --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.81 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add sector_metadata/governance/parked_cohort_registry_v1.csv \
+                  docs/validation/JP_N225_Park_Post_Park_Reselection_AU_SP_ASX200_Gate_C_v0.81.md \
+                  output_jp_park_reselection_au_asx200_gate_c_v0_81/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(sector_metadata/governance/parked_cohort_registry_v1\.csv|docs/validation/JP_N225_Park_Post_Park_Reselection_AU_SP_ASX200_Gate_C_v0\.81\.md|output_jp_park_reselection_au_asx200_gate_c_v0_81/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          test ! -e sector_metadata/canonical/cohorts/AU_SP_ASX200_sector_metadata_v1.csv
+          git commit -m "Persist JP park and AU ASX200 Gate C v0.81"
+          git push origin HEAD:main
