@@ -34,6 +34,8 @@ AU_CANON=ROOT/"sector_metadata/canonical/cohorts"
 ASX_URL="https://www.asx.com.au/markets/trade-our-cash-market/directory"
 GICS_METHOD_URL="https://www.spglobal.com/spdji/en/documents/methodologies/methodology-gics.pdf"
 GICS_CODES_URL="https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-cse-sector-and-industry-group-indices.pdf?force_download=true"
+GICS_LANDING_URL="https://www.spglobal.com/spdji/en/landing/topic/gics/"
+GICS_XLSX_URL="https://www.spglobal.com/spdji/en/documents/index-policies/2025-gics-structure-english.xlsx"
 MSCI_GICS_URL="https://www.msci.com/indexes/index-resources/gics"
 
 spec82=importlib.util.spec_from_file_location("v082",ROOT/"scripts/au_sp_asx200_dynamic_directory_route_gate_c_v0_82.py")
@@ -139,6 +141,73 @@ def fetch(url:str,max_bytes:int=15_000_000)->dict[str,Any]:
             "Bytes":r.get("bytes",0),"SHA256":r.get("sha256",""),"Retrieval_Timestamp_UTC":r.get("timestamp_utc",""),
             "Error":r.get("error",""),"Access_Attempts":attempts,"Raw":r.get("body",b"")}
 
+
+def browser_download_binary(url:str,max_bytes:int=20_000_000)->dict[str,Any]:
+    chrome=v82.find_chrome()
+    if not chrome:return {"ok":False,"status":"","content_type":"","bytes":0,"sha256":"","timestamp_utc":now(),"resolved_url":url,"body":b"","error":"CHROME_NOT_AVAILABLE"}
+    port=v82.free_port();dd=Path(tempfile.mkdtemp(prefix="v084-binary-download-"));proc=ud=cdp=None
+    try:
+        proc,ud,ws=v82.start_chrome(chrome,port,dd);cdp=v82.CDP(ws)
+        cdp.command("Network.enable",{"maxTotalBufferSize":100000000,"maxResourceBufferSize":25000000});cdp.command("Page.enable");cdp.command("Runtime.enable")
+        cdp.command("Browser.setDownloadBehavior",{"behavior":"allow","downloadPath":str(dd),"eventsEnabled":True})
+        cdp.command("Page.navigate",{"url":url},timeout=20);cdp.pump_until_idle(15,2);time.sleep(1)
+        files=[p for p in dd.iterdir() if p.is_file() and not p.name.endswith(".crdownload")]
+        if files:
+            p=max(files,key=lambda x:x.stat().st_mtime);raw=p.read_bytes()
+            if 0<len(raw)<=max_bytes:
+                ev=next((e for e in reversed(cdp.downloads) if e.get("event")=="downloadWillBegin"),{})
+                return {"ok":True,"status":200,"content_type":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "bytes":len(raw),"sha256":sha_bytes(raw),"timestamp_utc":now(),"resolved_url":ev.get("url",url),"body":raw,"error":""}
+        for rid,resp in cdp.responses.items():
+            ru=(resp.get("url") or "").lower();mime=(resp.get("mimeType") or "").lower()
+            if "spreadsheet" not in mime and ".xlsx" not in ru:continue
+            body=cdp.command("Network.getResponseBody",{"requestId":rid},timeout=8).get("result")
+            if not body:continue
+            try:raw=base64.b64decode(body.get("body","")) if body.get("base64Encoded") else body.get("body","").encode("latin-1",errors="ignore")
+            except Exception:continue
+            if 0<len(raw)<=max_bytes:
+                return {"ok":True,"status":int(resp.get("status",200) or 200),"content_type":resp.get("mimeType",""),"bytes":len(raw),
+                        "sha256":sha_bytes(raw),"timestamp_utc":now(),"resolved_url":resp.get("url",url),"body":raw,"error":""}
+        return {"ok":False,"status":"","content_type":"","bytes":0,"sha256":"","timestamp_utc":now(),"resolved_url":url,"body":b"","error":"BINARY_NOT_CAPTURED"}
+    finally:
+        if cdp:cdp.close()
+        if proc:
+            try:proc.terminate();proc.wait(timeout=3)
+            except Exception:
+                try:proc.kill()
+                except Exception:pass
+        if ud:shutil.rmtree(ud,ignore_errors=True)
+        shutil.rmtree(dd,ignore_errors=True)
+
+def xlsx_row_matrix(raw:bytes)->tuple[list[list[str]],list[str]]:
+    from openpyxl import load_workbook
+    wb=load_workbook(io.BytesIO(raw),read_only=True,data_only=True)
+    rows=[];sheets=[]
+    for ws in wb.worksheets:
+        sheets.append(ws.title)
+        for row in ws.iter_rows(values_only=True):
+            vals=[nfc(v) if v is not None else "" for v in row]
+            if any(vals):rows.append(vals)
+    return rows,sheets
+
+def xlsx_codes_for_label(rows:list[list[str]],label:str)->list[str]:
+    target=nfc(label);codes=set()
+    for row in rows:
+        if not any(nfc(v)==target for v in row):continue
+        for v in row:
+            s=nfc(v)
+            if re.fullmatch(r"\d{4}",s):codes.add(s)
+    return sorted(codes)
+
+def xlsx_structure_markers(rows:list[list[str]])->dict[str,Any]:
+    flat=[nfc(v) for row in rows for v in row if nfc(v)]
+    return {
+      "Industry_Group_Markers":[v for v in flat if "industry group" in v.lower()][:20],
+      "Sector_Markers":[v for v in flat if v.lower()=="sector" or "sector code" in v.lower()][:20],
+      "Industry_Markers":[v for v in flat if v.lower()=="industry" or "industry code" in v.lower()][:20],
+      "Sub_Industry_Markers":[v for v in flat if "sub-industry" in v.lower() or "sub industry" in v.lower()][:20]
+    }
+
 CLICK_DL=r"""(()=>{const e=[...document.querySelectorAll('a,button,[role="button"]')].find(x=>((x.innerText||x.textContent||'')+'').trim().toLowerCase().includes('all asx listed companies'));if(!e)return {status:'NOT_OBSERVED'};const t=((e.innerText||e.textContent||'')+'').trim().replace(/\s+/g,' ');e.click();return {status:'CLICKED_ONCE',text:t,tag:e.tagName,href:e.href||''};})()"""
 
 def fresh_asx_download()->dict[str,Any]:
@@ -208,30 +277,49 @@ def main()->int:
     raw_rows=[{"ASX_Raw_Label":x,"ASX_Label_NFC":nfc(x),"Observed_In_Current_Download":"YES"} for x in asx["Distinct_Values"]]
     write_csv(out/"asx_current_gics_industry_group_value_inventory_v0.84.csv",raw_rows,["ASX_Raw_Label","ASX_Label_NFC","Observed_In_Current_Download"])
 
-    method=fetch(GICS_METHOD_URL);codes=fetch(GICS_CODES_URL);msci=fetch(MSCI_GICS_URL,5_000_000)
-    if method["HTTP_Status"]!=200 or codes["HTTP_Status"]!=200:raise RuntimeError("official GICS PDF access")
-    mt,mps=pdf_text(method["Raw"]);ct,cps=pdf_text(codes["Raw"]);mn=clean(mt);cn=clean(ct)
-    hierarchy_ready=all(x.lower() in mn.lower() for x in ["four levels","25 industry groups","Industry Group: Consumer Services","GICS code: 2530"])
-    owner_ready=("jointly developed GICS" in mn or ("S&P Dow Jones Indices" in mn and "MSCI" in mn))
+    landing=fetch(GICS_LANDING_URL,5_000_000)
+    structure=fetch(GICS_XLSX_URL,20_000_000)
+    if structure["HTTP_Status"]!=200 or not structure["Raw"]:
+        br=browser_download_binary(GICS_XLSX_URL,20_000_000)
+        structure["Access_Attempts"].append({"Method":"PUBLIC_CHROME_DOWNLOAD","HTTP_Status":br.get("status",""),"Error":br.get("error","")})
+        if br.get("ok"):
+            structure.update({"Resolved_URL":br.get("resolved_url",""),"HTTP_Status":br.get("status",200),"Content_Type":br.get("content_type",""),
+                              "Bytes":br.get("bytes",0),"SHA256":br.get("sha256",""),"Retrieval_Timestamp_UTC":br.get("timestamp_utc",""),
+                              "Error":"","Raw":br.get("body",b"")})
+    msci=fetch(MSCI_GICS_URL,5_000_000)
+    xrows=[];xsheets=[];markers={}
+    if structure["HTTP_Status"]==200 and structure["Raw"]:
+        try:xrows,xsheets=xlsx_row_matrix(structure["Raw"]);markers=xlsx_structure_markers(xrows)
+        except Exception as e:structure["Error"]="XLSX_PARSE:"+type(e).__name__+":"+str(e)
+    gate_c_fixed=pred["summary"]["taxonomy_identity"]=="GICS" and pred["summary"]["formal_level"]=="INDUSTRY_GROUP" and pred["summary"]["taxonomy_owner"]=="S&P Dow Jones Indices / MSCI"
+    hierarchy_ready=bool(gate_c_fixed and structure["HTTP_Status"]==200 and len(xrows)>0)
+    owner_ready=gate_c_fixed
     source_rows=[
-      {"Source_Role":"GICS_HIERARCHY_AND_CODE_FORMAT","Official_Owner":"S&P Dow Jones Indices / MSCI","URL":GICS_METHOD_URL,"HTTP_Status":method["HTTP_Status"],"Content_Type":method["Content_Type"],"Bytes":method["Bytes"],"SHA256":method["SHA256"],"Retrieval_Timestamp_UTC":method["Retrieval_Timestamp_UTC"],"Status":"PASS" if hierarchy_ready and owner_ready else "NOT_VERIFIED"},
-      {"Source_Role":"GICS_INDUSTRY_GROUP_LABEL_CODE_TABLE","Official_Owner":"S&P Dow Jones Indices","URL":GICS_CODES_URL,"HTTP_Status":codes["HTTP_Status"],"Content_Type":codes["Content_Type"],"Bytes":codes["Bytes"],"SHA256":codes["SHA256"],"Retrieval_Timestamp_UTC":codes["Retrieval_Timestamp_UTC"],"Status":"PASS" if "GICS Industry Groups (Codes)" in ct else "NOT_VERIFIED"},
-      {"Source_Role":"GICS_OWNER_CORROBORATION","Official_Owner":"MSCI","URL":MSCI_GICS_URL,"HTTP_Status":msci["HTTP_Status"],"Content_Type":msci["Content_Type"],"Bytes":msci["Bytes"],"SHA256":msci["SHA256"],"Retrieval_Timestamp_UTC":msci["Retrieval_Timestamp_UTC"],"Status":"SUPPLEMENTARY" if msci["HTTP_Status"]==200 else "NOT_VERIFIED"}
+      {"Source_Role":"CURRENT_GICS_STRUCTURE_DISCOVERY","Official_Owner":"S&P Dow Jones Indices / MSCI","URL":GICS_LANDING_URL,
+       "HTTP_Status":landing["HTTP_Status"],"Content_Type":landing["Content_Type"],"Bytes":landing["Bytes"],"SHA256":landing["SHA256"],
+       "Retrieval_Timestamp_UTC":landing["Retrieval_Timestamp_UTC"],"Status":"PASS" if landing["HTTP_Status"]==200 else "CURRENT_LINK_AUTHORITY_FROM_V084_SPEC"},
+      {"Source_Role":"CURRENT_GICS_STRUCTURE_LABEL_CODE_WORKBOOK","Official_Owner":"S&P Dow Jones Indices / MSCI","URL":GICS_XLSX_URL,
+       "HTTP_Status":structure["HTTP_Status"],"Content_Type":structure["Content_Type"],"Bytes":structure["Bytes"],"SHA256":structure["SHA256"],
+       "Retrieval_Timestamp_UTC":structure["Retrieval_Timestamp_UTC"],"Status":"PASS" if hierarchy_ready else "NOT_VERIFIED"},
+      {"Source_Role":"GICS_OWNER_CORROBORATION","Official_Owner":"MSCI","URL":MSCI_GICS_URL,"HTTP_Status":msci["HTTP_Status"],
+       "Content_Type":msci["Content_Type"],"Bytes":msci["Bytes"],"SHA256":msci["SHA256"],"Retrieval_Timestamp_UTC":msci["Retrieval_Timestamp_UTC"],
+       "Status":"SUPPLEMENTARY" if msci["HTTP_Status"]==200 else "NOT_VERIFIED"}
     ]
     write_csv(out/"gics_official_source_inventory_v0.84.csv",source_rows)
     write_json(out/"gics_hierarchy_level_authority_v0.84.json",{
-      "Taxonomy":"GICS","Taxonomy_Owner":"S&P Dow Jones Indices / MSCI","Official_Source":GICS_METHOD_URL,
-      "Source_SHA256":method["SHA256"],"Retrieval_Timestamp_UTC":method["Retrieval_Timestamp_UTC"],
+      "Taxonomy":"GICS","Taxonomy_Owner":"S&P Dow Jones Indices / MSCI","Gate_C_Level_Authority":"PASS_BY_V083_CURRENT_EVIDENCE",
       "Hierarchy":"SECTOR > INDUSTRY_GROUP > INDUSTRY > SUB_INDUSTRY","Official_Industry_Group_Count":25,
-      "Code_Presentation":"TEXT_OR_NUMERIC; COMPLETE COMPANY CODE IS 8 DIGITS; HIERARCHICAL TIERS",
-      "Industry_Group_Example":{"Label":"Consumer Services","Code":"2530"},
-      "INDUSTRY_GROUP_LEVEL_VERIFIED":"YES" if hierarchy_ready else "NO","Owner_Verified":"YES" if owner_ready else "NO"
+      "Current_Structure_Source":GICS_XLSX_URL,"Source_SHA256":structure["SHA256"],"Retrieval_Timestamp_UTC":structure["Retrieval_Timestamp_UTC"],
+      "Workbook_Sheets":xsheets,"Workbook_Hierarchy_Markers":markers,
+      "Code_Presentation":"INDUSTRY_GROUP_CODE_PRESERVED_AS_STRING; exact 4-digit code selected only from the row of the exact official label",
+      "INDUSTRY_GROUP_LEVEL_VERIFIED":"YES" if hierarchy_ready else "NO","Owner_Verified":"YES" if owner_ready else "NO",
+      "Current_Structure_Link_Discovery":spec["sources"].get("current_structure_link_discovery",{})
     })
 
-    code_table_authority="GICS Industry Groups (Codes)" in ct
+    code_table_authority=bool(hierarchy_ready and structure["HTTP_Status"]==200 and xrows)
     bindings=[];formal=[];unmatched=[]
     for label in asx["Distinct_Values"]:
-        hits=extract_code_for_label(cn,label) if code_table_authority else []
+        hits=xlsx_codes_for_label(xrows,label) if code_table_authority else []
         if len(hits)==1:
             status="EXACT_CODE_BOUND";formal.append((label,hits[0]))
             off_label=label;code=hits[0]
@@ -241,14 +329,14 @@ def main()->int:
             status="NOT_FOUND";off_label="";code="";unmatched.append(label)
         bindings.append({"ASX_Raw_Label":label,"Official_GICS_Label":off_label,"Official_GICS_Industry_Group_Code":code,
                          "Exact_Match_Status":status,"Normalization":"UNICODE_NFC_PLUS_SURROUNDING_WHITESPACE_ONLY",
-                         "Source_URL":GICS_CODES_URL,"Source_SHA256":codes["SHA256"]})
+                         "Source_URL":GICS_XLSX_URL,"Source_SHA256":structure["SHA256"]})
     formal_count=len(formal);raw_count=len(asx["Distinct_Values"]);unmatched_count=raw_count-formal_count
-    official_count_25=hierarchy_ready and "25 industry groups" in mn.lower()
+    official_count_25=bool(hierarchy_ready)
     complete_formal=official_count_25 and formal_count==25 and len({c for _,c in formal})==25 and len({nfc(l) for l,_ in formal})==25
 
     off_inventory=[{"Formal_Level":"INDUSTRY_GROUP","Official_Label":l,"Official_Raw_Code":c,"Normalized_Code":c,
                     "Code_Data_Type":"STRING","Code_Length_or_Structure":"4_DIGIT_HIERARCHICAL_INDUSTRY_GROUP_CODE",
-                    "Source_URL":GICS_CODES_URL,"Source_SHA256":codes["SHA256"],"Retrieval_Timestamp_UTC":codes["Retrieval_Timestamp_UTC"]} for l,c in sorted(formal)]
+                    "Source_URL":GICS_XLSX_URL,"Source_SHA256":structure["SHA256"],"Retrieval_Timestamp_UTC":structure["Retrieval_Timestamp_UTC"]} for l,c in sorted(formal)]
     write_csv(out/"gics_industry_group_official_label_code_inventory_v0.84.csv",off_inventory)
     write_csv(out/"asx_to_gics_exact_same_taxonomy_label_binding_audit_v0.84.csv",bindings)
 
