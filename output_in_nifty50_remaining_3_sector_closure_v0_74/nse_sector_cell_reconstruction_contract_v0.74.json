@@ -1,0 +1,41 @@
+{
+  "Allowed_Repairs": [
+    "join line-wrapped fragments from same coordinate cell",
+    "collapse extraction whitespace",
+    "Unicode/whitespace normalization only"
+  ],
+  "Column_Anchors": {
+    "BASIC_INDUSTRY": 466.44000244140625,
+    "INDUSTRY": 325.7799987792969,
+    "MACRO_ECONOMIC_SECTOR": 69.38400268554688,
+    "SECTOR": 197.08999633789062
+  },
+  "Column_Margin_Points": 3,
+  "Deterministic_Rerun": true,
+  "Expected_PDF_SHA256": "8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b",
+  "Extraction_Error": "",
+  "Extraction_Method": "page.get_text(words) coordinate-aware cell reconstruction",
+  "Forbidden_Repairs": [
+    "insert words",
+    "spelling correction",
+    "punctuation substitution",
+    "fuzzy matching",
+    "semantic inference"
+  ],
+  "Max_Cell_Vertical_Points": 42,
+  "Observed_PDF_SHA256": "8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b",
+  "Official_PDF_URL": "https://www.niftyindices.com/docs/default-source/default-document-library/industry-classification/nse-indices_industry-classification-structure-2023-07.pdf?sfvrsn=c89dd39_1",
+  "PDF_SHA_Matches": true,
+  "Raw_PDF_Persisted": false,
+  "Raw_PDF_Redistribution_Rights": "NOT_VERIFIED",
+  "Right_Column_Boundaries": {
+    "BASIC_INDUSTRY": 699.6699829101562,
+    "INDUSTRY": 463.44000244140625,
+    "MACRO_ECONOMIC_SECTOR": 194.08999633789062,
+    "SECTOR": 322.7799987792969
+  },
+  "Run1_Structural_SHA256": "f870ee10d408565340307233b94ca082f8c7596fdf5acea10fda3f7ddff7a08e",
+  "Run2_Structural_SHA256": "f870ee10d408565340307233b94ca082f8c7596fdf5acea10fda3f7ddff7a08e",
+  "Tool": "PyMuPDF",
+  "Tool_Version": "1.26.4"
+}

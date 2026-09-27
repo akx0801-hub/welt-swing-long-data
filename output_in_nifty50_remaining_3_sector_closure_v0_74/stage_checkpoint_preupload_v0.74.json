@@ -1,0 +1,20 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "",
+  "bound_classification_level": "SECTOR",
+  "classified": 45,
+  "conflict": 0,
+  "distinct_classifications": 15,
+  "in_exact_45_sector_classification_coverage_ready": true,
+  "next_gate": "IN_NIFTY50 SOURCE ACCESS / PERSISTENCE GATE",
+  "not_found": 0,
+  "not_verified": 0,
+  "remaining_3_node_bindings": 3,
+  "remaining_3_node_total": 3,
+  "source_native_code_coverage": 45,
+  "stage": "IN_NIFTY50_REMAINING_3_SECTOR_NODE_SOURCE_NATIVE_CODE_CLOSURE_GATE_F_COMPLETION",
+  "total": 45,
+  "verdict": "PASS_IN_NIFTY50_REMAINING_3_SECTOR_CODE_CLOSURE_GATE_F_COMPLETE",
+  "version": "v0.74"
+}

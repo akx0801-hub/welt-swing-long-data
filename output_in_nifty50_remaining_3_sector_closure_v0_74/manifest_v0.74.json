@@ -1,0 +1,128 @@
+{
+  "ambiguous": 0,
+  "artifact": {
+    "artifact_digest": "472f856de56611cb7292075b96690557b5bc4df099c097a8b15b7202b7141a9e",
+    "artifact_id": 10930917775,
+    "artifact_name": "in-nifty50-remaining-3-sector-closure-v0.74-36317697732",
+    "artifact_scope": "pre-persistence v0.74 remaining-three NSE SECTOR source-native code closure and exact-45 Gate-F completion evidence",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "63eef8a216d21348e211500345664ce2786999a2",
+    "workflow_run_id": 36317697732
+  },
+  "blocker": "",
+  "bound_classification_level": "SECTOR",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "classified": 45,
+  "conflict": 0,
+  "distinct_classifications": 15,
+  "files": {
+    "artifact_binding_v0.74.json": {
+      "bytes": 471,
+      "sha256": "26f6f1c9c335d9c619591b1b5a5383fca18e361133149440dcd059f54ead57d1"
+    },
+    "docs/validation/IN_NIFTY50_Remaining_3_Sector_Node_Code_Closure_Gate_F_Completion_v0.74.md": {
+      "bytes": 2979,
+      "sha256": "01da0446a007e1d979a74429aeb4d7f19817cc12a0b78d86a2a1ec2d2940d7e5"
+    },
+    "external_request_ledger_v0.74.csv": {
+      "bytes": 593,
+      "sha256": "05035ac484d5d5fa0a0d736b744e740c503fb69daf6b5ab551d1b4127264d745"
+    },
+    "immutability_audit_v0.74.json": {
+      "bytes": 1360,
+      "sha256": "6357d1ea87504f0065258f4733533bcdb4ed88de491207f56d77522e5e86cf5a"
+    },
+    "in_15_sector_code_inventory_v0.74.csv": {
+      "bytes": 2244,
+      "sha256": "f31af303aaa3af176053be87d8722d2daa8997f366e0fbeada18ae86b800ed49"
+    },
+    "in_descendant_parent_sector_binding_v0.74.csv": {
+      "bytes": 4462,
+      "sha256": "0d94c559ea2e89aeae42f2afaf9560825ec79c2c84c96388f761a7e467848111"
+    },
+    "in_descendant_taxonomy_node_binding_v0.74.csv": {
+      "bytes": 4789,
+      "sha256": "fe4596f41499162a77422956caf894bd23371d7252bff32412093f031d835777"
+    },
+    "in_exact_45_classification_coverage_v0.74.csv": {
+      "bytes": 10570,
+      "sha256": "12027331eee12debb325b026bcfa4c09e98ad12921512de81fa638d40b7ccfc9"
+    },
+    "in_remaining_3_sector_code_binding_v0.74.csv": {
+      "bytes": 1044,
+      "sha256": "83d30af892d8594355fe6c1da8637c1c3bd0b654d1b1c9960465bbb8a237bea9"
+    },
+    "in_remaining_3_sector_target_v0.74.csv": {
+      "bytes": 908,
+      "sha256": "d3834369c20f339e77befd932bbf2c464a87925a1084aebe6d7675d7721ce564"
+    },
+    "in_source_native_code_binding_v0.74.csv": {
+      "bytes": 3372,
+      "sha256": "5e4a51fb6eec5f455addeddd09ed373b2083231431d5129e0ca655a3da9f5c7b"
+    },
+    "in_unresolved_descendant_application_assignments_v0.74.csv": {
+      "bytes": 3432,
+      "sha256": "5e18e5b814c1241bbc831b0406b9b0802b6e6d5a9f121a9d82787e9d2c0e0466"
+    },
+    "manifest_preupload_v0.74.json": {
+      "bytes": 3741,
+      "sha256": "5b34831c142b467960d8c6f58dacc451bf05d901f6bd3d4d5e65a0d4a10aff5e"
+    },
+    "nse_sector_cell_coordinate_extraction_audit_v0.74.csv": {
+      "bytes": 11876,
+      "sha256": "c2677690e9dc4530876748bc582756bca1a5c98b5b830930ae6ba9762e906b5f"
+    },
+    "nse_sector_cell_reconstruction_contract_v0.74.json": {
+      "bytes": 1646,
+      "sha256": "292405e4afe05502be0c08348b30589ed9ef52d4c54e7b4162ca64eecdda39bb"
+    },
+    "provider_call_audit_v0.74.json": {
+      "bytes": 766,
+      "sha256": "2b7858a999e210edb28dbdc9f1f1030076ba41779d39f23c6679292e99080602"
+    },
+    "stage_checkpoint_preupload_v0.74.json": {
+      "bytes": 665,
+      "sha256": "dde4b5059b94f57721b9223d8f0c742d27407a6e2fc738efd3ce7a908bbe01db"
+    },
+    "stage_checkpoint_v0.74.json": {
+      "bytes": 808,
+      "sha256": "a3174da83a77f51a48b5cd6d4e3e44582778c6f23e9e01de937673b4c142f227"
+    },
+    "summary_preupload_v0.74.json": {
+      "bytes": 1237,
+      "sha256": "4245091812a9d3d5bb72234c749894a47b8553c37e42dc2f3379e883c8157d27"
+    },
+    "summary_v0.74.json": {
+      "bytes": 1729,
+      "sha256": "674da1403b04e50dfe75551ee1c4c532fe2328bf58beb5f944602c53ff10cb6f"
+    },
+    "taxonomy_code_hierarchy_integrity_audit_v0.74.json": {
+      "bytes": 385,
+      "sha256": "43316b82ef6806a37880f5d9e74ae158c383c1e251419f0c378770dcb36ff38e"
+    },
+    "test_results_v0.74.csv": {
+      "bytes": 1209,
+      "sha256": "979f66b3e2f35f418226979c0d04993f0d3056b02c101a9471023d5fe8b9d470"
+    }
+  },
+  "gate_h_promotions": 0,
+  "in_exact_45_sector_classification_coverage_ready": true,
+  "next_gate": "IN_NIFTY50 SOURCE ACCESS / PERSISTENCE GATE",
+  "not_found": 0,
+  "not_verified": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "remaining_3_node_bindings": 3,
+  "required_start_head": "57364dbf0b08edc2c563e0ecbf8f9d3e5fc2269f",
+  "sector_rs_runs": 0,
+  "source_native_code_coverage": 45,
+  "stage": "IN_NIFTY50_REMAINING_3_SECTOR_NODE_SOURCE_NATIVE_CODE_CLOSURE_GATE_F_COMPLETION",
+  "total": 45,
+  "verdict": "PASS_IN_NIFTY50_REMAINING_3_SECTOR_CODE_CLOSURE_GATE_F_COMPLETE",
+  "version": "v0.74",
+  "workflow_head_sha": "63eef8a216d21348e211500345664ce2786999a2",
+  "workflow_run_id": 36317697732
+}

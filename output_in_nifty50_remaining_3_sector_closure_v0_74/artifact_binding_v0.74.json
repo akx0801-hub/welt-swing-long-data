@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "472f856de56611cb7292075b96690557b5bc4df099c097a8b15b7202b7141a9e",
+  "artifact_id": 10930917775,
+  "artifact_name": "in-nifty50-remaining-3-sector-closure-v0.74-36317697732",
+  "artifact_scope": "pre-persistence v0.74 remaining-three NSE SECTOR source-native code closure and exact-45 Gate-F completion evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "63eef8a216d21348e211500345664ce2786999a2",
+  "workflow_run_id": 36317697732
+}

@@ -1,0 +1,11 @@
+{
+  "Audited_As_Integrity_Check_Only": true,
+  "Explicit_Parent_Columns_Used_For_Descendant_Closure": true,
+  "Industry_Basic_Checks": 197,
+  "Macro_Sector_Checks": 197,
+  "Mismatch_Count": 0,
+  "Mismatches": [],
+  "Sector_Industry_Checks": 197,
+  "Used_As_Sole_Parent_Authority": false,
+  "v072_Structural_SHA256": "d431587f5f686b8432bc57755a8fe6aef232fed49fb858cf7e905b3318687173"
+}
