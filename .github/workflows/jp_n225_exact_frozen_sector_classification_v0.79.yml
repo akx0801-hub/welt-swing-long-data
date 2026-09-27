@@ -1,0 +1,250 @@
+name: JP N225 Exact Frozen Sector Coverage Gate v0.79
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/jp_n225_exact_frozen_sector_classification_v0.79.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  jp-n225-gate-f:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.79 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.79 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="4a5c2f5914f57e5333c68f7a8616dfd1b50adceb"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/jp_n225_exact_frozen_sector_classification_spec_v0\.79\.json|scripts/jp_n225_exact_frozen_sector_classification_v0_79\.py|scripts/persist_jp_n225_exact_frozen_sector_classification_v0_79\.py|tests/test_jp_n225_exact_frozen_sector_classification_v0_79\.py|\.github/workflows/jp_n225_exact_frozen_sector_classification_v0\.79\.yml|config/jp_n225_exact_frozen_sector_classification_v0\.79\.json|docs/validation/JP_N225_Exact_Frozen_Sector_Classification_Coverage_Gate_v0\.79\.md|output_jp_n225_exact_frozen_sector_classification_v0_79/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.78 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10933309355 --jq .digest)"
+          test "$DIGEST" = "sha256:4c5d1eae5e6ff4d2fa0397b7d58b89f5ab4754021c481b06e8c7c3557d902114"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_shared_sec_park_jp_n225_gate_d_v0_78")
+          s=json.load(open(out/"summary_v0.78.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.78.json",encoding="utf-8"))
+          comp=json.load(open(out/"nikkei_component_structure_audit_v0.78.json",encoding="utf-8"))
+          dec=json.load(open(out/"jp_canonical_classification_level_decision_v0.78.json",encoding="utf-8"))
+          src=list(csv.DictReader(open(out/"nikkei_official_source_inventory_v0.78.csv",encoding="utf-8")))
+          pdsc=list(csv.DictReader(open(out/"jp_pdsc_distinct_label_feasibility_audit_v0.78.csv",encoding="utf-8")))
+          assert s["verdict"]=="PASS_JP_N225_CANONICAL_CLASSIFICATION_LEVEL_GATE_D"
+          assert s["jp_canonical_classification_level_ready"] is True
+          assert s["taxonomy"]=="NIKKEI_36_INDUSTRY_AND_SECTOR"
+          assert s["selected_classification_level"]=="SECTOR"
+          assert s["official_level_name"]=="Sector"
+          assert s["native_code_available"]=="NO"
+          assert s["pdsc_required"]=="YES"
+          assert s["distinct_labels"]==6 and s["pdsc_collisions"]==0
+          assert (s["nikkei_sector_count"],s["nikkei_industry_count"],s["nikkei_component_security_count"])==(6,36,225)
+          assert c["workflow_run_id"]==36326606790 and c["artifact_id"]==10933309355
+          assert "sha256:"+c["artifact_digest"]=="sha256:4c5d1eae5e6ff4d2fa0397b7d58b89f5ab4754021c481b06e8c7c3557d902114"
+          assert comp["Response_SHA256"]=="7c3dd31f7987c6ea0fc21b5ee61054dbafb6c5c1fcce376dd63025cfdeb7043b"
+          assert comp["Source_Update_Raw"]=="Update：Sep/25/2026"
+          assert comp["Grouping_Hierarchy"]=="SECTOR -> INDUSTRY -> SECURITY_CODE"
+          assert comp["Machine_Countable_Component_Securities"]==225
+          assert comp["Sector_Count"]==6 and comp["Industry_Count"]==36
+          profile=next(r for r in src if r["Source_ID"]=="NIKKEI_225_PROFILE")
+          assert profile["SHA256"]=="d537eee86b7d39464eddcec3fd64d3e060e2aedf5a633a9749265dc32d330ffa"
+          assert dec["JP_CANONICAL_CLASSIFICATION_LEVEL_READY"] is True
+          assert dec["Sector_Level"]=="SECTOR"
+          assert dec["Source_Native_Sector_Code_Available"]=="NO"
+          assert dec["PDSC_Required"]=="YES"
+          expected={
+            "Technology":"PDSC1:2eb3437c8c82dad4cca3468ea713f244dd11c166ecd04a2a03bb2e010229c093",
+            "Financials":"PDSC1:0587309eb18ea75e0cd9964b23533cc25604f934902824576f82f9850c2c40be",
+            "Consumer Goods":"PDSC1:78be66233d528b6397fc234995d241e69913ed571321c6bf6e1d7d8a1d3541ca",
+            "Materials":"PDSC1:e3962e390df45617e19fea135091e814d14ced1f767bc1e4dbd543a4ccfcfef7",
+            "Capital Goods/Others":"PDSC1:49d729022c336d8e7d9819f30f8a587fea2c0d4dce2e63142d469f187a131176",
+            "Transportation and Utilities":"PDSC1:2fa8886dfeff0c0077ad4c1e75bdde490b6b2b67df89fdf035a9cb9d92dde596"
+          }
+          assert {r["Sector_Raw_Name"]:r["PDSC_Run_1"] for r in pdsc}==expected
+          assert all(r["PDSC_Run_1"]==r["PDSC_Run_2"] and r["Deterministic"]=="YES" for r in pdsc)
+
+          parks=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          ps={r["Cohort"]:r["Execution_State"] for r in parks}
+          assert ps=={"IN_NIFTY50":"PARKED_EXTERNAL_AUTHORIZATION","US_SP400":"PARKED_SOURCE_ACCESS","US_SP500":"PARKED_SHARED_SOURCE_PREREQUISITE"}
+
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="d367957506fd357e22b7cc9c62479a0dfa46ddf54b04ed862a71fdb50b87b2db"
+          assert sha("sector_metadata/governance/shared_source_dependency_registry_v1.csv")=="9847587b9e04aba5f26d96b6e9b3f1d9acc197cfee8b913ac887c549dec57b17"
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify v0.79 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/jp_n225_exact_frozen_sector_classification_spec_v0.79.json",encoding="utf-8"))
+          t=json.load(open("config/jp_n225_exact_frozen_sector_classification_v0.79.json",encoding="utf-8"))
+          assert s["required_start_head"]=="4a5c2f5914f57e5333c68f7a8616dfd1b50adceb"
+          assert s["scope_cohort"]=="JP_N225"
+          assert s["scope_gate"]=="F_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_ONLY"
+          assert s["taxonomy"]=="NIKKEI_36_INDUSTRY_AND_SECTOR"
+          assert s["sector_level"]=="SECTOR"
+          assert s["expected_frozen_rows"]==197 and s["expected_primary_mic"]=="XTKS"
+          assert s["component_source"]["max_requests"]==1
+          assert len(s["authorized_sector_labels"])==6
+          assert len(s["authorized_pdsc"])==6
+          assert s["identity_contract"]["numeric_casting_allowed"] is False
+          assert s["identity_contract"]["zero_padding_allowed"] is False
+          assert s["identity_contract"]["company_name_join_allowed"] is False
+          assert s["identity_contract"]["fuzzy_matching_allowed"] is False
+          assert s["limited_fallback"]["per_security_fanout_allowed"] is False
+          assert s["scope_boundaries"]["gate_h_allowed"] is False
+          assert s["scope_boundaries"]["canonical_materialization_allowed"] is False
+          assert s["scope_boundaries"]["other_cohort_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert s["forbidden"]["sec_requests"] is True
+          assert s["forbidden"]["nse_requests"] is True
+          assert t["required_start_head"]=="4a5c2f5914f57e5333c68f7a8616dfd1b50adceb"
+          assert t["scope_cohort"]=="JP_N225"
+          assert t["gate_h_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["other_cohort_allowed"] is False
+          assert t["sec_requests_allowed"] is False
+          assert t["nse_requests_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/jp_n225_exact_frozen_sector_classification_v0_79.py             scripts/persist_jp_n225_exact_frozen_sector_classification_v0_79.py
+          python3 tests/test_jp_n225_exact_frozen_sector_classification_v0_79.py -v
+
+      - name: Run bounded JP_N225 Gate F
+        run: |
+          set -euo pipefail
+          rm -rf output_jp_n225_exact_frozen_sector_classification_v0_79
+          python3 scripts/jp_n225_exact_frozen_sector_classification_v0_79.py             --repository-sha "$GITHUB_SHA"             --output-dir output_jp_n225_exact_frozen_sector_classification_v0_79
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_jp_n225_exact_frozen_sector_classification_v0_79")
+          s=json.load(open(out/"summary_preupload_v0.79.json",encoding="utf-8"))
+          target=list(csv.DictReader(open(out/"jp_frozen_197_classification_target_v0.79.csv",encoding="utf-8")))
+          source=json.load(open(out/"nikkei_component_source_audit_v0.79.json",encoding="utf-8"))
+          hierarchy=json.load(open(out/"nikkei_component_hierarchy_parse_audit_v0.79.json",encoding="utf-8"))
+          unique=json.load(open(out/"nikkei_source_security_code_uniqueness_audit_v0.79.json",encoding="utf-8"))
+          join=list(csv.DictReader(open(out/"jp_exact_197_security_code_join_audit_v0.79.csv",encoding="utf-8")))
+          membership=list(csv.DictReader(open(out/"jp_current_membership_vs_frozen_audit_v0.79.csv",encoding="utf-8")))
+          coverage=list(csv.DictReader(open(out/"jp_exact_197_classification_coverage_v0.79.csv",encoding="utf-8")))
+          sectors=list(csv.DictReader(open(out/"jp_frozen_sector_distribution_v0.79.csv",encoding="utf-8")))
+          industries=list(csv.DictReader(open(out/"jp_frozen_industry_inventory_v0.79.csv",encoding="utf-8")))
+          pdsc=list(csv.DictReader(open(out/"jp_pdsc_authority_recalculation_audit_v0.79.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.79.csv",encoding="utf-8")))
+          prov=json.load(open(out/"provider_call_audit_v0.79.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.79.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.79.csv",encoding="utf-8")))
+
+          assert len(target)==197 and len({r["Security_Key"] for r in target})==197 and len({r["WS_ID"] for r in target})==197
+          assert all(r["Primary_MIC"]=="XTKS" for r in target)
+          assert len(join)==len(membership)==len(coverage)==197
+          assert len(pdsc)==6 and all(r["Status"]=="PASS" for r in pdsc)
+          assert len(ext)==1
+          assert ext[0]["Source_Class"]=="NIKKEI_OFFICIAL"
+          assert ext[0]["Per_Security_Fanout"]=="NO"
+          assert ext[0]["SEC_Request"]=="NO" and ext[0]["NSE_Request"]=="NO"
+          assert all(v==0 for v in prov.values())
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert s["taxonomy"]=="NIKKEI_36_INDUSTRY_AND_SECTOR" and s["sector_level"]=="SECTOR"
+          assert s["authorized_sector_labels"]==6 and s["pdsc_collisions"]==0
+          assert s["in_nifty50_park_state"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert s["us_sp400_park_state"]=="PARKED_SOURCE_ACCESS"
+          assert s["us_sp500_park_state"]=="PARKED_SHARED_SOURCE_PREREQUISITE"
+          assert s["canonical_ready_rows"]==37 and s["canonical_total_rows"]==1425
+          assert s["gate_h_runs"]==0 and s["canonical_materialization_runs"]==0 and s["other_cohort_runs"]==0
+          assert s["sec_requests"]==0 and s["nse_requests"]==0
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/JP_N225_sector_metadata_v1.csv").exists()
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+
+          if s["jp_exact_197_sector_classification_coverage_ready"]:
+              assert s["verdict"]=="PASS_JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE"
+              assert (s["classified"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(197,197,0,0,0,0)
+              assert s["current_source_matches"]==197 and s["pdsc_coverage"]==197
+              assert source["Source_Status"]=="PASS"
+              assert hierarchy["Status"]=="PASS"
+              assert unique["Status"]=="PASS" and unique["Duplicate_Source_Code_Count"]==0
+              assert all(r["Join_Status"]=="EXACT_CURRENT_COMPONENT_MATCH" for r in join)
+              assert all(r["Classification_Status"]=="PROVABLY_CLASSIFIED" for r in coverage)
+              assert set(r["Official_Sector_Raw"] for r in coverage)==set(r["Official_Sector_Raw"] for r in sectors)
+              assert s["blocker"]==""
+              assert s["next_gate"]=="JP_N225 SOURCE ACCESS / PERSISTENCE GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE"
+              assert s["blocker"]!=""
+
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="d367957506fd357e22b7cc9c62479a0dfa46ddf54b04ed862a71fdb50b87b2db"
+          assert sha("sector_metadata/governance/shared_source_dependency_registry_v1.csv")=="9847587b9e04aba5f26d96b6e9b3f1d9acc197cfee8b913ac887c549dec57b17"
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["Parked_Cohort_Registry_Unchanged"] is True
+          assert imm["Shared_Source_Registry_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          PY
+          BAD_WORKTREE="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_jp_n225_exact_frozen_sector_classification_v0_79/.*|docs/validation/JP_N225_Exact_Frozen_Sector_Classification_Coverage_Gate_v0\.79\.md)$' || true)"
+          test -z "$BAD_WORKTREE"
+
+      - name: Upload bounded v0.79 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: jp-n225-exact-frozen-sector-coverage-v0.79-${{ github.run_id }}
+          path: output_jp_n225_exact_frozen_sector_classification_v0_79/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_jp_n225_exact_frozen_sector_classification_v0_79.py             --output-dir output_jp_n225_exact_frozen_sector_classification_v0_79             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "jp-n225-exact-frozen-sector-coverage-v0.79-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.79 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/JP_N225_Exact_Frozen_Sector_Classification_Coverage_Gate_v0.79.md                   output_jp_n225_exact_frozen_sector_classification_v0_79/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/JP_N225_Exact_Frozen_Sector_Classification_Coverage_Gate_v0\.79\.md|output_jp_n225_exact_frozen_sector_classification_v0_79/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist JP N225 exact Frozen sector coverage v0.79"
+          git push origin HEAD:main
