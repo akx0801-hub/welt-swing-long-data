@@ -1,0 +1,239 @@
+name: IN NIFTY50 Remaining-3 Sector Closure Gate F Completion v0.74
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/in_nifty50_remaining_3_sector_closure_v0.74.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  in-nifty50-remaining-3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout bounded v0.74 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.74 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="57364dbf0b08edc2c563e0ecbf8f9d3e5fc2269f"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/in_nifty50_remaining_3_sector_closure_spec_v0\.74\.json|scripts/in_nifty50_remaining_3_sector_closure_v0_74\.py|scripts/persist_in_nifty50_remaining_3_sector_closure_v0_74\.py|tests/test_in_nifty50_remaining_3_sector_closure_v0_74\.py|\.github/workflows/in_nifty50_remaining_3_sector_closure_v0\.74\.yml|config/in_nifty50_remaining_3_sector_closure_v0\.74\.json|docs/validation/IN_NIFTY50_Remaining_3_Sector_Node_Code_Closure_Gate_F_Completion_v0\.74\.md|output_in_nifty50_remaining_3_sector_closure_v0_74/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.73 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10929840911 --jq .digest)"
+          test "$DIGEST" = "sha256:5d1cbce614a0f943af0cb76fddc4dcf7bd80b9e6a3213850a9bac4601784a706"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_in_nifty50_sectoral_distribution_contract_v0_73")
+          s=json.load(open(out/"summary_v0.73.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.73.json",encoding="utf-8"))
+          lvl=json.load(open(out/"in_classification_level_binding_v0.73.json",encoding="utf-8"))
+          bind=list(csv.DictReader(open(out/"in_source_native_code_binding_v0.73.csv",encoding="utf-8")))
+          mem=list(csv.DictReader(open(out/"nifty_application_security_membership_v0.73.csv",encoding="utf-8")))
+          assign=list(csv.DictReader(open(out/"in_csv_vs_application_level_assignment_audit_v0.73.csv",encoding="utf-8")))
+          cov=list(csv.DictReader(open(out/"in_exact_45_classification_coverage_v0.73.csv",encoding="utf-8")))
+          repro=json.load(open("output_in_nifty50_nse_classification_structure_repair_v0_72/nse_pdf_extraction_reproducibility_audit_v0.72.json",encoding="utf-8"))
+          link=list(csv.DictReader(open("output_in_nifty50_deterministic_security_identity_linkage_v0_70/in_exact_45_identity_linkage_audit_v0.70.csv",encoding="utf-8")))
+          assert s["verdict"]=="BLOCKED_IN_NIFTY50_GATE_F_APPLICATION_CONTRACT_RESOLUTION"
+          assert s["in_exact_45_sector_classification_coverage_ready"] is False
+          assert s["bound_classification_level"]=="SECTOR"
+          assert s["distinct_classifications"]==15
+          assert (s["classified"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(0,45,0,7,38,0)
+          assert s["blocker"]=="NIFTY_APPLICATION_NODE_TO_TAXONOMY_CODE_NOT_VERIFIED"
+          assert s["candidate_contract_count"]==4 and s["public_reproducibility"] is True
+          assert c["workflow_run_id"]==36312901944 and c["artifact_id"]==10929840911
+          assert "sha256:"+c["artifact_digest"]=="sha256:5d1cbce614a0f943af0cb76fddc4dcf7bd80b9e6a3213850a9bac4601784a706"
+          assert lvl["Level_Binding_Status"]=="PASS"
+          assert lvl["Official_Taxonomy_Level"]=="SECTOR"
+          assert lvl["Complete_Explaining_Levels"]==["SECTOR"]
+          assert len(mem)==180
+          sector=[r for r in assign if r["Application_Level"]=="SECTOR"]
+          assert len(sector)==45
+          assert all(r["Application_Assignment_Status"]=="PASS" and r["CSV_to_Application_Relation"]=="EXACT_DISPLAY_LABEL" for r in sector)
+          assert len(bind)==15
+          assert sum(r["Binding_Status"]=="PASS" for r in bind)==12
+          unresolved=[r for r in bind if r["Binding_Status"]!="PASS"]
+          assert {(r["CSV_Source_Label"],r["Application_Node_ID_or_Code"]) for r in unresolved}=={
+              ("Information Technology","11"),("Services","1"),("Telecommunication","7")}
+          from collections import Counter
+          cc=Counter(r["CSV_Source_Label"] for r in sector if r["CSV_Source_Label"] in {"Information Technology","Services","Telecommunication"})
+          assert cc==Counter({"Information Technology":4,"Services":2,"Telecommunication":1})
+          assert len(cov)==45
+          assert repro["PDF_SHA256"]=="8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b"
+          assert repro["Run1_Structural_SHA256"]=="d431587f5f686b8432bc57755a8fe6aef232fed49fb858cf7e905b3318687173"
+          assert len(link)==45 and all(r["Gate_E_Status"]=="PROVABLY_LINKED" for r in link)
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify v0.74 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/in_nifty50_remaining_3_sector_closure_spec_v0.74.json",encoding="utf-8"))
+          t=json.load(open("config/in_nifty50_remaining_3_sector_closure_v0.74.json",encoding="utf-8"))
+          assert s["required_start_head"]=="57364dbf0b08edc2c563e0ecbf8f9d3e5fc2269f"
+          assert s["scope_cohort"]=="IN_NIFTY50"
+          assert s["scope_gate"]=="GATE_F_REMAINING_3_NODE_CLOSURE_ONLY"
+          assert s["bound_classification_level"]=="SECTOR"
+          assert len(s["remaining_sector_nodes"])==3
+          assert s["coordinate_extraction"]["required_version"]=="1.26.4"
+          assert s["application_contract_rediscovery_allowed"] is False
+          assert s["application_endpoint_refetch_allowed"] is False
+          assert s["nifty_constituent_refetch_allowed"] is False
+          assert s["nse_equity_l_allowed"] is False
+          assert s["ocr_allowed"] is False
+          assert s["screenshots_allowed"] is False
+          assert s["manual_transcription_allowed"] is False
+          assert s["fuzzy_matching_allowed"] is False
+          assert s["semantic_inference_allowed"] is False
+          assert s["company_name_join_allowed"] is False
+          assert s["cross_taxonomy_mapping_allowed"] is False
+          assert s["pdsc_fallback_allowed"] is False
+          assert s["per_security_fanout_allowed"] is False
+          assert s["gate_h_allowed"] is False
+          assert s["canonical_materialization_allowed"] is False
+          assert s["sector_rs_allowed"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert t["required_start_head"]=="57364dbf0b08edc2c563e0ecbf8f9d3e5fc2269f"
+          assert t["gate_h_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Prepare deterministic coordinate parser
+        run: |
+          set -euo pipefail
+          INSTALL_CMD='python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple PyMuPDF==1.26.4'
+          echo "V074_PYMUPDF_INSTALL_COMMAND=$INSTALL_CMD" >> "$GITHUB_ENV"
+          $INSTALL_CMD
+          python3 - <<'PY'
+          import importlib.metadata
+          assert importlib.metadata.version("PyMuPDF")=="1.26.4"
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/in_nifty50_remaining_3_sector_closure_v0_74.py             scripts/persist_in_nifty50_remaining_3_sector_closure_v0_74.py
+          python3 tests/test_in_nifty50_remaining_3_sector_closure_v0_74.py -v
+
+      - name: Run bounded remaining-3 closure
+        run: |
+          set -euo pipefail
+          rm -rf output_in_nifty50_remaining_3_sector_closure_v0_74
+          python3 scripts/in_nifty50_remaining_3_sector_closure_v0_74.py             --repository-sha "$GITHUB_SHA"             --output-dir output_in_nifty50_remaining_3_sector_closure_v0_74
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_in_nifty50_remaining_3_sector_closure_v0_74")
+          s=json.load(open(out/"summary_preupload_v0.74.json",encoding="utf-8"))
+          contract=json.load(open(out/"nse_sector_cell_reconstruction_contract_v0.74.json",encoding="utf-8"))
+          target=list(csv.DictReader(open(out/"in_remaining_3_sector_target_v0.74.csv",encoding="utf-8")))
+          rem=list(csv.DictReader(open(out/"in_remaining_3_sector_code_binding_v0.74.csv",encoding="utf-8")))
+          inv=list(csv.DictReader(open(out/"in_15_sector_code_inventory_v0.74.csv",encoding="utf-8")))
+          bind=list(csv.DictReader(open(out/"in_source_native_code_binding_v0.74.csv",encoding="utf-8")))
+          cov=list(csv.DictReader(open(out/"in_exact_45_classification_coverage_v0.74.csv",encoding="utf-8")))
+          desc=list(csv.DictReader(open(out/"in_unresolved_descendant_application_assignments_v0.74.csv",encoding="utf-8")))
+          dnode=list(csv.DictReader(open(out/"in_descendant_taxonomy_node_binding_v0.74.csv",encoding="utf-8")))
+          dparent=list(csv.DictReader(open(out/"in_descendant_parent_sector_binding_v0.74.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.74.csv",encoding="utf-8")))
+          prov=json.load(open(out/"provider_call_audit_v0.74.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.74.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.74.csv",encoding="utf-8")))
+          assert len(target)==7 and len(rem)==3 and len(inv)==15 and len(bind)==15 and len(cov)==45
+          assert len(desc)==14 and len(dnode)==14 and len(dparent)==14
+          assert len(ext)==1
+          assert ext[0]["Request_Type"]=="NSE_INDICES_CLASSIFICATION_PDF_COORDINATE_REEXTRACTION"
+          assert ext[0]["Per_Security_Fanout"]=="NO"
+          assert contract["Tool"]=="PyMuPDF" and contract["Tool_Version"]=="1.26.4"
+          assert contract["Deterministic_Rerun"] is True
+          assert all(v==0 for v in prov.values())
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert s["bound_classification_level"]=="SECTOR"
+          assert s["distinct_classifications"]==15
+          assert s["gate_h_promotions"]==0 and s["canonical_materialization_runs"]==0
+          assert s["canonical_ready_rows"]==37
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/IN_NIFTY50_sector_metadata_v1.csv").exists()
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          if s["in_exact_45_sector_classification_coverage_ready"]:
+              assert s["verdict"]=="PASS_IN_NIFTY50_REMAINING_3_SECTOR_CODE_CLOSURE_GATE_F_COMPLETE"
+              assert (s["classified"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(45,45,0,0,0,0)
+              assert s["source_native_code_coverage"]==45
+              assert s["remaining_3_node_bindings"]==3
+              assert all(r["Binding_Status"]=="PASS" for r in rem)
+              assert all(r["Binding_Status"]=="PASS" for r in bind)
+              assert all(r["Classification_Status"]=="PROVABLY_CLASSIFIED" for r in cov)
+              assert s["blocker"]==""
+              assert s["next_gate"]=="IN_NIFTY50 SOURCE ACCESS / PERSISTENCE GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_IN_NIFTY50_REMAINING_3_SECTOR_CODE_CLOSURE"
+              assert s["blocker"]!=""
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          PY
+          BAD_WORKTREE="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_in_nifty50_remaining_3_sector_closure_v0_74/.*|docs/validation/IN_NIFTY50_Remaining_3_Sector_Node_Code_Closure_Gate_F_Completion_v0\.74\.md)$' || true)"
+          test -z "$BAD_WORKTREE"
+
+      - name: Upload bounded v0.74 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: in-nifty50-remaining-3-sector-closure-v0.74-${{ github.run_id }}
+          path: output_in_nifty50_remaining_3_sector_closure_v0_74/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_in_nifty50_remaining_3_sector_closure_v0_74.py             --output-dir output_in_nifty50_remaining_3_sector_closure_v0_74             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "in-nifty50-remaining-3-sector-closure-v0.74-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.74 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/IN_NIFTY50_Remaining_3_Sector_Node_Code_Closure_Gate_F_Completion_v0.74.md                   output_in_nifty50_remaining_3_sector_closure_v0_74/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/IN_NIFTY50_Remaining_3_Sector_Node_Code_Closure_Gate_F_Completion_v0\.74\.md|output_in_nifty50_remaining_3_sector_closure_v0_74/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist IN NIFTY50 remaining-3 sector closure v0.74"
+          git push origin HEAD:main
