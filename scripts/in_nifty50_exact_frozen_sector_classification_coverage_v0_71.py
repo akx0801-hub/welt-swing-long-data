@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import argparse, csv, hashlib, html.parser, io, json, re, subprocess, tempfile, time, unicodedata, urllib.parse, urllib.request
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
