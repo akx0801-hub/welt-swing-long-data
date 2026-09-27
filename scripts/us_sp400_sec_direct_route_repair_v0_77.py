@@ -200,7 +200,7 @@ def main()->int:
     out=ROOT/a.output_dir;out.mkdir(parents=True,exist_ok=True)
 
     correction={
-      "Version":"v0.77","v076_SEC_Source_Record_Count":0,"v076_Row_NOT_FOUND_Count":368,
+      "Version":"v0.77","v076_SEC_Source_Record_Count":0,"v076_Row_NOT_FOUND_Count":368,"v076_not_found_368_is_not_security_absence_evidence":True,
       "Correction":"v0.76 NOT_FOUND statuses were downstream artifacts of a route-discovery failure and are not genuine security-level absence evidence.",
       "Forward_Failure_Semantics":"If the direct SEC bulk dataset cannot be loaded, all 368 target rows are NOT_VERIFIED and NOT_FOUND remains zero.",
       "v076_Historical_Evidence_Rewritten":False
