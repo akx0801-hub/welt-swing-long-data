@@ -22,6 +22,6 @@
   "p1_p2_allowed": false,
   "alpha_vantage_allowed": false,
   "productive": false,
-  "execution_attempt": 3,
-  "retry_reason": "FIX_CDP_PAGE_TARGET_AND_PERSIST_APPLICATION_CODE_CONTEXTS"
+  "execution_attempt": 4,
+  "retry_reason": "EXECUTE_EXPLICIT_FOAMTREE_STATIC_LEVEL_PAYLOAD_CONTRACT_AND_REPLAY"
 }
