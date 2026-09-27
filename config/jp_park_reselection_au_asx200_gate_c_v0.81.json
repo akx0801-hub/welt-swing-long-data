@@ -14,6 +14,6 @@
   "nse_requests_allowed": false,
   "alpha_vantage_allowed": false,
   "productive": false,
-  "retry_attempt": 3,
-  "retry_reason": "park hash line break fix"
+  "retry_attempt": 4,
+  "retry_reason": "validation wording consistency"
 }
