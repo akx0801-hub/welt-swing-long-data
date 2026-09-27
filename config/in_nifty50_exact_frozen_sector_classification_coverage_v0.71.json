@@ -16,5 +16,7 @@
   "cross_taxonomy_crosswalk_allowed": false,
   "third_party_sector_source_allowed": false,
   "alpha_vantage_allowed": false,
-  "productive": false
+  "productive": false,
+  "execution_attempt": 2,
+  "retry_reason": "FIX_COUNTER_IMPORT"
 }
