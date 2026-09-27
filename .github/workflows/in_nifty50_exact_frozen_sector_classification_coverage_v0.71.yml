@@ -1,0 +1,209 @@
+name: IN NIFTY50 Exact Frozen Sector Classification Coverage v0.71
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/in_nifty50_exact_frozen_sector_classification_coverage_v0.71.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  in-nifty50-gate-f:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.71 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.71 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="9acf51ba20e5c88954d0b21ed5017f95274b6f6f"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/in_nifty50_exact_frozen_sector_classification_coverage_spec_v0\.71\.json|scripts/in_nifty50_exact_frozen_sector_classification_coverage_v0_71\.py|scripts/persist_in_nifty50_exact_frozen_sector_classification_coverage_v0_71\.py|tests/test_in_nifty50_exact_frozen_sector_classification_coverage_v0_71\.py|\.github/workflows/in_nifty50_exact_frozen_sector_classification_coverage_v0\.71\.yml|config/in_nifty50_exact_frozen_sector_classification_coverage_v0\.71\.json)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.70 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10917150644 --jq .digest)"
+          test "$DIGEST" = "sha256:a0e9b942970d510f7bc1042e7b93371b61662adb61cc972e557847046aa34ede"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          s=json.load(open("output_in_nifty50_deterministic_security_identity_linkage_v0_70/summary_v0.70.json",encoding="utf-8"))
+          c=json.load(open("output_in_nifty50_deterministic_security_identity_linkage_v0_70/stage_checkpoint_v0.70.json",encoding="utf-8"))
+          src=json.load(open("output_in_nifty50_deterministic_security_identity_linkage_v0_70/official_nifty50_constituent_source_audit_v0.70.json",encoding="utf-8"))
+          nse=json.load(open("output_in_nifty50_deterministic_security_identity_linkage_v0_70/official_nse_security_reference_source_audit_v0.70.json",encoding="utf-8"))
+          link=list(csv.DictReader(open("output_in_nifty50_deterministic_security_identity_linkage_v0_70/in_exact_45_identity_linkage_audit_v0.70.csv",encoding="utf-8")))
+          assert s["verdict"]=="PASS_IN_NIFTY50_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE"
+          assert s["in_deterministic_ws_id_linkage_ready"] is True
+          assert (s["linked"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(45,45,0,0,0,0)
+          assert s["direct_nifty_isin_links"]==45 and s["nse_master_fallback_links"]==0
+          assert s["current_nifty_membership_absent_but_identity_linked"]==0
+          assert c["workflow_run_id"]==36274393667 and c["artifact_id"]==10917150644
+          assert "sha256:"+c["artifact_digest"]=="sha256:a0e9b942970d510f7bc1042e7b93371b61662adb61cc972e557847046aa34ede"
+          assert src["Selected_Source_URL"]=="https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+          assert src["Raw_SHA256"]=="9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28"
+          assert src["Row_Count"]==50
+          assert src["Field_Names"]==["Company Name","Industry","Symbol","Series","ISIN Code"]
+          assert nse["Schema_Status"]=="NOT_VERIFIED"
+          assert nse["Selected_Source_URL"]=="NOT_VERIFIED"
+          assert len(link)==45
+          assert all(r["Gate_E_Status"]=="PROVABLY_LINKED" and r["Identity_Route"]=="NIFTY_ISIN_DIRECT" and r["Primary_MIC"]=="XNSE" for r in link)
+          assert s["canonical_ready_rows"]==37
+          assert s["gate_f_executions"]==0 and s["sector_classification_population_rows"]==0
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify inherited taxonomy and v0.71 spec
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json
+          research=json.load(open("config/source_native_sector_research_v0.62.json",encoding="utf-8"))
+          inv=list(csv.DictReader(open("output_frozen_1425_source_native_sector_coverage_v0_62/source_native_taxonomy_inventory_v0.62.csv",encoding="utf-8")))
+          matrix=list(csv.DictReader(open("output_frozen_1425_canonical_sector_reconciliation_v0_69/current_authority_cohort_gate_matrix_v0.69.csv",encoding="utf-8")))
+          s=json.load(open("config/in_nifty50_exact_frozen_sector_classification_coverage_spec_v0.71.json",encoding="utf-8"))
+          t=json.load(open("config/in_nifty50_exact_frozen_sector_classification_coverage_v0.71.json",encoding="utf-8"))
+          f=research["cohort_findings"]["IN_NIFTY50"]
+          assert f["taxonomy_identity"]=="NSE_INDICES_INDUSTRY_CLASSIFICATION"
+          assert f["gate_status"]["A"]==f["gate_status"]["B"]==f["gate_status"]["C"]==f["gate_status"]["D"]=="PASS"
+          assert f["gate_status"]["G"]=="PASS" and f["gate_status"]["H"]=="NOT_EVALUATED"
+          ti=next(r for r in inv if r["Cohort"]=="IN_NIFTY50")
+          assert ti["Taxonomy_Identity"]=="NSE_INDICES_INDUSTRY_CLASSIFICATION"
+          assert ti["Sector_Code_Status"]=="PASS"
+          m=next(r for r in matrix if r["Cohort"]=="IN_NIFTY50")
+          assert m["G"]=="PASS_INHERITED" and m["H"]=="NOT_EVALUATED"
+          assert s["required_start_head"]=="9acf51ba20e5c88954d0b21ed5017f95274b6f6f"
+          assert s["scope_cohort"]=="IN_NIFTY50" and s["gate"]=="F_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE"
+          assert s["taxonomy"]=="NSE_INDICES_INDUSTRY_CLASSIFICATION"
+          assert s["official_nifty50_constituent_url"]=="https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv"
+          assert set(s["allowed_hosts"]) <= {"www.niftyindices.com","niftyindices.com"}
+          assert s["pdsc_fallback_allowed"] is False
+          assert s["gate_h_promotion_allowed"] is False
+          assert s["canonical_materialization_allowed"] is False
+          assert s["sector_rs_allowed"] is False
+          assert s["per_security_web_fanout_allowed"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert t["required_start_head"]=="9acf51ba20e5c88954d0b21ed5017f95274b6f6f"
+          assert t["gate_h_promotion_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/in_nifty50_exact_frozen_sector_classification_coverage_v0_71.py             scripts/persist_in_nifty50_exact_frozen_sector_classification_coverage_v0_71.py
+          python3 tests/test_in_nifty50_exact_frozen_sector_classification_coverage_v0_71.py -v
+
+      - name: Run bounded official-only Gate F
+        run: |
+          set -euo pipefail
+          rm -rf output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71
+          python3 scripts/in_nifty50_exact_frozen_sector_classification_coverage_v0_71.py             --repository-sha "$GITHUB_SHA"             --output-dir output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71
+
+      - name: Validate Gate F result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71")
+          s=json.load(open(out/"summary_preupload_v0.71.json",encoding="utf-8"))
+          src=json.load(open(out/"official_nifty50_classification_source_audit_v0.71.json",encoding="utf-8"))
+          tax=json.load(open(out/"nse_industry_taxonomy_contract_audit_v0.71.json",encoding="utf-8"))
+          level=json.load(open(out/"in_classification_level_binding_v0.71.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.71.json",encoding="utf-8"))
+          prov=json.load(open(out/"provider_call_audit_v0.71.json",encoding="utf-8"))
+          target=list(csv.DictReader(open(out/"in_gate_f_identity_authority_binding_v0.71.csv",encoding="utf-8")))
+          cov=list(csv.DictReader(open(out/"in_exact_45_classification_coverage_v0.71.csv",encoding="utf-8")))
+          bind=list(csv.DictReader(open(out/"in_source_native_code_binding_v0.71.csv",encoding="utf-8")))
+          inv=list(csv.DictReader(open(out/"in_distinct_classification_inventory_v0.71.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.71.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.71.csv",encoding="utf-8")))
+          assert len(target)==45 and len({r["WS_ID"] for r in target})==45
+          assert all(r["v070_Gate_E_Status"]=="PROVABLY_LINKED" and r["Primary_MIC"]=="XNSE" for r in target)
+          assert len(cov)==45
+          assert all(r["Taxonomy"]=="NSE_INDICES_INDUSTRY_CLASSIFICATION" for r in cov)
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert all(v==0 for v in prov.values())
+          assert all(r["Official_Source"]=="YES" and r["Per_Security_Fanout"]=="NO" for r in ext)
+          assert s["gate_h_promotions"]==0 and s["canonical_materialization_runs"]==0
+          assert s["canonical_ready_rows"]==37
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/IN_NIFTY50_sector_metadata_v1.csv").exists()
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          if s["in_exact_45_sector_classification_coverage_ready"]:
+              assert s["verdict"]=="PASS_IN_NIFTY50_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE"
+              assert (s["classified"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(45,45,0,0,0,0)
+              assert s["taxonomy"]=="NSE_INDICES_INDUSTRY_CLASSIFICATION"
+              assert s["bound_classification_level"]=="INDUSTRY"
+              assert s["source_native_code_coverage"]==45
+              assert all(r["Classification_Status"]=="PROVABLY_CLASSIFIED" and r["Official_Taxonomy_Level"]=="INDUSTRY" and r["Source_Sector_Code"]!="NOT_VERIFIED" for r in cov)
+              assert all(r["Code_Binding_Status"]=="PASS" for r in bind)
+              assert all(r["Unique_Code_Status"]=="PASS" for r in inv)
+              assert level["Level_Binding_Status"]=="PASS" and level["Official_Taxonomy_Level"]=="INDUSTRY"
+              assert s["blocker"]==""
+              assert s["next_gate"]=="IN_NIFTY50 SOURCE ACCESS / PERSISTENCE GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_IN_NIFTY50_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE"
+              assert s["blocker"]!=""
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          assert imm["Gate_H_Promotions"]==0
+          PY
+          test "$(git status --porcelain --untracked-files=no)" = ""
+
+      - name: Upload bounded v0.71 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: in-nifty50-exact-frozen-sector-classification-v0.71-${{ github.run_id }}
+          path: output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_in_nifty50_exact_frozen_sector_classification_coverage_v0_71.py             --output-dir output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "in-nifty50-exact-frozen-sector-classification-v0.71-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.71 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/IN_NIFTY50_Exact_Frozen_Sector_Classification_Coverage_Gate_v0.71.md                   output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/IN_NIFTY50_Exact_Frozen_Sector_Classification_Coverage_Gate_v0\.71\.md|output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist IN NIFTY50 Gate F classification coverage v0.71"
+          git push origin HEAD:main
