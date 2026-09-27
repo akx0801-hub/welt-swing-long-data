@@ -6,11 +6,11 @@
 IN_EXACT_45_SECTOR_CLASSIFICATION_COVERAGE_READY = **NO**.
 CLASSIFIED / TOTAL = **0 / 45**.
 AMBIGUOUS = **0**.
-NOT_FOUND = **0**.
-NOT_VERIFIED = **45**.
+NOT_FOUND = **7**.
+NOT_VERIFIED = **38**.
 CONFLICT = **0**.
 APPLICATION CONTRACT = **https://liveindexsa.niftyindices.com/jsonfiles/Basic%20Industry/SectorialIndexDataNIFTY%2050_BasicIndustry.js; https://liveindexsa.niftyindices.com/jsonfiles/Industry/SectorialIndexDataNIFTY%2050_Industry.js; https://liveindexsa.niftyindices.com/jsonfiles/MacroEconomicSector/SectorialIndexDataNIFTY%2050_MacroEconomicSector.js; https://liveindexsa.niftyindices.com/jsonfiles/Sector/SectorialIndexDataNIFTY%2050_Sector.js**.
-BOUND CLASSIFICATION LEVEL = **NOT_VERIFIED**.
+BOUND CLASSIFICATION LEVEL = **SECTOR**.
 DISTINCT CLASSIFICATIONS = **15**.
 SOURCE-NATIVE CODE COVERAGE = **0 / 45**.
 
@@ -37,16 +37,16 @@ No company-name joins, fuzzy matching, semantic inference, cross-taxonomy mappin
 - Canonical READY remains 37/1425.
 
 ## Blocker
-**NIFTY_CLASSIFICATION_LEVEL_AMBIGUOUS**.
+**NIFTY_APPLICATION_NODE_TO_TAXONOMY_CODE_NOT_VERIFIED**.
 
 ## Artifact binding
-- Workflow run: 36312582008
-- Workflow head: 3402ed0ac29bd600e9b5936558eb5ad76a1e27b1
-- Artifact: 10929612133
-- Artifact name: in-nifty50-sectoral-distribution-contract-v0.73-36312582008
-- Artifact digest: 3928fc11a3d8353da51c781f764b7cf9a34d9b043448e1ce991020b4ad396426
+- Workflow run: 36312901944
+- Workflow head: dbeca2e397adb6d32da378348cca16d8006466d8
+- Artifact: 10929840911
+- Artifact name: in-nifty50-sectoral-distribution-contract-v0.73-36312901944
+- Artifact digest: 5d1cbce614a0f943af0cb76fddc4dcf7bd80b9e6a3213850a9bac4601784a706
 
 ## Next gate
-**NIFTY_CLASSIFICATION_LEVEL_AMBIGUOUS**
+**NIFTY_APPLICATION_NODE_TO_TAXONOMY_CODE_NOT_VERIFIED**
 
 Hard stop: no Gate H, canonical materialization, Sector RS, P0/P1/P2, or next cohort execution.

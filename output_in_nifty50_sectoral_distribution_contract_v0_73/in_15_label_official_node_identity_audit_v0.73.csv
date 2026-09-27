@@ -1,16 +1,16 @@
 CSV_Source_Label,Application_Display_Label,Application_Level,Application_Node_ID_or_Code,Identity_Relation,Security_Row_Count,Binding_Status
-Automobile and Auto Components,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Capital Goods,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Construction,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Construction Materials,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Consumer Durables,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Consumer Services,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Fast Moving Consumer Goods,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Financial Services,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Healthcare,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Information Technology,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Metals & Mining,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Oil Gas & Consumable Fuels,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Power,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Services,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
-Telecommunication,,NOT_VERIFIED,,NOT_VERIFIED,0,NOT_VERIFIED
+Automobile and Auto Components,Automobile and Auto Components,SECTOR,5,EXACT_DISPLAY_LABEL,5,PASS
+Capital Goods,Capital Goods,SECTOR,6,EXACT_DISPLAY_LABEL,1,PASS
+Construction,Construction,SECTOR,13,EXACT_DISPLAY_LABEL,1,PASS
+Construction Materials,Construction Materials,SECTOR,10,EXACT_DISPLAY_LABEL,2,PASS
+Consumer Durables,Consumer Durables,SECTOR,3,EXACT_DISPLAY_LABEL,2,PASS
+Consumer Services,Consumer Services,SECTOR,9,EXACT_DISPLAY_LABEL,2,PASS
+Fast Moving Consumer Goods,Fast Moving Consumer Goods,SECTOR,12,EXACT_DISPLAY_LABEL,3,PASS
+Financial Services,Financial Services,SECTOR,4,EXACT_DISPLAY_LABEL,9,PASS
+Healthcare,Healthcare,SECTOR,2,EXACT_DISPLAY_LABEL,4,PASS
+Information Technology,Information Technology,SECTOR,11,EXACT_DISPLAY_LABEL,4,PASS
+Metals & Mining,Metals & Mining,SECTOR,0,EXACT_DISPLAY_LABEL,4,PASS
+Oil Gas & Consumable Fuels,Oil Gas & Consumable Fuels,SECTOR,8,EXACT_DISPLAY_LABEL,3,PASS
+Power,Power,SECTOR,14,EXACT_DISPLAY_LABEL,2,PASS
+Services,Services,SECTOR,1,EXACT_DISPLAY_LABEL,2,PASS
+Telecommunication,Telecommunication,SECTOR,7,EXACT_DISPLAY_LABEL,1,PASS
