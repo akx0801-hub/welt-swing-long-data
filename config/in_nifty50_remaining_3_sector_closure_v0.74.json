@@ -28,5 +28,7 @@
   "p0_allowed": false,
   "p1_p2_allowed": false,
   "alpha_vantage_allowed": false,
-  "productive": false
+  "productive": false,
+  "execution_attempt": 2,
+  "retry_reason": "FIX_V073_ASSIGNMENT_FIELD_NAME"
 }
