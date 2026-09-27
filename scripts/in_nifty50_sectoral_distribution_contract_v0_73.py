@@ -513,6 +513,62 @@ def main()->int:
       "Source_Asset":"","Keyword":"","Context":""
     }])
 
+    # Explicit public application contract from the official foamtree application code.
+    page_text=page.get("body",b"").decode("utf-8",errors="replace") if page.get("ok") else ""
+    app_index_name=extract_hidden_input_value(page_text,"hdnSet")
+    foamtree_url=next((u for u in asset_texts if u.endswith("/assets/js/foamtree.js")), "")
+    foamtree_text=asset_texts.get(foamtree_url,"")
+    code_contracts=[
+      ("MACRO_ECONOMIC_SECTOR","Macro Economic Sector","MacroEconomicSector","_MacroEconomicSector"),
+      ("SECTOR","Sector","Sector","_Sector"),
+      ("INDUSTRY","Industry","Industry","_Industry"),
+      ("BASIC_INDUSTRY","Basic Industry","Basic Industry","_BasicIndustry")
+    ]
+    static_level_payloads=[];static_candidate_contracts=[];static_membership=[];static_level_contract_rows=[]
+    base="https://liveindexsa.niftyindices.com/jsonfiles/"
+    for formal,display,folder,suffix in code_contracts:
+        template=f"{folder}/SectorialIndexData"+chr(36)+"{e.toUpperCase()}"+f"{suffix}"
+        code_proof=(display in foamtree_text and folder in foamtree_text and suffix in foamtree_text and "SectorialIndexData" in foamtree_text)
+        path=f"{folder}/SectorialIndexData{app_index_name.upper()}{suffix}.js" if app_index_name else ""
+        url=safe_url_join_path(base,path) if path and code_proof else ""
+        fr=fetch(url) if url else {"ok":False,"body":b"","status":"","content_type":"","bytes":0,"sha256":"","timestamp_utc":"","error":"STATIC_CONTRACT_NOT_CONSTRUCTED"}
+        if url:
+            external.append({"Request_Order":len(external)+1,"Request_Type":"SECTORAL_DISTRIBUTION_LEVEL_PAYLOAD","URL":url,"Method":"GET",
+                             "Status":fr.get("status",""),"Content_Type":fr.get("content_type",""),"Bytes":fr.get("bytes",0),"SHA256":fr.get("sha256",""),
+                             "Timestamp_UTC":fr.get("timestamp_utc",""),"Official_Source":"YES","Per_Security_Fanout":"NO",
+                             "Result":"OK" if fr.get("ok") else fr.get("error","FAILED")})
+        obj,parse_status=parse_foamtree_payload(fr.get("body",b"")) if fr.get("ok") else (None,"NOT_FETCHED")
+        recs=extract_membership_records(obj,"LEVEL:"+display,url) if obj is not None else []
+        static_membership.extend(recs)
+        sch=body_schema(json.dumps(obj,ensure_ascii=False).encode("utf-8"),"application/json") if obj is not None else {"parse_type":"","json_keys":[]}
+        rawtxt=fr.get("body",b"").decode("utf-8",errors="replace")
+        static_level_payloads.append({
+          "Formal_Level":formal,"Official_Displayed_Label":display,"Application_Index_Name":app_index_name or "NOT_VERIFIED",
+          "Application_Path_Template":template,"Constructed_URL":url or "NOT_VERIFIED","Application_Code_Proof":"PASS" if code_proof else "NOT_VERIFIED",
+          "HTTP_Status":fr.get("status",""),"Content_Type":fr.get("content_type",""),"Response_Bytes":fr.get("bytes",0),
+          "Response_SHA256":fr.get("sha256",""),"Payload_Parse_Status":parse_status,
+          "Response_Schema_Keys":" | ".join(sch.get("json_keys",[])[:200]),"Extracted_Membership_Record_Count":len(recs),
+          "Response_Prefix":rawtxt[:1000].replace("\r"," ").replace("\n"," ")
+        })
+        if obj is not None and fr.get("ok"):
+            static_candidate_contracts.append({
+              "request_id":"STATIC:"+formal,"phase":"LEVEL:"+display,"endpoint":url,"method":"GET","request_body":"",
+              "response_sha256":fr.get("sha256",""),"response_bytes":fr.get("bytes",0),"response_parse_type":"JSONP_OBJECT",
+              "schema_keys":sch.get("json_keys",[]),
+              "label_hit_count":sum(1 for x in EXPECTED_LABELS if x in rawtxt),
+              "security_hit_count":sum(1 for rr in pred["identity"] if rr["Frozen_ISIN"] in rawtxt or rr["Primary_Ticker"] in rawtxt),
+              "membership_record_count":len(recs),"static_object":obj
+            })
+        static_level_contract_rows.append({
+          "Official_Displayed_Label":display,"Internal_Formal_Level":formal,
+          "Application_Raw_Level_Value":folder+"/"+suffix.lstrip("_"),
+          "UI_Select_ID":"sectorDropdown","UI_Select_Name":"",
+          "Controlled_Level_Phase_Request_Count":1 if fr.get("ok") else 0,
+          "Observed_Request_Endpoints":url or "","Observed_Request_Bodies":"",
+          "Level_Parameter_Status":"PASS_APPLICATION_CODE_PATH_ENUM" if code_proof and fr.get("ok") else "NOT_VERIFIED"
+        })
+    write_csv(out/"nifty_static_sectoral_distribution_contract_v0.73.csv",static_level_payloads)
+
     # Browser network capture.
     bc=browser_capture(spec,out)
     runtime_evidence={
@@ -523,7 +579,7 @@ def main()->int:
       "Snapshots":bc.get("snapshots",[])
     }
     (out/"nifty_browser_runtime_snapshot_v0.73.json").write_text(json.dumps(runtime_evidence,indent=2,sort_keys=True)[:1000000]+"\n",encoding="utf-8")
-    net_rows=[];candidate_contracts=[];all_membership=[]
+    net_rows=[];candidate_contracts=list(static_candidate_contracts);all_membership=list(static_membership)
     bodies=bc.get("bodies",{})
     for rid,req in bc.get("requests",{}).items():
         resp=bc.get("responses",{}).get(rid,{})
