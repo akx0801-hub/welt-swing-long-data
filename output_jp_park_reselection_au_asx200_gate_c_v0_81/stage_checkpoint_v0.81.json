@@ -1,7 +1,7 @@
 {
   "artifact_binding": "PASS",
-  "artifact_digest": "sha256:95a0049ecb57c4ba24fe2a4e2b24841f7aa404810a3ed83e49fc82ca7014c7d5",
-  "artifact_id": 10937741236,
+  "artifact_digest": "sha256:0c63ab9a508b7de35da35761d9e3d48f8285940c6a9193ca63f2a6777fe885e0",
+  "artifact_id": 10937766315,
   "au_gate_c": "BLOCKED",
   "au_source_native_taxonomy_identity_ready": false,
   "blocker": "ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE",
@@ -13,6 +13,6 @@
   "stage": "JP_N225_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_AU_SP_ASX200_GATE_C",
   "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
   "version": "v0.81",
-  "workflow_head_sha": "9b464a692d944087a5dfe1e40962917b409ace24",
-  "workflow_run_id": 36337366779
+  "workflow_head_sha": "dd25c0c7be56c5d933a95eb1006609eefbca2815",
+  "workflow_run_id": 36337443965
 }

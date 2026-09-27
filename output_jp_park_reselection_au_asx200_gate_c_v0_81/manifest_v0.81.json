@@ -1,6 +1,6 @@
 {
-  "artifact_digest": "sha256:95a0049ecb57c4ba24fe2a4e2b24841f7aa404810a3ed83e49fc82ca7014c7d5",
-  "artifact_id": 10937741236,
+  "artifact_digest": "sha256:0c63ab9a508b7de35da35761d9e3d48f8285940c6a9193ca63f2a6777fe885e0",
+  "artifact_id": 10937766315,
   "au_gate_d_runs": 0,
   "au_gate_e_runs": 0,
   "au_gate_f_runs": 0,
@@ -12,11 +12,11 @@
   "files": {
     "artifact_binding_v0.81.json": {
       "bytes": 488,
-      "sha256": "3874eb3f873d4e76ac2715ce97f055841f0940c9f9409ca8c0dd245592a75a68"
+      "sha256": "5557bca4e043fc70ce63fa494b9f9b4dbed67485f3fb5fcbfca11846d59082c7"
     },
     "asx_directory_bulk_discovery_markers_v0.81.json": {
-      "bytes": 2082,
-      "sha256": "2062b2115093d3b6969f181d6c4395f9c65397d2a78a95153029dba1a80471d3"
+      "bytes": 2084,
+      "sha256": "ac3a07b00f8debc4546de8cd2a0cdcde327dc91a9ee5b693b0fc229028b07dd8"
     },
     "asx_directory_industry_distinct_label_inventory_v0.81.csv": {
       "bytes": 30,
@@ -32,7 +32,7 @@
     },
     "asx_directory_source_audit_v0.81.json": {
       "bytes": 779,
-      "sha256": "6168a852acaf130bc03131c337d9c00bb742b3f8d501a5509c36c51a17c441da"
+      "sha256": "60147985b6c11eb916296de0f7d747537ea2c8aebf50e43d95103cb944a2a921"
     },
     "asx_gics_field_binding_audit_v0.81.json": {
       "bytes": 338,
@@ -68,15 +68,15 @@
     },
     "au_taxonomy_version_contract_v0.81.json": {
       "bytes": 329,
-      "sha256": "cac875dfc9408c178482a69ca898645b78ad42ce9de72643806f8bfbe05ed76a"
+      "sha256": "eb23ad44aaa09e87bebf1f047284146a674e0c43ec1ac9793abdb644073f8efb"
     },
     "docs/validation/JP_N225_Park_Post_Park_Reselection_AU_SP_ASX200_Gate_C_v0.81.md": {
-      "bytes": 3346,
-      "sha256": "6a84bb6dd3c32582d84a8c7bce46b1a31a8d4d4db585ea1f6130458e55edf7ed"
+      "bytes": 3371,
+      "sha256": "9621ea009c2fc5941457150a6b25210c7afb9346b28bda3d0f2f74e5bf585b71"
     },
     "external_request_ledger_v0.81.csv": {
-      "bytes": 3663,
-      "sha256": "440a9a683b974b3af4a3a73d45e40233a6ebf8ad25e62ae4b7c177f1e754fa11"
+      "bytes": 3665,
+      "sha256": "d4828280940bf1d6681ac6287a38d652254260b91c30f84e82e8d8e143cac07f"
     },
     "immutability_audit_v0.81.json": {
       "bytes": 2160,
@@ -88,7 +88,7 @@
     },
     "manifest_preupload_v0.81.json": {
       "bytes": 4707,
-      "sha256": "884bdf6803d714188de598833f08fe1f9aaaf0f4485c863f1e8b1a89d0b6ccc3"
+      "sha256": "5432ced7443b6cb050296be1c3e35dfe220360a0feb46450b662e257a46092ec"
     },
     "parked_cohort_registry_update_v0_81.csv": {
       "bytes": 726,
@@ -116,7 +116,7 @@
     },
     "stage_checkpoint_v0.81.json": {
       "bytes": 787,
-      "sha256": "b1280247c8fd83803dcb9a93d7d0c34b793347bc79e86c0b91446df1e4dbb63d"
+      "sha256": "275265f4837c92ec04d0bd59acef4af1ce7b072f4c5ae7bf82eee55696572334"
     },
     "summary_preupload_v0.81.json": {
       "bytes": 1281,
@@ -124,7 +124,7 @@
     },
     "summary_v0.81.json": {
       "bytes": 1790,
-      "sha256": "e4e7e12b57940af148b753a223211c71480cff216859148355d34d11a87db86e"
+      "sha256": "d388dc63e73cee9c46ab70ccf0b1c9100bdbbb9117dd8e46ea5465b8c51ca9f9"
     },
     "test_results_v0.81.csv": {
       "bytes": 1334,
@@ -141,6 +141,6 @@
   "stage": "JP_N225_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_AU_SP_ASX200_GATE_C",
   "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
   "version": "v0.81",
-  "workflow_head_sha": "9b464a692d944087a5dfe1e40962917b409ace24",
-  "workflow_run_id": 36337366779
+  "workflow_head_sha": "dd25c0c7be56c5d933a95eb1006609eefbca2815",
+  "workflow_run_id": 36337443965
 }

@@ -4,7 +4,7 @@
   "Bulk_Discovery_Status": "NOT_FOUND",
   "Bulk_Link_Text": "",
   "Bulk_URL": "",
-  "Bytes": 135651,
+  "Bytes": 135652,
   "Complete_Raw_Page_Persisted": false,
   "Content_Type": "text/html;charset=utf-8",
   "Directory_URL": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
@@ -14,6 +14,6 @@
   "Market_Data_Credit_Morningstar_Observed": true,
   "Public_Request_Reproducible": true,
   "Resolved_URL": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
-  "Retrieval_Timestamp_UTC": "2026-09-27T17:33:18Z",
-  "SHA256": "caef0ad0effd47615685b82ed69dc724eda0010db47baa7c555c74bb2923a416"
+  "Retrieval_Timestamp_UTC": "2026-09-27T17:34:35Z",
+  "SHA256": "8d5c6270d008468cc2baa2164ed40b11560ab0ae36c2569812a6f709cfce3679"
 }

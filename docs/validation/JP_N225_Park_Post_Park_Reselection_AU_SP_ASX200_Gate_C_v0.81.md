@@ -23,7 +23,7 @@ Existing G-SEC-06 was applied without creating new governance. JP_N225 is PARKED
 The persisted v0.69 selection rule was re-applied after excluding canonical READY and all parked cohorts: greatest consecutive resolved gates from A, then smaller Frozen row count, then lexicographic cohort ID. The calculation, rather than a hard-coded cohort result, selects AU_SP_ASX200 with 63 Frozen rows and Gate C as its earliest unresolved gate.
 
 ## ASX directory and bulk evidence
-The current ASX company directory was requested directly. The All ASX Listed Companies bulk route was discovered from the directory response rather than from a stale hard-coded endpoint. The bulk response metadata, schema, row count, SHA256 and exact Industry-like field statistics are persisted without storing the complete raw source.
+The current ASX company directory was publicly reproducible, but bounded inspection of the static directory response plus the ASX-hosted script assets explicitly referenced by that page did not expose a reproducible All ASX Listed Companies bulk URL. No stale endpoint was guessed. Therefore no bulk schema or directory Industry field was claimed from this run.
 
 ## Taxonomy identity
 The bounded current evidence did not satisfy all Gate-C requirements. In particular, the directory Industry-like field was not promoted to GICS or any other taxonomy merely because ASX uses GICS for sector indices. The persisted blocker is the smallest Gate-C blocker under the required precedence.
@@ -38,11 +38,11 @@ G-SEC-02 taxonomy isolation is preserved. No crosswalk, semantic label inference
 **ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE**.
 
 ## Artifact binding
-- Workflow run: 36337366779
-- Workflow head: 9b464a692d944087a5dfe1e40962917b409ace24
-- Artifact: 10937741236
-- Artifact name: jp-park-reselection-au-asx200-gate-c-v0.81-36337366779
-- Artifact digest: sha256:95a0049ecb57c4ba24fe2a4e2b24841f7aa404810a3ed83e49fc82ca7014c7d5
+- Workflow run: 36337443965
+- Workflow head: dd25c0c7be56c5d933a95eb1006609eefbca2815
+- Artifact: 10937766315
+- Artifact name: jp-park-reselection-au-asx200-gate-c-v0.81-36337443965
+- Artifact digest: sha256:0c63ab9a508b7de35da35761d9e3d48f8285940c6a9193ca63f2a6777fe885e0
 
 ## Next gate
 **NONE_WHILE_GATE_C_BLOCKED**

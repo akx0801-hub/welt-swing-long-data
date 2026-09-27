@@ -6,8 +6,8 @@
   "external_requests": 9,
   "files": {
     "asx_directory_bulk_discovery_markers_v0.81.json": {
-      "bytes": 2082,
-      "sha256": "2062b2115093d3b6969f181d6c4395f9c65397d2a78a95153029dba1a80471d3"
+      "bytes": 2084,
+      "sha256": "ac3a07b00f8debc4546de8cd2a0cdcde327dc91a9ee5b693b0fc229028b07dd8"
     },
     "asx_directory_industry_distinct_label_inventory_v0.81.csv": {
       "bytes": 30,
@@ -23,7 +23,7 @@
     },
     "asx_directory_source_audit_v0.81.json": {
       "bytes": 779,
-      "sha256": "6168a852acaf130bc03131c337d9c00bb742b3f8d501a5509c36c51a17c441da"
+      "sha256": "60147985b6c11eb916296de0f7d747537ea2c8aebf50e43d95103cb944a2a921"
     },
     "asx_gics_field_binding_audit_v0.81.json": {
       "bytes": 338,
@@ -59,11 +59,11 @@
     },
     "au_taxonomy_version_contract_v0.81.json": {
       "bytes": 329,
-      "sha256": "cac875dfc9408c178482a69ca898645b78ad42ce9de72643806f8bfbe05ed76a"
+      "sha256": "eb23ad44aaa09e87bebf1f047284146a674e0c43ec1ac9793abdb644073f8efb"
     },
     "external_request_ledger_v0.81.csv": {
-      "bytes": 3663,
-      "sha256": "440a9a683b974b3af4a3a73d45e40233a6ebf8ad25e62ae4b7c177f1e754fa11"
+      "bytes": 3665,
+      "sha256": "d4828280940bf1d6681ac6287a38d652254260b91c30f84e82e8d8e143cac07f"
     },
     "immutability_audit_v0.81.json": {
       "bytes": 2160,
@@ -107,7 +107,7 @@
   "p1_runs": 0,
   "p2_runs": 0,
   "park_registry_sha256_after": "38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd",
-  "repository_sha": "9b464a692d944087a5dfe1e40962917b409ace24",
+  "repository_sha": "dd25c0c7be56c5d933a95eb1006609eefbca2815",
   "required_start_head": "a6b5a2e1f946bc8cd8615e37fe26efd82b77eb53",
   "sector_rs_runs": 0,
   "selected_cohort": "AU_SP_ASX200",
