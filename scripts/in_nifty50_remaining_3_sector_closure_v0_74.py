@@ -225,7 +225,7 @@ def validate_predecessor(repo_sha:str)->dict[str,Any]:
     got={(r["CSV_Source_Label"],r["Application_Node_ID_or_Code"]) for r in unresolved}
     exp={(k,v["node_id"]) for k,v in UNRESOLVED.items()}
     if got!=exp:raise RuntimeError("v0.73 unresolved nodes")
-    counts=Counter(r["CSV_Source_Classification_Raw"] for r in sector_assign if r["CSV_Source_Label"] in UNRESOLVED)
+    counts=Counter(r["CSV_Source_Classification_Raw"] for r in sector_assign if r["CSV_Source_Classification_Raw"] in UNRESOLVED)
     if {k:counts[k] for k in UNRESOLVED}!={k:v["affected"] for k,v in UNRESOLVED.items()}:raise RuntimeError("v0.73 unresolved affected counts")
     if len(cov)!=45 or len(link)!=45 or any(r["Gate_E_Status"]!="PROVABLY_LINKED" for r in link):raise RuntimeError("identity/coverage")
     if repro["PDF_SHA256"]!=PDF_SHA or repro["Run1_Structural_SHA256"]!=V072_STRUCTURAL_SHA:raise RuntimeError("v0.72 PDF/table authority")
@@ -404,7 +404,7 @@ def main()->int:
     # Remaining-three final bindings.
     remaining_rows=[];remaining_final={}
     for label,meta in UNRESOLVED.items():
-        ws_rows=[r for r in target if r["CSV_Source_Classification_Raw"]==label]
+        ws_rows=[r for r in target if r["CSV_Source_Label"]==label]
         direct_code=direct[label]["code"];direct_status=direct[label]["status"]
         child_results=[ws_desc_result[r["WS_ID"]] for r in ws_rows]
         child_codes={x["code"] for x in child_results if x["status"]=="PASS" and x["code"]}
