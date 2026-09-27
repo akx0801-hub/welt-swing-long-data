@@ -1,0 +1,78 @@
+{
+  "version": "v0.73",
+  "stage": "IN_NIFTY50_NSE_INDICES_SECTORAL_DISTRIBUTION_DATA_CONTRACT_GATE_F_RESOLUTION",
+  "required_start_head": "7464e7c643922e946c39631c58174e9716cb53b4",
+  "scope_cohort": "IN_NIFTY50",
+  "scope_gate": "GATE_F_APPLICATION_CONTRACT_RESOLUTION_ONLY",
+  "taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION",
+  "nifty50_page": "https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50",
+  "classification_page": "https://www.niftyindices.com/resources/industry-classification",
+  "allowed_official_host_suffix": "niftyindices.com",
+  "expected_levels": [
+    "Macro Economic Sector",
+    "Sector",
+    "Industry",
+    "Basic Industry"
+  ],
+  "expected_observed_labels": [
+    "Automobile and Auto Components",
+    "Capital Goods",
+    "Construction",
+    "Construction Materials",
+    "Consumer Durables",
+    "Consumer Services",
+    "Fast Moving Consumer Goods",
+    "Financial Services",
+    "Healthcare",
+    "Information Technology",
+    "Metals & Mining",
+    "Oil Gas & Consumable Fuels",
+    "Power",
+    "Services",
+    "Telecommunication"
+  ],
+  "browser_contract_discovery": {
+    "enabled": true,
+    "chrome_binary_candidates": [
+      "/usr/bin/google-chrome",
+      "/usr/bin/google-chrome-stable",
+      "/usr/bin/chromium",
+      "/usr/bin/chromium-browser"
+    ],
+    "remote_debugging_port": 9222,
+    "block_non_official_network_requests": true,
+    "initial_observation_seconds": 8,
+    "level_switch_observation_seconds": 3,
+    "max_response_body_bytes": 5000000
+  },
+  "static_asset_discovery": {
+    "max_assets": 30,
+    "max_asset_bytes": 5000000,
+    "official_assets_only": true
+  },
+  "tooling": {
+    "websocket_client_version": "1.8.0",
+    "install_command": "python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple websocket-client==1.8.0",
+    "package_source_class": "PYPI_PUBLIC_PACKAGE_INDEX"
+  },
+  "security_identity_authority": "v0.70 NIFTY.ISIN -> Frozen.ISIN 45/45",
+  "v072_structured_taxonomy_table": "output_in_nifty50_nse_classification_structure_repair_v0_72/nse_industry_classification_structured_table_v0.72.csv",
+  "v072_structural_sha256": "d431587f5f686b8432bc57755a8fe6aef232fed49fb858cf7e905b3318687173",
+  "nse_equity_l_allowed": false,
+  "nifty_constituent_refetch_allowed": false,
+  "company_name_join_allowed": false,
+  "fuzzy_matching_allowed": false,
+  "semantic_inference_allowed": false,
+  "cross_taxonomy_mapping_allowed": false,
+  "pdsc_fallback_allowed": false,
+  "per_security_fanout_allowed": false,
+  "authentication_bypass_allowed": false,
+  "captcha_bypass_allowed": false,
+  "gate_h_allowed": false,
+  "canonical_materialization_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
