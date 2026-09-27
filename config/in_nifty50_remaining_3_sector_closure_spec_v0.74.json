@@ -1,0 +1,69 @@
+{
+  "version": "v0.74",
+  "stage": "IN_NIFTY50_REMAINING_3_SECTOR_NODE_SOURCE_NATIVE_CODE_CLOSURE_GATE_F_COMPLETION",
+  "required_start_head": "57364dbf0b08edc2c563e0ecbf8f9d3e5fc2269f",
+  "scope_cohort": "IN_NIFTY50",
+  "scope_gate": "GATE_F_REMAINING_3_NODE_CLOSURE_ONLY",
+  "taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION",
+  "bound_classification_level": "SECTOR",
+  "official_pdf_url": "https://www.niftyindices.com/docs/default-source/default-document-library/industry-classification/nse-indices_industry-classification-structure-2023-07.pdf?sfvrsn=c89dd39_1",
+  "expected_pdf_sha256": "8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b",
+  "expected_v072_structural_sha256": "d431587f5f686b8432bc57755a8fe6aef232fed49fb858cf7e905b3318687173",
+  "v072_structured_table": "output_in_nifty50_nse_classification_structure_repair_v0_72/nse_industry_classification_structured_table_v0.72.csv",
+  "v073_source_binding": "output_in_nifty50_sectoral_distribution_contract_v0_73/in_source_native_code_binding_v0.73.csv",
+  "v073_membership": "output_in_nifty50_sectoral_distribution_contract_v0_73/nifty_application_security_membership_v0.73.csv",
+  "remaining_sector_nodes": [
+    {
+      "application_node_id": "11",
+      "application_display_label": "Information Technology",
+      "affected_rows": 4
+    },
+    {
+      "application_node_id": "1",
+      "application_display_label": "Services",
+      "affected_rows": 2
+    },
+    {
+      "application_node_id": "7",
+      "application_display_label": "Telecommunication",
+      "affected_rows": 1
+    }
+  ],
+  "coordinate_extraction": {
+    "tool": "PyMuPDF",
+    "package": "PyMuPDF",
+    "required_version": "1.26.4",
+    "install_command": "python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple PyMuPDF==1.26.4",
+    "package_source_class": "PYPI_PUBLIC_PACKAGE_INDEX",
+    "method": "page.get_text(words) coordinate-aware cell reconstruction",
+    "deterministic_runs": 2,
+    "max_cell_vertical_points": 42,
+    "column_margin_points": 3
+  },
+  "allowed_external_hosts": [
+    "www.niftyindices.com",
+    "niftyindices.com"
+  ],
+  "application_contract_rediscovery_allowed": false,
+  "application_endpoint_refetch_allowed": false,
+  "nifty_constituent_refetch_allowed": false,
+  "nse_equity_l_allowed": false,
+  "ocr_allowed": false,
+  "screenshots_allowed": false,
+  "manual_transcription_allowed": false,
+  "fuzzy_matching_allowed": false,
+  "semantic_inference_allowed": false,
+  "company_name_join_allowed": false,
+  "cross_taxonomy_mapping_allowed": false,
+  "pdsc_fallback_allowed": false,
+  "per_security_fanout_allowed": false,
+  "authentication_bypass_allowed": false,
+  "captcha_bypass_allowed": false,
+  "gate_h_allowed": false,
+  "canonical_materialization_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
