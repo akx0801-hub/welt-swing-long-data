@@ -59,11 +59,19 @@ jobs:
           assert imm["IN_Gate_F_Classified_After"]==45 and imm["IN_Gate_F_Total_After"]==45
           assert imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
           reg=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
-          assert {r["Cohort"]:r["Execution_State"] for r in reg}=={
-            "IN_NIFTY50":"PARKED_EXTERNAL_AUTHORIZATION",
-            "US_SP400":"PARKED_SOURCE_ACCESS",
-            "US_SP500":"PARKED_SHARED_SOURCE_PREREQUISITE"
-          }
+          by={r["Cohort"]:r for r in reg}
+          assert by["IN_NIFTY50"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert by["US_SP400"]["Execution_State"]=="PARKED_SOURCE_ACCESS"
+          assert by["US_SP500"]["Execution_State"]=="PARKED_SHARED_SOURCE_PREREQUISITE"
+          if "JP_N225" in by:
+              jp=by["JP_N225"]
+              assert jp["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+              assert jp["Technical_Gates_A_G"]=="PASS"
+              assert jp["Gate_H"]=="BLOCKED"
+              assert jp["Gate_H_Blocker"]=="EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+              assert jp["Gate_F_Classified"]=="197" and jp["Gate_F_Total"]=="197"
+              assert jp["Canonical_Readiness"]=="NO" and jp["Canonical_Rows"]=="0"
+              assert jp["Reopen_Automatically"]=="NO" and jp["Authority"]=="G-SEC-06"
           PY
 
       - name: Verify governance, spec and trigger
@@ -125,6 +133,7 @@ jobs:
             "post_jp_park_selected_cohort_authority_v0_81.json",
             "au_gate_c_authority_v0.81.json",
             "asx_directory_source_audit_v0.81.json",
+            "asx_directory_bulk_discovery_markers_v0.81.json",
             "asx_listed_companies_bulk_schema_audit_v0.81.json",
             "asx_directory_industry_distinct_label_inventory_v0.81.csv",
             "asx_directory_industry_field_audit_v0.81.json",
