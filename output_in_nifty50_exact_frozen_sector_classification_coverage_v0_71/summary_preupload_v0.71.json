@@ -7,7 +7,7 @@
   "canonical_ready_rows": 37,
   "classified": 0,
   "conflict": 0,
-  "distinct_classifications": 0,
+  "distinct_classifications": 15,
   "external_requests": 3,
   "gate_h_promotions": 0,
   "in_exact_45_sector_classification_coverage_ready": false,

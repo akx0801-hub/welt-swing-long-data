@@ -1,9 +1,9 @@
 {
-  "artifact_digest": "a270cf93eb119e339a7bb402a8fc954699b9b48bc60f2f38a65fdb14a0c73dd9",
-  "artifact_id": 10927873425,
-  "artifact_name": "in-nifty50-exact-frozen-sector-classification-v0.71-36308231859",
+  "artifact_digest": "9de669cf670be62f99f325ae7deedb2af8028d6222d6b725af8d71a94e3244ed",
+  "artifact_id": 10928267335,
+  "artifact_name": "in-nifty50-exact-frozen-sector-classification-v0.71-36308429404",
   "artifact_scope": "pre-persistence v0.71 IN_NIFTY50 Gate F exact Frozen sector-classification coverage evidence",
   "artifact_verified": "PASS",
-  "workflow_head_sha": "0d249e0f51ac4afe605c3bdcf6103fcd88afc128",
-  "workflow_run_id": 36308231859
+  "workflow_head_sha": "b699d21616d2f6fdd66dc5048ad3eed88c1cd700",
+  "workflow_run_id": 36308429404
 }

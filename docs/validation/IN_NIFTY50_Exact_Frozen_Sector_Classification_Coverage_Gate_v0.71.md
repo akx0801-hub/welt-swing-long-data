@@ -11,7 +11,7 @@ NOT_VERIFIED = **45**.
 CONFLICT = **0**.
 TAXONOMY = **NSE_INDICES_INDUSTRY_CLASSIFICATION**.
 BOUND CLASSIFICATION LEVEL = **NOT_VERIFIED**.
-DISTINCT CLASSIFICATIONS = **0**.
+DISTINCT CLASSIFICATIONS = **15**.
 SOURCE-NATIVE CODE COVERAGE = **0 / 45**.
 
 ## Scope
@@ -42,11 +42,11 @@ Gate H remains NOT_EVALUATED. Raw source redistribution or persistence rights ar
 **NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED**.
 
 ## Artifact binding
-- Workflow run: 36308231859
-- Workflow head: 0d249e0f51ac4afe605c3bdcf6103fcd88afc128
-- Artifact: 10927873425
-- Artifact name: in-nifty50-exact-frozen-sector-classification-v0.71-36308231859
-- Artifact digest: a270cf93eb119e339a7bb402a8fc954699b9b48bc60f2f38a65fdb14a0c73dd9
+- Workflow run: 36308429404
+- Workflow head: b699d21616d2f6fdd66dc5048ad3eed88c1cd700
+- Artifact: 10928267335
+- Artifact name: in-nifty50-exact-frozen-sector-classification-v0.71-36308429404
+- Artifact digest: 9de669cf670be62f99f325ae7deedb2af8028d6222d6b725af8d71a94e3244ed
 
 ## Next gate
 **NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED**

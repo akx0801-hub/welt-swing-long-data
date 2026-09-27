@@ -24,7 +24,7 @@
     }
   ],
   "Structure_Raw_SHA256": "8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b",
-  "Structure_Text_Extraction_Error": "PDFTOTEXT_NOT_AVAILABLE",
+  "Structure_Text_Extraction_Error": "PURE_PYTHON_PDF_STREAM_FALLBACK_INSUFFICIENT;PRIMARY=PDFTOTEXT_NOT_AVAILABLE",
   "Structure_Text_Extraction_Status": "NOT_VERIFIED",
   "Taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION"
 }

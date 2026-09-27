@@ -1,13 +1,13 @@
 {
   "ambiguous": 0,
   "artifact": {
-    "artifact_digest": "a270cf93eb119e339a7bb402a8fc954699b9b48bc60f2f38a65fdb14a0c73dd9",
-    "artifact_id": 10927873425,
-    "artifact_name": "in-nifty50-exact-frozen-sector-classification-v0.71-36308231859",
+    "artifact_digest": "9de669cf670be62f99f325ae7deedb2af8028d6222d6b725af8d71a94e3244ed",
+    "artifact_id": 10928267335,
+    "artifact_name": "in-nifty50-exact-frozen-sector-classification-v0.71-36308429404",
     "artifact_scope": "pre-persistence v0.71 IN_NIFTY50 Gate F exact Frozen sector-classification coverage evidence",
     "artifact_verified": "PASS",
-    "workflow_head_sha": "0d249e0f51ac4afe605c3bdcf6103fcd88afc128",
-    "workflow_run_id": 36308231859
+    "workflow_head_sha": "b699d21616d2f6fdd66dc5048ad3eed88c1cd700",
+    "workflow_run_id": 36308429404
   },
   "blocker": "NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED",
   "bound_classification_level": "NOT_VERIFIED",
@@ -15,19 +15,19 @@
   "canonical_ready_rows": 37,
   "classified": 0,
   "conflict": 0,
-  "distinct_classifications": 0,
+  "distinct_classifications": 15,
   "files": {
     "artifact_binding_v0.71.json": {
       "bytes": 456,
-      "sha256": "122e5a85fd56a70ebce88c4528b6f778605a8308f3c92540b622a2a0c17bd50f"
+      "sha256": "5a3f671f3a7627db951e6461f40e31e1bddcba2c823a2af892e97563408693ca"
     },
     "docs/validation/IN_NIFTY50_Exact_Frozen_Sector_Classification_Coverage_Gate_v0.71.md": {
-      "bytes": 2941,
-      "sha256": "2b76370e472fee1055ca3d1890b0d2fe17496e89f91162fa9e0b15b74bebaba8"
+      "bytes": 2942,
+      "sha256": "247988496b1ec59a4c9e6632f4bc8e7c3a8e981dbc438bc32f20597ab293cb7a"
     },
     "external_request_ledger_v0.71.csv": {
       "bytes": 1243,
-      "sha256": "aa9fda64c0f462d609ae29b9fad5fa6219c08d8c47ec8b6447f60d37e8edb658"
+      "sha256": "3e4ed887b87d15888935fd43fe035787dee75de725ad1c7cd001d0b49c2f43bf"
     },
     "immutability_audit_v0.71.json": {
       "bytes": 1233,
@@ -42,8 +42,8 @@
       "sha256": "7b8f0b32f490750b4a64edf27b06b214b6034e2aed29e673ed9c7538a50883f6"
     },
     "in_distinct_classification_inventory_v0.71.csv": {
-      "bytes": 147,
-      "sha256": "41134ceb155e8c885873c986d49d6b16269106766b3aa8a1f2c1f66c5dcada90"
+      "bytes": 993,
+      "sha256": "7dfb935eaf42b4ea24372ea4bdbd28ec4f2db12a979aa3a0871638bc019bf253"
     },
     "in_exact_45_classification_coverage_v0.71.csv": {
       "bytes": 24198,
@@ -58,16 +58,16 @@
       "sha256": "0a22d0279973bcc69dfd543c66f1dc63691f25360dee7fdcf32796a9efb67447"
     },
     "manifest_preupload_v0.71.json": {
-      "bytes": 3413,
-      "sha256": "0fbeb55beb4d0ae253565a75943562a6d708161fef8c0c316fb287bcfed91f5c"
+      "bytes": 3414,
+      "sha256": "4709f7705f761cb55e6e5540ee3dd1c77c24fd768d75d976129e27c18bae9ffc"
     },
     "nse_industry_taxonomy_contract_audit_v0.71.json": {
-      "bytes": 1448,
-      "sha256": "ff6f5f374e987efe6ffa20a4ef7c286c21b9d37265f797334fa84c2adbee4b03"
+      "bytes": 1501,
+      "sha256": "0dbbd7d16318ff6481c83794d9a7690e23bf9a4b7f739df4e34c7de4eebf6e2d"
     },
     "official_nifty50_classification_source_audit_v0.71.json": {
       "bytes": 812,
-      "sha256": "c8959390487626dbdda6dfdbcaf45a529e21177359f753d59171b8602e22a4d3"
+      "sha256": "8ceb03f6f7b8964c36976f1fdf86f92f493ad7ca470b8144c1068dca8cc426f7"
     },
     "provider_call_audit_v0.71.json": {
       "bytes": 440,
@@ -78,20 +78,20 @@
       "sha256": "17f6fc68662031b4a558a13fb31d3e0eec9688fac48d85984f7c3b92a02ae74f"
     },
     "stage_checkpoint_preupload_v0.71.json": {
-      "bytes": 688,
-      "sha256": "32022dc25711e3dd676b799e429dfd08d27e066f8e130aa547ee75804a69f743"
+      "bytes": 689,
+      "sha256": "c4b4eb2b970ebeb1ba4c8756a517796fcf796fde29ed41c49ce074346ff41ef5"
     },
     "stage_checkpoint_v0.71.json": {
-      "bytes": 831,
-      "sha256": "c2341154534b79ab7e6818a98afc679531449db93cc8dae6b40b8a070ff59912"
+      "bytes": 832,
+      "sha256": "7222e5d5203920a5c89be429a2a1db90ba382140dd3df5a3069ad22b62131212"
     },
     "summary_preupload_v0.71.json": {
-      "bytes": 1132,
-      "sha256": "2f38d956372c261dc930dc5448f73e338a0027d4125212d5bf567298c87e744e"
+      "bytes": 1133,
+      "sha256": "263c65ed4ed1986b871cc0460ed4720febea9051b5e15b53fa821b52ea4e1968"
     },
     "summary_v0.71.json": {
-      "bytes": 1609,
-      "sha256": "0b96caa7354f332f2f6ceb885d7a2e485360b36263a67ff9c7299fa043413ba9"
+      "bytes": 1610,
+      "sha256": "b296a65efdb4df6481618c75607974e05a8bf4dfa7ae219a6a0bcc967dce49ef"
     },
     "test_results_v0.71.csv": {
       "bytes": 1245,
@@ -115,6 +115,6 @@
   "total": 45,
   "verdict": "BLOCKED_IN_NIFTY50_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE",
   "version": "v0.71",
-  "workflow_head_sha": "0d249e0f51ac4afe605c3bdcf6103fcd88afc128",
-  "workflow_run_id": 36308231859
+  "workflow_head_sha": "b699d21616d2f6fdd66dc5048ad3eed88c1cd700",
+  "workflow_run_id": 36308429404
 }

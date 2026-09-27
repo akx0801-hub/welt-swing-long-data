@@ -1,13 +1,13 @@
 {
   "ambiguous": 0,
   "artifact_binding": "PASS",
-  "artifact_digest": "a270cf93eb119e339a7bb402a8fc954699b9b48bc60f2f38a65fdb14a0c73dd9",
-  "artifact_id": 10927873425,
+  "artifact_digest": "9de669cf670be62f99f325ae7deedb2af8028d6222d6b725af8d71a94e3244ed",
+  "artifact_id": 10928267335,
   "blocker": "NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED",
   "bound_classification_level": "NOT_VERIFIED",
   "classified": 0,
   "conflict": 0,
-  "distinct_classifications": 0,
+  "distinct_classifications": 15,
   "in_exact_45_sector_classification_coverage_ready": false,
   "next_gate": "NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED",
   "not_found": 0,
@@ -18,5 +18,5 @@
   "total": 45,
   "verdict": "BLOCKED_IN_NIFTY50_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE",
   "version": "v0.71",
-  "workflow_run_id": 36308231859
+  "workflow_run_id": 36308429404
 }
