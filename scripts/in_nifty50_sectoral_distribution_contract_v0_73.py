@@ -451,9 +451,23 @@ def main()->int:
     write_csv(out/"nifty_sectoral_distribution_application_asset_ledger_v0.73.csv",asset_rows if asset_rows else [{
       "Asset_Order":0,"Asset_Type":"NONE","Asset_URL":"","HTTP_Status":"","Content_Type":"","Bytes":0,"SHA256":"","Relevant_String_Count":0,"Fetch_Status":"NOT_VERIFIED"
     }])
+    string_rows=[]
+    for src,s in candidate_strings:
+        string_rows.append({"Source_Asset":src,"Relevant_String":s})
+    write_csv(out/"nifty_application_asset_relevant_strings_v0.73.csv",string_rows if string_rows else [{
+      "Source_Asset":"","Relevant_String":""
+    }])
 
     # Browser network capture.
     bc=browser_capture(spec,out)
+    runtime_evidence={
+      "Status":bc.get("status"),"Error":bc.get("error",""),"Chrome":bc.get("chrome",""),
+      "Request_Count":len(bc.get("requests",{})),"Response_Count":len(bc.get("responses",{})),
+      "Blocked_Non_Official_Request_Count":len(bc.get("blocked",[])),
+      "Level_Select":bc.get("level_select",{}),
+      "Snapshots":bc.get("snapshots",[])
+    }
+    (out/"nifty_browser_runtime_snapshot_v0.73.json").write_text(json.dumps(runtime_evidence,indent=2,sort_keys=True)[:1000000]+"\n",encoding="utf-8")
     net_rows=[];candidate_contracts=[];all_membership=[]
     bodies=bc.get("bodies",{})
     for rid,req in bc.get("requests",{}).items():
