@@ -149,6 +149,8 @@ jobs:
             "au_dynamic_directory_interaction_audit_v0.82.csv",
             "au_directory_candidate_route_inventory_v0.82.csv",
             "au_directory_selected_data_route_contract_v0.82.json",
+            "au_directory_pagination_contract_v0.82.json",
+            "au_directory_pagination_completion_audit_v0.82.csv",
             "au_directory_direct_replay_audit_v0.82.json",
             "au_directory_runtime_schema_audit_v0.82.csv",
             "au_directory_classification_field_audit_v0.82.csv",
@@ -203,7 +205,7 @@ jobs:
           reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
           assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
           if s["dynamic_directory_route"]=="FAIL":
-              assert s["public_browser_reproducible"]=="NO"
+              assert s["public_browser_reproducible"] in {"YES","NO"}
               assert s["blocker"]=="ASX_DIRECTORY_DYNAMIC_DATA_ROUTE_NOT_REPRODUCIBLE"
               assert s["next_gate"]=="AU_SP_ASX200 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE"
               assert hist["CURRENT_ROUTE_REPRODUCIBILITY"]=="FAIL"
@@ -212,6 +214,8 @@ jobs:
               assert route["ASX_DIRECTORY_DATA_ROUTE_READY"]=="YES"
               assert route["PUBLIC_BROWSER_REPRODUCIBLE"]=="YES"
               assert route["Data_Records_RUN1"]>0 and route["Data_Records_RUN2"]>0
+              assert route["No_Incomplete_Pagination"] is True
+              assert route["Complete_Directory_Record_Count"]>0
               assert replay["DIRECT_HTTP_REPLAY"] in {"PASS","FAIL","NOT_APPLICABLE"}
               if s["au_source_native_taxonomy_identity_ready"]:
                   assert s["verdict"]=="PASS_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C"
