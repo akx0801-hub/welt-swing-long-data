@@ -1,0 +1,69 @@
+{
+  "authority_id": "G-SEC-07",
+  "title": "Shared Source-Access Dependency Parking",
+  "effective_forward_from": "v0.78",
+  "authority_type": "MANAGER_GOVERNANCE",
+  "rules": {
+    "shared_external_prerequisite_directly_tested_and_not_reproducibly_accessible_may_be_marked": "SHARED_SOURCE_ACCESS_BLOCKED",
+    "directly_tested_cohort_state": "PARKED_SOURCE_ACCESS",
+    "sibling_same_prerequisite_state": "PARKED_SHARED_SOURCE_PREREQUISITE",
+    "sibling_technical_gate_remains": "NOT_VERIFIED",
+    "sibling_row_level_results_must_not_be_fabricated": true,
+    "parking_excludes_from_automatic_next_cohort_selection": true,
+    "reopen_conditions": [
+      "shared official route becomes reproducibly accessible",
+      "manager supplies a captured authoritative source artifact",
+      "manager authorizes a genuinely independent official source architecture"
+    ],
+    "route_around_via_mirrors_reproductions_caches_etf_holdings_search_snippets_or_unofficial_datasets_forbidden": true,
+    "parking_reversible": true,
+    "historical_gate_evidence_rewritten": false
+  },
+  "shared_sec_dependency": {
+    "dependency_id": "SEC_COMPANY_TICKERS_EXCHANGE_OFFICIAL_BULK_IDENTITY_PREREQUISITE",
+    "exact_url": "https://www.sec.gov/files/company_tickers_exchange.json",
+    "status": "SHARED_SOURCE_ACCESS_BLOCKED",
+    "direct_test_authority": {
+      "cohort": "US_SP400",
+      "v0_77_final_commit": "c567c86f08ffd0b98aea83f0f01246335b7b9443",
+      "workflow_run": 36324171127,
+      "artifact": 10933038067,
+      "http_status": 403,
+      "response_server": "AkamaiGHost",
+      "response_content_type": "text/html",
+      "response_bytes": 1925,
+      "response_sha256": "c924a7d7bf9e54316e462a4c78c09cf031fff7b4a55352defe3930667f5c326a"
+    },
+    "affected_cohorts": {
+      "US_SP400": {
+        "execution_state": "PARKED_SOURCE_ACCESS",
+        "gate_E": "NOT_VERIFIED",
+        "row_level_not_verified": 368,
+        "row_level_gate_execution_source_loaded": false,
+        "blocker": "SEC_TICKER_EXCHANGE_DIRECT_BULK_ROUTE_NOT_REPRODUCIBLE"
+      },
+      "US_SP500": {
+        "execution_state": "PARKED_SHARED_SOURCE_PREREQUISITE",
+        "gate_E": "NOT_VERIFIED",
+        "row_level_gate_execution_performed": false,
+        "row_level_results_created": false,
+        "reason": "Current authorized Gate-E architecture depends on the same exact SEC CIK/ticker/exchange bulk identity prerequisite tested for US_SP400."
+      }
+    }
+  },
+  "in_nifty50_preserved_authority": {
+    "execution_state": "PARKED_EXTERNAL_AUTHORIZATION",
+    "authority": "G-SEC-06",
+    "gate_F": "PASS",
+    "gate_F_classified": 45,
+    "gate_F_total": 45,
+    "gate_H": "BLOCKED",
+    "canonical_rows": 0
+  },
+  "canonical_global_effect": {
+    "ready_rows_before": 37,
+    "ready_rows_after": 37,
+    "total_rows": 1425
+  },
+  "productive": false
+}
