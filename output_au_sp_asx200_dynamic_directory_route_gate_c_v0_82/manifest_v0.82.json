@@ -1,28 +1,28 @@
 {
-  "artifact_digest": "sha256:a9d8fd151680e365276f0baec48152ac252e4c727e8e49055741b5981d2613bd",
-  "artifact_id": 10940115519,
+  "artifact_digest": "sha256:1c401854687ebd9cbe4af89422960ed6cbea2817bb90c5771cca3ee7032110c0",
+  "artifact_id": 10940220470,
   "au_gate_d_runs": 0,
   "au_gate_e_runs": 0,
   "au_gate_f_runs": 0,
   "au_source_native_taxonomy_identity_ready": false,
-  "blocker": "ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED",
+  "blocker": "ASX_DIRECTORY_DYNAMIC_DATA_ROUTE_NOT_REPRODUCIBLE",
   "canonical_materialization_runs": 0,
   "canonical_ready_rows": 37,
   "canonical_total_rows": 1425,
-  "direct_http_replay": "PASS",
-  "dynamic_directory_route": "PASS",
+  "direct_http_replay": "NOT_APPLICABLE",
+  "dynamic_directory_route": "FAIL",
   "files": {
     "artifact_binding_v0.82.json": {
       "bytes": 484,
-      "sha256": "43a69c1400c7f05349a7b8be2446d5074defd8dd1d7d8d8c89bd22cf1dbd7e99"
+      "sha256": "380263ec21089383496c39360cd75c2aea52a42e1d5e999787dc8ee1b60f4cd4"
     },
     "asx_directory_field_provenance_audit_v0_82.json": {
-      "bytes": 332,
-      "sha256": "7d3d2cb966cc76015069ea70ecb376db4aaf85de5fd25ea6c331a70e0b4c1866"
+      "bytes": 354,
+      "sha256": "6a1605f4ca1d9faaf9e2c404ee4ca2b45ae46891ff129daf127c6a1bba3dd741"
     },
     "asx_gics_field_binding_audit_v0_82.json": {
-      "bytes": 423,
-      "sha256": "45fd1993fa94d59a9c88c4cbb5516d77af649f4114aff91dfe35eccfc81074fd"
+      "bytes": 428,
+      "sha256": "4749a73d77634a5894633706ceeb2d5c0127c2105953d5a20934fe99e17a1785"
     },
     "asx_upstream_provider_attribution_audit_v0_82.json": {
       "bytes": 321,
@@ -30,39 +30,47 @@
     },
     "au_directory_candidate_route_inventory_v0.82.csv": {
       "bytes": 9343,
-      "sha256": "4c227f127f9ff8f56bd51353682bfe9c412051ee88894a6c7369e99f46276a12"
+      "sha256": "8362057e127c60b6443ed0f83d9c04f6a274a0ab9e61451dd71823325b3c475f"
     },
     "au_directory_classification_field_audit_v0.82.csv": {
-      "bytes": 130,
-      "sha256": "1f4eba7cdae6265069c85bd2ce5efa902efec6b03830e99e713346294376db85"
+      "bytes": 107,
+      "sha256": "2aecc7907efe469349b87455b13fbef2ce18e55fea371d1c69b5ce0c339587a0"
     },
     "au_directory_classification_label_inventory_v0.82.csv": {
-      "bytes": 490,
-      "sha256": "2cf0631a76034c1bf504552781bf2bf805e6c780b99ff9ae95b024152f2f0733"
+      "bytes": 26,
+      "sha256": "16129a4e5e671fceb90370551dbf55520a18060a97d45a134700b8b947f816c7"
     },
     "au_directory_direct_replay_audit_v0.82.json": {
-      "bytes": 989,
-      "sha256": "cc7d9a7abd956d404710bc8ddc4a6228544899afe268ecf4b42e258aa3a62008"
+      "bytes": 110,
+      "sha256": "516fb1673fb41dd96fa074e3228d401e272551eb42626a5b9852ac98ac5bc6be"
+    },
+    "au_directory_pagination_completion_audit_v0.82.csv": {
+      "bytes": 93,
+      "sha256": "fe155507477e1c1f2d6577ddded72ada95dbb7f2a1201446a4fd77f5c71840dc"
+    },
+    "au_directory_pagination_contract_v0.82.json": {
+      "bytes": 1032,
+      "sha256": "e15c4dfa75575c6609f70636e6f462f3dc9f37a40e2ee31da57972dd259a6921"
     },
     "au_directory_runtime_schema_audit_v0.82.csv": {
-      "bytes": 291,
-      "sha256": "f1534933eb96052e322a154f89d595fee9c36db44b74b48f1f17975def90dc35"
+      "bytes": 75,
+      "sha256": "f73fc32e8be7c3b7999a01912c7c4b1f69050c2e48eefae8c62035b3c0f35710"
     },
     "au_directory_selected_data_route_contract_v0.82.json": {
-      "bytes": 4189,
-      "sha256": "9e887cd3ccf78bf2c4bdb82cb029b04bbc4b177cac80e2d55e5b6f706276bb02"
+      "bytes": 4993,
+      "sha256": "832f0bfd63fecdbb818659f02f32c3c37b1757a4778e0312375e1f427548a560"
     },
     "au_dynamic_directory_interaction_audit_v0.82.csv": {
       "bytes": 99,
       "sha256": "0a43f7b94d7dcf53752e0112d255035f7489e708d32b94fb6344baf031885eae"
     },
     "au_dynamic_directory_network_capture_run1_v0.82.csv": {
-      "bytes": 21734,
-      "sha256": "1d8ecae62ae67836dc9aab8b71e96fd8776c5125198671af4b84fe5198618fd0"
+      "bytes": 21612,
+      "sha256": "263190eb2f46112cf51797135e49725e0fc57f89f08bbf60ea772d9493055fb4"
     },
     "au_dynamic_directory_network_capture_run2_v0.82.csv": {
-      "bytes": 21922,
-      "sha256": "2ae783c3cb3b0a4424d7cc8ff9ec34f1ae3c140cddd2afc9af3a4eb6ccc98c8d"
+      "bytes": 21572,
+      "sha256": "7838d3095eea52707c405eb7855619fed204ff3febbd53ac1174f6bcc9922c4e"
     },
     "au_dynamic_directory_rendered_dom_audit_v0.82.csv": {
       "bytes": 436,
@@ -73,64 +81,64 @@
       "sha256": "20142bc64b25d3dc05151151d184de0890cdc6eec8a5fc7397809469ad18729b"
     },
     "au_source_native_taxonomy_identity_decision_v0_82.json": {
-      "bytes": 985,
-      "sha256": "6532d6dee9e180e8433fc5ae394fb6ac1a3811d582070583d3654ce1bc39db2d"
+      "bytes": 1064,
+      "sha256": "6143f7f867c027f572f4ed2b73032a8d772bdce1676b84fa50212b92c6e92195"
     },
     "au_taxonomy_candidate_inventory_v0_82.csv": {
       "bytes": 216,
       "sha256": "65bb70397ae46d1ddb6b4e6a0526d42acc8c589a76ede6dfbcd40ecca2a4edac"
     },
     "au_taxonomy_formal_level_audit_v0_82.json": {
-      "bytes": 155,
-      "sha256": "cb856a872f25948f37df65930ce11b49960e70dab5a35d88aad6bee8b3addb08"
+      "bytes": 160,
+      "sha256": "eeae6dd65ee804c8f6656f178ac5dd3e0a419857b22467426fb928466d966aca"
     },
     "au_taxonomy_version_contract_v0_82.json": {
       "bytes": 573,
-      "sha256": "b2322dd80f39965e68ec2a9e4715f9d7143f6c5934ce24f542004c6e136cdbae"
+      "sha256": "5f69b79ae1cde10cee176028b23d197fb8e23b6173eb11d76eaed747e67dee09"
     },
     "docs/validation/AU_SP_ASX200_Dynamic_Directory_Data_Route_Gate_C_Completion_v0.82.md": {
-      "bytes": 2545,
-      "sha256": "c90081deb89fed19088d43b75edf22d92a588bb6d40b9b6a48572004f08578c3"
+      "bytes": 2629,
+      "sha256": "4a6aabd7c0fe6c79da55fdea657dbd798754624fe1811b21e11575ab455523a6"
     },
     "external_request_ledger_v0.82.csv": {
-      "bytes": 22213,
-      "sha256": "e314c737d189fd1c1f8306ffd780af1a3ca7fcf3c5ab699786ae1f13a92c0c85"
+      "bytes": 21628,
+      "sha256": "be96ee59c07904247344053c4024486662d69fcb408aa7e34445a195e7637319"
     },
     "historical_vs_current_asx_bulk_route_audit_v0.82.json": {
-      "bytes": 272,
-      "sha256": "eeec7a14fda81d4c104c3fe716efc8bbe17e42a1e64c571c9f1b24204ecb9896"
+      "bytes": 276,
+      "sha256": "d52108af67b3f36ae8d25cfa74a04089db020052910a56dc390199c8bfcb5d07"
     },
     "immutability_audit_v0.82.json": {
       "bytes": 1894,
       "sha256": "b560e294a18cb10a99faa4d806de7908ff23d61f213303bc44c3a12202c248bd"
     },
     "manifest_preupload_v0.82.json": {
-      "bytes": 5165,
-      "sha256": "ca4b53c8fc1927f7b98136f7906a90e88e08feeedf34f2b0e985e1fbbf093fb9"
+      "bytes": 5540,
+      "sha256": "2f8b56524ec1abfbbc3bd75f7d5ba96d2274e4f2a8d3dcc0f5a11b4aec07a260"
     },
     "provider_call_audit_v0.82.json": {
       "bytes": 690,
-      "sha256": "bd3474a9bac015c12020d1c0c8a57b9218c6e2b6a1d513077af9289e245c0317"
+      "sha256": "3ed6070603a545fd9a5948c0ab9bcac210c979e76a3181296e24ab669448dbd1"
     },
     "stage_checkpoint_preupload_v0.82.json": {
-      "bytes": 591,
-      "sha256": "7b71fd01ab1d16e2d39a9a4ed31352534c2f6688b4ba2adcdd6b486203f9cbaf"
+      "bytes": 644,
+      "sha256": "cf60e257bfe73777f9981aa71da52d9162153eda22a5216be118463a47aff32b"
     },
     "stage_checkpoint_v0.82.json": {
-      "bytes": 808,
-      "sha256": "bd36a11375129c477cf1ad6f983a6bb2313af093f10de51d3c5ca3b7e892d26c"
+      "bytes": 861,
+      "sha256": "7e8b04c559906c2644876c678d04c75e37bfd5f9fe3c991ba400705b0b2259c8"
     },
     "summary_preupload_v0.82.json": {
-      "bytes": 1368,
-      "sha256": "112b3257c1a173f7b0dd74c870ed50e0596ec7e451f7c542aa477e85a3911358"
+      "bytes": 1452,
+      "sha256": "73847626fec59db15f6debc1a2a2dc1f3a9138ea881c56db313e20ee950c5101"
     },
     "summary_v0.82.json": {
-      "bytes": 1873,
-      "sha256": "b0aab09ef1d7b0f1b42d91a1be830bb29812c9c0f0c3f9e14910633975aefd8a"
+      "bytes": 1957,
+      "sha256": "6e568b5bd25328618fb226c079655aca4a35cf2dd7efef19047f5f58f98df5c2"
     },
     "test_results_v0.82.csv": {
-      "bytes": 1082,
-      "sha256": "9535aba50cc9b8bdf7b17b8458031202618de57dc73ca196e8c9376563237295"
+      "bytes": 1204,
+      "sha256": "d96d5df28b6d17cf84d333ad9bb8b49acbb416494d6a6996dd793bdf4e92d9df"
     },
     "v081_blocker_authority_v0.82.json": {
       "bytes": 714,
@@ -138,7 +146,7 @@
     }
   },
   "next_cohort_executions": 0,
-  "next_gate": "NONE_WHILE_GATE_C_BLOCKED",
+  "next_gate": "AU_SP_ASX200 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
   "p0_runs": 0,
   "p1_runs": 0,
   "p2_runs": 0,
@@ -148,6 +156,6 @@
   "stage": "AU_SP_ASX200_DYNAMIC_DIRECTORY_DATA_ROUTE_REPAIR_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C_COMPLETION",
   "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
   "version": "v0.82",
-  "workflow_head_sha": "7a30b9fdfc401fa047bd6a2e2fb12f6d5a460bea",
-  "workflow_run_id": 36343098663
+  "workflow_head_sha": "4776342d524bdc096bcf8786fd4bfe3533bb0ba2",
+  "workflow_run_id": 36343377368
 }

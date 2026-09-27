@@ -18,7 +18,7 @@
   "TradingView": 0,
   "Wikipedia": 0,
   "Yahoo_yfinance": 0,
-  "bounded_direct_replays": 1,
+  "bounded_direct_replays": 0,
   "company_name_joins": 0,
   "cross_taxonomy_mapping": 0,
   "fuzzy_matching": 0,

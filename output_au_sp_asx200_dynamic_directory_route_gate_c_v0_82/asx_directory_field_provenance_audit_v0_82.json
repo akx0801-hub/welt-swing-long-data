@@ -1,9 +1,9 @@
 {
-  "Classification_Field": "industry",
+  "Classification_Field": "NOT_AVAILABLE",
   "Direct_Schema_Taxonomy_Binding": "NOT_VERIFIED",
-  "Directory_Route_Runtime_Binding": "PASS",
+  "Directory_Route_Runtime_Binding": "NOT_VERIFIED",
   "Generic_Field_Promoted_By_Label_Resemblance": "NO",
-  "Network_Initiator_Causality": "YES",
+  "Network_Initiator_Causality": "NOT_VERIFIED",
   "Rendered_Control_Causality": "NOT_REQUIRED_OR_NOT_OBSERVED",
   "Semantic_Inference_Used": "NO"
 }

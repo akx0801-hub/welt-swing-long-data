@@ -1,0 +1,37 @@
+{
+  "Complete": false,
+  "Completion_Status": "FAIL_EXPLICIT_PAGE_COUNT_CONTRACT_NOT_FOUND",
+  "Contract_Reproduced_In_Two_Browser_Contexts": true,
+  "RUN_1_Contract": {
+    "Detected": true,
+    "Explicit_Contract": false,
+    "Explicit_Total_Count": null,
+    "Explicit_Total_Count_Path": "",
+    "Explicit_Total_Pages": null,
+    "Explicit_Total_Pages_Path": "",
+    "Observed_Meta": {
+      "data.count": 1830
+    },
+    "Observed_Page_Size": 25,
+    "Observed_Page_Value": "0",
+    "Page_Parameter": "page",
+    "Page_Size_Parameter": "itemsPerPage"
+  },
+  "RUN_2_Contract": {
+    "Detected": true,
+    "Explicit_Contract": false,
+    "Explicit_Total_Count": null,
+    "Explicit_Total_Count_Path": "",
+    "Explicit_Total_Pages": null,
+    "Explicit_Total_Pages_Path": "",
+    "Observed_Meta": {
+      "data.count": 1832
+    },
+    "Observed_Page_Size": 25,
+    "Observed_Page_Value": "0",
+    "Page_Parameter": "page",
+    "Page_Size_Parameter": "itemsPerPage"
+  },
+  "Retrieved_Record_Count": 0,
+  "Unique_Record_Count": 0
+}
