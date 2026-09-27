@@ -1,0 +1,99 @@
+{
+  "version": "v0.78",
+  "stage": "SHARED_SEC_SOURCE_ACCESS_PARKING_POST_PARK_RESELECTION_JP_N225_GATE_D",
+  "required_start_head": "c567c86f08ffd0b98aea83f0f01246335b7b9443",
+  "governance_authority": "config/manager_governance_authority_G_SEC_07_v0.78.json",
+  "shared_sec_parking": {
+    "sec_requests_allowed": false,
+    "us_sp400_state": "PARKED_SOURCE_ACCESS",
+    "us_sp400_gate_e": "NOT_VERIFIED",
+    "us_sp500_state": "PARKED_SHARED_SOURCE_PREREQUISITE",
+    "us_sp500_gate_e": "NOT_VERIFIED",
+    "us_sp500_row_level_execution_allowed": false,
+    "shared_dependency_status": "SHARED_SOURCE_ACCESS_BLOCKED"
+  },
+  "post_park_selection": {
+    "rule_authority": "v0.69 deterministic next-cohort rule",
+    "excluded": [
+      "BR_IBRX100:CANONICAL_READY",
+      "IN_NIFTY50:PARKED_EXTERNAL_AUTHORIZATION",
+      "US_SP400:PARKED_SOURCE_ACCESS",
+      "US_SP500:PARKED_SHARED_SOURCE_PREREQUISITE"
+    ],
+    "expected_selected_cohort": "JP_N225",
+    "expected_resolved_depth": 3,
+    "expected_earliest_unresolved_gate": "D"
+  },
+  "jp_gate_d": {
+    "cohort": "JP_N225",
+    "frozen_rows": 197,
+    "taxonomy": "NIKKEI_36_INDUSTRY_AND_SECTOR",
+    "historical_gate_e": "PASS_INHERITED",
+    "gate_f_allowed": false,
+    "canonical_materialization_allowed": false,
+    "official_sources": [
+      "https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225",
+      "https://indexes.nikkei.co.jp/en/nkave/index/profile?idx=nk225",
+      "https://indexes.nikkei.co.jp/en/nkave/factsheet?idx=nk225"
+    ],
+    "allowed_hosts": [
+      "indexes.nikkei.co.jp"
+    ],
+    "max_official_requests": 3,
+    "expected_structural_relation": "official profile states 6 sector categories consolidated from 36 Nikkei industrial classifications; component page must independently expose the parent-child grouping",
+    "candidate_project_level_identifiers": [
+      "SECTOR",
+      "INDUSTRY"
+    ],
+    "native_code_check": "explicit official classification code semantics only; HTML anchor fragments or security codes are not classification codes",
+    "pdsc_feasibility_only": true,
+    "pdsc_row_population_allowed": false
+  },
+  "pdsc_sha256_v1": {
+    "unicode_normalization": "NFC_ONLY",
+    "separator": "U+001F",
+    "input_order": [
+      "Sector_Taxonomy",
+      "Sector_Level",
+      "Sector_Name"
+    ],
+    "encoding": "UTF-8",
+    "hash": "SHA-256",
+    "output_format": "PDSC1:<full-lowercase-sha256>",
+    "truncate": false
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "wikipedia": true,
+    "bloomberg": true,
+    "reuters": true,
+    "tradingview": true,
+    "etf_holdings": true,
+    "third_party_classification_databases": true,
+    "search_engine_evidence": true,
+    "per_security_web_fanout": true,
+    "company_name_join": true,
+    "fuzzy_matching": true,
+    "semantic_guessing": true,
+    "sec_requests": true,
+    "nse_requests": true,
+    "price_ohlcv": true,
+    "news_trading": true
+  },
+  "scope_boundaries": {
+    "jp_gate_e_execution_allowed": false,
+    "jp_gate_f_execution_allowed": false,
+    "us_gate_e_execution_allowed": false,
+    "us_row_level_evidence_creation_allowed": false,
+    "canonical_materialization_allowed": false,
+    "canonical_registry_readiness_update_allowed": false,
+    "other_cohort_research_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_allowed": false,
+    "p1_p2_allowed": false,
+    "productive": false
+  }
+}
