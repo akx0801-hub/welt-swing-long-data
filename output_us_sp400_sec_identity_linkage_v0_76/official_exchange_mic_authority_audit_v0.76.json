@@ -1,0 +1,23 @@
+{
+  "Content_Type": "text/csv",
+  "Discovery_Method": "OFFICIAL_LANDING_PAGE_HREF",
+  "HTTP_Status": 200,
+  "Official_Landing_Page": "https://www.iso20022.org/market-identifier-codes",
+  "Parse_Error": "",
+  "Parsed_Row_Count": 2883,
+  "Raw_Bytes": 589482,
+  "Raw_SHA256": "79de0f7704e260bd49b0d2439f3084891cabc93481da8bdbaa716e15a27211ed",
+  "Raw_Snapshot_Persisted": false,
+  "Relevant_SEC_Exchange_Values": [],
+  "Retrieval_Timestamp_UTC": "2026-09-27T13:24:14Z",
+  "Schema_Field_Map": {
+    "acronym": "ACRONYM",
+    "country": "",
+    "market_name": "MARKET NAME-INSTITUTION DESCRIPTION",
+    "mic": "MIC",
+    "operating_mic": "OPERATING MIC",
+    "oprt_sgmt": "OPRT/SGMT",
+    "status": "STATUS"
+  },
+  "Selected_MIC_Dataset_URL": "https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv"
+}

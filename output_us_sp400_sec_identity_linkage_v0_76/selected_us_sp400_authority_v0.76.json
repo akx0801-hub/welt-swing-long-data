@@ -1,0 +1,16 @@
+{
+  "Current_Blocker": "DETERMINISTIC_WS_ID_LINKAGE_NOT_VERIFIED",
+  "Earliest_Unresolved_Gate": "E",
+  "Frozen_Rows": 368,
+  "Resolved_Gates_Before_Blocker": 4,
+  "Selected_Cohort": "US_SP400",
+  "Selection_Rule": "greatest consecutive resolved A-H gates; tie smaller Frozen rows; tie lexicographic",
+  "Tie_Row_Counts": {
+    "US_SP400": 368,
+    "US_SP500": 372
+  },
+  "Tie_Set": [
+    "US_SP400",
+    "US_SP500"
+  ]
+}

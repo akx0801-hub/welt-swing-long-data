@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "d43417c1e101e0cee2da785ea0c78f80305f9f0d8cd03e2498017427259b0f34",
+  "artifact_id": 10932404865,
+  "artifact_name": "us-sp400-sec-identity-linkage-v0.76-36322252802",
+  "artifact_scope": "pre-persistence v0.76 IN_NIFTY50 park governance plus US_SP400 deterministic SEC ticker/exchange-to-MIC identity linkage evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "660bd5ba5ce12a7958317bf81388ad753dc37f2b",
+  "workflow_run_id": 36322252802
+}

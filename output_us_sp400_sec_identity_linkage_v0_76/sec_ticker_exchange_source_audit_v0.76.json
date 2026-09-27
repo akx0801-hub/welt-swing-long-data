@@ -1,0 +1,24 @@
+{
+  "Content_Type": "",
+  "Discovery_Method": "NOT_VERIFIED",
+  "Documentation_URLs": [
+    "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data"
+  ],
+  "Duplicate_Ticker_Count": 0,
+  "Duplicate_Ticker_Exchange_Count": 0,
+  "Fair_Access_User_Agent": "WeltSwingLongDev-v0.76 akx0801-hub/welt-swing-long-data contact=https://github.com/akx0801-hub",
+  "HTTP_Status": "",
+  "Null_Exchange_Count": 0,
+  "Null_Ticker_Count": 0,
+  "Parse_Error": "",
+  "Per_Security_Requests": 0,
+  "Raw_Bytes": 0,
+  "Raw_SHA256": "",
+  "Raw_Snapshot_Persisted": false,
+  "Record_Count": 0,
+  "Retrieval_Timestamp_UTC": "",
+  "Schema": [],
+  "Schema_Status": "NOT_VERIFIED",
+  "Selected_Source_URL": "NOT_VERIFIED"
+}

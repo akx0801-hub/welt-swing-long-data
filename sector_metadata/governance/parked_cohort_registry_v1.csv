@@ -1,0 +1,2 @@
+Cohort,Execution_State,Technical_Gates_A_G,Gate_H,Gate_H_Blocker,Gate_F_Classified,Gate_F_Total,Canonical_Readiness,Canonical_Rows,Reopen_Automatically,Authority,Effective_From
+IN_NIFTY50,PARKED_EXTERNAL_AUTHORIZATION,PASS,BLOCKED,EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION,45,45,NO,0,NO,G-SEC-06,v0.76

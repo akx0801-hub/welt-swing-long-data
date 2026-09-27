@@ -1,0 +1,2 @@
+WS_ID,CIK,SEC_Ticker,SEC_Exchange,SEC_CIK_Total_Ticker_Count,SEC_CIK_Total_Ticker_Exchange_Count,Target_Frozen_Rows_With_Same_CIK,Share_Class_Collapse_Performed,CIK_Role,Audit_Status
+,,,,0,0,0,NO,ISSUER_REFERENCE_ONLY,NOT_VERIFIED

@@ -1,0 +1,2 @@
+SEC_Exchange_Value,Official_Exchange_Name,Operating_MIC,Segment_MICs,MIC_Type,Evidence_Source,Exact_Acronym_Match_Count,Unique_Operating_MIC_Count,Mapping_Status
+,,NOT_VERIFIED,,NOT_VERIFIED,https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv,0,0,NOT_VERIFIED

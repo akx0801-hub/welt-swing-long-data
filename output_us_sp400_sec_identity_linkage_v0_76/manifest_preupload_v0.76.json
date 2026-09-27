@@ -1,0 +1,120 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "SEC_TICKER_EXCHANGE_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "conflict": 0,
+  "exchange_mic_authority": "https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv / exact SEC exchange value to ISO ACRONYM, unique operating MIC",
+  "files": {
+    "external_request_ledger_v0.76.csv": {
+      "bytes": 1227,
+      "sha256": "09d4380e20642e5c3c719d8d83e301cac8b1aef386179bb0172c8059e768fc58"
+    },
+    "immutability_audit_v0.76.json": {
+      "bytes": 1436,
+      "sha256": "ad1bbfdac401a3200dd915795c68c0f7e484ca3c24d3bc771102b258e9d29625"
+    },
+    "manager_governance_authority_G_SEC_06_v0.76.json": {
+      "bytes": 1486,
+      "sha256": "a3d924c4f7e12ccafb4708a0891cf26159b6f3617ee52301c1e912244934c2b8"
+    },
+    "official_exchange_mic_authority_audit_v0.76.json": {
+      "bytes": 817,
+      "sha256": "d026c5512b97a4d12c050f4c9cd2c1b5fb8a85ce474e6317bb4c5e1ed9485d58"
+    },
+    "optional_sec_bulk_submissions_audit_v0.76.json": {
+      "bytes": 304,
+      "sha256": "9d9eff26ea4f4ee01e5c00a260b6c3cc0310e296a87875c5f287fb26e92f2303"
+    },
+    "parked_cohort_registry_v0.76.csv": {
+      "bytes": 307,
+      "sha256": "161f1c354531ca9440c1d97b8c95ed417b5248734f8fe381c83a87858b9b9d37"
+    },
+    "post_park_next_cohort_selection_calculation_v0.76.csv": {
+      "bytes": 635,
+      "sha256": "8edc3abb60fd33f1c543eb36dbade89e15a251c352ba20df29ba63776506ea51"
+    },
+    "provider_call_audit_v0.76.json": {
+      "bytes": 625,
+      "sha256": "c10de111cc413c29b095d3fb35d5409f64191ad6cc5744c3d2218e6973507cd5"
+    },
+    "sec_exchange_to_mic_mapping_v0.76.csv": {
+      "bytes": 283,
+      "sha256": "578db47b76a12ccba842ef24a135b508d265aab40b7fa2451bf65cb2e0b164e4"
+    },
+    "sec_exchange_value_inventory_v0.76.csv": {
+      "bytes": 39,
+      "sha256": "b05a462801102d7200f72716ac17ccde7e067c0363cf9f8a370bf26c5b6aa95e"
+    },
+    "sec_ticker_exchange_source_audit_v0.76.json": {
+      "bytes": 805,
+      "sha256": "e466ae90e2a465bc8abc83a950a096dbb024ecd5258b43db0b31c0089c07de0c"
+    },
+    "selected_us_sp400_authority_v0.76.json": {
+      "bytes": 422,
+      "sha256": "82bc50f315e9ca576000d4bdbfc8d577183b8d2109e57b045627bcbe9e89e71f"
+    },
+    "stage_checkpoint_preupload_v0.76.json": {
+      "bytes": 953,
+      "sha256": "6a685bec71429a040f14de7fa5f1ba1badaf5ff9da9dd7205f743ff1a981b434"
+    },
+    "summary_preupload_v0.76.json": {
+      "bytes": 1758,
+      "sha256": "889eec802577f8c28c42b81a46c47681020a7ac0e01d6fb0cff230c944abf48b"
+    },
+    "test_results_v0.76.csv": {
+      "bytes": 1083,
+      "sha256": "1f7400a334336f22618afff2f95d7f515662c53cdd99a692f2e40c4ce7a11092"
+    },
+    "us_sp400_cik_share_class_audit_v0.76.csv": {
+      "bytes": 231,
+      "sha256": "77cb0fd2154c432fa7017b4dfd269d7f4055f9ccadbd0d85e3d3d54e53dd012b"
+    },
+    "us_sp400_exact_368_identity_linkage_v0.76.csv": {
+      "bytes": 77547,
+      "sha256": "db8a59a41a48cd0e67d151217191d5dfa28c5e783ac73fd0d1624b3c1a88b3dc"
+    },
+    "us_sp400_frozen_368_identity_target_v0.76.csv": {
+      "bytes": 29159,
+      "sha256": "f5e884a11cc11e148e73d20fb7771ae126735f956819c0a1eb6b745c957c125e"
+    },
+    "us_sp400_frozen_primary_mic_distribution_v0.76.json": {
+      "bytes": 33,
+      "sha256": "108f5d4de9c8683ba1d53bfca802a3f6dfcc6076b8d9ec3fabe4e7b4a3e9448d"
+    },
+    "us_sp400_identity_collision_audit_v0.76.csv": {
+      "bytes": 152,
+      "sha256": "4313f9fbf8c3e98e6cf26ca59d6e5bb3f22a98462aa056a229f18ec354f3f9d9"
+    },
+    "us_sp400_ticker_normalization_audit_v0.76.csv": {
+      "bytes": 13229,
+      "sha256": "bbd07085511332f0b9a93704c7915fcb22514cf827c30da43a8160ef126197db"
+    }
+  },
+  "in_canonical_rows": 0,
+  "in_gate_f_classified": 45,
+  "in_nifty50_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "linked": 0,
+  "next_gate": "SEC_TICKER_EXCHANGE_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "not_found": 368,
+  "not_verified": 0,
+  "other_cohort_runs": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "repository_sha": "660bd5ba5ce12a7958317bf81388ad753dc37f2b",
+  "required_start_head": "40f261b29dd0e92dc79b976a0970f6ae8970e9e8",
+  "sec_identity_route": "SEC exact ticker + SEC exact exchange -> ISO 10383 exact ACRONYM -> operating MIC -> Frozen exact (Primary_Ticker, Primary_MIC) -> WS_ID",
+  "sector_rs_runs": 0,
+  "selected_cohort": "US_SP400",
+  "stage": "US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE_GATE_WITH_IN_NIFTY50_PARK",
+  "total": 368,
+  "us_gate_f_runs": 0,
+  "us_sp400_deterministic_sec_identity_ready": false,
+  "us_sp500_runs": 0,
+  "verdict": "BLOCKED_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE",
+  "version": "v0.76"
+}
