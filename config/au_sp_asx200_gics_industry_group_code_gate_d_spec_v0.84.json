@@ -60,7 +60,14 @@
     "asx_directory_url": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
     "sp_gics_methodology": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-gics.pdf",
     "sp_gics_industry_group_code_table": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-cse-sector-and-industry-group-indices.pdf?force_download=true",
-    "msci_gics_context": "https://www.msci.com/indexes/index-resources/gics"
+    "msci_gics_context": "https://www.msci.com/indexes/index-resources/gics",
+    "sp_gics_landing": "https://www.spglobal.com/spdji/en/landing/topic/gics/",
+    "sp_gics_current_structure_xlsx": "https://www.spglobal.com/spdji/en/documents/index-policies/2025-gics-structure-english.xlsx",
+    "current_structure_link_discovery": {
+      "discovered_utc": "2026-09-27",
+      "official_landing_label": "GICS Structure (current & historical versions)",
+      "evidence_status": "CURRENT_OFFICIAL_SP_DJI_LANDING_PAGE_LINK"
+    }
   },
   "matching_contract": {
     "exact_taxonomy": "GICS",
