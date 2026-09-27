@@ -4,18 +4,11 @@
   "Error": "",
   "Level_Select": {},
   "Request_Count": 1,
-  "Response_Count": 2,
+  "Response_Count": 0,
   "Snapshots": [
     {
       "phase": "INITIAL",
-      "snapshot": {
-        "bodyText": "",
-        "highcharts": [],
-        "levelElements": [],
-        "selects": [],
-        "title": "",
-        "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html"
-      }
+      "snapshot": {}
     }
   ],
   "Status": "PASS"

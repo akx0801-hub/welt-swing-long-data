@@ -40,11 +40,11 @@ No company-name joins, fuzzy matching, semantic inference, cross-taxonomy mappin
 **NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED**.
 
 ## Artifact binding
-- Workflow run: 36311526274
-- Workflow head: bd6988eb9bd881af6c25d4432d6992b6b5fea3cb
-- Artifact: 10928907386
-- Artifact name: in-nifty50-sectoral-distribution-contract-v0.73-36311526274
-- Artifact digest: 67c455f4f8a8bc83732e705a42fddf5446d0b40c12eb4ae5e1fb154182ba3f61
+- Workflow run: 36311638619
+- Workflow head: bb90a030ef7ef6ff69ca9a7e8d7c4f59dca07306
+- Artifact: 10929546915
+- Artifact name: in-nifty50-sectoral-distribution-contract-v0.73-36311638619
+- Artifact digest: fa6d8bd7df26a43e4ce89f883b1b1ee8c92acb45e713e406ba4c0a7f38e20b47
 
 ## Next gate
 **NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED**

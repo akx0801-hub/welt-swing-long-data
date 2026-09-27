@@ -16,7 +16,7 @@
     },
     "external_request_ledger_v0.73.csv": {
       "bytes": 3900,
-      "sha256": "02c15add7b32bb281be63b03de085eef5467fa85c43d9c6e51d64a2bcdbf2223"
+      "sha256": "77859436f2e85f28d7e287c3d3698e9355839f887a09890f5617938c02b2994b"
     },
     "immutability_audit_v0.73.json": {
       "bytes": 1275,
@@ -46,6 +46,10 @@
       "bytes": 1532,
       "sha256": "6d79fd41615cf2447b6a8f41ccab772dc3fcf395692d3ee6e45796eb092c6578"
     },
+    "nifty_application_asset_context_snippets_v0.73.csv": {
+      "bytes": 66387,
+      "sha256": "88b8ed2675dee341b011faeaedc6c673da2425cae81dccb786c95edd3186278a"
+    },
     "nifty_application_asset_relevant_strings_v0.73.csv": {
       "bytes": 36280,
       "sha256": "d7b2a3e3d9d8c77cef775bf858966a4e7f0e534409dad13c48b83f8dbaa2ac12"
@@ -59,8 +63,8 @@
       "sha256": "2935f8638858769c3288bd370005325b1e8980014d2a6b1fe7b6cb3b4f6bfe22"
     },
     "nifty_browser_runtime_snapshot_v0.73.json": {
-      "bytes": 482,
-      "sha256": "16599fea37b7d213e1f52861326ce8331d090c3e918b7b402aa5dfcfc214bd71"
+      "bytes": 267,
+      "sha256": "8bacc087f487a7274ede16b3af3a66abd4d3b9c18bfd71c4d1cdb47c5f32ab3f"
     },
     "nifty_classification_level_parameter_contract_v0.73.csv": {
       "bytes": 448,
@@ -71,8 +75,8 @@
       "sha256": "0fca8cb2f547185460c59078a1682a9eb7cf890a4334f8eea927627bedd72b66"
     },
     "nifty_sectoral_distribution_network_request_ledger_v0.73.csv": {
-      "bytes": 305,
-      "sha256": "6d1980ac3e78955c8d293a4bd86e9763ae7b492233b3273d97321e0587e739ec"
+      "bytes": 420,
+      "sha256": "da2c3419c6291a3f0c556c10bfa9ef1b5a92974f0cdecf759049e63f874ca10c"
     },
     "provider_call_audit_v0.73.json": {
       "bytes": 617,
@@ -100,7 +104,7 @@
   "p1_runs": 0,
   "p2_runs": 0,
   "productive": false,
-  "repository_sha": "bd6988eb9bd881af6c25d4432d6992b6b5fea3cb",
+  "repository_sha": "bb90a030ef7ef6ff69ca9a7e8d7c4f59dca07306",
   "required_start_head": "7464e7c643922e946c39631c58174e9716cb53b4",
   "sector_rs_runs": 0,
   "source_native_code_coverage": 0,

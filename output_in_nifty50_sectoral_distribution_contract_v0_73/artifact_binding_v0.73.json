@@ -1,9 +1,9 @@
 {
-  "artifact_digest": "67c455f4f8a8bc83732e705a42fddf5446d0b40c12eb4ae5e1fb154182ba3f61",
-  "artifact_id": 10928907386,
-  "artifact_name": "in-nifty50-sectoral-distribution-contract-v0.73-36311526274",
+  "artifact_digest": "fa6d8bd7df26a43e4ce89f883b1b1ee8c92acb45e713e406ba4c0a7f38e20b47",
+  "artifact_id": 10929546915,
+  "artifact_name": "in-nifty50-sectoral-distribution-contract-v0.73-36311638619",
   "artifact_scope": "pre-persistence v0.73 official NSE Indices sectoral-distribution application contract and Gate-F resolution evidence",
   "artifact_verified": "PASS",
-  "workflow_head_sha": "bd6988eb9bd881af6c25d4432d6992b6b5fea3cb",
-  "workflow_run_id": 36311526274
+  "workflow_head_sha": "bb90a030ef7ef6ff69ca9a7e8d7c4f59dca07306",
+  "workflow_run_id": 36311638619
 }
