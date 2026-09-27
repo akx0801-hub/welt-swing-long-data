@@ -3,13 +3,13 @@
   "application_contract": "NOT_DISCOVERED",
   "application_membership_rows": 0,
   "artifact": {
-    "artifact_digest": "fa6d8bd7df26a43e4ce89f883b1b1ee8c92acb45e713e406ba4c0a7f38e20b47",
-    "artifact_id": 10929546915,
-    "artifact_name": "in-nifty50-sectoral-distribution-contract-v0.73-36311638619",
+    "artifact_digest": "222507cfaa5c4108c24a26eb164f89aa0fa429a199e9e53d7b4463829b3777e7",
+    "artifact_id": 10929067745,
+    "artifact_name": "in-nifty50-sectoral-distribution-contract-v0.73-36311985653",
     "artifact_scope": "pre-persistence v0.73 official NSE Indices sectoral-distribution application contract and Gate-F resolution evidence",
     "artifact_verified": "PASS",
-    "workflow_head_sha": "bb90a030ef7ef6ff69ca9a7e8d7c4f59dca07306",
-    "workflow_run_id": 36311638619
+    "workflow_head_sha": "a6aeff406880fdd0a675f9a94a10e8c420638e1c",
+    "workflow_run_id": 36311985653
   },
   "artifact_binding": "PASS",
   "blocker": "NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED",

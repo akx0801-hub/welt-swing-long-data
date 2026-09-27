@@ -1,0 +1,5 @@
+Formal_Level,Official_Displayed_Label,Application_Index_Name,Application_Path_Template,Constructed_URL,Application_Code_Proof,HTTP_Status,Content_Type,Response_Bytes,Response_SHA256,Payload_Parse_Status,Response_Schema_Keys,Extracted_Membership_Record_Count,Response_Prefix
+MACRO_ECONOMIC_SECTOR,Macro Economic Sector,NOT_VERIFIED,MacroEconomicSector/SectorialIndexData${e.toUpperCase()}_MacroEconomicSector,NOT_VERIFIED,PASS,,,0,,NOT_FETCHED,,0,
+SECTOR,Sector,NOT_VERIFIED,Sector/SectorialIndexData${e.toUpperCase()}_Sector,NOT_VERIFIED,PASS,,,0,,NOT_FETCHED,,0,
+INDUSTRY,Industry,NOT_VERIFIED,Industry/SectorialIndexData${e.toUpperCase()}_Industry,NOT_VERIFIED,PASS,,,0,,NOT_FETCHED,,0,
+BASIC_INDUSTRY,Basic Industry,NOT_VERIFIED,Basic Industry/SectorialIndexData${e.toUpperCase()}_BasicIndustry,NOT_VERIFIED,PASS,,,0,,NOT_FETCHED,,0,
