@@ -487,6 +487,46 @@ def taxonomy_lookup(maps:dict[str,dict[str,dict[str,str]]],level:str,display:str
     if len(hits)==1:return hits[0][0],hits[0][1]["name"],"APPLICATION_DISPLAY_LABEL_EXACT_TO_V072_TAXONOMY_NODE"
     return "","","NOT_VERIFIED"
 
+def taxonomy_parent_path_for_code(level:str,code:str,maps:dict[str,dict[str,dict[str,str]]])->str:
+    parts=[]
+    if level=="SECTOR" and code:
+        mes=code[:4]
+        if mes in maps.get("MACRO_ECONOMIC_SECTOR",{}):
+            parts.append(mes+" "+maps["MACRO_ECONOMIC_SECTOR"][mes]["name"])
+        if code in maps.get("SECTOR",{}):
+            parts.append(code+" "+maps["SECTOR"][code]["name"])
+    return " > ".join(parts)
+
+def derive_sector_code_from_descendant_membership(label:str,sector_rows:list[dict[str,Any]],by_ws_level:dict[Any,Any],
+                                                   maps:dict[str,dict[str,dict[str,str]]])->tuple[str,str,list[dict[str,str]]]:
+    ws_set=sorted({r["WS_ID"] for r in sector_rows})
+    evidence=[];global_codes=set();all_ws_proven=True
+    for ws in ws_set:
+        ws_codes=set();ws_evidence=[]
+        for child_level in ("INDUSTRY","BASIC_INDUSTRY"):
+            for ar in by_ws_level.get((ws,child_level),[]):
+                display=ar.get("Application_Display_Label","")
+                hits=[code for code,d in maps.get(child_level,{}).items() if d.get("name")==display]
+                if len(hits)==1:
+                    code=hits[0];parent=code[:6]
+                    ws_codes.add(parent)
+                    ws_evidence.append({
+                      "CSV_Source_Label":label,"WS_ID":ws,"Child_Application_Level":child_level,
+                      "Child_Application_Display_Label":display,"Child_Taxonomy_Code":code,
+                      "Derived_Parent_Sector_Code":parent,"Evidence_Status":"PASS_EXACT_CHILD_NODE"
+                    })
+        if len(ws_codes)!=1:
+            all_ws_proven=False
+        else:
+            global_codes.update(ws_codes)
+        evidence.extend(ws_evidence if ws_evidence else [{
+          "CSV_Source_Label":label,"WS_ID":ws,"Child_Application_Level":"","Child_Application_Display_Label":"",
+          "Child_Taxonomy_Code":"","Derived_Parent_Sector_Code":"","Evidence_Status":"NOT_VERIFIED"
+        }])
+    if all_ws_proven and len(global_codes)==1:
+        return next(iter(global_codes)),"APPLICATION_SECURITY_MEMBERSHIP_TO_EXACT_DESCENDANT_TAXONOMY_PARENT",evidence
+    return "","NOT_VERIFIED",evidence
+
 def main()->int:
     ap=argparse.ArgumentParser()
     ap.add_argument("--repository-sha",required=True)
@@ -777,26 +817,37 @@ def main()->int:
         if r["Application_Level"] in LEVEL_LABELS:by_ws_level[(r["WS_ID"],r["Application_Level"])].append(r)
     assignment_audit=[];level_stats={}
     for level in LEVEL_LABELS:
-        complete=0;det=0;raw_to_nodes=defaultdict(set)
+        complete=0;raw_to_nodes=defaultdict(set);node_to_raw=defaultdict(set);exact_display_count=0
         for ws,csvr in sorted(csv_by_ws.items()):
             rows=by_ws_level.get((ws,level),[])
-            # unique exact category identity within level
             ids={(x["Application_Node_ID_or_Code"] or x["Application_Display_Label"],x["Application_Display_Label"]) for x in rows if x["Application_Display_Label"] or x["Application_Node_ID_or_Code"]}
             app_status="PASS" if len(ids)==1 else ("AMBIGUOUS" if len(ids)>1 else "NOT_FOUND")
             app_label=next(iter(ids))[1] if len(ids)==1 else ""
             app_node=next(iter(ids))[0] if len(ids)==1 else ""
+            relation="NOT_VERIFIED"
             if len(ids)==1:
-                complete+=1;raw_to_nodes[csvr["Source_Classification_Raw"]].add(app_node)
+                complete+=1
+                raw_to_nodes[csvr["Source_Classification_Raw"]].add(app_node)
+                node_to_raw[app_node].add(csvr["Source_Classification_Raw"])
+                if app_label==csvr["Source_Classification_Raw"]:
+                    relation="EXACT_DISPLAY_LABEL";exact_display_count+=1
             assignment_audit.append({
               "WS_ID":ws,"Frozen_ISIN":csvr["Frozen_ISIN"],"Primary_Ticker":csvr["Primary_Ticker"],
               "CSV_Source_Classification_Raw":csvr["Source_Classification_Raw"],"Application_Level":level,
               "Application_Display_Label":app_label,"Application_Node_ID_or_Code":app_node,
               "Application_Assignment_Count":len(ids),"Application_Assignment_Status":app_status,
-              "CSV_to_Application_Relation":"EXACT_DISPLAY_LABEL" if app_label and app_label==csvr["Source_Classification_Raw"] else ("NODE_ID_SECURITY_BINDING" if len(ids)==1 else "NOT_VERIFIED")
+              "CSV_to_Application_Relation":relation
             })
         deterministic_labels=sum(1 for label,nodes in raw_to_nodes.items() if len(nodes)==1)
-        explains=(complete==45 and len(raw_to_nodes)==15 and deterministic_labels==15)
-        level_stats[level]={"complete_security_count":complete,"raw_label_count":len(raw_to_nodes),"deterministic_raw_label_node_count":deterministic_labels,"explains_all_45":explains}
+        unique_nodes=len(node_to_raw)
+        one_to_one=deterministic_labels==15 and unique_nodes==15 and all(len(v)==1 for v in node_to_raw.values())
+        explains=(complete==45 and len(raw_to_nodes)==15 and exact_display_count==45 and one_to_one)
+        level_stats[level]={
+          "complete_security_count":complete,"raw_label_count":len(raw_to_nodes),
+          "deterministic_raw_label_node_count":deterministic_labels,"unique_application_node_count":unique_nodes,
+          "one_to_one_raw_label_node_identity":one_to_one,"exact_display_relation_count":exact_display_count,
+          "explains_all_45":explains
+        }
     write_csv(out/"in_csv_vs_application_level_assignment_audit_v0.73.csv",assignment_audit)
 
     explaining=[lev for lev,s in level_stats.items() if s["explains_all_45"]]
@@ -805,7 +856,7 @@ def main()->int:
     explaining=[lev for lev in explaining if param_pass.get(lev,False)]
 
     # Node -> taxonomy code resolution per candidate selected level.
-    node_bind_rows=[];label_identity_rows=[]
+    node_bind_rows=[];label_identity_rows=[];descendant_parent_audit=[]
     selected=explaining[0] if len(explaining)==1 else ""
     source_code_by_label={}
     if selected:
@@ -815,22 +866,33 @@ def main()->int:
                 raw_group[r["CSV_Source_Classification_Raw"]].append(r)
         for label in EXPECTED_LABELS:
             rs=raw_group.get(label,[])
-            nodes={(x["Application_Node_ID_or_Code"],x["Application_Display_Label"]) for x in rs}
-            nodeid,display=next(iter(nodes)) if len(nodes)==1 else ("","")
+            nodeset={(x["Application_Node_ID_or_Code"],x["Application_Display_Label"]) for x in rs}
+            nodeid,display=next(iter(nodeset)) if len(nodeset)==1 else ("","")
             code,name,method=taxonomy_lookup(taxmaps,selected,display,nodeid)
+            if not code and selected=="SECTOR" and len(nodeset)==1:
+                code,method,ev=derive_sector_code_from_descendant_membership(label,rs,by_ws_level,taxmaps)
+                descendant_parent_audit.extend(ev)
+                if code:
+                    name=taxmaps.get("SECTOR",{}).get(code,{}).get("name","")
+            elif selected=="SECTOR":
+                descendant_parent_audit.extend([{
+                  "CSV_Source_Label":label,"WS_ID":x["WS_ID"],"Child_Application_Level":"","Child_Application_Display_Label":"",
+                  "Child_Taxonomy_Code":"","Derived_Parent_Sector_Code":code,"Evidence_Status":"DIRECT_EXACT_SECTOR_NODE"
+                } for x in rs])
             status="PASS" if code else "NOT_VERIFIED"
             if status=="PASS":source_code_by_label[label]=code
-            rel="EXACT_DISPLAY_LABEL" if display==label else ("DISPLAY_VARIANT_PROVEN_BY_OFFICIAL_NODE_ID" if code and nodeid==code else "NOT_VERIFIED")
+            rel="EXACT_DISPLAY_LABEL" if display==label else "NOT_VERIFIED"
             label_identity_rows.append({
               "CSV_Source_Label":label,"Application_Display_Label":display,"Application_Level":selected,
               "Application_Node_ID_or_Code":nodeid,"Identity_Relation":rel,
-              "Security_Row_Count":len(rs),"Binding_Status":"PASS" if len(rs)>0 and rel!="NOT_VERIFIED" else "NOT_VERIFIED"
+              "Security_Row_Count":len(rs),"Binding_Status":"PASS" if len(rs)>0 and rel=="EXACT_DISPLAY_LABEL" else "NOT_VERIFIED"
             })
             node_bind_rows.append({
               "CSV_Source_Label":label,"Application_Display_Label":display,"Application_Level":selected,
               "Application_Node_ID_or_Code":nodeid,"Taxonomy_Source_Native_Code":code or "NOT_VERIFIED",
-              "Official_Taxonomy_Name":name or "NOT_VERIFIED","Binding_Method":method,
-              "Application_ID_Is_Formal_Taxonomy_Code":"YES" if nodeid and code and nodeid==code else "NO",
+              "Official_Taxonomy_Name":name or "NOT_VERIFIED",
+              "Parent_Path":taxonomy_parent_path_for_code(selected,code,taxmaps) if code else "NOT_VERIFIED",
+              "Binding_Method":method,"Application_ID_Is_Formal_Taxonomy_Code":"YES" if nodeid and code and nodeid==code else "NO",
               "Binding_Status":status
             })
     else:
@@ -839,10 +901,14 @@ def main()->int:
               "Application_Node_ID_or_Code":"","Identity_Relation":"NOT_VERIFIED","Security_Row_Count":0,"Binding_Status":"NOT_VERIFIED"})
             node_bind_rows.append({"CSV_Source_Label":label,"Application_Display_Label":"","Application_Level":"NOT_VERIFIED",
               "Application_Node_ID_or_Code":"","Taxonomy_Source_Native_Code":"NOT_VERIFIED","Official_Taxonomy_Name":"NOT_VERIFIED",
-              "Binding_Method":"NOT_VERIFIED","Application_ID_Is_Formal_Taxonomy_Code":"NO","Binding_Status":"NOT_VERIFIED"})
+              "Parent_Path":"NOT_VERIFIED","Binding_Method":"NOT_VERIFIED","Application_ID_Is_Formal_Taxonomy_Code":"NO","Binding_Status":"NOT_VERIFIED"})
     write_csv(out/"in_15_label_official_node_identity_audit_v0.73.csv",label_identity_rows)
     write_csv(out/"in_application_node_taxonomy_code_binding_v0.73.csv",node_bind_rows)
     write_csv(out/"in_source_native_code_binding_v0.73.csv",node_bind_rows)
+    write_csv(out/"in_application_descendant_parent_code_audit_v0.73.csv",descendant_parent_audit if descendant_parent_audit else [{
+      "CSV_Source_Label":"","WS_ID":"","Child_Application_Level":"","Child_Application_Display_Label":"","Child_Taxonomy_Code":"",
+      "Derived_Parent_Sector_Code":"","Evidence_Status":"NOT_APPLICABLE"
+    }])
 
     level_binding={
       "Taxonomy":TAXONOMY,"Source_Field_Name":"Industry","Application_Contract_Status":"PASS" if candidate_contracts else "NOT_VERIFIED",
