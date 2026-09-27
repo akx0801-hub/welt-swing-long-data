@@ -1,0 +1,5 @@
+Official_Displayed_Label,Internal_Formal_Level,Application_Raw_Level_Value,UI_Select_ID,UI_Select_Name,Controlled_Level_Phase_Request_Count,Observed_Request_Endpoints,Observed_Request_Bodies,Level_Parameter_Status
+Macro Economic Sector,MACRO_ECONOMIC_SECTOR,NOT_VERIFIED,,,0,,,NOT_VERIFIED
+Sector,SECTOR,NOT_VERIFIED,,,0,,,NOT_VERIFIED
+Industry,INDUSTRY,NOT_VERIFIED,,,0,,,NOT_VERIFIED
+Basic Industry,BASIC_INDUSTRY,NOT_VERIFIED,,,0,,,NOT_VERIFIED

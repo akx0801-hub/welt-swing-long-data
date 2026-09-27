@@ -1,0 +1,22 @@
+{
+  "ambiguous": 0,
+  "application_contract": "NOT_DISCOVERED",
+  "artifact_binding": "PASS",
+  "artifact_digest": "d0877d0935ec6ba85010573b37d5f23dd668969f1d89df947efc8c03842c6a2e",
+  "artifact_id": 10929038146,
+  "blocker": "NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED",
+  "bound_classification_level": "NOT_VERIFIED",
+  "classified": 0,
+  "conflict": 0,
+  "distinct_classifications": 15,
+  "in_exact_45_sector_classification_coverage_ready": false,
+  "next_gate": "NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED",
+  "not_found": 0,
+  "not_verified": 45,
+  "source_native_code_coverage": 0,
+  "stage": "IN_NIFTY50_NSE_INDICES_SECTORAL_DISTRIBUTION_DATA_CONTRACT_GATE_F_RESOLUTION",
+  "total": 45,
+  "verdict": "BLOCKED_IN_NIFTY50_GATE_F_APPLICATION_CONTRACT_RESOLUTION",
+  "version": "v0.73",
+  "workflow_run_id": 36311383821
+}

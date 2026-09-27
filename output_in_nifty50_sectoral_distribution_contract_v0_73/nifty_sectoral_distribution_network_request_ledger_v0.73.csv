@@ -1,0 +1,2 @@
+Phase,Initiator,Endpoint,HTTP_Method,Request_Body,Index_Identifier_Evidence,Response_Status,Response_MIME,Response_SHA256,Response_Bytes,Response_Parse_Type,Response_Schema_Keys,Expected_Label_Hit_Count,Frozen_Security_Hit_Count,Public_Browser_Request,Auth_Bypass,Captcha_Bypass
+,,,,,,,,,0,,,0,0,NO,NO,NO

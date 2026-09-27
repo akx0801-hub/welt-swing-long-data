@@ -1,0 +1,37 @@
+{
+  "Application_Contract_Status": "NOT_VERIFIED",
+  "Complete_Explaining_Levels": [],
+  "Level_Assignment_Stats": {
+    "BASIC_INDUSTRY": {
+      "complete_security_count": 0,
+      "deterministic_raw_label_node_count": 0,
+      "explains_all_45": false,
+      "raw_label_count": 0
+    },
+    "INDUSTRY": {
+      "complete_security_count": 0,
+      "deterministic_raw_label_node_count": 0,
+      "explains_all_45": false,
+      "raw_label_count": 0
+    },
+    "MACRO_ECONOMIC_SECTOR": {
+      "complete_security_count": 0,
+      "deterministic_raw_label_node_count": 0,
+      "explains_all_45": false,
+      "raw_label_count": 0
+    },
+    "SECTOR": {
+      "complete_security_count": 0,
+      "deterministic_raw_label_node_count": 0,
+      "explains_all_45": false,
+      "raw_label_count": 0
+    }
+  },
+  "Level_Binding_Status": "NOT_VERIFIED",
+  "Level_Parameter_Contract_PASS_Count": 0,
+  "Mixed_Level_Interpretation_Used": false,
+  "Official_Taxonomy_Level": "NOT_VERIFIED",
+  "Semantic_Inference_Used": false,
+  "Source_Field_Name": "Industry",
+  "Taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION"
+}

@@ -1,0 +1,10 @@
+{
+  "Browser_Capture_Status": "PASS",
+  "Browser_Error": "",
+  "Candidate_Contract_Count": 0,
+  "Independent_Replay_Count": 0,
+  "Independent_Replay_PASS_Count": 0,
+  "Non_Official_Browser_Requests_Blocked": 0,
+  "Raw_Response_Bodies_Persisted": false,
+  "Replays": []
+}
