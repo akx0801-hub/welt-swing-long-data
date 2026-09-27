@@ -128,19 +128,79 @@ def discover_structure_pdf(page_url:str,body:bytes)->tuple[str|None,list[dict[st
             seen.append(x["url"]);out.append(x)
     return (out[0]["url"] if len(out)==1 else None),out
 
+def _pdf_literal_strings_from_stream(data:bytes)->list[str]:
+    out=[];i=0;n=len(data)
+    while i<n:
+        if data[i]!=0x28:
+            i+=1;continue
+        i+=1;buf=bytearray();depth=1
+        while i<n and depth>0:
+            b=data[i]
+            if b==0x5c and i+1<n:
+                i+=1;esc=data[i]
+                maps={ord("n"):10,ord("r"):13,ord("t"):9,ord("b"):8,ord("f"):12}
+                if esc in maps:buf.append(maps[esc])
+                elif esc in (0x28,0x29,0x5c):buf.append(esc)
+                elif 48<=esc<=55:
+                    octal=bytes([esc]);j=0
+                    while i+1<n and j<2 and 48<=data[i+1]<=55:
+                        i+=1;octal+=bytes([data[i]]);j+=1
+                    try:buf.append(int(octal,8)&0xff)
+                    except:pass
+                elif esc in (10,13):
+                    if esc==13 and i+1<n and data[i+1]==10:i+=1
+                else:buf.append(esc)
+            elif b==0x28:
+                depth+=1;buf.append(b)
+            elif b==0x29:
+                depth-=1
+                if depth>0:buf.append(b)
+            else:buf.append(b)
+            i+=1
+        if buf:
+            for enc in ("utf-8","cp1252","latin-1"):
+                try:
+                    s=buf.decode(enc)
+                    if any(ch.isalnum() for ch in s):out.append(s)
+                    break
+                except UnicodeDecodeError:pass
+    return out
+
+def _pdf_stream_fallback(pdf:bytes)->tuple[bool,str,str]:
+    import zlib
+    pieces=[]
+    for m in re.finditer(br"stream\r?\n",pdf):
+        s=m.end();e=pdf.find(b"endstream",s)
+        if e<0:continue
+        raw=pdf[s:e].rstrip(b"\r\n")
+        header=pdf[max(0,m.start()-500):m.start()]
+        candidates=[raw]
+        if b"/FlateDecode" in header:
+            try:candidates=[zlib.decompress(raw)]
+            except Exception:continue
+        for data in candidates:
+            strings=_pdf_literal_strings_from_stream(data)
+            if strings:pieces.extend(strings)
+    txt=" ".join(pieces)
+    ok=bool(re.search(r"\bIN\d{2,9}\b",txt)) and len(txt)>500
+    return ok,txt,"PURE_PYTHON_PDF_STREAM_LITERAL_FALLBACK" if ok else "PURE_PYTHON_PDF_STREAM_FALLBACK_INSUFFICIENT"
+
 def pdf_to_text(pdf:bytes)->tuple[bool,str,str]:
     try:
         with tempfile.TemporaryDirectory() as td:
             p=Path(td)/"structure.pdf";p.write_bytes(pdf)
             cp=subprocess.run(["pdftotext","-layout","-enc","UTF-8",str(p),"-"],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=30)
-            if cp.returncode!=0:
-                return False,"",f"PDFTOTEXT_EXIT_{cp.returncode}:{cp.stderr.decode('utf-8',errors='replace')[:500]}"
-            txt=cp.stdout.decode("utf-8",errors="replace")
-            return (bool(txt.strip()),txt,"")
+            if cp.returncode==0:
+                txt=cp.stdout.decode("utf-8",errors="replace")
+                if txt.strip():
+                    return True,txt,"PDFTOTEXT"
+            primary_error=f"PDFTOTEXT_EXIT_{cp.returncode}:{cp.stderr.decode('utf-8',errors='replace')[:500]}"
     except FileNotFoundError:
-        return False,"","PDFTOTEXT_NOT_AVAILABLE"
+        primary_error="PDFTOTEXT_NOT_AVAILABLE"
     except Exception as e:
-        return False,"",f"{type(e).__name__}:{e}"
+        primary_error=f"{type(e).__name__}:{e}"
+    ok,txt,fallback=_pdf_stream_fallback(pdf)
+    return ok,txt,(fallback+";PRIMARY="+primary_error)
 
 def exact_label_occurrences(pdf_text:str,label:str)->list[dict[str,str]]:
     flat=layout_norm(pdf_text); target=layout_norm(label)
@@ -384,10 +444,15 @@ def main()->int:
         })
     write_csv(out/"in_exact_45_classification_coverage_v0.71.csv",final)
 
+    raw_counts=Counter(r["Source_Classification_Raw"] for r in prelim if r["Source_Classification_Raw"])
     inventory=[]
-    for (label,code),count in sorted(inventory_counter.items()):
-        inventory.append({"Source_Classification_Raw":label,"Official_Taxonomy_Level":"INDUSTRY","Source_Sector_Code":code,
-                          "Frozen_Row_Count":count,"Unique_Code_Status":"PASS"})
+    for label,count in sorted(raw_counts.items()):
+        b=label_bind.get(label,{"status":"NOT_VERIFIED","code":""})
+        inventory.append({"Source_Classification_Raw":label,
+                          "Official_Taxonomy_Level":"INDUSTRY" if b["status"]=="PASS" and level_binding_pass else "NOT_VERIFIED",
+                          "Source_Sector_Code":b["code"] if b["status"]=="PASS" else "NOT_VERIFIED",
+                          "Frozen_Row_Count":count,
+                          "Unique_Code_Status":b["status"]})
     write_csv(out/"in_distinct_classification_inventory_v0.71.csv",inventory if inventory else [{
       "Source_Classification_Raw":"","Official_Taxonomy_Level":"NOT_VERIFIED","Source_Sector_Code":"NOT_VERIFIED","Frozen_Row_Count":0,"Unique_Code_Status":"NOT_VERIFIED"
     }])
@@ -469,7 +534,7 @@ def main()->int:
       "in_exact_45_sector_classification_coverage_ready":ready,"classified":counts["PROVABLY_CLASSIFIED"],"total":45,
       "ambiguous":counts["AMBIGUOUS"],"not_found":counts["NOT_FOUND"],"not_verified":counts["NOT_VERIFIED"],"conflict":counts["CONFLICT"],
       "taxonomy":TAXONOMY,"bound_classification_level":"INDUSTRY" if level_binding_pass else "NOT_VERIFIED",
-      "distinct_classifications":len(inventory_counter),"source_native_code_coverage":source_native_code_coverage,
+      "distinct_classifications":len(distinct_labels),"source_native_code_coverage":source_native_code_coverage,
       "source_sha256":current.get("sha256",""),"source_sha_changed_vs_v070":current.get("sha256","")!=V070_NIFTY_SHA,
       "blocker":blocker,"external_requests":len(ext),"prohibited_provider_calls":sum(providers.values()),
       "gate_h_promotions":0,"canonical_ready_rows":37,"canonical_materialization_runs":0,
