@@ -1,0 +1,22 @@
+{
+  "Blocked_Non_Official_Request_Count": 0,
+  "Chrome": "/usr/bin/google-chrome",
+  "Error": "",
+  "Level_Select": {},
+  "Request_Count": 1,
+  "Response_Count": 2,
+  "Snapshots": [
+    {
+      "phase": "INITIAL",
+      "snapshot": {
+        "bodyText": "",
+        "highcharts": [],
+        "levelElements": [],
+        "selects": [],
+        "title": "",
+        "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html"
+      }
+    }
+  ],
+  "Status": "PASS"
+}

@@ -16,7 +16,7 @@
     },
     "external_request_ledger_v0.73.csv": {
       "bytes": 3900,
-      "sha256": "7feb04d763c05f4b915e496968162b2544b92a35030993a478077da3f125a414"
+      "sha256": "02c15add7b32bb281be63b03de085eef5467fa85c43d9c6e51d64a2bcdbf2223"
     },
     "immutability_audit_v0.73.json": {
       "bytes": 1275,
@@ -46,6 +46,10 @@
       "bytes": 1532,
       "sha256": "6d79fd41615cf2447b6a8f41ccab772dc3fcf395692d3ee6e45796eb092c6578"
     },
+    "nifty_application_asset_relevant_strings_v0.73.csv": {
+      "bytes": 36280,
+      "sha256": "d7b2a3e3d9d8c77cef775bf858966a4e7f0e534409dad13c48b83f8dbaa2ac12"
+    },
     "nifty_application_category_schema_v0.73.csv": {
       "bytes": 184,
       "sha256": "e6a81e5165a0c0d399567a239f5993758b167aa1c08f0cb3e5cb442dfb45a321"
@@ -53,6 +57,10 @@
     "nifty_application_security_membership_v0.73.csv": {
       "bytes": 195,
       "sha256": "2935f8638858769c3288bd370005325b1e8980014d2a6b1fe7b6cb3b4f6bfe22"
+    },
+    "nifty_browser_runtime_snapshot_v0.73.json": {
+      "bytes": 482,
+      "sha256": "16599fea37b7d213e1f52861326ce8331d090c3e918b7b402aa5dfcfc214bd71"
     },
     "nifty_classification_level_parameter_contract_v0.73.csv": {
       "bytes": 448,
@@ -92,7 +100,7 @@
   "p1_runs": 0,
   "p2_runs": 0,
   "productive": false,
-  "repository_sha": "32de969c16cdb95056a3fbfa3f04f24bb6271076",
+  "repository_sha": "bd6988eb9bd881af6c25d4432d6992b6b5fea3cb",
   "required_start_head": "7464e7c643922e946c39631c58174e9716cb53b4",
   "sector_rs_runs": 0,
   "source_native_code_coverage": 0,

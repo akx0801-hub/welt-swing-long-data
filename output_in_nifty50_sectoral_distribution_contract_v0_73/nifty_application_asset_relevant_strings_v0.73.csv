@@ -1,0 +1,365 @@
+Source_Asset,Relevant_String
+https://liveindexsa.niftyindices.com/assets/css/styles.css, /></filter></svg>#anychart-greyscale
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,") } function Gt(e, t) { var n, r, i = ce.ajaxSettings.flatOptions || {}; for (n in t) void 0 !== t[n] && ((i[n] ? e : r || (r = {}))[n] = t[n]); return r && ce.extend(!0, e, r), e } Xt.href = Et.href, ce.extend({ active: 0, lastModified: {}, etag: {}, ajaxSettings: { url: Et.href, type: "
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,": ce.parseXML }, flatOptions: { url: !0, context: !0 } }, ajaxSetup: function (e, t) { return t ? Gt(Gt(e, ce.ajaxSettings), t) : Gt(ce.ajaxSettings, e) }, ajaxPrefilter: Ut(Bt), ajaxTransport: Ut(_t), ajax: function (e, t) { "
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js," == typeof e && (t = e, e = void 0), t = t || {}; var c, f, p, n, d, r, h, g, i, o, v = ce.ajaxSetup({}, t), y = v.context || v, m = v.context && (y.nodeType || y.jquery) ? ce(y) : ce.event, x = ce.Deferred(), b = ce.Callbacks("
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,") }), ce._evalUrl = function (e, t, n) { return ce.ajax({ url: e, type: "
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js," + jt.guid++; return this[e] = !0, e } }), ce.ajaxPrefilter("
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,"), 0 < a.length && ce.ajax({ url: e, type: i || "
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,ajaxStart
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,ajaxStop
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,ajaxComplete
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,ajaxError
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,ajaxSuccess
+https://www.niftyindices.com/assets/js/jquery-3.7.1.min.js,ajaxSend
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,"https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700"
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,>Advanced Charting</a></li><li><a href=
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,>SECTORAL INDICES</a></li><li><a href=
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-auto
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-capital-goods
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-cement
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-chemicals
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-commercial---transport-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-construction
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-consumer-durables-index
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-consumer-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-financial-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-financial-services-25-50-index
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-financial--services-ex-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-financial-services-ex-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-fmcg
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-healthcare-index
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-hospitals
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-housing-finance
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-insurance
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-it
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-media
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-metal
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-nbfc
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-oil-and-gas-index
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-pharma
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-power
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-private-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-psu-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-realty
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-reits---realty
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-retail
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-telecommunications
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty500-healthcare
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-midsmall--financial-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-midsmall-financial-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-midsmallhealthcare
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-midsmall--it-telecom
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-midsmall-it-telecom
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/thematic-indices/nifty-capital-markets
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/thematic-indices/nifty100-esg-sector-leaders
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/thematic-indices/nifty-services-sector
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/strategy-indices/nifty-growth-sectors-15
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,drop-capital
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/resources/industry-classification
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,advChartdate
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,advCharttime
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-auto
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-capital-goods
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-cement
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-chemicals
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-commercial---transport-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-construction
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-consumer-durables-index
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-consumer-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-financial-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-financial-services-25-50-index
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-financial--services-ex-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-fmcg
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-healthcare-index
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-hospitals
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-housing-finance
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-insurance
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-it
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-media
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-metal
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-midsmall--financial-services
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-midsmallhealthcare
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-midsmall--it-telecom
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-nbfc
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-oil-and-gas-index
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-pharma
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-power
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-private-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-psu-bank
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-realty
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-reits---realty
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-retail
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty-telecommunications
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/sectoral-indices/nifty500-healthcare
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/thematic-indices/nifty-capital-markets
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/thematic-indices/nifty-services-sector
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/thematic-indices/nifty100-esg-sector-leaders
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,/indices/equity/strategy-indices/nifty-growth-sectors-15
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,advancedChartrefresh()
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,"><h2>The Nifty 50 is a well diversified 50 stock index and it represent important sectors of the economy.</h2><p>The base period selected for Nifty 50 index is the close of prices on November 3, 1995, which marks the completion of one year of operations of NSE"
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,whBox  graphChartWrap
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,chartTimeTabbing clearfix
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,chartTimeTabs
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,mCustomScrollbar addonChart1
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,btn btn-select chartType
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,chartWrap
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,assets/images/chart.jpg
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,compareChart
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,mCustomScrollbar addonChart1
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,mCustomScrollbar addonChart2
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,chart-export hidden
+https://www.niftyindices.com/indices/equity/broad-based-indices/nifty--50,#compareChart
+https://www.niftyindices.com/assets/js/developer.js,https://liveindexsa.niftyindices.com/jsonfiles/Sector/SectorialIndexData
+https://www.niftyindices.com/assets/js/developer.js,_Sector.js
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs ul.addonChart1 li.selected
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartType .typeUL li
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart1
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart2
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart3
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart1
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart2
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart3
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,g.highcharts-button:nth-child(8)
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,g.highcharts-button:nth-child(9)
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,g.highcharts-button:nth-child(10)
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs ul.addonChart1 li.selected
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs ul.addonChart1 li#daily
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs ul.addonChart1 li.selected
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs ul.addonChart1 li#1
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs li
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs li
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs li
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartType .typeUL li
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.chartTimeTabs ul.addonChart1 li.selected
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart1
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart2
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart3
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart1
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart2
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,addonChart3
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,#compareChart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,Sectorial Distribution
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.highcharts-credits
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,//cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js%3E%3C/script%3E
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js, + r.idx + d + p).wrapInner(
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,Highcharts error #
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,: www.highcharts.com/errors/
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,Chart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,data-highcharts-chart
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-text-outline
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-text-outline
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,.highcharts-text-outline
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-root
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-button-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,http://code.highcharts.com/5.0.6/gfx/vml-radial-gradient.png
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,Chart title
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,http://www.highcharts.com
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,Highcharts.com
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-plot-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-plot-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-axis-title
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-axis-line
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-crosshair highcharts-crosshair-
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,", r.chartHeight, e, i.plotY + r.plotTop, r.plotTop, r.plotTop + r.plotHeight], c = ["
+https://liveindexsa.niftyindices.com/assets/js/indices_foamtree.js,highcharts-color-
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,api:initialized
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,api:initialized
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,api:initialized
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,api:initialized
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,api:initialized
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,api:initialized
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,api:initialized
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,api:initialized
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,Basic Industry
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,Sector
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,#sectorDropdown li
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,#selectedinSectorial
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,selectedinSectorial
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,sectorDropdown
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,Industry
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,Basic Industry
+https://liveindexsa.niftyindices.com/assets/js/foamtree.js,Macro Economic Sector
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(8)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(9)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(10)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(8)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(9)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(10)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#ddlchartindexs li:textEquals(
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#addonChart1 li:textEquals(
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#addonChart2 li:textEquals(
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#addonChart3 li:textEquals(
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(8)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(9)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(10)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartTimeTabs li
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.customChartBar
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartTimeTabs .addonChart1 li.selected
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li.selected
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#line
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .btn-select-value
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(8)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(9)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(10)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.customChartBar .rangeCalendar .submitBtn
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#chartfromdate
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#charttodate
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#line
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .btn-select-value
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#line
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .btn-select-value
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,advanced-charting
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#advanceChart
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartTimeTabs .addonChart1 li.selected
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li.selected
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#line
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .btn-select-value
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(8)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(9)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(10)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.highcharts-range-selector-buttons
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.customChartBar .rangeCalendar .submitBtn
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#chartfromdate
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#charttodate
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#line
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .btn-select-value
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#area
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#candlestick
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .typeUL li#line
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,.chartType .btn-select-value
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,advanced-charting
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,#advanceChart
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(8)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(9)
+https://liveindexsa.niftyindices.com/assets/js/common_chart.js,g.highcharts-button:nth-child(10)
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,click.bs.carousel.data-api
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,load.bs.carousel.data-api
+https://liveindexsa.niftyindices.com/assets/js/vendor.js, === t.type && (n.clickEvent = t) } i._completeHide(n) } } static getParentFromElement(t) { return a(t) || t.parentNode } static dataApiKeydownHandler(t) { if (/input|textarea/i.test(t.target.tagName) ? 
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,", pt.dataApiKeydownHandler), B.on(document, "
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,click.bs.dropdown.data-api
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,keyup.bs.dropdown.data-api
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,click.bs.dropdown.data-api
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,load.bs.offcanvas.data-api
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,===c.type?a.ajax({type:
+https://liveindexsa.niftyindices.com/assets/js/vendor.js,===c.type&&a.ajax({type:
+https://liveindexsa.niftyindices.com/assets/js/global.js,.sectoralDistibution
+https://liveindexsa.niftyindices.com/assets/js/global.js,.advanceChartingWrap
+https://liveindexsa.niftyindices.com/assets/js/global.js,#advanceChart
+https://liveindexsa.niftyindices.com/assets/js/global.js,.chartTimeTabsWrap
+https://liveindexsa.niftyindices.com/assets/js/global.js,#ddlchartindexs
+https://liveindexsa.niftyindices.com/assets/js/global.js,#ddlchartindexs
+https://liveindexsa.niftyindices.com/assets/js/global.js,.chartTimeTabsWrap .adaptive-dropdown
+https://liveindexsa.niftyindices.com/assets/js/global.js,.chartTimeTabsWrap .adaptive-dropdown
+https://liveindexsa.niftyindices.com/assets/js/global.js,.chartTimeTabsWrap .adaptive-dropdown
+https://liveindexsa.niftyindices.com/assets/js/global.js,.chartTimeTabsWrap .adaptive-dropdown ul li
+https://liveindexsa.niftyindices.com/assets/js/global.js,.chartTimeTabsWrap .adaptive-dropdown ul
+https://liveindexsa.niftyindices.com/assets/js/global.js,.chartTimeTabsWrap .adaptive-dropdown ul
+https://liveindexsa.niftyindices.com/assets/js/global.js,.chartTimeTabsWrap .adaptive-dropdown
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,.chart svg
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,#advChartdate
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,#advCharttime
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,Sectoral Indices
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,AJAX Success:
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,Sectoral Indices
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,AJAX Success:
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,AJAX Error:
+https://liveindexsa.niftyindices.com/assets/js/IISLComponet.js,/indices/equity/sectoral-indices
