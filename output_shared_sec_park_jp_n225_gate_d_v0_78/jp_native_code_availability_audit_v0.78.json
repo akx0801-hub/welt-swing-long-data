@@ -1,0 +1,8 @@
+{
+  "Evidence": "v0.62 historical official-source audit found no native classification code; v0.78 bounded component/profile/factsheet sources expose names/security codes but no explicit Sector classification-code semantics.",
+  "G_SEC_03_Applicable_If_Level_Ready": true,
+  "HTML_Anchor_Fragments_Treated_As_Source_Native_Codes": false,
+  "Security_Code_Field_Treated_As_Classification_Code": false,
+  "Selected_Level": "SECTOR",
+  "Source_Native_Sector_Code_Available": "NO"
+}

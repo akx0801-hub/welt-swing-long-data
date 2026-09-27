@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "4c5d1eae5e6ff4d2fa0397b7d58b89f5ab4754021c481b06e8c7c3557d902114",
+  "artifact_id": 10933309355,
+  "artifact_name": "shared-sec-park-jp-n225-gate-d-v0.78-36326606790",
+  "artifact_scope": "pre-persistence v0.78 shared SEC dependency parking, deterministic post-park reselection, and JP_N225 Gate-D official hierarchy/PDSC-feasibility evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "ea43c786d9d12e51d1bc310620967f7ce95dc02d",
+  "workflow_run_id": 36326606790
+}

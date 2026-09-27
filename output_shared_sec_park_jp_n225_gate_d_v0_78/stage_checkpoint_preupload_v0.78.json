@@ -1,0 +1,20 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "",
+  "distinct_labels": 6,
+  "in_nifty50_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "jp_canonical_classification_level_ready": true,
+  "native_code_available": "NO",
+  "next_gate": "JP_N225 EXACT FROZEN SECTOR CLASSIFICATION COVERAGE GATE",
+  "official_level_name": "Sector",
+  "pdsc_collisions": 0,
+  "pdsc_required": "YES",
+  "selected_classification_level": "SECTOR",
+  "selected_cohort": "JP_N225",
+  "stage": "SHARED_SEC_SOURCE_ACCESS_PARKING_POST_PARK_RESELECTION_JP_N225_GATE_D",
+  "taxonomy": "NIKKEI_36_INDUSTRY_AND_SECTOR",
+  "us_sp400_park_state": "PARKED_SOURCE_ACCESS",
+  "us_sp500_park_state": "PARKED_SHARED_SOURCE_PREREQUISITE",
+  "verdict": "PASS_JP_N225_CANONICAL_CLASSIFICATION_LEVEL_GATE_D",
+  "version": "v0.78"
+}

@@ -1,0 +1,13 @@
+{
+  "Component_Industry_Count": 36,
+  "Component_Sector_Count": 6,
+  "Component_Security_Count": 225,
+  "Component_Structural_Parent_Child_PASS": true,
+  "Factsheet_Sector_Terminology_Observed": false,
+  "Hierarchy": "Sector -> Industry -> constituent security",
+  "Profile_Explicit_6_Sectors_36_Industries": true,
+  "Profile_Explicit_Sector_Balance_Role": true,
+  "Profile_Response_SHA256": "d537eee86b7d39464eddcec3fd64d3e060e2aedf5a633a9749265dc32d330ffa",
+  "Profile_URL": "https://indexes.nikkei.co.jp/en/nkave/index/profile?idx=nk225",
+  "Status": "PASS"
+}

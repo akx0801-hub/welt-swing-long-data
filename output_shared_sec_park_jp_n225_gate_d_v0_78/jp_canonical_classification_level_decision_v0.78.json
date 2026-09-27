@@ -1,0 +1,16 @@
+{
+  "Blocker": "",
+  "Decision_Basis": "Official Nikkei profile explicitly uses 6 sector categories for sector balance and defines them as consolidated parents of 36 Nikkei industrial classifications; the current component page reproduces that exact parent-child hierarchy and assigns 225 current components through one Industry to one Sector. The canonical peer-group level is therefore the official parent Sector level, not selected merely by its English label.",
+  "Distinct_Selected_Level_Labels": 6,
+  "Gate_D_After": "PASS_BY_CURRENT_GOVERNANCE",
+  "Gate_E": "PASS_INHERITED",
+  "Gate_F": "NOT_EVALUATED",
+  "Gate_H": "NOT_EVALUATED",
+  "JP_CANONICAL_CLASSIFICATION_LEVEL_READY": true,
+  "PDSC_Collisions": 0,
+  "PDSC_Required": "YES",
+  "Sector_Level": "SECTOR",
+  "Sector_Level_Source_Name": "Sector",
+  "Sector_Taxonomy": "NIKKEI_36_INDUSTRY_AND_SECTOR",
+  "Source_Native_Sector_Code_Available": "NO"
+}

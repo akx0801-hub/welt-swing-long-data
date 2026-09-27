@@ -1,0 +1,151 @@
+{
+  "artifact": {
+    "artifact_digest": "4c5d1eae5e6ff4d2fa0397b7d58b89f5ab4754021c481b06e8c7c3557d902114",
+    "artifact_id": 10933309355,
+    "artifact_name": "shared-sec-park-jp-n225-gate-d-v0.78-36326606790",
+    "artifact_scope": "pre-persistence v0.78 shared SEC dependency parking, deterministic post-park reselection, and JP_N225 Gate-D official hierarchy/PDSC-feasibility evidence",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "ea43c786d9d12e51d1bc310620967f7ce95dc02d",
+    "workflow_run_id": 36326606790
+  },
+  "blocker": "",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "distinct_labels": 6,
+  "files": {
+    "artifact_binding_v0.78.json": {
+      "bytes": 502,
+      "sha256": "363785ae02747fdb60b33da7054352960f7e761e6b3a3f8dca6410c9f0459d3a"
+    },
+    "docs/validation/Shared_SEC_Parking_Post_Park_Reselection_JP_N225_Gate_D_v0.78.md": {
+      "bytes": 3633,
+      "sha256": "e053b1e7a1a084e683e61d39d5600761732caa48a5c49a0d4901830787433d2e"
+    },
+    "external_request_ledger_v0.78.csv": {
+      "bytes": 1009,
+      "sha256": "e70598f1faade91e50292402e97abeb66d21ae1df5231dc0514a0b7c58bf1f35"
+    },
+    "immutability_audit_v0.78.json": {
+      "bytes": 1484,
+      "sha256": "c7625be2909594a74683da554495d67ae3bdbf3a0c61cfddd4cb0f5b275cd4f9"
+    },
+    "jp_canonical_classification_level_decision_v0.78.json": {
+      "bytes": 912,
+      "sha256": "f0d6ab4bb353561ded5d3fced0588c34b4b495d22a20cefd7a426be5e56955db"
+    },
+    "jp_canonical_level_candidate_audit_v0.78.csv": {
+      "bytes": 910,
+      "sha256": "274d088f92abb1dfa584db654e9b2339f2027d4c3f0c828d9cae5cfde8d42ec6"
+    },
+    "jp_n225_gate_d_authority_v0.78.json": {
+      "bytes": 637,
+      "sha256": "b8069b42846e55aad71afa4a46161ef15959da182518b04659b7557ec8f6eb0d"
+    },
+    "jp_native_code_availability_audit_v0.78.json": {
+      "bytes": 479,
+      "sha256": "5d2e44e57def24f8a6358a4a601c86474b6f73771f86447970df5678fb6c4c41"
+    },
+    "jp_pdsc_collision_audit_v0.78.csv": {
+      "bytes": 37,
+      "sha256": "1f828c3c36a95f2911ead97a401cf0a418c917d37be463cfa014f518d68bba58"
+    },
+    "jp_pdsc_distinct_label_feasibility_audit_v0.78.csv": {
+      "bytes": 1433,
+      "sha256": "1f5bd2fdb726d178c3d63f2354b12e05c213001ac5973c872a3b6d5e65f3e210"
+    },
+    "manager_governance_authority_G_SEC_07_v0.78.json": {
+      "bytes": 2848,
+      "sha256": "d7a317cb48ad4bc3ce72aaecc3f94390b77c5a7a2b18a8a26bdb2fbf7ccd5250"
+    },
+    "manifest_preupload_v0.78.json": {
+      "bytes": 4504,
+      "sha256": "662947599c500fbc45b88271d760612b8d9d2e543b3be58a827cf128a80b773f"
+    },
+    "nikkei_classification_level_inventory_v0.78.csv": {
+      "bytes": 918,
+      "sha256": "a5639c04d77db3912b365b82f585af5b3935cb9de8ad4aee850baafe69c1972b"
+    },
+    "nikkei_component_structure_audit_v0.78.json": {
+      "bytes": 1678,
+      "sha256": "77f081379c50f2459475968156d87b3f95f193d999093dd03d5aa64fcf70503f"
+    },
+    "nikkei_official_source_inventory_v0.78.csv": {
+      "bytes": 1150,
+      "sha256": "24b3cf1e87f1c7761ff39844e02ad3c676030d03b2ede798158b5fb22e381940"
+    },
+    "nikkei_sector_industry_hierarchy_audit_v0.78.json": {
+      "bytes": 563,
+      "sha256": "e0379b9cd7c7db912f79cca81d0289235b9bd9d14cfd21a9f642d33b3610c988"
+    },
+    "post_shared_park_next_cohort_selection_calculation_v0.78.csv": {
+      "bytes": 712,
+      "sha256": "f944e6f82d90eb1c3c59047f2caf3096a1b40976005f43350ee52fb0235bd683"
+    },
+    "provider_call_audit_v0.78.json": {
+      "bytes": 679,
+      "sha256": "50a2cecb0c92705ea0a7c0b4b6d5b8aa045f96cc885bf779939efc2cd77c0774"
+    },
+    "sector_metadata/governance/parked_cohort_registry_v1.csv": {
+      "bytes": 590,
+      "sha256": "d367957506fd357e22b7cc9c62479a0dfa46ddf54b04ed862a71fdb50b87b2db"
+    },
+    "sector_metadata/governance/shared_source_dependency_registry_v1.csv": {
+      "bytes": 960,
+      "sha256": "9847587b9e04aba5f26d96b6e9b3f1d9acc197cfee8b913ac887c549dec57b17"
+    },
+    "shared_source_dependency_registry_v0.78.csv": {
+      "bytes": 960,
+      "sha256": "9847587b9e04aba5f26d96b6e9b3f1d9acc197cfee8b913ac887c549dec57b17"
+    },
+    "stage_checkpoint_preupload_v0.78.json": {
+      "bytes": 796,
+      "sha256": "805405e2660e4735cd37ce7a1c5538ca97ac1413c73810d29218032c9d006d26"
+    },
+    "stage_checkpoint_v0.78.json": {
+      "bytes": 939,
+      "sha256": "31429846cbfc70edbba2b0906aa450adac59a6fffad168484f95e87c97061616"
+    },
+    "summary_preupload_v0.78.json": {
+      "bytes": 1297,
+      "sha256": "71d13642f21029554175349e195be491787911ee89a7093864f86353b2fc8772"
+    },
+    "summary_v0.78.json": {
+      "bytes": 2245,
+      "sha256": "9e074b2a7ca858f6f95c8a7788470aacfba0b40cdd8360affe565c2dfb755839"
+    },
+    "test_results_v0.78.csv": {
+      "bytes": 1241,
+      "sha256": "4abef67945f9092878ea5ea982ca957f04ae61689233ec74c8a80a1252f29597"
+    }
+  },
+  "in_nifty50_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "jp_canonical_classification_level_ready": true,
+  "jp_gate_e_runs": 0,
+  "jp_gate_f_runs": 0,
+  "native_code_available": "NO",
+  "next_gate": "JP_N225 EXACT FROZEN SECTOR CLASSIFICATION COVERAGE GATE",
+  "official_level_name": "Sector",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "parked_cohort_registry_path": "sector_metadata/governance/parked_cohort_registry_v1.csv",
+  "parked_cohort_registry_sha256": "d367957506fd357e22b7cc9c62479a0dfa46ddf54b04ed862a71fdb50b87b2db",
+  "pdsc_collisions": 0,
+  "pdsc_required": "YES",
+  "productive": false,
+  "required_start_head": "c567c86f08ffd0b98aea83f0f01246335b7b9443",
+  "sector_rs_runs": 0,
+  "selected_classification_level": "SECTOR",
+  "selected_cohort": "JP_N225",
+  "shared_source_dependency_registry_path": "sector_metadata/governance/shared_source_dependency_registry_v1.csv",
+  "shared_source_dependency_registry_sha256": "9847587b9e04aba5f26d96b6e9b3f1d9acc197cfee8b913ac887c549dec57b17",
+  "stage": "SHARED_SEC_SOURCE_ACCESS_PARKING_POST_PARK_RESELECTION_JP_N225_GATE_D",
+  "taxonomy": "NIKKEI_36_INDUSTRY_AND_SECTOR",
+  "us_sp400_park_state": "PARKED_SOURCE_ACCESS",
+  "us_sp500_park_state": "PARKED_SHARED_SOURCE_PREREQUISITE",
+  "verdict": "PASS_JP_N225_CANONICAL_CLASSIFICATION_LEVEL_GATE_D",
+  "version": "v0.78",
+  "workflow_head_sha": "ea43c786d9d12e51d1bc310620967f7ce95dc02d",
+  "workflow_run_id": 36326606790
+}

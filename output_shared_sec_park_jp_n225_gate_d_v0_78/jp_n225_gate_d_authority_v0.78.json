@@ -1,0 +1,18 @@
+{
+  "A": "PASS_INHERITED",
+  "B": "PASS_INHERITED",
+  "C": "PASS_INHERITED",
+  "Cohort": "JP_N225",
+  "Current_Blocker_Before": "JP_CANONICAL_CLASSIFICATION_LEVEL_NOT_VERIFIED",
+  "D": "TARGET_THIS_STAGE",
+  "E": "PASS_INHERITED",
+  "F": "NOT_EVALUATED",
+  "Frozen_Rows": 197,
+  "G": "PASS_INHERITED",
+  "G_SEC_03_Effect": "Native-code absence is not itself blocking after exact taxonomy level/name are established.",
+  "Gate_E_Rerun_Performed": false,
+  "Gate_F_Execution_Performed": false,
+  "H": "NOT_EVALUATED",
+  "Historical_v0_62_Blocker": "SOURCE_NATIVE_SECTOR_CODE_NOT_AVAILABLE",
+  "Taxonomy": "NIKKEI_36_INDUSTRY_AND_SECTOR"
+}
