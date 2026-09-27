@@ -1,0 +1,84 @@
+{
+  "version": "v0.77",
+  "stage": "US_SP400_SEC_COMPANY_TICKERS_EXCHANGE_DIRECT_BULK_ROUTE_REPAIR_GATE_E_COMPLETION",
+  "required_start_head": "17c21283f6c4fbdf524bc80324235c029018b6d6",
+  "scope_cohort": "US_SP400",
+  "scope_gate": "E_SECURITY_IDENTITY_DIRECT_ROUTE_REPAIR_ONLY",
+  "expected_frozen_rows": 368,
+  "expected_primary_mic_distribution": {
+    "XNAS": 126,
+    "XNYS": 242
+  },
+  "sec_direct_source": {
+    "url": "https://www.sec.gov/files/company_tickers_exchange.json",
+    "manager_authorized_from_persisted_repository_authority": true,
+    "documentation_page_success_prerequisite": false,
+    "max_attempts": 3,
+    "retry_only_transient_statuses": [429, 500, 502, 503, 504],
+    "retry_after_seconds": 1.0,
+    "user_agent": "WeltSwingLongDev-v0.77 akx0801-hub@users.noreply.github.com https://github.com/akx0801-hub/welt-swing-long-data",
+    "accept": "application/json,text/plain,*/*;q=0.8",
+    "no_authentication": true,
+    "cookie_authority_forbidden": true,
+    "captcha_bypass_forbidden": true,
+    "proxy_rotation_forbidden": true
+  },
+  "iso_mic_authority": {
+    "persisted_v0_76_url": "https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv",
+    "persisted_v0_76_sha256": "79de0f7704e260bd49b0d2439f3084891cabc93481da8bdbaa716e15a27211ed",
+    "bounded_integrity_refetch_allowed": true,
+    "max_refetches": 1,
+    "comparison": "exact normalized SEC exchange value to ISO ACRONYM first; then exact normalized MARKET NAME only if acronym has zero hits",
+    "normalization": ["strip surrounding whitespace", "NFC", "casefold"],
+    "fuzzy_matching": false
+  },
+  "ticker_join": {
+    "primary": "exact equality after surrounding-whitespace strip",
+    "case_only_fallback_allowed": true,
+    "punctuation_substitution_allowed_without_explicit_authority": false,
+    "company_name_join_allowed": false,
+    "fuzzy_matching_allowed": false,
+    "share_class_collapse_allowed": false
+  },
+  "v076_failure_semantics_correction": {
+    "v076_sec_source_record_count": 0,
+    "v076_not_found_368_is_not_security_absence_evidence": true,
+    "direct_route_failure_row_status": "NOT_VERIFIED"
+  },
+  "optional_bulk_submissions": {
+    "allowed_only_after_primary_route_success_for_genuine_bounded_ambiguity": true,
+    "primary_http_failure_alternative_forbidden": true,
+    "per_cik_requests_forbidden": true,
+    "max_bulk_acquisitions": 1
+  },
+  "scope_boundaries": {
+    "us_gate_f_allowed": false,
+    "sic_promotion_allowed": false,
+    "us_sp500_allowed": false,
+    "canonical_materialization_allowed": false,
+    "canonical_registry_readiness_update_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_allowed": false,
+    "p1_p2_allowed": false,
+    "nifty_requests_allowed": false,
+    "productive": false
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "wikipedia": true,
+    "tradingview": true,
+    "etf_holdings": true,
+    "ishares_identity_authority": true,
+    "sp_constituent_third_party_mirrors": true,
+    "company_name_joins": true,
+    "fuzzy_matching": true,
+    "manual_issuer_guessing": true,
+    "per_security_web_fanout": true,
+    "price_ohlcv": true,
+    "news": true,
+    "trading_analysis": true
+  }
+}
