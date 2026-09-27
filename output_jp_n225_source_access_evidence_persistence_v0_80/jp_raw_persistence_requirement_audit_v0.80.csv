@@ -1,0 +1,4 @@
+Source_Class,Source_Name,RAW_PERSISTENCE_REQUIRED_FOR_AUDIT,RAW_PERSISTENCE_RIGHTS,RAW_SOURCE_CURRENTLY_PERSISTED,Basis
+A,NIKKEI_INDEXES_NIKKEI225_COMPONENTS,NO,VERIFIED_RESTRICTED,NO,G-SEC-05 permits bounded audit evidence; reviewed official policy is not treated as raw-redistribution authorization.
+B,NIKKEI_INDEXES_NIKKEI225_PROFILE,NO,VERIFIED_RESTRICTED,NO,G-SEC-05 permits bounded audit evidence; reviewed official policy is not treated as raw-redistribution authorization.
+C,NIKKEI_INDEXES_NIKKEI225_FACTSHEET,NO,VERIFIED_RESTRICTED,NO,G-SEC-05 permits bounded audit evidence; reviewed official policy is not treated as raw-redistribution authorization.

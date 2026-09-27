@@ -1,0 +1,3 @@
+Source_Class,TECHNICAL_BOUNDED_EVIDENCE_SUFFICIENT,Evidence_Row_Count,Persisted_Bounded_Evidence,Raw_Source_Required,Evidence_Authority
+A,YES,197,official URL; retrieval timestamp; explicit source update; response SHA256; Security Code; Industry_Raw; Sector_Raw; exact Frozen WS_ID/Primary_Ticker; exact match/classification status; hierarchy evidence; v0.79 final commit,NO,v0.79
+B,YES,1,official profile URL; retrieval timestamp; response SHA256; explicit 6-Sector/36-Industry structure; official Sector-balance role; exact authority commit,NO,v0.78 inherited into v0.79

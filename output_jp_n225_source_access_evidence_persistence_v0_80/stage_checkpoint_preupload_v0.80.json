@@ -1,0 +1,18 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "bounded_evidence_persistence_ready": false,
+  "canonical_evidence_persistable": "NO",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "jp_canonical_sector_metadata_ready": false,
+  "jp_gate_h": "FAIL",
+  "jp_source_access_persistence_ready": false,
+  "next_gate": "NONE_WHILE_GATE_H_BLOCKED",
+  "official_policy_compatibility_ready": false,
+  "official_policy_review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "public_source_access_ready": true,
+  "stage": "JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "verdict": "BLOCKED_JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "version": "v0.80"
+}

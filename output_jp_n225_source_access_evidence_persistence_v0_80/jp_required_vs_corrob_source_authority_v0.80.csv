@@ -1,0 +1,4 @@
+Source_Class,Source_Name,Necessity,Canonical_Authority_Role,Uniquely_Required_For_Canonical_Audit
+A,NIKKEI_INDEXES_NIKKEI225_COMPONENTS,REQUIRED,official Security Code; Industry assignment; Sector parent assignment; complete hierarchy for v0.79 197/197 classification,YES
+B,NIKKEI_INDEXES_NIKKEI225_PROFILE,REQUIRED,formal 6-Sector / 36-Industry structure and official Sector-balance role,YES
+C,NIKKEI_INDEXES_NIKKEI225_FACTSHEET,CORROBORATING_ONLY,corroborating Sector terminology/distribution only; no uniquely required canonical field,NO

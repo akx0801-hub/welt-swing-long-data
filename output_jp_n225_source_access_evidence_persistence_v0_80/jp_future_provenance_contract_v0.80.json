@@ -1,0 +1,19 @@
+{
+  "Evidence_Final_Commit": "must be exact final evidence commit at later materialization; v0.80 performs no materialization",
+  "Source_A": {
+    "Business_Effective_Date_From_Retrieval": false,
+    "Source_Name": "NIKKEI_INDEXES_NIKKEI225_COMPONENTS",
+    "Source_Reference": "https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225",
+    "Source_Retrieved_UTC": "retrieval provenance only",
+    "Source_SHA256": "response SHA256",
+    "Source_Update_Raw": "Update：Sep/25/2026"
+  },
+  "Source_B": {
+    "Business_Effective_Date_From_Retrieval": false,
+    "Source_Name": "NIKKEI_INDEXES_NIKKEI225_PROFILE",
+    "Source_Reference": "https://indexes.nikkei.co.jp/en/nkave/index/profile?idx=nk225",
+    "Source_Retrieved_UTC": "retrieval provenance only",
+    "Source_SHA256": "d537eee86b7d39464eddcec3fd64d3e060e2aedf5a633a9749265dc32d330ffa",
+    "Source_Update_Raw": "SOURCE_SNAPSHOT_SHA256:d537eee86b7d39464eddcec3fd64d3e060e2aedf5a633a9749265dc32d330ffa"
+  }
+}

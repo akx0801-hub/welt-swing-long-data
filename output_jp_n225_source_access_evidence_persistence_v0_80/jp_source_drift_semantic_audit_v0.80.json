@@ -1,0 +1,14 @@
+{
+  "AUTHORITY_REGRESSION_REVIEW_REQUIRED": "NO",
+  "BYTE_DRIFT": "YES",
+  "Basis": "v0.79 Gate-F authority; byte hash drift alone is not authority regression",
+  "CLASSIFICATION_DRIFT": "NO",
+  "STRUCTURAL_DRIFT": "NO",
+  "v0_78_Component_SHA256": "7c3dd31f7987c6ea0fc21b5ee61054dbafb6c5c1fcce376dd63025cfdeb7043b",
+  "v0_79_Classifications": 197,
+  "v0_79_Component_SHA256": "7cde320f69115a6e4f7c8d3d2ba8170a8c76a97a825f58cbc9682c8226adfa04",
+  "v0_79_Frozen_Exact_Matches": 197,
+  "v0_79_Industries": 36,
+  "v0_79_Sectors": 6,
+  "v0_79_Unique_Security_Codes": 225
+}

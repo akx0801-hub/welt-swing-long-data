@@ -1,0 +1,13 @@
+{
+  "Authorized_Labels": 6,
+  "PDSC_Is_Nikkei_Source_Native_Code": "NO",
+  "PDSC_Is_Source_Authorization": "NO",
+  "Sector_Code_Format": "PDSC1:<sha256>",
+  "Sector_Code_Method": "PDSC_SHA256_V1",
+  "Sector_Code_Origin": "PROJECT_DERIVED_CANONICAL",
+  "Source_Native_Classification_Code": "NO",
+  "Source_Sector_Code": null,
+  "Underlying_Official_Sector_Name_Still_Subject_To_Policy_Review": "YES",
+  "v0_79_PDSC_Collisions": 0,
+  "v0_79_PDSC_Coverage": 197
+}

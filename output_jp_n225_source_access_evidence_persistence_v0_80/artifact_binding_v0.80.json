@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "sha256:a309d2edf8b3997009c98e40bc8e3fd0cf4f98606618eaa4f27967e4d3878d56",
+  "artifact_id": 10936936683,
+  "artifact_name": "jp-n225-source-access-evidence-persistence-v0.80-36333946734",
+  "artifact_scope": "pre-persistence v0.80 JP_N225 Gate-H official-source access, bounded evidence persistence, provenance and operational policy evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "1615a628dc6051f2e99a60f238f2cc00921ee1d0",
+  "workflow_run_id": 36333946734
+}

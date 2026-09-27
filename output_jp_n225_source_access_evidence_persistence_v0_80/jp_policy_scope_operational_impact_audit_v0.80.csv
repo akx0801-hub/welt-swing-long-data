@@ -1,0 +1,7 @@
+Scope,Behavior,Operational_Status,Basis,Legal_Opinion
+A,ordinary public page access,NO_EXPLICIT_OPERATIONAL_BLOCKER_FOUND,A/B exact public HTTP 200 evidence is persisted from same-day v0.78/v0.79; no auth/cookie/CAPTCHA was used.,NO
+B,automated/bulk retrieval,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,Official Non-Display Usage material requires Nikkei permission/license for automatic machine processing of Nikkei index data; project has no such authorization authority persisted.,NO
+C,internal analytical use,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,Official Non-Display Usage material expressly addresses internal machine processing; operational comparison only.,NO
+D,persistence of URLs/hashes/timestamps,NO_EXPLICIT_OPERATIONAL_BLOCKER_FOUND,"No reviewed clause specifically identifies URLs, cryptographic hashes, or retrieval timestamps as the restricted index-data reuse; this does not authorize broader source-derived metadata.",NO
+E,persistence of bounded classification metadata: security code + sector name + provenance,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,The required pipeline programmatically processes Nikkei component/classification content and would persist source-derived classification metadata; no license/permission authority is present in project evidence.,NO
+F,redistribution of full/raw Nikkei pages or datasets,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,Official data-provision/display material restricts copying/reproduction and constituent-list dissemination absent the stated permission/contract conditions.,NO

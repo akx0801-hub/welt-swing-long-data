@@ -1,0 +1,22 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:a309d2edf8b3997009c98e40bc8e3fd0cf4f98606618eaa4f27967e4d3878d56",
+  "artifact_id": 10936936683,
+  "blocker": "EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "bounded_evidence_persistence_ready": false,
+  "canonical_evidence_persistable": "NO",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "jp_canonical_sector_metadata_ready": false,
+  "jp_gate_h": "FAIL",
+  "jp_source_access_persistence_ready": false,
+  "next_gate": "NONE_WHILE_GATE_H_BLOCKED",
+  "official_policy_compatibility_ready": false,
+  "official_policy_review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "public_source_access_ready": true,
+  "stage": "JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "verdict": "BLOCKED_JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "version": "v0.80",
+  "workflow_head_sha": "1615a628dc6051f2e99a60f238f2cc00921ee1d0",
+  "workflow_run_id": 36333946734
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "Future_Canonical_Source_Name": "NIKKEI_INDEXES_NIKKEI225_COMPONENTS",
+    "Legacy_Evidence_Name": "NIKKEI_225_COMPONENTS",
+    "Materialized_Now": "NO",
+    "Reconciliation": "ALIAS_NORMALIZATION_ONLY_NO_AUTHORITY_CHANGE",
+    "Source_Class": "A",
+    "Source_Reference": "https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225"
+  },
+  {
+    "Future_Canonical_Source_Name": "NIKKEI_INDEXES_NIKKEI225_PROFILE",
+    "Legacy_Evidence_Name": "NIKKEI_225_PROFILE",
+    "Materialized_Now": "NO",
+    "Reconciliation": "ALIAS_NORMALIZATION_ONLY_NO_AUTHORITY_CHANGE",
+    "Source_Class": "B",
+    "Source_Reference": "https://indexes.nikkei.co.jp/en/nkave/index/profile?idx=nk225"
+  }
+]

@@ -1,0 +1,113 @@
+{
+  "artifact_digest": "sha256:a309d2edf8b3997009c98e40bc8e3fd0cf4f98606618eaa4f27967e4d3878d56",
+  "artifact_id": 10936936683,
+  "blocker": "EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "files": {
+    "artifact_binding_v0.80.json": {
+      "bytes": 501,
+      "sha256": "77b30eebd06d32da42e456c0b0a86499960025ef3eeca4939e1a01c039dda2de"
+    },
+    "docs/validation/JP_N225_Source_Access_Evidence_Persistence_Gate_v0.80.md": {
+      "bytes": 4973,
+      "sha256": "7703f16e874d9ad6196f08d4c60639fc6e7a6abb024e18682afb4d7f74000758"
+    },
+    "external_request_ledger_v0.80.csv": {
+      "bytes": 1065,
+      "sha256": "51fa452cc8cdce26d1063e478d62f5b5d563c3e3c1bbd91a955015255793bf3a"
+    },
+    "immutability_audit_v0.80.json": {
+      "bytes": 2106,
+      "sha256": "b53b4d9e4ed58f41e577c9d05e12d00915f6e0e92e47b5278f8dce978a95a409"
+    },
+    "jp_bounded_evidence_persistence_audit_v0.80.csv": {
+      "bytes": 573,
+      "sha256": "af072ef000c6573c59a11d339787d3d402eaf7811a1c2e091d011351d57fa23b"
+    },
+    "jp_canonical_metadata_evidence_persistability_v0.80.json": {
+      "bytes": 913,
+      "sha256": "4a1386dec3e2a0ab56b0106429a2a14e277c42bebdbac878425bdea0ed9b8ce8"
+    },
+    "jp_future_provenance_contract_v0.80.json": {
+      "bytes": 976,
+      "sha256": "4b985d6fd04557c218e7db1a07805484f95ce73ca9c1fee8fee13e4d1e640ab7"
+    },
+    "jp_gate_h_source_inventory_v0.80.csv": {
+      "bytes": 1583,
+      "sha256": "c4fc5d39d1994e368a9d317a508ce57be06ed4e53e024f03d1a3e6a9bccefd45"
+    },
+    "jp_official_terms_policy_review_v0.80.csv": {
+      "bytes": 1872,
+      "sha256": "05c5dc20aca92c4f0acd49d9ecff2823431fca2834d23e7fd8a52f20c481037b"
+    },
+    "jp_pdsc_persistence_role_audit_v0.80.json": {
+      "bytes": 461,
+      "sha256": "9c558d2bf65f2201c1cbe638410c97b703ad5623c8e522f7f6a4bba415a058be"
+    },
+    "jp_policy_scope_operational_impact_audit_v0.80.csv": {
+      "bytes": 1533,
+      "sha256": "86e8b27a66cb042aee754abc01de484bc43b4ef0b3b3fc00dd3d149ad4d7661a"
+    },
+    "jp_public_access_reproducibility_audit_v0.80.csv": {
+      "bytes": 1391,
+      "sha256": "839a412b9cbd4fd99bdff124324b244eac564e20465428fa44272c33fe000c01"
+    },
+    "jp_raw_persistence_requirement_audit_v0.80.csv": {
+      "bytes": 662,
+      "sha256": "0099f36dd2e245aeb928aed2c48c89cd61a574c83715879af3336f334e234236"
+    },
+    "jp_required_vs_corrob_source_authority_v0.80.csv": {
+      "bytes": 541,
+      "sha256": "adad52d9cadbe782493ad98bfe675220a3974bd4bdaebcc74731780523b4f4aa"
+    },
+    "jp_source_drift_semantic_audit_v0.80.json": {
+      "bytes": 569,
+      "sha256": "424c9819062dc0e0e546de0d9205c2584b424ba0fabd6c2d148a79fcbc717626"
+    },
+    "jp_source_name_reference_contract_v0.80.json": {
+      "bytes": 699,
+      "sha256": "d1fac98bf9a9229e3916ea5a259a33d5186f8904dd132e9005238ccf86c2424b"
+    },
+    "manifest_preupload_v0.80.json": {
+      "bytes": 3494,
+      "sha256": "57ac00abc136454c41a3cc6d04070f1f98c6db5079d579d314caf260cfe8ebb4"
+    },
+    "provider_call_audit_v0.80.json": {
+      "bytes": 734,
+      "sha256": "3b542f9dfe50d8dea4d999a61c556878381243662d838b298de745e2ad73dbac"
+    },
+    "stage_checkpoint_preupload_v0.80.json": {
+      "bytes": 737,
+      "sha256": "2197dff08a0b9943a0d5815cfd736a1c24d488bedbee59a65d9563284d0270e2"
+    },
+    "stage_checkpoint_v0.80.json": {
+      "bytes": 954,
+      "sha256": "af6f15f9aca4c501830b24bf508f4f655c9077d48e33a775d1f2b81776c31812"
+    },
+    "summary_preupload_v0.80.json": {
+      "bytes": 1805,
+      "sha256": "737740eab01ea661bfe0a33174879c457c1350fc8390092b35270e40843dc3be"
+    },
+    "summary_v0.80.json": {
+      "bytes": 2327,
+      "sha256": "f601f4d8f4a2d04d25de6136453564d56793fdef9f89d7b4fb81329b9825d493"
+    },
+    "test_results_v0.80.csv": {
+      "bytes": 1259,
+      "sha256": "d6323d1a68467fb4d65885f5a1dc941c516a8dfb1bc39d193cdbf80079a0c3c5"
+    }
+  },
+  "jp_canonical_rows": 0,
+  "jp_source_access_persistence_ready": false,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "sector_rs_runs": 0,
+  "stage": "JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "verdict": "BLOCKED_JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+  "version": "v0.80",
+  "workflow_head_sha": "1615a628dc6051f2e99a60f238f2cc00921ee1d0",
+  "workflow_run_id": 36333946734
+}

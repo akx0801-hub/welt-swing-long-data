@@ -1,0 +1,27 @@
+{
+  "CANONICAL_METADATA_EVIDENCE_PERSISTABLE": "NO",
+  "Canonical_Materialization_Performed": false,
+  "Current_Project_Authorization_Basis": "NO_NIKKEI_LICENSE_OR_PERMISSION_AUTHORITY_PERSISTED",
+  "Fields": [
+    "WS_ID",
+    "Primary_MIC",
+    "Primary_Ticker",
+    "Sector_Taxonomy",
+    "Sector_Level",
+    "Sector_Code",
+    "Source_Sector_Code",
+    "Sector_Name",
+    "Sector_Code_Origin",
+    "Sector_Code_Method",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Update_Raw",
+    "Source_Retrieved_UTC",
+    "Source_SHA256",
+    "Mapping_Status",
+    "Evidence_Final_Commit"
+  ],
+  "Legal_Opinion": false,
+  "Reason": "Fail-closed operational policy comparison: explicit official machine-processing/content-use restrictions materially cover the required source-derived metadata pipeline; PDSC does not provide source authorization.",
+  "Would_Reproduce_Complete_Nikkei_Component_Dataset": false
+}
