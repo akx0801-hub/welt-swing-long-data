@@ -1,0 +1,36 @@
+{
+  "authority_id": "G-SEC-06",
+  "title": "External Authorization Blocker Parking",
+  "effective_forward_from": "v0.76",
+  "authority_type": "MANAGER_GOVERNANCE",
+  "rules": {
+    "external_consent_license_contractual_blocker_may_be_parked": true,
+    "parking_does_not_downgrade_proven_technical_gates": true,
+    "parked_cohort_excluded_from_active_next_cohort_selection": true,
+    "reopen_conditions": [
+      "explicit permission or license authority supplied",
+      "relevant official policy changes",
+      "manager explicitly authorizes a genuinely independent policy-compatible source architecture"
+    ],
+    "restriction_circumvention_via_mirrors_reproductions_caches_or_third_party_copies_forbidden": true,
+    "parking_does_not_create_canonical_metadata": true,
+    "parking_rows_do_not_count_toward_global_canonical_coverage": true,
+    "parked_cohort_may_not_be_automatically_reopened_by_later_cohort_workflows": true
+  },
+  "in_nifty50_authority": {
+    "technical_gates_A_through_G": "PASS",
+    "gate_H": "BLOCKED",
+    "gate_H_blocker": "EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+    "execution_state": "PARKED_EXTERNAL_AUTHORIZATION",
+    "gate_F_classified": 45,
+    "gate_F_total": 45,
+    "canonical_readiness": "NO",
+    "canonical_rows": 0
+  },
+  "canonical_global_effect": {
+    "ready_rows_before": 37,
+    "ready_rows_after_parking": 37,
+    "total_rows": 1425
+  },
+  "scope": "forward authority; does not rewrite v0.70-v0.75 IN_NIFTY50 evidence"
+}
