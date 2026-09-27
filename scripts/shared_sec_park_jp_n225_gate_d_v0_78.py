@@ -290,7 +290,8 @@ def main()->int:
     spec=json.loads(SPEC.read_text(encoding="utf-8"));g7=json.loads(GSEC07.read_text(encoding="utf-8"));g3=json.loads(GSEC03.read_text(encoding="utf-8"))
     if spec["version"]!=VERSION or spec["required_start_head"]!=REQUIRED_START_HEAD:raise RuntimeError("spec mismatch")
     if g7["authority_id"]!="G-SEC-07" or g7["shared_sec_dependency"]["status"]!="SHARED_SOURCE_ACCESS_BLOCKED":raise RuntimeError("G-SEC-07 mismatch")
-    if g3["authority_id"]!="G-SEC-03" or g3["pdsc_sha256_v1"]["canonical_method_when_native_code_absent"] if False else False:pass
+    if g3["authority_id"]!="G-SEC-03":raise RuntimeError("G-SEC-03 authority mismatch")
+    if g3["rules"]["canonical_method_when_native_code_absent"]!="PDSC_SHA256_V1":raise RuntimeError("G-SEC-03 method")
     if g3["pdsc_sha256_v1"]["output_format"]!="PDSC1:<full-lowercase-sha256>":raise RuntimeError("G-SEC-03 PDSC contract")
     out=ROOT/a.output_dir;out.mkdir(parents=True,exist_ok=True)
     (out/"manager_governance_authority_G_SEC_07_v0.78.json").write_text(json.dumps(g7,indent=2,sort_keys=True)+"\n",encoding="utf-8")
