@@ -391,7 +391,8 @@ def complete_paginated_route(selected:dict[str,Any]|None,max_pages:int=100)->dic
     if not pc.get("Explicit_Contract"):
         return {"Status":"FAIL_EXPLICIT_PAGE_COUNT_CONTRACT_NOT_FOUND","Complete":False,"Records":[],"Pages":[],"Contract":pc}
     total_pages=int(pc.get("Explicit_Total_Pages") or 0)
-    if total_pages<=0 or total_pages>max_pages:
+    page_size=int(pc.get("Observed_Page_Size") or 0)
+    if total_pages<=0 or total_pages>max_pages or page_size<=0:
         return {"Status":"FAIL_PAGE_COUNT_OUT_OF_BOUNDS","Complete":False,"Records":[],"Pages":[],"Contract":pc}
     rawurl=selected.get("Resolved_URL") or selected.get("Request_URL") or ""
     if "<REDACTED>" in rawurl:
@@ -399,7 +400,7 @@ def complete_paginated_route(selected:dict[str,Any]|None,max_pages:int=100)->dic
     p=urllib.parse.urlparse(rawurl);pairs=urllib.parse.parse_qsl(p.query,keep_blank_values=True)
     page_key=pc["Page_Parameter"]
     schema_sig=selected.get("schema_signature","")
-    pages=[];records=[]
+    pages=[];records=[];observed_counts=[];observed_page_counts=[]
     for page_no in range(total_pages):
         qp=[(k,str(page_no) if k==page_key else v) for k,v in pairs]
         u=urllib.parse.urlunparse((p.scheme,p.netloc,p.path,p.params,urllib.parse.urlencode(qp,doseq=True),p.fragment))
@@ -408,8 +409,19 @@ def complete_paginated_route(selected:dict[str,Any]|None,max_pages:int=100)->dic
         sig=sha_bytes(json.dumps(sorted(parsed.get("schema",[])),ensure_ascii=False).encode("utf-8")) if parsed else ""
         ok=bool(r.get("ok") and parsed and sig==schema_sig)
         rc=len(parsed.get("records",[])) if parsed else 0
+        page_pc=pagination_contract({"Resolved_URL":u,"Request_URL":u,"parsed":parsed or {}}) if parsed else {"Explicit_Contract":False}
+        response_count=page_pc.get("Explicit_Total_Count")
+        response_pages=page_pc.get("Explicit_Total_Pages")
+        if response_count is not None:
+            try:observed_counts.append(int(response_count))
+            except Exception:pass
+        if response_pages is not None:
+            try:observed_page_counts.append(int(response_pages))
+            except Exception:pass
         pages.append({"Page":page_no,"URL":sanitize_url(u),"HTTP_Status":r.get("status",""),"Content_Type":r.get("content_type",""),
                       "Bytes":r.get("bytes",0),"Response_SHA256":r.get("sha256",""),"Record_Count":rc,
+                      "Response_Total_Count":response_count if response_count is not None else "",
+                      "Response_Total_Pages":response_pages if response_pages is not None else "",
                       "Schema_Signature":sig,"Status":"PASS" if ok else "FAIL"})
         if not ok:
             return {"Status":"FAIL_PAGE_RETRIEVAL","Complete":False,"Records":[],"Pages":pages,"Contract":pc}
@@ -421,11 +433,26 @@ def complete_paginated_route(selected:dict[str,Any]|None,max_pages:int=100)->dic
     for r in records:
         key=(clean(r.get(code)) if code else "",clean(r.get(name)) if name else "",json.dumps(r,sort_keys=True,ensure_ascii=False))
         if key not in seen:seen.add(key);ded.append(r)
-    total_count=pc.get("Explicit_Total_Count")
-    complete=all(x["Status"]=="PASS" for x in pages) and (total_count is None or len(ded)==int(total_count))
-    status="PASS_COMPLETE" if complete else "FAIL_RECORD_COUNT_MISMATCH"
-    return {"Status":status,"Complete":complete,"Records":ded,"Pages":pages,"Contract":pc,
-            "Retrieved_Record_Count":len(records),"Unique_Record_Count":len(ded)}
+    all_pages_pass=all(x["Status"]=="PASS" for x in pages)
+    page_band_consistent=bool(observed_page_counts) and all(x==total_pages for x in observed_page_counts)
+    final_total_count=observed_counts[-1] if observed_counts else pc.get("Explicit_Total_Count")
+    last_count=pages[-1]["Record_Count"] if pages else 0
+    expected_last=None
+    if final_total_count is not None:
+        try:expected_last=int(final_total_count)-page_size*(total_pages-1)
+        except Exception:expected_last=None
+    last_page_consistent=bool(expected_last is not None and 1<=expected_last<=page_size and last_count==expected_last)
+    slot_count_consistent=bool(len(records)==page_size*(total_pages-1)+last_count)
+    complete=bool(all_pages_pass and page_band_consistent and last_page_consistent and slot_count_consistent)
+    dynamic_count=bool(observed_counts and len(set(observed_counts))>1)
+    status=("PASS_COMPLETE_DYNAMIC_COUNT_BAND" if dynamic_count else "PASS_COMPLETE") if complete else "FAIL_RECORD_COUNT_MISMATCH"
+    return {"Status":status,"Complete":complete,"Records":records,"Pages":pages,"Contract":pc,
+            "Retrieved_Record_Count":len(records),"Unique_Record_Count":len(ded),
+            "Observed_Total_Counts":sorted(set(observed_counts)),"Observed_Total_Page_Counts":sorted(set(observed_page_counts)),
+            "Final_Total_Count":final_total_count,"Expected_Last_Page_Record_Count":expected_last,
+            "Actual_Last_Page_Record_Count":last_count,"Page_Count_Band_Consistent":page_band_consistent,
+            "Last_Page_Consistent":last_page_consistent,"Slot_Count_Consistent":slot_count_consistent,
+            "Dynamic_Count_Observed":dynamic_count}
 
 def parse_json_dataset(raw:bytes)->dict[str,Any]|None:
     try:obj=json.loads(raw.decode("utf-8-sig"))
@@ -840,13 +867,22 @@ def main()->int:
     route_ready=bool(public_browser_repro and pagination_complete)
     full_records=pagination1.get("Records",[]) if route_ready else []
     write_csv(out/"au_directory_pagination_completion_audit_v0.82.csv",pagination1.get("Pages",[]),
-              ["Page","URL","HTTP_Status","Content_Type","Bytes","Response_SHA256","Record_Count","Schema_Signature","Status"])
+              ["Page","URL","HTTP_Status","Content_Type","Bytes","Response_SHA256","Record_Count","Response_Total_Count","Response_Total_Pages","Schema_Signature","Status"])
     write_json(out/"au_directory_pagination_contract_v0.82.json",{
       "RUN_1_Contract":pagination1.get("Contract",{}),"RUN_2_Contract":pagination2_contract,
       "Contract_Reproduced_In_Two_Browser_Contexts":pagination_contract_same,
       "Completion_Status":pagination1.get("Status",""),"Complete":pagination_complete,
       "Retrieved_Record_Count":pagination1.get("Retrieved_Record_Count",len(full_records)),
-      "Unique_Record_Count":pagination1.get("Unique_Record_Count",len(full_records))
+      "Unique_Record_Count":pagination1.get("Unique_Record_Count",len(full_records)),
+      "Observed_Total_Counts":pagination1.get("Observed_Total_Counts",[]),
+      "Observed_Total_Page_Counts":pagination1.get("Observed_Total_Page_Counts",[]),
+      "Final_Total_Count":pagination1.get("Final_Total_Count"),
+      "Expected_Last_Page_Record_Count":pagination1.get("Expected_Last_Page_Record_Count"),
+      "Actual_Last_Page_Record_Count":pagination1.get("Actual_Last_Page_Record_Count"),
+      "Page_Count_Band_Consistent":pagination1.get("Page_Count_Band_Consistent",False),
+      "Last_Page_Consistent":pagination1.get("Last_Page_Consistent",False),
+      "Slot_Count_Consistent":pagination1.get("Slot_Count_Consistent",False),
+      "Dynamic_Count_Observed":pagination1.get("Dynamic_Count_Observed",False)
     })
 
     route_contract={
