@@ -1,0 +1,16 @@
+Source_Classification_Raw,Observed_Levels,Industry_Code_Count,Industry_Codes,Industry_Parent_Codes,Same_Bound_Level_Multiple_Codes,Cross_Level_Label_Occurrence,Collision_Status
+Automobile and Auto Components,NONE,0,,,NO,NO,NOT_VERIFIED
+Capital Goods,NONE,0,,,NO,NO,NOT_VERIFIED
+Construction,NONE,0,,,NO,NO,NOT_VERIFIED
+Construction Materials,NONE,0,,,NO,NO,NOT_VERIFIED
+Consumer Durables,NONE,0,,,NO,NO,NOT_VERIFIED
+Consumer Services,NONE,0,,,NO,NO,NOT_VERIFIED
+Fast Moving Consumer Goods,NONE,0,,,NO,NO,NOT_VERIFIED
+Financial Services,NONE,0,,,NO,NO,NOT_VERIFIED
+Healthcare,NONE,0,,,NO,NO,NOT_VERIFIED
+Information Technology,NONE,0,,,NO,NO,NOT_VERIFIED
+Metals & Mining,NONE,0,,,NO,NO,NOT_VERIFIED
+Oil Gas & Consumable Fuels,NONE,0,,,NO,NO,NOT_VERIFIED
+Power,NONE,0,,,NO,NO,NOT_VERIFIED
+Services,NONE,0,,,NO,NO,NOT_VERIFIED
+Telecommunication,NONE,0,,,NO,NO,NOT_VERIFIED

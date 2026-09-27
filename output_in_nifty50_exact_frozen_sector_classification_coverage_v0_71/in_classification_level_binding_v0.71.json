@@ -1,0 +1,15 @@
+{
+  "Exact_Unique_Industry_Code_Bindings": 0,
+  "Level_Binding_Evidence": [
+    "https://www.niftyindices.com/resources/industry-classification",
+    "https://www.niftyindices.com/docs/default-source/default-document-library/industry-classification/nse-indices_industry-classification-structure-2023-07.pdf?sfvrsn=c89dd39_1",
+    "Official page defines Industry as one of four formal levels.",
+    "Every distinct non-empty current NIFTY Industry value for the Frozen-45 exact ISIN rows is exact-match bound to one unique Ind_Code in the official classification structure."
+  ],
+  "Level_Binding_Status": "NOT_VERIFIED",
+  "Observed_Distinct_Source_Labels": 15,
+  "Official_Taxonomy_Level": "NOT_VERIFIED",
+  "Semantic_Inference_Used": false,
+  "Source_Field_Name": "Industry",
+  "Taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION"
+}

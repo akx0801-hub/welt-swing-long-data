@@ -1,0 +1,10 @@
+{
+  "Changed": false,
+  "Drift_Is_Automatic_Failure": false,
+  "Exact_45_Coverage_Rechecked": true,
+  "Schema_Changed": false,
+  "v070_Row_Count": 50,
+  "v070_SHA256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28",
+  "v071_Row_Count": 50,
+  "v071_SHA256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28"
+}

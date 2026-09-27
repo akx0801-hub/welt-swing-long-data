@@ -1,0 +1,30 @@
+{
+  "Authority": "NSE Indices Limited",
+  "Classification_Page": "https://www.niftyindices.com/resources/industry-classification",
+  "Classification_Page_HTTP_Status": 200,
+  "Classification_Page_SHA256": "30d259c13047f8758408c0f677304624bb003a2e0eb9cb7fb3245428ff2bdc85",
+  "Expected_Level_Names": [
+    "MACRO_ECONOMIC_SECTOR",
+    "SECTOR",
+    "INDUSTRY",
+    "BASIC_INDUSTRY"
+  ],
+  "Formal_Four_Tier_Page_Contract_Status": "PASS",
+  "Industry_Code_Tokens_Observed": 0,
+  "Raw_Persistence_Rights_Status": "NOT_VERIFIED",
+  "Raw_Structure_Persisted": false,
+  "Selected_Structure_URL": "https://www.niftyindices.com/docs/default-source/default-document-library/industry-classification/nse-indices_industry-classification-structure-2023-07.pdf?sfvrsn=c89dd39_1",
+  "Structure_Bytes": 452220,
+  "Structure_Content_Type": "application/pdf",
+  "Structure_HTTP_Status": 200,
+  "Structure_Link_Candidates": [
+    {
+      "anchor_text": "NSE Indices Industry Classification Structure",
+      "url": "https://www.niftyindices.com/docs/default-source/default-document-library/industry-classification/nse-indices_industry-classification-structure-2023-07.pdf?sfvrsn=c89dd39_1"
+    }
+  ],
+  "Structure_Raw_SHA256": "8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b",
+  "Structure_Text_Extraction_Error": "PDFTOTEXT_NOT_AVAILABLE",
+  "Structure_Text_Extraction_Status": "NOT_VERIFIED",
+  "Taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION"
+}

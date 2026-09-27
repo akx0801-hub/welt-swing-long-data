@@ -1,0 +1,25 @@
+{
+  "Classification_Field": "Industry",
+  "Content_Type": "application/octet-stream",
+  "Exact_Schema": [
+    "Company Name",
+    "Industry",
+    "Symbol",
+    "Series",
+    "ISIN Code"
+  ],
+  "HTTP_Status": 200,
+  "ISIN_Field": "ISIN Code",
+  "Raw_Byte_Count": 3352,
+  "Raw_Persistence_Rights_Status": "NOT_VERIFIED",
+  "Raw_SHA256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28",
+  "Raw_Snapshot_Persisted": false,
+  "Retrieval_Timestamp_UTC": "2026-09-27T09:05:06Z",
+  "Row_Count": 50,
+  "SHA_Equals_v070": true,
+  "Schema_Status": "PASS",
+  "Source_Authority": "NSE Indices Limited",
+  "Source_URL": "https://www.niftyindices.com/IndexConstituent/ind_nifty50list.csv",
+  "Symbol_Field": "Symbol",
+  "v070_Raw_SHA256": "9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28"
+}

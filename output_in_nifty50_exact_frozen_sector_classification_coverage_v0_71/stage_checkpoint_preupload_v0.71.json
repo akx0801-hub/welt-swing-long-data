@@ -1,0 +1,19 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED",
+  "bound_classification_level": "NOT_VERIFIED",
+  "classified": 0,
+  "conflict": 0,
+  "distinct_classifications": 0,
+  "in_exact_45_sector_classification_coverage_ready": false,
+  "next_gate": "NIFTY_CLASSIFICATION_LEVEL_BINDING_NOT_VERIFIED",
+  "not_found": 0,
+  "not_verified": 45,
+  "source_native_code_coverage": 0,
+  "stage": "IN_NIFTY50_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_GATE",
+  "taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION",
+  "total": 45,
+  "verdict": "BLOCKED_IN_NIFTY50_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE",
+  "version": "v0.71"
+}

@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "a270cf93eb119e339a7bb402a8fc954699b9b48bc60f2f38a65fdb14a0c73dd9",
+  "artifact_id": 10927873425,
+  "artifact_name": "in-nifty50-exact-frozen-sector-classification-v0.71-36308231859",
+  "artifact_scope": "pre-persistence v0.71 IN_NIFTY50 Gate F exact Frozen sector-classification coverage evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "0d249e0f51ac4afe605c3bdcf6103fcd88afc128",
+  "workflow_run_id": 36308231859
+}
