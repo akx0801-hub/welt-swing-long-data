@@ -1,0 +1,17 @@
+{
+  "Bytes": 99550,
+  "Content_Type": "text/html; charset=utf-8",
+  "Explicit_Source_Update": "Update\uff1aSep/25/2026",
+  "HTTP_Status": 200,
+  "Industry_Count": 36,
+  "Machine_Counted_Securities": 225,
+  "Raw_Source_Persisted": false,
+  "Resolved_URL": "https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225",
+  "Retrieval_Timestamp_UTC": "2026-09-27T15:40:19Z",
+  "SHA256": "7cde320f69115a6e4f7c8d3d2ba8170a8c76a97a825f58cbc9682c8226adfa04",
+  "SHA_Comparison": "CHANGED",
+  "Sector_Count": 6,
+  "Source_Status": "PASS",
+  "URL": "https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225",
+  "v0_78_SHA256": "7c3dd31f7987c6ea0fc21b5ee61054dbafb6c5c1fcce376dd63025cfdeb7043b"
+}

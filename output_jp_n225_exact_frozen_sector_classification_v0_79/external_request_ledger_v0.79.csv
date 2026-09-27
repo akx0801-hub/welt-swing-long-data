@@ -1,0 +1,2 @@
+Request_Order,Source_Class,Request_Type,URL,Resolved_URL,HTTP_Status,Content_Type,Bytes,SHA256,Retrieval_Timestamp_UTC,Per_Security_Fanout,SEC_Request,NSE_Request,Result
+1,NIKKEI_OFFICIAL,NIKKEI_225_COMPONENTS_GATE_F,https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225,https://indexes.nikkei.co.jp/en/nkave/index/component?idx=nk225,200,text/html; charset=utf-8,99550,7cde320f69115a6e4f7c8d3d2ba8170a8c76a97a825f58cbc9682c8226adfa04,2026-09-27T15:40:19Z,NO,NO,NO,PASS

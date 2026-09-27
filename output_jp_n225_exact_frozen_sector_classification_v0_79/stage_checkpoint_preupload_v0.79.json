@@ -1,0 +1,19 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PENDING_UPLOAD",
+  "authorized_sector_labels": 6,
+  "blocker": "",
+  "classified": 197,
+  "conflict": 0,
+  "current_source_matches": 197,
+  "jp_exact_197_sector_classification_coverage_ready": true,
+  "next_gate": "JP_N225 SOURCE ACCESS / PERSISTENCE GATE",
+  "not_found": 0,
+  "not_verified": 0,
+  "pdsc_collisions": 0,
+  "pdsc_coverage": 197,
+  "stage": "JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_GATE",
+  "total": 197,
+  "verdict": "PASS_JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE",
+  "version": "v0.79"
+}

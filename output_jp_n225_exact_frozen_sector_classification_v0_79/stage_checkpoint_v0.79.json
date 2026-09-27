@@ -1,0 +1,22 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PASS",
+  "artifact_digest": "9d96c111cc3f6ec779013fc6294f634f65c04adae5ba356ec56045edebc3461a",
+  "artifact_id": 10935786239,
+  "authorized_sector_labels": 6,
+  "blocker": "",
+  "classified": 197,
+  "conflict": 0,
+  "current_source_matches": 197,
+  "jp_exact_197_sector_classification_coverage_ready": true,
+  "next_gate": "JP_N225 SOURCE ACCESS / PERSISTENCE GATE",
+  "not_found": 0,
+  "not_verified": 0,
+  "pdsc_collisions": 0,
+  "pdsc_coverage": 197,
+  "stage": "JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_GATE",
+  "total": 197,
+  "verdict": "PASS_JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE",
+  "version": "v0.79",
+  "workflow_run_id": 36330409269
+}

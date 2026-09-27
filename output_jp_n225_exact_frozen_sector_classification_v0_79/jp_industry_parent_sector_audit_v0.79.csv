@@ -1,0 +1,37 @@
+Official_Industry_Raw,Official_Parent_Sector_Raw,Parent_Sector_Authorized,Current_Source_Security_Count,Relation_Status
+Pharmaceuticals,Technology,YES,9,PASS
+Electric Machinery,Technology,YES,32,PASS
+Automobiles & Auto parts,Technology,YES,10,PASS
+Precision Instruments,Technology,YES,6,PASS
+Communications,Technology,YES,4,PASS
+Banking,Financials,YES,10,PASS
+Other Financial Services,Financials,YES,3,PASS
+Securities,Financials,YES,2,PASS
+Insurance,Financials,YES,5,PASS
+Fishery,Consumer Goods,YES,1,PASS
+Foods,Consumer Goods,YES,10,PASS
+Retail,Consumer Goods,YES,11,PASS
+Services,Consumer Goods,YES,19,PASS
+Mining,Materials,YES,1,PASS
+Textiles & Apparel,Materials,YES,2,PASS
+Pulp & Paper,Materials,YES,1,PASS
+Chemicals,Materials,YES,16,PASS
+Petroleum,Materials,YES,2,PASS
+Rubber,Materials,YES,2,PASS
+Glass & Ceramics,Materials,YES,6,PASS
+Steel,Materials,YES,3,PASS
+Nonferrous Metals,Materials,YES,8,PASS
+Trading Companies,Materials,YES,7,PASS
+Construction,Capital Goods/Others,YES,9,PASS
+Machinery,Capital Goods/Others,YES,16,PASS
+Shipbuilding,Capital Goods/Others,YES,1,PASS
+Transportation Equipment,Capital Goods/Others,YES,0,PASS
+Other Manufacturing,Capital Goods/Others,YES,4,PASS
+Real Estate,Capital Goods/Others,YES,5,PASS
+Railway & Bus,Transportation and Utilities,YES,8,PASS
+Land Transport,Transportation and Utilities,YES,2,PASS
+Marine Transport,Transportation and Utilities,YES,3,PASS
+Air Transport,Transportation and Utilities,YES,2,PASS
+Warehousing,Transportation and Utilities,YES,0,PASS
+Electric Power,Transportation and Utilities,YES,3,PASS
+Gas,Transportation and Utilities,YES,2,PASS

@@ -1,0 +1,14 @@
+{
+  "Each_Industry_One_Parent_Sector": true,
+  "Each_Security_Exactly_One_Industry": true,
+  "Empty_Industries": [
+    "Transportation Equipment",
+    "Warehousing"
+  ],
+  "Hierarchy": "SECTOR -> INDUSTRY -> SECURITY_CODE",
+  "Industry_Count": 36,
+  "Parse_Detail": "PASS",
+  "Sector_Count": 6,
+  "Security_Count": 225,
+  "Status": "PASS"
+}

@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "9d96c111cc3f6ec779013fc6294f634f65c04adae5ba356ec56045edebc3461a",
+  "artifact_id": 10935786239,
+  "artifact_name": "jp-n225-exact-frozen-sector-coverage-v0.79-36330409269",
+  "artifact_scope": "pre-persistence v0.79 JP_N225 exact Frozen-197 current Nikkei security-code-to-SECTOR classification coverage evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "11126c9a742bbfc32507d845d7e40f023582cf19",
+  "workflow_run_id": 36330409269
+}

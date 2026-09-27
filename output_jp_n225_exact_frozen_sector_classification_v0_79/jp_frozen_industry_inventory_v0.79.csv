@@ -1,0 +1,33 @@
+Official_Industry_Raw,Parent_Official_Sector_Raw,Frozen_197_Row_Count,Industry_Canonical_Code_Generated,Peer_Group_Level_Used
+Pharmaceuticals,Technology,9,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Electric Machinery,Technology,31,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Automobiles & Auto parts,Technology,10,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Precision Instruments,Technology,5,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Communications,Technology,4,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Banking,Financials,10,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Other Financial Services,Financials,2,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Securities,Financials,2,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Insurance,Financials,5,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Foods,Consumer Goods,7,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Retail,Consumer Goods,9,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Services,Consumer Goods,18,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Mining,Materials,1,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Textiles & Apparel,Materials,1,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Chemicals,Materials,15,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Petroleum,Materials,2,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Rubber,Materials,2,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Glass & Ceramics,Materials,4,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Steel,Materials,3,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Nonferrous Metals,Materials,8,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Trading Companies,Materials,7,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Construction,Capital Goods/Others,7,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Machinery,Capital Goods/Others,11,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Shipbuilding,Capital Goods/Others,1,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Other Manufacturing,Capital Goods/Others,4,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Real Estate,Capital Goods/Others,4,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Railway & Bus,Transportation and Utilities,4,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Land Transport,Transportation and Utilities,1,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Marine Transport,Transportation and Utilities,3,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Air Transport,Transportation and Utilities,2,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Electric Power,Transportation and Utilities,3,NO,NO_SUPPORTING_HIERARCHY_ONLY
+Gas,Transportation and Utilities,2,NO,NO_SUPPORTING_HIERARCHY_ONLY
