@@ -1,0 +1,8 @@
+{
+  "Per_CIK_Requests": 0,
+  "Primary_Route_HTTP_Failure_Alternative_Used": false,
+  "Reason": "Optional bulk submissions are not used after primary-route failure and are not needed merely to classify source-unavailable rows.",
+  "Requests": 0,
+  "SIC_Promotion_Performed": false,
+  "Status": "NOT_EXECUTED"
+}

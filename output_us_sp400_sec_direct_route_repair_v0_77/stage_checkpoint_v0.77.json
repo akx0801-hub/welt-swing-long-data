@@ -1,0 +1,22 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PASS",
+  "artifact_digest": "68165105bdf9c666cac5912ee1a70446d26f971ff76d7fce0bdf3f5c7c174905",
+  "artifact_id": 10933038067,
+  "blocker": "SEC_TICKER_EXCHANGE_DIRECT_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "cik_coverage": 0,
+  "conflict": 0,
+  "exchange_mic_authority": "NOT_VERIFIED",
+  "linked": 0,
+  "next_gate": "SEC_TICKER_EXCHANGE_DIRECT_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "not_found": 0,
+  "not_verified": 368,
+  "sec_direct_bulk_route": "FAIL",
+  "sec_records": 0,
+  "stage": "US_SP400_SEC_COMPANY_TICKERS_EXCHANGE_DIRECT_BULK_ROUTE_REPAIR_GATE_E_COMPLETION",
+  "total": 368,
+  "us_sp400_deterministic_sec_identity_ready": false,
+  "verdict": "BLOCKED_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE",
+  "version": "v0.77",
+  "workflow_run_id": 36324171127
+}

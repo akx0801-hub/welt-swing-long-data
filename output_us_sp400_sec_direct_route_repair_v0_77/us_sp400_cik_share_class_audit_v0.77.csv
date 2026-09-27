@@ -1,0 +1,2 @@
+WS_ID,CIK,SEC_Ticker,SEC_Exchange,CIK_Ticker_Count,CIK_Ticker_Exchange_Count,One_CIK_Multiple_Tickers,Share_Class_Collapse_Performed,Exact_Ticker_MIC_Unique,Audit_Status
+,,,,0,0,NOT_EVALUATED,NO,NOT_EVALUATED,NOT_VERIFIED

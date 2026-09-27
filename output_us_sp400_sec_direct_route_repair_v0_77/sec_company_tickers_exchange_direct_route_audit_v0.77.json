@@ -1,0 +1,38 @@
+{
+  "Attempts": 1,
+  "Authentication_Used": false,
+  "Captcha_Bypass_Used": false,
+  "Content_Type": "text/html",
+  "Cookie_Authority_Used": false,
+  "HTTP_Status": 403,
+  "Raw_Bytes": 1925,
+  "Raw_SHA256": "c924a7d7bf9e54316e462a4c78c09cf031fff7b4a55352defe3930667f5c326a",
+  "Raw_Source_Persisted": false,
+  "Record_Count": 0,
+  "Request_Headers": {
+    "Accept": "application/json,text/plain,*/*;q=0.8",
+    "Accept-Encoding": "identity",
+    "User-Agent": "WeltSwingLongDev-v0.77 akx0801-hub@users.noreply.github.com https://github.com/akx0801-hub/welt-swing-long-data"
+  },
+  "Resolved_URL": "https://www.sec.gov/files/company_tickers_exchange.json",
+  "Response_Diagnostics": [
+    {
+      "Attempt": 1,
+      "Body_Bytes": 1925,
+      "Body_Prefix_Bounded": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"> <html xmlns=\"http://www.w3.org/1999/xhtml\"> <head> <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" ",
+      "Body_SHA256": "c924a7d7bf9e54316e462a4c78c09cf031fff7b4a55352defe3930667f5c326a",
+      "HTTP_Status": 403,
+      "Interpretation": "HTTP_403_NO_BYPASS",
+      "Response_Headers": {
+        "Content-Length": "1925",
+        "Content-Type": "text/html",
+        "Date": "Sun, 27 Sep 2026 13:57:16 GMT",
+        "Server": "AkamaiGHost"
+      }
+    }
+  ],
+  "Retrieval_Timestamp_UTC": "2026-09-27T13:57:16Z",
+  "Route_Status": "FAIL",
+  "Schema": [],
+  "Selected_Source_URL": "https://www.sec.gov/files/company_tickers_exchange.json"
+}

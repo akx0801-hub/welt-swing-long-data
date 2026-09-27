@@ -1,0 +1,15 @@
+{
+  "Field_Positions": {},
+  "Fields": [],
+  "Name_Field_Allowed_For_Provenance_Only": true,
+  "Name_Field_Used_For_Join": false,
+  "Parse_Error": "",
+  "Positional_Binding_Rule": "Positions are derived only from the returned fields array.",
+  "Required_Fields": [
+    "cik",
+    "ticker",
+    "exchange"
+  ],
+  "Status": "NOT_VERIFIED",
+  "Top_Level_Type": "NOT_LOADED"
+}

@@ -1,0 +1,2 @@
+SEC_Exchange_Value_Raw,Normalized_Comparison_Value,Candidate_Record_Count,Matched_ISO_Field,ISO_Market_Name,ISO_Acronym,MIC,Operating_MIC,OPRT_SGMT,STATUS,Exact_Match_Count,Unique_Operating_MIC_Count,Mapping_Status,Evidence_Source,ISO_Current_SHA256,ISO_v076_SHA256,ISO_Drift_Status
+,,0,NONE,,,,,,,0,0,NOT_VERIFIED,https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv,,79de0f7704e260bd49b0d2439f3084891cabc93481da8bdbaa716e15a27211ed,NOT_REFETCHED_OR_FAILED

@@ -1,0 +1,133 @@
+{
+  "ambiguous": 0,
+  "artifact": {
+    "artifact_digest": "68165105bdf9c666cac5912ee1a70446d26f971ff76d7fce0bdf3f5c7c174905",
+    "artifact_id": 10933038067,
+    "artifact_name": "us-sp400-sec-direct-route-repair-v0.77-36324171127",
+    "artifact_scope": "pre-persistence v0.77 direct official SEC company_tickers_exchange route repair and US_SP400 deterministic Gate-E evidence",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "c18da3f73c7a84c616482aa81f9b6f5c614e6132",
+    "workflow_run_id": 36324171127
+  },
+  "blocker": "SEC_TICKER_EXCHANGE_DIRECT_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "cik_coverage": 0,
+  "conflict": 0,
+  "exchange_mic_authority": "NOT_VERIFIED",
+  "files": {
+    "artifact_binding_v0.77.json": {
+      "bytes": 473,
+      "sha256": "cd2955908614db55f9712fd4a768787afaf71a36d44ec3f618e135d47d07367f"
+    },
+    "docs/validation/US_SP400_SEC_Direct_Bulk_Route_Repair_Gate_E_v0.77.md": {
+      "bytes": 2552,
+      "sha256": "61ab7cdae2042f18bccc6f32f4b05414bb400802279d9db1075ad0a8728d5e76"
+    },
+    "external_request_ledger_v0.77.csv": {
+      "bytes": 609,
+      "sha256": "033eaaeba00db76942ee382f1270c3e9193deee5edf394d8b64777c7e6a8177b"
+    },
+    "immutability_audit_v0.77.json": {
+      "bytes": 1569,
+      "sha256": "74c357f8064a67e7beecc717d0ec86d5c78631be984004f978e16171a7e7d8ed"
+    },
+    "iso_exchange_mic_binding_v0.77.csv": {
+      "bytes": 480,
+      "sha256": "9cd34f5f0bc9a934bd1ccfac498f4e78820af428d2d4551b3f430509f1c00a7f"
+    },
+    "manifest_preupload_v0.77.json": {
+      "bytes": 4218,
+      "sha256": "9986c4744e3d009dbd2ccef9ceb3f9b9aeabab34ec226373a1956033248efd88"
+    },
+    "optional_sec_bulk_submissions_audit_v0.77.json": {
+      "bytes": 310,
+      "sha256": "2cd963af1f38d698ea7bec38f852a41d023eb9d0013f199243e825e20c5ead5b"
+    },
+    "provider_call_audit_v0.77.json": {
+      "bytes": 584,
+      "sha256": "ee44ebcab7da4035c11f4a27096b29834b7c90b1b7e4c79ebcac0183a41f900e"
+    },
+    "sec_company_tickers_exchange_direct_route_audit_v0.77.json": {
+      "bytes": 1559,
+      "sha256": "1ae4ae438bba98fc20674e119a3742ba8a13e9f551dc5cebf0bb6ddf046ac9ad"
+    },
+    "sec_company_tickers_exchange_schema_contract_v0.77.json": {
+      "bytes": 373,
+      "sha256": "e99e9e8bec22888cc97bcc2450adfcd1afcd9a292bd669113938f9c5ca9a7751"
+    },
+    "sec_exchange_value_inventory_v0.77.csv": {
+      "bytes": 45,
+      "sha256": "9feb99ba30b8c53b418a4a8177bef367b8d13c71cc6891037a03c10ced391725"
+    },
+    "stage_checkpoint_preupload_v0.77.json": {
+      "bytes": 662,
+      "sha256": "b76d9aa67e8b1a2e5b5585fb730633e235d2fc7bc0f68e3b543c42aea54caaa0"
+    },
+    "stage_checkpoint_v0.77.json": {
+      "bytes": 805,
+      "sha256": "c687bebb0aae063d8b59e432d2f53294aea1519a92904b2fa1ea4a0c4d705a84"
+    },
+    "summary_preupload_v0.77.json": {
+      "bytes": 1340,
+      "sha256": "0cfea14a106644b2b8464c8b008600f21cb990f6e653e679c0ef19f1b6b342cc"
+    },
+    "summary_v0.77.json": {
+      "bytes": 1834,
+      "sha256": "d64c622415cdb5f63076f9aca44d95d0e71db3776b5aaa1a04e3b2da1e8d6e96"
+    },
+    "test_results_v0.77.csv": {
+      "bytes": 1200,
+      "sha256": "1eabfbcbfdeca514bccd2bda921b061d5ab540fa23a904c559942d11bbcfc579"
+    },
+    "us_sp400_cik_share_class_audit_v0.77.csv": {
+      "bytes": 222,
+      "sha256": "cb279ccdf7134475bcdc7b8900fb9985d582d0833667fb45f54cc5ed4a9374c6"
+    },
+    "us_sp400_exact_368_identity_linkage_v0.77.csv": {
+      "bytes": 69382,
+      "sha256": "43c5b4fee5b7debdaadbf45c077e24c6c6317a4988e7bc62e4dc883d0ebfd111"
+    },
+    "us_sp400_frozen_368_identity_target_v0.77.csv": {
+      "bytes": 18475,
+      "sha256": "b3338cca5b2eb504d1c85a902bae4ff1387553b3bcf27aab4fd97c88992dad67"
+    },
+    "us_sp400_identity_collision_audit_v0.77.csv": {
+      "bytes": 152,
+      "sha256": "e564de06d8477e192f514203e6547fdc421dff847a50baf70940d865e850cf26"
+    },
+    "us_sp400_ticker_normalization_audit_v0.77.csv": {
+      "bytes": 23150,
+      "sha256": "db94b371418131c26516abd39230f2c9cfa6758565cf1d9523830150972cc6ab"
+    },
+    "v076_source_failure_semantics_correction_v0.77.json": {
+      "bytes": 507,
+      "sha256": "a651bb848d0bf76db2f98d225fad6a142178ff527bbebdb958ad166d80974050"
+    }
+  },
+  "in_canonical_rows": 0,
+  "in_gate_f_classified": 45,
+  "in_nifty50_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "linked": 0,
+  "next_gate": "SEC_TICKER_EXCHANGE_DIRECT_BULK_ROUTE_NOT_REPRODUCIBLE",
+  "not_found": 0,
+  "not_verified": 368,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "productive": false,
+  "required_start_head": "17c21283f6c4fbdf524bc80324235c029018b6d6",
+  "sec_direct_bulk_route": "FAIL",
+  "sec_records": 0,
+  "sector_rs_runs": 0,
+  "stage": "US_SP400_SEC_COMPANY_TICKERS_EXCHANGE_DIRECT_BULK_ROUTE_REPAIR_GATE_E_COMPLETION",
+  "total": 368,
+  "us_gate_f_runs": 0,
+  "us_sp400_deterministic_sec_identity_ready": false,
+  "us_sp500_runs": 0,
+  "verdict": "BLOCKED_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE",
+  "version": "v0.77",
+  "workflow_head_sha": "c18da3f73c7a84c616482aa81f9b6f5c614e6132",
+  "workflow_run_id": 36324171127
+}

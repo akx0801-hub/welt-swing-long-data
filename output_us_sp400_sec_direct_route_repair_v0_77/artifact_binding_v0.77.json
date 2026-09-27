@@ -1,0 +1,9 @@
+{
+  "artifact_digest": "68165105bdf9c666cac5912ee1a70446d26f971ff76d7fce0bdf3f5c7c174905",
+  "artifact_id": 10933038067,
+  "artifact_name": "us-sp400-sec-direct-route-repair-v0.77-36324171127",
+  "artifact_scope": "pre-persistence v0.77 direct official SEC company_tickers_exchange route repair and US_SP400 deterministic Gate-E evidence",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "c18da3f73c7a84c616482aa81f9b6f5c614e6132",
+  "workflow_run_id": 36324171127
+}
