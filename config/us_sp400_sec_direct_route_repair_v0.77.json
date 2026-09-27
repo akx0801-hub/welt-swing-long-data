@@ -13,5 +13,7 @@
   "p1_p2_allowed": false,
   "nifty_requests_allowed": false,
   "alpha_vantage_allowed": false,
-  "productive": false
+  "productive": false,
+  "execution_attempt": 2,
+  "retry_reason": "FIX_SOURCE_FAILURE_CORRECTION_FLAG"
 }
