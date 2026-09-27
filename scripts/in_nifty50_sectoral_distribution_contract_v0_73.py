@@ -178,6 +178,43 @@ def validate_predecessor(repo_sha:str)->dict[str,Any]:
     if len(reg)!=1 or reg[0]["Cohort"]!="BR_IBRX100" or reg[0]["Semantic_SHA256"]!=BR_SEMANTIC_SHA:raise RuntimeError("registry")
     return {"summary":s,"coverage":cov,"identity":link,"match":match,"repro":r}
 
+def extract_hidden_input_value(html_text:str,element_id:str)->str:
+    m=re.search(r"<input\\b[^>]*\\bid=[\"']"+re.escape(element_id)+r"[\"'][^>]*>",html_text,re.I)
+    if not m:return ""
+    v=re.search(r"\\bvalue=[\"']([^\"']*)[\"']",m.group(0),re.I)
+    return norm(v.group(1)) if v else ""
+
+def parse_foamtree_payload(raw:bytes)->tuple[Any|None,str]:
+    text=raw.decode("utf-8",errors="replace").strip()
+    if not text:return None,"EMPTY"
+    cleaned=re.sub(r",\\s*([\\]}])",r"\\1",text)
+    cleaned=re.sub(r"([{,]\\s*)([A-Za-z_][A-Za-z0-9_]*)\\s*:",r'\\1"\\2":',cleaned)
+    l=cleaned.find("(");r=cleaned.rfind(")")
+    inner=cleaned[l+1:r] if l>=0 and r>l else cleaned
+    start=inner.find("{")
+    if start<0:
+        try:return json.loads(inner),"JSON_DIRECT"
+        except Exception as e:return None,"NO_OBJECT:"+type(e).__name__
+    depth=0;end=-1;quote="";esc=False
+    for i,ch in enumerate(inner[start:],start):
+        if quote:
+            if esc:esc=False
+            elif ch=="\\\\":esc=True
+            elif ch==quote:quote=""
+            continue
+        if ch in ("\"","'"):quote=ch;continue
+        if ch=="{":depth+=1
+        elif ch=="}":
+            depth-=1
+            if depth==0:end=i+1;break
+    if end<0:return None,"UNBALANCED_OBJECT"
+    objtxt=inner[start:end]
+    try:return json.loads(objtxt),"PASS"
+    except Exception as e:return None,"JSON_PARSE_"+type(e).__name__+":"+str(e)[:180]
+
+def safe_url_join_path(base:str,path:str)->str:
+    return base.rstrip("/")+"/"+urllib.parse.quote(path.lstrip("/"),safe="/:_-.%")
+
 def provider_calls()->dict[str,int]:
     return {
       "alpha_vantage":0,"yahoo_yfinance":0,"eodhd":0,"scalable":0,"tradingview":0,"wikipedia":0,
@@ -429,7 +466,7 @@ def main()->int:
                      "Content_Type":page.get("content_type",""),"Bytes":page.get("bytes",0),"SHA256":page.get("sha256",""),
                      "Timestamp_UTC":page.get("timestamp_utc",""),"Official_Source":"YES","Per_Security_Fanout":"NO",
                      "Result":"OK" if page.get("ok") else page.get("error","FAILED")})
-    asset_rows=[];candidate_strings=[];context_rows=[]
+    asset_rows=[];candidate_strings=[];context_rows=[];asset_texts={}
     if page.get("ok"):
         hp=AssetParser();hp.feed(page["body"].decode("utf-8",errors="replace"))
         assets=[];seen=set()
@@ -444,6 +481,7 @@ def main()->int:
                              "Timestamp_UTC":fr.get("timestamp_utc",""),"Official_Source":"YES","Per_Security_Fanout":"NO",
                              "Result":"OK" if fr.get("ok") else fr.get("error","FAILED")})
             txt=fr.get("body",b"").decode("utf-8",errors="replace")
+            asset_texts[u]=txt
             for kw in ["SectorialIndexData","sectorDropdown","selectedinSectorial","_Sector.js","Macro Economic Sector","Basic Industry","sectoralDistibution"]:
                 pos=0
                 while True:
