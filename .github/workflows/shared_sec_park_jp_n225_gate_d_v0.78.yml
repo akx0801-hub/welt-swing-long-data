@@ -1,0 +1,256 @@
+name: Shared SEC Park + JP N225 Gate D v0.78
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/shared_sec_park_jp_n225_gate_d_v0.78.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  shared-sec-park-jp-gate-d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.78 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="c567c86f08ffd0b98aea83f0f01246335b7b9443"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/manager_governance_authority_G_SEC_07_v0\.78\.json|config/shared_sec_park_jp_n225_gate_d_spec_v0\.78\.json|scripts/shared_sec_park_jp_n225_gate_d_v0_78\.py|scripts/persist_shared_sec_park_jp_n225_gate_d_v0_78\.py|tests/test_shared_sec_park_jp_n225_gate_d_v0_78\.py|\.github/workflows/shared_sec_park_jp_n225_gate_d_v0\.78\.yml|config/shared_sec_park_jp_n225_gate_d_v0\.78\.json|docs/validation/Shared_SEC_Parking_Post_Park_Reselection_JP_N225_Gate_D_v0\.78\.md|output_shared_sec_park_jp_n225_gate_d_v0_78/.*|sector_metadata/governance/parked_cohort_registry_v1\.csv|sector_metadata/governance/shared_source_dependency_registry_v1\.csv)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.77 predecessor and inherited authorities
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10933038067 --jq .digest)"
+          test "$DIGEST" = "sha256:68165105bdf9c666cac5912ee1a70446d26f971ff76d7fce0bdf3f5c7c174905"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_us_sp400_sec_direct_route_repair_v0_77")
+          s=json.load(open(out/"summary_v0.77.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.77.json",encoding="utf-8"))
+          r=json.load(open(out/"sec_company_tickers_exchange_direct_route_audit_v0.77.json",encoding="utf-8"))
+          links=list(csv.DictReader(open(out/"us_sp400_exact_368_identity_linkage_v0.77.csv",encoding="utf-8")))
+          assert s["verdict"]=="BLOCKED_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE"
+          assert s["us_sp400_deterministic_sec_identity_ready"] is False
+          assert s["sec_direct_bulk_route"]=="FAIL" and s["sec_records"]==0
+          assert (s["linked"],s["total"],s["not_found"],s["not_verified"],s["conflict"])==(0,368,0,368,0)
+          assert s["blocker"]=="SEC_TICKER_EXCHANGE_DIRECT_BULK_ROUTE_NOT_REPRODUCIBLE"
+          assert c["workflow_run_id"]==36324171127 and c["artifact_id"]==10933038067
+          assert "sha256:"+c["artifact_digest"]=="sha256:68165105bdf9c666cac5912ee1a70446d26f971ff76d7fce0bdf3f5c7c174905"
+          assert r["Selected_Source_URL"]=="https://www.sec.gov/files/company_tickers_exchange.json"
+          assert r["HTTP_Status"]==403 and r["Content_Type"]=="text/html" and r["Raw_Bytes"]==1925
+          assert r["Raw_SHA256"]=="c924a7d7bf9e54316e462a4c78c09cf031fff7b4a55352defe3930667f5c326a"
+          assert r["Response_Diagnostics"][0]["Response_Headers"]["Server"]=="AkamaiGHost"
+          assert len(links)==368 and all(x["Gate_E_Status"]=="NOT_VERIFIED" for x in links)
+
+          park=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(park)==1 and park[0]["Cohort"]=="IN_NIFTY50"
+          assert park[0]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert park[0]["Gate_F_Classified"]=="45" and park[0]["Canonical_Rows"]=="0"
+
+          matrix=list(csv.DictReader(open("output_frozen_1425_canonical_sector_reconciliation_v0_69/current_authority_cohort_gate_matrix_v0.69.csv",encoding="utf-8")))
+          by={x["Cohort"]:x for x in matrix}
+          assert by["JP_N225"]["Frozen_Rows"]=="197"
+          assert by["JP_N225"]["Consecutive_Resolved_Gates"]=="3"
+          assert by["JP_N225"]["Current_Earliest_Unresolved_Gate"]=="D"
+          assert by["JP_N225"]["Current_Blocker"]=="JP_CANONICAL_CLASSIFICATION_LEVEL_NOT_VERIFIED"
+          assert by["AU_SP_ASX200"]["Consecutive_Resolved_Gates"]=="2"
+          assert by["CN_CSI300"]["Consecutive_Resolved_Gates"]=="1"
+          assert by["TW_TW50"]["Consecutive_Resolved_Gates"]=="1"
+          assert by["US_SP400"]["Consecutive_Resolved_Gates"]=="4"
+          assert by["US_SP500"]["Consecutive_Resolved_Gates"]=="4"
+
+          g3=json.load(open("config/manager_governance_authority_G_SEC_03_v0.64.json",encoding="utf-8"))
+          assert g3["authority_id"]=="G-SEC-03"
+          assert g3["rules"]["canonical_method_when_native_code_absent"]=="PDSC_SHA256_V1"
+          assert g3["pdsc_sha256_v1"]["input_order"]==["Sector_Taxonomy","Sector_Level","Sector_Name"]
+
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="161f1c354531ca9440c1d97b8c95ed417b5248734f8fe381c83a87858b9b9d37"
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify G-SEC-07, spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          g=json.load(open("config/manager_governance_authority_G_SEC_07_v0.78.json",encoding="utf-8"))
+          s=json.load(open("config/shared_sec_park_jp_n225_gate_d_spec_v0.78.json",encoding="utf-8"))
+          t=json.load(open("config/shared_sec_park_jp_n225_gate_d_v0.78.json",encoding="utf-8"))
+          assert g["authority_id"]=="G-SEC-07"
+          assert g["effective_forward_from"]=="v0.78"
+          assert g["shared_sec_dependency"]["status"]=="SHARED_SOURCE_ACCESS_BLOCKED"
+          assert g["shared_sec_dependency"]["affected_cohorts"]["US_SP400"]["execution_state"]=="PARKED_SOURCE_ACCESS"
+          assert g["shared_sec_dependency"]["affected_cohorts"]["US_SP500"]["execution_state"]=="PARKED_SHARED_SOURCE_PREREQUISITE"
+          assert g["shared_sec_dependency"]["affected_cohorts"]["US_SP500"]["row_level_gate_execution_performed"] is False
+          assert s["required_start_head"]=="c567c86f08ffd0b98aea83f0f01246335b7b9443"
+          assert s["shared_sec_parking"]["sec_requests_allowed"] is False
+          assert s["post_park_selection"]["expected_selected_cohort"]=="JP_N225"
+          assert s["jp_gate_d"]["frozen_rows"]==197
+          assert s["jp_gate_d"]["taxonomy"]=="NIKKEI_36_INDUSTRY_AND_SECTOR"
+          assert s["jp_gate_d"]["max_official_requests"]==3
+          assert s["jp_gate_d"]["gate_f_allowed"] is False
+          assert s["scope_boundaries"]["jp_gate_e_execution_allowed"] is False
+          assert s["scope_boundaries"]["jp_gate_f_execution_allowed"] is False
+          assert s["scope_boundaries"]["us_gate_e_execution_allowed"] is False
+          assert s["scope_boundaries"]["canonical_materialization_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert s["forbidden"]["sec_requests"] is True
+          assert t["required_start_head"]=="c567c86f08ffd0b98aea83f0f01246335b7b9443"
+          assert t["selected_cohort"]=="JP_N225"
+          assert t["sec_requests_allowed"] is False
+          assert t["jp_gate_f_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/shared_sec_park_jp_n225_gate_d_v0_78.py             scripts/persist_shared_sec_park_jp_n225_gate_d_v0_78.py
+          python3 tests/test_shared_sec_park_jp_n225_gate_d_v0_78.py -v
+
+      - name: Run bounded shared park + JP Gate D
+        run: |
+          set -euo pipefail
+          rm -rf output_shared_sec_park_jp_n225_gate_d_v0_78
+          python3 scripts/shared_sec_park_jp_n225_gate_d_v0_78.py             --repository-sha "$GITHUB_SHA"             --output-dir output_shared_sec_park_jp_n225_gate_d_v0_78
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json,urllib.parse
+          from pathlib import Path
+          out=Path("output_shared_sec_park_jp_n225_gate_d_v0_78")
+          s=json.load(open(out/"summary_preupload_v0.78.json",encoding="utf-8"))
+          shared=list(csv.DictReader(open(out/"shared_source_dependency_registry_v0.78.csv",encoding="utf-8")))
+          calc=list(csv.DictReader(open(out/"post_shared_park_next_cohort_selection_calculation_v0.78.csv",encoding="utf-8")))
+          authority=json.load(open(out/"jp_n225_gate_d_authority_v0.78.json",encoding="utf-8"))
+          source=list(csv.DictReader(open(out/"nikkei_official_source_inventory_v0.78.csv",encoding="utf-8")))
+          comp=json.load(open(out/"nikkei_component_structure_audit_v0.78.json",encoding="utf-8"))
+          levels=list(csv.DictReader(open(out/"nikkei_classification_level_inventory_v0.78.csv",encoding="utf-8")))
+          hierarchy=json.load(open(out/"nikkei_sector_industry_hierarchy_audit_v0.78.json",encoding="utf-8"))
+          candidates=list(csv.DictReader(open(out/"jp_canonical_level_candidate_audit_v0.78.csv",encoding="utf-8")))
+          decision=json.load(open(out/"jp_canonical_classification_level_decision_v0.78.json",encoding="utf-8"))
+          native=json.load(open(out/"jp_native_code_availability_audit_v0.78.json",encoding="utf-8"))
+          pdsc=list(csv.DictReader(open(out/"jp_pdsc_distinct_label_feasibility_audit_v0.78.csv",encoding="utf-8")))
+          collisions=list(csv.DictReader(open(out/"jp_pdsc_collision_audit_v0.78.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.78.csv",encoding="utf-8")))
+          prov=json.load(open(out/"provider_call_audit_v0.78.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.78.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.78.csv",encoding="utf-8")))
+
+          assert len(shared)==2
+          by={r["Affected_Cohort"]:r for r in shared}
+          assert by["US_SP400"]["Execution_State"]=="PARKED_SOURCE_ACCESS" and by["US_SP400"]["Gate_E"]=="NOT_VERIFIED"
+          assert by["US_SP500"]["Execution_State"]=="PARKED_SHARED_SOURCE_PREREQUISITE" and by["US_SP500"]["Gate_E"]=="NOT_VERIFIED"
+          assert by["US_SP500"]["Row_Level_Gate_E_Executed"]=="NO" and by["US_SP500"]["Row_Level_Result_Authority"]=="NONE_CREATED"
+          cby={r["Cohort"]:r for r in calc}
+          assert cby["IN_NIFTY50"]["Selection_State"].startswith("EXCLUDED_")
+          assert cby["US_SP400"]["Selection_State"].startswith("EXCLUDED_")
+          assert cby["US_SP500"]["Selection_State"].startswith("EXCLUDED_")
+          assert s["selected_cohort"]=="JP_N225"
+          assert authority["Frozen_Rows"]==197 and authority["E"]=="PASS_INHERITED" and authority["F"]=="NOT_EVALUATED"
+          assert len(source)==3 and len(ext)==3
+          assert all((urllib.parse.urlparse(r["URL"]).hostname or "")=="indexes.nikkei.co.jp" for r in ext)
+          assert all(r["Per_Security_Fanout"]=="NO" for r in ext)
+          assert prov["sec_requests"]==0 and prov["nse_requests"]==0
+          assert prov["jp_gate_e_execution"]==0 and prov["jp_gate_f_execution"]==0
+          assert prov["us_gate_e_execution"]==0 and prov["us_row_level_evidence_creation"]==0
+          assert prov["canonical_materialization"]==0 and prov["other_cohort_research"]==0
+          assert all(v==0 for v in prov.values())
+          assert all(r["Result"]=="PASS" for r in tests)
+
+          assert s["in_nifty50_park_state"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert s["us_sp400_park_state"]=="PARKED_SOURCE_ACCESS"
+          assert s["us_sp500_park_state"]=="PARKED_SHARED_SOURCE_PREREQUISITE"
+          assert s["canonical_ready_rows"]==37 and s["canonical_total_rows"]==1425
+          assert s["jp_gate_e_runs"]==0 and s["jp_gate_f_runs"]==0 and s["canonical_materialization_runs"]==0
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/JP_N225_sector_metadata_v1.csv").exists()
+
+          if s["jp_canonical_classification_level_ready"]:
+              assert s["verdict"]=="PASS_JP_N225_CANONICAL_CLASSIFICATION_LEVEL_GATE_D"
+              assert s["taxonomy"]=="NIKKEI_36_INDUSTRY_AND_SECTOR"
+              assert s["selected_classification_level"]=="SECTOR"
+              assert s["official_level_name"]=="Sector"
+              assert s["native_code_available"]=="NO"
+              assert s["pdsc_required"]=="YES"
+              assert s["distinct_labels"]==6 and s["pdsc_collisions"]==0
+              assert comp["Structure_Status"]=="PASS"
+              assert comp["Machine_Countable_Component_Securities"]==225
+              assert comp["Sector_Count"]==6 and comp["Industry_Count"]==36
+              assert hierarchy["Status"]=="PASS"
+              assert decision["Gate_D_After"]=="PASS_BY_CURRENT_GOVERNANCE"
+              assert native["Source_Native_Sector_Code_Available"]=="NO"
+              assert len(pdsc)==6 and all(r["Deterministic"]=="YES" for r in pdsc)
+              assert len(collisions)==1 and collisions[0]["Collision_Count"]=="0"
+              assert sum(1 for r in candidates if r["Canonical_Decision"]=="SELECT")==1
+              assert s["blocker"]==""
+              assert s["next_gate"]=="JP_N225 EXACT FROZEN SECTOR CLASSIFICATION COVERAGE GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_JP_N225_CANONICAL_CLASSIFICATION_LEVEL_GATE_D"
+              assert s["blocker"]!=""
+
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="161f1c354531ca9440c1d97b8c95ed417b5248734f8fe381c83a87858b9b9d37"
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["IN_Gate_F_Classified_Before"]==imm["IN_Gate_F_Classified_After"]==45
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          PY
+          BAD_WORKTREE="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_shared_sec_park_jp_n225_gate_d_v0_78/.*|docs/validation/Shared_SEC_Parking_Post_Park_Reselection_JP_N225_Gate_D_v0\.78\.md|sector_metadata/governance/parked_cohort_registry_v1\.csv|sector_metadata/governance/shared_source_dependency_registry_v1\.csv)$' || true)"
+          test -z "$BAD_WORKTREE"
+
+      - name: Upload bounded v0.78 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared-sec-park-jp-n225-gate-d-v0.78-${{ github.run_id }}
+          path: output_shared_sec_park_jp_n225_gate_d_v0_78/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_shared_sec_park_jp_n225_gate_d_v0_78.py             --output-dir output_shared_sec_park_jp_n225_gate_d_v0_78             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "shared-sec-park-jp-n225-gate-d-v0.78-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.78 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/Shared_SEC_Parking_Post_Park_Reselection_JP_N225_Gate_D_v0.78.md                   output_shared_sec_park_jp_n225_gate_d_v0_78/                   sector_metadata/governance/parked_cohort_registry_v1.csv                   sector_metadata/governance/shared_source_dependency_registry_v1.csv
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/Shared_SEC_Parking_Post_Park_Reselection_JP_N225_Gate_D_v0\.78\.md|output_shared_sec_park_jp_n225_gate_d_v0_78/.*|sector_metadata/governance/parked_cohort_registry_v1\.csv|sector_metadata/governance/shared_source_dependency_registry_v1\.csv)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist shared SEC park and JP N225 Gate D v0.78"
+          git push origin HEAD:main
