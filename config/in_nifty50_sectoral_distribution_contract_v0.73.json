@@ -22,6 +22,6 @@
   "p1_p2_allowed": false,
   "alpha_vantage_allowed": false,
   "productive": false,
-  "execution_attempt": 5,
-  "retry_reason": "PERSIST_HDNSET_AND_APPLICATION_INDEX_CONTEXT_EVIDENCE"
+  "execution_attempt": 6,
+  "retry_reason": "FIX_STATIC_HTML_AND_FOAMTREE_PAYLOAD_PARSER_ESCAPING"
 }
