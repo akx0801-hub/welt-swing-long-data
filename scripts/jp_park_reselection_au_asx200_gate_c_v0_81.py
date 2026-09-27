@@ -68,9 +68,12 @@ class PageParser(html.parser.HTMLParser):
         self.skip=0;self.parts=[];self.anchor_href=None;self.anchor_parts=[];self.anchors=[];self.attrs=[]
     def handle_starttag(self,tag,attrs):
         tag=tag.lower()
-        if tag in {"script","style","noscript"}:self.skip+=1
+        d=dict(attrs)
+        if not self.skip:self.attrs.append({"tag":tag,**{str(k):str(v or "") for k,v in attrs}})
+        if tag in {"script","style","noscript"}:
+            self.skip+=1
+            return
         if self.skip:return
-        d=dict(attrs);self.attrs.append({"tag":tag,**{str(k):str(v or "") for k,v in attrs}})
         if tag=="a":self.anchor_href=d.get("href","");self.anchor_parts=[]
     def handle_endtag(self,tag):
         tag=tag.lower()
@@ -107,37 +110,95 @@ def fetch(url:str,allowed_hosts:set[str]|None=None,max_bytes:int=8_000_000)->dic
 def parse_page(body:bytes)->PageParser:
     p=PageParser();p.feed(body.decode("utf-8",errors="replace"));return p
 
+def _normalize_embedded_url(value:str,base:str)->str:
+    v=html.unescape(str(value or "")).strip().replace("\\/","/")
+    v=v.replace("\\u0026","&")
+    if not v:return ""
+    return urllib.parse.urljoin(base,v)
+
 def discover_bulk_url(page:dict[str,Any],parser:PageParser)->dict[str,Any]:
     base=page.get("resolved_url") or page.get("url") or DIRECTORY_URL
-    candidates=[]
+    raw=page.get("body",b"").decode("utf-8",errors="replace")
+    candidates=[];markers=[]
     for a in parser.anchors:
         href=clean(a.get("href",""));txt=clean(a.get("text",""))
         if not href:continue
-        score=0
-        low=(txt+" "+href).casefold()
-        if "all asx listed companies" in txt.casefold():score+=100
-        if ".csv" in low:score+=40
-        if "listed" in low and "compan" in low:score+=20
-        if score:candidates.append((score,urllib.parse.urljoin(base,href),txt,"ANCHOR"))
+        tlow=txt.casefold();hlow=href.casefold()
+        if "all asx listed companies" in tlow:
+            candidates.append((200,_normalize_embedded_url(href,base),txt,"EXACT_ANCHOR_TEXT"))
+        elif ".csv" in hlow and ("asx" in hlow or "compan" in hlow or "listed" in hlow):
+            candidates.append((160,_normalize_embedded_url(href,base),txt or "CSV_HREF","CSV_ANCHOR_HREF"))
     for d in parser.attrs:
+        tag=d.get("tag","")
         for k,v in d.items():
             if k=="tag" or not v:continue
             low=v.casefold()
-            if ".csv" in low and ("listed" in low or "compan" in low or "asx" in low):
-                candidates.append((30,urllib.parse.urljoin(base,v),f"{d.get('tag')}:{k}","ATTRIBUTE"))
-    raw=page.get("body",b"").decode("utf-8",errors="replace")
-    for m in re.finditer(r"""(?P<q>["'])(?P<u>[^"']+(?:\.csv|csv\?[^"']*))(?P=q)""",raw,re.I):
-        u=m.group("u")
-        candidates.append((10,urllib.parse.urljoin(base,u),"REGEX_CSV","RAW_HTML"))
+            if ".csv" in low and ("asx" in low or "compan" in low or "listed" in low):
+                candidates.append((140,_normalize_embedded_url(v,base),f"{tag}:{k}","CSV_ATTRIBUTE"))
+    patterns=[
+      r"""(?P<q>["'])(?P<u>[^"'<>]{0,500}\.csv(?:\?[^"'<>]*)?)(?P=q)""",
+      r"""(?P<u>https?:\\?/\\?/[^\s"'<>]+?\.csv(?:\?[^\s"'<>]*)?)""",
+      r"""(?P<u>/[^\s"'<>]{1,500}\.csv(?:\?[^\s"'<>]*)?)"""
+    ]
+    for pat in patterns:
+        for m in re.finditer(pat,raw,re.I):
+            u=m.group("u");ulow=u.casefold()
+            if "asx" in ulow or "compan" in ulow or "listed" in ulow or "directory" in ulow:
+                candidates.append((120,_normalize_embedded_url(u,base),"RAW_CSV_STRING","RAW_HTML"))
+    lowraw=raw.casefold()
+    for term in ("all asx listed companies",".csv","gics industry group"):
+        pos=0;n=0
+        while n<5:
+            i=lowraw.find(term,pos)
+            if i<0:break
+            lo=max(0,i-350);hi=min(len(raw),i+len(term)+650)
+            markers.append({"term":term,"offset":i,"context":clean(raw[lo:hi])[:1200]})
+            pos=i+len(term);n+=1
+    script_urls=[]
+    for d in parser.attrs:
+        if d.get("tag")!="script":continue
+        src=clean(d.get("src",""))
+        if not src:continue
+        u=_normalize_embedded_url(src,base)
+        host=(urllib.parse.urlparse(u).hostname or "").lower()
+        if host in {"www.asx.com.au","asx.com.au"}:script_urls.append(u)
+    script_urls=list(dict.fromkeys(script_urls))[:12]
     dedup={}
     for score,url,txt,src in candidates:
+        if not url:continue
         prev=dedup.get(url)
         if prev is None or score>prev[0]:dedup[url]=(score,txt,src)
     ranked=sorted([(s,u,t,src) for u,(s,t,src) in dedup.items()],key=lambda x:(-x[0],x[1]))
-    if not ranked:return {"status":"NOT_FOUND","selected_url":"","candidates":[]}
+    if not ranked:
+        return {"status":"NOT_FOUND","selected_url":"","selected_anchor_text":"","discovery_mode":"",
+                "candidates":[],"bounded_markers":markers,"official_script_urls":script_urls}
     s,u,t,src=ranked[0]
     return {"status":"FOUND","selected_url":u,"selected_anchor_text":t,"discovery_mode":src,
-            "candidates":[{"score":x[0],"url":x[1],"marker":x[2],"mode":x[3]} for x in ranked[:10]]}
+            "candidates":[{"score":x[0],"url":x[1],"marker":x[2],"mode":x[3]} for x in ranked[:10]],
+            "bounded_markers":markers,"official_script_urls":script_urls}
+
+def discover_bulk_in_asset(asset:dict[str,Any],asset_url:str)->dict[str,Any]:
+    raw=asset.get("body",b"").decode("utf-8",errors="replace")
+    base=asset.get("resolved_url") or asset_url
+    candidates=[];markers=[];low=raw.casefold()
+    for term in ("all asx listed companies",".csv","gics industry group","company directory"):
+        pos=0;n=0
+        while n<4:
+            i=low.find(term,pos)
+            if i<0:break
+            markers.append({"term":term,"offset":i,"context":clean(raw[max(0,i-300):min(len(raw),i+len(term)+550)])[:1000]})
+            pos=i+len(term);n+=1
+    for pat in [
+      r"""(?P<q>["'])(?P<u>[^"'<>]{0,500}\.csv(?:\?[^"'<>]*)?)(?P=q)""",
+      r"""(?P<u>https?:\\?/\\?/[^\s"'<>]+?\.csv(?:\?[^\s"'<>]*)?)""",
+      r"""(?P<u>/[^\s"'<>]{1,500}\.csv(?:\?[^\s"'<>]*)?)"""
+    ]:
+        for m in re.finditer(pat,raw,re.I):
+            u=m.group("u");ulow=u.casefold()
+            if "asx" in ulow or "compan" in ulow or "listed" in ulow or "directory" in ulow:
+                candidates.append(_normalize_embedded_url(u,base))
+    candidates=list(dict.fromkeys(x for x in candidates if x))
+    return {"asset_url":asset_url,"candidates":candidates[:10],"bounded_markers":markers}
 
 def decode_text(b:bytes)->tuple[str,str]:
     for enc in ("utf-8-sig","utf-8","cp1252","latin-1"):
@@ -191,7 +252,21 @@ def validate_predecessor(repo_sha:str)->dict[str,Any]:
     if imm["Canonical_READY_Rows_After"]!=37 or imm["JP_Canonical_Rows_After"]!=0:raise RuntimeError("v0.80 canonical state")
     if imm["JP_Gate_F_Classified_After"]!=197 or imm["IN_Gate_F_Classified_After"]!=45:raise RuntimeError("v0.80 prior Gate F")
     if sha_file(FROZEN)!=FROZEN_SHA or sha_file(V057)!=V057_SHA or sha_file(V058)!=V058_SHA:raise RuntimeError("semantic immutability")
-    if sha_file(PARK)!=PARK_BEFORE_SHA:raise RuntimeError("park registry start state")
+    park_rows=read_csv(PARK)
+    preserved={"IN_NIFTY50":"PARKED_EXTERNAL_AUTHORIZATION","US_SP400":"PARKED_SOURCE_ACCESS","US_SP500":"PARKED_SHARED_SOURCE_PREREQUISITE"}
+    bypark={r["Cohort"]:r for r in park_rows}
+    if any(bypark.get(k,{}).get("Execution_State")!=v for k,v in preserved.items()):raise RuntimeError("pre-existing parked states changed")
+    if set(bypark)-set(preserved)-{"JP_N225"}:raise RuntimeError("unexpected parked cohort")
+    if "JP_N225" in bypark:
+        jp=bypark["JP_N225"]
+        expected_jp={"Execution_State":"PARKED_EXTERNAL_AUTHORIZATION","Technical_Gates_A_G":"PASS","Gate_H":"BLOCKED",
+                     "Gate_H_Blocker":"EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION","Gate_F_Classified":"197",
+                     "Gate_F_Total":"197","Canonical_Readiness":"NO","Canonical_Rows":"0","Reopen_Automatically":"NO",
+                     "Authority":"G-SEC-06","Effective_From":"v0.81"}
+        if any(jp.get(k)!=v for k,v in expected_jp.items()):raise RuntimeError("existing JP park row mismatch")
+        if sha_file(PARK)!=PARK_APPLIED_SHA:raise RuntimeError("idempotent JP park registry hash mismatch")
+    elif sha_file(PARK)!=PARK_BEFORE_SHA:
+        raise RuntimeError("park registry start state")
     if sha_file(SHARED)!=SHARED_SHA:raise RuntimeError("shared registry changed")
     reg=read_csv(REGISTRY)
     if len(reg)!=1 or reg[0]["Cohort"]!="BR_IBRX100" or reg[0]["Semantic_SHA256"]!=BR_SEMANTIC_SHA:raise RuntimeError("canonical registry")
@@ -211,13 +286,9 @@ def validate_governance()->tuple[dict[str,Any],dict[str,Any]]:
 
 def apply_jp_park(out:Path,g6:dict[str,Any])->dict[str,Any]:
     rows=read_csv(PARK)
-    expected={
-      "IN_NIFTY50":"PARKED_EXTERNAL_AUTHORIZATION",
-      "US_SP400":"PARKED_SOURCE_ACCESS",
-      "US_SP500":"PARKED_SHARED_SOURCE_PREREQUISITE"
-    }
-    if {r["Cohort"]:r["Execution_State"] for r in rows}!=expected:raise RuntimeError("pre-existing parked states changed")
-    if any(r["Cohort"]=="JP_N225" for r in rows):raise RuntimeError("JP already parked")
+    preserved={"IN_NIFTY50":"PARKED_EXTERNAL_AUTHORIZATION","US_SP400":"PARKED_SOURCE_ACCESS","US_SP500":"PARKED_SHARED_SOURCE_PREREQUISITE"}
+    by={r["Cohort"]:r for r in rows}
+    if any(by.get(k,{}).get("Execution_State")!=v for k,v in preserved.items()):raise RuntimeError("pre-existing parked states changed")
     fields=list(rows[0].keys())
     jp={
       "Cohort":"JP_N225","Execution_State":"PARKED_EXTERNAL_AUTHORIZATION","Technical_Gates_A_G":"PASS",
@@ -225,19 +296,27 @@ def apply_jp_park(out:Path,g6:dict[str,Any])->dict[str,Any]:
       "Gate_F_Classified":"197","Gate_F_Total":"197","Canonical_Readiness":"NO","Canonical_Rows":"0",
       "Reopen_Automatically":"NO","Authority":"G-SEC-06","Effective_From":"v0.81"
     }
-    rows.append(jp)
-    write_csv(PARK,rows,fields)
+    before_sha=sha_file(PARK)
+    if "JP_N225" in by:
+        if any(by["JP_N225"].get(k)!=v for k,v in jp.items()):raise RuntimeError("JP existing park row mismatch")
+        action="ALREADY_APPLIED_IDEMPOTENT"
+    else:
+        rows.append(jp);write_csv(PARK,rows,fields)
+        action="APPLIED_EXISTING_RULE_NO_NEW_GOVERNANCE"
     after_sha=sha_file(PARK)
+    if after_sha!=PARK_APPLIED_SHA:raise RuntimeError("JP park registry final hash mismatch")
+    rows=read_csv(PARK)
     write_csv(out/"parked_cohort_registry_update_v0_81.csv",rows,fields)
     app={
       "Cohort":"JP_N225","Execution_State":"PARKED_EXTERNAL_AUTHORIZATION","Technical_Gates_A_G":"PASS",
       "Gate_H":"BLOCKED","Gate_H_Blocker":"EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
       "Gate_F":"197/197","Canonical_Readiness":"NO","Canonical_Rows":0,"Reopen_Automatically":"NO",
-      "Authority":"G-SEC-06","Authority_Title":g6["title"],"Authority_Action":"APPLIED_EXISTING_RULE_NO_NEW_GOVERNANCE",
-      "Park_Registry_SHA256_Before":PARK_BEFORE_SHA,"Park_Registry_SHA256_After":after_sha
+      "Authority":"G-SEC-06","Authority_Title":g6["title"],"Authority_Action":action,
+      "Park_Registry_SHA256_Original_Pre_v0_81":PARK_BEFORE_SHA,"Park_Registry_SHA256_Before_This_Run":before_sha,
+      "Park_Registry_SHA256_After":after_sha
     }
     write_json(out/"jp_n225_external_authorization_park_application_v0_81.json",app)
-    return {"rows":rows,"after_sha":after_sha,"jp":jp}
+    return {"rows":rows,"after_sha":after_sha,"jp":jp,"action":action}
 
 def reselection(out:Path,park_rows:list[dict[str,str]])->dict[str,Any]:
     matrix=read_csv(MATRIX69);sel69=json.loads(SEL69.read_text(encoding="utf-8"))
@@ -331,7 +410,26 @@ def main()->int:
     asx_hosts={"www.asx.com.au","asx.com.au"}
     directory=logged_fetch(DIRECTORY_URL,"ASX_COMPANY_DIRECTORY",asx_hosts)
     dir_parser=parse_page(directory["body"]) if directory.get("ok") else PageParser()
-    discovery=discover_bulk_url(directory,dir_parser) if directory.get("ok") else {"status":"NOT_FOUND","selected_url":"","candidates":[]}
+    discovery=discover_bulk_url(directory,dir_parser) if directory.get("ok") else {"status":"NOT_FOUND","selected_url":"","candidates":[],"bounded_markers":[],"official_script_urls":[]}
+    asset_audits=[]
+    if discovery["status"]!="FOUND":
+        for script_url in discovery.get("official_script_urls",[])[:6]:
+            asset=logged_fetch(script_url,"ASX_DIRECTORY_DISCOVERED_SCRIPT_ASSET",asx_hosts)
+            audit=discover_bulk_in_asset(asset,script_url) if asset.get("ok") else {"asset_url":script_url,"candidates":[],"bounded_markers":[]}
+            asset_audits.append(audit)
+            if audit.get("candidates"):
+                discovery["status"]="FOUND";discovery["selected_url"]=audit["candidates"][0]
+                discovery["selected_anchor_text"]="DISCOVERED_IN_ASX_SCRIPT_ASSET"
+                discovery["discovery_mode"]="OFFICIAL_SCRIPT_ASSET_CSV_STRING"
+                discovery["candidates"]=[{"score":110,"url":u,"marker":"SCRIPT_CSV_STRING","mode":"OFFICIAL_SCRIPT_ASSET"} for u in audit["candidates"]]
+                break
+    write_json(out/"asx_directory_bulk_discovery_markers_v0.81.json",{
+      "Directory_Bounded_Markers":discovery.get("bounded_markers",[]),
+      "Official_Script_URLs_Considered":discovery.get("official_script_urls",[]),
+      "Script_Asset_Audits":asset_audits,
+      "Selected_URL":discovery.get("selected_url",""),"Status":discovery.get("status","NOT_FOUND"),
+      "No_Guessed_Stale_Endpoint":True
+    })
     bulk=None
     if discovery["status"]=="FOUND":
         bulk=logged_fetch(discovery["selected_url"],"ASX_DIRECTORY_DISCOVERED_BULK",None)
@@ -348,7 +446,7 @@ def main()->int:
       "Retrieval_Timestamp_UTC":directory.get("timestamp_utc",""),"Public_Request_Reproducible":bool(directory.get("ok")),
       "Bulk_Discovery_Status":discovery.get("status"),"Bulk_URL":discovery.get("selected_url",""),
       "Bulk_Discovery_Mode":discovery.get("discovery_mode",""),"Bulk_Link_Text":discovery.get("selected_anchor_text",""),
-      "Bulk_Candidates":discovery.get("candidates",[]),"Complete_Raw_Page_Persisted":False,
+      "Bulk_Candidates":discovery.get("candidates",[]),"Discovery_Marker_File":"asx_directory_bulk_discovery_markers_v0.81.json","Complete_Raw_Page_Persisted":False,
       "Market_Data_Credit_LSEG_Observed":"lseg" in dtext.casefold(),
       "Market_Data_Credit_Morningstar_Observed":"morningstar" in dtext.casefold()
     }
