@@ -1,2 +1,5 @@
 Phase,Endpoint,Method,Response_SHA256,Response_Bytes,Response_Parse_Type,Schema_Keys,Expected_Label_Hit_Count,Frozen_Security_Hit_Count,Extracted_Membership_Record_Count
-,,,,0,,,0,0,0
+LEVEL:Macro Economic Sector,https://liveindexsa.niftyindices.com/jsonfiles/MacroEconomicSector/SectorialIndexDataNIFTY%2050_MacroEconomicSector.js,GET,17ba1a7eca6759ac5a32bab7497d0afc16c5fe8f16077b730724600ee1b74f1c,4471,JSONP_OBJECT,colour | date | groups | id | label | weight,6,45,0
+LEVEL:Sector,https://liveindexsa.niftyindices.com/jsonfiles/Sector/SectorialIndexDataNIFTY%2050_Sector.js,GET,af23aef61958ecca00194626855cadb73052fb758fe665f6f27935aac804424d,4829,JSONP_OBJECT,colour | date | groups | id | label | weight,15,45,0
+LEVEL:Industry,https://liveindexsa.niftyindices.com/jsonfiles/Industry/SectorialIndexDataNIFTY%2050_Industry.js,GET,155b4d2450e193306b639150940e39a4a9882a071eeeb5994ef84b738a0e57b1,5641,JSONP_OBJECT,colour | date | groups | id | label | weight,5,45,0
+LEVEL:Basic Industry,https://liveindexsa.niftyindices.com/jsonfiles/Basic%20Industry/SectorialIndexDataNIFTY%2050_BasicIndustry.js,GET,4bfcf2e94c4b6f96de247b2d22e1cffa10b101cede3fd9b94e27431d73e2f68f,6303,JSONP_OBJECT,colour | date | groups | id | label | weight,2,45,0

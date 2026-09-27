@@ -1,16 +1,16 @@
 {
   "ambiguous": 0,
-  "application_contract": "NOT_DISCOVERED",
+  "application_contract": "https://liveindexsa.niftyindices.com/jsonfiles/Basic%20Industry/SectorialIndexDataNIFTY%2050_BasicIndustry.js; https://liveindexsa.niftyindices.com/jsonfiles/Industry/SectorialIndexDataNIFTY%2050_Industry.js; https://liveindexsa.niftyindices.com/jsonfiles/MacroEconomicSector/SectorialIndexDataNIFTY%2050_MacroEconomicSector.js; https://liveindexsa.niftyindices.com/jsonfiles/Sector/SectorialIndexDataNIFTY%2050_Sector.js",
   "artifact": {
-    "artifact_digest": "f28b5d2e22d0da2cf7aced0f25c8b9eadd524bf92c8673f1d6cc935fc3109e2d",
-    "artifact_id": 10929567488,
-    "artifact_name": "in-nifty50-sectoral-distribution-contract-v0.73-36312173771",
+    "artifact_digest": "3ccfe23226841406430e2044bda6378168e5894fc0777448cbb66d76b0e9ab79",
+    "artifact_id": 10928868468,
+    "artifact_name": "in-nifty50-sectoral-distribution-contract-v0.73-36312324586",
     "artifact_scope": "pre-persistence v0.73 official NSE Indices sectoral-distribution application contract and Gate-F resolution evidence",
     "artifact_verified": "PASS",
-    "workflow_head_sha": "4bc4d0bb50df07273f509477204f14651d61b666",
-    "workflow_run_id": 36312173771
+    "workflow_head_sha": "8b4c7479774d08382a671b417f5cd67f6986af17",
+    "workflow_run_id": 36312324586
   },
-  "blocker": "NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED",
+  "blocker": "NIFTY_SECURITY_CATEGORY_MEMBERSHIP_NOT_REPRODUCIBLE",
   "bound_classification_level": "NOT_VERIFIED",
   "canonical_materialization_runs": 0,
   "canonical_ready_rows": 37,
@@ -19,20 +19,20 @@
   "distinct_classifications": 15,
   "files": {
     "application_public_reproducibility_audit_v0.73.json": {
-      "bytes": 271,
-      "sha256": "ad8159b116e7ca7adb14eda6775e74a482070c77ea2b84af021ffbc5d2071912"
+      "bytes": 2837,
+      "sha256": "77b7416d865713d098178c318a5734d8282a8558db7b503f217db9b47dd59edd"
     },
     "artifact_binding_v0.73.json": {
       "bytes": 476,
-      "sha256": "d97d8ec0a43b4913a119aabbdcdfd2be4b9415028712f36b10ae266398f2c2dc"
+      "sha256": "0d6ad50eabf0948db84ca0ab011f59a6b525ce203e9e50ade3d3ab064da14732"
     },
     "docs/validation/IN_NIFTY50_NSE_Sectoral_Distribution_Application_Contract_Gate_F_Resolution_v0.73.md": {
-      "bytes": 2571,
-      "sha256": "72d542ea78debbbc372da74042dd3dba4fffd70dcbcc68fb2256536e33480677"
+      "bytes": 2956,
+      "sha256": "a71660ee850ae7472943fd8d653eae4a89798d963b309a980166b86a073096de"
     },
     "external_request_ledger_v0.73.csv": {
-      "bytes": 3900,
-      "sha256": "7de7ac33244e9695abced898cd5d5788e2632c4b76f22e415d03fffb45b47899"
+      "bytes": 6070,
+      "sha256": "bc5948da53f217bfbd4563bba48f76bb60f52d0715b16c8b2bf47acf71d35fbf"
     },
     "immutability_audit_v0.73.json": {
       "bytes": 1275,
@@ -47,8 +47,8 @@
       "sha256": "6d79fd41615cf2447b6a8f41ccab772dc3fcf395692d3ee6e45796eb092c6578"
     },
     "in_classification_level_binding_v0.73.json": {
-      "bytes": 1106,
-      "sha256": "61ce6f5e9f493b28eff1508842d21208315d8323214382d64606e15a4c2be653"
+      "bytes": 1098,
+      "sha256": "0470f4dcdaff6eb5f6047bdbd3664e12d46ac7f816cc33b5722816acb55f018f"
     },
     "in_csv_vs_application_level_assignment_audit_v0.73.csv": {
       "bytes": 18583,
@@ -63,8 +63,8 @@
       "sha256": "6d79fd41615cf2447b6a8f41ccab772dc3fcf395692d3ee6e45796eb092c6578"
     },
     "manifest_preupload_v0.73.json": {
-      "bytes": 4852,
-      "sha256": "86666ae78ed60b843d1b2fe82ef89bf4d730ee907b46d15500a8d5ff1a3d835d"
+      "bytes": 5250,
+      "sha256": "5b34e5e4e9fd0bd29086a4ee7c0f7130f9d05c4ed70e130e13da320fff61ba0e"
     },
     "nifty_application_asset_context_snippets_v0.73.csv": {
       "bytes": 92578,
@@ -75,8 +75,8 @@
       "sha256": "d7b2a3e3d9d8c77cef775bf858966a4e7f0e534409dad13c48b83f8dbaa2ac12"
     },
     "nifty_application_category_schema_v0.73.csv": {
-      "bytes": 184,
-      "sha256": "e6a81e5165a0c0d399567a239f5993758b167aa1c08f0cb3e5cb442dfb45a321"
+      "bytes": 1223,
+      "sha256": "2ed4c690551b44e05903f8deaf2e91ad41f76f55e27ff7151b2f0af087f38d35"
     },
     "nifty_application_page_context_snippets_v0.73.csv": {
       "bytes": 48359,
@@ -91,8 +91,8 @@
       "sha256": "8bacc087f487a7274ede16b3af3a66abd4d3b9c18bfd71c4d1cdb47c5f32ab3f"
     },
     "nifty_classification_level_parameter_contract_v0.73.csv": {
-      "bytes": 553,
-      "sha256": "467cdaf5f69e8dbced4fda3aaf63ed2c1dae5644219e5fd39e4cafecdc12082c"
+      "bytes": 1044,
+      "sha256": "a3003726e3dc7a959d74ae7df2ad4bfe39357dc8e074d39d26413060bb217fba"
     },
     "nifty_sectoral_distribution_application_asset_ledger_v0.73.csv": {
       "bytes": 2837,
@@ -103,37 +103,37 @@
       "sha256": "da2c3419c6291a3f0c556c10bfa9ef1b5a92974f0cdecf759049e63f874ca10c"
     },
     "nifty_static_sectoral_distribution_contract_v0.73.csv": {
-      "bytes": 837,
-      "sha256": "90f00ce17644f76aee7fe5cc4227cdfde32ed76e7563fe2a7752b698bd9a74b7"
+      "bytes": 6499,
+      "sha256": "6dd0081e64f7efef53580eae9fc04056244d59bd9b7fca0828fd24531752894d"
     },
     "provider_call_audit_v0.73.json": {
       "bytes": 617,
       "sha256": "2791006179e9826ae18a5b7fa90048dabe7295110f4272223b1904e250c5df1f"
     },
     "stage_checkpoint_preupload_v0.73.json": {
-      "bytes": 714,
-      "sha256": "386e122996048ecfb96ff1e33a0ca34e85a7ae5b333dae8d97325cf6ad476445"
+      "bytes": 1107,
+      "sha256": "44d7460f2ef44eee7ce846dd7f681417cd5431eadbd04c8634f0076424babe31"
     },
     "stage_checkpoint_v0.73.json": {
-      "bytes": 857,
-      "sha256": "3614b485f315676052bbf5de33c01c0ea8f98a7162ba615e4c6cfe941f6cf768"
+      "bytes": 1250,
+      "sha256": "60bc6623cc24b77b0b74f06f9e6b6b7c775c8b59024dab8163b0b1a46ba36937"
     },
     "summary_preupload_v0.73.json": {
-      "bytes": 1173,
-      "sha256": "12306ebd1a5567cda83a2cffec8619765893d2ddbfdef8d8fbdc99961400a44b"
+      "bytes": 1565,
+      "sha256": "927bee81f5b5b12967076c09334c5eed36805656d917f8bb44f311cfbee45fbb"
     },
     "summary_v0.73.json": {
-      "bytes": 1670,
-      "sha256": "8bd9e29d8d7c462639a496cd85e4975b5fb921294d6b4ab3de549e493bcc5c82"
+      "bytes": 2062,
+      "sha256": "992595e63622abeac159aae4aa9ad2609a7c525f1d015acd015c7b6812fbfea4"
     },
     "test_results_v0.73.csv": {
-      "bytes": 951,
-      "sha256": "f629177519725a7a7ca867422e2e8ca818ba2076c813cbd02f6589fd3f72cf0f"
+      "bytes": 944,
+      "sha256": "3ec8d045725ea7477ec42a2aa84b2064c3fed42bedc0e71fefe378fe1e478093"
     }
   },
   "gate_h_promotions": 0,
   "in_exact_45_sector_classification_coverage_ready": false,
-  "next_gate": "NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED",
+  "next_gate": "NIFTY_SECURITY_CATEGORY_MEMBERSHIP_NOT_REPRODUCIBLE",
   "not_found": 0,
   "not_verified": 45,
   "p0_runs": 0,
@@ -147,6 +147,6 @@
   "total": 45,
   "verdict": "BLOCKED_IN_NIFTY50_GATE_F_APPLICATION_CONTRACT_RESOLUTION",
   "version": "v0.73",
-  "workflow_head_sha": "4bc4d0bb50df07273f509477204f14651d61b666",
-  "workflow_run_id": 36312173771
+  "workflow_head_sha": "8b4c7479774d08382a671b417f5cd67f6986af17",
+  "workflow_run_id": 36312324586
 }

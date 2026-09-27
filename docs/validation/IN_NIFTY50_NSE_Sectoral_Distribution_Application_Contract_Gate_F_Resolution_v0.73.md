@@ -9,7 +9,7 @@ AMBIGUOUS = **0**.
 NOT_FOUND = **0**.
 NOT_VERIFIED = **45**.
 CONFLICT = **0**.
-APPLICATION CONTRACT = **NOT_DISCOVERED**.
+APPLICATION CONTRACT = **https://liveindexsa.niftyindices.com/jsonfiles/Basic%20Industry/SectorialIndexDataNIFTY%2050_BasicIndustry.js; https://liveindexsa.niftyindices.com/jsonfiles/Industry/SectorialIndexDataNIFTY%2050_Industry.js; https://liveindexsa.niftyindices.com/jsonfiles/MacroEconomicSector/SectorialIndexDataNIFTY%2050_MacroEconomicSector.js; https://liveindexsa.niftyindices.com/jsonfiles/Sector/SectorialIndexDataNIFTY%2050_Sector.js**.
 BOUND CLASSIFICATION LEVEL = **NOT_VERIFIED**.
 DISTINCT CLASSIFICATIONS = **15**.
 SOURCE-NATIVE CODE COVERAGE = **0 / 45**.
@@ -20,9 +20,9 @@ Only public NSE Indices application assets and requests are permitted. Browser i
 
 ## Application contract evidence
 - Browser capture status: PASS
-- Candidate public application contracts: 0
+- Candidate public application contracts: 4
 - Derived application membership rows: 0
-- Independent public replay: NOT_VERIFIED
+- Independent public replay: PASS
 
 The level parameter contract, response schema, security membership, CSV-vs-application assignments, application node identities, and node-to-taxonomy code bindings are persisted separately. Raw response bodies are not persisted.
 
@@ -37,16 +37,16 @@ No company-name joins, fuzzy matching, semantic inference, cross-taxonomy mappin
 - Canonical READY remains 37/1425.
 
 ## Blocker
-**NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED**.
+**NIFTY_SECURITY_CATEGORY_MEMBERSHIP_NOT_REPRODUCIBLE**.
 
 ## Artifact binding
-- Workflow run: 36312173771
-- Workflow head: 4bc4d0bb50df07273f509477204f14651d61b666
-- Artifact: 10929567488
-- Artifact name: in-nifty50-sectoral-distribution-contract-v0.73-36312173771
-- Artifact digest: f28b5d2e22d0da2cf7aced0f25c8b9eadd524bf92c8673f1d6cc935fc3109e2d
+- Workflow run: 36312324586
+- Workflow head: 8b4c7479774d08382a671b417f5cd67f6986af17
+- Artifact: 10928868468
+- Artifact name: in-nifty50-sectoral-distribution-contract-v0.73-36312324586
+- Artifact digest: 3ccfe23226841406430e2044bda6378168e5894fc0777448cbb66d76b0e9ab79
 
 ## Next gate
-**NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED**
+**NIFTY_SECURITY_CATEGORY_MEMBERSHIP_NOT_REPRODUCIBLE**
 
 Hard stop: no Gate H, canonical materialization, Sector RS, P0/P1/P2, or next cohort execution.

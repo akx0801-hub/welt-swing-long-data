@@ -1,10 +1,63 @@
 {
   "Browser_Capture_Status": "PASS",
   "Browser_Error": "",
-  "Candidate_Contract_Count": 0,
-  "Independent_Replay_Count": 0,
-  "Independent_Replay_PASS_Count": 0,
+  "Candidate_Contract_Count": 4,
+  "Independent_Replay_Count": 4,
+  "Independent_Replay_PASS_Count": 4,
   "Non_Official_Browser_Requests_Blocked": 0,
   "Raw_Response_Bodies_Persisted": false,
-  "Replays": []
+  "Replays": [
+    {
+      "Browser_Response_SHA256": "17ba1a7eca6759ac5a32bab7497d0afc16c5fe8f16077b730724600ee1b74f1c",
+      "Endpoint": "https://liveindexsa.niftyindices.com/jsonfiles/MacroEconomicSector/SectorialIndexDataNIFTY%2050_MacroEconomicSector.js",
+      "Method": "GET",
+      "Phase": "LEVEL:Macro Economic Sector",
+      "Public_Reproducibility_Status": "PASS",
+      "Replay_Content_Type": "application/octet-stream",
+      "Replay_HTTP_Status": 200,
+      "Replay_Parse_Type": "TEXT",
+      "Replay_SHA256": "17ba1a7eca6759ac5a32bab7497d0afc16c5fe8f16077b730724600ee1b74f1c",
+      "Replay_Schema_Keys": "",
+      "Replay_Without_Cookies_Or_Auth": "YES"
+    },
+    {
+      "Browser_Response_SHA256": "af23aef61958ecca00194626855cadb73052fb758fe665f6f27935aac804424d",
+      "Endpoint": "https://liveindexsa.niftyindices.com/jsonfiles/Sector/SectorialIndexDataNIFTY%2050_Sector.js",
+      "Method": "GET",
+      "Phase": "LEVEL:Sector",
+      "Public_Reproducibility_Status": "PASS",
+      "Replay_Content_Type": "application/octet-stream",
+      "Replay_HTTP_Status": 200,
+      "Replay_Parse_Type": "TEXT",
+      "Replay_SHA256": "af23aef61958ecca00194626855cadb73052fb758fe665f6f27935aac804424d",
+      "Replay_Schema_Keys": "",
+      "Replay_Without_Cookies_Or_Auth": "YES"
+    },
+    {
+      "Browser_Response_SHA256": "155b4d2450e193306b639150940e39a4a9882a071eeeb5994ef84b738a0e57b1",
+      "Endpoint": "https://liveindexsa.niftyindices.com/jsonfiles/Industry/SectorialIndexDataNIFTY%2050_Industry.js",
+      "Method": "GET",
+      "Phase": "LEVEL:Industry",
+      "Public_Reproducibility_Status": "PASS",
+      "Replay_Content_Type": "application/octet-stream",
+      "Replay_HTTP_Status": 200,
+      "Replay_Parse_Type": "TEXT",
+      "Replay_SHA256": "155b4d2450e193306b639150940e39a4a9882a071eeeb5994ef84b738a0e57b1",
+      "Replay_Schema_Keys": "",
+      "Replay_Without_Cookies_Or_Auth": "YES"
+    },
+    {
+      "Browser_Response_SHA256": "4bfcf2e94c4b6f96de247b2d22e1cffa10b101cede3fd9b94e27431d73e2f68f",
+      "Endpoint": "https://liveindexsa.niftyindices.com/jsonfiles/Basic%20Industry/SectorialIndexDataNIFTY%2050_BasicIndustry.js",
+      "Method": "GET",
+      "Phase": "LEVEL:Basic Industry",
+      "Public_Reproducibility_Status": "PASS",
+      "Replay_Content_Type": "application/octet-stream",
+      "Replay_HTTP_Status": 200,
+      "Replay_Parse_Type": "TEXT",
+      "Replay_SHA256": "4bfcf2e94c4b6f96de247b2d22e1cffa10b101cede3fd9b94e27431d73e2f68f",
+      "Replay_Schema_Keys": "",
+      "Replay_Without_Cookies_Or_Auth": "YES"
+    }
+  ]
 }
