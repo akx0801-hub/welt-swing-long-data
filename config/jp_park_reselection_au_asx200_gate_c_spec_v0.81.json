@@ -1,0 +1,134 @@
+{
+  "version": "v0.81",
+  "stage": "JP_N225_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_AU_SP_ASX200_GATE_C",
+  "required_start_head": "a6b5a2e1f946bc8cd8615e37fe26efd82b77eb53",
+  "scope": {
+    "jp_park": true,
+    "post_park_reselection": true,
+    "au_gate_c_only": true,
+    "au_gate_d_allowed": false,
+    "au_gate_e_allowed": false,
+    "au_gate_f_allowed": false,
+    "canonical_materialization_allowed": false,
+    "canonical_registry_readiness_update_allowed": false,
+    "other_cohort_execution_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_p1_p2_allowed": false,
+    "productive": false
+  },
+  "governance": {
+    "parking_authority": "G-SEC-06",
+    "taxonomy_isolation_authority": "G-SEC-02",
+    "pdsc_allowed": false
+  },
+  "predecessor": {
+    "final_commit": "a6b5a2e1f946bc8cd8615e37fe26efd82b77eb53",
+    "verdict": "BLOCKED_JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE",
+    "jp_source_access_persistence_ready": false,
+    "jp_gate_f_classified": 197,
+    "jp_gate_f_total": 197,
+    "jp_gate_h": "FAIL",
+    "blocker": "EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+    "workflow_run_id": 36333946734,
+    "artifact_id": 10936936683,
+    "artifact_digest": "sha256:a309d2edf8b3997009c98e40bc8e3fd0cf4f98606618eaa4f27967e4d3878d56",
+    "canonical_ready_rows": 37,
+    "canonical_total_rows": 1425
+  },
+  "jp_park_contract": {
+    "Cohort": "JP_N225",
+    "Execution_State": "PARKED_EXTERNAL_AUTHORIZATION",
+    "Technical_Gates_A_G": "PASS",
+    "Gate_H": "BLOCKED",
+    "Gate_H_Blocker": "EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+    "Gate_F_Classified": 197,
+    "Gate_F_Total": 197,
+    "Canonical_Readiness": "NO",
+    "Canonical_Rows": 0,
+    "Reopen_Automatically": "NO",
+    "Authority": "G-SEC-06",
+    "Effective_From": "v0.81"
+  },
+  "preserve_parked": {
+    "IN_NIFTY50": "PARKED_EXTERNAL_AUTHORIZATION",
+    "US_SP400": "PARKED_SOURCE_ACCESS",
+    "US_SP500": "PARKED_SHARED_SOURCE_PREREQUISITE"
+  },
+  "selection_rule_authority": {
+    "source": "output_frozen_1425_canonical_sector_reconciliation_v0_69/selected_next_cohort_authority_v0.69.json",
+    "primary": "greatest consecutive resolved A-H gates from A",
+    "tie_break_1": "smaller Frozen cohort row count",
+    "tie_break_2": "lexicographically ascending Cohort ID"
+  },
+  "expected_active_unresolved_authority": {
+    "AU_SP_ASX200": {"Frozen_Rows": 63, "Consecutive_Resolved_Gates": 2, "Earliest_Unresolved_Gate": "C"},
+    "CN_CSI300": {"Frozen_Rows": 294, "Consecutive_Resolved_Gates": 1, "Earliest_Unresolved_Gate": "B"},
+    "TW_TW50": {"Frozen_Rows": 49, "Consecutive_Resolved_Gates": 1, "Earliest_Unresolved_Gate": "B"}
+  },
+  "au_gate_c": {
+    "cohort": "AU_SP_ASX200",
+    "frozen_rows": 63,
+    "historical_source_native_candidate": "ASX company-directory Industry field",
+    "historical_taxonomy_identity": "NOT_VERIFIED",
+    "historical_blocker": "SOURCE_NATIVE_TAXONOMY_IDENTITY_NOT_VERIFIED",
+    "directory_url": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+    "context_urls": [
+      "https://www.asx.com.au/markets/trade-our-cash-market/overview/indices",
+      "https://www.asx.com.au/connectivity-and-data/information-services/reference-data",
+      "https://www.asx.com.au/markets/market-resources/asx-codes-and-descriptors"
+    ],
+    "bulk_discovery": "discover current All ASX Listed Companies link from directory page; do not guess stale endpoint",
+    "gics_pass_rule": "exact ASX directory-linked bulk field must explicitly identify GICS and exact hierarchy level, or another direct official field-to-taxonomy binding must do so",
+    "taxonomy_version_fallback": "CURRENT_MAINTAINED_NO_STATIC_VERSION with deterministic official source snapshot evidence",
+    "no_silent_gics_assumption": true,
+    "no_cross_taxonomy_mapping": true,
+    "no_semantic_inference": true,
+    "no_frozen_security_linkage": true,
+    "no_classification_coverage": true
+  },
+  "failure_precedence": [
+    "ASX_DIRECTORY_BULK_ROUTE_NOT_REPRODUCIBLE",
+    "ASX_DIRECTORY_INDUSTRY_FIELD_NOT_AVAILABLE",
+    "ASX_DIRECTORY_INDUSTRY_FIELD_PROVENANCE_NOT_VERIFIED",
+    "ASX_DIRECTORY_INDUSTRY_TAXONOMY_NOT_IDENTIFIED",
+    "ASX_DIRECTORY_INDUSTRY_FORMAL_LEVEL_NOT_VERIFIED",
+    "ASX_DIRECTORY_TAXONOMY_VERSION_NOT_VERIFIABLE",
+    "UPSTREAM_PROVIDER_FIELD_ATTRIBUTION_NOT_VERIFIED",
+    "SOURCE_NATIVE_TAXONOMY_IDENTITY_NOT_VERIFIED",
+    "AUTHORITY_REGRESSION_REVIEW_REQUIRED"
+  ],
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "tradingview": true,
+    "wikipedia": true,
+    "etf_holdings": true,
+    "third_party_security_sector_databases": true,
+    "company_name_joins": true,
+    "fuzzy_matching": true,
+    "semantic_sector_inference": true,
+    "cross_taxonomy_mapping": true,
+    "pdsc": true,
+    "price_ohlcv": true,
+    "news": true,
+    "trading_analysis": true,
+    "per_security_web_fanout": true,
+    "sec_requests": true,
+    "nse_requests": true,
+    "nikkei_classification_rerun": true
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_home_market_rs_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "canonical_ready_rows": 37,
+    "canonical_total_rows": 1425,
+    "sector_rs_runs": 0,
+    "p0_runs": 0,
+    "p1_runs": 0,
+    "p2_runs": 0
+  }
+}
