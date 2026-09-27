@@ -71,7 +71,7 @@ jobs:
           assert {(r["CSV_Source_Label"],r["Application_Node_ID_or_Code"]) for r in unresolved}=={
               ("Information Technology","11"),("Services","1"),("Telecommunication","7")}
           from collections import Counter
-          cc=Counter(r["CSV_Source_Label"] for r in sector if r["CSV_Source_Label"] in {"Information Technology","Services","Telecommunication"})
+          cc=Counter(r["CSV_Source_Classification_Raw"] for r in sector if r["CSV_Source_Classification_Raw"] in {"Information Technology","Services","Telecommunication"})
           assert cc==Counter({"Information Technology":4,"Services":2,"Telecommunication":1})
           assert len(cov)==45
           assert repro["PDF_SHA256"]=="8ae58cbd10d7dd5184d76cfec6486f91c019026c8de329432b69c54ff7235f8b"
