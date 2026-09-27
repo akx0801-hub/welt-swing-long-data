@@ -40,6 +40,11 @@ def main()->int:
     write_json(out/"stage_checkpoint_v0.81.json",cp)
 
     ready="YES" if summary["au_source_native_taxonomy_identity_ready"] else "NO"
+    bulk_paragraph=(
+      "The current ASX company directory was requested directly. The All ASX Listed Companies bulk route was discovered from official directory/page-source evidence rather than from a stale hard-coded endpoint. The bulk response metadata, schema, row count, SHA256 and exact Industry-like field statistics are persisted without storing the complete raw source."
+      if summary["directory_bulk_route"]=="PASS" else
+      "The current ASX company directory was publicly reproducible, but bounded inspection of the static directory response plus the ASX-hosted script assets explicitly referenced by that page did not expose a reproducible All ASX Listed Companies bulk URL. No stale endpoint was guessed. Therefore no bulk schema or directory Industry field was claimed from this run."
+    )
     report=ROOT/"docs/validation/JP_N225_Park_Post_Park_Reselection_AU_SP_ASX200_Gate_C_v0.81.md"
     report.parent.mkdir(parents=True,exist_ok=True)
     lines=[
@@ -62,7 +67,7 @@ def main()->int:
       "## Deterministic reselection",
       "The persisted v0.69 selection rule was re-applied after excluding canonical READY and all parked cohorts: greatest consecutive resolved gates from A, then smaller Frozen row count, then lexicographic cohort ID. The calculation, rather than a hard-coded cohort result, selects AU_SP_ASX200 with 63 Frozen rows and Gate C as its earliest unresolved gate.","",
       "## ASX directory and bulk evidence",
-      "The current ASX company directory was requested directly. The All ASX Listed Companies bulk route was discovered from the directory response rather than from a stale hard-coded endpoint. The bulk response metadata, schema, row count, SHA256 and exact Industry-like field statistics are persisted without storing the complete raw source.","",
+      bulk_paragraph,"",
       "## Taxonomy identity",
       ("The official ASX directory-linked bulk schema directly names the field as GICS industry group. The official ASX indices page expands GICS as the Global Industry Classification Standard and identifies S&P Dow Jones Indices and MSCI as its developers. The exact formal level is therefore Industry Group from the source schema itself; this is not inferred from label appearance or from ASX sector-index usage alone. A static taxonomy version number was not asserted; the reproducible contract is CURRENT_MAINTAINED_NO_STATIC_VERSION with official source snapshot hashes." if summary["au_source_native_taxonomy_identity_ready"] else
        "The bounded current evidence did not satisfy all Gate-C requirements. In particular, the directory Industry-like field was not promoted to GICS or any other taxonomy merely because ASX uses GICS for sector indices. The persisted blocker is the smallest Gate-C blocker under the required precedence."),"",
