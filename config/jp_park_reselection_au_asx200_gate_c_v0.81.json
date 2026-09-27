@@ -1,0 +1,17 @@
+{
+  "version": "v0.81",
+  "stage": "JP_N225_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_AU_SP_ASX200_GATE_C",
+  "required_start_head": "a6b5a2e1f946bc8cd8615e37fe26efd82b77eb53",
+  "jp_park_authorized": true,
+  "post_park_reselection_authorized": true,
+  "au_gate_c_authorized": true,
+  "au_gate_d_allowed": false,
+  "au_gate_e_f_allowed": false,
+  "canonical_materialization_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "sec_requests_allowed": false,
+  "nse_requests_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
