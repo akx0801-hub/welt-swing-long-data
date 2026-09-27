@@ -1,0 +1,17 @@
+{
+  "version": "v0.76",
+  "stage": "US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE_GATE_WITH_IN_NIFTY50_PARK",
+  "required_start_head": "40f261b29dd0e92dc79b976a0970f6ae8970e9e8",
+  "selected_cohort": "US_SP400",
+  "in_nifty50_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "us_gate_f_allowed": false,
+  "canonical_materialization_allowed": false,
+  "us_sp500_execution_allowed": false,
+  "other_cohort_execution_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "nifty_requests_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
