@@ -1,0 +1,20 @@
+{
+  "version": "v0.71",
+  "stage": "IN_NIFTY50_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE_GATE",
+  "required_start_head": "9acf51ba20e5c88954d0b21ed5017f95274b6f6f",
+  "scope_cohort": "IN_NIFTY50",
+  "gate": "F_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE",
+  "frozen_target_rows": 45,
+  "taxonomy": "NSE_INDICES_INDUSTRY_CLASSIFICATION",
+  "pdsc_fallback_allowed": false,
+  "gate_h_promotion_allowed": false,
+  "canonical_materialization_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_allowed": false,
+  "p1_p2_allowed": false,
+  "per_security_web_fanout_allowed": false,
+  "cross_taxonomy_crosswalk_allowed": false,
+  "third_party_sector_source_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
