@@ -1,0 +1,215 @@
+name: US SP400 SEC Direct Route Repair Gate v0.77
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/us_sp400_sec_direct_route_repair_v0.77.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  us-sp400-sec-direct-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.77 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="17c21283f6c4fbdf524bc80324235c029018b6d6"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/us_sp400_sec_direct_route_repair_spec_v0\.77\.json|scripts/us_sp400_sec_direct_route_repair_v0_77\.py|scripts/persist_us_sp400_sec_direct_route_repair_v0_77\.py|tests/test_us_sp400_sec_direct_route_repair_v0_77\.py|\.github/workflows/us_sp400_sec_direct_route_repair_v0\.77\.yml|config/us_sp400_sec_direct_route_repair_v0\.77\.json|docs/validation/US_SP400_SEC_Direct_Bulk_Route_Repair_Gate_E_v0\.77\.md|output_us_sp400_sec_direct_route_repair_v0_77/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.76 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10932404865 --jq .digest)"
+          test "$DIGEST" = "sha256:d43417c1e101e0cee2da785ea0c78f80305f9f0d8cd03e2498017427259b0f34"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_us_sp400_sec_identity_linkage_v0_76")
+          s=json.load(open(out/"summary_v0.76.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.76.json",encoding="utf-8"))
+          a=json.load(open(out/"sec_ticker_exchange_source_audit_v0.76.json",encoding="utf-8"))
+          assert s["verdict"]=="BLOCKED_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE"
+          assert s["selected_cohort"]=="US_SP400"
+          assert s["us_sp400_deterministic_sec_identity_ready"] is False
+          assert (s["linked"],s["total"],s["not_found"])==(0,368,368)
+          assert s["blocker"]=="SEC_TICKER_EXCHANGE_BULK_ROUTE_NOT_REPRODUCIBLE"
+          assert s["primary_mic_distribution"]=={"XNAS":126,"XNYS":242}
+          assert s["iso_mic_source_sha256"]=="79de0f7704e260bd49b0d2439f3084891cabc93481da8bdbaa716e15a27211ed"
+          assert c["workflow_run_id"]==36322252802 and c["artifact_id"]==10932404865
+          assert "sha256:"+c["artifact_digest"]=="sha256:d43417c1e101e0cee2da785ea0c78f80305f9f0d8cd03e2498017427259b0f34"
+          assert a["Record_Count"]==0
+
+          park=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(park)==1 and park[0]["Cohort"]=="IN_NIFTY50"
+          assert park[0]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert park[0]["Gate_F_Classified"]=="45" and park[0]["Canonical_Rows"]=="0"
+
+          cov=list(csv.DictReader(open("output_in_nifty50_remaining_3_sector_closure_v0_74/in_exact_45_classification_coverage_v0.74.csv",encoding="utf-8")))
+          assert len(cov)==45 and all(r["Classification_Status"]=="PROVABLY_CLASSIFIED" for r in cov)
+
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="161f1c354531ca9440c1d97b8c95ed417b5248734f8fe381c83a87858b9b9d37"
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify v0.77 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/us_sp400_sec_direct_route_repair_spec_v0.77.json",encoding="utf-8"))
+          t=json.load(open("config/us_sp400_sec_direct_route_repair_v0.77.json",encoding="utf-8"))
+          assert s["required_start_head"]=="17c21283f6c4fbdf524bc80324235c029018b6d6"
+          assert s["scope_cohort"]=="US_SP400"
+          assert s["scope_gate"]=="E_SECURITY_IDENTITY_DIRECT_ROUTE_REPAIR_ONLY"
+          assert s["sec_direct_source"]["url"]=="https://www.sec.gov/files/company_tickers_exchange.json"
+          assert s["sec_direct_source"]["documentation_page_success_prerequisite"] is False
+          assert s["sec_direct_source"]["max_attempts"]==3
+          assert s["sec_direct_source"]["retry_only_transient_statuses"]==[429,500,502,503,504]
+          assert s["v076_failure_semantics_correction"]["direct_route_failure_row_status"]=="NOT_VERIFIED"
+          assert s["optional_bulk_submissions"]["primary_http_failure_alternative_forbidden"] is True
+          assert s["scope_boundaries"]["us_gate_f_allowed"] is False
+          assert s["scope_boundaries"]["us_sp500_allowed"] is False
+          assert s["scope_boundaries"]["canonical_materialization_allowed"] is False
+          assert s["scope_boundaries"]["nifty_requests_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert t["required_start_head"]=="17c21283f6c4fbdf524bc80324235c029018b6d6"
+          assert t["scope_cohort"]=="US_SP400"
+          assert t["us_gate_f_allowed"] is False
+          assert t["us_sp500_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/us_sp400_sec_direct_route_repair_v0_77.py             scripts/persist_us_sp400_sec_direct_route_repair_v0_77.py
+          python3 tests/test_us_sp400_sec_direct_route_repair_v0_77.py -v
+
+      - name: Run bounded direct-route repair
+        run: |
+          set -euo pipefail
+          rm -rf output_us_sp400_sec_direct_route_repair_v0_77
+          python3 scripts/us_sp400_sec_direct_route_repair_v0_77.py             --repository-sha "$GITHUB_SHA"             --output-dir output_us_sp400_sec_direct_route_repair_v0_77
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_us_sp400_sec_direct_route_repair_v0_77")
+          s=json.load(open(out/"summary_preupload_v0.77.json",encoding="utf-8"))
+          corr=json.load(open(out/"v076_source_failure_semantics_correction_v0.77.json",encoding="utf-8"))
+          route=json.load(open(out/"sec_company_tickers_exchange_direct_route_audit_v0.77.json",encoding="utf-8"))
+          schema=json.load(open(out/"sec_company_tickers_exchange_schema_contract_v0.77.json",encoding="utf-8"))
+          target=list(csv.DictReader(open(out/"us_sp400_frozen_368_identity_target_v0.77.csv",encoding="utf-8")))
+          links=list(csv.DictReader(open(out/"us_sp400_exact_368_identity_linkage_v0.77.csv",encoding="utf-8")))
+          mic=list(csv.DictReader(open(out/"iso_exchange_mic_binding_v0.77.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.77.csv",encoding="utf-8")))
+          prov=json.load(open(out/"provider_call_audit_v0.77.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.77.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.77.csv",encoding="utf-8")))
+
+          assert corr["v076_SEC_Source_Record_Count"]==0
+          assert corr["v076_not_found_368_is_not_security_absence_evidence"] is True
+          assert len(target)==368 and len(links)==368
+          assert len({r["WS_ID"] for r in target})==368 and len({r["Security_Key"] for r in target})==368
+          assert 1<=route["Attempts"]<=3
+          assert route["Selected_Source_URL"]=="https://www.sec.gov/files/company_tickers_exchange.json"
+          assert all(r["URL"]=="https://www.sec.gov/files/company_tickers_exchange.json" for r in ext if r["Source_Class"]=="SEC")
+          assert all(r["Per_Security_Fanout"]=="NO" for r in ext)
+          assert sum(1 for r in ext if r["Source_Class"]=="SEC")<=3
+          assert sum(1 for r in ext if r["Request_Type"]=="ISO_10383_MIC_INTEGRITY_REFETCH")<=1
+          assert all(v==0 for v in prov.values())
+          assert all(r["Result"]=="PASS" for r in tests)
+
+          assert s["in_nifty50_park_state"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert s["in_gate_f_classified"]==45 and s["in_canonical_rows"]==0
+          assert s["canonical_ready_rows"]==37 and s["canonical_total_rows"]==1425
+          assert s["us_gate_f_runs"]==0 and s["us_sp500_runs"]==0 and s["canonical_materialization_runs"]==0
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/US_SP400_sector_metadata_v1.csv").exists()
+
+          if s["sec_direct_bulk_route"]=="FAIL":
+              assert s["not_found"]==0
+              assert s["not_verified"]==368
+              assert s["blocker"]=="SEC_TICKER_EXCHANGE_DIRECT_BULK_ROUTE_NOT_REPRODUCIBLE"
+              assert all(r["Gate_E_Status"]=="NOT_VERIFIED" for r in links)
+          if s["us_sp400_deterministic_sec_identity_ready"]:
+              assert s["verdict"]=="PASS_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE"
+              assert s["sec_direct_bulk_route"]=="PASS" and s["sec_records"]>0
+              assert schema["Status"]=="PASS"
+              assert (s["linked"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(368,368,0,0,0,0)
+              assert s["cik_coverage"]==368
+              assert s["exchange_mic_authority"]=="PASS"
+              assert mic and all(r["Mapping_Status"]=="PASS" for r in mic)
+              assert all(r["Gate_E_Status"]=="PROVABLY_LINKED" for r in links)
+              assert s["blocker"]==""
+              assert s["next_gate"]=="US_SP400 EXACT FROZEN SEC SIC CLASSIFICATION COVERAGE GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_US_SP400_DETERMINISTIC_SEC_SECURITY_IDENTITY_LINKAGE"
+              assert s["blocker"]!=""
+
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="161f1c354531ca9440c1d97b8c95ed417b5248734f8fe381c83a87858b9b9d37"
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["IN_Park_Registry_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          PY
+          BAD_WORKTREE="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_us_sp400_sec_direct_route_repair_v0_77/.*|docs/validation/US_SP400_SEC_Direct_Bulk_Route_Repair_Gate_E_v0\.77\.md)$' || true)"
+          test -z "$BAD_WORKTREE"
+
+      - name: Upload bounded v0.77 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: us-sp400-sec-direct-route-repair-v0.77-${{ github.run_id }}
+          path: output_us_sp400_sec_direct_route_repair_v0_77/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_us_sp400_sec_direct_route_repair_v0_77.py             --output-dir output_us_sp400_sec_direct_route_repair_v0_77             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "us-sp400-sec-direct-route-repair-v0.77-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.77 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/US_SP400_SEC_Direct_Bulk_Route_Repair_Gate_E_v0.77.md                   output_us_sp400_sec_direct_route_repair_v0_77/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/US_SP400_SEC_Direct_Bulk_Route_Repair_Gate_E_v0\.77\.md|output_us_sp400_sec_direct_route_repair_v0_77/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist US SP400 SEC direct route repair v0.77"
+          git push origin HEAD:main
