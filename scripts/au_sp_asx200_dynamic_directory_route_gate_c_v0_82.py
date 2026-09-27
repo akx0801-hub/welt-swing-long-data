@@ -829,8 +829,8 @@ def main()->int:
        pagination1.get("Contract",{}).get("Observed_Page_Size")==pagination2_contract.get("Observed_Page_Size"))
     )
     pagination_complete=bool(pagination1.get("Complete") and pagination_contract_same)
-    public_browser_repro=bool(browser_contract_repro and pagination_complete)
-    route_ready=public_browser_repro
+    public_browser_repro=browser_contract_repro
+    route_ready=bool(public_browser_repro and pagination_complete)
     full_records=pagination1.get("Records",[]) if route_ready else []
     write_csv(out/"au_directory_pagination_completion_audit_v0.82.csv",pagination1.get("Pages",[]),
               ["Page","URL","HTTP_Status","Content_Type","Bytes","Response_SHA256","Record_Count","Schema_Signature","Status"])
@@ -966,7 +966,8 @@ def main()->int:
     write_json(out/"au_source_native_taxonomy_identity_decision_v0_82.json",final_decision)
 
     # Provider/method and external request ledger.
-    prov=provider_audit(2,1 if replay["DIRECT_HTTP_REPLAY"]!="NOT_APPLICABLE" else 0,2)
+    pagination_request_count=len(pagination1.get("Pages",[]))
+    prov=provider_audit(2,(1 if replay["DIRECT_HTTP_REPLAY"]!="NOT_APPLICABLE" else 0)+pagination_request_count,2)
     write_json(out/"provider_call_audit_v0.82.json",prov)
     ext=[]
     n=0
@@ -986,6 +987,11 @@ def main()->int:
                          "Method":replay.get("Method",""),"HTTP_Status":replay.get("HTTP_Status",""),"Content_Type":replay.get("Content_Type",""),
                          "Bytes":replay.get("Bytes",0),"Response_SHA256":replay.get("Response_SHA256",""),"Per_Security_Request":"NO",
                          "Authentication":"NONE","Candidate_Reason":"SELECTED_DIRECTORY_ROUTE_REPLAY"})
+    for pg in pagination1.get("Pages",[]):
+        n+=1;ext.append({"Request_Order":n,"Execution_Mode":"DIRECT_DIRECTORY_PAGINATION","URL":pg.get("URL",""),"Method":"GET",
+                         "HTTP_Status":pg.get("HTTP_Status",""),"Content_Type":pg.get("Content_Type",""),"Bytes":pg.get("Bytes",0),
+                         "Response_SHA256":pg.get("Response_SHA256",""),"Per_Security_Request":"NO","Authentication":"NONE",
+                         "Candidate_Reason":"DETERMINISTIC_DIRECTORY_LEVEL_PAGINATION"})
     write_csv(out/"external_request_ledger_v0.82.csv",ext,
               ["Request_Order","Execution_Mode","URL","Method","HTTP_Status","Content_Type","Bytes","Response_SHA256","Per_Security_Request","Authentication","Candidate_Reason"])
 
