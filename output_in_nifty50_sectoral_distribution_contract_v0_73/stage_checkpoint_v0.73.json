@@ -2,8 +2,8 @@
   "ambiguous": 0,
   "application_contract": "NOT_DISCOVERED",
   "artifact_binding": "PASS",
-  "artifact_digest": "222507cfaa5c4108c24a26eb164f89aa0fa429a199e9e53d7b4463829b3777e7",
-  "artifact_id": 10929067745,
+  "artifact_digest": "f28b5d2e22d0da2cf7aced0f25c8b9eadd524bf92c8673f1d6cc935fc3109e2d",
+  "artifact_id": 10929567488,
   "blocker": "NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED",
   "bound_classification_level": "NOT_VERIFIED",
   "classified": 0,
@@ -18,5 +18,5 @@
   "total": 45,
   "verdict": "BLOCKED_IN_NIFTY50_GATE_F_APPLICATION_CONTRACT_RESOLUTION",
   "version": "v0.73",
-  "workflow_run_id": 36311985653
+  "workflow_run_id": 36312173771
 }

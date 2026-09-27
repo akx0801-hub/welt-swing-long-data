@@ -16,7 +16,7 @@
     },
     "external_request_ledger_v0.73.csv": {
       "bytes": 3900,
-      "sha256": "c8432c6b081c8dad173f6de334da1f31fa09118600d89905a3c11c1719d7549c"
+      "sha256": "7de7ac33244e9695abced898cd5d5788e2632c4b76f22e415d03fffb45b47899"
     },
     "immutability_audit_v0.73.json": {
       "bytes": 1275,
@@ -47,8 +47,8 @@
       "sha256": "6d79fd41615cf2447b6a8f41ccab772dc3fcf395692d3ee6e45796eb092c6578"
     },
     "nifty_application_asset_context_snippets_v0.73.csv": {
-      "bytes": 66387,
-      "sha256": "88b8ed2675dee341b011faeaedc6c673da2425cae81dccb786c95edd3186278a"
+      "bytes": 92578,
+      "sha256": "c7474233c7436d792e7010212a5208c5fe1482137d17d91ca1c4f3f575bad32a"
     },
     "nifty_application_asset_relevant_strings_v0.73.csv": {
       "bytes": 36280,
@@ -57,6 +57,10 @@
     "nifty_application_category_schema_v0.73.csv": {
       "bytes": 184,
       "sha256": "e6a81e5165a0c0d399567a239f5993758b167aa1c08f0cb3e5cb442dfb45a321"
+    },
+    "nifty_application_page_context_snippets_v0.73.csv": {
+      "bytes": 48359,
+      "sha256": "adf638838dbfd551743530e3ee3f10a27f8ee420aa59cf832920a2ac05b47a79"
     },
     "nifty_application_security_membership_v0.73.csv": {
       "bytes": 195,
@@ -108,7 +112,7 @@
   "p1_runs": 0,
   "p2_runs": 0,
   "productive": false,
-  "repository_sha": "a6aeff406880fdd0a675f9a94a10e8c420638e1c",
+  "repository_sha": "4bc4d0bb50df07273f509477204f14651d61b666",
   "required_start_head": "7464e7c643922e946c39631c58174e9716cb53b4",
   "sector_rs_runs": 0,
   "source_native_code_coverage": 0,

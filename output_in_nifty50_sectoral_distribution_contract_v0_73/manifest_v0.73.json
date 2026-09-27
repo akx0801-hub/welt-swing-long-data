@@ -2,13 +2,13 @@
   "ambiguous": 0,
   "application_contract": "NOT_DISCOVERED",
   "artifact": {
-    "artifact_digest": "222507cfaa5c4108c24a26eb164f89aa0fa429a199e9e53d7b4463829b3777e7",
-    "artifact_id": 10929067745,
-    "artifact_name": "in-nifty50-sectoral-distribution-contract-v0.73-36311985653",
+    "artifact_digest": "f28b5d2e22d0da2cf7aced0f25c8b9eadd524bf92c8673f1d6cc935fc3109e2d",
+    "artifact_id": 10929567488,
+    "artifact_name": "in-nifty50-sectoral-distribution-contract-v0.73-36312173771",
     "artifact_scope": "pre-persistence v0.73 official NSE Indices sectoral-distribution application contract and Gate-F resolution evidence",
     "artifact_verified": "PASS",
-    "workflow_head_sha": "a6aeff406880fdd0a675f9a94a10e8c420638e1c",
-    "workflow_run_id": 36311985653
+    "workflow_head_sha": "4bc4d0bb50df07273f509477204f14651d61b666",
+    "workflow_run_id": 36312173771
   },
   "blocker": "NIFTY_SECTORAL_DISTRIBUTION_PUBLIC_CONTRACT_NOT_DISCOVERED",
   "bound_classification_level": "NOT_VERIFIED",
@@ -24,15 +24,15 @@
     },
     "artifact_binding_v0.73.json": {
       "bytes": 476,
-      "sha256": "709849e69f8d59f4ded3149e98e86ff267428b4fb5649bf14fec696c90ad202f"
+      "sha256": "d97d8ec0a43b4913a119aabbdcdfd2be4b9415028712f36b10ae266398f2c2dc"
     },
     "docs/validation/IN_NIFTY50_NSE_Sectoral_Distribution_Application_Contract_Gate_F_Resolution_v0.73.md": {
       "bytes": 2571,
-      "sha256": "2d1d2fa69c14bdf6774a06db993b516610a20cafa201d9ae99615e5010c870fe"
+      "sha256": "72d542ea78debbbc372da74042dd3dba4fffd70dcbcc68fb2256536e33480677"
     },
     "external_request_ledger_v0.73.csv": {
       "bytes": 3900,
-      "sha256": "c8432c6b081c8dad173f6de334da1f31fa09118600d89905a3c11c1719d7549c"
+      "sha256": "7de7ac33244e9695abced898cd5d5788e2632c4b76f22e415d03fffb45b47899"
     },
     "immutability_audit_v0.73.json": {
       "bytes": 1275,
@@ -63,12 +63,12 @@
       "sha256": "6d79fd41615cf2447b6a8f41ccab772dc3fcf395692d3ee6e45796eb092c6578"
     },
     "manifest_preupload_v0.73.json": {
-      "bytes": 4681,
-      "sha256": "79871f3e587718e9f7550bbfd20981c98da7cef2fee6b1713dd7fc25acd9fda8"
+      "bytes": 4852,
+      "sha256": "86666ae78ed60b843d1b2fe82ef89bf4d730ee907b46d15500a8d5ff1a3d835d"
     },
     "nifty_application_asset_context_snippets_v0.73.csv": {
-      "bytes": 66387,
-      "sha256": "88b8ed2675dee341b011faeaedc6c673da2425cae81dccb786c95edd3186278a"
+      "bytes": 92578,
+      "sha256": "c7474233c7436d792e7010212a5208c5fe1482137d17d91ca1c4f3f575bad32a"
     },
     "nifty_application_asset_relevant_strings_v0.73.csv": {
       "bytes": 36280,
@@ -77,6 +77,10 @@
     "nifty_application_category_schema_v0.73.csv": {
       "bytes": 184,
       "sha256": "e6a81e5165a0c0d399567a239f5993758b167aa1c08f0cb3e5cb442dfb45a321"
+    },
+    "nifty_application_page_context_snippets_v0.73.csv": {
+      "bytes": 48359,
+      "sha256": "adf638838dbfd551743530e3ee3f10a27f8ee420aa59cf832920a2ac05b47a79"
     },
     "nifty_application_security_membership_v0.73.csv": {
       "bytes": 195,
@@ -112,7 +116,7 @@
     },
     "stage_checkpoint_v0.73.json": {
       "bytes": 857,
-      "sha256": "1d879e549cc234b3d94a79e0e745e603568e2b2e683c32952d3715329a561e94"
+      "sha256": "3614b485f315676052bbf5de33c01c0ea8f98a7162ba615e4c6cfe941f6cf768"
     },
     "summary_preupload_v0.73.json": {
       "bytes": 1173,
@@ -120,7 +124,7 @@
     },
     "summary_v0.73.json": {
       "bytes": 1670,
-      "sha256": "7890a6caf6781e750cd440f5b56e8ade03f4ab70659fd1b02a6fc50bb3365e7c"
+      "sha256": "8bd9e29d8d7c462639a496cd85e4975b5fb921294d6b4ab3de549e493bcc5c82"
     },
     "test_results_v0.73.csv": {
       "bytes": 951,
@@ -143,6 +147,6 @@
   "total": 45,
   "verdict": "BLOCKED_IN_NIFTY50_GATE_F_APPLICATION_CONTRACT_RESOLUTION",
   "version": "v0.73",
-  "workflow_head_sha": "a6aeff406880fdd0a675f9a94a10e8c420638e1c",
-  "workflow_run_id": 36311985653
+  "workflow_head_sha": "4bc4d0bb50df07273f509477204f14651d61b666",
+  "workflow_run_id": 36312173771
 }
