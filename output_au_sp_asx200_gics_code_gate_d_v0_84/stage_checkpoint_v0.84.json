@@ -1,0 +1,16 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:2c1dbb7bb0767b25bfde36b4fc1dd61af7ec8174775114b10a1aa099b53dd8a5",
+  "artifact_id": 10941761588,
+  "au_sector_field_code_feasibility_ready": false,
+  "blocker": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "selected_code_strategy": "NONE",
+  "stage": "AU_SP_ASX200_GICS_INDUSTRY_GROUP_FIELD_SOURCE_NATIVE_CODE_FEASIBILITY_GATE_D",
+  "verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "version": "v0.84",
+  "workflow_head_sha": "1fcb42b02b67bfe44673a44977744a6cf185d0b2",
+  "workflow_run_id": 36349188738
+}

@@ -1,0 +1,8 @@
+{
+  "Authority": "G-SEC-03",
+  "PDSC_FALLBACK_PERMITTED_IN_PRINCIPLE": "YES",
+  "PDSC_FALLBACK_REQUIRED": "NO",
+  "PDSC_Generated_Count": 0,
+  "Reason": "FALLBACK_CONDITIONS_NOT_MET",
+  "Sentinel_PDSC_Generated_Count": 0
+}

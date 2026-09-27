@@ -1,0 +1,5 @@
+Request_Order,Source_Class,URL,Purpose,HTTP_Status,SHA256,Per_Security_Request
+1,OFFICIAL_ASX,https://www.asx.com.au/markets/trade-our-cash-market/directory,ONE_FRESH_CURRENT_DIRECTORY_DOWNLOAD,BROWSER_PUBLIC,95b75e149cb72b8d8b75984e74c322f34dffcefc5a8f66196ea534e03b239948,NO
+2,OFFICIAL_GICS_OWNER_SP_DJI,https://www.spglobal.com/spdji/en/landing/topic/gics/,CURRENT_GICS_STRUCTURE_DISCOVERY,,,NO
+3,OFFICIAL_GICS_OWNER_SP_DJI,https://www.spglobal.com/spdji/en/documents/index-policies/2025-gics-structure-english.xlsx,CURRENT_GICS_STRUCTURE_LABEL_CODE_WORKBOOK,403,1cacfc25a0955eb5be5a64e5af70d524f7c4e7caa84d87d02b6587fa93a37d90,NO
+4,OFFICIAL_GICS_OWNER_MSCI,https://www.msci.com/indexes/index-resources/gics,OWNER_CONTEXT_CORROBORATION,200,fc34ec3f6d84fca52bdb06cd321c649d742a9de0abcf3c183d806efb4a604eb3,NO

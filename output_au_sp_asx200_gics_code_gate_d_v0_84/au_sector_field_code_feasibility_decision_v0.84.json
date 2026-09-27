@@ -1,0 +1,19 @@
+{
+  "AU_SECTOR_FIELD_CODE_FEASIBILITY_READY": "NO",
+  "Blocker": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "Classification_Field": "GICs industry group",
+  "Code_Strategy": "NONE",
+  "Cohort": "AU_SP_ASX200",
+  "Current_Raw_Classification_Value_Count": 27,
+  "Formal_Label_Count": 0,
+  "Gate_D": "BLOCKED",
+  "Gate_E": "NOT_EVALUATED",
+  "Gate_F": "NOT_EVALUATED",
+  "Gate_H": "NOT_EVALUATED",
+  "Level": "INDUSTRY_GROUP",
+  "Next_Gate": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "PROJECT_DERIVED_CANONICAL_READY": "NO",
+  "SOURCE_NATIVE_GICS_CODE_READY": "NO",
+  "Sentinel_or_Unresolved_Value_Count": 27,
+  "Taxonomy": "GICS"
+}

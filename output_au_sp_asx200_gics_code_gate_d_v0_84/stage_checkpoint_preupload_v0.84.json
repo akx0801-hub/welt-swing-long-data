@@ -1,0 +1,12 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "au_sector_field_code_feasibility_ready": false,
+  "blocker": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "selected_code_strategy": "NONE",
+  "stage": "AU_SP_ASX200_GICS_INDUSTRY_GROUP_FIELD_SOURCE_NATIVE_CODE_FEASIBILITY_GATE_D",
+  "verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "version": "v0.84"
+}

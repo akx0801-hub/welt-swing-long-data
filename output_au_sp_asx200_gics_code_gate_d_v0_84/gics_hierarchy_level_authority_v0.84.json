@@ -1,0 +1,22 @@
+{
+  "Code_Presentation": "SOURCE_STRING_FROM_EXPLICIT_INDUSTRY_GROUP_CODE_COLUMN; leading zeros preserved as text",
+  "Current_Structure_Link_Discovery": {
+    "discovered_utc": "2026-09-27",
+    "evidence_status": "CURRENT_OFFICIAL_SP_DJI_LANDING_PAGE_LINK",
+    "official_landing_label": "GICS Structure (current & historical versions)"
+  },
+  "Current_Structure_Source": "https://www.spglobal.com/spdji/en/documents/index-policies/2025-gics-structure-english.xlsx",
+  "Gate_C_Level_Authority": "PASS_BY_V083_CURRENT_EVIDENCE",
+  "Hierarchy": "SECTOR > INDUSTRY_GROUP > INDUSTRY > SUB_INDUSTRY",
+  "INDUSTRY_GROUP_LEVEL_VERIFIED": "NO",
+  "Industry_Group_Header_Authority": {},
+  "Observed_Industry_Group_Code_Lengths": [],
+  "Official_Industry_Group_Count": "NOT_VERIFIED",
+  "Owner_Verified": "YES",
+  "Retrieval_Timestamp_UTC": "2026-09-27T20:45:45Z",
+  "Source_SHA256": "1cacfc25a0955eb5be5a64e5af70d524f7c4e7caa84d87d02b6587fa93a37d90",
+  "Taxonomy": "GICS",
+  "Taxonomy_Owner": "S&P Dow Jones Indices / MSCI",
+  "Workbook_Hierarchy_Markers": {},
+  "Workbook_Sheets": []
+}

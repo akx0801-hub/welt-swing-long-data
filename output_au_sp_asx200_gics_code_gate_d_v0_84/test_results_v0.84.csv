@@ -1,0 +1,21 @@
+Test,Result,Detail
+V083_PASS,PASS,PASS_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C
+V083_ARTIFACT,PASS,10940184410
+GATE_C_FIXED,PASS,GICS/INDUSTRY_GROUP
+ASX_DOWNLOAD_HEADER,PASS,GICs industry group
+RAW_VALUE_RECONCILIATION,PASS,27=0+27
+SENTINELS_NO_CODE,PASS,"['Automobiles & Components', 'Banks', 'Capital Goods', 'Class Pend', 'Commercial & Professional Services', 'Consumer Discretionary Distribution & Retail', 'Consumer Durables & Apparel', 'Consumer Services', 'Consumer Staples Distribution & Retail', 'Energy', 'Equity Real Estate Investment Trusts (REITs)', 'Financial Services', 'Food, Beverage & Tobacco', 'Health Care Equipment & Services', 'Household & Personal Products', 'Insurance', 'Materials', 'Media & Entertainment', 'Not Applic', 'Pharmaceuticals, Biotechnology & Life Sciences', 'Real Estate Management & Development', 'Semiconductors & Semiconductor Equipment', 'Software & Services', 'Technology Hardware & Equipment', 'Telecommunication Services', 'Transportation', 'Utilities']"
+NO_PDSC_IF_NATIVE,PASS,0
+DECISION_STRATEGY_EXCLUSIVE,PASS,0
+NO_FORBIDDEN_METHODS,PASS,0
+NO_DOWNSTREAM_GATES,PASS,0
+NO_CANONICAL_RS_P,PASS,0
+FROZEN_IMMUTABLE,PASS,54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb
+V057_IMMUTABLE,PASS,177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9
+V058_IMMUTABLE,PASS,2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32
+BR_IMMUTABLE,PASS,bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed
+PARKS_IMMUTABLE,PASS,38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd
+CANONICAL_READY_37,PASS,37/1425
+NO_AU_CANONICAL,PASS,0
+GATE_D_BLOCKED,PASS,GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE
+BLOCKER_PRECEDENCE_VALID,PASS,GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE

@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:2c1dbb7bb0767b25bfde36b4fc1dd61af7ec8174775114b10a1aa099b53dd8a5",
+  "artifact_id": 10941761588,
+  "artifact_name": "au-asx200-gics-code-gate-d-v0.84-36349188738",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "1fcb42b02b67bfe44673a44977744a6cf185d0b2",
+  "workflow_run_id": 36349188738
+}

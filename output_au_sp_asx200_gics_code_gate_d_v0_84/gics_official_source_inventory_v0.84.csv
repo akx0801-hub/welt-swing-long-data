@@ -1,0 +1,4 @@
+Source_Role,Official_Owner,URL,HTTP_Status,Content_Type,Bytes,SHA256,Retrieval_Timestamp_UTC,Status
+CURRENT_GICS_STRUCTURE_DISCOVERY,S&P Dow Jones Indices / MSCI,https://www.spglobal.com/spdji/en/landing/topic/gics/,,,0,,2026-09-27T20:45:41Z,CURRENT_LINK_AUTHORITY_FROM_V084_SPEC
+CURRENT_GICS_STRUCTURE_LABEL_CODE_WORKBOOK,S&P Dow Jones Indices / MSCI,https://www.spglobal.com/spdji/en/documents/index-policies/2025-gics-structure-english.xlsx,403,text/html,2010,1cacfc25a0955eb5be5a64e5af70d524f7c4e7caa84d87d02b6587fa93a37d90,2026-09-27T20:45:45Z,NOT_VERIFIED
+GICS_OWNER_CORROBORATION,MSCI,https://www.msci.com/indexes/index-resources/gics,200,text/html,1881,fc34ec3f6d84fca52bdb06cd321c649d742a9de0abcf3c183d806efb4a604eb3,2026-09-27T20:45:45Z,SUPPLEMENTARY

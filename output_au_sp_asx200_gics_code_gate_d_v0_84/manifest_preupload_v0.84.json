@@ -1,0 +1,105 @@
+{
+  "au_gate_e_runs": 0,
+  "au_gate_f_runs": 0,
+  "au_sector_field_code_feasibility_ready": false,
+  "blocker": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "files": {
+    "asx_current_gics_industry_group_value_inventory_v0.84.csv": {
+      "bytes": 1497,
+      "sha256": "c2480973d0c8e921865198dd7b399d1f8fb339d37180604c8ef905c27b5f0aa1"
+    },
+    "asx_to_gics_exact_same_taxonomy_label_binding_audit_v0.84.csv": {
+      "bytes": 6570,
+      "sha256": "0355d1ee5f55ec1776307facd2d2fa706b54aa4fdb7f3f261ac8a1ce36111f6e"
+    },
+    "au_classification_sentinel_governance_audit_v0.84.csv": {
+      "bytes": 6585,
+      "sha256": "baef37832859e626b4eec70523cf756a03ae772c1f253f45b544ad5f2aef7fa8"
+    },
+    "au_formal_vs_nonformal_classification_value_reconciliation_v0.84.json": {
+      "bytes": 1174,
+      "sha256": "c296351cde5d1587704ccbd948af225c2e64dec07c84399aeaac98969e17fe06"
+    },
+    "au_gate_d_predecessor_authority_v0.84.json": {
+      "bytes": 749,
+      "sha256": "ac98990de192b4971adaae1c14ffc6f32119ba10eea842890142bfe04204c395"
+    },
+    "au_pdsc_collision_audit_v0.84.json": {
+      "bytes": 102,
+      "sha256": "2d33f16dfa65f9cf6b8f9b70845afb5d891e23f9a88ffdeb6c694d968f049763"
+    },
+    "au_pdsc_distinct_label_feasibility_audit_v0.84.csv": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "au_pdsc_fallback_necessity_audit_v0.84.json": {
+      "bytes": 223,
+      "sha256": "614341f8f57769ab306aa86eadf2937befd92647c25d93ea5ee8dbf8c48f8191"
+    },
+    "au_sector_field_code_feasibility_decision_v0.84.json": {
+      "bytes": 667,
+      "sha256": "bb53612441293f73454ea3a6127d3648916b7af643cc03553b64030ce8d5c56b"
+    },
+    "au_source_native_code_feasibility_decision_v0.84.json": {
+      "bytes": 1288,
+      "sha256": "3944cd642d2d0767a9750d977125c615726388733c96ac294572cdc266827978"
+    },
+    "external_request_ledger_v0.84.csv": {
+      "bytes": 811,
+      "sha256": "f9717b6eb190fb130e799c6bf691d0a23c745975fe5797ca47d27902cc2f740d"
+    },
+    "gics_hierarchy_level_authority_v0.84.json": {
+      "bytes": 1080,
+      "sha256": "0db032fa3e8befdb2fa0bea2bd8bb7b571308f793ebb75febcebd8ba44657b73"
+    },
+    "gics_industry_group_code_uniqueness_audit_v0.84.csv": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "gics_industry_group_official_label_code_inventory_v0.84.csv": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "gics_official_source_inventory_v0.84.csv": {
+      "bytes": 761,
+      "sha256": "3bfed43f38e8a6ad414d2fd309b24c6dbe7eeb2bd09beaa85930a5d25824f064"
+    },
+    "immutability_audit_v0.84.json": {
+      "bytes": 1589,
+      "sha256": "48a8893b90cd4bb84d25c53cf593741a286817103870180cee6b0248ab321626"
+    },
+    "provider_call_audit_v0.84.json": {
+      "bytes": 646,
+      "sha256": "f22b057d675435a837603f9488cab4492021a897e1ddcf0639f45567302aa20f"
+    },
+    "stage_checkpoint_preupload_v0.84.json": {
+      "bytes": 532,
+      "sha256": "f62804cff545f87b96410b9e8878ee2e20079beb7f437f46560c77cdb38049fb"
+    },
+    "summary_preupload_v0.84.json": {
+      "bytes": 1235,
+      "sha256": "3e379ee9a6241c5200903887bee6d3d86ce28afefb2941c69b334c64035042e6"
+    },
+    "test_results_v0.84.csv": {
+      "bytes": 1795,
+      "sha256": "a36ef5311c4dea572848e5ee671451beee07b88561560102318ee3f4f7fe661d"
+    }
+  },
+  "frozen_63_linkage_runs": 0,
+  "gate_h_runs": 0,
+  "next_gate": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "other_cohort_runs": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "repository_sha": "1fcb42b02b67bfe44673a44977744a6cf185d0b2",
+  "required_start_head": "258ecaa5e697f9bc51f0586bb6c2f2a3ee961647",
+  "sector_rs_runs": 0,
+  "selected_code_strategy": "NONE",
+  "stage": "AU_SP_ASX200_GICS_INDUSTRY_GROUP_FIELD_SOURCE_NATIVE_CODE_FEASIBILITY_GATE_D",
+  "verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "version": "v0.84"
+}

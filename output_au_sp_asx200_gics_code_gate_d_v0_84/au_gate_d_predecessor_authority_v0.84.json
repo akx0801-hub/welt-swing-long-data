@@ -1,0 +1,17 @@
+{
+  "Artifact": 10940184410,
+  "Artifact_Digest": "sha256:2534f3e6be146e6bc46e36c1d39e90c82392a57408d3c684a44f7f8656fd983d",
+  "Classification_Field": "industry",
+  "Download_Header": "GICs industry group",
+  "Evidence_Status": "VERIFIED_FROM_V083_FINAL_COMMIT",
+  "Field_Binding": "PASS_CURRENT_RUNTIME_AND_OFFICIAL_ASX_SEMANTICS",
+  "Final_Commit": "258ecaa5e697f9bc51f0586bb6c2f2a3ee961647",
+  "Formal_Level": "INDUSTRY_GROUP",
+  "Sentinel_Status": "REQUIRES_SEPARATE_SENTINEL_TYPING",
+  "Taxonomy": "GICS",
+  "Taxonomy_Owner": "S&P Dow Jones Indices / MSCI",
+  "Tests": "22/22 PASS",
+  "Verdict": "PASS_AU_SP_ASX200_SOURCE_NATIVE_TAXONOMY_IDENTITY_GATE_C",
+  "Version_Status": "CURRENT_MAINTAINED_NO_STATIC_VERSION",
+  "Workflow": 36345799341
+}
