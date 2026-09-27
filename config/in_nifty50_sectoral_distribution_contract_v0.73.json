@@ -21,5 +21,7 @@
   "p0_allowed": false,
   "p1_p2_allowed": false,
   "alpha_vantage_allowed": false,
-  "productive": false
+  "productive": false,
+  "execution_attempt": 2,
+  "retry_reason": "PERSIST_STATIC_RELEVANT_STRINGS_AND_BROWSER_RUNTIME_DIAGNOSTICS"
 }
