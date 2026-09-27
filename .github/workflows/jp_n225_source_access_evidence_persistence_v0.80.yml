@@ -1,0 +1,210 @@
+name: JP N225 Source Access Evidence Persistence Gate v0.80
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/jp_n225_source_access_evidence_persistence_v0.80.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  jp-n225-gate-h:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.80 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.80 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="954c7272b575c0d0c3ae9633db073ad2e126daa7"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/jp_n225_source_access_evidence_persistence_spec_v0\.80\.json|scripts/jp_n225_source_access_evidence_persistence_v0_80\.py|scripts/persist_jp_n225_source_access_evidence_persistence_v0_80\.py|tests/test_jp_n225_source_access_evidence_persistence_v0_80\.py|\.github/workflows/jp_n225_source_access_evidence_persistence_v0\.80\.yml|config/jp_n225_source_access_evidence_persistence_v0\.80\.json|docs/validation/JP_N225_Source_Access_Evidence_Persistence_Gate_v0\.80\.md|output_jp_n225_source_access_evidence_persistence_v0_80/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.79 predecessor and artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10935786239 --jq .digest)"
+          test "$DIGEST" = "sha256:9d96c111cc3f6ec779013fc6294f634f65c04adae5ba356ec56045edebc3461a"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_jp_n225_exact_frozen_sector_classification_v0_79")
+          s=json.load(open(out/"summary_v0.79.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.79.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.79.json",encoding="utf-8"))
+          cov=list(csv.DictReader(open(out/"jp_exact_197_classification_coverage_v0.79.csv",encoding="utf-8")))
+          assert s["verdict"]=="PASS_JP_N225_EXACT_FROZEN_SECTOR_CLASSIFICATION_COVERAGE"
+          assert s["jp_exact_197_sector_classification_coverage_ready"] is True
+          assert (s["classified"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(197,197,0,0,0,0)
+          assert s["current_source_matches"]==197 and s["authorized_sector_labels"]==6
+          assert s["pdsc_coverage"]==197 and s["pdsc_collisions"]==0
+          assert c["workflow_run_id"]==36330409269 and c["artifact_id"]==10935786239
+          assert "sha256:"+c["artifact_digest"]=="sha256:9d96c111cc3f6ec779013fc6294f634f65c04adae5ba356ec56045edebc3461a"
+          assert len(cov)==197 and all(r["Classification_Status"]=="PROVABLY_CLASSIFIED" for r in cov)
+          assert imm["Frozen_Unchanged"] is True and imm["v057_Unchanged"] is True and imm["v058_Unchanged"] is True
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_After"]==37
+          assert imm["Gate_H_Runs"]==0 and imm["Canonical_Materialization_Runs"]==0
+          PY
+
+      - name: Verify G-SEC-05, spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          g=json.load(open("config/manager_governance_authority_G_SEC_05_v0.75.json",encoding="utf-8"))
+          s=json.load(open("config/jp_n225_source_access_evidence_persistence_spec_v0.80.json",encoding="utf-8"))
+          t=json.load(open("config/jp_n225_source_access_evidence_persistence_v0.80.json",encoding="utf-8"))
+          assert g["authority_id"]=="G-SEC-05" and g["gate"]=="H_ACCESS_PERSISTENCE" and g["legal_opinion"] is False
+          assert s["required_start_head"]=="954c7272b575c0d0c3ae9633db073ad2e126daa7"
+          assert s["scope_cohort"]=="JP_N225" and s["scope_gate"]=="H_ACCESS_PERSISTENCE_ONLY"
+          assert s["sources"]["A"]["necessity"]=="REQUIRED" and s["sources"]["B"]["necessity"]=="REQUIRED"
+          assert s["sources"]["C"]["necessity"]=="CORROBORATING_ONLY"
+          assert s["raw_persistence"]["required_for_audit"] is False
+          assert s["forbidden"]["gate_f_rerun"] is True
+          assert s["forbidden"]["canonical_materialization"] is True
+          assert s["forbidden"]["sec_requests"] is True and s["forbidden"]["nse_requests"] is True
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert t["version"]=="v0.80" and t["required_start_head"]==s["required_start_head"]
+          assert t["scope_cohort"]=="JP_N225" and t["gate_h_authorized"] is True
+          assert t["gate_f_rerun_allowed"] is False and t["canonical_materialization_allowed"] is False
+          assert t["sec_requests_allowed"] is False and t["nse_requests_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False and t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/jp_n225_source_access_evidence_persistence_v0_80.py scripts/persist_jp_n225_source_access_evidence_persistence_v0_80.py
+          python3 tests/test_jp_n225_source_access_evidence_persistence_v0_80.py -v
+
+      - name: Run bounded JP_N225 Gate H
+        run: |
+          set -euo pipefail
+          rm -rf output_jp_n225_source_access_evidence_persistence_v0_80
+          python3 scripts/jp_n225_source_access_evidence_persistence_v0_80.py --repository-sha "$GITHUB_SHA" --output-dir output_jp_n225_source_access_evidence_persistence_v0_80
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_jp_n225_source_access_evidence_persistence_v0_80")
+          required=[
+            "jp_gate_h_source_inventory_v0.80.csv","jp_required_vs_corrob_source_authority_v0.80.csv",
+            "jp_public_access_reproducibility_audit_v0.80.csv","jp_source_drift_semantic_audit_v0.80.json",
+            "jp_raw_persistence_requirement_audit_v0.80.csv","jp_bounded_evidence_persistence_audit_v0.80.csv",
+            "jp_pdsc_persistence_role_audit_v0.80.json","jp_canonical_metadata_evidence_persistability_v0.80.json",
+            "jp_future_provenance_contract_v0.80.json","jp_source_name_reference_contract_v0.80.json",
+            "jp_official_terms_policy_review_v0.80.csv","jp_policy_scope_operational_impact_audit_v0.80.csv",
+            "provider_call_audit_v0.80.json","external_request_ledger_v0.80.csv","immutability_audit_v0.80.json",
+            "test_results_v0.80.csv","summary_preupload_v0.80.json","stage_checkpoint_preupload_v0.80.json",
+            "manifest_preupload_v0.80.json"
+          ]
+          assert all((out/x).exists() for x in required)
+          s=json.load(open(out/"summary_preupload_v0.80.json",encoding="utf-8"))
+          drift=json.load(open(out/"jp_source_drift_semantic_audit_v0.80.json",encoding="utf-8"))
+          can=json.load(open(out/"jp_canonical_metadata_evidence_persistability_v0.80.json",encoding="utf-8"))
+          pdsc=json.load(open(out/"jp_pdsc_persistence_role_audit_v0.80.json",encoding="utf-8"))
+          prov=json.load(open(out/"provider_call_audit_v0.80.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.80.json",encoding="utf-8"))
+          access=list(csv.DictReader(open(out/"jp_public_access_reproducibility_audit_v0.80.csv",encoding="utf-8")))
+          raw=list(csv.DictReader(open(out/"jp_raw_persistence_requirement_audit_v0.80.csv",encoding="utf-8")))
+          bounded=list(csv.DictReader(open(out/"jp_bounded_evidence_persistence_audit_v0.80.csv",encoding="utf-8")))
+          policy=list(csv.DictReader(open(out/"jp_official_terms_policy_review_v0.80.csv",encoding="utf-8")))
+          scope=list(csv.DictReader(open(out/"jp_policy_scope_operational_impact_audit_v0.80.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.80.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.80.csv",encoding="utf-8")))
+          assert s["required_public_sources_ready"] is True
+          assert s["raw_persistence_required"] is False
+          assert s["technical_bounded_evidence_sufficient"] is True
+          assert s["factsheet_required_for_canonical_audit"] is False
+          assert len(access)==3 and all(r["PUBLIC_ACCESS"]=="YES" for r in access[:2])
+          assert all(r["AUTH_REQUIRED"]=="NO" and r["CAPTCHA_OR_BOT_BYPASS_REQUIRED"]=="NO" for r in access[:2])
+          assert len(raw)==3 and all(r["RAW_PERSISTENCE_REQUIRED_FOR_AUDIT"]=="NO" and r["RAW_SOURCE_CURRENTLY_PERSISTED"]=="NO" for r in raw)
+          assert {r["Source_Class"]:r["TECHNICAL_BOUNDED_EVIDENCE_SUFFICIENT"] for r in bounded}=={"A":"YES","B":"YES"}
+          assert drift["BYTE_DRIFT"]=="YES" and drift["STRUCTURAL_DRIFT"]=="NO" and drift["CLASSIFICATION_DRIFT"]=="NO"
+          assert drift["AUTHORITY_REGRESSION_REVIEW_REQUIRED"]=="NO"
+          assert pdsc["PDSC_Is_Nikkei_Source_Native_Code"]=="NO" and pdsc["PDSC_Is_Source_Authorization"]=="NO"
+          assert len(policy)==3 and len(scope)==6 and {r["Scope"] for r in scope}==set("ABCDEF")
+          assert len(ext)==3 and all(r["Source_Class"]=="NIKKEI_OFFICIAL_POLICY" for r in ext)
+          assert all(r["Per_Security_Fanout"]=="NO" and r["SEC_Request"]=="NO" and r["NSE_Request"]=="NO" for r in ext)
+          assert prov["nikkei_core_source_refetches"]==0 and prov["gate_f_reruns"]==0
+          assert prov["canonical_materialization"]==0 and prov["canonical_registry_readiness_update"]==0
+          assert prov["sec_requests"]==0 and prov["nse_requests"]==0 and prov["alpha_vantage"]==0
+          assert all(v==0 for k,v in prov.items() if k not in {"nikkei_official_policy_requests"})
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert imm["Frozen_Unchanged"] is True and imm["v057_Unchanged"] is True and imm["v058_Unchanged"] is True
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True and imm["Parked_Cohort_Registry_Unchanged"] is True and imm["Shared_Source_Registry_Unchanged"] is True
+          assert imm["Canonical_READY_Rows_After"]==37 and imm["JP_Canonical_Rows_After"]==0
+          assert imm["JP_Gate_F_Classified_After"]==197 and imm["JP_Gate_F_Total_After"]==197
+          assert not Path("sector_metadata/canonical/cohorts/JP_N225_sector_metadata_v1.csv").exists()
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          if s["official_policy_review"]=="EXPLICIT_OPERATIONAL_RESTRICTION_FOUND":
+              assert s["verdict"]=="BLOCKED_JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE"
+              assert s["jp_source_access_persistence_ready"] is False
+              assert s["official_policy_compatibility_ready"] is False
+              assert s["canonical_evidence_persistable"]=="NO"
+              assert s["blocker"]=="EXPLICIT_NIKKEI_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+              assert can["CANONICAL_METADATA_EVIDENCE_PERSISTABLE"]=="NO"
+          elif s["official_policy_review"]=="NO_EXPLICIT_OPERATIONAL_BLOCKER_FOUND":
+              assert s["verdict"]=="PASS_JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE"
+              assert s["jp_source_access_persistence_ready"] is True
+              assert s["canonical_evidence_persistable"]=="YES"
+              assert s["blocker"]==""
+          else:
+              assert s["verdict"]=="BLOCKED_JP_N225_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE"
+              assert s["jp_source_access_persistence_ready"] is False
+              assert s["canonical_evidence_persistable"]=="NOT_VERIFIED"
+          PY
+          BAD_WORKTREE="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_jp_n225_source_access_evidence_persistence_v0_80/.*|docs/validation/JP_N225_Source_Access_Evidence_Persistence_Gate_v0\.80\.md)$' || true)"
+          test -z "$BAD_WORKTREE"
+
+      - name: Upload bounded v0.80 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: jp-n225-source-access-evidence-persistence-v0.80-${{ github.run_id }}
+          path: output_jp_n225_source_access_evidence_persistence_v0_80/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_jp_n225_source_access_evidence_persistence_v0_80.py \
+            --output-dir output_jp_n225_source_access_evidence_persistence_v0_80 \
+            --artifact-id "${{ steps.upload.outputs.artifact-id }}" \
+            --artifact-digest "${{ steps.upload.outputs.artifact-digest }}" \
+            --artifact-name "jp-n225-source-access-evidence-persistence-v0.80-${{ github.run_id }}" \
+            --workflow-run-id "${{ github.run_id }}" \
+            --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.80 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/JP_N225_Source_Access_Evidence_Persistence_Gate_v0.80.md output_jp_n225_source_access_evidence_persistence_v0_80/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/JP_N225_Source_Access_Evidence_Persistence_Gate_v0\.80\.md|output_jp_n225_source_access_evidence_persistence_v0_80/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          test ! -e sector_metadata/canonical/cohorts/JP_N225_sector_metadata_v1.csv
+          git commit -m "Persist JP N225 source access evidence persistence v0.80"
+          git push origin HEAD:main
