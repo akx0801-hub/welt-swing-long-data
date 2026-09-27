@@ -95,7 +95,7 @@ jobs:
       - name: Prepare browser and PDF tooling
         run: |
           set -euo pipefail
-          python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple websocket-client==1.8.0 "pypdf>=5,<7"
+          python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple websocket-client==1.8.0 "pypdf>=5,<7" "openpyxl>=3.1,<4"
           python3 - <<'PY'
           import importlib.metadata,shutil
           from pathlib import Path
@@ -104,7 +104,7 @@ jobs:
           if not chrome:chrome=shutil.which("google-chrome") or shutil.which("chromium")
           assert chrome,"Chrome/Chromium unavailable"
           print("CHROME="+chrome)
-          print("PYPDF="+importlib.metadata.version("pypdf"))
+          print("PYPDF="+importlib.metadata.version("pypdf"))\n          print("OPENPYXL="+importlib.metadata.version("openpyxl"))
           PY
 
       - name: Compile and unit-test
