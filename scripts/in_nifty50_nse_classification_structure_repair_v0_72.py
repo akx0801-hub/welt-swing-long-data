@@ -55,7 +55,7 @@ EXPECTED_LABELS=[
 
 def sha_bytes(b:bytes)->str:return hashlib.sha256(b).hexdigest()
 def sha_file(p:Path)->str:return hashlib.sha256(p.read_bytes()).hexdigest()
-def git(*a:str)->str:return subprocess.check_output(["git",*a,cwd=ROOT] if False else ["git",*a],cwd=ROOT,text=True).strip()
+def git(*a:str)->str:return subprocess.check_output(["git",*a],cwd=ROOT,text=True).strip()
 
 def read_csv(path:Path)->list[dict[str,str]]:
     with path.open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
