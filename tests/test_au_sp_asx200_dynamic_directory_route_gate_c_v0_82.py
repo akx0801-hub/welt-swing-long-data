@@ -82,6 +82,20 @@ class V082Tests(unittest.TestCase):
         self.assertEqual(p["Observed_Page_Size"],25)
         self.assertEqual(p["Explicit_Total_Pages"],5)
 
+    def test_structural_sibling_count_pagination_contract(self):
+        selected={
+          "Resolved_URL":"https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&includeFilterOptions=true",
+          "Request_URL":"https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory?page=0&itemsPerPage=25&includeFilterOptions=true",
+          "parsed":{"records_path":"data.items","meta":{"data.count":1830}}
+        }
+        p=mod.pagination_contract(selected)
+        self.assertTrue(p["Detected"])
+        self.assertTrue(p["Explicit_Contract"])
+        self.assertEqual(p["Explicit_Total_Count"],1830)
+        self.assertEqual(p["Explicit_Total_Count_Path"],"data.count")
+        self.assertEqual(p["Explicit_Total_Pages"],74)
+        self.assertEqual(p["Explicit_Total_Pages_Path"],"DERIVED_FROM_EXPLICIT_TOTAL_COUNT_AND_OBSERVED_PAGE_SIZE")
+
     def test_explicit_gics_field_contract(self):
         selected={"analysis":{"classification_fields":["GICS Industry Group"]}}
         ctx={"GICS_Expanded":True,"SPDJI_Observed":True,"MSCI_Observed":True}
