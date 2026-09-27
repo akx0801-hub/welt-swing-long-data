@@ -482,7 +482,7 @@ def main()->int:
                              "Result":"OK" if fr.get("ok") else fr.get("error","FAILED")})
             txt=fr.get("body",b"").decode("utf-8",errors="replace")
             asset_texts[u]=txt
-            for kw in ["SectorialIndexData","sectorDropdown","selectedinSectorial","_Sector.js","Macro Economic Sector","Basic Industry","sectoralDistibution"]:
+            for kw in ["SectorialIndexData","sectorDropdown","selectedinSectorial","_Sector.js","Macro Economic Sector","Basic Industry","sectoralDistibution","hdnSet","hdnPgName","IndexTypeFinder1"]:
                 pos=0
                 while True:
                     p=txt.find(kw,pos)
@@ -515,6 +515,16 @@ def main()->int:
 
     # Explicit public application contract from the official foamtree application code.
     page_text=page.get("body",b"").decode("utf-8",errors="replace") if page.get("ok") else ""
+    page_contexts=[]
+    for kw in ["hdnSet","hdnPgName","Sectoral Distribution","NIFTY 50"]:
+        pos=0
+        while True:
+            p=page_text.find(kw,pos)
+            if p<0:break
+            page_contexts.append({"Keyword":kw,"Context":page_text[max(0,p-900):min(len(page_text),p+1600)].replace("\r"," ").replace("\n"," ")})
+            pos=p+len(kw)
+            if sum(1 for x in page_contexts if x["Keyword"]==kw)>=15:break
+    write_csv(out/"nifty_application_page_context_snippets_v0.73.csv",page_contexts if page_contexts else [{"Keyword":"","Context":""}])
     app_index_name=extract_hidden_input_value(page_text,"hdnSet")
     foamtree_url=next((u for u in asset_texts if u.endswith("/assets/js/foamtree.js")), "")
     foamtree_text=asset_texts.get(foamtree_url,"")
