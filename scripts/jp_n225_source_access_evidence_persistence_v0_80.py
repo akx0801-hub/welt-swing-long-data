@@ -147,7 +147,7 @@ def validate_predecessor(repo_sha:str)->dict[str,Any]:
     reg=read_csv(REGISTRY)
     if len(reg)!=1 or reg[0]["Cohort"]!="BR_IBRX100" or reg[0]["Semantic_SHA256"]!=BR_SEMANTIC_SHA:raise RuntimeError("canonical registry")
     if JP_CANONICAL.exists():raise RuntimeError("JP canonical partition already exists")
-    if imm["Canonical_READY_Rows_After"]!=37:return None
+    if imm["Canonical_READY_Rows_After"]!=37:raise RuntimeError("canonical READY changed")
     return {"summary79":s,"checkpoint79":c,"imm79":imm,"src79":src79,"coverage79":cov,"target79":target,"src78":src78,"hier78":hier}
 
 def policy_review()->tuple[str,list[dict[str,Any]],list[dict[str,Any]]]:
