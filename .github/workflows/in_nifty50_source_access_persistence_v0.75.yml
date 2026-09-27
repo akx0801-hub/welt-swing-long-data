@@ -1,0 +1,218 @@
+name: IN NIFTY50 Source Access Evidence Persistence Gate v0.75
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/in_nifty50_source_access_persistence_v0.75.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  in-nifty50-gate-h:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout bounded v0.75 gate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify v0.75 lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="b3c0110e1c4f0441447c9ad90515daeb36ac41ff"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/manager_governance_authority_G_SEC_05_v0\.75\.json|config/in_nifty50_source_access_persistence_spec_v0\.75\.json|scripts/in_nifty50_source_access_persistence_v0_75\.py|scripts/persist_in_nifty50_source_access_persistence_v0_75\.py|tests/test_in_nifty50_source_access_persistence_v0_75\.py|\.github/workflows/in_nifty50_source_access_persistence_v0\.75\.yml|config/in_nifty50_source_access_persistence_v0\.75\.json|docs/validation/IN_NIFTY50_Source_Access_Evidence_Persistence_Gate_v0\.75\.md|output_in_nifty50_source_access_persistence_v0_75/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.74 predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10930917775 --jq .digest)"
+          test "$DIGEST" = "sha256:472f856de56611cb7292075b96690557b5bc4df099c097a8b15b7202b7141a9e"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_in_nifty50_remaining_3_sector_closure_v0_74")
+          s=json.load(open(out/"summary_v0.74.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.74.json",encoding="utf-8"))
+          ctr=json.load(open(out/"nse_sector_cell_reconstruction_contract_v0.74.json",encoding="utf-8"))
+          cov=list(csv.DictReader(open(out/"in_exact_45_classification_coverage_v0.74.csv",encoding="utf-8")))
+          bind=list(csv.DictReader(open(out/"in_source_native_code_binding_v0.74.csv",encoding="utf-8")))
+          assert s["verdict"]=="PASS_IN_NIFTY50_REMAINING_3_SECTOR_CODE_CLOSURE_GATE_F_COMPLETE"
+          assert s["in_exact_45_sector_classification_coverage_ready"] is True
+          assert (s["classified"],s["total"],s["ambiguous"],s["not_found"],s["not_verified"],s["conflict"])==(45,45,0,0,0,0)
+          assert s["bound_classification_level"]=="SECTOR"
+          assert s["distinct_classifications"]==15 and s["source_native_code_coverage"]==45
+          assert s["remaining_3_node_bindings"]==3 and s["blocker"]==""
+          assert c["workflow_run_id"]==36317697732 and c["artifact_id"]==10930917775
+          assert "sha256:"+c["artifact_digest"]=="sha256:472f856de56611cb7292075b96690557b5bc4df099c097a8b15b7202b7141a9e"
+          assert ctr["Run1_Structural_SHA256"]=="f870ee10d408565340307233b94ca082f8c7596fdf5acea10fda3f7ddff7a08e"
+          assert ctr["Deterministic_Rerun"] is True
+          assert len(cov)==45 and all(r["Classification_Status"]=="PROVABLY_CLASSIFIED" for r in cov)
+          assert len(bind)==15 and all(r["Binding_Status"]=="PASS" for r in bind)
+          a70=json.load(open("output_in_nifty50_deterministic_security_identity_linkage_v0_70/official_nifty50_constituent_source_audit_v0.70.json",encoding="utf-8"))
+          a71=json.load(open("output_in_nifty50_exact_frozen_sector_classification_coverage_v0_71/official_nifty50_classification_source_audit_v0.71.json",encoding="utf-8"))
+          b73=json.load(open("output_in_nifty50_sectoral_distribution_contract_v0_73/application_public_reproducibility_audit_v0.73.json",encoding="utf-8"))
+          assert a70["Raw_SHA256"]=="9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28"
+          assert a71["Raw_SHA256"]=="9fb8832853c279448d2bc05f0e7dd5f460ed2ff35332fea8c40fc1250362ad28"
+          assert b73["Independent_Replay_PASS_Count"]==4
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          PY
+
+      - name: Verify G-SEC-05, spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          g=json.load(open("config/manager_governance_authority_G_SEC_05_v0.75.json",encoding="utf-8"))
+          s=json.load(open("config/in_nifty50_source_access_persistence_spec_v0.75.json",encoding="utf-8"))
+          t=json.load(open("config/in_nifty50_source_access_persistence_v0.75.json",encoding="utf-8"))
+          assert g["authority_id"]=="G-SEC-05"
+          assert g["effective_forward_from"]=="v0.75"
+          assert g["legal_opinion"] is False
+          assert g["rules"]["explicit_official_operational_restriction_requires_fail_closed"] is True
+          assert g["rules"]["unknown_raw_redistribution_rights_alone_do_not_fail_when_raw_not_required"] is True
+          assert s["required_start_head"]=="b3c0110e1c4f0441447c9ad90515daeb36ac41ff"
+          assert s["scope_cohort"]=="IN_NIFTY50" and s["scope_gate"]=="H_ACCESS_PERSISTENCE_ONLY"
+          assert s["policy_first_fail_closed"] is True
+          assert s["core_source_refetch_if_explicit_policy_restriction_found"] is False
+          assert s["max_policy_requests"]==2
+          assert s["persist_raw_source_bodies"] is False
+          assert s["persist_raw_policy_bodies"] is False
+          assert s["gate_f_rerun_allowed"] is False
+          assert s["canonical_materialization_allowed"] is False
+          assert s["registry_update_allowed"] is False
+          assert s["other_cohort_allowed"] is False
+          assert s["pdsc_allowed"] is False
+          assert s["authentication_bypass_allowed"] is False
+          assert s["captcha_bypass_allowed"] is False
+          assert s["alpha_vantage_allowed"] is False
+          assert t["required_start_head"]=="b3c0110e1c4f0441447c9ad90515daeb36ac41ff"
+          assert t["scope_cohort"]=="IN_NIFTY50"
+          assert t["gate_f_rerun_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["sector_rs_allowed"] is False
+          assert t["p0_allowed"] is False
+          assert t["alpha_vantage_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             scripts/in_nifty50_source_access_persistence_v0_75.py             scripts/persist_in_nifty50_source_access_persistence_v0_75.py
+          python3 tests/test_in_nifty50_source_access_persistence_v0_75.py -v
+
+      - name: Run bounded Gate H
+        run: |
+          set -euo pipefail
+          rm -rf output_in_nifty50_source_access_persistence_v0_75
+          python3 scripts/in_nifty50_source_access_persistence_v0_75.py             --repository-sha "$GITHUB_SHA"             --output-dir output_in_nifty50_source_access_persistence_v0_75
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_in_nifty50_source_access_persistence_v0_75")
+          s=json.load(open(out/"summary_preupload_v0.75.json",encoding="utf-8"))
+          g=json.load(open(out/"manager_governance_authority_G_SEC_05_v0.75.json",encoding="utf-8"))
+          src=list(csv.DictReader(open(out/"in_gate_h_source_inventory_v0.75.csv",encoding="utf-8")))
+          access=list(csv.DictReader(open(out/"in_public_access_reproducibility_audit_v0.75.csv",encoding="utf-8")))
+          drift=list(csv.DictReader(open(out/"in_source_drift_audit_v0.75.csv",encoding="utf-8")))
+          raw=list(csv.DictReader(open(out/"in_raw_persistence_requirement_audit_v0.75.csv",encoding="utf-8")))
+          bounded=list(csv.DictReader(open(out/"in_bounded_evidence_persistence_audit_v0.75.csv",encoding="utf-8")))
+          policy=list(csv.DictReader(open(out/"in_official_terms_policy_review_v0.75.csv",encoding="utf-8")))
+          persist=json.load(open(out/"in_canonical_metadata_evidence_persistability_v0.75.json",encoding="utf-8"))
+          future=json.load(open(out/"in_future_provenance_contract_v0.75.json",encoding="utf-8"))
+          names=list(csv.DictReader(open(out/"in_source_name_reference_contract_v0.75.csv",encoding="utf-8")))
+          ext=list(csv.DictReader(open(out/"external_request_ledger_v0.75.csv",encoding="utf-8")))
+          prov=json.load(open(out/"provider_call_audit_v0.75.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.75.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.75.csv",encoding="utf-8")))
+          assert g["authority_id"]=="G-SEC-05"
+          assert len(src)==len(access)==len(drift)==len(raw)==len(bounded)==len(names)==3
+          assert len(policy)==2 and len(ext)==2
+          assert all(r["Request_Type"]=="OFFICIAL_POLICY_REVIEW" for r in ext)
+          assert all(r["Official_Source"]=="YES" and r["Per_Security_Fanout"]=="NO" and r["Raw_Body_Persisted"]=="NO" for r in ext)
+          assert all(r["RAW_PERSISTENCE_REQUIRED_FOR_AUDIT"]=="NO" and r["RAW_SOURCE_CURRENTLY_PERSISTED"]=="NO" for r in raw)
+          assert all(r["Technical_Evidence_Sufficiency"]=="YES" and r["Complete_Raw_Source_Required"]=="NO" for r in bounded)
+          assert all(v==0 for v in prov.values())
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert s["in_gate_f_classified"]==45
+          assert s["core_source_refetches"]==0
+          assert s["canonical_ready_rows"]==37 and s["canonical_total_rows"]==1425
+          assert s["canonical_materialization_runs"]==0 and s["registry_updates"]==0 and s["other_cohort_runs"]==0
+          assert s["sector_rs_runs"]==0 and s["p0_runs"]==s["p1_runs"]==s["p2_runs"]==0
+          assert not Path("sector_metadata/canonical/cohorts/IN_NIFTY50_sector_metadata_v1.csv").exists()
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          if s["in_source_access_persistence_ready"]:
+              assert s["verdict"]=="PASS_IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE"
+              assert s["public_sources_ready"] is True
+              assert s["raw_persistence_required"] is False
+              assert s["canonical_evidence_persistable"]=="YES"
+              assert s["official_policy_review"]=="NO_EXPLICIT_OPERATIONAL_BLOCKER_FOUND"
+              assert s["blocker"]==""
+              assert s["next_gate"]=="IN_NIFTY50 CANONICAL SECTOR METADATA MAPPING MATERIALIZATION GATE"
+          else:
+              assert s["verdict"]=="BLOCKED_IN_NIFTY50_SOURCE_ACCESS_EVIDENCE_PERSISTENCE"
+              assert s["blocker"]!=""
+              if s["blocker"]=="EXPLICIT_SOURCE_POLICY_OPERATIONAL_RESTRICTION":
+                  assert s["official_policy_review"]=="EXPLICIT_OPERATIONAL_RESTRICTION_FOUND"
+                  assert s["canonical_evidence_persistable"]=="NOT_VERIFIED"
+                  assert persist["Legal_Conclusion"] is False
+          assert future["Source_Retrieved_UTC_rule"].startswith("Record actual retrieval timestamp")
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert imm["BR_Canonical_Semantic_Unchanged"] is True
+          assert imm["IN_Gate_F_Classified_Before"]==imm["IN_Gate_F_Classified_After"]==45
+          assert imm["Canonical_READY_Rows_Before"]==imm["Canonical_READY_Rows_After"]==37
+          PY
+          BAD_WORKTREE="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_in_nifty50_source_access_persistence_v0_75/.*|docs/validation/IN_NIFTY50_Source_Access_Evidence_Persistence_Gate_v0\.75\.md)$' || true)"
+          test -z "$BAD_WORKTREE"
+
+      - name: Upload bounded v0.75 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: in-nifty50-source-access-persistence-v0.75-${{ github.run_id }}
+          path: output_in_nifty50_source_access_persistence_v0_75/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_in_nifty50_source_access_persistence_v0_75.py             --output-dir output_in_nifty50_source_access_persistence_v0_75             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "in-nifty50-source-access-persistence-v0.75-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.75 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/IN_NIFTY50_Source_Access_Evidence_Persistence_Gate_v0.75.md                   output_in_nifty50_source_access_persistence_v0_75/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/IN_NIFTY50_Source_Access_Evidence_Persistence_Gate_v0\.75\.md|output_in_nifty50_source_access_persistence_v0_75/.*)$' ; then
+            echo "Unexpected staged path"
+            exit 1
+          fi
+          git commit -m "Persist IN NIFTY50 Gate H v0.75"
+          git push origin HEAD:main
