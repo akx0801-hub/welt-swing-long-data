@@ -215,6 +215,47 @@ def parse_foamtree_payload(raw:bytes)->tuple[Any|None,str]:
 def safe_url_join_path(base:str,path:str)->str:
     return base.rstrip("/")+"/"+urllib.parse.quote(path.lstrip("/"),safe="/:_-.%")
 
+def strip_weight_presentation(label:str,weight:Any)->tuple[str,str]:
+    s=norm(label)
+    m=re.match(r"^(.*)\s+(-?\d+(?:\.\d+)?)%$",s)
+    if not m:return s,"NO_WEIGHT_SUFFIX"
+    try:
+        shown=float(m.group(2));w=float(weight)
+    except Exception:return s,"WEIGHT_NOT_NUMERIC"
+    if abs(shown-w)>0.000001:return s,"WEIGHT_SUFFIX_MISMATCH"
+    return norm(m.group(1)),"PASS_EXACT_TRAILING_WEIGHT"
+
+def extract_foamtree_membership_records(obj:Any,formal_level:str,display_level:str,source_url:str)->tuple[list[dict[str,str]],list[dict[str,Any]]]:
+    records=[];audit=[]
+    groups=obj.get("groups",[]) if isinstance(obj,dict) else []
+    if not isinstance(groups,list):return records,audit
+    for cat in groups:
+        if not isinstance(cat,dict):continue
+        raw_cat=norm(cat.get("label",""));cat_weight=cat.get("weight","")
+        cat_label,cat_parse=strip_weight_presentation(raw_cat,cat_weight)
+        cat_id=norm(str(cat.get("id","")))
+        children=cat.get("groups",[])
+        if not isinstance(children,list):children=[]
+        for child in children:
+            if not isinstance(child,dict):continue
+            raw_sec=norm(child.get("label",""));sec_weight=child.get("weight","")
+            symbol,sec_parse=strip_weight_presentation(raw_sec,sec_weight)
+            audit.append({
+              "Formal_Level":formal_level,"Official_Displayed_Level":display_level,
+              "Category_Raw_Label":raw_cat,"Category_Display_Label":cat_label,"Category_Weight":cat_weight,
+              "Application_Category_ID":cat_id,"Security_Raw_Label":raw_sec,"Security_Symbol":symbol,
+              "Security_Weight":sec_weight,"Category_Label_Parse_Status":cat_parse,
+              "Security_Label_Parse_Status":sec_parse,"Security_Leaf_ID":norm(str(child.get("id",""))),
+              "Source_Endpoint":source_url
+            })
+            if cat_parse=="PASS_EXACT_TRAILING_WEIGHT" and sec_parse=="PASS_EXACT_TRAILING_WEIGHT" and symbol:
+                records.append({
+                  "phase":"LEVEL:"+display_level,"source_url":source_url,"security_id":symbol,"security_id_type":"SYMBOL",
+                  "application_level_raw":display_level,"category_label":cat_label,"application_node_id_or_code":cat_id,
+                  "category_raw_label":raw_cat,"security_raw_label":raw_sec
+                })
+    return records,audit
+
 def provider_calls()->dict[str,int]:
     return {
       "alpha_vantage":0,"yahoo_yfinance":0,"eodhd":0,"scalable":0,"tradingview":0,"wikipedia":0,
@@ -534,7 +575,7 @@ def main()->int:
       ("INDUSTRY","Industry","Industry","_Industry"),
       ("BASIC_INDUSTRY","Basic Industry","Basic Industry","_BasicIndustry")
     ]
-    static_level_payloads=[];static_candidate_contracts=[];static_membership=[];static_level_contract_rows=[]
+    static_level_payloads=[];static_candidate_contracts=[];static_membership=[];static_level_contract_rows=[];static_foamtree_audit=[]
     base="https://liveindexsa.niftyindices.com/jsonfiles/"
     for formal,display,folder,suffix in code_contracts:
         template=f"{folder}/SectorialIndexData"+chr(36)+"{e.toUpperCase()}"+f"{suffix}"
@@ -548,8 +589,12 @@ def main()->int:
                              "Timestamp_UTC":fr.get("timestamp_utc",""),"Official_Source":"YES","Per_Security_Fanout":"NO",
                              "Result":"OK" if fr.get("ok") else fr.get("error","FAILED")})
         obj,parse_status=parse_foamtree_payload(fr.get("body",b"")) if fr.get("ok") else (None,"NOT_FETCHED")
-        recs=extract_membership_records(obj,"LEVEL:"+display,url) if obj is not None else []
+        if obj is not None:
+            recs,raw_audit=extract_foamtree_membership_records(obj,formal,display,url)
+        else:
+            recs,raw_audit=[],[]
         static_membership.extend(recs)
+        static_foamtree_audit.extend(raw_audit)
         sch=body_schema(json.dumps(obj,ensure_ascii=False).encode("utf-8"),"application/json") if obj is not None else {"parse_type":"","json_keys":[]}
         rawtxt=fr.get("body",b"").decode("utf-8",errors="replace")
         static_level_payloads.append({
@@ -578,6 +623,11 @@ def main()->int:
           "Level_Parameter_Status":"PASS_APPLICATION_CODE_PATH_ENUM" if code_proof and fr.get("ok") else "NOT_VERIFIED"
         })
     write_csv(out/"nifty_static_sectoral_distribution_contract_v0.73.csv",static_level_payloads)
+    write_csv(out/"nifty_foamtree_category_security_raw_audit_v0.73.csv",static_foamtree_audit if static_foamtree_audit else [{
+      "Formal_Level":"","Official_Displayed_Level":"","Category_Raw_Label":"","Category_Display_Label":"","Category_Weight":"",
+      "Application_Category_ID":"","Security_Raw_Label":"","Security_Symbol":"","Security_Weight":"",
+      "Category_Label_Parse_Status":"NOT_VERIFIED","Security_Label_Parse_Status":"NOT_VERIFIED","Security_Leaf_ID":"","Source_Endpoint":""
+    }])
 
     # Browser network capture.
     bc=browser_capture(spec,out)
