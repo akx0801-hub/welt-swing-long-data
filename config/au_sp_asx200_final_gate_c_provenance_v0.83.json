@@ -1,0 +1,17 @@
+{
+  "version": "v0.83",
+  "required_start_head": "5629089262fa1915c0f83e8281fe4f13509f2a08",
+  "evidence_repair_authorized": true,
+  "final_gate_c_provenance_attempt_authorized": true,
+  "fresh_browser_contexts_max": 1,
+  "complete_74_page_rerun_allowed": false,
+  "au_gate_d_allowed": false,
+  "au_gate_e_f_allowed": false,
+  "canonical_materialization_allowed": false,
+  "parking_reselection_execution_allowed": false,
+  "next_cohort_execution_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
