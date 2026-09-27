@@ -22,6 +22,6 @@
   "p1_p2_allowed": false,
   "alpha_vantage_allowed": false,
   "productive": false,
-  "execution_attempt": 7,
-  "retry_reason": "PARSE_OFFICIAL_FOAMTREE_CATEGORY_AND_SYMBOL_MEMBERSHIP"
+  "execution_attempt": 8,
+  "retry_reason": "REQUIRE_EXACT_APP_LEVEL_IDENTITY_AND_DERIVE_SECTOR_CODES_FROM_OFFICIAL_DESCENDANTS"
 }
