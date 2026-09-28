@@ -13,5 +13,7 @@
   "core_msci_methodology_requests_allowed": 0,
   "bounded_policy_page_requests_allowed": true,
   "alpha_vantage_allowed": false,
-  "productive": false
+  "productive": false,
+  "retry_attempt": 1,
+  "retry_reason": "S&P Global terms endpoint unreproducible in runner; switched to official S&P DJI legal disclaimers"
 }
