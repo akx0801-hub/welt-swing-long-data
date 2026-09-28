@@ -1,0 +1,158 @@
+{
+  "version": "v0.88",
+  "stage": "AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G",
+  "required_start_head": "3c71084e03fbd49c6ab5b34b03696c62aac765ad",
+  "role": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "fail_closed": true,
+  "predecessor": {
+    "verdict": "PASS_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+    "ready": true,
+    "frozen_total": 63,
+    "provably_classified": 63,
+    "not_provably_classified": 0,
+    "not_found": 0,
+    "ambiguous": 0,
+    "not_verified": 0,
+    "conflict": 0,
+    "formal_label_binding": "63/63",
+    "source_native_code_coverage": "63/63",
+    "nonformal_frozen_exposure": 0,
+    "used_distinct_gics_codes": 16,
+    "unauthorized_codes": 0,
+    "pdsc": 0,
+    "workflow_run_id": 36392661784,
+    "artifact_id": 10956817563,
+    "artifact_digest": "sha256:961c68520689e978945a550b4d05b7a2e698f5b890fc072caecffb6a95e186bc",
+    "tests": "34/34 PASS",
+    "canonical_ready": "37/1425"
+  },
+  "frozen_authority": {
+    "file": "universe/SWING_U3K_FROZEN_v0.5.csv",
+    "sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "cohort_label_authority_file": "output_p0_frozen_1425_home_market_rs_v0_58/capability_v0.58.csv",
+    "physical_frozen_has_primary_universe_index": false,
+    "cohort": "AU_SP_ASX200",
+    "expected_rows": 63
+  },
+  "classification_source": {
+    "source_name": "ASX_COMPANY_DIRECTORY_LISTED_COMPANIES_CSV",
+    "source_reference": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+    "snapshot_sha256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+    "retrieved_utc": "2026-09-28T07:37:52Z",
+    "source_version_or_asof": "SOURCE_SNAPSHOT_SHA256:66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+    "effective_asof_status": "NO_EXPLICIT_EFFECTIVE_DATE_IN_PERSISTED_SOURCE",
+    "business_effective_date_from_retrieval": "NO",
+    "record_count": 1833,
+    "schema": [
+      "ASX code",
+      "Company name",
+      "GICs industry group",
+      "Listing date",
+      "Market Cap"
+    ],
+    "persisted_authority_file": "output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87/asx_current_gate_f_source_snapshot_audit_v0.87.json"
+  },
+  "code_authority": {
+    "name": "MSCI_GICS_METHODOLOGY",
+    "reference": "https://www.msci.com/indexes/documents/methodology/1_MSCI_Global_Industry_Classification_Standard_GICS_Methodology_20250220.pdf",
+    "sha256": "d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06",
+    "version_or_asof": "APRIL 2026",
+    "retrieved_utc": "2026-09-28T06:24:19Z",
+    "document_title": "GLOBAL INDUSTRY CLASSIFICATION STANDARD (GICS®) METHODOLOGY",
+    "last_updated": "April 2026",
+    "taxonomy": "GICS",
+    "level": "INDUSTRY_GROUP",
+    "joint_authority": "MSCI / S&P Dow Jones Indices",
+    "official_industry_groups": 25,
+    "taxonomy_version_status": "CURRENT_MAINTAINED_NO_STATIC_VERSION"
+  },
+  "evidence_contract": {
+    "identity": {
+      "version": "v0.86",
+      "final_commit": "16ca7cfc2148527f4e48bda642e7533831a716c5"
+    },
+    "classification": {
+      "version": "v0.87",
+      "final_commit": "3c71084e03fbd49c6ab5b34b03696c62aac765ad"
+    },
+    "code_authority": {
+      "version": "v0.85",
+      "final_commit": "62c1d0345c8955c949c134318f9329e12dca0469"
+    }
+  },
+  "future_canonical_core": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Code",
+    "Sector_Name",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "Mapping_Status"
+  ],
+  "stable_names": {
+    "source_name": "ASX_COMPANY_DIRECTORY_LISTED_COMPANIES_CSV",
+    "source_reference": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+    "code_authority_name": "MSCI_GICS_METHODOLOGY"
+  },
+  "scope": {
+    "gate_g_only": true,
+    "external_source_requests": 0,
+    "gate_h_allowed": false,
+    "policy_review_allowed": false,
+    "canonical_materialization_allowed": false,
+    "asx_refetch_allowed": false,
+    "msci_refetch_allowed": false,
+    "sp_refetch_allowed": false,
+    "gate_f_rerun_allowed": false,
+    "other_cohort_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_p1_p2_allowed": false,
+    "productive": false
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "tradingview": true,
+    "wikipedia": true,
+    "etf_holdings": true,
+    "asx_network_requests": true,
+    "msci_network_requests": true,
+    "sp_network_requests": true,
+    "third_party_classification_sources": true,
+    "company_name_linkage": true,
+    "fuzzy_matching": true,
+    "semantic_inference": true,
+    "cross_taxonomy_mapping": true,
+    "pdsc": true,
+    "per_security_web_fanout": true,
+    "gate_h": true,
+    "canonical_materialization": true,
+    "sector_rs": true,
+    "p0": true,
+    "p1": true,
+    "p2": true
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "v085_gics_code_authority": "25/25",
+    "v086_au_identity": "63/63",
+    "v087_au_classification": "63/63",
+    "in_gate_f": "45/45",
+    "jp_gate_f": "197/197",
+    "canonical_ready": "37/1425",
+    "sector_rs": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0
+  },
+  "terminal": {
+    "pass_next_gate": "AU_SP_ASX200 SOURCE ACCESS / EVIDENCE PERSISTENCE GATE H",
+    "execute_next_automatically": false
+  }
+}
