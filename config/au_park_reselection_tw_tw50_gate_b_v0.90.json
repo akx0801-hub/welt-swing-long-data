@@ -1,0 +1,16 @@
+{
+  "version": "v0.90",
+  "required_start_head": "ef6029b3660b1f2a8bc29c016dc78d0188a775b1",
+  "au_park_authorized": true,
+  "post_park_reselection_authorized": true,
+  "tw_gate_b_authorized": true,
+  "tw_gate_e_allowed": false,
+  "tw_gate_f_allowed": false,
+  "tw_gate_h_allowed": false,
+  "canonical_materialization_allowed": false,
+  "next_cohort_execution_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
