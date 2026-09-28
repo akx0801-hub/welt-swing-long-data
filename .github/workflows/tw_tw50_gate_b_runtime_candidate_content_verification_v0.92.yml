@@ -1,0 +1,224 @@
+name: TW TW50 Gate B Runtime Candidate Verification v0.92
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/tw_tw50_gate_b_runtime_candidate_content_verification_v0.92.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  tw-tw50-gate-b-runtime-candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout bounded v0.92 stage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="14270624d2f34f68fc0041d1cb7bd9d94c4b8d4f"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/tw_tw50_gate_b_runtime_candidate_content_verification_spec_v0\.92\.json|scripts/tw_tw50_gate_b_runtime_candidate_content_verification_v0_92\.py|scripts/persist_tw_tw50_gate_b_runtime_candidate_content_verification_v0_92\.py|tests/test_tw_tw50_gate_b_runtime_candidate_content_verification_v0_92\.py|\.github/workflows/tw_tw50_gate_b_runtime_candidate_content_verification_v0\.92\.yml|config/tw_tw50_gate_b_runtime_candidate_content_verification_v0\.92\.json|docs/validation/TW_TW50_Gate_B_Runtime_Candidate_Content_Verification_v0\.92\.md|output_tw_tw50_gate_b_runtime_candidate_verification_v0_92/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.91 predecessor and artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10990953798 --jq .digest)"
+          test "$DIGEST" = "sha256:d6db0d2fe1449fb7b68f64f0e41cf6c96ea2bc3283995c87e2e3472eb7eb74ab"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_tw_tw50_gate_b_pdf_content_repair_v0_91")
+          s=json.load(open(out/"summary_v0.91.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.91.json",encoding="utf-8"))
+          m=json.load(open(out/"manifest_v0.91.json",encoding="utf-8"))
+          assert s["version"]=="v0.91"
+          assert s["tw_official_sector_bulk_source_ready"] is False
+          assert s["pdf_route_reproducible"]=="YES"
+          assert s["pdf_parse_status"]=="PASS"
+          assert s["pdf_pages"]==2
+          assert s["pdf_row_level_security_records"]=="YES"
+          assert s["pdf_security_identifier"]=="NOT_AVAILABLE"
+          assert s["pdf_icb_level"]=="NOT_VERIFIED"
+          assert s["runtime_route_found"]=="YES"
+          assert s["tests"]=={"failed":0,"passed":24,"total":24}
+          assert c["workflow_run_id"]==36470124613 and c["artifact_id"]==10990953798
+          assert c["artifact_digest"]=="sha256:d6db0d2fe1449fb7b68f64f0e41cf6c96ea2bc3283995c87e2e3472eb7eb74ab"
+          assert m["workflow_run_id"]==36470124613 and m["artifact_id"]==10990953798
+          pages=list(csv.DictReader(open(out/"tw_pdf_page_structure_audit_v0.91.csv",encoding="utf-8")))
+          assert len(pages)==3 and [int(r["Page"]) for r in pages]==[1,2,3]
+          pdf=json.load(open(out/"tw_current_pdf_source_audit_v0.91.json",encoding="utf-8"))
+          assert pdf["PDF_Page_Count"]==2
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="73bbb2d59a044b92a3abbfd83ccba5c65e17e979f6e707a22f12dd2775a03696"
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          parks=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(parks)==5
+          by={r["Cohort"]:r for r in parks}
+          assert by["AU_SP_ASX200"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("TW_TW50_*.csv"))
+          PY
+
+      - name: Verify v0.92 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/tw_tw50_gate_b_runtime_candidate_content_verification_spec_v0.92.json",encoding="utf-8"))
+          t=json.load(open("config/tw_tw50_gate_b_runtime_candidate_content_verification_v0.92.json",encoding="utf-8"))
+          assert s["required_start_head"]=="14270624d2f34f68fc0041d1cb7bd9d94c4b8d4f"
+          assert s["predecessor"]["v091_pdf_finding_authority"]=="ACCEPTED"
+          assert s["predecessor"]["v091_stage_blocker_authority"]=="NOT_YET_COMPLETE"
+          assert [x["id"] for x in s["candidates"]]==["A","B","C","D","E"]
+          assert s["scope"]["no_new_broad_source_hunt"] is True
+          assert s["scope"]["evaluate_only_known_candidates"] is True
+          assert s["scope"]["tw_gate_e"] is False and s["scope"]["tw_gate_f"] is False and s["scope"]["tw_gate_h"] is False
+          assert s["scope"]["tw_parking"] is False and s["scope"]["reselection"] is False and s["scope"]["cn_csi300_execution"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert t["version"]=="v0.92"
+          assert t["required_start_head"]==s["required_start_head"]
+          assert t["runtime_candidate_content_verification_authorized"] is True
+          assert t["tw_gate_e_allowed"] is False and t["tw_gate_f_allowed"] is False and t["tw_gate_h_allowed"] is False
+          assert t["tw_parking_allowed"] is False and t["reselection_allowed"] is False and t["cn_csi300_execution_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Ensure bounded runtime tooling
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple websocket-client==1.8.0
+          if ! command -v pdftotext >/dev/null || ! command -v pdfinfo >/dev/null; then
+            sudo apt-get update -y
+            sudo apt-get install -y poppler-utils
+          fi
+          command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser
+          python3 - <<'PY'
+          import websocket
+          assert websocket.__version__=="1.8.0"
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/tw_tw50_gate_b_runtime_candidate_content_verification_v0_92.py scripts/persist_tw_tw50_gate_b_runtime_candidate_content_verification_v0_92.py
+          python3 tests/test_tw_tw50_gate_b_runtime_candidate_content_verification_v0_92.py -v
+
+      - name: Run bounded v0.92 candidate content verification
+        run: |
+          set -euo pipefail
+          rm -rf output_tw_tw50_gate_b_runtime_candidate_verification_v0_92
+          python3 scripts/tw_tw50_gate_b_runtime_candidate_content_verification_v0_92.py             --repository-sha "$GITHUB_SHA"             --output-dir output_tw_tw50_gate_b_runtime_candidate_verification_v0_92
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_tw_tw50_gate_b_runtime_candidate_verification_v0_92")
+          req=[
+            "v091_manager_runtime_completeness_authority_v0.92.json","v091_pdf_page_count_reconciliation_v0.92.json",
+            "tw_v092_candidate_authority_inventory_v0.92.csv","tw_v092_interaction_execution_audit_v0.92.csv",
+            "tw_lseg_constituent_weights_page_audit_v0.92.json","tw_lseg_constituents_section_audit_v0.92.json",
+            "tw_downloadsingleissue_tw50_audit_v0.92.json","tw_taiwanindex_authority_audit_v0.92.json",
+            "tw_taiwanindex_index_page_audit_v0.92.json","tw_v092_runtime_network_content_audit_v0.92.csv",
+            "tw_v092_security_identifier_architecture_audit_v0.92.json","tw_v092_icb_industry_group_architecture_audit_v0.92.json",
+            "tw_v092_two_source_composition_audit_v0.92.json","tw_v092_gate_b_decision_v0.92.json",
+            "external_request_ledger_v0.92.csv","provider_call_audit_v0.92.json","immutability_audit_v0.92.json",
+            "test_results_v0.92.csv","summary_preupload_v0.92.json","stage_checkpoint_preupload_v0.92.json","manifest_preupload_v0.92.json"
+          ]
+          assert all((out/x).exists() for x in req)
+          corr=json.load(open(out/"v091_pdf_page_count_reconciliation_v0.92.json",encoding="utf-8"))
+          assert corr["V091_PDF_Page_Count"]==2 and corr["V092_Reconciled_Page_Audit_Rows"]==2
+          assert corr["PDF_Parse_Attempts_v092"]==0 and corr["Content_Reassessment"]=="NO"
+          cand=list(csv.DictReader(open(out/"tw_v092_candidate_authority_inventory_v0.92.csv",encoding="utf-8")))
+          assert [r["Candidate"] for r in cand]==["A","B","C","D","E"]
+          allowed={"CONTENT_VERIFIED_USABLE","CONTENT_VERIFIED_INSUFFICIENT","AUTH_REQUIRED","NOT_REPRODUCIBLE","NOT_VERIFIED_AUTHORITY"}
+          assert all(r["Content_Status"] in allowed for r in cand)
+          inter=list(csv.DictReader(open(out/"tw_v092_interaction_execution_audit_v0.92.csv",encoding="utf-8")))
+          assert len(inter)>=2
+          assert any(r["Candidate"]=="C" and r["Action_URL"] for r in inter)
+          s=json.load(open(out/"summary_preupload_v0.92.json",encoding="utf-8"))
+          d=json.load(open(out/"tw_v092_gate_b_decision_v0.92.json",encoding="utf-8"))
+          p=json.load(open(out/"provider_call_audit_v0.92.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.92.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.92.csv",encoding="utf-8")))
+          assert all(r["Result"]=="PASS" for r in tests)
+          zero=["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings",
+                "unofficial_constituent_lists","third_party_classification_databases","company_name_Frozen_linkage",
+                "fuzzy_matching","semantic_inference","cross_taxonomy_mapping","PDSC","per_security_fanout","Frozen_49_linkage",
+                "TW_Gate_E","TW_Gate_F","TW_Gate_H","TW_Parking","Reselection","CN_CSI300_execution",
+                "canonical_materialization","Sector_RS","P0","P1","P2","PDF_parse_attempts"]
+          assert all(p[k]==0 for k in zero)
+          assert imm["Frozen_Unchanged"] and imm["v057_Unchanged"] and imm["v058_Unchanged"] and imm["BR_Canonical_Semantic_Unchanged"]
+          assert imm["Parked_Registry_Unchanged"] and imm["Parked_Registry_Rows"]==5
+          assert imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("TW_TW50_*.csv"))
+          if s["tw_gate_b_ready"]:
+              assert s["verdict"]=="PASS_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B"
+              assert d["B"]=="PASS_BY_CURRENT_EVIDENCE"
+              assert d["Security_Identifier_Field"]!="NOT_AVAILABLE"
+              assert d["ICB_Level_Binding"]=="PASS"
+              assert d["Blocker"]==""
+              assert s["next_gate"]=="TW_TW50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E"
+          else:
+              assert s["verdict"]=="BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B_FINAL"
+              assert d["B"]=="BLOCKED"
+              assert d["Final_TW_Gate_B_Source_Hunt_Status"]=="CLOSED_BY_V0.92"
+              assert s["blocker"] in {
+                "TWSE_OFFICIAL_INDEX_SOURCE_NOT_REPRODUCIBLE","TWSE_TAIWAN50_BULK_CONSTITUENT_ROUTE_NOT_REPRODUCIBLE",
+                "TWSE_BULK_ROW_LEVEL_SECURITY_RECORDS_NOT_AVAILABLE","TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE",
+                "TWSE_ICB_ROW_LEVEL_CLASSIFICATION_ROUTE_NOT_REPRODUCIBLE","TWSE_BULK_ICB_INDUSTRY_GROUP_FIELD_NOT_AVAILABLE",
+                "TWSE_BULK_ICB_LEVEL_BINDING_NOT_VERIFIED","TWSE_OFFICIAL_BULK_SOURCE_REQUIRES_PER_SECURITY_FANOUT",
+                "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED","AUTH_OR_ENTITLEMENT_REQUIRED","AUTHORITY_REGRESSION_REVIEW_REQUIRED"
+              }
+              assert s["next_gate"]=="TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE"
+          PY
+          BAD="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_tw_tw50_gate_b_runtime_candidate_verification_v0_92/.*|docs/validation/TW_TW50_Gate_B_Runtime_Candidate_Content_Verification_v0\.92\.md)$' || true)"
+          test -z "$BAD"
+
+      - name: Upload bounded v0.92 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: tw-tw50-gate-b-runtime-candidates-v0.92-${{ github.run_id }}
+          path: output_tw_tw50_gate_b_runtime_candidate_verification_v0_92/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_tw_tw50_gate_b_runtime_candidate_content_verification_v0_92.py             --output-dir output_tw_tw50_gate_b_runtime_candidate_verification_v0_92             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "tw-tw50-gate-b-runtime-candidates-v0.92-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.92 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/TW_TW50_Gate_B_Runtime_Candidate_Content_Verification_v0.92.md                   output_tw_tw50_gate_b_runtime_candidate_verification_v0_92/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/TW_TW50_Gate_B_Runtime_Candidate_Content_Verification_v0\.92\.md|output_tw_tw50_gate_b_runtime_candidate_verification_v0_92/.*)$'; then
+            echo "Unexpected staged path"; exit 1
+          fi
+          test "$(sha256sum sector_metadata/governance/parked_cohort_registry_v1.csv | awk '{print $1}')" = "73bbb2d59a044b92a3abbfd83ccba5c65e17e979f6e707a22f12dd2775a03696"
+          test ! -e sector_metadata/canonical/cohorts/TW_TW50_sector_metadata_v1.csv
+          git commit -m "Persist TW TW50 Gate B runtime candidate verification v0.92"
+          git push origin HEAD:main
