@@ -1,0 +1,213 @@
+name: AU SP ASX200 Identity Linkage Gate E v0.86
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/au_sp_asx200_identity_linkage_gate_e_v0.86.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  au-asx200-gate-e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.86 stage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="62c1d0345c8955c949c134318f9329e12dca0469"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/au_sp_asx200_identity_linkage_gate_e_spec_v0\.86\.json|scripts/au_sp_asx200_identity_linkage_gate_e_v0_86\.py|scripts/persist_au_sp_asx200_identity_linkage_gate_e_v0_86\.py|tests/test_au_sp_asx200_identity_linkage_gate_e_v0_86\.py|\.github/workflows/au_sp_asx200_identity_linkage_gate_e_v0\.86\.yml|config/au_sp_asx200_identity_linkage_gate_e_v0\.86\.json|docs/validation/AU_SP_ASX200_Deterministic_Security_Identity_Linkage_Gate_E_v0\.86\.md|output_au_sp_asx200_identity_linkage_gate_e_v0_86/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.85 predecessor and artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10954507819 --jq .digest)"
+          test "$DIGEST" = "sha256:4330c752787106bbfb0897d2430a53b17811a2cc1a2fb99c07281adf4a00eeb7"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_au_sp_asx200_gate_d_msci_gics_repair_v0_85")
+          s=json.load(open(out/"summary_v0.85.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.85.json",encoding="utf-8"))
+          m=json.load(open(out/"manifest_v0.85.json",encoding="utf-8"))
+          d=json.load(open(out/"au_sector_field_code_feasibility_decision_v0_85.json",encoding="utf-8"))
+          assert s["verdict"]=="PASS_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D"
+          assert s["au_sector_field_code_feasibility_ready"] is True
+          assert s["formal_exact_match_values"]==25 and s["nonformal_values"]==2
+          assert s["formal_label_code_coverage"]=="25/25"
+          assert s["selected_code_strategy"]=="SOURCE_NATIVE_GICS_CODE"
+          assert s["tests"]=={"failed":0,"passed":23,"total":23}
+          assert c["workflow_run_id"]==36386276036 and c["artifact_id"]==10954507819
+          assert c["artifact_digest"]=="sha256:4330c752787106bbfb0897d2430a53b17811a2cc1a2fb99c07281adf4a00eeb7"
+          assert m["workflow_run_id"]==36386276036 and m["artifact_id"]==10954507819
+          assert d["Taxonomy"]=="GICS" and d["Level"]=="INDUSTRY_GROUP"
+          assert d["Code_Strategy"]=="SOURCE_NATIVE_GICS_CODE"
+          assert d["Sector_Code_Origin"]=="SOURCE_NATIVE"
+          assert d["Sector_Code_Method"]=="GICS_OFFICIAL_INDUSTRY_GROUP_CODE"
+          assert d["Gate_E"]=="NOT_EVALUATED" and d["Gate_F"]=="NOT_EVALUATED" and d["Gate_H"]=="NOT_EVALUATED"
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          PY
+
+      - name: Verify v0.86 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/au_sp_asx200_identity_linkage_gate_e_spec_v0.86.json",encoding="utf-8"))
+          t=json.load(open("config/au_sp_asx200_identity_linkage_gate_e_v0.86.json",encoding="utf-8"))
+          assert s["required_start_head"]=="62c1d0345c8955c949c134318f9329e12dca0469"
+          assert s["scope"]["gate_e_only"] is True
+          assert s["scope"]["gate_f_allowed"] is False
+          assert s["scope"]["gate_h_allowed"] is False
+          assert s["scope"]["canonical_materialization_allowed"] is False
+          assert s["scope"]["pdsc_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert t["version"]=="v0.86"
+          assert t["required_start_head"]==s["required_start_head"]
+          assert t["gate_e_authorized"] is True
+          assert t["gate_f_allowed"] is False and t["gate_h_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["pdsc_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Prepare browser tooling
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple websocket-client==1.8.0
+          python3 - <<'PY'
+          import importlib.metadata,shutil
+          from pathlib import Path
+          assert importlib.metadata.version("websocket-client")=="1.8.0"
+          chrome=next((p for p in ["/usr/bin/google-chrome","/usr/bin/google-chrome-stable","/usr/bin/chromium","/usr/bin/chromium-browser"] if Path(p).exists()),None)
+          if not chrome:chrome=shutil.which("google-chrome") or shutil.which("chromium")
+          assert chrome,"Chrome/Chromium unavailable"
+          print("CHROME="+chrome)
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/au_sp_asx200_identity_linkage_gate_e_v0_86.py scripts/persist_au_sp_asx200_identity_linkage_gate_e_v0_86.py
+          python3 tests/test_au_sp_asx200_identity_linkage_gate_e_v0_86.py -v
+
+      - name: Run bounded AU Gate E
+        run: |
+          set -euo pipefail
+          rm -rf output_au_sp_asx200_identity_linkage_gate_e_v0_86
+          python3 scripts/au_sp_asx200_identity_linkage_gate_e_v0_86.py             --repository-sha "$GITHUB_SHA"             --output-dir output_au_sp_asx200_identity_linkage_gate_e_v0_86
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_au_sp_asx200_identity_linkage_gate_e_v0_86")
+          req=[
+            "au_gate_e_predecessor_authority_v0.86.json",
+            "au_frozen_63_identity_target_v0.86.csv",
+            "au_frozen_63_identity_target_schema_audit_v0.86.json",
+            "au_frozen_source_ws_id_contract_audit_v0.86.csv",
+            "asx_current_directory_identity_source_audit_v0.86.json",
+            "asx_current_csv_identity_schema_audit_v0.86.json",
+            "asx_current_asx_code_uniqueness_audit_v0.86.json",
+            "asx_current_asx_code_duplicate_detail_v0.86.csv",
+            "au_exact_63_ticker_linkage_audit_v0.86.csv",
+            "au_source_ws_id_construction_audit_v0.86.csv",
+            "au_identity_collision_ambiguity_audit_v0.86.csv",
+            "au_current_directory_presence_audit_v0.86.csv",
+            "au_deterministic_security_identity_linkage_decision_v0.86.json",
+            "external_request_ledger_v0.86.csv","provider_call_audit_v0.86.json","immutability_audit_v0.86.json",
+            "test_results_v0.86.csv","summary_preupload_v0.86.json","stage_checkpoint_preupload_v0.86.json","manifest_preupload_v0.86.json"
+          ]
+          assert all((out/x).exists() for x in req)
+          s=json.load(open(out/"summary_preupload_v0.86.json",encoding="utf-8"))
+          d=json.load(open(out/"au_deterministic_security_identity_linkage_decision_v0.86.json",encoding="utf-8"))
+          p=json.load(open(out/"provider_call_audit_v0.86.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.86.json",encoding="utf-8"))
+          schema=json.load(open(out/"au_frozen_63_identity_target_schema_audit_v0.86.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.86.csv",encoding="utf-8")))
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert schema["Row_Count"]==63 and schema["Unique_Security_Key"]==63 and schema["Unique_Source_WS_ID"]==63 and schema["Unique_Primary_Ticker"]==63
+          assert schema["Primary_MIC_Distribution"]=={"XASX":63}
+          assert schema["Frozen_Physical_Has_Primary_Universe_Index"]=="NO"
+          zero=["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings","third_party_identity_databases",
+                "company_name_linkage","fuzzy_matching","ticker_change_inference","semantic_identity_inference","per_security_web_fanout",
+                "ASX_ISIN_fallback","issuer_page_fallback","MSCI_methodology_requests","PDSC","AU_Gate_F","Gate_H","canonical_materialization",
+                "Sector_RS","P0","P1","P2"]
+          assert all(p[k]==0 for k in zero)
+          assert p["fresh_ASX_directory_snapshots"]==1
+          assert d["Gate_F"]=="NOT_EVALUATED" and d["Gate_H"]=="NOT_EVALUATED"
+          assert imm["Frozen_Unchanged"] and imm["v057_Unchanged"] and imm["v058_Unchanged"] and imm["BR_Canonical_Semantic_Unchanged"]
+          assert imm["Parked_Cohort_Registry_Unchanged"] and imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          if s["au_deterministic_security_identity_linkage_ready"]:
+              assert s["verdict"]=="PASS_AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E"
+              assert s["exact_ticker_links"]==63 and s["source_ws_id_equality"]==63
+              assert s["not_found"]==s["ambiguous"]==s["not_verified"]==s["conflict"]==0
+              assert d["Gate_E"]=="PASS_BY_CURRENT_EVIDENCE"
+              assert s["next_gate"]=="AU_SP_ASX200 EXACT FROZEN GICS INDUSTRY-GROUP CLASSIFICATION COVERAGE GATE F"
+              assert s["blocker"]==""
+          else:
+              assert s["verdict"]=="BLOCKED_AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E"
+              assert s["blocker"] in {
+                "ASX_DIRECTORY_IDENTITY_SOURCE_NOT_REPRODUCIBLE","ASX_DIRECTORY_ASX_CODE_FIELD_NOT_AVAILABLE",
+                "AU_FROZEN_SOURCE_WS_ID_CONTRACT_NOT_VERIFIED","ASX_DIRECTORY_ASX_CODE_DUPLICATE_FOR_FROZEN_SECURITY",
+                "AU_FROZEN_SECURITY_NOT_PRESENT_CURRENT_ASX_DIRECTORY","AU_SOURCE_WS_ID_CONSTRUCTION_NOT_VERIFIED",
+                "AU_SECURITY_IDENTITY_LINKAGE_AMBIGUOUS","AU_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_INCOMPLETE",
+                "AUTHORITY_REGRESSION_REVIEW_REQUIRED"
+              }
+          PY
+          BAD="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_au_sp_asx200_identity_linkage_gate_e_v0_86/.*|docs/validation/AU_SP_ASX200_Deterministic_Security_Identity_Linkage_Gate_E_v0\.86\.md)$' || true)"
+          test -z "$BAD"
+
+      - name: Upload bounded v0.86 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: au-asx200-identity-linkage-gate-e-v0.86-${{ github.run_id }}
+          path: output_au_sp_asx200_identity_linkage_gate_e_v0_86/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_au_sp_asx200_identity_linkage_gate_e_v0_86.py             --output-dir output_au_sp_asx200_identity_linkage_gate_e_v0_86             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "au-asx200-identity-linkage-gate-e-v0.86-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.86 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/AU_SP_ASX200_Deterministic_Security_Identity_Linkage_Gate_E_v0.86.md                   output_au_sp_asx200_identity_linkage_gate_e_v0_86/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/AU_SP_ASX200_Deterministic_Security_Identity_Linkage_Gate_E_v0\.86\.md|output_au_sp_asx200_identity_linkage_gate_e_v0_86/.*)$'; then
+            echo "Unexpected staged path"; exit 1
+          fi
+          test ! -e sector_metadata/canonical/cohorts/AU_SP_ASX200_sector_metadata_v1.csv
+          git commit -m "Persist AU ASX200 identity linkage Gate E v0.86"
+          git push origin HEAD:main
