@@ -134,7 +134,7 @@ jobs:
             "asx_to_msci_gics_exact_label_code_binding_audit_v0.85.csv",
             "au_formal_vs_nonformal_value_reconciliation_v0_85.json",
             "au_nonformal_value_governance_audit_v0_85.csv",
-            "gics_industry_group_code_uniqueness_audit_v0.85.csv",
+            "gics_industry_group_code_uniqueness_audit_v0_85.csv",
             "au_source_native_code_feasibility_decision_v0_85.json",
             "au_pdsc_fallback_necessity_audit_v0_85.json",
             "au_sector_field_code_feasibility_decision_v0_85.json",
