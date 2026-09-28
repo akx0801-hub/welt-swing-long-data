@@ -1,0 +1,230 @@
+name: AU SP ASX200 Exact Frozen GICS Gate F v0.87
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/au_sp_asx200_exact_frozen_gics_gate_f_v0.87.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  au-asx200-gate-f:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.87 stage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="16ca7cfc2148527f4e48bda642e7533831a716c5"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/au_sp_asx200_exact_frozen_gics_classification_gate_f_spec_v0\.87\.json|scripts/au_sp_asx200_exact_frozen_gics_gate_f_v0_87\.py|scripts/persist_au_sp_asx200_exact_frozen_gics_gate_f_v0_87\.py|tests/test_au_sp_asx200_exact_frozen_gics_gate_f_v0_87\.py|\.github/workflows/au_sp_asx200_exact_frozen_gics_gate_f_v0\.87\.yml|config/au_sp_asx200_exact_frozen_gics_gate_f_v0\.87\.json|docs/validation/AU_SP_ASX200_Exact_Frozen_GICS_Classification_Coverage_Gate_F_v0\.87\.md|output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.86 predecessor and artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10955208258 --jq .digest)"
+          test "$DIGEST" = "sha256:b9f68ee805db5725db95b0c3d397e8b8fcf0a9759d7814ff3edf169c0ce46f03"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_au_sp_asx200_identity_linkage_gate_e_v0_86")
+          s=json.load(open(out/"summary_v0.86.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.86.json",encoding="utf-8"))
+          m=json.load(open(out/"manifest_v0.86.json",encoding="utf-8"))
+          d=json.load(open(out/"au_deterministic_security_identity_linkage_decision_v0.86.json",encoding="utf-8"))
+          assert s["verdict"]=="PASS_AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E"
+          assert s["au_deterministic_security_identity_linkage_ready"] is True
+          assert s["frozen_target"]==63 and s["exact_ticker_links"]==63 and s["source_ws_id_equality"]==63
+          assert s["not_found"]==s["ambiguous"]==s["not_verified"]==s["conflict"]==0
+          assert s["tests"]=={"failed":0,"passed":30,"total":30}
+          assert c["workflow_run_id"]==36388443082 and c["artifact_id"]==10955208258
+          assert c["artifact_digest"]=="sha256:b9f68ee805db5725db95b0c3d397e8b8fcf0a9759d7814ff3edf169c0ce46f03"
+          assert m["workflow_run_id"]==36388443082 and m["artifact_id"]==10955208258
+          assert d["Identity_Source"]=="ASX_OFFICIAL_COMPANY_DIRECTORY"
+          assert d["Identity_Field"]=="ASX code"
+          assert d["Identity_Method"]=="EXACT_ASX_CODE_TO_FROZEN_PRIMARY_TICKER"
+          assert d["MIC"]=="XASX"
+          assert d["Gate_F"]=="NOT_EVALUATED" and d["Gate_H"]=="NOT_EVALUATED"
+          s85=json.load(open("output_au_sp_asx200_gate_d_msci_gics_repair_v0_85/summary_v0.85.json",encoding="utf-8"))
+          inv=list(csv.DictReader(open("output_au_sp_asx200_gate_d_msci_gics_repair_v0_85/gics_industry_group_official_label_code_inventory_v0.85.csv",encoding="utf-8")))
+          non=list(csv.DictReader(open("output_au_sp_asx200_gate_d_msci_gics_repair_v0_85/au_nonformal_value_governance_audit_v0_85.csv",encoding="utf-8")))
+          assert s85["formal_exact_match_values"]==25 and s85["formal_label_code_coverage"]=="25/25"
+          assert s85["selected_code_strategy"]=="SOURCE_NATIVE_GICS_CODE"
+          assert len(inv)==25 and len({r["Official_GICS_Industry_Group_Code"] for r in inv})==25
+          assert all(r["Source_SHA256"]=="d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06" for r in inv)
+          assert {r["Label"] for r in non}=={"Class Pend","Not Applic"}
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          PY
+
+      - name: Verify v0.87 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/au_sp_asx200_exact_frozen_gics_classification_gate_f_spec_v0.87.json",encoding="utf-8"))
+          t=json.load(open("config/au_sp_asx200_exact_frozen_gics_gate_f_v0.87.json",encoding="utf-8"))
+          assert s["required_start_head"]=="16ca7cfc2148527f4e48bda642e7533831a716c5"
+          assert s["scope"]["gate_f_only"] is True
+          assert s["scope"]["gate_g_allowed"] is False
+          assert s["scope"]["gate_h_allowed"] is False
+          assert s["scope"]["canonical_materialization_allowed"] is False
+          assert s["scope"]["pdsc_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert s["forbidden"]["msci_methodology_requests"] is True
+          assert t["version"]=="v0.87"
+          assert t["required_start_head"]==s["required_start_head"]
+          assert t["gate_f_authorized"] is True
+          assert t["gate_g_allowed"] is False and t["gate_h_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["pdsc_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Prepare browser tooling
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --index-url https://pypi.org/simple websocket-client==1.8.0
+          python3 - <<'PY'
+          import importlib.metadata,shutil
+          from pathlib import Path
+          assert importlib.metadata.version("websocket-client")=="1.8.0"
+          chrome=next((p for p in ["/usr/bin/google-chrome","/usr/bin/google-chrome-stable","/usr/bin/chromium","/usr/bin/chromium-browser"] if Path(p).exists()),None)
+          if not chrome:chrome=shutil.which("google-chrome") or shutil.which("chromium")
+          assert chrome,"Chrome/Chromium unavailable"
+          print("CHROME="+chrome)
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/au_sp_asx200_exact_frozen_gics_gate_f_v0_87.py scripts/persist_au_sp_asx200_exact_frozen_gics_gate_f_v0_87.py
+          python3 tests/test_au_sp_asx200_exact_frozen_gics_gate_f_v0_87.py -v
+
+      - name: Run bounded AU Gate F
+        run: |
+          set -euo pipefail
+          rm -rf output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87
+          python3 scripts/au_sp_asx200_exact_frozen_gics_gate_f_v0_87.py             --repository-sha "$GITHUB_SHA"             --output-dir output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87")
+          req=[
+            "au_gate_f_predecessor_authority_v0.87.json",
+            "au_frozen_63_classification_target_v0.87.csv",
+            "au_frozen_target_sidecar_authority_audit_v0.87.json",
+            "asx_current_gate_f_source_snapshot_audit_v0.87.json",
+            "asx_gate_f_source_schema_audit_v0.87.json",
+            "asx_gate_f_asx_code_uniqueness_audit_v0.87.json",
+            "au_exact_63_gate_f_source_join_audit_v0.87.csv",
+            "au_frozen_63_raw_classification_audit_v0.87.csv",
+            "au_frozen_63_formal_gics_binding_audit_v0.87.csv",
+            "au_frozen_63_source_native_code_audit_v0.87.csv",
+            "au_frozen_classification_status_audit_v0.87.csv",
+            "au_nonformal_frozen_exposure_audit_v0.87.csv",
+            "au_used_gics_code_authority_audit_v0.87.json",
+            "au_frozen_gics_distribution_v0.87.csv",
+            "au_gate_f_source_drift_audit_v0.87.json",
+            "au_exact_frozen_gics_classification_coverage_decision_v0.87.json",
+            "external_request_ledger_v0.87.csv","provider_call_audit_v0.87.json","immutability_audit_v0.87.json",
+            "test_results_v0.87.csv","summary_preupload_v0.87.json","stage_checkpoint_preupload_v0.87.json","manifest_preupload_v0.87.json"
+          ]
+          assert all((out/x).exists() for x in req)
+          s=json.load(open(out/"summary_preupload_v0.87.json",encoding="utf-8"))
+          d=json.load(open(out/"au_exact_frozen_gics_classification_coverage_decision_v0.87.json",encoding="utf-8"))
+          p=json.load(open(out/"provider_call_audit_v0.87.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.87.json",encoding="utf-8"))
+          ta=json.load(open(out/"au_frozen_target_sidecar_authority_audit_v0.87.json",encoding="utf-8"))
+          codes=json.load(open(out/"au_used_gics_code_authority_audit_v0.87.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.87.csv",encoding="utf-8")))
+          statuses=list(csv.DictReader(open(out/"au_frozen_classification_status_audit_v0.87.csv",encoding="utf-8")))
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert ta["Frozen_Target_Rows"]==63 and ta["Unique_Security_Key"]==63 and ta["Unique_Source_WS_ID"]==63 and ta["Unique_Primary_Ticker"]==63
+          assert ta["Primary_MIC_XASX"]==63 and ta["Source_WS_ID_Contract_PASS"]==63
+          assert ta["Exact_Match_To_v086_Target"]=="YES"
+          assert len(statuses)==63
+          zero=["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings",
+                "third_party_classification_databases","company_name_linkage","fuzzy_matching","ticker_change_inference",
+                "semantic_classification_inference","cross_taxonomy_mapping","PDSC","MSCI_methodology_requests",
+                "per_security_web_fanout","Gate_G","Gate_H","canonical_materialization","Sector_RS","P0","P1","P2"]
+          assert all(p[k]==0 for k in zero)
+          assert p["fresh_ASX_directory_snapshots"]==1
+          assert d["Gate_G"]=="NOT_EVALUATED" and d["Gate_H"]=="NOT_EVALUATED"
+          assert codes["Unauthorized_Code_Count"]==0 and codes["All_Used_Codes_Authorized"]=="YES"
+          assert imm["Frozen_Unchanged"] and imm["v057_Unchanged"] and imm["v058_Unchanged"] and imm["BR_Canonical_Semantic_Unchanged"]
+          assert imm["Parked_Cohort_Registry_Unchanged"] and imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          if s["au_exact_frozen_gics_classification_coverage_ready"]:
+              assert s["verdict"]=="PASS_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F"
+              assert s["provably_classified"]==63
+              assert s["not_provably_classified"]==s["not_found"]==s["ambiguous"]==s["not_verified"]==s["conflict"]==0
+              assert s["formal_label_binding"]=="63/63" and s["source_native_code_coverage"]=="63/63"
+              assert s["pdsc_generated"]==0
+              assert d["Gate_F"]=="PASS_BY_CURRENT_EVIDENCE"
+              assert s["next_gate"]=="AU_SP_ASX200 PROVENANCE GATE G"
+              assert s["blocker"]==""
+          else:
+              assert s["verdict"]=="BLOCKED_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F"
+              assert s["blocker"] in {
+                "ASX_DIRECTORY_CLASSIFICATION_SOURCE_NOT_REPRODUCIBLE","ASX_DIRECTORY_GICS_INDUSTRY_GROUP_FIELD_NOT_AVAILABLE",
+                "ASX_DIRECTORY_ASX_CODE_DUPLICATE_FOR_FROZEN_SECURITY","AU_FROZEN_SECURITY_NOT_PRESENT_CURRENT_ASX_DIRECTORY",
+                "AU_FROZEN_SOURCE_CLASSIFICATION_VALUE_MISSING","AU_FROZEN_SOURCE_CLASSIFICATION_NONFORMAL",
+                "ASX_GICS_FORMAL_LABEL_NOT_FOUND_IN_OFFICIAL_GICS","GICS_LABEL_TO_CODE_BINDING_AMBIGUOUS","GICS_CODE_COLLISION",
+                "AU_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_INCOMPLETE","AUTHORITY_REGRESSION_REVIEW_REQUIRED"
+              }
+          PY
+          BAD="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87/.*|docs/validation/AU_SP_ASX200_Exact_Frozen_GICS_Classification_Coverage_Gate_F_v0\.87\.md)$' || true)"
+          test -z "$BAD"
+
+      - name: Upload bounded v0.87 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: au-asx200-exact-frozen-gics-gate-f-v0.87-${{ github.run_id }}
+          path: output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_au_sp_asx200_exact_frozen_gics_gate_f_v0_87.py             --output-dir output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "au-asx200-exact-frozen-gics-gate-f-v0.87-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.87 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/AU_SP_ASX200_Exact_Frozen_GICS_Classification_Coverage_Gate_F_v0.87.md                   output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/AU_SP_ASX200_Exact_Frozen_GICS_Classification_Coverage_Gate_F_v0\.87\.md|output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87/.*)$'; then
+            echo "Unexpected staged path"; exit 1
+          fi
+          test ! -e sector_metadata/canonical/cohorts/AU_SP_ASX200_sector_metadata_v1.csv
+          git commit -m "Persist AU ASX200 exact Frozen GICS Gate F v0.87"
+          git push origin HEAD:main
