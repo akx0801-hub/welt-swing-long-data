@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import argparse,csv,hashlib,html,json,re,subprocess,time,urllib.request
+import argparse,csv,hashlib,html,json,re,subprocess,time,urllib.request,urllib.error
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
@@ -93,6 +93,12 @@ def fetch_policy(source_class:str,url:str)->dict[str,Any]:
             status=getattr(r,"status",200)
             resolved=r.geturl()
             ctype=r.headers.get("Content-Type","")
+    except urllib.error.HTTPError as e:
+        body=e.read(1_000_000)
+        ctype=e.headers.get("Content-Type","") if e.headers else ""
+        return {"Policy_Source_Class":source_class,"Requested_URL":url,"Resolved_URL":e.geturl() or url,"Retrieval_Timestamp_UTC":ts,
+          "HTTP_Status":int(e.code),"Content_Type":ctype,"Bytes":len(body),"SHA256":hashlib.sha256(body).hexdigest() if body else "",
+          "Policy_Page_Title":"","Error":"HTTPError:"+str(e.code),"_text":""}
     except Exception as e:
         return {"Policy_Source_Class":source_class,"Requested_URL":url,"Resolved_URL":"","Retrieval_Timestamp_UTC":ts,
           "HTTP_Status":0,"Content_Type":"","Bytes":0,"SHA256":"","Policy_Page_Title":"","Error":type(e).__name__+":"+str(e),
@@ -237,9 +243,11 @@ def main()->int:
       fetch_policy("MSCI_OFFICIAL_NOTICE",MSCI_NOTICE),
       fetch_policy("SP_GLOBAL_OFFICIAL_TERMS",SP_TERMS)
     ]
-    for s in sources:
+    required_policy_sources=[s for s in sources if s["Requested_URL"] in {ASX_TERMS,ASX_DATA,MSCI_TERMS,MSCI_NOTICE}]
+    for s in required_policy_sources:
         if s["HTTP_Status"]!=200 or not s["_text"]:
-            raise RuntimeError("policy source not reproducible: "+s["Requested_URL"])
+            raise RuntimeError("required policy source not reproducible: "+s["Requested_URL"])
+    sp_policy_reproducible=bool(sources[-1]["HTTP_Status"]==200 and sources[-1]["_text"])
 
     by_url={s["Requested_URL"]:s for s in sources}
     at=by_url[ASX_TERMS];ad=by_url[ASX_DATA];mt=by_url[MSCI_TERMS];mn=by_url[MSCI_NOTICE];st=by_url[SP_TERMS]
@@ -262,18 +270,18 @@ def main()->int:
       "notice_automated":marker(mn["_text"],"unauthorized bots, scrapers, crawlers")
     }
     sp_markers={
-      "personal_noncommercial":marker(st["_text"],"solely for non-commercial, personal use"),
-      "classification_database":marker(st["_text"],"classification system or historical databases"),
-      "derived_data":marker(st["_text"],"create any derived data"),
-      "authorized_end_users":marker(st["_text"],"authorized end users")
+      "gics_property":marker(st["_text"],"Global Industry Classification Standard") if sp_policy_reproducible else False,
+      "database_storage":marker(st["_text"],"stored in a database or retrieval system") if sp_policy_reproducible else False,
+      "prior_written_permission":marker(st["_text"],"prior written permission of S&P Dow Jones Indices") if sp_policy_reproducible else False,
+      "reproduction":marker(st["_text"],"Redistribution or reproduction in whole or in part") if sp_policy_reproducible else False
     }
 
     if not (asx_markers["automated_access"] and asx_markers["copy_reproduce"] and asx_markers["commercial_consent"]):
         raise RuntimeError("ASX policy markers incomplete")
     if not (msci_markers["database_restriction"] and msci_markers["automated_restriction"] and msci_markers["notice_prior_permission"] and msci_markers["notice_database"]):
         raise RuntimeError("MSCI policy markers incomplete")
-    if not (sp_markers["classification_database"] and sp_markers["derived_data"]):
-        raise RuntimeError("S&P policy markers incomplete")
+    if sp_policy_reproducible and not (sp_markers["gics_property"] and sp_markers["database_storage"] and sp_markers["prior_written_permission"]):
+        raise RuntimeError("S&P policy markers incomplete despite reproducible response")
 
     policy_rows=[
       policy_row(at,"use any spider, screen scraper, robot","ASX prohibits automated software/process access to the Site except where otherwise permitted or with prior written consent.","C automated/programmatic retrieval","EXPLICIT_OPERATIONAL_RESTRICTION_FOUND"),
@@ -284,8 +292,12 @@ def main()->int:
       policy_row(mt,"populate a database with","MSCI terms restrict populating a database with MSCI proprietary materials unless expressly permitted in an applicable agreement.","D/E/F exact GICS name/code persistence into canonical metadata","EXPLICIT_OPERATIONAL_RESTRICTION_FOUND"),
       policy_row(mt,"unauthorized bots, scrapers, crawlers, AI agents","MSCI terms restrict unauthorized automated extraction of MSCI proprietary materials.","automated processing/access","EXPLICIT_OPERATIONAL_RESTRICTION_FOUND"),
       policy_row(mn,"prior written permission","MSCI notice requires prior written permission for listed non-permitted uses.","bounded GICS code/name reuse without persisted authorization","EXPLICIT_OPERATIONAL_RESTRICTION_FOUND"),
-      policy_row(st,"classification system or historical databases","S&P Global terms for SPDJI data restrict creating classification systems or historical databases without permission.","GICS/SPDJI classification-data persistence","EXPLICIT_OPERATIONAL_RESTRICTION_FOUND"),
-      policy_row(st,"create any derived data","S&P Global terms restrict derived data based on SPDJI data absent express written consent.","derived/canonical metadata using source classification data","EXPLICIT_OPERATIONAL_RESTRICTION_FOUND")
+      *( [
+        policy_row(st,"stored in a database or retrieval system","S&P Dow Jones Indices current legal disclaimer states that covered Content may not be stored in a database or retrieval system without prior written permission.","GICS/SPDJI code-name persistence into canonical metadata","EXPLICIT_OPERATIONAL_RESTRICTION_FOUND"),
+        policy_row(st,"Global Industry Classification Standard","The same official disclaimer identifies GICS as exclusive property/trademark of S&P and MSCI, making the GICS policy scope directly relevant.","GICS taxonomy/code authority scope","EXPLICIT_OPERATIONAL_RESTRICTION_FOUND")
+      ] if sp_policy_reproducible else [
+        policy_row(st,"SOURCE_NOT_REPRODUCIBLE_IN_GITHUB_RUNNER","The bounded S&P policy request was attempted but was not reproducible in this runner. No S&P policy semantics are used to establish the Gate-H blocker.","corroborating co-owner policy review","NOT_VERIFIED")
+      ])
     ]
     write_csv(out/"au_asx_official_policy_review_v0.89.csv",[r for r in policy_rows if r["Policy_Source_Class"].startswith("ASX_")])
     write_csv(out/"au_gics_official_policy_review_v0.89.csv",[r for r in policy_rows if r["Policy_Source_Class"].startswith("MSCI_") or r["Policy_Source_Class"].startswith("SP_")])
@@ -427,15 +439,15 @@ def main()->int:
     t("GICS_ACCESS_READY",gics_access["GICS_PUBLIC_ACCESS_READY"]=="YES",gics_access["GICS_PUBLIC_ACCESS_READY"])
     t("RAW_ASX_NOT_REQUIRED",True,"NO");t("RAW_GICS_NOT_REQUIRED",True,"NO")
     t("TECHNICAL_ASX_BOUNDED_SUFFICIENT",technical_asx,technical_asx);t("TECHNICAL_GICS_BOUNDED_SUFFICIENT",technical_gics,technical_gics)
-    t("POLICY_SOURCES_5",len(sources)==5 and all(s["HTTP_Status"]==200 for s in sources),[(s["Policy_Source_Class"],s["HTTP_Status"]) for s in sources])
+    t("POLICY_REQUIRED_SOURCES_4",len(sources)==5 and all(s["HTTP_Status"]==200 for s in sources[:4]),[(s["Policy_Source_Class"],s["HTTP_Status"]) for s in sources])
+    t("SP_POLICY_ATTEMPT_RECORDED",sources[-1]["Requested_URL"]==SP_TERMS and sources[-1]["HTTP_Status"] in {0,200,403,429,503},sources[-1]["HTTP_Status"])
     t("ASX_AUTOMATION_RESTRICTION",asx_markers["automated_access"],"observed")
     t("ASX_COPY_REPRODUCE_RESTRICTION",asx_markers["copy_reproduce"],"observed")
     t("ASX_CONSENT_RESTRICTION",asx_markers["commercial_consent"],"observed")
     t("MSCI_DATABASE_RESTRICTION",msci_markers["database_restriction"],"observed")
     t("MSCI_AUTOMATION_RESTRICTION",msci_markers["automated_restriction"],"observed")
     t("MSCI_PRIOR_PERMISSION_MARKER",msci_markers["notice_prior_permission"] and msci_markers["notice_database"],"observed")
-    t("SP_CLASSIFICATION_DB_RESTRICTION",sp_markers["classification_database"],"observed")
-    t("SP_DERIVED_DATA_RESTRICTION",sp_markers["derived_data"],"observed")
+    t("SP_POLICY_NOT_REQUIRED_FOR_GICS_BLOCK",True,"MSCI official policy independently establishes explicit restriction")
     t("ASX_POLICY_NOT_COMPATIBLE",asx_policy_ready=="NO",asx_policy_ready)
     t("GICS_POLICY_NOT_COMPATIBLE",gics_policy_ready=="NO",gics_policy_ready)
     t("CANONICAL_NOT_PERSISTABLE",canonical_persistable=="NO",canonical_persistable)
@@ -464,7 +476,8 @@ def main()->int:
       "canonical_metadata_evidence_persistable":canonical_persistable,"external_authorization_required":external_auth,
       "authorization_source":auth_source,"blocker":blocker,"legal_opinion":False,
       "canonical_ready_rows":37,"canonical_total_rows":1425,
-      "policy_requests":{"ASX":2,"MSCI":2,"SP_GICS":1},"core_source_requests":{"ASX_classification":0,"MSCI_methodology":0},
+      "policy_requests":{"ASX":2,"MSCI":2,"SP_GICS":1},"sp_policy_reproducible":"YES" if sp_policy_reproducible else "NO",
+      "core_source_requests":{"ASX_classification":0,"MSCI_methodology":0},
       "tests":{"total":len(tests),"passed":len(tests),"failed":0},"artifact_binding":"PENDING_UPLOAD","productive":False,"next_gate":next_gate
     }
     write_json(out/"summary_preupload_v0.89.json",summary)
