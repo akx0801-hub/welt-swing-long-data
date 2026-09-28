@@ -1,0 +1,11 @@
+{
+  "Exact_Match_To_v086_Target": "YES",
+  "Frozen_Target_Rows": 63,
+  "Physical_Frozen_Has_Primary_Universe_Index": "NO",
+  "Primary_MIC_XASX": 63,
+  "Sidecar_AU_Security_Key_Count": 63,
+  "Source_WS_ID_Contract_PASS": 63,
+  "Unique_Primary_Ticker": 63,
+  "Unique_Security_Key": 63,
+  "Unique_Source_WS_ID": 63
+}

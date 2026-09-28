@@ -1,0 +1,15 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:961c68520689e978945a550b4d05b7a2e698f5b890fc072caecffb6a95e186bc",
+  "artifact_id": 10956817563,
+  "au_exact_frozen_gics_classification_coverage_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "AU_SP_ASX200 PROVENANCE GATE G",
+  "stage": "AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "verdict": "PASS_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "version": "v0.87",
+  "workflow_head_sha": "bf18216d914fcf482bc531abd925a4a9898aacf9",
+  "workflow_run_id": 36392661784
+}

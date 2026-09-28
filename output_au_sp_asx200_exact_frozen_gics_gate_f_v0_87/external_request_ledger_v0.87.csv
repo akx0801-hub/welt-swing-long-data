@@ -1,0 +1,3 @@
+Request_Order,Source_Class,URL,Purpose,HTTP_Status,Per_Security_Request
+1,OFFICIAL_ASX,https://www.asx.com.au/markets/trade-our-cash-market/directory,CURRENT_DIRECTORY_PAGE_AND_SINGLE_CSV_DOWNLOAD,200,NO
+2,OFFICIAL_ASX_RUNTIME_DOWNLOAD,https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory/file?access_token=83ff96335c2d45a094df02a206a39ff4,CURRENT_COMPLETE_DIRECTORY_CSV_SNAPSHOT,200,NO

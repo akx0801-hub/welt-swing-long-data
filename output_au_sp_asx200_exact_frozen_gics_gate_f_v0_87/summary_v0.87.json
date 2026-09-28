@@ -1,0 +1,67 @@
+{
+  "ambiguous": 0,
+  "artifact": {
+    "artifact_digest": "sha256:961c68520689e978945a550b4d05b7a2e698f5b890fc072caecffb6a95e186bc",
+    "artifact_id": 10956817563,
+    "artifact_name": "au-asx200-exact-frozen-gics-gate-f-v0.87-36392661784",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "bf18216d914fcf482bc531abd925a4a9898aacf9",
+    "workflow_run_id": 36392661784
+  },
+  "artifact_binding": "PASS",
+  "au_exact_frozen_gics_classification_coverage_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "conflict": 0,
+  "current_asx_directory_rows": 1833,
+  "exact_source_links": 63,
+  "formal_label_binding": "63/63",
+  "frozen_total": 63,
+  "gate_g": "NOT_EVALUATED",
+  "gate_h": "NOT_EVALUATED",
+  "next_gate": "AU_SP_ASX200 PROVENANCE GATE G",
+  "nonformal_frozen_exposure": 0,
+  "not_found": 0,
+  "not_provably_classified": 0,
+  "not_verified": 0,
+  "pdsc_generated": 0,
+  "productive": false,
+  "provably_classified": 63,
+  "source_drift": {
+    "BYTE_DRIFT": "NO",
+    "FROZEN_CLASSIFICATION_DRIFT": "NOT_EVALUABLE_FROM_V086_PERSISTED_IDENTITY_ONLY_EVIDENCE",
+    "FROZEN_IDENTITY_DRIFT": "NO",
+    "ROW_COUNT_DRIFT": "NO",
+    "SCHEMA_DRIFT": "NO",
+    "v086_CSV_SHA256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+    "v086_Row_Count": 1833,
+    "v086_Schema": [
+      "ASX code",
+      "Company name",
+      "GICs industry group",
+      "Listing date",
+      "Market Cap"
+    ],
+    "v087_CSV_SHA256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+    "v087_Row_Count": 1833,
+    "v087_Schema": [
+      "ASX code",
+      "Company name",
+      "GICs industry group",
+      "Listing date",
+      "Market Cap"
+    ]
+  },
+  "source_native_code_coverage": "63/63",
+  "stage": "AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "tests": {
+    "failed": 0,
+    "passed": 34,
+    "total": 34
+  },
+  "unauthorized_codes": 0,
+  "used_distinct_gics_codes": 16,
+  "verdict": "PASS_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "version": "v0.87"
+}

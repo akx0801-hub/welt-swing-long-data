@@ -1,0 +1,17 @@
+GICS_Industry_Group_Code,GICS_Industry_Group_Label,Status_Bucket,Frozen_Row_Count
+1010,Energy,PROVABLY_CLASSIFIED,5
+1510,Materials,PROVABLY_CLASSIFIED,20
+2020,Commercial & Professional Services,PROVABLY_CLASSIFIED,4
+2030,Transportation,PROVABLY_CLASSIFIED,2
+2530,Consumer Services,PROVABLY_CLASSIFIED,2
+2550,Consumer Discretionary Distribution & Retail,PROVABLY_CLASSIFIED,2
+3010,Consumer Staples Distribution & Retail,PROVABLY_CLASSIFIED,2
+3510,Health Care Equipment & Services,PROVABLY_CLASSIFIED,5
+3520,"Pharmaceuticals, Biotechnology & Life Sciences",PROVABLY_CLASSIFIED,2
+4010,Banks,PROVABLY_CLASSIFIED,4
+4020,Financial Services,PROVABLY_CLASSIFIED,3
+4030,Insurance,PROVABLY_CLASSIFIED,5
+4510,Software & Services,PROVABLY_CLASSIFIED,3
+5010,Telecommunication Services,PROVABLY_CLASSIFIED,1
+5020,Media & Entertainment,PROVABLY_CLASSIFIED,2
+5510,Utilities,PROVABLY_CLASSIFIED,1

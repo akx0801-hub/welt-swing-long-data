@@ -1,0 +1,25 @@
+{
+  "BYTE_DRIFT": "NO",
+  "FROZEN_CLASSIFICATION_DRIFT": "NOT_EVALUABLE_FROM_V086_PERSISTED_IDENTITY_ONLY_EVIDENCE",
+  "FROZEN_IDENTITY_DRIFT": "NO",
+  "ROW_COUNT_DRIFT": "NO",
+  "SCHEMA_DRIFT": "NO",
+  "v086_CSV_SHA256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+  "v086_Row_Count": 1833,
+  "v086_Schema": [
+    "ASX code",
+    "Company name",
+    "GICs industry group",
+    "Listing date",
+    "Market Cap"
+  ],
+  "v087_CSV_SHA256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+  "v087_Row_Count": 1833,
+  "v087_Schema": [
+    "ASX code",
+    "Company name",
+    "GICs industry group",
+    "Listing date",
+    "Market Cap"
+  ]
+}

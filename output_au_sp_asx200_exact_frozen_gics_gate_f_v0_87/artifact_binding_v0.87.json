@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:961c68520689e978945a550b4d05b7a2e698f5b890fc072caecffb6a95e186bc",
+  "artifact_id": 10956817563,
+  "artifact_name": "au-asx200-exact-frozen-gics-gate-f-v0.87-36392661784",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "bf18216d914fcf482bc531abd925a4a9898aacf9",
+  "workflow_run_id": 36392661784
+}

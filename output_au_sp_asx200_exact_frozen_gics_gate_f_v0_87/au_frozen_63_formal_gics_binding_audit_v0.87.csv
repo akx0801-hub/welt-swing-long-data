@@ -1,0 +1,64 @@
+Security_Key,Primary_Ticker,Source_Classification_Raw,Formal_GICS_Exact_Match,Official_GICS_Industry_Group_Label,Official_GICS_Industry_Group_Code,Binding_Status
+WSSEC:WS:XASX:ALD,ALD,Energy,YES,Energy,1010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:ALL,ALL,Consumer Services,YES,Consumer Services,2530,EXACT_CODE_BOUND
+WSSEC:WS:XASX:ALQ,ALQ,Commercial & Professional Services,YES,Commercial & Professional Services,2020,EXACT_CODE_BOUND
+WSSEC:WS:XASX:ANZ,ANZ,Banks,YES,Banks,4010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:ASX,ASX,Financial Services,YES,Financial Services,4020,EXACT_CODE_BOUND
+WSSEC:WS:XASX:AZJ,AZJ,Transportation,YES,Transportation,2030,EXACT_CODE_BOUND
+WSSEC:WS:XASX:BHP,BHP,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:BSL,BSL,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:BXB,BXB,Commercial & Professional Services,YES,Commercial & Professional Services,2020,EXACT_CODE_BOUND
+WSSEC:WS:XASX:CAR,CAR,Media & Entertainment,YES,Media & Entertainment,5020,EXACT_CODE_BOUND
+WSSEC:WS:XASX:CBA,CBA,Banks,YES,Banks,4010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:CMM,CMM,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:COH,COH,Health Care Equipment & Services,YES,Health Care Equipment & Services,3510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:COL,COL,Consumer Staples Distribution & Retail,YES,Consumer Staples Distribution & Retail,3010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:CPU,CPU,Commercial & Professional Services,YES,Commercial & Professional Services,2020,EXACT_CODE_BOUND
+WSSEC:WS:XASX:CSL,CSL,"Pharmaceuticals, Biotechnology & Life Sciences",YES,"Pharmaceuticals, Biotechnology & Life Sciences",3520,EXACT_CODE_BOUND
+WSSEC:WS:XASX:CWY,CWY,Commercial & Professional Services,YES,Commercial & Professional Services,2020,EXACT_CODE_BOUND
+WSSEC:WS:XASX:EVN,EVN,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:FMG,FMG,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:GMD,GMD,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:IAG,IAG,Insurance,YES,Insurance,4030,EXACT_CODE_BOUND
+WSSEC:WS:XASX:IGO,IGO,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:JBH,JBH,Consumer Discretionary Distribution & Retail,YES,Consumer Discretionary Distribution & Retail,2550,EXACT_CODE_BOUND
+WSSEC:WS:XASX:LTR,LTR,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:LYC,LYC,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:MIN,MIN,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:MP1,MP1,Software & Services,YES,Software & Services,4510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:MPL,MPL,Insurance,YES,Insurance,4030,EXACT_CODE_BOUND
+WSSEC:WS:XASX:MQG,MQG,Financial Services,YES,Financial Services,4020,EXACT_CODE_BOUND
+WSSEC:WS:XASX:NAB,NAB,Banks,YES,Banks,4010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:NST,NST,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:NXT,NXT,Software & Services,YES,Software & Services,4510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:ORG,ORG,Utilities,YES,Utilities,5510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:ORI,ORI,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:PDN,PDN,Energy,YES,Energy,1010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:PLS,PLS,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:PME,PME,Health Care Equipment & Services,YES,Health Care Equipment & Services,3510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:PRU,PRU,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:QAN,QAN,Transportation,YES,Transportation,2030,EXACT_CODE_BOUND
+WSSEC:WS:XASX:QBE,QBE,Insurance,YES,Insurance,4030,EXACT_CODE_BOUND
+WSSEC:WS:XASX:REA,REA,Media & Entertainment,YES,Media & Entertainment,5020,EXACT_CODE_BOUND
+WSSEC:WS:XASX:RHC,RHC,Health Care Equipment & Services,YES,Health Care Equipment & Services,3510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:RIO,RIO,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:RMS,RMS,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:RRL,RRL,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:S32,S32,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:SDF,SDF,Insurance,YES,Insurance,4030,EXACT_CODE_BOUND
+WSSEC:WS:XASX:SFR,SFR,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:SHL,SHL,Health Care Equipment & Services,YES,Health Care Equipment & Services,3510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:SIG,SIG,Health Care Equipment & Services,YES,Health Care Equipment & Services,3510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:STO,STO,Energy,YES,Energy,1010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:SUN,SUN,Insurance,YES,Insurance,4030,EXACT_CODE_BOUND
+WSSEC:WS:XASX:TLC,TLC,Consumer Services,YES,Consumer Services,2530,EXACT_CODE_BOUND
+WSSEC:WS:XASX:TLS,TLS,Telecommunication Services,YES,Telecommunication Services,5010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:TLX,TLX,"Pharmaceuticals, Biotechnology & Life Sciences",YES,"Pharmaceuticals, Biotechnology & Life Sciences",3520,EXACT_CODE_BOUND
+WSSEC:WS:XASX:WBC,WBC,Banks,YES,Banks,4010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:WDS,WDS,Energy,YES,Energy,1010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:WES,WES,Consumer Discretionary Distribution & Retail,YES,Consumer Discretionary Distribution & Retail,2550,EXACT_CODE_BOUND
+WSSEC:WS:XASX:WGX,WGX,Materials,YES,Materials,1510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:WHC,WHC,Energy,YES,Energy,1010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:WOW,WOW,Consumer Staples Distribution & Retail,YES,Consumer Staples Distribution & Retail,3010,EXACT_CODE_BOUND
+WSSEC:WS:XASX:WTC,WTC,Software & Services,YES,Software & Services,4510,EXACT_CODE_BOUND
+WSSEC:WS:XASX:ZIP,ZIP,Financial Services,YES,Financial Services,4020,EXACT_CODE_BOUND

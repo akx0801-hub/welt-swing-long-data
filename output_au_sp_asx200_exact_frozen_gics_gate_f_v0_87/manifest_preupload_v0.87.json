@@ -1,0 +1,110 @@
+{
+  "au_exact_frozen_gics_classification_coverage_ready": true,
+  "blocker": "",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "files": {
+    "asx_current_gate_f_source_snapshot_audit_v0.87.json": {
+      "bytes": 800,
+      "sha256": "2fdfd53ada4d471579bc17ea9c3447e565f2e3e0fae9473fe8b8fdec39285885"
+    },
+    "asx_gate_f_asx_code_uniqueness_audit_v0.87.json": {
+      "bytes": 122,
+      "sha256": "0c0818b35691c54d98b3d9537966a685816ee5984090bfaadff87a60eea8ec9c"
+    },
+    "asx_gate_f_source_schema_audit_v0.87.json": {
+      "bytes": 396,
+      "sha256": "053859cd7e2bdd1c12c729c2ccc501c214e8690dc26d61a2fa632f2856818845"
+    },
+    "au_exact_63_gate_f_source_join_audit_v0.87.csv": {
+      "bytes": 2916,
+      "sha256": "9daad85d5d02e1f0d97f80ef9bb56a19c378721246373783eede0e0faf6a82dd"
+    },
+    "au_exact_frozen_gics_classification_coverage_decision_v0.87.json": {
+      "bytes": 534,
+      "sha256": "84610fbdb79c85ccb1aaf1675eb285160d16a2b1bdcb31a49176a1cc3fa3b221"
+    },
+    "au_frozen_63_classification_target_v0.87.csv": {
+      "bytes": 7528,
+      "sha256": "18440bb19e3056d701eb7de3a66ce281094a8a271aeca690b17d57d3e29c3f46"
+    },
+    "au_frozen_63_formal_gics_binding_audit_v0.87.csv": {
+      "bytes": 5474,
+      "sha256": "04678a1613b58341dc9f5f1cc595c60c2a629a32c072cc312683d8fc512557db"
+    },
+    "au_frozen_63_raw_classification_audit_v0.87.csv": {
+      "bytes": 3941,
+      "sha256": "939cebd1130c3faca7174449a8b1e0dda8e7c407dd421e160c6ffc9bd8127e86"
+    },
+    "au_frozen_63_source_native_code_audit_v0.87.csv": {
+      "bytes": 9079,
+      "sha256": "31564883090fa828d833a3700f10d0af93312f3540bdbc094fb554aacf165d1e"
+    },
+    "au_frozen_classification_status_audit_v0.87.csv": {
+      "bytes": 11454,
+      "sha256": "5f10407401c788668b4d63476edeae7a0dec0c75cbf2d19c3c608dcc9bf730fa"
+    },
+    "au_frozen_gics_distribution_v0.87.csv": {
+      "bytes": 880,
+      "sha256": "9e0494a8bc2c9960e22b1f19c1f49be38e33783604d0e97baee9ce9186af7caf"
+    },
+    "au_frozen_target_sidecar_authority_audit_v0.87.json": {
+      "bytes": 314,
+      "sha256": "d79eb152bc9e1e1dfb1c889f48d6a514b0cf732114b503cd04872e58437d07f3"
+    },
+    "au_gate_f_predecessor_authority_v0.87.json": {
+      "bytes": 914,
+      "sha256": "b05209f8bb75b07cc4738994c8d62e6300a804b5aad0243a23f7b342a9a7086e"
+    },
+    "au_gate_f_source_drift_audit_v0.87.json": {
+      "bytes": 680,
+      "sha256": "d3919cd29b313b4b0acd0b76df99cbe0cc47a17c0505d30180b787864cb08cc7"
+    },
+    "au_nonformal_frozen_exposure_audit_v0.87.csv": {
+      "bytes": 114,
+      "sha256": "9cfff1a3bc18c7597e45d44a81c4a9787b572b1b7ee545755dbadf087da676df"
+    },
+    "au_used_gics_code_authority_audit_v0.87.json": {
+      "bytes": 480,
+      "sha256": "051a5a18ff55da201c6cab8e4325d827c1a653a28fdb35a537e670b89a15c0d5"
+    },
+    "external_request_ledger_v0.87.csv": {
+      "bytes": 399,
+      "sha256": "ccef47aa969c7085a646ad3b7800949314287adb5896d61e95b1edf272397034"
+    },
+    "immutability_audit_v0.87.json": {
+      "bytes": 1586,
+      "sha256": "6291136b0b47a68a71764dfd50d98149f361c7664320f9dcaed3550e67b6290e"
+    },
+    "provider_call_audit_v0.87.json": {
+      "bytes": 572,
+      "sha256": "4b8011a452901c37bb0ce195a9f07385d4dfd1243df40a98ccf88dbe9ec4c986"
+    },
+    "stage_checkpoint_preupload_v0.87.json": {
+      "bytes": 414,
+      "sha256": "6e62cf391acf1f0c22595e332f58c8b6e66004e22cc8d65b1ab1e576796e7c70"
+    },
+    "summary_preupload_v0.87.json": {
+      "bytes": 1729,
+      "sha256": "f8eb93d642dfbc679b09e498cf1d6193d2b35a4d87bb92310214f9f7457dfe47"
+    },
+    "test_results_v0.87.csv": {
+      "bytes": 1283,
+      "sha256": "5ad5c889910bb2cfb602a3c1f5ef9e380edde22c400958d15346f9ee48992022"
+    }
+  },
+  "gate_g_runs": 0,
+  "gate_h_runs": 0,
+  "next_gate": "AU_SP_ASX200 PROVENANCE GATE G",
+  "other_cohort_runs": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "repository_sha": "bf18216d914fcf482bc531abd925a4a9898aacf9",
+  "required_start_head": "16ca7cfc2148527f4e48bda642e7533831a716c5",
+  "sector_rs_runs": 0,
+  "stage": "AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "verdict": "PASS_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "version": "v0.87"
+}

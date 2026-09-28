@@ -1,0 +1,15 @@
+{
+  "ASX_Code_Field_Status": "PASS",
+  "Classification_Field_Status": "PASS",
+  "Observed_ASX_Code_Field": "ASX code",
+  "Observed_Classification_Field": "GICs industry group",
+  "Required_ASX_Code_Field": "ASX code",
+  "Required_Classification_Field": "GICs industry group",
+  "Schema": [
+    "ASX code",
+    "Company name",
+    "GICs industry group",
+    "Listing date",
+    "Market Cap"
+  ]
+}

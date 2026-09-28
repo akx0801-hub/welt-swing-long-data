@@ -1,0 +1,21 @@
+{
+  "Bytes": 134882,
+  "CSV_SHA256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+  "Content_Type": "text/csv",
+  "Directory_Page_HTTP_Status": 200,
+  "Directory_Page_SHA256": "e96e2377a0af2bcc89929f9d350bd31b83ab4f3e342ee79f70a08493dbadfc20",
+  "Directory_Page_URL": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+  "Download_Control": "All asx listed companies .csv",
+  "Download_URL": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory/file?access_token=83ff96335c2d45a094df02a206a39ff4",
+  "HTTP_Status": 200,
+  "Raw_Source_Persisted": "NO",
+  "Record_Count": 1833,
+  "Retrieval_Timestamp_UTC": "2026-09-28T07:37:52Z",
+  "Schema": [
+    "ASX code",
+    "Company name",
+    "GICs industry group",
+    "Listing date",
+    "Market Cap"
+  ]
+}

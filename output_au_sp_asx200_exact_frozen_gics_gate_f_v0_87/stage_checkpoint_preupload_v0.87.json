@@ -1,0 +1,11 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "au_exact_frozen_gics_classification_coverage_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "AU_SP_ASX200 PROVENANCE GATE G",
+  "stage": "AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "verdict": "PASS_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "version": "v0.87"
+}
