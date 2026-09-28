@@ -250,7 +250,8 @@ def main()->int:
         if not required_present:reasons.append("REQUIRED_PROVENANCE_FIELD_MISSING")
         prov_status="PROVENANCE_COMPLETE" if not reasons else "PROVENANCE_CONFLICT"
         chain={
-          "WS_ID":t["Source_WS_ID"],"Security_Key":sk,"Primary_Universe_Index":"AU_SP_ASX200","Primary_MIC":t["Primary_MIC"],"Primary_Ticker":t["Primary_Ticker"],
+          "WS_ID":t["Source_WS_ID"],"Source_WS_ID":t["Source_WS_ID"],"Security_Key":sk,"Primary_Universe_Index":"AU_SP_ASX200","Primary_MIC":t["Primary_MIC"],"Primary_Ticker":t["Primary_Ticker"],
+          "Cohort_Label_Source":str(SIDECAR.relative_to(ROOT)),
           "Sector_Taxonomy":"GICS","Sector_Level":"INDUSTRY_GROUP","Sector_Name":formal_label,"Sector_Raw_Name":raw_label,
           "Sector_Code":sector_code,"Source_Sector_Code":nfc(s["Source_Sector_Code"]) if s else "",
           "Sector_Code_Origin":s["Sector_Code_Origin"] if s else "","Sector_Code_Method":s["Sector_Code_Method"] if s else "",
@@ -259,6 +260,8 @@ def main()->int:
           "Classification_Source_Download_Evidence":download_evidence,"Classification_Source_Snapshot_SHA256":ASX_SHA,
           "Classification_Source_Retrieved_UTC":ASX_RETRIEVED,"Classification_Source_Version_or_AsOf":ASX_SOURCE_VERSION,
           "Classification_Source_Effective_AsOf_Status":ASX_EFFECTIVE_STATUS,"Business_Effective_Date_From_Retrieval":"NO",
+          "Source_Name":ASX_SOURCE_NAME,"Source_Reference":ASX_SOURCE_REFERENCE,"Source_Version_or_AsOf":ASX_SOURCE_VERSION,
+          "Source_Retrieved_UTC":ASX_RETRIEVED,"Source_Effective_AsOf_Status":ASX_EFFECTIVE_STATUS,
           "Code_Authority_Name":MSCI_AUTHORITY_NAME,"Code_Authority_Reference":MSCI_URL,"Code_Authority_SHA256":MSCI_SHA,
           "Code_Authority_Version_or_AsOf":MSCI_VERSION,"Code_Authority_Retrieved_UTC":MSCI_RETRIEVED,"Taxonomy_Version_Status":TAXONOMY_VERSION_STATUS,
           "Frozen_Authority_File":str(FROZEN.relative_to(ROOT)),"Frozen_Authority_SHA256":FROZEN_SHA,
