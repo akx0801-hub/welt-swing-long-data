@@ -1,0 +1,180 @@
+{
+  "version": "v0.89",
+  "stage": "AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H",
+  "required_start_head": "fb0a3ea7d9b1988e53290fd9ad9e7a9ff6488efd",
+  "role": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "fail_closed": true,
+  "governance_authority": "config/manager_governance_authority_G_SEC_05_v0.75.json",
+  "governance_id": "G-SEC-05",
+  "predecessor": {
+    "verdict": "PASS_AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G",
+    "ready": true,
+    "rows": "63/63",
+    "provenance_complete": 63,
+    "provenance_incomplete": 0,
+    "provenance_conflict": 0,
+    "provenance_not_verified": 0,
+    "cross_stage_conflicts": 0,
+    "classification_source": "ASX_COMPANY_DIRECTORY_LISTED_COMPANIES_CSV",
+    "classification_reference": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+    "classification_sha256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+    "classification_retrieved_utc": "2026-09-28T07:37:52Z",
+    "classification_version_asof": "SOURCE_SNAPSHOT_SHA256:66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+    "classification_effective_asof_status": "NO_EXPLICIT_EFFECTIVE_DATE_IN_PERSISTED_SOURCE",
+    "code_authority": "MSCI_GICS_METHODOLOGY",
+    "code_authority_sha256": "d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06",
+    "code_authority_version_asof": "APRIL 2026",
+    "code_authority_retrieved_utc": "2026-09-28T06:24:19Z",
+    "workflow_run_id": 36403714685,
+    "artifact_id": 10961292663,
+    "artifact_digest": "sha256:b85acf39849f088e8d6d72766fd320dedc554ccabe92a9031342dd7890bba75e",
+    "tests": "33/33 PASS",
+    "canonical_ready": "37/1425"
+  },
+  "source_classes": {
+    "ASX": {
+      "stable_source": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+      "product": "All ASX Listed Companies .csv",
+      "bounded_fields": [
+        "ASX code",
+        "GICs industry group"
+      ],
+      "purposes": [
+        "security identity",
+        "source classification name"
+      ]
+    },
+    "GICS": {
+      "source": "https://www.msci.com/indexes/documents/methodology/1_MSCI_Global_Industry_Classification_Standard_GICS_Methodology_20250220.pdf",
+      "purposes": [
+        "formal GICS INDUSTRY_GROUP taxonomy",
+        "official four-digit Industry Group codes"
+      ],
+      "joint_authority": "MSCI / S&P Dow Jones Indices"
+    }
+  },
+  "inherited_access_evidence": {
+    "ASX": {
+      "public_http_200": true,
+      "public_download_control": true,
+      "authentication": "NONE",
+      "paid_entitlement": "NONE_OBSERVED",
+      "captcha_bypass": "NO",
+      "privileged_session": "NO",
+      "token_classification": "EPHEMERAL_PAGE_GENERATED_PUBLIC_TOKEN",
+      "direct_http_replay": "PASS"
+    },
+    "GICS": {
+      "methodology_http_200": true,
+      "authentication": "NONE",
+      "paid_entitlement": "NONE_OBSERVED",
+      "public_access_ready": true
+    }
+  },
+  "raw_persistence": {
+    "ASX_required": false,
+    "GICS_required": false,
+    "full_raw_sources_must_not_be_persisted": true
+  },
+  "technical_bounded_evidence": {
+    "ASX": true,
+    "GICS": true,
+    "authority": "v0.88 technical provenance 63/63"
+  },
+  "future_canonical_behavior": {
+    "classification": "BOUNDED_CANONICAL_METADATA_CANDIDATE_SUBJECT_TO_POLICY",
+    "row_count": 63,
+    "fields": [
+      "WS_ID",
+      "Sector_Taxonomy",
+      "Sector_Level",
+      "Sector_Name",
+      "Sector_Raw_Name",
+      "Sector_Code",
+      "Source_Sector_Code",
+      "Sector_Code_Origin",
+      "Sector_Code_Method",
+      "Source_Name",
+      "Source_Reference",
+      "Source_Version_or_AsOf",
+      "Source_Retrieved_UTC",
+      "Source_Effective_AsOf_Status",
+      "Mapping_Status",
+      "Evidence_Version",
+      "Evidence_Final_Commit"
+    ],
+    "raw_asx_directory_redistribution": false,
+    "raw_msci_methodology_redistribution": false
+  },
+  "policy_sources": {
+    "ASX": [
+      "https://www.asx.com.au/legals/terms-of-use",
+      "https://www.asx.com.au/legals/data-disclaimers"
+    ],
+    "MSCI": [
+      "https://www.msci.com/legal/terms-of-use",
+      "https://www.msci.com/legal/notice-and-disclaimer"
+    ],
+    "SP_GICS": [
+      "https://www.spglobal.com/en/terms-of-use"
+    ]
+  },
+  "scope": {
+    "gate_h_only": true,
+    "gate_a_g_rerun_allowed": false,
+    "canonical_materialization_allowed": false,
+    "au_parking_allowed": false,
+    "reselection_allowed": false,
+    "other_cohort_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_p1_p2_allowed": false,
+    "core_asx_classification_requests": 0,
+    "core_msci_methodology_requests": 0,
+    "policy_page_requests_bounded": true,
+    "productive": false
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "tradingview": true,
+    "wikipedia": true,
+    "etf_holdings": true,
+    "per_security_web_fanout": true,
+    "gate_a_rerun": true,
+    "gate_b_rerun": true,
+    "gate_c_rerun": true,
+    "gate_d_rerun": true,
+    "gate_e_rerun": true,
+    "gate_f_rerun": true,
+    "gate_g_rerun": true,
+    "canonical_materialization": true,
+    "sector_rs": true,
+    "p0": true,
+    "p1": true,
+    "p2": true
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "v085_gics_code_authority": "25/25",
+    "v086_au_identity": "63/63",
+    "v087_au_classification": "63/63",
+    "v088_au_provenance": "63/63",
+    "in_gate_f": "45/45",
+    "jp_gate_f": "197/197",
+    "canonical_ready": "37/1425",
+    "sector_rs": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0
+  },
+  "terminal": {
+    "pass_next_gate": "AU_SP_ASX200 CANONICAL SECTOR METADATA MAPPING MATERIALIZATION GATE",
+    "external_authorization_block_next_gate": "AU_SP_ASX200 EXTERNAL-AUTHORIZATION PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+    "execute_next_automatically": false
+  }
+}
