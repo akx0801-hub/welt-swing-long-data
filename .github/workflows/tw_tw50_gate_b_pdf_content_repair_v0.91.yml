@@ -31,7 +31,7 @@ jobs:
 
       - name: Verify exact v0.90 predecessor and artifact
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10966961769 --jq .digest)"
@@ -182,7 +182,7 @@ jobs:
         id: upload
         uses: actions/upload-artifact@v4
         with:
-          name: tw-tw50-gate-b-pdf-content-repair-v0.91-\${{ github.run_id }}
+          name: tw-tw50-gate-b-pdf-content-repair-v0.91-${{ github.run_id }}
           path: output_tw_tw50_gate_b_pdf_content_repair_v0_91/
           if-no-files-found: error
           retention-days: 14
@@ -192,10 +192,10 @@ jobs:
           set -euo pipefail
           python3 scripts/persist_tw_tw50_gate_b_pdf_content_repair_v0_91.py \
             --output-dir output_tw_tw50_gate_b_pdf_content_repair_v0_91 \
-            --artifact-id "\${{ steps.upload.outputs.artifact-id }}" \
-            --artifact-digest "\${{ steps.upload.outputs.artifact-digest }}" \
-            --artifact-name "tw-tw50-gate-b-pdf-content-repair-v0.91-\${{ github.run_id }}" \
-            --workflow-run-id "\${{ github.run_id }}" \
+            --artifact-id "${{ steps.upload.outputs.artifact-id }}" \
+            --artifact-digest "${{ steps.upload.outputs.artifact-digest }}" \
+            --artifact-name "tw-tw50-gate-b-pdf-content-repair-v0.91-${{ github.run_id }}" \
+            --workflow-run-id "${{ github.run_id }}" \
             --workflow-head-sha "$GITHUB_SHA"
 
       - name: Persist bounded v0.91 result
