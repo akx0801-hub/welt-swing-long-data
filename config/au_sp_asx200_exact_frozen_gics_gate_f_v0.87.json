@@ -1,0 +1,16 @@
+{
+  "version": "v0.87",
+  "required_start_head": "16ca7cfc2148527f4e48bda642e7533831a716c5",
+  "gate_f_authorized": true,
+  "fresh_asx_directory_snapshots_max": 1,
+  "gate_g_allowed": false,
+  "gate_h_allowed": false,
+  "canonical_materialization_allowed": false,
+  "pdsc_allowed": false,
+  "msci_methodology_requests_allowed": false,
+  "other_cohort_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
