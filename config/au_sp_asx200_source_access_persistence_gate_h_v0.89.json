@@ -14,6 +14,6 @@
   "bounded_policy_page_requests_allowed": true,
   "alpha_vantage_allowed": false,
   "productive": false,
-  "retry_attempt": 1,
-  "retry_reason": "S&P Global terms endpoint unreproducible in runner; switched to official S&P DJI legal disclaimers"
+  "retry_attempt": 2,
+  "retry_reason": "S&P policy page unavailable in runner; record attempt, rely on independently sufficient MSCI official blocker"
 }
