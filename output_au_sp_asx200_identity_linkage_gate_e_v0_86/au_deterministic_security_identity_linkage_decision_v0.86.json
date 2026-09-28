@@ -1,0 +1,20 @@
+{
+  "AMBIGUOUS": 0,
+  "AU_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_READY": "YES",
+  "Blocker": "",
+  "CONFLICT": 0,
+  "Cohort": "AU_SP_ASX200",
+  "Frozen_Target": 63,
+  "Gate_E": "PASS_BY_CURRENT_EVIDENCE",
+  "Gate_F": "NOT_EVALUATED",
+  "Gate_H": "NOT_EVALUATED",
+  "Identity_Field": "ASX code",
+  "Identity_Method": "EXACT_ASX_CODE_TO_FROZEN_PRIMARY_TICKER",
+  "Identity_Source": "ASX_OFFICIAL_COMPANY_DIRECTORY",
+  "Linked": 63,
+  "MIC": "XASX",
+  "NOT_FOUND": 0,
+  "NOT_VERIFIED": 0,
+  "Next_Gate": "AU_SP_ASX200 EXACT FROZEN GICS INDUSTRY-GROUP CLASSIFICATION COVERAGE GATE F",
+  "Source_WS_ID_Equality": 63
+}

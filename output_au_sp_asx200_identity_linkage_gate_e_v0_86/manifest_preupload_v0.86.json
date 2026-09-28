@@ -1,0 +1,98 @@
+{
+  "au_deterministic_security_identity_linkage_ready": true,
+  "au_gate_f_runs": 0,
+  "blocker": "",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "files": {
+    "asx_current_asx_code_duplicate_detail_v0.86.csv": {
+      "bytes": 89,
+      "sha256": "a6e30fcdbc2c9898e8f8a923823f7655c0a0c76c0fd9ca31b63fd720ae07268b"
+    },
+    "asx_current_asx_code_uniqueness_audit_v0.86.json": {
+      "bytes": 190,
+      "sha256": "87d80ca8dd855dc095ddafe7b1e9756a1f60555b6da4f761807a884ee9588f38"
+    },
+    "asx_current_csv_identity_schema_audit_v0.86.json": {
+      "bytes": 424,
+      "sha256": "64fa4448560fcd6afe115f0faaf277f1a901312aeb792aa1eaf5a123928fc72d"
+    },
+    "asx_current_directory_identity_source_audit_v0.86.json": {
+      "bytes": 1090,
+      "sha256": "3f8188aae43b7628321bc38af2f0d3dd1da1d15467f89de54f87e36ed94142a3"
+    },
+    "au_current_directory_presence_audit_v0.86.csv": {
+      "bytes": 2612,
+      "sha256": "3e51f433ba62026f8c1e028457754e6613e9d9315e7414db541cfab15dd5ccbf"
+    },
+    "au_deterministic_security_identity_linkage_decision_v0.86.json": {
+      "bytes": 614,
+      "sha256": "2c73a9e9a14b638d14f7fccec54a2f7f0b4b0c576508949a955708d808229289"
+    },
+    "au_exact_63_ticker_linkage_audit_v0.86.csv": {
+      "bytes": 3702,
+      "sha256": "12acb68b4eb7ba3db31f99cad4f2e875aba7be4f9325224c960be8ae932a9378"
+    },
+    "au_frozen_63_identity_target_schema_audit_v0.86.json": {
+      "bytes": 504,
+      "sha256": "6938801b01272c7b039f017da61c6980f9c9021ec774d4ea245f0c14a47d99f4"
+    },
+    "au_frozen_63_identity_target_v0.86.csv": {
+      "bytes": 7528,
+      "sha256": "18440bb19e3056d701eb7de3a66ce281094a8a271aeca690b17d57d3e29c3f46"
+    },
+    "au_frozen_source_ws_id_contract_audit_v0.86.csv": {
+      "bytes": 8637,
+      "sha256": "087606885ca917c38dbf5971bd48d806fc57c664ebbcf2c572cb10c444ec1fd3"
+    },
+    "au_gate_e_predecessor_authority_v0.86.json": {
+      "bytes": 699,
+      "sha256": "f484a97d1ae4f0d8e711a20ad6d57a75abf5f39b297a8e9916f566a35ab2a5c4"
+    },
+    "au_identity_collision_ambiguity_audit_v0.86.csv": {
+      "bytes": 46,
+      "sha256": "92c053e192c0354fbf17cb8d95c6b72901a9943da5e5a8fba4923cd5c17433f6"
+    },
+    "au_source_ws_id_construction_audit_v0.86.csv": {
+      "bytes": 3563,
+      "sha256": "02725e4503949747de4ddd25625e088af1abcab8b4cdc5aea4bd0ceb7a4d84b0"
+    },
+    "external_request_ledger_v0.86.csv": {
+      "bytes": 399,
+      "sha256": "ccef47aa969c7085a646ad3b7800949314287adb5896d61e95b1edf272397034"
+    },
+    "immutability_audit_v0.86.json": {
+      "bytes": 1498,
+      "sha256": "44287b76c547eeb3c94d4614d93ecaa41b432a7658b5b7a2dd64b4abd7a6c043"
+    },
+    "provider_call_audit_v0.86.json": {
+      "bytes": 587,
+      "sha256": "f8a47044ffe87503d1a84bce542049fe52f7408b5dec2f1adca39fb8c8bbb235"
+    },
+    "stage_checkpoint_preupload_v0.86.json": {
+      "bytes": 454,
+      "sha256": "2201f5a99106dec4152bdc171b0b1d0a9f38484533f0d1c642b403d030c45005"
+    },
+    "summary_preupload_v0.86.json": {
+      "bytes": 939,
+      "sha256": "0dc4c37864bafafffbd76e22ec0bfd84abe4347ecaaf5e7a75aa1b966ebc4b11"
+    },
+    "test_results_v0.86.csv": {
+      "bytes": 1209,
+      "sha256": "4e5f700fe558cbbdf0a5f4856fdaff50be52da13dc1f9709fae626ccc064002c"
+    }
+  },
+  "gate_h_runs": 0,
+  "next_gate": "AU_SP_ASX200 EXACT FROZEN GICS INDUSTRY-GROUP CLASSIFICATION COVERAGE GATE F",
+  "other_cohort_runs": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "repository_sha": "7eb12ecfa5b4ce3769bda8548c65469662ffd507",
+  "required_start_head": "62c1d0345c8955c949c134318f9329e12dca0469",
+  "sector_rs_runs": 0,
+  "stage": "AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E",
+  "verdict": "PASS_AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E",
+  "version": "v0.86"
+}

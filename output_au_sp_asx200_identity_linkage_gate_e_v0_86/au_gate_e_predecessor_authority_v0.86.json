@@ -1,0 +1,18 @@
+{
+  "AU_SECTOR_FIELD_CODE_FEASIBILITY_READY": "YES",
+  "Artifact": 10954507819,
+  "Artifact_Digest": "sha256:4330c752787106bbfb0897d2430a53b17811a2cc1a2fb99c07281adf4a00eeb7",
+  "Canonical_READY": "37/1425",
+  "Code_Strategy": "SOURCE_NATIVE_GICS_CODE",
+  "Final_Commit": "62c1d0345c8955c949c134318f9329e12dca0469",
+  "Formal_Label_Code_Coverage": "25/25",
+  "Formal_Label_Count": 25,
+  "Level": "INDUSTRY_GROUP",
+  "Nonformal_Value_Count": 2,
+  "Sector_Code_Method": "GICS_OFFICIAL_INDUSTRY_GROUP_CODE",
+  "Sector_Code_Origin": "SOURCE_NATIVE",
+  "Taxonomy": "GICS",
+  "Tests": "23/23 PASS",
+  "Verdict": "PASS_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "Workflow": 36386276036
+}

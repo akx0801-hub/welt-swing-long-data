@@ -1,0 +1,39 @@
+{
+  "ambiguous": 0,
+  "artifact": {
+    "artifact_digest": "sha256:b9f68ee805db5725db95b0c3d397e8b8fcf0a9759d7814ff3edf169c0ce46f03",
+    "artifact_id": 10955208258,
+    "artifact_name": "au-asx200-identity-linkage-gate-e-v0.86-36388443082",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "7eb12ecfa5b4ce3769bda8548c65469662ffd507",
+    "workflow_run_id": 36388443082
+  },
+  "artifact_binding": "PASS",
+  "au_deterministic_security_identity_linkage_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "company_name_linkage": 0,
+  "conflict": 0,
+  "current_asx_directory_rows": 1833,
+  "current_distinct_asx_codes": 1833,
+  "exact_ticker_links": 63,
+  "frozen_source_ws_id_contract": "PASS",
+  "frozen_target": 63,
+  "gate_f": "NOT_EVALUATED",
+  "gate_h": "NOT_EVALUATED",
+  "next_gate": "AU_SP_ASX200 EXACT FROZEN GICS INDUSTRY-GROUP CLASSIFICATION COVERAGE GATE F",
+  "not_found": 0,
+  "not_verified": 0,
+  "productive": false,
+  "source_ws_id_equality": 63,
+  "stage": "AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E",
+  "tests": {
+    "failed": 0,
+    "passed": 30,
+    "total": 30
+  },
+  "ticker_change_inference": 0,
+  "verdict": "PASS_AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E",
+  "version": "v0.86"
+}

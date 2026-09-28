@@ -1,0 +1,15 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:b9f68ee805db5725db95b0c3d397e8b8fcf0a9759d7814ff3edf169c0ce46f03",
+  "artifact_id": 10955208258,
+  "au_deterministic_security_identity_linkage_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "AU_SP_ASX200 EXACT FROZEN GICS INDUSTRY-GROUP CLASSIFICATION COVERAGE GATE F",
+  "stage": "AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E",
+  "verdict": "PASS_AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E",
+  "version": "v0.86",
+  "workflow_head_sha": "7eb12ecfa5b4ce3769bda8548c65469662ffd507",
+  "workflow_run_id": 36388443082
+}

@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:b9f68ee805db5725db95b0c3d397e8b8fcf0a9759d7814ff3edf169c0ce46f03",
+  "artifact_id": 10955208258,
+  "artifact_name": "au-asx200-identity-linkage-gate-e-v0.86-36388443082",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "7eb12ecfa5b4ce3769bda8548c65469662ffd507",
+  "workflow_run_id": 36388443082
+}

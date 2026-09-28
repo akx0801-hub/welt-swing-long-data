@@ -1,0 +1,31 @@
+{
+  "ambiguous": 0,
+  "artifact_binding": "PENDING_UPLOAD",
+  "au_deterministic_security_identity_linkage_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "company_name_linkage": 0,
+  "conflict": 0,
+  "current_asx_directory_rows": 1833,
+  "current_distinct_asx_codes": 1833,
+  "exact_ticker_links": 63,
+  "frozen_source_ws_id_contract": "PASS",
+  "frozen_target": 63,
+  "gate_f": "NOT_EVALUATED",
+  "gate_h": "NOT_EVALUATED",
+  "next_gate": "AU_SP_ASX200 EXACT FROZEN GICS INDUSTRY-GROUP CLASSIFICATION COVERAGE GATE F",
+  "not_found": 0,
+  "not_verified": 0,
+  "productive": false,
+  "source_ws_id_equality": 63,
+  "stage": "AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E",
+  "tests": {
+    "failed": 0,
+    "passed": 30,
+    "total": 30
+  },
+  "ticker_change_inference": 0,
+  "verdict": "PASS_AU_SP_ASX200_DETERMINISTIC_SECURITY_IDENTITY_LINKAGE_GATE_E",
+  "version": "v0.86"
+}

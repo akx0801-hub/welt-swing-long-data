@@ -1,0 +1,14 @@
+{
+  "Cohort_Label_Sidecar": "output_p0_frozen_1425_home_market_rs_v0_58/capability_v0.58.csv",
+  "Frozen_Physical_Has_Primary_Universe_Index": "NO",
+  "Frozen_Target_Authority": "universe/SWING_U3K_FROZEN_v0.5.csv",
+  "Primary_MIC_Distribution": {
+    "XASX": 63
+  },
+  "Row_Count": 63,
+  "Source_WS_ID_Contract": "PASS",
+  "Target_Derivation": "FROZEN_ROW_AUTHORITY_WITH_EXACT_SECURITY_KEY_COHORT_LABEL_SIDECAR",
+  "Unique_Primary_Ticker": 63,
+  "Unique_Security_Key": 63,
+  "Unique_Source_WS_ID": 63
+}

@@ -1,0 +1,18 @@
+{
+  "Allowed_Normalization": [
+    "Unicode NFC",
+    "surrounding whitespace removal"
+  ],
+  "Classification_Field_Used_For_Gate_E": "NO",
+  "Company_Name_Used_For_Linkage": "NO",
+  "Identity_Field_Observed": "ASX code",
+  "Identity_Field_Required": "ASX code",
+  "Identity_Field_Status": "PASS_EXACT",
+  "Schema": [
+    "ASX code",
+    "Company name",
+    "GICs industry group",
+    "Listing date",
+    "Market Cap"
+  ]
+}
