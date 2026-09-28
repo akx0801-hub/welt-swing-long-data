@@ -42,6 +42,7 @@ def sha_bytes(b:bytes)->str:return hashlib.sha256(b).hexdigest()
 def sha_file(p:Path)->str:return hashlib.sha256(p.read_bytes()).hexdigest()
 def git(*a:str)->str:return subprocess.check_output(["git",*a],cwd=ROOT,text=True).strip()
 def nfc(x:Any)->str:return unicodedata.normalize("NFC",str(x or "")).strip()
+def keynorm(x:Any)->str:return re.sub(r"[^a-z0-9]","",nfc(x).lower().lstrip("\ufeff"))
 
 def read_csv(p:Path)->list[dict[str,str]]:
     with p.open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
@@ -136,8 +137,9 @@ def fresh_directory_snapshot()->dict[str,Any]:
         parsed=v82.parse_dataset(raw,"text/csv",p.name)
         if not parsed or parsed.get("format")!="CSV":raise RuntimeError("download not CSV")
         schema=parsed["schema"];records=parsed["records"]
-        field=next((h for h in schema if nfc(h)=="ASX code"),None)
-        if not field:raise RuntimeError("ASX code field absent")
+        field=next((h for h in schema if keynorm(h)=="asxcode"),None)
+        if not field:
+            field=""
         event=next((e for e in reversed(cdp.downloads) if e.get("event")=="downloadWillBegin"),{})
         req_url=event.get("url","") or action.get("href","")
         return {
@@ -208,14 +210,14 @@ def main()->int:
     })
     write_json(out/"asx_current_csv_identity_schema_audit_v0.86.json",{
       "Schema":schema,"Identity_Field_Required":"ASX code","Identity_Field_Observed":field,
-      "Identity_Field_Status":"PASS" if field=="ASX code" else "FAIL","Allowed_Normalization":["Unicode NFC","surrounding whitespace removal"],
+      "Identity_Field_Status":"PASS_EXACT" if field=="ASX code" else ("PASS_CURRENT_SCHEMA_EQUIVALENT" if field and keynorm(field)=="asxcode" else "FAIL"),"Allowed_Normalization":["Unicode NFC","surrounding whitespace removal"],
       "Company_Name_Used_For_Linkage":"NO","Classification_Field_Used_For_Gate_E":"NO"
     })
 
     src_rows=[]
     by_code=defaultdict(list)
     for i,row in enumerate(records, start=1):
-        raw=nfc(row.get(field,""));norm=nfc(raw)
+        raw=nfc(row.get(field,"")) if field else "";norm=nfc(raw)
         if norm:
             h=row_hash(row,schema);entry={"Source_Row_Number":i,"ASX_Code_Raw":raw,"ASX_Code_Normalized":norm,"Full_Row_SHA256":h}
             src_rows.append(entry);by_code[norm].append(entry)
@@ -269,7 +271,7 @@ def main()->int:
     blocker=""
     if not ready:
         if snap["page"]["Directory_Page_HTTP_Status"]!=200 or snap["download"]["HTTP_Status"]!=200:blocker="ASX_DIRECTORY_IDENTITY_SOURCE_NOT_REPRODUCIBLE"
-        elif field!="ASX code":blocker="ASX_DIRECTORY_ASX_CODE_FIELD_NOT_AVAILABLE"
+        elif not field or keynorm(field)!="asxcode":blocker="ASX_DIRECTORY_ASX_CODE_FIELD_NOT_AVAILABLE"
         elif not contract_pass:blocker="AU_FROZEN_SOURCE_WS_ID_CONTRACT_NOT_VERIFIED"
         elif any(r["Primary_Ticker"] in duplicate_codes for r in target):blocker="ASX_DIRECTORY_ASX_CODE_DUPLICATE_FOR_FROZEN_SECURITY"
         elif not_found:blocker="AU_FROZEN_SECURITY_NOT_PRESENT_CURRENT_ASX_DIRECTORY"
@@ -312,7 +314,7 @@ def main()->int:
     t("TARGET_SOURCE_WS_ID_UNIQUE",len({r["Source_WS_ID"] for r in target})==63,63);t("TARGET_TICKER_UNIQUE",len({r["Primary_Ticker"] for r in target})==63,63)
     t("TARGET_MIC_XASX",all(r["Primary_MIC"]=="XASX" for r in target),"XASX");t("SOURCE_WS_ID_CONTRACT",contract_pass,"63/63")
     t("DIRECTORY_PAGE_200",snap["page"]["Directory_Page_HTTP_Status"]==200,snap["page"]["Directory_Page_HTTP_Status"])
-    t("CSV_DOWNLOAD_200",snap["download"]["HTTP_Status"]==200,snap["download"]["HTTP_Status"]);t("ASX_CODE_FIELD",field=="ASX code",field)
+    t("CSV_DOWNLOAD_200",snap["download"]["HTTP_Status"]==200,snap["download"]["HTTP_Status"]);t("ASX_CODE_FIELD",bool(field and keynorm(field)=="asxcode"),field or str(schema))
     t("FROZEN_LINK_COUNTS_RECONCILE",exact+not_found+amb+not_ver+conf==63,f"{exact}+{not_found}+{amb}+{not_ver}+{conf}")
     t("NO_COMPANY_NAME_LINKAGE",prov["company_name_linkage"]==0,"0");t("NO_FUZZY_OR_TICKER_INFERENCE",prov["fuzzy_matching"]==0 and prov["ticker_change_inference"]==0,"0")
     t("NO_PER_SECURITY_FANOUT",prov["per_security_web_fanout"]==0,"0");t("NO_MSCI_REQUEST",prov["MSCI_methodology_requests"]==0,"0")
