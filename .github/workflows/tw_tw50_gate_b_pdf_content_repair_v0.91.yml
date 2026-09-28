@@ -1,0 +1,215 @@
+name: TW TW50 Gate B PDF Content Repair v0.91
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/tw_tw50_gate_b_pdf_content_repair_v0.91.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  tw-tw50-gate-b-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout bounded v0.91 stage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="90f796612937089ec9ac115c2a77a72d2a66c2a1"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/tw_tw50_gate_b_pdf_content_repair_spec_v0\.91\.json|scripts/tw_tw50_gate_b_pdf_content_repair_v0_91\.py|scripts/persist_tw_tw50_gate_b_pdf_content_repair_v0_91\.py|tests/test_tw_tw50_gate_b_pdf_content_repair_v0_91\.py|\.github/workflows/tw_tw50_gate_b_pdf_content_repair_v0\.91\.yml|config/tw_tw50_gate_b_pdf_content_repair_v0\.91\.json|docs/validation/TW_TW50_Gate_B_PDF_Content_Repair_v0\.91\.md|output_tw_tw50_gate_b_pdf_content_repair_v0_91/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.90 predecessor and artifact
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10966961769 --jq .digest)"
+          test "$DIGEST" = "sha256:91d535cce36d6e8f0f3b0e314b721c366751ff62962773b6ae9fac5db42242f9"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_au_park_reselection_tw_tw50_gate_b_v0_90")
+          s=json.load(open(out/"summary_v0.90.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.90.json",encoding="utf-8"))
+          m=json.load(open(out/"manifest_v0.90.json",encoding="utf-8"))
+          assert s["au_park_state"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert s["au_technical_gates_a_g"]=="PASS"
+          assert s["au_gate_h"]=="BLOCKED"
+          assert s["au_primary_blocker"]=="EXPLICIT_ASX_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+          assert s["au_independent_gics_blocker"]=="EXPLICIT_GICS_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+          assert s["selected_cohort"]=="TW_TW50"
+          assert c["workflow_run_id"]==36414129933 and c["artifact_id"]==10966961769
+          assert c["artifact_digest"]=="sha256:91d535cce36d6e8f0f3b0e314b721c366751ff62962773b6ae9fac5db42242f9"
+          assert m["workflow_run_id"]==36414129933 and m["artifact_id"]==10966961769
+          for fn in ["tw_bulk_route_reproducibility_run1_v0.90.json","tw_bulk_route_reproducibility_run2_v0.90.json","tw_direct_http_replay_audit_v0.90.json"]:
+              r=json.load(open(out/fn,encoding="utf-8"))
+              assert r["status"]==200 and r["bytes"]==335595
+              assert r["sha256"]=="4fbd2617c611df41de1e1f9e64e8774a115eb66343c29498da526eda5681f86f"
+              assert ".pdf" in r["content_disposition"].lower()
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="73bbb2d59a044b92a3abbfd83ccba5c65e17e979f6e707a22f12dd2775a03696"
+          rows=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(rows)==5
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("TW_TW50_*.csv"))
+          PY
+
+      - name: Verify v0.91 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/tw_tw50_gate_b_pdf_content_repair_spec_v0.91.json",encoding="utf-8"))
+          t=json.load(open("config/tw_tw50_gate_b_pdf_content_repair_v0.91.json",encoding="utf-8"))
+          assert s["required_start_head"]=="90f796612937089ec9ac115c2a77a72d2a66c2a1"
+          assert s["manager_correction"]["v090_transport_route_reproducibility"]=="PASS"
+          assert s["manager_correction"]["v090_content_parse_status"]=="NOT_VERIFIED_DUE_UNSUPPORTED_PDF_PARSER"
+          assert s["manager_correction"]["v090_gate_b_blocker_authority"]=="SUPERSEDED_BY_MANAGER_REVIEW"
+          assert s["tw_authority"]["taxonomy"]=="ICB" and s["tw_authority"]["formal_level"]=="INDUSTRY_GROUP"
+          assert t["version"]=="v0.91" and t["tw_gate_b_repair_authorized"] is True
+          assert t["tw_gate_e_allowed"] is False and t["tw_gate_f_allowed"] is False and t["tw_gate_h_allowed"] is False
+          assert t["tw_parking_allowed"] is False and t["reselection_allowed"] is False
+          assert t["cn_csi300_execution_allowed"] is False and t["productive"] is False
+          PY
+
+      - name: Ensure local PDF tooling
+        run: |
+          set -euo pipefail
+          if ! command -v pdftotext >/dev/null || ! command -v pdfinfo >/dev/null; then
+            sudo apt-get update -y
+            sudo apt-get install -y poppler-utils
+          fi
+          pdftotext -v 2>&1 | head -n 2 || true
+          pdfinfo -v 2>&1 | head -n 2 || true
+          command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/tw_tw50_gate_b_pdf_content_repair_v0_91.py scripts/persist_tw_tw50_gate_b_pdf_content_repair_v0_91.py
+          python3 tests/test_tw_tw50_gate_b_pdf_content_repair_v0_91.py -v
+
+      - name: Run final bounded TW Gate-B repair
+        run: |
+          set -euo pipefail
+          rm -rf output_tw_tw50_gate_b_pdf_content_repair_v0_91
+          python3 scripts/tw_tw50_gate_b_pdf_content_repair_v0_91.py \
+            --repository-sha "$GITHUB_SHA" \
+            --output-dir output_tw_tw50_gate_b_pdf_content_repair_v0_91
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_tw_tw50_gate_b_pdf_content_repair_v0_91")
+          req=[
+            "v090_manager_gate_b_correction_authority_v0.91.json","v090_transport_vs_content_semantics_audit_v0.91.json",
+            "tw_gate_b_repair_predecessor_authority_v0.91.json","tw_current_pdf_source_audit_v0.91.json",
+            "tw_pdf_extraction_environment_v0.91.json","tw_pdf_page_structure_audit_v0.91.csv",
+            "tw_pdf_row_level_security_audit_v0.91.json","tw_pdf_security_identifier_audit_v0.91.json",
+            "tw_pdf_icb_field_inventory_v0.91.csv","tw_pdf_icb_level_binding_audit_v0.91.json",
+            "tw_transport_reproducibility_audit_v0.91.json","tw_content_contract_decision_v0.91.json",
+            "tw_runtime_capture_environment_v0.91.json","tw_runtime_network_candidate_inventory_v0.91.csv",
+            "tw_runtime_interaction_audit_v0.91.json","tw_static_script_config_candidate_inventory_v0.91.csv",
+            "tw_official_source_candidate_inventory_v0_91.csv","tw_selected_bulk_source_contract_v0_91.json",
+            "tw_source_composition_decision_v0_91.json","tw_bulk_security_identifier_audit_v0_91.json",
+            "tw_bulk_icb_industry_group_field_audit_v0_91.json","tw_official_sector_bulk_source_gate_b_decision_v0_91.json",
+            "external_request_ledger_v0.91.csv","provider_call_audit_v0.91.json","immutability_audit_v0.91.json",
+            "test_results_v0.91.csv","summary_preupload_v0.91.json","stage_checkpoint_preupload_v0.91.json","manifest_preupload_v0.91.json"
+          ]
+          assert all((out/x).exists() for x in req)
+          s=json.load(open(out/"summary_preupload_v0.91.json",encoding="utf-8"))
+          d=json.load(open(out/"tw_official_sector_bulk_source_gate_b_decision_v0_91.json",encoding="utf-8"))
+          pdf=json.load(open(out/"tw_current_pdf_source_audit_v0.91.json",encoding="utf-8"))
+          tr=json.load(open(out/"tw_transport_reproducibility_audit_v0.91.json",encoding="utf-8"))
+          p=json.load(open(out/"provider_call_audit_v0.91.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.91.json",encoding="utf-8"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.91.csv",encoding="utf-8")))
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert s["v090_transport_correction"]=="PASS" and s["pdf_route_reproducible"]=="YES"
+          assert s["pdf_parse_status"]=="PASS" and int(s["pdf_pages"])>0
+          assert pdf["PDF_Signature"]=="%PDF-" and pdf["Raw_PDF_Persisted"]=="NO"
+          assert tr["TRANSPORT_ROUTE_REPRODUCIBILITY"]=="PASS" and tr["DIRECT_HTTP_REPLAY"]=="PASS"
+          zero=["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings",
+                "unofficial_constituent_lists","third_party_classification_databases","company_name_Frozen_linkage",
+                "fuzzy_matching","semantic_inference","cross_taxonomy_mapping","PDSC","per_security_fanout","Frozen_49_linkage",
+                "TW_Gate_E","TW_Gate_F","TW_Gate_H","canonical_materialization","Sector_RS","P0","P1","P2","CN_CSI300_execution"]
+          assert all(p[k]==0 for k in zero)
+          assert imm["Parked_Registry_Unchanged"] and imm["Parked_Registry_Rows"]==5
+          assert imm["Frozen_Unchanged"] and imm["v057_Unchanged"] and imm["v058_Unchanged"] and imm["BR_Canonical_Semantic_Unchanged"]
+          assert imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          if s["tw_official_sector_bulk_source_ready"]:
+              assert s["verdict"]=="PASS_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B"
+              assert d["B"]=="PASS_BY_CURRENT_EVIDENCE"
+              assert s["row_level_security_records"]=="YES"
+              assert s["security_identifier_field"]!="NOT_AVAILABLE"
+              assert s["icb_level_binding"]=="PASS" and s["blocker"]==""
+              assert s["next_gate"]=="TW_TW50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E"
+          else:
+              assert s["verdict"]=="BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B"
+              assert d["B"]=="BLOCKED"
+              assert s["blocker"] in {
+                "TWSE_OFFICIAL_INDEX_SOURCE_NOT_REPRODUCIBLE","TWSE_TAIWAN50_BULK_CONSTITUENT_ROUTE_NOT_REPRODUCIBLE",
+                "TWSE_BULK_PDF_CONTENT_NOT_PARSEABLE","TWSE_BULK_ROW_LEVEL_SECURITY_RECORDS_NOT_AVAILABLE",
+                "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE","TWSE_ICB_ROW_LEVEL_CLASSIFICATION_ROUTE_NOT_REPRODUCIBLE",
+                "TWSE_BULK_ICB_INDUSTRY_GROUP_FIELD_NOT_AVAILABLE","TWSE_BULK_ICB_LEVEL_BINDING_NOT_VERIFIED",
+                "TWSE_OFFICIAL_BULK_SOURCE_REQUIRES_PER_SECURITY_FANOUT","OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+                "AUTH_OR_ENTITLEMENT_REQUIRED","AUTHORITY_REGRESSION_REVIEW_REQUIRED"}
+              assert s["next_gate"]=="TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE"
+          PY
+          BAD="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_tw_tw50_gate_b_pdf_content_repair_v0_91/.*|docs/validation/TW_TW50_Gate_B_PDF_Content_Repair_v0\.91\.md)$' || true)"
+          test -z "$BAD"
+
+      - name: Upload bounded v0.91 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: tw-tw50-gate-b-pdf-content-repair-v0.91-\${{ github.run_id }}
+          path: output_tw_tw50_gate_b_pdf_content_repair_v0_91/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_tw_tw50_gate_b_pdf_content_repair_v0_91.py \
+            --output-dir output_tw_tw50_gate_b_pdf_content_repair_v0_91 \
+            --artifact-id "\${{ steps.upload.outputs.artifact-id }}" \
+            --artifact-digest "\${{ steps.upload.outputs.artifact-digest }}" \
+            --artifact-name "tw-tw50-gate-b-pdf-content-repair-v0.91-\${{ github.run_id }}" \
+            --workflow-run-id "\${{ github.run_id }}" \
+            --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.91 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/TW_TW50_Gate_B_PDF_Content_Repair_v0.91.md output_tw_tw50_gate_b_pdf_content_repair_v0_91/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/TW_TW50_Gate_B_PDF_Content_Repair_v0\.91\.md|output_tw_tw50_gate_b_pdf_content_repair_v0_91/.*)$'; then
+            echo "Unexpected staged path"; exit 1
+          fi
+          test "$(sha256sum sector_metadata/governance/parked_cohort_registry_v1.csv | awk '{print $1}')" = "73bbb2d59a044b92a3abbfd83ccba5c65e17e979f6e707a22f12dd2775a03696"
+          test ! -e sector_metadata/canonical/cohorts/TW_TW50_sector_metadata_v1.csv
+          git commit -m "Persist TW TW50 Gate B PDF content repair v0.91"
+          git push origin HEAD:main
