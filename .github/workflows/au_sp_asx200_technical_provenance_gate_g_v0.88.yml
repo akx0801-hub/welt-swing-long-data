@@ -1,0 +1,227 @@
+name: AU SP ASX200 Technical Provenance Gate G v0.88
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/au_sp_asx200_technical_provenance_gate_g_v0.88.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  au-asx200-gate-g:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout bounded v0.88 stage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="3c71084e03fbd49c6ab5b34b03696c62aac765ad"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/au_sp_asx200_technical_provenance_gate_g_spec_v0\.88\.json|scripts/au_sp_asx200_technical_provenance_gate_g_v0_88\.py|scripts/persist_au_sp_asx200_technical_provenance_gate_g_v0_88\.py|tests/test_au_sp_asx200_technical_provenance_gate_g_v0_88\.py|\.github/workflows/au_sp_asx200_technical_provenance_gate_g_v0\.88\.yml|config/au_sp_asx200_technical_provenance_gate_g_v0\.88\.json|docs/validation/AU_SP_ASX200_Technical_Provenance_Gate_G_v0\.88\.md|output_au_sp_asx200_technical_provenance_gate_g_v0_88/.*)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.87 predecessor and artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10956817563 --jq .digest)"
+          test "$DIGEST" = "sha256:961c68520689e978945a550b4d05b7a2e698f5b890fc072caecffb6a95e186bc"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_au_sp_asx200_exact_frozen_gics_gate_f_v0_87")
+          s=json.load(open(out/"summary_v0.87.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.87.json",encoding="utf-8"))
+          m=json.load(open(out/"manifest_v0.87.json",encoding="utf-8"))
+          d=json.load(open(out/"au_exact_frozen_gics_classification_coverage_decision_v0.87.json",encoding="utf-8"))
+          assert s["verdict"]=="PASS_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F"
+          assert s["au_exact_frozen_gics_classification_coverage_ready"] is True
+          assert s["frozen_total"]==63 and s["provably_classified"]==63
+          assert s["not_provably_classified"]==s["not_found"]==s["ambiguous"]==s["not_verified"]==s["conflict"]==0
+          assert s["formal_label_binding"]=="63/63" and s["source_native_code_coverage"]=="63/63"
+          assert s["nonformal_frozen_exposure"]==0 and s["unauthorized_codes"]==0 and s["pdsc_generated"]==0
+          assert s["tests"]=={"failed":0,"passed":34,"total":34}
+          assert c["workflow_run_id"]==36392661784 and c["artifact_id"]==10956817563
+          assert c["artifact_digest"]=="sha256:961c68520689e978945a550b4d05b7a2e698f5b890fc072caecffb6a95e186bc"
+          assert m["workflow_run_id"]==36392661784 and m["artifact_id"]==10956817563
+          assert d["Gate_F"]=="PASS_BY_CURRENT_EVIDENCE" and d["Gate_G"]=="NOT_EVALUATED" and d["Gate_H"]=="NOT_EVALUATED"
+          snap=json.load(open(out/"asx_current_gate_f_source_snapshot_audit_v0.87.json",encoding="utf-8"))
+          assert snap["CSV_SHA256"]=="66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d"
+          assert snap["Record_Count"]==1833 and snap["Retrieval_Timestamp_UTC"]=="2026-09-28T07:37:52Z"
+          assert snap["Directory_Page_URL"]=="https://www.asx.com.au/markets/trade-our-cash-market/directory"
+          assert snap["Schema"]==["ASX code","Company name","GICs industry group","Listing date","Market Cap"]
+          src85=json.load(open("output_au_sp_asx200_gate_d_msci_gics_repair_v0_85/msci_current_gics_methodology_source_audit_v0.85.json",encoding="utf-8"))
+          inv=list(csv.DictReader(open("output_au_sp_asx200_gate_d_msci_gics_repair_v0_85/gics_industry_group_official_label_code_inventory_v0.85.csv",encoding="utf-8")))
+          assert src85["SHA256"]=="d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06"
+          assert src85["Retrieval_Timestamp_UTC"]=="2026-09-28T06:24:19Z"
+          assert src85["Document_Display_Date"]=="APRIL 2026"
+          assert len(inv)==25 and len({r["Official_GICS_Industry_Group_Code"] for r in inv})==25
+          target=list(csv.DictReader(open("output_au_sp_asx200_identity_linkage_gate_e_v0_86/au_frozen_63_identity_target_v0.86.csv",encoding="utf-8")))
+          link=list(csv.DictReader(open("output_au_sp_asx200_identity_linkage_gate_e_v0_86/au_exact_63_ticker_linkage_audit_v0.86.csv",encoding="utf-8")))
+          assert len(target)==63 and len(link)==63 and all(r["Linkage_Status"]=="EXACT_LINK" for r in link)
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          PY
+
+      - name: Verify v0.88 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/au_sp_asx200_technical_provenance_gate_g_spec_v0.88.json",encoding="utf-8"))
+          t=json.load(open("config/au_sp_asx200_technical_provenance_gate_g_v0.88.json",encoding="utf-8"))
+          assert s["required_start_head"]=="3c71084e03fbd49c6ab5b34b03696c62aac765ad"
+          assert s["scope"]["gate_g_only"] is True
+          assert s["scope"]["external_source_requests"]==0
+          assert s["scope"]["gate_h_allowed"] is False
+          assert s["scope"]["policy_review_allowed"] is False
+          assert s["scope"]["canonical_materialization_allowed"] is False
+          assert s["scope"]["asx_refetch_allowed"] is False
+          assert s["scope"]["msci_refetch_allowed"] is False
+          assert s["scope"]["sp_refetch_allowed"] is False
+          assert s["forbidden"]["alpha_vantage"] is True
+          assert t["version"]=="v0.88"
+          assert t["required_start_head"]==s["required_start_head"]
+          assert t["gate_g_authorized"] is True
+          assert t["external_source_requests_allowed"]==0
+          assert t["gate_h_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/au_sp_asx200_technical_provenance_gate_g_v0_88.py scripts/persist_au_sp_asx200_technical_provenance_gate_g_v0_88.py
+          python3 tests/test_au_sp_asx200_technical_provenance_gate_g_v0_88.py -v
+
+      - name: Run bounded AU Gate G from persisted evidence only
+        run: |
+          set -euo pipefail
+          rm -rf output_au_sp_asx200_technical_provenance_gate_g_v0_88
+          python3 scripts/au_sp_asx200_technical_provenance_gate_g_v0_88.py             --repository-sha "$GITHUB_SHA"             --output-dir output_au_sp_asx200_technical_provenance_gate_g_v0_88
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_au_sp_asx200_technical_provenance_gate_g_v0_88")
+          req=[
+            "au_gate_g_predecessor_authority_v0.88.json",
+            "au_frozen_membership_provenance_authority_v0.88.json",
+            "au_identity_evidence_provenance_authority_v0.88.json",
+            "au_classification_source_provenance_contract_v0.88.json",
+            "au_classification_source_snapshot_contract_v0.88.json",
+            "au_classification_source_asof_contract_v0.88.json",
+            "au_gics_code_authority_provenance_contract_v0.88.json",
+            "au_evidence_version_commit_contract_v0.88.json",
+            "au_row_level_provenance_chain_v0.88.csv",
+            "au_row_level_provenance_status_audit_v0.88.csv",
+            "au_cross_stage_identity_value_consistency_audit_v0.88.csv",
+            "au_cross_stage_classification_value_consistency_audit_v0.88.csv",
+            "au_snapshot_hash_consistency_audit_v0.88.json",
+            "au_code_authority_hash_consistency_audit_v0.88.json",
+            "au_future_canonical_provenance_field_contract_v0.88.json",
+            "au_technical_provenance_decision_v0.88.json",
+            "external_request_ledger_v0.88.csv","provider_call_audit_v0.88.json","immutability_audit_v0.88.json",
+            "test_results_v0.88.csv","summary_preupload_v0.88.json","stage_checkpoint_preupload_v0.88.json","manifest_preupload_v0.88.json"
+          ]
+          assert all((out/x).exists() for x in req)
+          s=json.load(open(out/"summary_preupload_v0.88.json",encoding="utf-8"))
+          d=json.load(open(out/"au_technical_provenance_decision_v0.88.json",encoding="utf-8"))
+          p=json.load(open(out/"provider_call_audit_v0.88.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.88.json",encoding="utf-8"))
+          chain=list(csv.DictReader(open(out/"au_row_level_provenance_chain_v0.88.csv",encoding="utf-8")))
+          statuses=list(csv.DictReader(open(out/"au_row_level_provenance_status_audit_v0.88.csv",encoding="utf-8")))
+          requests=list(csv.DictReader(open(out/"external_request_ledger_v0.88.csv",encoding="utf-8")))
+          tests=list(csv.DictReader(open(out/"test_results_v0.88.csv",encoding="utf-8")))
+          assert all(r["Result"]=="PASS" for r in tests)
+          assert len(chain)==63 and len(statuses)==63 and requests==[]
+          zero=["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings",
+                "ASX_network_requests","MSCI_network_requests","SP_network_requests","third_party_classification_sources",
+                "company_name_linkage","fuzzy_matching","semantic_inference","cross_taxonomy_mapping","PDSC",
+                "per_security_web_fanout","Gate_H","canonical_materialization","Sector_RS","P0","P1","P2"]
+          assert all(p[k]==0 for k in zero)
+          assert d["Gate_H"]=="NOT_EVALUATED" and d["AU_Canonical_Readiness"]=="NO"
+          assert all(r["Classification_Source_Name"]=="ASX_COMPANY_DIRECTORY_LISTED_COMPANIES_CSV" for r in chain)
+          assert all(r["Classification_Source_Reference"]=="https://www.asx.com.au/markets/trade-our-cash-market/directory" for r in chain)
+          assert all(r["Classification_Source_Snapshot_SHA256"]=="66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d" for r in chain)
+          assert all(r["Classification_Source_Retrieved_UTC"]=="2026-09-28T07:37:52Z" for r in chain)
+          assert all(r["Classification_Source_Effective_AsOf_Status"]=="NO_EXPLICIT_EFFECTIVE_DATE_IN_PERSISTED_SOURCE" for r in chain)
+          assert all(r["Business_Effective_Date_From_Retrieval"]=="NO" for r in chain)
+          assert all(r["Code_Authority_Name"]=="MSCI_GICS_METHODOLOGY" and r["Code_Authority_SHA256"]=="d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06" for r in chain)
+          assert all(r["Code_Authority_Version_or_AsOf"]=="APRIL 2026" and r["Code_Authority_Retrieved_UTC"]=="2026-09-28T06:24:19Z" for r in chain)
+          assert all(r["WS_ID"]==r["Source_WS_ID"] and r["Cohort_Label_Source"]=="output_p0_frozen_1425_home_market_rs_v0_58/capability_v0.58.csv" for r in chain)
+          assert imm["Frozen_Unchanged"] and imm["v057_Unchanged"] and imm["v058_Unchanged"] and imm["BR_Canonical_Semantic_Unchanged"]
+          assert imm["Parked_Cohort_Registry_Unchanged"] and imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          if s["au_technical_provenance_ready"]:
+              assert s["verdict"]=="PASS_AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G"
+              assert s["rows"]==63 and s["provenance_complete"]==63
+              assert s["provenance_incomplete"]==s["provenance_conflict"]==s["provenance_not_verified"]==0
+              assert s["cross_stage_conflicts"]==0 and s["external_source_requests"]==0
+              assert all(r["Provenance_Status"]=="PROVENANCE_COMPLETE" for r in statuses)
+              assert d["Gate_G"]=="PASS_BY_CURRENT_EVIDENCE"
+              assert s["next_gate"]=="AU_SP_ASX200 SOURCE ACCESS / EVIDENCE PERSISTENCE GATE H"
+              assert s["blocker"]==""
+          else:
+              assert s["verdict"]=="BLOCKED_AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G"
+              assert s["blocker"] in {
+                "AU_FROZEN_MEMBERSHIP_PROVENANCE_NOT_VERIFIED","AU_IDENTITY_EVIDENCE_PROVENANCE_NOT_VERIFIED",
+                "ASX_CLASSIFICATION_SOURCE_REFERENCE_NOT_VERIFIED","ASX_CLASSIFICATION_SNAPSHOT_HASH_NOT_VERIFIED",
+                "ASX_CLASSIFICATION_RETRIEVAL_PROVENANCE_NOT_VERIFIED","AU_SOURCE_EFFECTIVE_ASOF_STATUS_NOT_EXPLICIT",
+                "GICS_CODE_AUTHORITY_REFERENCE_NOT_VERIFIED","GICS_CODE_AUTHORITY_VERSION_NOT_VERIFIED",
+                "AU_ROW_LEVEL_PROVENANCE_INCOMPLETE","AU_CROSS_STAGE_PROVENANCE_CONFLICT",
+                "AU_TECHNICAL_PROVENANCE_NOT_VERIFIED","AUTHORITY_REGRESSION_REVIEW_REQUIRED"
+              }
+          PY
+          BAD="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_au_sp_asx200_technical_provenance_gate_g_v0_88/.*|docs/validation/AU_SP_ASX200_Technical_Provenance_Gate_G_v0\.88\.md)$' || true)"
+          test -z "$BAD"
+
+      - name: Upload bounded v0.88 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: au-asx200-technical-provenance-gate-g-v0.88-${{ github.run_id }}
+          path: output_au_sp_asx200_technical_provenance_gate_g_v0_88/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_au_sp_asx200_technical_provenance_gate_g_v0_88.py             --output-dir output_au_sp_asx200_technical_provenance_gate_g_v0_88             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "au-asx200-technical-provenance-gate-g-v0.88-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.88 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add docs/validation/AU_SP_ASX200_Technical_Provenance_Gate_G_v0.88.md                   output_au_sp_asx200_technical_provenance_gate_g_v0_88/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(docs/validation/AU_SP_ASX200_Technical_Provenance_Gate_G_v0\.88\.md|output_au_sp_asx200_technical_provenance_gate_g_v0_88/.*)$'; then
+            echo "Unexpected staged path"; exit 1
+          fi
+          test ! -e sector_metadata/canonical/cohorts/AU_SP_ASX200_sector_metadata_v1.csv
+          git commit -m "Persist AU ASX200 technical provenance Gate G v0.88"
+          git push origin HEAD:main
