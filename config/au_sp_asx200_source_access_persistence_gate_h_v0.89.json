@@ -1,0 +1,17 @@
+{
+  "version": "v0.89",
+  "required_start_head": "fb0a3ea7d9b1988e53290fd9ad9e7a9ff6488efd",
+  "gate_h_authorized": true,
+  "gate_a_g_rerun_allowed": false,
+  "canonical_materialization_allowed": false,
+  "au_parking_allowed": false,
+  "reselection_allowed": false,
+  "other_cohort_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "core_asx_classification_source_requests_allowed": 0,
+  "core_msci_methodology_requests_allowed": 0,
+  "bounded_policy_page_requests_allowed": true,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
