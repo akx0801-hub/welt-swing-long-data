@@ -1,0 +1,140 @@
+{
+  "version": "v0.91",
+  "stage": "TW_TW50_GATE_B_PDF_CONTENT_REPAIR_FINAL_CURRENT_OFFICIAL_BULK_ROUTE_COMPLETION",
+  "required_start_head": "90f796612937089ec9ac115c2a77a72d2a66c2a1",
+  "role": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "fail_closed": true,
+  "predecessor": {
+    "workflow_run_id": 36414129933,
+    "artifact_id": 10966961769,
+    "artifact_digest": "sha256:91d535cce36d6e8f0f3b0e314b721c366751ff62962773b6ae9fac5db42242f9",
+    "au_park_authoritative": true,
+    "selected_cohort": "TW_TW50",
+    "frozen_rows": 49
+  },
+  "manager_correction": {
+    "v090_transport_route_reproducibility": "PASS",
+    "v090_content_parse_status": "NOT_VERIFIED_DUE_UNSUPPORTED_PDF_PARSER",
+    "v090_gate_b_blocker_authority": "SUPERSEDED_BY_MANAGER_REVIEW",
+    "route": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+    "observed_status": 200,
+    "observed_bytes": 335595,
+    "observed_sha256": "4fbd2617c611df41de1e1f9e64e8774a115eb66343c29498da526eda5681f86f",
+    "observed_content_disposition": "attachment; filename=TW50_QUARTERLY-DAILYData-EUR_StocksWeight_20260630.pdf"
+  },
+  "tw_authority": {
+    "cohort": "TW_TW50",
+    "frozen_rows": 49,
+    "taxonomy": "ICB",
+    "formal_level": "INDUSTRY_GROUP",
+    "gates": {
+      "A": "PASS_INHERITED",
+      "B": "TARGET_THIS_STAGE",
+      "C": "PASS_INHERITED",
+      "D": "PASS_INHERITED",
+      "E": "NOT_EVALUATED",
+      "F": "NOT_EVALUATED",
+      "G": "PASS_INHERITED",
+      "H": "NOT_EVALUATED"
+    }
+  },
+  "current_routes": {
+    "pdf": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+    "twse": "https://www.twse.com.tw/en/indices/indices/series.html",
+    "lseg": "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan"
+  },
+  "pdf": {
+    "require_pdf_signature": true,
+    "preferred_extractor": "pdftotext -layout",
+    "fallback_extractors": [
+      "python pypdf if runner-installed"
+    ],
+    "ocr_only_if_no_extractable_text": true,
+    "persist_full_pdf": false
+  },
+  "runtime_if_pdf_insufficient": {
+    "enabled": true,
+    "clean_public_context": true,
+    "authentication": "NONE",
+    "captcha_bypass": "NO",
+    "privileged_session": "NO",
+    "proxy_rotation": "NO",
+    "pages": [
+      "https://www.twse.com.tw/en/indices/indices/series.html",
+      "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan"
+    ],
+    "bounded_keywords": [
+      "TW50",
+      "Taiwan50",
+      "Taiwan 50",
+      "constituent",
+      "component",
+      "ICB",
+      "industryGroup",
+      "industry_group",
+      "industry group",
+      "DownloadConstituentsWeights",
+      "CSV",
+      "XLS",
+      "XLSX",
+      "JSON",
+      "API"
+    ]
+  },
+  "pass_contract": {
+    "official_source_authority": "PASS",
+    "current_route_reproducibility": "PASS",
+    "bulk_or_finite_directory_architecture": "PASS",
+    "row_level_security_records": "PASS",
+    "deterministic_security_identifier": "PASS",
+    "row_level_icb_industry_group": "PASS",
+    "icb_formal_level_binding": "PASS",
+    "future_gate_e_f_without_guessing": "PASS",
+    "per_security_fanout": 0,
+    "frozen_49_linkage_runs": 0
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "tradingview": true,
+    "wikipedia": true,
+    "etf_holdings": true,
+    "unofficial_constituent_lists": true,
+    "third_party_classification_databases": true,
+    "company_name_frozen_linkage": true,
+    "fuzzy_matching": true,
+    "semantic_inference": true,
+    "cross_taxonomy_mapping": true,
+    "pdsc": true,
+    "per_security_fanout": true,
+    "frozen_49_linkage": true,
+    "tw_gate_e": true,
+    "tw_gate_f": true,
+    "tw_gate_h": true,
+    "canonical_materialization": true,
+    "sector_rs": true,
+    "p0": true,
+    "p1": true,
+    "p2": true,
+    "cn_csi300_execution": true
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "parked_registry_sha256_v090": "73bbb2d59a044b92a3abbfd83ccba5c65e17e979f6e707a22f12dd2775a03696",
+    "canonical_ready": "37/1425",
+    "sector_rs": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0
+  },
+  "terminal": {
+    "pass_next_gate": "TW_TW50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E",
+    "block_next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+    "execute_next_automatically": false
+  }
+}
