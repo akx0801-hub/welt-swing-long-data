@@ -54,7 +54,7 @@ def main()->int:
       "## Operational interpretation",
       "This is an operational G-SEC-05 decision, not legal advice. Public access and technical bounded-evidence sufficiency both pass. "
       "However, current official ASX policy contains an explicit restriction on automated software/process access and broader restrictions on copying/reproduction/use outside the limited permitted context. "
-      "Current official MSCI policy separately restricts database population and unauthorized automated extraction of MSCI proprietary materials; S&P Global terms for SPDJI data also restrict classification/historical database and derived-data use. "
+      "Current official MSCI policy separately restricts database population and unauthorized automated extraction of MSCI proprietary materials. A bounded S&P co-owner policy request is recorded separately; if runner access is blocked, no S&P policy semantics are used for the Gate-H blocker. "
       "The intended future 63-row canonical output is technically bounded metadata, but boundedness does not override those explicit operational restrictions. "
       "Full raw ASX CSV and full MSCI methodology persistence remain unnecessary and were not performed.","",
       "## Blocker",f"**{sf['blocker']}**.","",
