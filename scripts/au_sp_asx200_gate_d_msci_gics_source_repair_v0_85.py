@@ -117,10 +117,9 @@ def first_regex(text:str,pat:str,flags:int=re.I|re.S)->str:
     return normspace(m.group(1)) if m else ""
 
 def parse_counts(text:str)->dict[str,int]:
-    m=re.search(r"11\s+Sectors,\s*25\s+Industry\s+Groups,\s*74\s+Industries,\s*and\s*163\s+Sub[-\s]?Industries",text,re.I)
+    m=re.search(r"includes\s+(\d+)\s+Sectors,\s*(\d+)\s+Industry\s+Groups,\s*(\d+)\s+Industries,\s*and\s*(\d+)\s+Sub.{0,4}?Industries",text,re.I|re.S)
     if not m:return {}
-    nums=[int(x) for x in re.findall(r"\d+",m.group(0))]
-    return {"SECTOR":nums[0],"INDUSTRY_GROUP":nums[1],"INDUSTRY":nums[2],"SUB_INDUSTRY":nums[3]}
+    return {"SECTOR":int(m.group(1)),"INDUSTRY_GROUP":int(m.group(2)),"INDUSTRY":int(m.group(3)),"SUB_INDUSTRY":int(m.group(4))}
 
 def parse_structure(pages:list[str])->tuple[list[dict[str,str]],dict[str,Any]]:
     text="\n".join(pages)
@@ -183,12 +182,13 @@ def main()->int:
     if reproducible:
         try:pages,full=pdf_extract(src["Raw"])
         except Exception:reproducible=False
-    title=normspace(pages[0].splitlines()[0]) if pages and pages[0].splitlines() else ""
+    title_marker=bool(pages and re.search(r"GLOBAL\s+INDUSTRY\s+CLASSIFICATION\s+STANDARD.*?METHODOLOGY",pages[0],re.I|re.S))
+    title="GLOBAL INDUSTRY CLASSIFICATION STANDARD (GICS®) METHODOLOGY" if title_marker else ""
     display_date=first_regex(full,r"GLOBAL INDUSTRY CLASSIFICATION STANDARD.*?\n\s*(APRIL\s+2026)") if full else ""
     if not display_date and full:display_date=first_regex(full,r"\b(APRIL\s+2026)\b")
     last_updated=first_regex(full,r"last updated in\s+([A-Za-z]+\s+\d{4})") if full else ""
     latest_marker=bool(re.search(r"The GICS Structure presented in this document is the latest Structure",full,re.I)) if full else False
-    current_effective=bool(reproducible and title.startswith("GLOBAL INDUSTRY CLASSIFICATION STANDARD") and display_date.upper()=="APRIL 2026" and last_updated.lower()=="april 2026" and latest_marker)
+    current_effective=bool(reproducible and title_marker and display_date.upper()=="APRIL 2026" and last_updated.lower()=="april 2026" and latest_marker)
     write_json(out/"msci_current_gics_methodology_source_audit_v0.85.json",{
       "Requested_URL":src["Requested_URL"],"Resolved_URL":src["Resolved_URL"],"HTTP_Status":src["HTTP_Status"],
       "Content_Type":src["Content_Type"],"Bytes":src["Bytes"],"SHA256":src["SHA256"],"Retrieval_Timestamp_UTC":src["Retrieval_Timestamp_UTC"],
