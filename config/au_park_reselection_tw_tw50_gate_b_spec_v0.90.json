@@ -1,0 +1,157 @@
+{
+  "version": "v0.90",
+  "stage": "AU_SP_ASX200_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_TW_TW50_GATE_B",
+  "required_start_head": "ef6029b3660b1f2a8bc29c016dc78d0188a775b1",
+  "role": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "fail_closed": true,
+  "governance_authority": "config/manager_governance_authority_G_SEC_06_v0.76.json",
+  "predecessor": {
+    "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H",
+    "au_source_access_persistence_ready": false,
+    "asx_access_ready": "YES",
+    "gics_access_ready": "YES",
+    "raw_persistence_required_asx": "NO",
+    "raw_persistence_required_gics": "NO",
+    "technical_bounded_evidence_sufficient_asx": "YES",
+    "technical_bounded_evidence_sufficient_gics": "YES",
+    "asx_policy_compatibility": "NO",
+    "gics_policy_compatibility": "NO",
+    "canonical_metadata_evidence_persistable": "NO",
+    "external_authorization_required": "YES",
+    "primary_blocker": "EXPLICIT_ASX_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+    "independent_gics_blocker": "EXPLICIT_GICS_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+    "au_gate_f": "63/63",
+    "au_gate_g": "63/63",
+    "workflow_run_id": 36412097411,
+    "artifact_id": 10965001804,
+    "artifact_digest": "sha256:39c8c68f5750164265b29c994b422ab78b57c772d3a497e24ab9f22c7e7a8c23",
+    "tests": "35/35 PASS",
+    "canonical_ready": "37/1425"
+  },
+  "au_park": {
+    "Cohort": "AU_SP_ASX200",
+    "Execution_State": "PARKED_EXTERNAL_AUTHORIZATION",
+    "Technical_Gates_A_G": "PASS",
+    "Gate_H": "BLOCKED",
+    "Primary_Gate_H_Blocker": "EXPLICIT_ASX_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+    "Additional_Independent_Gate_H_Blocker": "EXPLICIT_GICS_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+    "Authorization_Requirement": "ASX prior written consent / applicable express permission AND applicable MSCI / S&P Dow Jones Indices GICS license or permission",
+    "Gate_F_Classified": 63,
+    "Gate_F_Total": 63,
+    "Canonical_Readiness": "NO",
+    "Canonical_Rows": 0,
+    "Reopen_Automatically": "NO",
+    "Authority": "G-SEC-06",
+    "Effective_From": "v0.90"
+  },
+  "preserved_parks": {
+    "IN_NIFTY50": "PARKED_EXTERNAL_AUTHORIZATION",
+    "JP_N225": "PARKED_EXTERNAL_AUTHORIZATION",
+    "US_SP400": "PARKED_SOURCE_ACCESS",
+    "US_SP500": "PARKED_SHARED_SOURCE_PREREQUISITE"
+  },
+  "reselection": {
+    "authority_matrix": "output_frozen_1425_canonical_sector_reconciliation_v0_69/current_authority_cohort_gate_matrix_v0.69.csv",
+    "selection_rule": {
+      "primary": "greatest consecutive resolved A-H gates from A",
+      "tie_break_1": "smaller Frozen cohort row count",
+      "tie_break_2": "lexicographically ascending Cohort ID"
+    },
+    "expected_active": [
+      "TW_TW50",
+      "CN_CSI300"
+    ],
+    "calculation_not_hard_coded": true
+  },
+  "tw": {
+    "cohort": "TW_TW50",
+    "frozen_rows": 49,
+    "taxonomy": "ICB",
+    "level": "INDUSTRY_GROUP",
+    "source_native_candidate": "ICB within FTSE TWSE Taiwan Index Series",
+    "inherited_gates": {
+      "A": "PASS_INHERITED",
+      "C": "PASS_INHERITED",
+      "D": "PASS_INHERITED",
+      "G": "PASS_INHERITED"
+    },
+    "target_gate": "B",
+    "untouched_gates": {
+      "E": "NOT_EVALUATED",
+      "F": "NOT_EVALUATED",
+      "H": "NOT_EVALUATED"
+    },
+    "historical_blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+    "official_start_pages": [
+      "https://www.twse.com.tw/en/indices/indices/series.html",
+      "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan"
+    ],
+    "historical_authority": [
+      "https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf",
+      "https://wwwc.twse.com.tw/en/indices/indices/series.html",
+      "https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/2.08.html"
+    ],
+    "current_static_candidate_patterns": [
+      "DownloadConstituentsWeights",
+      "FTSE TWSE 50",
+      "Taiwan 50",
+      "Constituents"
+    ],
+    "allowed_hosts": [
+      "www.twse.com.tw",
+      "wwwc.twse.com.tw",
+      "research.ftserussell.com",
+      "www.lseg.com"
+    ],
+    "runtime_if_static_insufficient": true,
+    "direct_http_replay_if_possible": true,
+    "per_security_fanout": false,
+    "frozen_49_linkage": false
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "tradingview": true,
+    "wikipedia": true,
+    "etf_holdings": true,
+    "unofficial_tw_constituent_lists": true,
+    "third_party_classification_databases": true,
+    "company_name_frozen_linkage": true,
+    "fuzzy_matching": true,
+    "semantic_classification_inference": true,
+    "cross_taxonomy_mapping": true,
+    "pdsc": true,
+    "per_security_web_fanout": true,
+    "tw_gate_e": true,
+    "tw_gate_f": true,
+    "tw_gate_h": true,
+    "canonical_materialization": true,
+    "sector_rs": true,
+    "p0": true,
+    "p1": true,
+    "p2": true
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "au_gate_f": "63/63",
+    "au_gate_g": "63/63",
+    "au_canonical_rows": 0,
+    "in_gate_f": "45/45",
+    "jp_gate_f": "197/197",
+    "canonical_ready": "37/1425",
+    "sector_rs": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0
+  },
+  "terminal": {
+    "pass_next_gate": "TW_TW50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E",
+    "no_route_next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+    "execute_next_automatically": false
+  }
+}
