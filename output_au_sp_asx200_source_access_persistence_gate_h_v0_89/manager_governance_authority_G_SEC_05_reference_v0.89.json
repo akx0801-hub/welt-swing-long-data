@@ -1,0 +1,22 @@
+{
+  "Authority_File": "config/manager_governance_authority_G_SEC_05_v0.75.json",
+  "Authority_File_SHA256": "d5cd1026c4b6b951e34288e9f80c1a7cee25bfb51508bfec17922dda47cd1abd",
+  "Authority_ID": "G-SEC-05",
+  "Authority_Title": "Evidence Persistence Without Raw Redistribution",
+  "Legal_Opinion": false,
+  "Pass_Conditions": [
+    "authoritative source is publicly and reproducibly accessible",
+    "no authentication, paid entitlement, CAPTCHA bypass, private token, privileged session, or prohibited access mechanism is required",
+    "repository can persist sufficient bounded audit evidence without full raw-source redistribution",
+    "future canonical rows can be traced to the official source contract",
+    "complete raw-source redistribution is not technically required for deterministic audit or reproduction",
+    "bounded review discovers no explicit official statement blocking the specific project behavior required for canonical metadata"
+  ],
+  "Rules": {
+    "canonical_facts_must_remain_bounded_metadata_not_disguised_raw_dataset": true,
+    "explicit_official_operational_restriction_requires_fail_closed": true,
+    "gate_h_operational_not_legal": true,
+    "raw_source_storage_not_required_for_pass": true,
+    "unknown_raw_redistribution_rights_alone_do_not_fail_when_raw_not_required": true
+  }
+}

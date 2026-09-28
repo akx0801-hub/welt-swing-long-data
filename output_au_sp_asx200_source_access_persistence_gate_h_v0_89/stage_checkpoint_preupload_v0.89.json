@@ -1,0 +1,13 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "au_source_access_persistence_ready": false,
+  "authorization_source": "ASX prior written consent / applicable express permission; MSCI and/or S&P Dow Jones Indices applicable GICS license/permission",
+  "blocker": "EXPLICIT_ASX_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "external_authorization_required": "YES",
+  "next_gate": "AU_SP_ASX200 EXTERNAL-AUTHORIZATION PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "stage": "AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H",
+  "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H",
+  "version": "v0.89"
+}

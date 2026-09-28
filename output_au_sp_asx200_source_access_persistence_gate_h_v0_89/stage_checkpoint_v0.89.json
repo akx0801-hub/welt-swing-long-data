@@ -1,0 +1,17 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:39c8c68f5750164265b29c994b422ab78b57c772d3a497e24ab9f22c7e7a8c23",
+  "artifact_id": 10965001804,
+  "au_source_access_persistence_ready": false,
+  "authorization_source": "ASX prior written consent / applicable express permission; MSCI and/or S&P Dow Jones Indices applicable GICS license/permission",
+  "blocker": "EXPLICIT_ASX_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "external_authorization_required": "YES",
+  "next_gate": "AU_SP_ASX200 EXTERNAL-AUTHORIZATION PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "stage": "AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H",
+  "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H",
+  "version": "v0.89",
+  "workflow_head_sha": "5b83e12f46bd4e92e500e369dff60a1be8e82e9f",
+  "workflow_run_id": 36412097411
+}

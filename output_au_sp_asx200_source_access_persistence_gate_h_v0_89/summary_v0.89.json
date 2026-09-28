@@ -1,0 +1,51 @@
+{
+  "artifact": {
+    "artifact_digest": "sha256:39c8c68f5750164265b29c994b422ab78b57c772d3a497e24ab9f22c7e7a8c23",
+    "artifact_id": 10965001804,
+    "artifact_name": "au-asx200-source-access-persistence-gate-h-v0.89-36412097411",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "5b83e12f46bd4e92e500e369dff60a1be8e82e9f",
+    "workflow_run_id": 36412097411
+  },
+  "artifact_binding": "PASS",
+  "asx_access_ready": "YES",
+  "asx_bounded_evidence_persistence_ready": "NO",
+  "asx_bounded_evidence_sufficient": "YES",
+  "asx_official_policy_review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "asx_policy_compatibility": "NO",
+  "au_source_access_persistence_ready": false,
+  "authorization_source": "ASX prior written consent / applicable express permission; MSCI and/or S&P Dow Jones Indices applicable GICS license/permission",
+  "blocker": "EXPLICIT_ASX_SOURCE_POLICY_OPERATIONAL_RESTRICTION",
+  "canonical_metadata_evidence_persistable": "NO",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "core_source_requests": {
+    "ASX_classification": 0,
+    "MSCI_methodology": 0
+  },
+  "external_authorization_required": "YES",
+  "gics_access_ready": "YES",
+  "gics_bounded_evidence_persistence_ready": "NO",
+  "gics_bounded_evidence_sufficient": "YES",
+  "gics_official_policy_review": "EXPLICIT_OPERATIONAL_RESTRICTION_FOUND",
+  "gics_policy_compatibility": "NO",
+  "legal_opinion": false,
+  "next_gate": "AU_SP_ASX200 EXTERNAL-AUTHORIZATION PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "policy_requests": {
+    "ASX": 2,
+    "MSCI": 2,
+    "SP_GICS": 1
+  },
+  "productive": false,
+  "raw_asx_persistence_required": "NO",
+  "raw_gics_persistence_required": "NO",
+  "sp_policy_reproducible": "NO",
+  "stage": "AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H",
+  "tests": {
+    "failed": 0,
+    "passed": 35,
+    "total": 35
+  },
+  "verdict": "BLOCKED_AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H",
+  "version": "v0.89"
+}

@@ -1,0 +1,9 @@
+{
+  "RAW_PERSISTENCE_REQUIRED_ASX": "NO",
+  "RAW_PERSISTENCE_REQUIRED_GICS": "NO",
+  "RAW_PERSISTENCE_RIGHTS_ASX": "VERIFIED_RESTRICTED",
+  "RAW_PERSISTENCE_RIGHTS_GICS": "VERIFIED_RESTRICTED",
+  "RAW_SOURCE_CURRENTLY_PERSISTED_ASX": "NO",
+  "RAW_SOURCE_CURRENTLY_PERSISTED_GICS": "NO",
+  "Technical_Reason": "v0.88 proves 63/63 auditability from stable references, hashes, timestamps, bounded row evidence and exact code authority; complete raw sources are not technically required."
+}

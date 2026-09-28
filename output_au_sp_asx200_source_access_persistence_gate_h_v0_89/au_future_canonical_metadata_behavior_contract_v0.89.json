@@ -1,0 +1,31 @@
+{
+  "Automated_Pipeline_Context": "YES",
+  "Canonical_Materialization_Executed_v089": "NO",
+  "Cohort": "AU_SP_ASX200",
+  "Full_ASX_Directory_Redistribution": "NO",
+  "Full_MSCI_Methodology_Redistribution": "NO",
+  "Intended_Fields": [
+    "WS_ID",
+    "Sector_Taxonomy",
+    "Sector_Level",
+    "Sector_Name",
+    "Sector_Raw_Name",
+    "Sector_Code",
+    "Source_Sector_Code",
+    "Sector_Code_Origin",
+    "Sector_Code_Method",
+    "Source_Name",
+    "Source_Reference",
+    "Source_Version_or_AsOf",
+    "Source_Retrieved_UTC",
+    "Source_Effective_AsOf_Status",
+    "Mapping_Status",
+    "evidence-version/commit fields"
+  ],
+  "Internal_Canonical_Metadata_Persistence": "YES",
+  "Rows": 63,
+  "Uses_Exact_ASX_Codes": "YES",
+  "Uses_Exact_ASX_GICS_Industry_Group_Values": "YES",
+  "Uses_Exact_GICS_Four_Digit_Codes": "YES",
+  "Uses_Exact_GICS_Industry_Group_Names": "YES"
+}

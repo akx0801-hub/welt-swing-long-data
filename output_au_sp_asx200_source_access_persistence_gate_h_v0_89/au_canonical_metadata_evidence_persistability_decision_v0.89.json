@@ -1,0 +1,9 @@
+{
+  "ASX_Side_Persistable": "NO",
+  "CANONICAL_METADATA_EVIDENCE_PERSISTABLE": "NO",
+  "GICS_Side_Persistable": "NO",
+  "Raw_ASX_Persistence_Required": "NO",
+  "Raw_GICS_Persistence_Required": "NO",
+  "Reason": "bounded technical evidence is sufficient, but current official policy review found explicit operational restrictions materially covering automated/transformed ASX use and GICS code/name database persistence",
+  "Technical_Output_Classification": "BOUNDED_CANONICAL_METADATA"
+}

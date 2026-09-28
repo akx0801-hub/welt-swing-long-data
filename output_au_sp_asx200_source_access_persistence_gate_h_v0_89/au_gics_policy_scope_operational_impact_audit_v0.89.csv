@@ -1,0 +1,9 @@
+Behavior,Status,Basis
+A viewing public GICS methodology,NO_EXPLICIT_OPERATIONAL_BLOCKER_FOUND,public methodology access inherited; viewing alone is not the blocked behavior
+B internal use of GICS taxonomy labels,NOT_VERIFIED,MSCI grants limited internal non-production access but separate restrictions apply to database/derived persistence
+C internal use of GICS classification codes,NOT_VERIFIED,public code authority does not itself supply persistence authorization
+D storing bounded code/name mapping,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,MSCI terms expressly restrict populating a database with MSCI proprietary materials absent applicable permission
+E using GICS classifications as security metadata,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,future canonical metadata persists exact GICS names/codes as a structured database-like dataset
+F automated processing of GICS classifications,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,MSCI terms/notice restrict unauthorized automated extraction/AI-related use
+G redistribution/publication of GICS data,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,official terms restrict redistribution/derived-data use
+H full GICS database/product use,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,full database/product use is separately restricted and is not required by this project

@@ -1,0 +1,13 @@
+{
+  "Has_63_ASX_Codes": "YES",
+  "Has_63_Raw_GICS_Values": "YES",
+  "Has_Evidence_Versions_Commits": "YES",
+  "Has_Exact_Frozen_WS_ID_Linkage": "YES",
+  "Has_Retrieval_Timestamp": "YES",
+  "Has_Schema_Metadata": "YES",
+  "Raw_CSV_Required": "NO",
+  "Rows": 63,
+  "Snapshot_SHA256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+  "Stable_URL": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+  "TECHNICAL_BOUNDED_EVIDENCE_SUFFICIENT_ASX": "YES"
+}

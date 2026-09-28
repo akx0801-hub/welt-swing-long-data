@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:39c8c68f5750164265b29c994b422ab78b57c772d3a497e24ab9f22c7e7a8c23",
+  "artifact_id": 10965001804,
+  "artifact_name": "au-asx200-source-access-persistence-gate-h-v0.89-36412097411",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "5b83e12f46bd4e92e500e369dff60a1be8e82e9f",
+  "workflow_run_id": 36412097411
+}

@@ -1,0 +1,10 @@
+Behavior,Status,Basis
+A ordinary public page access,NO_EXPLICIT_OPERATIONAL_BLOCKER_FOUND,public access inherited; policy permits ordinary browser access for limited informational use
+B public CSV download through official directory,NOT_VERIFIED,"download control is public, but policy terms constrain copying/use and do not provide a general reuse license"
+C automated/programmatic retrieval of CSV,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,ASX terms expressly prohibit spider/screen scraper/robot or similar automated process absent permission/exception
+D internal analytical use,NOT_VERIFIED,"limited personal/non-commercial use exists, but repository pipeline behavior exceeds a simple personal unchanged copy contract"
+E URL/hash/timestamp/schema persistence,NO_EXPLICIT_OPERATIONAL_BLOCKER_FOUND,bounded provenance facts alone are not the blocked behavior identified
+F exact ASX code persistence,NOT_VERIFIED,exact source content persistence is covered by general copy/reproduce/use restrictions
+G exact GICs industry group values for 63 securities,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,intended transformed persistence reproduces exact source classification values outside the expressly limited unchanged-copy use
+H later internal canonical metadata creation,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,automated transformed canonical metadata materially relies on restricted source-content use without persisted consent
+I redistribution/publication of full ASX directory,EXPLICIT_OPERATIONAL_RESTRICTION_FOUND,full reproduction/redistribution is outside required project behavior and separately restricted

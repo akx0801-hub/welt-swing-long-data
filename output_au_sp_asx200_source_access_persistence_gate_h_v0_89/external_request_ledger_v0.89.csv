@@ -1,0 +1,6 @@
+Request_Order,Source_Class,URL,Purpose,HTTP_Status,Content_Type,SHA256,Core_Classification_or_Methodology_Request,Per_Security_Request
+1,ASX_OFFICIAL_TERMS,https://www.asx.com.au/legals/terms-of-use,CURRENT_OFFICIAL_POLICY_REVIEW,200,text/html;charset=utf-8,84c558ad32c46586d05c8ac86e770906059dc98c44ae8af8ae75b50266bdcafb,NO,NO
+2,ASX_OFFICIAL_DATA_DISCLAIMERS,https://www.asx.com.au/legals/data-disclaimers,CURRENT_OFFICIAL_POLICY_REVIEW,200,text/html;charset=utf-8,8dd2a06f6a4f08af7c3177d902b31ea681177f576caa9490a22e95949d46f324,NO,NO
+3,MSCI_OFFICIAL_TERMS,https://www.msci.com/legal/terms-of-use,CURRENT_OFFICIAL_POLICY_REVIEW,200,text/html; charset=utf-8,7d9e7884adb3ece10781ec65e788adfa87aec5c86bec390d8fb670c55f3af760,NO,NO
+4,MSCI_OFFICIAL_NOTICE,https://www.msci.com/legal/notice-and-disclaimer,CURRENT_OFFICIAL_POLICY_REVIEW,200,text/html; charset=utf-8,18b4cc5d0923b98e2747eeeed9658dce0f8d8619d96d2a4faa7a8f776bbce0ca,NO,NO
+5,SP_GLOBAL_OFFICIAL_TERMS,https://www.spglobal.com/spdji/en/disclaimers/,CURRENT_OFFICIAL_POLICY_REVIEW,403,text/html,0e1371d4226023ded052cd3a1847cfbce72157d4c19796bb0d6de0abfb1c952d,NO,NO

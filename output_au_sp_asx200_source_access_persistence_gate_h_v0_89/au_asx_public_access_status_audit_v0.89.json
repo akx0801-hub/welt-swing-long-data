@@ -1,0 +1,14 @@
+{
+  "ASX_ACCESS_READY": "YES",
+  "ASX_AUTH_REQUIRED": "NO",
+  "ASX_CAPTCHA_BYPASS_REQUIRED": "NO",
+  "ASX_DIRECT_HTTP_REPLAY": "PASS",
+  "ASX_PAID_ENTITLEMENT_REQUIRED": "NO",
+  "ASX_PRIVILEGED_SESSION_REQUIRED": "NO",
+  "ASX_PUBLIC_ACCESS": "YES",
+  "ASX_PUBLIC_PAGE_GENERATED_TOKEN": "YES",
+  "ASX_TOKEN_CLASSIFICATION": "EPHEMERAL_PAGE_GENERATED_PUBLIC_TOKEN",
+  "Evidence_Source_v082": "output_au_sp_asx200_dynamic_directory_route_gate_c_v0_82/au_dynamic_directory_route_capture_environment_v0.82.json",
+  "Evidence_Source_v083": "output_au_sp_asx200_final_gate_c_provenance_v0_83/au_current_directory_download_control_audit_v0.83.json",
+  "No_Core_ASX_Refetch_v089": "YES"
+}
