@@ -1,0 +1,135 @@
+{
+  "artifact_digest": "sha256:73768af33c62a2f7ce6c8fe454fc3853e8fceeafad03081fac446b69be6649bd",
+  "artifact_id": 10955045259,
+  "au_gate_e_runs": 0,
+  "au_gate_f_runs": 0,
+  "au_sector_field_code_feasibility_ready": false,
+  "blocker": "MSCI_GICS_CURRENTNESS_NOT_VERIFIED",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "files": {
+    "artifact_binding_v0.85.json": {
+      "bytes": 335,
+      "sha256": "6ef67a9f02895513b4391cf41f7aea185b1700a35d1d35262a73caeb7b7fe79b"
+    },
+    "asx_current_raw_classification_authority_v0.85.csv": {
+      "bytes": 2848,
+      "sha256": "60d690ddbb231e72065c8d9ee41bb4cce9ab1bfeba6d62ea94048a12697af26b"
+    },
+    "asx_to_msci_gics_exact_label_code_binding_audit_v0.85.csv": {
+      "bytes": 3200,
+      "sha256": "ab99336734036f5490829d50f7bd0b34b5c08d361ab7bfb155292f1889110c88"
+    },
+    "au_formal_vs_nonformal_value_reconciliation_v0_85.json": {
+      "bytes": 262,
+      "sha256": "c05e5f8bec8aeacccd357250ae68cea8f76ef974343b3c77d2b25df0d384bd80"
+    },
+    "au_nonformal_value_governance_audit_v0_85.csv": {
+      "bytes": 403,
+      "sha256": "682b7025c1acdc715305aaba40e6a308d9c2bc9a0fbb2bb6e10e2c381a9150db"
+    },
+    "au_pdsc_fallback_necessity_audit_v0_85.json": {
+      "bytes": 176,
+      "sha256": "c9877c93bd126256465a7d94913484aa6cf7d9d2bca992579bf9f9a42adac99f"
+    },
+    "au_sector_field_code_feasibility_decision_v0_85.json": {
+      "bytes": 667,
+      "sha256": "133659367ccb9351fecfb8f548d4ada267f395da0b1c5c25dd4996f60148cce2"
+    },
+    "au_source_native_code_feasibility_decision_v0_85.json": {
+      "bytes": 440,
+      "sha256": "fc4a309d48ff39478ac319dfcaa3c489a737a2167876f9432ae832e59c2ccc40"
+    },
+    "docs/validation/AU_SP_ASX200_Gate_D_MSCI_GICS_CoOwner_Source_Repair_v0.85.md": {
+      "bytes": 1528,
+      "sha256": "c6a03133da681bdeab464c9e15520543b33c814e86cebc493a8d55eb29c692c5"
+    },
+    "external_request_ledger_v0.85.csv": {
+      "bytes": 382,
+      "sha256": "72f96df1d822d7b421faef96c9cd53e839dd0907e0a47781c9bc3f3199fdd1dd"
+    },
+    "gics_current_hierarchy_contract_v0.85.json": {
+      "bytes": 744,
+      "sha256": "ac832b8dce27c7f87b79fee64da12115fb04bb2edfded91b9f08479394cafc33"
+    },
+    "gics_current_level_count_audit_v0.85.json": {
+      "bytes": 213,
+      "sha256": "e3a07c4a804b6f68e5f1a6ef1a566fa6d3dd9ffaf7b41d20671b735b3560d5c8"
+    },
+    "gics_industry_group_code_uniqueness_audit_v0_85.csv": {
+      "bytes": 1198,
+      "sha256": "9b410d6983d8e8b7ae9756a88dbb60bf7236220056ef301923542baf15fad4f5"
+    },
+    "gics_industry_group_inventory_completeness_audit_v0.85.json": {
+      "bytes": 212,
+      "sha256": "e59c392301fe75fa32c9d8514f0d5e64707248f08556a80a31678e01e0532dd0"
+    },
+    "gics_industry_group_official_label_code_inventory_v0.85.csv": {
+      "bytes": 6707,
+      "sha256": "52ea903dc8da05b431aedf34e07e92db58fab49db0a292ca73a6ebff8cf1c36a"
+    },
+    "gics_joint_owner_authority_audit_v0.85.json": {
+      "bytes": 511,
+      "sha256": "8503bc4660e87d43471bf93c84f63300be8442a980ceedc24b65bbe3d994dd48"
+    },
+    "immutability_audit_v0.85.json": {
+      "bytes": 1589,
+      "sha256": "48a8893b90cd4bb84d25c53cf593741a286817103870180cee6b0248ab321626"
+    },
+    "manifest_preupload_v0.85.json": {
+      "bytes": 4476,
+      "sha256": "c98978dd94eda2f5d1dfaa7523b8fc9f885c2ca116095733d6e438b34dbd06ea"
+    },
+    "msci_current_gics_methodology_source_audit_v0.85.json": {
+      "bytes": 794,
+      "sha256": "3f20647743231b95c204f05a9cf9b67da31a3f0673f2c7c52aa3389645f73dc2"
+    },
+    "msci_gics_currentness_effective_status_audit_v0.85.json": {
+      "bytes": 233,
+      "sha256": "22a619ee68e6239c62a671bb3b8a02428332893e6a5bb8dcc2adeca1f4b07b11"
+    },
+    "provider_call_audit_v0.85.json": {
+      "bytes": 594,
+      "sha256": "551efec14fe0ec0594468a041fed9fea43f1a5c9ca2a894931f795b1e9f9cd84"
+    },
+    "stage_checkpoint_preupload_v0.85.json": {
+      "bytes": 518,
+      "sha256": "fc2d01492a1733875f2151801e8dba909ff0998daf8f687277bc84950475066c"
+    },
+    "stage_checkpoint_v0.85.json": {
+      "bytes": 735,
+      "sha256": "cab2ca1a4cbada2174c27a6ca5d3fe8044cd31240b0417d74a5a0d1026cee5b7"
+    },
+    "summary_preupload_v0.85.json": {
+      "bytes": 1242,
+      "sha256": "d65be8289893e858fed9f0242d749a11542b0fec063e8edb114c1f1331015f32"
+    },
+    "summary_v0.85.json": {
+      "bytes": 1596,
+      "sha256": "8d26827c653923c4ec7f3f6a15a6159e4e0b5d53e025ad60fcbd292182080bd3"
+    },
+    "test_results_v0.85.csv": {
+      "bytes": 989,
+      "sha256": "d50f46922ef2ecd098326c455870b31ac58881fc454fe762d769def20026013d"
+    },
+    "v084_blocker_authority_v0.85.json": {
+      "bytes": 682,
+      "sha256": "a53a408a9a41d10d5cab547addcce208a05727e901455c63a9faf2acb43abb64"
+    }
+  },
+  "frozen_63_linkage_runs": 0,
+  "gate_h_runs": 0,
+  "next_gate": "AU_SP_ASX200 GATE-D SOURCE-AUTHORITY PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "other_cohort_runs": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "sector_rs_runs": 0,
+  "selected_code_strategy": "NONE",
+  "stage": "AU_SP_ASX200_GATE_D_OFFICIAL_GICS_CO_OWNER_SOURCE_REPAIR",
+  "verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "version": "v0.85",
+  "workflow_head_sha": "323706fdfbdfe10c7d64b91c66f10765eaed0fe2",
+  "workflow_run_id": 36386143784
+}

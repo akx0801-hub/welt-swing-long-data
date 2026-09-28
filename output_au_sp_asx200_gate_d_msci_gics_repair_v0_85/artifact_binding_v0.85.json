@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:73768af33c62a2f7ce6c8fe454fc3853e8fceeafad03081fac446b69be6649bd",
+  "artifact_id": 10955045259,
+  "artifact_name": "au-asx200-gate-d-msci-gics-repair-v0.85-36386143784",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "323706fdfbdfe10c7d64b91c66f10765eaed0fe2",
+  "workflow_run_id": 36386143784
+}

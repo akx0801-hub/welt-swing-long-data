@@ -1,0 +1,26 @@
+Official_GICS_Industry_Group_Code,Label_Count,Official_Labels,Collision_Status
+1010,1,Energy,PASS_UNIQUE
+1510,1,Materials,PASS_UNIQUE
+2010,1,Capital Goods,PASS_UNIQUE
+2020,1,Commercial & Professional Services,PASS_UNIQUE
+2030,1,Transportation,PASS_UNIQUE
+2510,1,Automobiles & Components,PASS_UNIQUE
+2520,1,Consumer Durables & Apparel,PASS_UNIQUE
+2530,1,Consumer Services,PASS_UNIQUE
+2550,1,Consumer Discretionary Distribution & Retail,PASS_UNIQUE
+3010,1,Consumer Staples Distribution & Retail,PASS_UNIQUE
+3020,1,"Food, Beverage & Tobacco",PASS_UNIQUE
+3030,1,Household & Personal Products,PASS_UNIQUE
+3510,1,Health Care Equipment & Services,PASS_UNIQUE
+3520,1,"Pharmaceuticals, Biotechnology & Life Sciences",PASS_UNIQUE
+4010,1,Banks,PASS_UNIQUE
+4020,1,Financial Services,PASS_UNIQUE
+4030,1,Insurance,PASS_UNIQUE
+4510,1,Software & Services,PASS_UNIQUE
+4520,1,Technology Hardware & Equipment,PASS_UNIQUE
+4530,1,Semiconductors & Semiconductor Equipment,PASS_UNIQUE
+5010,1,Telecommunication Services,PASS_UNIQUE
+5020,1,Media & Entertainment,PASS_UNIQUE
+5510,1,Utilities,PASS_UNIQUE
+6010,1,Equity Real Estate Investment Trusts (REITs),PASS_UNIQUE
+6020,1,Real Estate Management & Development,PASS_UNIQUE

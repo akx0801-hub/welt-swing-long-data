@@ -1,0 +1,19 @@
+{
+  "AU_SECTOR_FIELD_CODE_FEASIBILITY_READY": "NO",
+  "Blocker": "MSCI_GICS_CURRENTNESS_NOT_VERIFIED",
+  "Classification_Field": "GICs industry group",
+  "Code_Strategy": "NONE",
+  "Cohort": "AU_SP_ASX200",
+  "Formal_Label_Count": 25,
+  "Gate_D": "BLOCKED",
+  "Gate_E": "NOT_EVALUATED",
+  "Gate_F": "NOT_EVALUATED",
+  "Gate_H": "NOT_EVALUATED",
+  "Level": "INDUSTRY_GROUP",
+  "Next_Gate": "AU_SP_ASX200 GATE-D SOURCE-AUTHORITY PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "Nonformal_Value_Count": 2,
+  "Official_Code_Source": "MSCI CURRENT GICS METHODOLOGY",
+  "Sector_Code_Method": "NOT_SELECTED",
+  "Sector_Code_Origin": "NOT_SELECTED",
+  "Taxonomy": "GICS"
+}

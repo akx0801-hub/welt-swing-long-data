@@ -1,0 +1,11 @@
+{
+  "Arithmetic_Reconciles": "YES",
+  "Current_Raw_Value_Count": 27,
+  "Formal_GICS_Exact_Match_Count": 25,
+  "Nonformal_or_Unresolved_Count": 2,
+  "Nonformal_or_Unresolved_Values": [
+    "Class Pend",
+    "Not Applic"
+  ],
+  "Unexpected_Unmatched_Values": []
+}

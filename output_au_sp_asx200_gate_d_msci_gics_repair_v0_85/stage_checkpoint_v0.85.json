@@ -1,0 +1,16 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:73768af33c62a2f7ce6c8fe454fc3853e8fceeafad03081fac446b69be6649bd",
+  "artifact_id": 10955045259,
+  "au_sector_field_code_feasibility_ready": false,
+  "blocker": "MSCI_GICS_CURRENTNESS_NOT_VERIFIED",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "AU_SP_ASX200 GATE-D SOURCE-AUTHORITY PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "selected_code_strategy": "NONE",
+  "stage": "AU_SP_ASX200_GATE_D_OFFICIAL_GICS_CO_OWNER_SOURCE_REPAIR",
+  "verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "version": "v0.85",
+  "workflow_head_sha": "323706fdfbdfe10c7d64b91c66f10765eaed0fe2",
+  "workflow_run_id": 36386143784
+}

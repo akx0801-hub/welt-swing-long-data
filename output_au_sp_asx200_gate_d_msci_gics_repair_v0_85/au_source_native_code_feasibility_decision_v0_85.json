@@ -1,0 +1,14 @@
+{
+  "Code_Collisions": 0,
+  "Formal_Ambiguities": 0,
+  "Formal_Label_Code_Coverage": "25/25",
+  "Formal_Label_Count": 25,
+  "Formal_Level": "INDUSTRY_GROUP",
+  "Nonformal_Value_Count": 2,
+  "Official_Code_Source": "MSCI CURRENT GICS METHODOLOGY",
+  "SOURCE_NATIVE_GICS_CODE_READY": "NO",
+  "Sector_Code_Method": "NOT_SELECTED",
+  "Sector_Code_Origin": "NOT_SELECTED",
+  "Source_Sector_Code_Contract": "NOT_VERIFIED",
+  "Taxonomy": "GICS"
+}

@@ -1,0 +1,21 @@
+{
+  "Access_Attempts": [
+    {
+      "Error": "",
+      "HTTP_Status": 200,
+      "Method": "PYTHON_URLLIB"
+    }
+  ],
+  "Bytes": 640893,
+  "Content_Type": "application/pdf",
+  "Document_Display_Date": "APRIL 2026",
+  "Document_Title": "NOT_VERIFIED",
+  "HTTP_Status": 200,
+  "Last_Updated_Statement": "April 2026",
+  "Page_Count": 61,
+  "Reproducible": "YES",
+  "Requested_URL": "https://www.msci.com/indexes/documents/methodology/1_MSCI_Global_Industry_Classification_Standard_GICS_Methodology_20250220.pdf",
+  "Resolved_URL": "https://www.msci.com/indexes/documents/methodology/1_MSCI_Global_Industry_Classification_Standard_GICS_Methodology_20250220.pdf",
+  "Retrieval_Timestamp_UTC": "2026-09-28T06:22:39Z",
+  "SHA256": "d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06"
+}

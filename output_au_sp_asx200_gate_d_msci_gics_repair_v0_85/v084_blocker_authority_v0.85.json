@@ -1,0 +1,16 @@
+{
+  "AU_SECTOR_FIELD_CODE_FEASIBILITY_READY": "NO",
+  "Artifact": 10941761588,
+  "Artifact_Digest": "sha256:2c1dbb7bb0767b25bfde36b4fc1dd61af7ec8174775114b10a1aa099b53dd8a5",
+  "Blocker": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+  "Current_ASX_Raw_Classification_Values": 27,
+  "Final_Commit": "c02fda68b5a377faafb75ef9304e120e271cb118",
+  "Formal_Level": "INDUSTRY_GROUP",
+  "Official_GICS_Structure_Ready": "NO",
+  "Selected_Code_Strategy": "NONE",
+  "Source_Native_GICS_Industry_Group_Codes_Ready": "NO",
+  "Taxonomy": "GICS",
+  "Tests": "20/20 PASS",
+  "Verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "Workflow": 36349188738
+}
