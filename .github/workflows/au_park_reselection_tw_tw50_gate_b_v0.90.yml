@@ -1,0 +1,236 @@
+name: AU Park Reselection TW50 Gate B v0.90
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - config/au_park_reselection_tw_tw50_gate_b_v0.90.json
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  au-park-tw50-gate-b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout bounded v0.90 stage
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify lineage and bounded scope
+        run: |
+          set -euo pipefail
+          START="ef6029b3660b1f2a8bc29c016dc78d0188a775b1"
+          git merge-base --is-ancestor "$START" HEAD
+          BAD="$(git diff --name-only "$START"..HEAD | grep -Ev '^(config/au_park_reselection_tw_tw50_gate_b_spec_v0\.90\.json|scripts/au_park_reselection_tw_tw50_gate_b_v0_90\.py|scripts/persist_au_park_reselection_tw_tw50_gate_b_v0_90\.py|tests/test_au_park_reselection_tw_tw50_gate_b_v0_90\.py|\.github/workflows/au_park_reselection_tw_tw50_gate_b_v0\.90\.yml|config/au_park_reselection_tw_tw50_gate_b_v0\.90\.json|docs/validation/AU_Park_Post_Park_Reselection_TW_TW50_Gate_B_v0\.90\.md|output_au_park_reselection_tw_tw50_gate_b_v0_90/.*|sector_metadata/governance/parked_cohort_registry_v1\.csv)$' || true)"
+          test -z "$BAD"
+
+      - name: Verify exact v0.89 predecessor and artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10965001804 --jq .digest)"
+          test "$DIGEST" = "sha256:39c8c68f5750164265b29c994b422ab78b57c772d3a497e24ab9f22c7e7a8c23"
+          python3 - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path("output_au_sp_asx200_source_access_persistence_gate_h_v0_89")
+          s=json.load(open(out/"summary_v0.89.json",encoding="utf-8"))
+          c=json.load(open(out/"stage_checkpoint_v0.89.json",encoding="utf-8"))
+          m=json.load(open(out/"manifest_v0.89.json",encoding="utf-8"))
+          d=json.load(open(out/"au_source_access_persistence_gate_h_decision_v0.89.json",encoding="utf-8"))
+          assert s["verdict"]=="BLOCKED_AU_SP_ASX200_SOURCE_ACCESS_EVIDENCE_PERSISTENCE_GATE_H"
+          assert s["au_source_access_persistence_ready"] is False
+          assert s["asx_access_ready"]=="YES" and s["gics_access_ready"]=="YES"
+          assert s["raw_asx_persistence_required"]=="NO" and s["raw_gics_persistence_required"]=="NO"
+          assert s["asx_bounded_evidence_sufficient"]=="YES" and s["gics_bounded_evidence_sufficient"]=="YES"
+          assert s["asx_policy_compatibility"]=="NO" and s["gics_policy_compatibility"]=="NO"
+          assert s["canonical_metadata_evidence_persistable"]=="NO"
+          assert s["external_authorization_required"]=="YES"
+          assert s["blocker"]=="EXPLICIT_ASX_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+          assert s["tests"]=={"failed":0,"passed":35,"total":35}
+          assert c["workflow_run_id"]==36412097411 and c["artifact_id"]==10965001804
+          assert c["artifact_digest"]=="sha256:39c8c68f5750164265b29c994b422ab78b57c772d3a497e24ab9f22c7e7a8c23"
+          assert m["workflow_run_id"]==36412097411 and m["artifact_id"]==10965001804
+          assert d["G"]=="PASS" and d["H"]=="BLOCKED"
+          assert d["GICS_OFFICIAL_POLICY_COMPATIBILITY_READY"]=="NO"
+          g=json.load(open("config/manager_governance_authority_G_SEC_06_v0.76.json",encoding="utf-8"))
+          assert g["authority_id"]=="G-SEC-06"
+          assert g["rules"]["external_consent_license_contractual_blocker_may_be_parked"] is True
+          assert g["rules"]["parking_does_not_downgrade_proven_technical_gates"] is True
+          assert g["rules"]["parked_cohort_excluded_from_active_next_cohort_selection"] is True
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          assert sha("universe/SWING_U3K_FROZEN_v0.5.csv")=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sha("output_p0_frozen_1425_local_feature_implementation_v0_57/feature_materialization_v0.57.csv")=="177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+          assert sha("output_p0_frozen_1425_home_market_rs_v0_58/home_market_rs_materialization_v0.58.csv")=="2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+          assert sha("sector_metadata/governance/parked_cohort_registry_v1.csv")=="38c05124088300464edae7dbd2c46f5ebf541ea6b3233dcdc9701b5a22c461dd"
+          reg=list(csv.DictReader(open("sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",encoding="utf-8")))
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100"
+          assert reg[0]["Semantic_SHA256"]=="bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          PY
+
+      - name: Verify v0.90 spec and trigger
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          s=json.load(open("config/au_park_reselection_tw_tw50_gate_b_spec_v0.90.json",encoding="utf-8"))
+          t=json.load(open("config/au_park_reselection_tw_tw50_gate_b_v0.90.json",encoding="utf-8"))
+          assert s["required_start_head"]=="ef6029b3660b1f2a8bc29c016dc78d0188a775b1"
+          assert s["governance_authority"]=="config/manager_governance_authority_G_SEC_06_v0.76.json"
+          assert s["tw"]["target_gate"]=="B"
+          assert s["tw"]["frozen_49_linkage"] is False
+          assert s["forbidden"]["tw_gate_e"] is True and s["forbidden"]["tw_gate_f"] is True and s["forbidden"]["tw_gate_h"] is True
+          assert s["forbidden"]["canonical_materialization"] is True
+          assert t["version"]=="v0.90"
+          assert t["required_start_head"]==s["required_start_head"]
+          assert t["au_park_authorized"] is True
+          assert t["post_park_reselection_authorized"] is True
+          assert t["tw_gate_b_authorized"] is True
+          assert t["tw_gate_e_allowed"] is False and t["tw_gate_f_allowed"] is False and t["tw_gate_h_allowed"] is False
+          assert t["canonical_materialization_allowed"] is False
+          assert t["productive"] is False
+          PY
+
+      - name: Compile and unit-test
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/au_park_reselection_tw_tw50_gate_b_v0_90.py scripts/persist_au_park_reselection_tw_tw50_gate_b_v0_90.py
+          python3 tests/test_au_park_reselection_tw_tw50_gate_b_v0_90.py -v
+
+      - name: Run bounded AU park and TW Gate B
+        run: |
+          set -euo pipefail
+          rm -rf output_au_park_reselection_tw_tw50_gate_b_v0_90
+          python3 scripts/au_park_reselection_tw_tw50_gate_b_v0_90.py             --repository-sha "$GITHUB_SHA"             --output-dir output_au_park_reselection_tw_tw50_gate_b_v0_90
+
+      - name: Validate result and hard scope
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          out=Path("output_au_park_reselection_tw_tw50_gate_b_v0_90")
+          req=[
+            "au_external_authorization_park_application_v0.90.json",
+            "au_gate_h_blocker_preservation_v0.90.json",
+            "parked_cohort_registry_update_v0.90.csv",
+            "post_au_park_active_cohort_gate_matrix_v0.90.csv",
+            "post_au_park_selection_calculation_v0.90.csv",
+            "post_au_park_selected_cohort_authority_v0.90.json",
+            "tw_gate_b_predecessor_authority_v0.90.json",
+            "tw_inherited_taxonomy_field_authority_v0.90.json",
+            "tw_official_source_candidate_inventory_v0.90.csv",
+            "tw_current_official_page_source_audit_v0.90.json",
+            "tw_static_bulk_route_discovery_audit_v0.90.json",
+            "tw_runtime_capture_environment_v0.90.json",
+            "tw_runtime_network_candidate_inventory_v0.90.csv",
+            "tw_runtime_interaction_audit_v0.90.json",
+            "tw_selected_bulk_source_contract_v0.90.json",
+            "tw_bulk_route_reproducibility_run1_v0.90.json",
+            "tw_bulk_route_reproducibility_run2_v0.90.json",
+            "tw_direct_http_replay_audit_v0.90.json",
+            "tw_bulk_schema_audit_v0.90.json",
+            "tw_bulk_security_identifier_audit_v0.90.json",
+            "tw_bulk_icb_industry_group_field_audit_v0.90.json",
+            "tw_bulk_row_level_vs_aggregate_audit_v0.90.json",
+            "tw_source_composition_decision_v0.90.json",
+            "tw_official_sector_bulk_source_gate_b_decision_v0.90.json",
+            "external_request_ledger_v0.90.csv","provider_call_audit_v0.90.json","immutability_audit_v0.90.json",
+            "test_results_v0.90.csv","summary_preupload_v0.90.json","stage_checkpoint_preupload_v0.90.json","manifest_preupload_v0.90.json"
+          ]
+          assert all((out/x).exists() for x in req)
+          s=json.load(open(out/"summary_preupload_v0.90.json",encoding="utf-8"))
+          d=json.load(open(out/"tw_official_sector_bulk_source_gate_b_decision_v0.90.json",encoding="utf-8"))
+          p=json.load(open(out/"provider_call_audit_v0.90.json",encoding="utf-8"))
+          imm=json.load(open(out/"immutability_audit_v0.90.json",encoding="utf-8"))
+          park=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv",encoding="utf-8")))
+          by={r["Cohort"]:r for r in park}
+          assert len(park)==5
+          assert by["IN_NIFTY50"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert by["JP_N225"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert by["US_SP400"]["Execution_State"]=="PARKED_SOURCE_ACCESS"
+          assert by["US_SP500"]["Execution_State"]=="PARKED_SHARED_SOURCE_PREREQUISITE"
+          assert by["AU_SP_ASX200"]["Execution_State"]=="PARKED_EXTERNAL_AUTHORIZATION"
+          assert by["AU_SP_ASX200"]["Technical_Gates_A_G"]=="PASS"
+          assert by["AU_SP_ASX200"]["Gate_H"]=="BLOCKED"
+          assert by["AU_SP_ASX200"]["Gate_H_Blocker"]=="EXPLICIT_ASX_SOURCE_POLICY_OPERATIONAL_RESTRICTION"
+          assert by["AU_SP_ASX200"]["Gate_F_Classified"]=="63" and by["AU_SP_ASX200"]["Gate_F_Total"]=="63"
+          assert by["AU_SP_ASX200"]["Canonical_Readiness"]=="NO" and by["AU_SP_ASX200"]["Canonical_Rows"]=="0"
+          sel=json.load(open(out/"post_au_park_selected_cohort_authority_v0.90.json",encoding="utf-8"))
+          assert sel["Selected_Cohort"]=="TW_TW50" and sel["Frozen_Rows"]==49
+          assert sel["Consecutive_Resolved_Gates"]==1 and sel["Earliest_Unresolved_Gate"]=="B"
+          assert sel["Calculation_Not_Hard_Coded"] is True
+          zero=["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings",
+                "unofficial_TW_constituent_lists","third_party_classification_databases","company_name_Frozen_linkage",
+                "fuzzy_matching","semantic_classification_inference","cross_taxonomy_mapping","PDSC","per_security_web_fanout",
+                "frozen_49_row_level_linkage_runs","TW_Gate_E","TW_Gate_F","TW_Gate_H","canonical_materialization","Sector_RS","P0","P1","P2"]
+          assert all(p[k]==0 for k in zero)
+          assert imm["Frozen_Unchanged"] and imm["v057_Unchanged"] and imm["v058_Unchanged"] and imm["BR_Canonical_Semantic_Unchanged"]
+          assert imm["AU_Gate_F"]=="63/63" and imm["AU_Gate_G"]=="63/63" and imm["AU_Canonical_Rows"]==0
+          assert imm["Canonical_READY_Rows_After"]==37 and imm["Canonical_Total_Rows"]==1425
+          assert not list(Path("sector_metadata/canonical/cohorts").glob("AU_SP_ASX200_*.csv"))
+          tests=list(csv.DictReader(open(out/"test_results_v0.90.csv",encoding="utf-8")))
+          assert tests and all(r["Result"]=="PASS" for r in tests)
+          if s["tw_official_sector_bulk_source_ready"]:
+              assert s["verdict"]=="PASS_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B"
+              assert d["B"]=="PASS_BY_CURRENT_EVIDENCE"
+              assert d["E"]==d["F"]==d["H"]=="NOT_EVALUATED"
+              assert s["row_level_security_records"]=="YES"
+              assert s["security_identifier_field"]!="NOT_AVAILABLE"
+              assert s["icb_level_binding"]=="PASS"
+              assert s["blocker"]==""
+              assert s["next_gate"]=="TW_TW50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E"
+          else:
+              assert s["verdict"]=="BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B"
+              assert d["B"]=="BLOCKED"
+              assert s["blocker"] in {
+                "TWSE_OFFICIAL_INDEX_SOURCE_NOT_REPRODUCIBLE",
+                "TWSE_TAIWAN50_BULK_CONSTITUENT_ROUTE_NOT_REPRODUCIBLE",
+                "TWSE_ICB_ROW_LEVEL_CLASSIFICATION_ROUTE_NOT_REPRODUCIBLE",
+                "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE",
+                "TWSE_BULK_ICB_INDUSTRY_GROUP_FIELD_NOT_AVAILABLE",
+                "TWSE_BULK_ICB_LEVEL_BINDING_NOT_VERIFIED",
+                "TWSE_OFFICIAL_BULK_SOURCE_REQUIRES_PER_SECURITY_FANOUT",
+                "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+                "AUTH_OR_ENTITLEMENT_REQUIRED",
+                "AUTHORITY_REGRESSION_REVIEW_REQUIRED"
+              }
+          PY
+          BAD="$(git status --porcelain --untracked-files=no | sed 's/^...//' | grep -Ev '^(output_au_park_reselection_tw_tw50_gate_b_v0_90/.*|docs/validation/AU_Park_Post_Park_Reselection_TW_TW50_Gate_B_v0\.90\.md|sector_metadata/governance/parked_cohort_registry_v1\.csv)$' || true)"
+          test -z "$BAD"
+
+      - name: Upload bounded v0.90 evidence
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: au-park-reselection-tw50-gate-b-v0.90-${{ github.run_id }}
+          path: output_au_park_reselection_tw_tw50_gate_b_v0_90/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Bind artifact and prepare persistence
+        run: |
+          set -euo pipefail
+          python3 scripts/persist_au_park_reselection_tw_tw50_gate_b_v0_90.py             --output-dir output_au_park_reselection_tw_tw50_gate_b_v0_90             --artifact-id "${{ steps.upload.outputs.artifact-id }}"             --artifact-digest "${{ steps.upload.outputs.artifact-digest }}"             --artifact-name "au-park-reselection-tw50-gate-b-v0.90-${{ github.run_id }}"             --workflow-run-id "${{ github.run_id }}"             --workflow-head-sha "$GITHUB_SHA"
+
+      - name: Persist bounded v0.90 result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add sector_metadata/governance/parked_cohort_registry_v1.csv                   docs/validation/AU_Park_Post_Park_Reselection_TW_TW50_Gate_B_v0.90.md                   output_au_park_reselection_tw_tw50_gate_b_v0_90/
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          if echo "$CHANGED" | grep -Ev '^(sector_metadata/governance/parked_cohort_registry_v1\.csv|docs/validation/AU_Park_Post_Park_Reselection_TW_TW50_Gate_B_v0\.90\.md|output_au_park_reselection_tw_tw50_gate_b_v0_90/.*)$'; then
+            echo "Unexpected staged path"; exit 1
+          fi
+          test ! -e sector_metadata/canonical/cohorts/AU_SP_ASX200_sector_metadata_v1.csv
+          git commit -m "Persist AU park and TW TW50 Gate B v0.90"
+          git push origin HEAD:main
