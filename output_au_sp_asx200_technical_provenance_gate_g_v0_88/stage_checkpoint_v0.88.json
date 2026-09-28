@@ -1,0 +1,18 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:b85acf39849f088e8d6d72766fd320dedc554ccabe92a9031342dd7890bba75e",
+  "artifact_id": 10961292663,
+  "au_technical_provenance_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "gate_h": "NOT_EVALUATED",
+  "next_gate": "AU_SP_ASX200 SOURCE ACCESS / EVIDENCE PERSISTENCE GATE H",
+  "provenance_complete": 63,
+  "rows": 63,
+  "stage": "AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G",
+  "verdict": "PASS_AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G",
+  "version": "v0.88",
+  "workflow_head_sha": "2698e369f022ed168c93796ca8e4e1dc7199fab3",
+  "workflow_run_id": 36403714685
+}

@@ -1,0 +1,18 @@
+{
+  "ASX_Effective_AsOf_Status": "NO_EXPLICIT_EFFECTIVE_DATE_IN_PERSISTED_SOURCE",
+  "AU_Canonical_Readiness": "NO",
+  "Blocker": "",
+  "Classification_Source": "ASX_COMPANY_DIRECTORY_LISTED_COMPANIES_CSV",
+  "Code_Authority": "MSCI_GICS_METHODOLOGY",
+  "Cohort": "AU_SP_ASX200",
+  "Cross_Stage_Conflicts": 0,
+  "Gate_G": "PASS_BY_CURRENT_EVIDENCE",
+  "Gate_H": "NOT_EVALUATED",
+  "Next_Gate": "AU_SP_ASX200 SOURCE ACCESS / EVIDENCE PERSISTENCE GATE H",
+  "PROVENANCE_COMPLETE": 63,
+  "PROVENANCE_CONFLICT": 0,
+  "PROVENANCE_INCOMPLETE": 0,
+  "PROVENANCE_NOT_VERIFIED": 0,
+  "Rows": "63/63",
+  "Technical_Provenance_Ready": "YES"
+}

@@ -1,0 +1,17 @@
+{
+  "Code_Authority_Name": "MSCI_GICS_METHODOLOGY",
+  "Code_Authority_Reference": "https://www.msci.com/indexes/documents/methodology/1_MSCI_Global_Industry_Classification_Standard_GICS_Methodology_20250220.pdf",
+  "Code_Authority_Retrieved_UTC": "2026-09-28T06:24:19Z",
+  "Code_Authority_SHA256": "d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06",
+  "Code_Authority_Version_or_AsOf": "APRIL 2026",
+  "Document_Title": "GLOBAL INDUSTRY CLASSIFICATION STANDARD (GICS®) METHODOLOGY",
+  "Evidence_Final_Commit": "62c1d0345c8955c949c134318f9329e12dca0469",
+  "Evidence_Version": "v0.85",
+  "Joint_Authority": "MSCI / S&P Dow Jones Indices",
+  "Last_Updated": "April 2026",
+  "Network_Request_In_v088": "NO",
+  "Official_Industry_Group_Count": 25,
+  "Taxonomy": "GICS",
+  "Taxonomy_Level": "INDUSTRY_GROUP",
+  "Taxonomy_Version_Status": "CURRENT_MAINTAINED_NO_STATIC_VERSION"
+}

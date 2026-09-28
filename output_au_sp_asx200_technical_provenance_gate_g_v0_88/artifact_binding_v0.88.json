@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:b85acf39849f088e8d6d72766fd320dedc554ccabe92a9031342dd7890bba75e",
+  "artifact_id": 10961292663,
+  "artifact_name": "au-asx200-technical-provenance-gate-g-v0.88-36403714685",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "2698e369f022ed168c93796ca8e4e1dc7199fab3",
+  "workflow_run_id": 36403714685
+}

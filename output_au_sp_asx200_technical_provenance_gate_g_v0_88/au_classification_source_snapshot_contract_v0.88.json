@@ -1,0 +1,15 @@
+{
+  "Classification_Source_Retrieved_UTC": "2026-09-28T07:37:52Z",
+  "Classification_Source_Snapshot_SHA256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+  "Directory_Page_SHA256": "e96e2377a0af2bcc89929f9d350bd31b83ab4f3e342ee79f70a08493dbadfc20",
+  "Raw_Source_Persisted": "NO",
+  "Record_Count": 1833,
+  "Schema": [
+    "ASX code",
+    "Company name",
+    "GICs industry group",
+    "Listing date",
+    "Market Cap"
+  ],
+  "Snapshot_Contract_Status": "PASS"
+}

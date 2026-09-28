@@ -1,0 +1,8 @@
+{
+  "Business_Effective_Date_From_Retrieval": "NO",
+  "Contract_Status": "PASS",
+  "Retrieval_Time_Is_Business_Effective_Date": "NO",
+  "Source_Effective_AsOf_Status": "NO_EXPLICIT_EFFECTIVE_DATE_IN_PERSISTED_SOURCE",
+  "Source_Retrieved_UTC": "2026-09-28T07:37:52Z",
+  "Source_Version_or_AsOf": "SOURCE_SNAPSHOT_SHA256:66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d"
+}

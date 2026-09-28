@@ -1,0 +1,9 @@
+{
+  "All_Rows_Same_Expected_Code_Authority": "YES",
+  "Expected_Code_Authority_SHA256": "d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06",
+  "Observed_Distinct_Code_Authority_SHA256": [
+    "d66cfdf808872211561270a7141c40687417b3f669192c6b2650ae2d0aacad06"
+  ],
+  "Rows": 63,
+  "S_and_P_Workbook_Substitution": "NO"
+}

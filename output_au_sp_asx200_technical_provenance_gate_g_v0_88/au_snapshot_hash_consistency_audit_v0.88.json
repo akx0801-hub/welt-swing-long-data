@@ -1,0 +1,8 @@
+{
+  "All_Rows_Same_Expected_Snapshot": "YES",
+  "Expected_ASX_Snapshot_SHA256": "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d",
+  "Observed_Distinct_Snapshot_SHA256": [
+    "66111266a833527d97b48388130111c707caa8bd35221fc95e3d60e8e8d6e69d"
+  ],
+  "Rows": 63
+}

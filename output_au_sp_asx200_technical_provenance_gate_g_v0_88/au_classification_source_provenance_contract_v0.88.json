@@ -1,0 +1,10 @@
+{
+  "Classification_Field": "GICs industry group",
+  "Classification_Source_Download_Evidence": "https://asx.api.cmfyapp.com/asx-research/1.0/companies/directory/file?access_token=83ff96335c2d45a094df02a206a39ff4",
+  "Classification_Source_Name": "ASX_COMPANY_DIRECTORY_LISTED_COMPANIES_CSV",
+  "Classification_Source_Reference": "https://www.asx.com.au/markets/trade-our-cash-market/directory",
+  "Ephemeral_Download_URL_Used_As_Sole_Stable_Reference": "NO",
+  "Evidence_Final_Commit": "3c71084e03fbd49c6ab5b34b03696c62aac765ad",
+  "Evidence_Version": "v0.87",
+  "Identity_Field": "ASX code"
+}

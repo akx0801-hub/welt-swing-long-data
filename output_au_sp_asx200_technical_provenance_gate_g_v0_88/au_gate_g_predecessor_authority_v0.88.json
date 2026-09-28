@@ -1,0 +1,23 @@
+{
+  "AMBIGUOUS": 0,
+  "AU_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_READY": "YES",
+  "Artifact": 10956817563,
+  "Artifact_Digest": "sha256:961c68520689e978945a550b4d05b7a2e698f5b890fc072caecffb6a95e186bc",
+  "CONFLICT": 0,
+  "Canonical_READY": "37/1425",
+  "Final_Commit": "3c71084e03fbd49c6ab5b34b03696c62aac765ad",
+  "Formal_Label_Binding": "63/63",
+  "Frozen_Total": 63,
+  "NOT_FOUND": 0,
+  "NOT_PROVABLY_CLASSIFIED": 0,
+  "NOT_VERIFIED": 0,
+  "Nonformal_Frozen_Exposure": 0,
+  "PDSC": 0,
+  "PROVABLY_CLASSIFIED": 63,
+  "Source_Native_Code_Coverage": "63/63",
+  "Tests": "34/34 PASS",
+  "Unauthorized_Codes": 0,
+  "Used_Distinct_GICS_Codes": 16,
+  "Verdict": "PASS_AU_SP_ASX200_EXACT_FROZEN_GICS_CLASSIFICATION_COVERAGE_GATE_F",
+  "Workflow": 36392661784
+}

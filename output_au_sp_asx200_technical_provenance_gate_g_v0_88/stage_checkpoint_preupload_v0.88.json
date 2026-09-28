@@ -1,0 +1,14 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "au_technical_provenance_ready": true,
+  "blocker": "",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "gate_h": "NOT_EVALUATED",
+  "next_gate": "AU_SP_ASX200 SOURCE ACCESS / EVIDENCE PERSISTENCE GATE H",
+  "provenance_complete": 63,
+  "rows": 63,
+  "stage": "AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G",
+  "verdict": "PASS_AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G",
+  "version": "v0.88"
+}

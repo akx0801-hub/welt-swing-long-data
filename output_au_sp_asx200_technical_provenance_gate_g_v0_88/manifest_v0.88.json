@@ -1,0 +1,134 @@
+{
+  "artifact_digest": "sha256:b85acf39849f088e8d6d72766fd320dedc554ccabe92a9031342dd7890bba75e",
+  "artifact_id": 10961292663,
+  "au_technical_provenance_ready": true,
+  "blocker": "",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "external_source_requests": 0,
+  "files": {
+    "artifact_binding_v0.88.json": {
+      "bytes": 339,
+      "sha256": "e22f6cafd093f82e4769f5b36360f3f0aff491064b93d1bb253fe8c13bbeba84"
+    },
+    "au_classification_source_asof_contract_v0.88.json": {
+      "bytes": 388,
+      "sha256": "7fc32486753a1881282e10cc702b500d7db2a1d60dcebb5d3d203c545d49d340"
+    },
+    "au_classification_source_provenance_contract_v0.88.json": {
+      "bytes": 595,
+      "sha256": "9f899779607326bef3c5ae3d8bf24df0839c41a670223c96806ed2a748b54d69"
+    },
+    "au_classification_source_snapshot_contract_v0.88.json": {
+      "bytes": 487,
+      "sha256": "b5b4727d329f362173f5e038a0dd2fcc5442e78681f9def339e2b9436dbb1566"
+    },
+    "au_code_authority_hash_consistency_audit_v0.88.json": {
+      "bytes": 335,
+      "sha256": "a99e2c44908edca5c7f1c11329a923b31b1a1f0d0184dbf4b052005d3c68537c"
+    },
+    "au_cross_stage_classification_value_consistency_audit_v0.88.csv": {
+      "bytes": 5845,
+      "sha256": "701ca01360aec0ea8ebabf8de424aae333c47872cf504d793ce29ad51ceecb93"
+    },
+    "au_cross_stage_identity_value_consistency_audit_v0.88.csv": {
+      "bytes": 3495,
+      "sha256": "abc6b91eb39c93e8eabff74d88cfd2382090f6d63f688b33099490d43dc35f04"
+    },
+    "au_evidence_version_commit_contract_v0.88.json": {
+      "bytes": 455,
+      "sha256": "989b886576de3effad5f362bf90fde001412df60c3a07bab757dc0cfe36fe126"
+    },
+    "au_frozen_membership_provenance_authority_v0.88.json": {
+      "bytes": 623,
+      "sha256": "cd2fb851de86eb8ff5e68f90b33d15bd273f7332c3232f33984e08f07dacd55c"
+    },
+    "au_future_canonical_provenance_field_contract_v0.88.json": {
+      "bytes": 1559,
+      "sha256": "aff3dfc4c13b331602fdd95d5a4c3f4d3e7bbde852b26b3305c4c95a6e773f8b"
+    },
+    "au_gate_g_predecessor_authority_v0.88.json": {
+      "bytes": 760,
+      "sha256": "1ab14daa2a9790739fc03d6d508a38d7b56e8b858f92db5014f3acbb1a03d387"
+    },
+    "au_gics_code_authority_provenance_contract_v0.88.json": {
+      "bytes": 891,
+      "sha256": "3fcfe5851936c59c4fcb658f74e717f482f8960948b6d581eedaf2676ae57755"
+    },
+    "au_identity_evidence_provenance_authority_v0.88.json": {
+      "bytes": 573,
+      "sha256": "439dfae2fd39e0d47cdbe5825720b3029c44c4888daec228dced394b3a9c769c"
+    },
+    "au_row_level_provenance_chain_v0.88.csv": {
+      "bytes": 100644,
+      "sha256": "a7f061a34ed0b9ef7a65a1806b3eaee91c7a1b6f64e5bb37a07395bd2e5240fd"
+    },
+    "au_row_level_provenance_status_audit_v0.88.csv": {
+      "bytes": 2762,
+      "sha256": "b49719152759e586e31da2d705699faf1307f19f1b12e57fad44ffc0877c6b5c"
+    },
+    "au_snapshot_hash_consistency_audit_v0.88.json": {
+      "bytes": 280,
+      "sha256": "e0ebad9ae805fbcbd0a31f7b2cbdd5ac524ce3c9f911378033aa2210a4809e07"
+    },
+    "au_technical_provenance_decision_v0.88.json": {
+      "bytes": 632,
+      "sha256": "3aa4f35bfc26f2878821a65c33c2148e7f42a732aa41ba57719fc5471d55bc8b"
+    },
+    "docs/validation/AU_SP_ASX200_Technical_Provenance_Gate_G_v0.88.md": {
+      "bytes": 2176,
+      "sha256": "d7129f383d1fc34906e9180e6cb026f545eb49309d4dfc25ba3bae81320f8e77"
+    },
+    "external_request_ledger_v0.88.csv": {
+      "bytes": 72,
+      "sha256": "509ca7dbd85d8c87e8d3a4bf2c97977853d67a5691efb0dae93255afc5882c03"
+    },
+    "immutability_audit_v0.88.json": {
+      "bytes": 1582,
+      "sha256": "489020f0f098608b60990a876a3d8d351b7821db78bef6fb0d6d70bb84358a73"
+    },
+    "manifest_preupload_v0.88.json": {
+      "bytes": 4349,
+      "sha256": "8472a6e2d39d83a60051d12076421755e52d6b71542731df6a742cf88aaec4e7"
+    },
+    "provider_call_audit_v0.88.json": {
+      "bytes": 523,
+      "sha256": "1ea155da3372c6c3a9d81e1c45493069bc82c937511426ce700c0d5e5dc58239"
+    },
+    "stage_checkpoint_preupload_v0.88.json": {
+      "bytes": 449,
+      "sha256": "eb775f2cd6ca032cf9335ac199c24632dd1bf5be7e1e82b5c6aaa9bacd489ba2"
+    },
+    "stage_checkpoint_v0.88.json": {
+      "bytes": 666,
+      "sha256": "ab520495a14ff8dde6aebed4e25613ff3e4d39fd1d0bfc84535f15d880129f88"
+    },
+    "summary_preupload_v0.88.json": {
+      "bytes": 1773,
+      "sha256": "0e5ba7f7fa424ca72c45b0e9fd919853e9bd857d15ddcb4529e0188538626011"
+    },
+    "summary_v0.88.json": {
+      "bytes": 2131,
+      "sha256": "81a4ebf5f78d5f47a3d35ab474a7f4b3c57ee2b0177f72700cd4c30975e5f6ec"
+    },
+    "test_results_v0.88.csv": {
+      "bytes": 1634,
+      "sha256": "fe84359d0b85a55426694a3f75326b49ea608d3ef38e12a0772711e4d21bb774"
+    }
+  },
+  "gate_h_runs": 0,
+  "next_gate": "AU_SP_ASX200 SOURCE ACCESS / EVIDENCE PERSISTENCE GATE H",
+  "other_cohort_runs": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "provenance_complete": 63,
+  "rows": 63,
+  "sector_rs_runs": 0,
+  "stage": "AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G",
+  "verdict": "PASS_AU_SP_ASX200_TECHNICAL_PROVENANCE_GATE_G",
+  "version": "v0.88",
+  "workflow_head_sha": "2698e369f022ed168c93796ca8e4e1dc7199fab3",
+  "workflow_run_id": 36403714685
+}
