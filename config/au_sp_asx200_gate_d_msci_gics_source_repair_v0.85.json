@@ -13,6 +13,6 @@
   "p0_p1_p2_allowed": false,
   "alpha_vantage_allowed": false,
   "productive": false,
-  "retry_attempt": 1,
-  "retry_reason": "required evidence filename validation fix"
+  "retry_attempt": 2,
+  "retry_reason": "MSCI PDF currentness/title and soft-hyphen level-count parser repair"
 }
