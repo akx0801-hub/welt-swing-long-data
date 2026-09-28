@@ -1,0 +1,139 @@
+{
+  "version": "v0.92",
+  "stage": "TW_TW50_GATE_B_RUNTIME_CANDIDATE_CONTENT_VERIFICATION",
+  "required_start_head": "14270624d2f34f68fc0041d1cb7bd9d94c4b8d4f",
+  "role": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "fail_closed": true,
+  "predecessor": {
+    "final_commit": "14270624d2f34f68fc0041d1cb7bd9d94c4b8d4f",
+    "workflow_run_id": 36470124613,
+    "artifact_id": 10990953798,
+    "artifact_digest": "sha256:d6db0d2fe1449fb7b68f64f0e41cf6c96ea2bc3283995c87e2e3472eb7eb74ab",
+    "tests": "24/24 PASS",
+    "v091_pdf_finding_authority": "ACCEPTED",
+    "v091_stage_blocker_authority": "NOT_YET_COMPLETE",
+    "au_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+    "selected_cohort": "TW_TW50",
+    "taxonomy": "ICB",
+    "level": "INDUSTRY_GROUP",
+    "pdf_route_reproducible": "YES",
+    "pdf_parse_status": "PASS",
+    "pdf_pages": 2,
+    "pdf_row_level_security_records": "YES",
+    "pdf_security_identifier": "NOT_AVAILABLE",
+    "pdf_icb_industry_group": "NOT_AVAILABLE"
+  },
+  "page_count_repair": {
+    "source_file": "output_tw_tw50_gate_b_pdf_content_repair_v0_91/tw_pdf_page_structure_audit_v0.91.csv",
+    "authoritative_pdf_page_count": 2,
+    "trailing_form_feed_fragment_must_be_dropped": true,
+    "content_reassessment": false
+  },
+  "candidates": [
+    {
+      "id": "A",
+      "url": "https://www.lseg.com/en/ftse-russell/index-resources/constituent-weights",
+      "authority": "LSEG_FTSE_RUSSELL_OFFICIAL",
+      "order": 1
+    },
+    {
+      "id": "B",
+      "url": "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan#t-constituents",
+      "authority": "LSEG_FTSE_RUSSELL_OFFICIAL",
+      "order": 2
+    },
+    {
+      "id": "C",
+      "control_label": "See all constituents",
+      "source_page": "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan#t-constituents",
+      "order": 3
+    },
+    {
+      "id": "D",
+      "url": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50&isManual=False",
+      "authority": "FTSE_RUSSELL_OFFICIAL",
+      "order": 4
+    },
+    {
+      "id": "E",
+      "url": "http://taiwanindex.com.tw/en/indexes/TW50",
+      "authority_check_source": "https://www.twse.com.tw/en/indices/indices/series.html",
+      "order": 5
+    }
+  ],
+  "candidate_statuses": [
+    "CONTENT_VERIFIED_USABLE",
+    "CONTENT_VERIFIED_INSUFFICIENT",
+    "AUTH_REQUIRED",
+    "NOT_REPRODUCIBLE",
+    "NOT_VERIFIED_AUTHORITY"
+  ],
+  "gate_b_contract": {
+    "row_level_securities": true,
+    "deterministic_security_identifier": true,
+    "row_level_icb_industry_group": true,
+    "formal_level": "INDUSTRY_GROUP",
+    "bulk_or_finite_deterministic_pagination": true,
+    "per_security_fanout": 0,
+    "company_name_join": false,
+    "frozen_linkage": false
+  },
+  "two_source_composition": {
+    "allowed": true,
+    "requirements": [
+      "both sources official",
+      "source A row-level security identity",
+      "source B row-level ICB Industry Group",
+      "same explicit deterministic security identifier"
+    ],
+    "company_name_join": false,
+    "frozen_linkage": false
+  },
+  "scope": {
+    "no_new_broad_source_hunt": true,
+    "evaluate_only_known_candidates": true,
+    "tw_gate_e": false,
+    "tw_gate_f": false,
+    "tw_gate_h": false,
+    "tw_parking": false,
+    "reselection": false,
+    "cn_csi300_execution": false,
+    "canonical_materialization": false,
+    "sector_rs": false,
+    "p0": false,
+    "p1": false,
+    "p2": false,
+    "productive": false
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "tradingview": true,
+    "wikipedia": true,
+    "etf_holdings": true,
+    "unofficial_constituent_lists": true,
+    "third_party_classification_databases": true,
+    "company_name_frozen_linkage": true,
+    "fuzzy_matching": true,
+    "semantic_inference": true,
+    "cross_taxonomy_mapping": true,
+    "pdsc": true,
+    "per_security_fanout": true,
+    "frozen_49_linkage": true
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "parked_registry_sha256": "73bbb2d59a044b92a3abbfd83ccba5c65e17e979f6e707a22f12dd2775a03696",
+    "canonical_ready": "37/1425"
+  },
+  "terminal": {
+    "pass_next_gate": "TW_TW50 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E",
+    "blocked_next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+    "no_further_tw_gate_b_source_hunt_if_blocked": true
+  }
+}
