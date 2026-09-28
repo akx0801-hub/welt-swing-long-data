@@ -12,5 +12,7 @@
   "sector_rs_allowed": false,
   "p0_p1_p2_allowed": false,
   "alpha_vantage_allowed": false,
-  "productive": false
+  "productive": false,
+  "retry_attempt": 1,
+  "retry_reason": "workflow expression escaping fixed after GitHub token 401"
 }
