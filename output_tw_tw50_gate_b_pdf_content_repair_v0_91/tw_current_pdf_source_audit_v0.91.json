@@ -1,0 +1,16 @@
+{
+  "Bytes": 335595,
+  "Content_Disposition": "attachment; filename=TW50_QUARTERLY-DAILYData-EUR_StocksWeight_20260630.pdf",
+  "Content_Type": "application/octet-stream",
+  "HTTP_Status": 200,
+  "PDF_Extraction_Method": "pdftotext -layout",
+  "PDF_Extraction_Status": "PASS",
+  "PDF_Page_Count": 2,
+  "PDF_Signature": "%PDF-",
+  "PDF_Text_Extractable": "YES",
+  "Raw_PDF_Persisted": "NO",
+  "Requested_URL": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+  "Resolved_URL": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+  "Retrieval_Timestamp_UTC": "2026-09-28T19:08:41Z",
+  "SHA256": "4fbd2617c611df41de1e1f9e64e8774a115eb66343c29498da526eda5681f86f"
+}

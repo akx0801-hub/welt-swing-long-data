@@ -1,0 +1,137 @@
+{
+  "blocker": "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "cn_csi300_execution_runs": 0,
+  "files": {
+    "external_request_ledger_v0.91.csv": {
+      "bytes": 3536,
+      "sha256": "195cf2ad510b4db73a8886437e0a3b1dd4b8fb40a1be2af86d5b857451ee4467"
+    },
+    "immutability_audit_v0.91.json": {
+      "bytes": 1506,
+      "sha256": "f688b33dc62e6437f2e41576618e1884e5edf4fbc907e034fa261c69c2ba6598"
+    },
+    "provider_call_audit_v0.91.json": {
+      "bytes": 742,
+      "sha256": "12e94094b0d4c455813bc6ec8930a26a0af1c66041ddfc269295f27ff3481d35"
+    },
+    "stage_checkpoint_preupload_v0.91.json": {
+      "bytes": 481,
+      "sha256": "f4a8cdde2a0a55c3633bab9cb945a6c55d55f9795822aaff80a4cef182fe5bf9"
+    },
+    "summary_preupload_v0.91.json": {
+      "bytes": 1326,
+      "sha256": "f184201e07fce0b5e98295a06afd029f59d40c4d4dd79d356f7f488be36cfc37"
+    },
+    "test_results_v0.91.csv": {
+      "bytes": 1118,
+      "sha256": "93d6bd24fda146bb5c1d5a456c54f6ce26caac00d478215fef5b91f2afcf641a"
+    },
+    "tw_bulk_icb_industry_group_field_audit_v0_91.json": {
+      "bytes": 251,
+      "sha256": "93dc5ed512652c1f1a6e875ac3d75148d310852ffdbd8e6b0f62c2d2ec6cb60f"
+    },
+    "tw_bulk_security_identifier_audit_v0_91.json": {
+      "bytes": 276,
+      "sha256": "771f97e88d086380c4442091e2938e8d53f300a548ecfcf5c0e6651ca39f3923"
+    },
+    "tw_content_contract_decision_v0.91.json": {
+      "bytes": 242,
+      "sha256": "5a5b8481de5ecb77401627fc11a27941d535777c2be0e0173367cfa132c6b7c2"
+    },
+    "tw_current_pdf_source_audit_v0.91.json": {
+      "bytes": 778,
+      "sha256": "6845c85a5da64f2113b451f56342625f6c7030d06ed852f3d9df705f399e4379"
+    },
+    "tw_gate_b_repair_predecessor_authority_v0.91.json": {
+      "bytes": 657,
+      "sha256": "a1d510230ea126edbac339311915eae41a6f0edf1ab9a374d3bac3960ecfbbfa"
+    },
+    "tw_official_sector_bulk_source_gate_b_decision_v0_91.json": {
+      "bytes": 459,
+      "sha256": "3ed837ab82823b06a26a04db138c59ccffae51e842e3d6935f793be95612cf6a"
+    },
+    "tw_official_source_candidate_inventory_v0_91.csv": {
+      "bytes": 2245,
+      "sha256": "b6a1a2ea01920b68be02f5491963e05079144359449d8195b4521b71541312b3"
+    },
+    "tw_pdf_extraction_environment_v0.91.json": {
+      "bytes": 192,
+      "sha256": "ecf94547f86f9b26ab26278f2555e75014158c1857ba7900290802b4041d3c81"
+    },
+    "tw_pdf_icb_field_inventory_v0.91.csv": {
+      "bytes": 19,
+      "sha256": "3e0b3d4343fff7e486ed68daedebb3663253331b07fc8d1b1d72ec23f35aa035"
+    },
+    "tw_pdf_icb_level_binding_audit_v0.91.json": {
+      "bytes": 297,
+      "sha256": "f4965f2ba9019ad8b5d62187acd9b8dbdedc3ac27daa9c5be2b44f57f375c1f2"
+    },
+    "tw_pdf_page_structure_audit_v0.91.csv": {
+      "bytes": 231,
+      "sha256": "2f04ca3281e683e3b66daf3352dee5399ec31a0206c90a420235102143969732"
+    },
+    "tw_pdf_row_level_security_audit_v0.91.json": {
+      "bytes": 564,
+      "sha256": "e7a60b749add3ee216b7ead9b45b49793b532828df39b671faf5def024090b73"
+    },
+    "tw_pdf_security_identifier_audit_v0.91.json": {
+      "bytes": 265,
+      "sha256": "30f1261ecb18777b88d1f93968850c6f55ba501c8bead5362faac4d1af71c0b2"
+    },
+    "tw_runtime_capture_environment_v0.91.json": {
+      "bytes": 13885,
+      "sha256": "27556bf69c9c31e1859eadee9657269d2ab97f9fe81489d22958c9843d5a907c"
+    },
+    "tw_runtime_interaction_audit_v0.91.json": {
+      "bytes": 12316,
+      "sha256": "dcdcf3f2ad61a7663c97255d39ca93c9ca2b8695e241e8332df45f109fa00a5e"
+    },
+    "tw_runtime_network_candidate_inventory_v0.91.csv": {
+      "bytes": 1356,
+      "sha256": "b93a410a08ab08362b7e1b2ad031b5edc94e7c3f7256729a867ea272394182c2"
+    },
+    "tw_selected_bulk_source_contract_v0_91.json": {
+      "bytes": 731,
+      "sha256": "6dc95be21f46329c31e427a171ed18c5599d791be2810c2081e6903e299dc5e8"
+    },
+    "tw_source_composition_decision_v0_91.json": {
+      "bytes": 223,
+      "sha256": "d6a724b0ec18b2f54a8c10ee1ec82e717bd99fa0c8e8f5f1df78fc22a2631218"
+    },
+    "tw_static_script_config_candidate_inventory_v0.91.csv": {
+      "bytes": 1325,
+      "sha256": "aae6f20860c88f3668201b6ffba31b6a1b0f9e44b60982511a9c4282ebb98b53"
+    },
+    "tw_transport_reproducibility_audit_v0.91.json": {
+      "bytes": 2058,
+      "sha256": "dc628ad0e1c2d78f554caf8f6498ac4dedea11013913a6db5363371d11d6ff6a"
+    },
+    "v090_manager_gate_b_correction_authority_v0.91.json": {
+      "bytes": 771,
+      "sha256": "73321dd4f4796244c0ba2d3a05ea56bc9cf227da5c1796366a6fc50f3a53908e"
+    },
+    "v090_transport_vs_content_semantics_audit_v0.91.json": {
+      "bytes": 332,
+      "sha256": "c368f5a99431712350421db3622f1d9bec5bfdbac055149315da52ce7f58a2d6"
+    }
+  },
+  "next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "repository_sha": "21f4e7d471ea37c8e0110d5101ae5dbbfd38e82a",
+  "required_start_head": "90f796612937089ec9ac115c2a77a72d2a66c2a1",
+  "reselection_runs": 0,
+  "sector_rs_runs": 0,
+  "stage": "TW_TW50_GATE_B_PDF_CONTENT_REPAIR_FINAL_CURRENT_OFFICIAL_BULK_ROUTE_COMPLETION",
+  "tw_gate_e_runs": 0,
+  "tw_gate_f_runs": 0,
+  "tw_gate_h_runs": 0,
+  "tw_official_sector_bulk_source_ready": false,
+  "tw_parking_runs": 0,
+  "verdict": "BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B",
+  "version": "v0.91"
+}

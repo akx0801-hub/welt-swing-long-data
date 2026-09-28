@@ -1,0 +1,357 @@
+{
+  "Interactions_Actually_Performed": [],
+  "Observed_Relevant_Controls": [
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/zh/about/company/intro.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Introduction to the Taiwan Stock Exchange"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/en/indices/ftse/tai50i.html",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan 50 Index Historical Data"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/en/indices/ftse/bfm44u-tai50i.html",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Monthly Average Market Spread of Taiwan 50 Index"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/shortversion-en.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "TIB at a glance"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/tib_qa.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "FAQ"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/en/clearing/download/pfmidisclosure20180912.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "TWSE's PFMI Disclosure Report"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/zh/about/company/intro.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Introduction to the Taiwan Stock Exchange"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/en/clearing/download/pfmidisclosure20180912.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "TWSE's PFMI Disclosure Report"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/en/indices/ftse/tai50i.html",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan 50 Index Historical Data"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/en/indices/ftse/bfm44u-tai50i.html",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Monthly Average Market Spread of Taiwan 50 Index"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen01.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen02.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen03.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen04.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen05.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen06.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen07.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "http://taiwanindex.com.tw/en/indexes/TW50",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan 50 Index"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "http://www.ftse.com/products/downloads/Free_Float_Restrictions.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Free Float Restrictions"
+    },
+    {
+      "Action_URL": "https://www.taiwanindex.com.tw/en/indexes/TW50C?lang=en",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan 50 30% Capped Index"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen20.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "http://www.ftse.com/products/indices/twse-taiwan",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE RAFI Taiwan 50 Index"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen13.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen13.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.twse.com.tw/downloads/en/products/indices/IndexSen15.pdf",
+      "Element": "a",
+      "Source_Page": "TWSE",
+      "Status": "OBSERVED",
+      "Visible_Label": "Methodology"
+    },
+    {
+      "Action_URL": "https://www.lseg.com/en/ftse-russell/index-resources/constituent-weights",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "Constituents & Weights"
+    },
+    {
+      "Action_URL": "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan#t-constituents",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "Constituents"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TWSERIES&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan Index Series"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan 50 Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50RCO&isManual=True",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan 50 Index Review Changes Overview"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50C&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan 50 30% Capped Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW100&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan Mid-Cap 100 Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TWDP&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan Dividend+ Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TWDP&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan Eight Industries Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TWTECH&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan Technology Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TWSH&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE Taiwan Shariah Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=FRTW50&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE RAFI Taiwan 50 Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=FRTW100&isManual=False",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE RAFI Taiwan 100 Index"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=ASIAMR&isManual=True",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE Asia Monthly Index Performance Report"
+    },
+    {
+      "Action_URL": "http://www.ftse.com/analytics/factsheets/Home/DownloadHistoricIndex/?indexdetails=ESMA_IndexReturn_TW50_TWD_QUARTERLY",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "Index Returns - FTSE TWSE 50"
+    },
+    {
+      "Action_URL": "https://www.lseg.com/en/ftse-russell/index-resources/constituent-weights",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "See all constituents"
+    },
+    {
+      "Action_URL": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+      "Element": "a",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "FTSE TWSE 50"
+    },
+    {
+      "Action_URL": "",
+      "Element": "button",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "Play, title: FTSE TWSE Taiwan 50 Index"
+    },
+    {
+      "Action_URL": "",
+      "Element": "button",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "Play, title: FTSE TWSE Taiwan 50 Index"
+    },
+    {
+      "Action_URL": "",
+      "Element": "button",
+      "Source_Page": "LSEG",
+      "Status": "OBSERVED",
+      "Visible_Label": "Play, title: FTSE TWSE Taiwan 50 Index"
+    }
+  ],
+  "Reason_No_Additional_Click": "The official LSEG constituent download route had already been directly activated/replayed; no second guessing or per-security interaction was required.",
+  "Status": "PASSIVE_RUNTIME_EXECUTED"
+}

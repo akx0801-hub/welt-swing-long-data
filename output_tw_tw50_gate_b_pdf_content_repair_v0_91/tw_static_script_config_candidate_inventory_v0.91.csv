@@ -1,0 +1,9 @@
+Source_Page,Script_URL,HTTP_Status,SHA256,Bytes,Relevant_Markers,Candidate_URLs
+TWSE,https://www.twse.com.tw/res/lib/ie-hints.min.js,200,79e2030240997a52f16c19d0b469cdbb8129d5c772a05dd4d0b74c190b88971c,1099,,
+TWSE,https://www.twse.com.tw/res/js/main.js,200,e904e5819a818a414c893d4f878e8f13fd745a14418666c849f2975020349252,128697,component|.json,
+TWSE,https://www.twse.com.tw/res/js/web.js,200,9c1dbb81dd7d16d6b95a7e45fcbc5f561e3a1f764ff526f7936320b22c5ce993,16563,,
+LSEG,https://www.lseg.com/etc.clientlibs/forge/components/data-layer/page/v1/page/clientlibs.min.js,200,c106a3d8cba49d00523c3a9975b356d1154bdc142e0760ca85262cfd809eb097,12375,,
+LSEG,https://www.lseg.com/etc.clientlibs/forge/components/content/rte/v2/rte/clientlibs/publish.min.js,200,7b98314532644fbbb674d6758d3d57e2f3172fa0327e0d332f2ff02b216c64da,1172,,
+LSEG,https://www.lseg.com/etc.clientlibs/clientlibs/granite/jquery/granite/csrf.min.js,200,515394110439a7aafe62229bbda44a768a1d938a2053d92764fae16b2aba5e81,3618,.json,
+LSEG,https://www.lseg.com/etc/designs/forge-ui/versions/forge-ui-v5-43-2/main.js,200,652b3a51419e72540e8b62fff2328086998c02180a7ec7377778082050c70bd1,735293,component|.json,
+LSEG,https://www.lseg.com/etc.clientlibs/lseg/clientlibs.min.js,200,9febe319970b4cee10dbe9598bb7eedbb38289bcfc08058870935c2b72921c5c,238515,component|icb|.json,

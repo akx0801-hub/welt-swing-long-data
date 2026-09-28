@@ -1,0 +1,7 @@
+{
+  "OCR_Used": "NO",
+  "Reason_OCR_Not_Used": "extractable text available",
+  "pdfinfo_path": "/usr/bin/pdfinfo",
+  "pdftotext_path": "/usr/bin/pdftotext",
+  "pypdf_runner_available": "NO"
+}

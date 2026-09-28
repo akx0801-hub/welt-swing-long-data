@@ -1,0 +1,9 @@
+{
+  "Not_Evidence_Of_Absent_ICB": "YES",
+  "Not_Evidence_Of_Absent_Identifiers": "YES",
+  "Not_Evidence_Of_Absent_Row_Records": "YES",
+  "PDF_Content_Parse_v090": "NOT_VERIFIED",
+  "Transport": "PASS",
+  "Transport_and_Content_Separated": "YES",
+  "v090_DIRECT_HTTP_REPLAY_REINTERPRETATION": "TRANSPORT_PASS_CONTENT_NOT_VERIFIED"
+}

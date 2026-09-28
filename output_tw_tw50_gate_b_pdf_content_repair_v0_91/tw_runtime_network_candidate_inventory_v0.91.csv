@@ -1,0 +1,9 @@
+Source_Page,Request_URL,Discovery_Basis,Status
+LSEG,https://www.lseg.com/content/lseg/en_us/ftse-russell/indices/twse-taiwan/jcr:content/root/container/page_content_region/page-content-region/section_copy/section-fw/column_control/column1/video_player_copy_co.ks.json,HEADLESS_CHROME_NETLOG,OBSERVED
+LSEG,https://www.lseg.com/content/lseg/en_us/ftse-russell/indices/twse-taiwan/jcr:content/root/container/page_content_region/page-content-region/section_copy/section-fw/column_control/column1/video_player_copy_co_355217325.ks.json,HEADLESS_CHROME_NETLOG,OBSERVED
+LSEG,https://www.lseg.com/etc.clientlibs/forge/components/content/billboard/v1/billboard/clientlibs_common.min.css,HEADLESS_CHROME_NETLOG,OBSERVED
+LSEG,https://www.lseg.com/etc.clientlibs/forge/components/content/forms/form/v2/form/clientlibs_common.min.css,HEADLESS_CHROME_NETLOG,OBSERVED
+LSEG,https://www.lseg.com/etc.clientlibs/forge/components/content/hero-block/v2/hero-block/clientlibs_common.min.css,HEADLESS_CHROME_NETLOG,OBSERVED
+LSEG,https://www.lseg.com/etc.clientlibs/forge/components/content/rte/v2/rte/clientlibs/publish.min.js,HEADLESS_CHROME_NETLOG,OBSERVED
+LSEG,https://www.lseg.com/etc.clientlibs/forge/components/data-layer/page/v1/page/clientlibs.min.js,HEADLESS_CHROME_NETLOG,OBSERVED
+LSEG,https://www.lseg.com/libs/granite/csrf/token.json,HEADLESS_CHROME_NETLOG,OBSERVED

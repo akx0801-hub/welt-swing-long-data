@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:d6db0d2fe1449fb7b68f64f0e41cf6c96ea2bc3283995c87e2e3472eb7eb74ab",
+  "artifact_id": 10990953798,
+  "artifact_name": "tw-tw50-gate-b-pdf-content-repair-v0.91-36470124613",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "21f4e7d471ea37c8e0110d5101ae5dbbfd38e82a",
+  "workflow_run_id": 36470124613
+}

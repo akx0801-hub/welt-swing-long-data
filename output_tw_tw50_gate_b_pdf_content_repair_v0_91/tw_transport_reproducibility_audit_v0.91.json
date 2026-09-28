@@ -1,0 +1,43 @@
+{
+  "CONTENT_CONTRACT_STATUS": "PENDING_PDF_PARSE",
+  "DIRECT_HTTP_REPLAY": "PASS",
+  "Replay": {
+    "PDF_Signature": "PASS",
+    "bytes": 335595,
+    "content_disposition": "attachment; filename=TW50_QUARTERLY-DAILYData-EUR_StocksWeight_20260630.pdf",
+    "content_type": "application/octet-stream",
+    "error": "",
+    "resolved_url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+    "sha256": "4fbd2617c611df41de1e1f9e64e8774a115eb66343c29498da526eda5681f86f",
+    "status": 200,
+    "timestamp_utc": "2026-09-28T19:08:42Z",
+    "url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50"
+  },
+  "Run_1": {
+    "PDF_Signature": "PASS",
+    "Run": 1,
+    "bytes": 335595,
+    "content_disposition": "attachment; filename=TW50_QUARTERLY-DAILYData-EUR_StocksWeight_20260630.pdf",
+    "content_type": "application/octet-stream",
+    "error": "",
+    "resolved_url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+    "sha256": "4fbd2617c611df41de1e1f9e64e8774a115eb66343c29498da526eda5681f86f",
+    "status": 200,
+    "timestamp_utc": "2026-09-28T19:08:41Z",
+    "url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50"
+  },
+  "Run_2": {
+    "PDF_Signature": "PASS",
+    "Run": 2,
+    "bytes": 335595,
+    "content_disposition": "attachment; filename=TW50_QUARTERLY-DAILYData-EUR_StocksWeight_20260630.pdf",
+    "content_type": "application/octet-stream",
+    "error": "",
+    "resolved_url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+    "sha256": "4fbd2617c611df41de1e1f9e64e8774a115eb66343c29498da526eda5681f86f",
+    "status": 200,
+    "timestamp_utc": "2026-09-28T19:08:42Z",
+    "url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50"
+  },
+  "TRANSPORT_ROUTE_REPRODUCIBILITY": "PASS"
+}

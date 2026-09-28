@@ -1,0 +1,21 @@
+{
+  "A": "PASS_INHERITED",
+  "AU_Park_Authoritative": "YES",
+  "AU_Park_State": "PARKED_EXTERNAL_AUTHORIZATION",
+  "Artifact": 10966961769,
+  "Artifact_Digest": "sha256:91d535cce36d6e8f0f3b0e314b721c366751ff62962773b6ae9fac5db42242f9",
+  "B": "TARGET_THIS_STAGE",
+  "C": "PASS_INHERITED",
+  "D": "PASS_INHERITED",
+  "E": "NOT_EVALUATED",
+  "F": "NOT_EVALUATED",
+  "Final_Commit": "90f796612937089ec9ac115c2a77a72d2a66c2a1",
+  "Formal_Level": "INDUSTRY_GROUP",
+  "G": "PASS_INHERITED",
+  "H": "NOT_EVALUATED",
+  "Selected_Active_Cohort": "TW_TW50",
+  "Selection_Authoritative": "YES",
+  "TW_Frozen_Rows": 49,
+  "Taxonomy": "ICB",
+  "Workflow": 36414129933
+}

@@ -1,0 +1,4 @@
+Page,Table_or_Section,Security_Row_Count,Identifier_Fields,ICB_Fields,Notes
+1,CONSTITUENT_WEIGHT_TABLE,22,NONE,NONE,bounded line-based audit
+2,OTHER,0,NONE,NONE,bounded line-based audit
+3,OTHER,0,NONE,NONE,bounded line-based audit

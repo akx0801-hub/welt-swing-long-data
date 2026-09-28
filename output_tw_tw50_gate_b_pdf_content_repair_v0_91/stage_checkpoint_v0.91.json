@@ -1,0 +1,15 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:d6db0d2fe1449fb7b68f64f0e41cf6c96ea2bc3283995c87e2e3472eb7eb74ab",
+  "artifact_id": 10990953798,
+  "blocker": "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "stage": "TW_TW50_GATE_B_PDF_CONTENT_REPAIR_FINAL_CURRENT_OFFICIAL_BULK_ROUTE_COMPLETION",
+  "tw_official_sector_bulk_source_ready": false,
+  "verdict": "BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B",
+  "version": "v0.91",
+  "workflow_head_sha": "21f4e7d471ea37c8e0110d5101ae5dbbfd38e82a",
+  "workflow_run_id": 36470124613
+}

@@ -1,0 +1,20 @@
+{
+  "Bounded_Sample": [
+    {
+      "Extracted_Line": "FTSE TWSE Taiwan 50 19 August 2026",
+      "Page": 1
+    },
+    {
+      "Extracted_Line": "Accton Technology 1.21 TAIWAN Gold Circuit Electronics 0.4 TAIWAN Taiwan Mobile 0.16 TAIWAN",
+      "Page": 1
+    },
+    {
+      "Extracted_Line": "Advantech 0.22 TAIWAN Hon Hai Precision Industry 3.01 TAIWAN Taiwan Semiconductor 57.59 TAIWAN",
+      "Page": 1
+    }
+  ],
+  "Distinct_Security_Row_Count": "NOT_VERIFIED",
+  "Frozen_49_Linkage": "NO",
+  "Observed_Row_Count": 22,
+  "ROW_LEVEL_SECURITY_RECORDS": "YES"
+}
