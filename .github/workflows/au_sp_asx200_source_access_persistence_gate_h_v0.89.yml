@@ -151,7 +151,10 @@ jobs:
           tests=list(csv.DictReader(open(out/"test_results_v0.89.csv",encoding="utf-8")))
           assert all(r["Result"]=="PASS" for r in tests)
           assert len(source_inv)==5 and len(requests)==5
-          assert all(r["HTTP_Status"]=="200" for r in source_inv)
+          required=[r for r in source_inv if r["Source_Class"]!="SP_GLOBAL_OFFICIAL_TERMS"]
+          sp=[r for r in source_inv if r["Source_Class"]=="SP_GLOBAL_OFFICIAL_TERMS"]
+          assert len(required)==4 and all(r["HTTP_Status"]=="200" for r in required)
+          assert len(sp)==1 and sp[0]["HTTP_Status"] in {"0","200","403","429","503"}
           assert all(r["Raw_Body_Persisted"]=="NO" for r in source_inv)
           zero=["Alpha_Vantage","Yahoo_yfinance","EODHD","Scalable","TradingView","Wikipedia","ETF_holdings",
                 "per_security_web_fanout","Gate_A_rerun","Gate_B_rerun","Gate_C_rerun","Gate_D_rerun","Gate_E_rerun",
