@@ -1,0 +1,24 @@
+{
+  "version": "v0.92",
+  "required_start_head": "14270624d2f34f68fc0041d1cb7bd9d94c4b8d4f",
+  "runtime_candidate_content_verification_authorized": true,
+  "candidate_scope": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "no_broad_source_hunt": true,
+  "tw_gate_e_allowed": false,
+  "tw_gate_f_allowed": false,
+  "tw_gate_h_allowed": false,
+  "tw_parking_allowed": false,
+  "reselection_allowed": false,
+  "cn_csi300_execution_allowed": false,
+  "canonical_materialization_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
