@@ -48,7 +48,7 @@ ASX_TERMS="https://www.asx.com.au/legals/terms-of-use"
 ASX_DATA="https://www.asx.com.au/legals/data-disclaimers"
 MSCI_TERMS="https://www.msci.com/legal/terms-of-use"
 MSCI_NOTICE="https://www.msci.com/legal/notice-and-disclaimer"
-SP_TERMS="https://www.spglobal.com/en/terms-of-use"
+SP_TERMS="https://www.spglobal.com/spdji/en/disclaimers/"
 
 class TextExtractor(HTMLParser):
     def __init__(self):
