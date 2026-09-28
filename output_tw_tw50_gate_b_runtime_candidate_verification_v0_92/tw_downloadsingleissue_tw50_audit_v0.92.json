@@ -1,0 +1,35 @@
+{
+  "Bounded_Sample": [
+    {
+      "Extracted_Line": "FTSE TWSE Taiwan 50 Index Data as at: 31 August 2026",
+      "Page": 2
+    },
+    {
+      "Extracted_Line": "Top 5 Constituents INFORMATION",
+      "Page": 2
+    },
+    {
+      "Extracted_Line": "Taiwan Semiconductor Manufacturing Technology Hardware and Equipment 58,374,316 57.44",
+      "Page": 2
+    }
+  ],
+  "Bytes": 371212,
+  "Candidate": "D",
+  "Content_Disposition": "attachment; filename=TW50_20260831.pdf",
+  "Content_Status": "CONTENT_VERIFIED_INSUFFICIENT",
+  "Content_Type": "application/octet-stream",
+  "Format": "PDF",
+  "HTTP_Status": 200,
+  "ICB_Industry_Group_Code_Field": "NOT_AVAILABLE",
+  "ICB_Industry_Group_Name_Field": "NOT_AVAILABLE",
+  "ICB_Level": "SUPERSECTOR|SECTOR",
+  "Partial_or_Aggregate": true,
+  "Requested_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50&isManual=False",
+  "Resolved_URL": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50&isManual=False",
+  "Retrieval_Timestamp_UTC": "2026-09-28T20:54:32Z",
+  "Row_Count": 33,
+  "Row_Level_Security_Records": "YES",
+  "SHA256": "841d2a0ab20ca56dadcf67f7324eca0017131f9fdcd20c76659ebc9e7211c130",
+  "Security_Identifier_Field": "NOT_AVAILABLE",
+  "Security_Identifier_Type": "NOT_AVAILABLE"
+}

@@ -1,0 +1,42 @@
+{
+  "Bytes": 222558,
+  "Candidate": "B",
+  "Content_Status": "CONTENT_VERIFIED_INSUFFICIENT",
+  "Content_Type": "text/html;charset=utf-8",
+  "HTTP_Status": 200,
+  "ICB_Industry_Group_Field": "NOT_AVAILABLE",
+  "ICB_Level": "NOT_VERIFIED",
+  "Identifier_Field": "NOT_AVAILABLE",
+  "Observed_Constituent_Controls": [
+    {
+      "text": "FTSE TWSE Taiwan 50 Index",
+      "url": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50&isManual=False"
+    },
+    {
+      "text": "FTSE TWSE Taiwan 50 Index Review Changes Overview",
+      "url": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50RCO&isManual=True"
+    },
+    {
+      "text": "FTSE TWSE Taiwan 50 30% Capped Index",
+      "url": "https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=TW50C&isManual=False"
+    },
+    {
+      "text": "Index Returns - FTSE TWSE 50",
+      "url": "http://www.ftse.com/analytics/factsheets/Home/DownloadHistoricIndex/?indexdetails=ESMA_IndexReturn_TW50_TWD_QUARTERLY"
+    },
+    {
+      "text": "See all constituents",
+      "url": "https://www.lseg.com/en/ftse-russell/index-resources/constituent-weights"
+    },
+    {
+      "text": "FTSE TWSE 50",
+      "url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50"
+    }
+  ],
+  "Requested_URL": "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan#t-constituents",
+  "Resolved_URL": "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan",
+  "Retrieval_Timestamp_UTC": "2026-09-28T20:54:13Z",
+  "Row_Level_Security_Records": "NO",
+  "Runtime_Status": "PASS",
+  "SHA256": "6396b7a5c38a6c80d2b4eeb160b22e5a2d38355f638920e363482db5b14c00dd"
+}

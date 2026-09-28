@@ -1,0 +1,521 @@
+{
+  "Bounded_Sample": [
+    {
+      "File Date": "-",
+      "Link": "Link",
+      "Title": "FTSE TWSE Taiwan Index Series FTSE Russell"
+    },
+    {
+      "File Date": "-",
+      "Link": "Link",
+      "Title": "FTSE TWSE Taiwan Index Series Technical Notice"
+    },
+    {
+      "File Date": "-",
+      "Link": "Link",
+      "Title": "FTSE TWSE Taiwan Index Series"
+    }
+  ],
+  "Bytes": 310257,
+  "Candidate": "E",
+  "Content_Status": "CONTENT_VERIFIED_INSUFFICIENT",
+  "Content_Type": "text/html; charset=utf-8",
+  "Direct_Page_ICB_Industry_Group": "NOT_AVAILABLE",
+  "Direct_Page_ICB_Level": "NOT_VERIFIED",
+  "Direct_Page_Identifier": "NOT_AVAILABLE",
+  "Direct_Page_Row_Level_Security_Records": "YES",
+  "HTTP_Status": 200,
+  "Requested_URL": "http://taiwanindex.com.tw/en/indexes/TW50",
+  "Resolved_URL": "https://taiwanindex.com.tw/en/indexes/TW50",
+  "Retrieval_Timestamp_UTC": "2026-09-28T20:54:48Z",
+  "Runtime_Child_Candidates_Checked": 5,
+  "Runtime_Child_Results": [
+    {
+      "Bounded_Sample": "[]",
+      "URL": "https://backend.taiwanindex.com.tw/api/indexes/TW50/last_transaction_day_records",
+      "bytes": 152,
+      "candidate_status": "CONTENT_VERIFIED_INSUFFICIENT",
+      "content_type": "application/json",
+      "format": "JSON",
+      "http_status": 200,
+      "reason": "NO_RECORD_LIST",
+      "resolved_url": "https://backend.taiwanindex.com.tw/api/indexes/TW50/last_transaction_day_records",
+      "row_count": 0,
+      "row_level": false,
+      "sha256": "194141d997660724ce756970c339bcbfa8f557911cc286af1022ae846a5dc863",
+      "source_ref": "E_RUNTIME:https://backend.taiwanindex.com.tw/api/indexes/TW50/last_transaction_day_records",
+      "usable": false
+    },
+    {
+      "Bounded_Sample": "[{\"Title\": \"FTSE TWSE Taiwan Index Series FTSE Russell\", \"File Date\": \"-\", \"Link\": \"Link\"}, {\"Title\": \"FTSE TWSE Taiwan Index Series Technical Notice\", \"File Date\": \"-\", \"Link\": \"Link\"}]",
+      "URL": "https://taiwanindex.com.tw/en/indexes/TW50",
+      "anchors": [
+        {
+          "text": "Technical Notice",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice"
+        },
+        {
+          "text": "Index Review Schedule",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice?category_id=3"
+        },
+        {
+          "text": "中文",
+          "url": "https://taiwanindex.com.tw/indexes/TW50"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "Overview",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50"
+        },
+        {
+          "text": "Historical Data",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history"
+        },
+        {
+          "text": "Disclaimer",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/info_rule"
+        },
+        {
+          "text": "Overview",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50"
+        },
+        {
+          "text": "Historical Data",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history"
+        },
+        {
+          "text": "Disclaimer",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/info_rule"
+        },
+        {
+          "text": "Link",
+          "url": "https://taiwanindex.com.tw/downloads/technical_notice"
+        },
+        {
+          "text": "Link",
+          "url": "https://research.ftserussell.com/products/downloads/FTSE_TWSE_Taiwan_Index_Series.pdf?_ga=2.58584810.1928997800.1595816920-801606558.1595816920"
+        },
+        {
+          "text": "Link",
+          "url": "https://research.ftserussell.com/products/downloads/Free_Float_Restrictions.pdf"
+        },
+        {
+          "text": "Link",
+          "url": "https://research.ftserussell.com/products/downloads/Suspended_Companies_Rule.pdf"
+        },
+        {
+          "text": "Link",
+          "url": "https://taiwanindex.com.tw/downloads/technical_notice"
+        },
+        {
+          "text": "Link",
+          "url": "https://research.ftserussell.com/products/downloads/FTSE_TWSE_Taiwan_Index_Series.pdf?_ga=2.58584810.1928997800.1595816920-801606558.1595816920"
+        },
+        {
+          "text": "Link",
+          "url": "https://research.ftserussell.com/products/downloads/Free_Float_Restrictions.pdf"
+        },
+        {
+          "text": "Link",
+          "url": "https://research.ftserussell.com/products/downloads/Suspended_Companies_Rule.pdf"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "Index Investing Report",
+          "url": "https://taiwanindex.com.tw/en/downloads/investment_report"
+        },
+        {
+          "text": "Technical Notice",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice"
+        },
+        {
+          "text": "Ground Rules and Related Files",
+          "url": "https://taiwanindex.com.tw/en/downloads/compilation_rule"
+        },
+        {
+          "text": "TIP TW Sustainability Ratings Files",
+          "url": "https://taiwanindex.com.tw/en/downloads/tip_sustainability_assessment"
+        },
+        {
+          "text": "Every 5 Seconds Information",
+          "url": "https://taiwanindex.com.tw/en/downloads/five_seconds_information_file"
+        }
+      ],
+      "bytes": 310257,
+      "candidate_status": "CONTENT_VERIFIED_INSUFFICIENT",
+      "content_type": "text/html; charset=utf-8",
+      "format": "HTML",
+      "headers": [
+        "Title",
+        "File Date",
+        "Link"
+      ],
+      "http_status": 200,
+      "icb_code": null,
+      "icb_level": "NOT_VERIFIED",
+      "icb_name": null,
+      "identifier": null,
+      "identifier_unique": "NOT_VERIFIED",
+      "partial_or_aggregate": false,
+      "resolved_url": "https://taiwanindex.com.tw/en/indexes/TW50",
+      "row_count": 12,
+      "row_level": true,
+      "sha256": "5cfaa8b4652ce2078a5f06f4f4a578dd878964719e624d8eb6bab07c9b65bc74",
+      "source_ref": "https://taiwanindex.com.tw/en/indexes/TW50#table17",
+      "text_markers": [
+        "Taiwan 50",
+        "Constituents"
+      ],
+      "usable": false
+    },
+    {
+      "Bounded_Sample": "[{\"檔案名稱\": \"臺灣指數系列基本規則\", \"檔案日期\": \"2025/09/10\", \"連結\": \"下載\"}, {\"檔案名稱\": \"臺灣證券交易所與富時國際有限公司合編之臺灣指數系列官方網站\", \"檔案日期\": \"-\", \"連結\": \"連結\"}]",
+      "URL": "https://taiwanindex.com.tw/indexes/TW50",
+      "anchors": [
+        {
+          "text": "技術通知",
+          "url": "https://taiwanindex.com.tw/downloads/technical_notice"
+        },
+        {
+          "text": "指數定審期程表",
+          "url": "https://taiwanindex.com.tw/downloads/technical_notice?category_id=3"
+        },
+        {
+          "text": "ENGLISH",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50"
+        },
+        {
+          "text": "下載專區",
+          "url": "https://taiwanindex.com.tw/downloads"
+        },
+        {
+          "text": "概覽",
+          "url": "https://taiwanindex.com.tw/indexes/TW50"
+        },
+        {
+          "text": "歷史指數值",
+          "url": "https://taiwanindex.com.tw/indexes/TW50/history"
+        },
+        {
+          "text": "相關聲明",
+          "url": "https://taiwanindex.com.tw/indexes/TW50/info_rule"
+        },
+        {
+          "text": "概覽",
+          "url": "https://taiwanindex.com.tw/indexes/TW50"
+        },
+        {
+          "text": "歷史指數值",
+          "url": "https://taiwanindex.com.tw/indexes/TW50/history"
+        },
+        {
+          "text": "相關聲明",
+          "url": "https://taiwanindex.com.tw/indexes/TW50/info_rule"
+        },
+        {
+          "text": "下載",
+          "url": "https://backend.taiwanindex.com.tw/api/downloadFile/IndexFiles/272/tw"
+        },
+        {
+          "text": "連結",
+          "url": "https://taiwanindex.com.tw/downloads/technical_notice"
+        },
+        {
+          "text": "下載",
+          "url": "https://backend.taiwanindex.com.tw/api/downloadFile/IndexFiles/270/tw"
+        },
+        {
+          "text": "下載",
+          "url": "https://backend.taiwanindex.com.tw/api/downloadFile/IndexFiles/271/tw"
+        },
+        {
+          "text": "下載",
+          "url": "https://backend.taiwanindex.com.tw/api/downloadFile/IndexFiles/272/tw"
+        },
+        {
+          "text": "連結",
+          "url": "https://taiwanindex.com.tw/downloads/technical_notice"
+        },
+        {
+          "text": "下載",
+          "url": "https://backend.taiwanindex.com.tw/api/downloadFile/IndexFiles/270/tw"
+        },
+        {
+          "text": "下載",
+          "url": "https://backend.taiwanindex.com.tw/api/downloadFile/IndexFiles/271/tw"
+        },
+        {
+          "text": "下載專區",
+          "url": "https://taiwanindex.com.tw/downloads"
+        },
+        {
+          "text": "下載專區",
+          "url": "https://taiwanindex.com.tw/downloads"
+        },
+        {
+          "text": "指數化投資報告",
+          "url": "https://taiwanindex.com.tw/downloads/investment_report"
+        },
+        {
+          "text": "技術通知",
+          "url": "https://taiwanindex.com.tw/downloads/technical_notice"
+        },
+        {
+          "text": "指數編製規則及相關檔案",
+          "url": "https://taiwanindex.com.tw/downloads/compilation_rule"
+        },
+        {
+          "text": "TIP台灣永續評鑑相關檔案",
+          "url": "https://taiwanindex.com.tw/downloads/tip_sustainability_assessment"
+        },
+        {
+          "text": "5秒資訊檔",
+          "url": "https://taiwanindex.com.tw/downloads/five_seconds_information_file"
+        }
+      ],
+      "bytes": 288844,
+      "candidate_status": "CONTENT_VERIFIED_INSUFFICIENT",
+      "content_type": "text/html; charset=utf-8",
+      "format": "HTML",
+      "headers": [
+        "檔案名稱",
+        "檔案日期",
+        "連結"
+      ],
+      "http_status": 200,
+      "icb_code": null,
+      "icb_level": "NOT_VERIFIED",
+      "icb_name": null,
+      "identifier": null,
+      "identifier_unique": "NOT_VERIFIED",
+      "partial_or_aggregate": false,
+      "resolved_url": "https://taiwanindex.com.tw/indexes/TW50",
+      "row_count": 12,
+      "row_level": true,
+      "sha256": "f9c56669b34d06cf0dac67521b3d933c723a13fb841b7ef7c28e7ef33398d70c",
+      "source_ref": "https://taiwanindex.com.tw/indexes/TW50#table17",
+      "text_markers": [
+        "ICB"
+      ],
+      "usable": false
+    },
+    {
+      "Bounded_Sample": "[]",
+      "URL": "https://taiwanindex.com.tw/en/indexes/TW50/history",
+      "anchors": [
+        {
+          "text": "Technical Notice",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice"
+        },
+        {
+          "text": "Index Review Schedule",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice?category_id=3"
+        },
+        {
+          "text": "中文",
+          "url": "https://taiwanindex.com.tw/indexes/TW50/history"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "Overview",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50"
+        },
+        {
+          "text": "Historical Data",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history"
+        },
+        {
+          "text": "Disclaimer",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/info_rule"
+        },
+        {
+          "text": "Overview",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50"
+        },
+        {
+          "text": "Historical Data",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history"
+        },
+        {
+          "text": "Disclaimer",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/info_rule"
+        },
+        {
+          "text": "1 Week",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history?interval=one_week"
+        },
+        {
+          "text": "1 Month",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history?interval=one_month"
+        },
+        {
+          "text": "1 Year",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history?interval=one_year"
+        },
+        {
+          "text": "3 Years",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history?interval=three_years"
+        },
+        {
+          "text": "5 Years",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history?interval=five_years"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "Index Investing Report",
+          "url": "https://taiwanindex.com.tw/en/downloads/investment_report"
+        },
+        {
+          "text": "Technical Notice",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice"
+        },
+        {
+          "text": "Ground Rules and Related Files",
+          "url": "https://taiwanindex.com.tw/en/downloads/compilation_rule"
+        },
+        {
+          "text": "TIP TW Sustainability Ratings Files",
+          "url": "https://taiwanindex.com.tw/en/downloads/tip_sustainability_assessment"
+        },
+        {
+          "text": "Every 5 Seconds Information",
+          "url": "https://taiwanindex.com.tw/en/downloads/five_seconds_information_file"
+        }
+      ],
+      "bytes": 298373,
+      "candidate_status": "CONTENT_VERIFIED_INSUFFICIENT",
+      "content_type": "text/html; charset=utf-8",
+      "format": "HTML",
+      "http_status": 200,
+      "icb_code": null,
+      "icb_level": "NOT_VERIFIED",
+      "icb_name": null,
+      "identifier": null,
+      "reason": "NO_TABLES",
+      "resolved_url": "https://taiwanindex.com.tw/en/indexes/TW50/history",
+      "row_count": 0,
+      "row_level": false,
+      "sha256": "3cce143503901b91abe6c28ec7e2d00f1b2d2da26b8fc6116a989978498b2334",
+      "text_markers": [
+        "Taiwan 50",
+        "Constituents"
+      ],
+      "usable": false
+    },
+    {
+      "Bounded_Sample": "[]",
+      "URL": "https://taiwanindex.com.tw/en/indexes/TW50/info_rule",
+      "anchors": [
+        {
+          "text": "Technical Notice",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice"
+        },
+        {
+          "text": "Index Review Schedule",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice?category_id=3"
+        },
+        {
+          "text": "中文",
+          "url": "https://taiwanindex.com.tw/indexes/TW50/info_rule"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "Overview",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50"
+        },
+        {
+          "text": "Historical Data",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history"
+        },
+        {
+          "text": "Disclaimer",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/info_rule"
+        },
+        {
+          "text": "Overview",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50"
+        },
+        {
+          "text": "Historical Data",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/history"
+        },
+        {
+          "text": "Disclaimer",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50/info_rule"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "File Download",
+          "url": "https://taiwanindex.com.tw/en/downloads"
+        },
+        {
+          "text": "Index Investing Report",
+          "url": "https://taiwanindex.com.tw/en/downloads/investment_report"
+        },
+        {
+          "text": "Technical Notice",
+          "url": "https://taiwanindex.com.tw/en/downloads/technical_notice"
+        },
+        {
+          "text": "Ground Rules and Related Files",
+          "url": "https://taiwanindex.com.tw/en/downloads/compilation_rule"
+        },
+        {
+          "text": "TIP TW Sustainability Ratings Files",
+          "url": "https://taiwanindex.com.tw/en/downloads/tip_sustainability_assessment"
+        },
+        {
+          "text": "Every 5 Seconds Information",
+          "url": "https://taiwanindex.com.tw/en/downloads/five_seconds_information_file"
+        }
+      ],
+      "bytes": 296690,
+      "candidate_status": "CONTENT_VERIFIED_INSUFFICIENT",
+      "content_type": "text/html; charset=utf-8",
+      "format": "HTML",
+      "http_status": 200,
+      "icb_code": null,
+      "icb_level": "NOT_VERIFIED",
+      "icb_name": null,
+      "identifier": null,
+      "reason": "NO_TABLES",
+      "resolved_url": "https://taiwanindex.com.tw/en/indexes/TW50/info_rule",
+      "row_count": 0,
+      "row_level": false,
+      "sha256": "a6c5afb247e859d46435b68a93ae9c3fe11d689a6afe73ab32ec7224b277922f",
+      "text_markers": [
+        "Taiwan 50",
+        "Constituents"
+      ],
+      "usable": false
+    }
+  ],
+  "Runtime_Status": "PASS",
+  "SHA256": "380da304aa21a3f9cb84880b38282ab4d6324641ddc65a3f7fbd5e7c7b6ad88e"
+}

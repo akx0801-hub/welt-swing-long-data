@@ -1,0 +1,32 @@
+{
+  "artifact": {
+    "artifact_digest": "sha256:a6e896ea940c0e2602eb02f760f8661c5984bf78137096d8070ffbf90a548ffb",
+    "artifact_id": 10997074472,
+    "artifact_name": "tw-tw50-gate-b-runtime-candidates-v0.92-36482386265",
+    "artifact_verified": "PASS",
+    "workflow_head_sha": "f1d54b7d8928a4f16e24b6f44662b0d8740a2728",
+    "workflow_run_id": 36482386265
+  },
+  "artifact_binding": "PASS",
+  "blocker": "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE",
+  "candidates_checked": 5,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "frozen_49_linkage_runs": 0,
+  "icb_industry_group": "NOT_AVAILABLE",
+  "next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "per_security_fanout": 0,
+  "productive": false,
+  "security_identifier": "NOT_AVAILABLE",
+  "security_identifier_type": "NOT_AVAILABLE",
+  "source_composition": "NONE_VERIFIED",
+  "stage": "TW_TW50_GATE_B_RUNTIME_CANDIDATE_CONTENT_VERIFICATION",
+  "tests": {
+    "failed": 0,
+    "passed": 26,
+    "total": 26
+  },
+  "tw_gate_b_ready": false,
+  "verdict": "BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B_FINAL",
+  "version": "v0.92"
+}

@@ -1,0 +1,7 @@
+{
+  "Common_Identifier": "",
+  "Reason": "no single source contract and no two official row-level sources share an explicit deterministic security identifier",
+  "Source_A": "",
+  "Source_B": "",
+  "Status": "NO_VALID_COMPOSITION"
+}

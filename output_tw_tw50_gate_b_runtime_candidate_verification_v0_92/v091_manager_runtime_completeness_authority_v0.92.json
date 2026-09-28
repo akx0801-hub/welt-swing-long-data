@@ -1,0 +1,14 @@
+{
+  "Accepted_PDF_Findings": {
+    "PDF_ICB_Industry_Group": "NOT_AVAILABLE",
+    "PDF_Pages": 2,
+    "PDF_Parse_Status": "PASS",
+    "PDF_Route_Reproducible": "YES",
+    "PDF_Row_Level_Security_Records": "YES",
+    "PDF_Security_Identifier": "NOT_AVAILABLE"
+  },
+  "Reason": "v0.91 discovered current official runtime/UI candidates but did not verify their content; v0.92 checks only those manager-enumerated candidates.",
+  "V091_PDF_FINDING_AUTHORITY": "ACCEPTED",
+  "V091_STAGE_BLOCKER_AUTHORITY": "NOT_YET_COMPLETE",
+  "v091_Files_Rewritten": "NO"
+}

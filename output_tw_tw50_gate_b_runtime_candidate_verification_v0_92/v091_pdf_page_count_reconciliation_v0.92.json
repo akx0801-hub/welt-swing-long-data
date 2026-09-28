@@ -1,0 +1,14 @@
+{
+  "Content_Reassessment": "NO",
+  "Drop_Reason": "TRAILING_FORM_FEED_EMPTY_FRAGMENT_AFTER_PDFINFO_PAGE_COUNT",
+  "Dropped_Trailing_Page_Numbers": [
+    3
+  ],
+  "Expected_PDF_Pages": 2,
+  "Expected_Page_Audit_Rows": 2,
+  "PDF_Parse_Attempts_v092": 0,
+  "PDF_Refetch": "NO",
+  "V091_PDF_Page_Count": 2,
+  "V091_Page_Audit_Rows_Before": 3,
+  "V092_Reconciled_Page_Audit_Rows": 2
+}

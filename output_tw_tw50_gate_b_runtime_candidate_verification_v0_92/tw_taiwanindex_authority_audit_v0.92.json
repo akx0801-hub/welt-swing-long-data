@@ -1,0 +1,12 @@
+{
+  "Authority_HTTP_Status": 200,
+  "Authority_Retrieval_Timestamp_UTC": "2026-09-28T20:54:46Z",
+  "Authority_SHA256": "0f134c3efa91da4d67d1b2802c42e203a112d6141c96daebd47ae86f825614a7",
+  "Authority_Source": "https://www.twse.com.tw/en/indices/indices/series.html",
+  "Candidate_E_Use_Authorized": "YES",
+  "Current_TWSE_Authority_Status": "PASS_CURRENT_OFFICIAL_TWSE_LINK",
+  "Observed_Current_Link": {
+    "text": "FTSE TWSE Taiwan 50 Index",
+    "url": "http://taiwanindex.com.tw/en/indexes/TW50"
+  }
+}

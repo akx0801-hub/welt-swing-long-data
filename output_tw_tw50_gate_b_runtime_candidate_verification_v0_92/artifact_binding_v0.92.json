@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:a6e896ea940c0e2602eb02f760f8661c5984bf78137096d8070ffbf90a548ffb",
+  "artifact_id": 10997074472,
+  "artifact_name": "tw-tw50-gate-b-runtime-candidates-v0.92-36482386265",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "f1d54b7d8928a4f16e24b6f44662b0d8740a2728",
+  "workflow_run_id": 36482386265
+}

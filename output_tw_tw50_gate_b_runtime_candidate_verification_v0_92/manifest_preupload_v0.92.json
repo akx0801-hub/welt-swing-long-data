@@ -1,0 +1,108 @@
+{
+  "blocker": "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE",
+  "candidates_checked": 5,
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "cn_csi300_execution_runs": 0,
+  "files": {
+    "external_request_ledger_v0.92.csv": {
+      "bytes": 11486,
+      "sha256": "e24ad16d2ea73037fe56364c6b9c8f0d38e921908c626c71ea4be1661323e655"
+    },
+    "immutability_audit_v0.92.json": {
+      "bytes": 1506,
+      "sha256": "f688b33dc62e6437f2e41576618e1884e5edf4fbc907e034fa261c69c2ba6598"
+    },
+    "provider_call_audit_v0.92.json": {
+      "bytes": 820,
+      "sha256": "e18b77032aa9c6cd23bc9daad1c0cc95168d806377df9d3d331faf37d14c4458"
+    },
+    "stage_checkpoint_preupload_v0.92.json": {
+      "bytes": 468,
+      "sha256": "6e3533cc06a35a4e7ea0f0f83ae92009b73a6bf1a044e2a28b61da4b95c91448"
+    },
+    "summary_preupload_v0.92.json": {
+      "bytes": 790,
+      "sha256": "f5cc89cc6a1f89c01b3c1b673f2c7bad279498fab76fbb72a8685e01b8b866cc"
+    },
+    "test_results_v0.92.csv": {
+      "bytes": 1189,
+      "sha256": "7c82bd51c169ee8eb5c1a902badae34df58cb29187caa22f89c796eb92f09147"
+    },
+    "tw_downloadsingleissue_tw50_audit_v0.92.json": {
+      "bytes": 1333,
+      "sha256": "7ae6f478522f353319cb971977b47c1add5b265008843926da6346f7eb94b5ff"
+    },
+    "tw_lseg_constituent_weights_page_audit_v0.92.json": {
+      "bytes": 25680,
+      "sha256": "fe4d527ab76caa4576f86b378b970337298d1a2b69dcaa917fd02d94fb581a10"
+    },
+    "tw_lseg_constituents_section_audit_v0.92.json": {
+      "bytes": 1764,
+      "sha256": "d82e60da1c578a2163f8ed874133efdc0248a1295a34c3092dc7cc0783e39132"
+    },
+    "tw_taiwanindex_authority_audit_v0.92.json": {
+      "bytes": 507,
+      "sha256": "8913d736260b8d63b42be492c0af081a862b6dec7323b8ef123461dd8d5e22de"
+    },
+    "tw_taiwanindex_index_page_audit_v0.92.json": {
+      "bytes": 17571,
+      "sha256": "a09d6c0258113c0595db43b6e93b9a84cbcde2163855d9d730d6d6f4502889cb"
+    },
+    "tw_v092_candidate_authority_inventory_v0.92.csv": {
+      "bytes": 898,
+      "sha256": "c32bcb92c229142b10a154c6b90afc17254165094ff5e6e67b86b195e719a483"
+    },
+    "tw_v092_gate_b_decision_v0.92.json": {
+      "bytes": 918,
+      "sha256": "33b8231fa4cf36f0fff6f95d105a2207f4f8235300d1b91fb93f17a5489df488"
+    },
+    "tw_v092_icb_industry_group_architecture_audit_v0.92.json": {
+      "bytes": 206,
+      "sha256": "7a632b26858556da1db8caaa45edd076d5e2ee30c49387255a69673bb2d58515"
+    },
+    "tw_v092_interaction_execution_audit_v0.92.csv": {
+      "bytes": 1075,
+      "sha256": "7ca883b9b9a022b62a0ff51cf5d40a30bcb40b242f34cf9a5bbb531ea23e6803"
+    },
+    "tw_v092_runtime_network_content_audit_v0.92.csv": {
+      "bytes": 7862,
+      "sha256": "dedd7003da9d075fc9bb13fd7159d78390374a298d8c72b485b924a50c4772b2"
+    },
+    "tw_v092_security_identifier_architecture_audit_v0.92.json": {
+      "bytes": 191,
+      "sha256": "91a377678414cad2357ff024e50775c74e21ecf500ece84725f40bb8f3ef2a59"
+    },
+    "tw_v092_two_source_composition_audit_v0.92.json": {
+      "bytes": 233,
+      "sha256": "7aca6cc0f63b4ffe819f3502e200efb154c5b6dce691b73b57943dc6b6bad897"
+    },
+    "v091_manager_runtime_completeness_authority_v0.92.json": {
+      "bytes": 555,
+      "sha256": "e86dc052a45c272f6a0a2ca9db069e22665442e16ac97b2325c4e3488a294ff8"
+    },
+    "v091_pdf_page_count_reconciliation_v0.92.json": {
+      "bytes": 381,
+      "sha256": "0243790f5847fe8c553930c43846fc6173aba88565601f1b600d7c62bc5c3a99"
+    }
+  },
+  "frozen_49_linkage_runs": 0,
+  "next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "per_security_fanout": 0,
+  "repository_sha": "f1d54b7d8928a4f16e24b6f44662b0d8740a2728",
+  "required_start_head": "14270624d2f34f68fc0041d1cb7bd9d94c4b8d4f",
+  "reselection_runs": 0,
+  "sector_rs_runs": 0,
+  "stage": "TW_TW50_GATE_B_RUNTIME_CANDIDATE_CONTENT_VERIFICATION",
+  "tw_gate_b_ready": false,
+  "tw_gate_e_runs": 0,
+  "tw_gate_f_runs": 0,
+  "tw_gate_h_runs": 0,
+  "tw_parking_runs": 0,
+  "verdict": "BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B_FINAL",
+  "version": "v0.92"
+}

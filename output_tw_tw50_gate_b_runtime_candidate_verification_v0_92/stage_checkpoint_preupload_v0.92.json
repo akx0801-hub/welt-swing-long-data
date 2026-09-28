@@ -1,0 +1,12 @@
+{
+  "artifact_binding": "PENDING_UPLOAD",
+  "blocker": "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE",
+  "candidates_checked": 5,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "stage": "TW_TW50_GATE_B_RUNTIME_CANDIDATE_CONTENT_VERIFICATION",
+  "tw_gate_b_ready": false,
+  "verdict": "BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B_FINAL",
+  "version": "v0.92"
+}
