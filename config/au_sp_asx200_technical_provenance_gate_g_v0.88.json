@@ -1,0 +1,15 @@
+{
+  "version": "v0.88",
+  "required_start_head": "3c71084e03fbd49c6ab5b34b03696c62aac765ad",
+  "gate_g_authorized": true,
+  "external_source_requests_allowed": 0,
+  "gate_h_allowed": false,
+  "policy_review_allowed": false,
+  "canonical_materialization_allowed": false,
+  "source_refetch_allowed": false,
+  "other_cohort_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
