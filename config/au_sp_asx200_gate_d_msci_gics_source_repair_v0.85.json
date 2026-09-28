@@ -1,0 +1,16 @@
+{
+  "version": "v0.85",
+  "required_start_head": "c02fda68b5a377faafb75ef9304e120e271cb118",
+  "gate_d_repair_authorized": true,
+  "official_source": "MSCI CURRENT GICS METHODOLOGY",
+  "gate_e_f_allowed": false,
+  "gate_h_allowed": false,
+  "frozen_63_linkage_allowed": false,
+  "canonical_materialization_allowed": false,
+  "other_cohort_allowed": false,
+  "parking_reselection_execution_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
