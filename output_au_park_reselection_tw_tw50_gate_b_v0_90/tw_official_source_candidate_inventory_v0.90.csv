@@ -1,0 +1,4 @@
+Candidate_URL,Source_Class,Candidate_Type,Discovery_Basis,Anchor_Text,Status
+https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50,FTSE_RUSSELL_LSEG_OFFICIAL,CONSTITUENT_BULK_DOWNLOAD,CURRENT_OFFICIAL_LSEG_PAGE_ANCHOR,FTSE TWSE 50,DISCOVERED
+https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/2.08.html,TWSE_OFFICIAL,AGGREGATE_INDUSTRY_STATISTICS,HISTORICAL_AUTHORITY,,REJECT_AGGREGATE_ONLY
+https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf,TWSE_OFFICIAL,METHODOLOGY,HISTORICAL_AUTHORITY,,REJECT_METHODOLOGY_ONLY

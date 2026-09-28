@@ -1,0 +1,15 @@
+{
+  "Format": "TEXT_DECODE_FAILED",
+  "Row_Count": 0,
+  "Run": 1,
+  "Schema": [],
+  "bytes": 335595,
+  "content_disposition": "attachment; filename=TW50_QUARTERLY-DAILYData-EUR_StocksWeight_20260630.pdf",
+  "content_type": "application/octet-stream",
+  "error": "",
+  "resolved_url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+  "sha256": "4fbd2617c611df41de1e1f9e64e8774a115eb66343c29498da526eda5681f86f",
+  "status": 200,
+  "timestamp_utc": "2026-09-28T11:11:23Z",
+  "url": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50"
+}

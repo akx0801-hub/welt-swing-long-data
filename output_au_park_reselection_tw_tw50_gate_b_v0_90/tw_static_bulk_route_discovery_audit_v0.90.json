@@ -1,0 +1,13 @@
+{
+  "Discovered_Current_Official_Constituent_Routes": [
+    {
+      "Anchor_Text": "FTSE TWSE 50",
+      "Discovery_Basis": "CURRENT_OFFICIAL_LSEG_PAGE_ANCHOR",
+      "URL": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50"
+    }
+  ],
+  "No_Guessed_Stale_Endpoint": "YES",
+  "Static_LSEG_Page_HTTP_Status": 200,
+  "Static_Route_Discovered": "YES",
+  "Static_TWSE_Page_HTTP_Status": 200
+}

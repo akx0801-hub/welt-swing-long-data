@@ -1,0 +1,40 @@
+{
+  "Pages": [
+    {
+      "Anchor_Count": 133,
+      "Source": "TWSE_INDEX_SERIES",
+      "Text_Markers": [
+        "Taiwan 50",
+        "ICB",
+        "Industry Group",
+        "Constituents"
+      ],
+      "bytes": 37628,
+      "content_disposition": "",
+      "content_type": "text/html",
+      "error": "",
+      "resolved_url": "https://www.twse.com.tw/en/indices/indices/series.html",
+      "sha256": "0f134c3efa91da4d67d1b2802c42e203a112d6141c96daebd47ae86f825614a7",
+      "status": 200,
+      "timestamp_utc": "2026-09-28T11:11:20Z",
+      "url": "https://www.twse.com.tw/en/indices/indices/series.html"
+    },
+    {
+      "Anchor_Count": 82,
+      "Source": "LSEG_FTSE_TWSE_SERIES",
+      "Text_Markers": [
+        "Taiwan 50",
+        "Constituents"
+      ],
+      "bytes": 222558,
+      "content_disposition": "",
+      "content_type": "text/html;charset=utf-8",
+      "error": "",
+      "resolved_url": "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan",
+      "sha256": "3de63aece222c3384ac97d6ca2763daefa27dd72ad43c54bac6e9cbad991f8e1",
+      "status": 200,
+      "timestamp_utc": "2026-09-28T11:11:22Z",
+      "url": "https://www.lseg.com/en/ftse-russell/indices/twse-taiwan"
+    }
+  ]
+}

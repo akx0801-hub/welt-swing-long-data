@@ -1,0 +1,144 @@
+{
+  "au_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "blocker": "TWSE_TAIWAN50_BULK_CONSTITUENT_ROUTE_NOT_REPRODUCIBLE",
+  "canonical_materialization_runs": 0,
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "files": {
+    "au_external_authorization_park_application_v0.90.json": {
+      "bytes": 1044,
+      "sha256": "763c01b9c2744c4dc4a4cd85bf07b15561aeae4198b9f70e9d7a674a02506395"
+    },
+    "au_gate_h_blocker_preservation_v0.90.json": {
+      "bytes": 373,
+      "sha256": "76e1d555917cdbf1191b909247c42ace7b4026a67f3778181a85ec3343d5f049"
+    },
+    "external_request_ledger_v0.90.csv": {
+      "bytes": 1481,
+      "sha256": "ee7af35bd9ee9fd5e3950bf4ddeacb3583c19b1fd8494a52f0fd588f558ff373"
+    },
+    "immutability_audit_v0.90.json": {
+      "bytes": 1411,
+      "sha256": "db643825fa9952ec23ca75dab3198caecc90a660071e47aee83bf6cb01133f78"
+    },
+    "parked_cohort_registry_update_v0.90.csv": {
+      "bytes": 862,
+      "sha256": "73bbb2d59a044b92a3abbfd83ccba5c65e17e979f6e707a22f12dd2775a03696"
+    },
+    "post_au_park_active_cohort_gate_matrix_v0.90.csv": {
+      "bytes": 1231,
+      "sha256": "01f994384c088989c7e66c2dfef5aacf00196ce90faa817b46ebf1b51757d7af"
+    },
+    "post_au_park_selected_cohort_authority_v0.90.json": {
+      "bytes": 493,
+      "sha256": "f065eb527f9d0ee726a763bb1ebfb4ceda23545d61f12a618c9c0ccea2699216"
+    },
+    "post_au_park_selection_calculation_v0.90.csv": {
+      "bytes": 464,
+      "sha256": "5d2c4978289d0ed78538d1dd6d35f8214475d533bf6656b7cf24bc351a8da75a"
+    },
+    "provider_call_audit_v0.90.json": {
+      "bytes": 683,
+      "sha256": "c8de0d39d062030a0f3573cb118d3498b37cfa132defd81ef503718048b37870"
+    },
+    "stage_checkpoint_preupload_v0.90.json": {
+      "bytes": 574,
+      "sha256": "a3bca3fa3de45ce7277a147e51ed710ac93916a206d746e160b96553e1294f68"
+    },
+    "summary_preupload_v0.90.json": {
+      "bytes": 1668,
+      "sha256": "e4cace656ed7aa60c68fa23f977ffaab7c2256bb6eb64e9ef07f769b9fe2764c"
+    },
+    "test_results_v0.90.csv": {
+      "bytes": 865,
+      "sha256": "7b32e0f8e84fa473fff6d8d5a16debbd39ba75a7eed850de3ee9edf4a54f741e"
+    },
+    "tw_bulk_icb_industry_group_field_audit_v0.90.json": {
+      "bytes": 200,
+      "sha256": "4e1f0e22ca486607a51b33d74b8f97331ff26e64958e90bd389973c515dff75d"
+    },
+    "tw_bulk_route_reproducibility_run1_v0.90.json": {
+      "bytes": 652,
+      "sha256": "45b3871297466498fb63a59e66187e2928e7c338f3d850652ee096ffea56ac78"
+    },
+    "tw_bulk_route_reproducibility_run2_v0.90.json": {
+      "bytes": 652,
+      "sha256": "f06b9f0e47750ce8ecea50a78fedd31644d8d36fb36d43032da26b125fafbe85"
+    },
+    "tw_bulk_row_level_vs_aggregate_audit_v0.90.json": {
+      "bytes": 145,
+      "sha256": "7a2df01e91816428613f838e586223708b064f632433c114479aa1a92d70de5a"
+    },
+    "tw_bulk_schema_audit_v0.90.json": {
+      "bytes": 384,
+      "sha256": "dc7afb1631f707d6f92f70ba15874fcdd5e777248f730cffb2215028d8d727d3"
+    },
+    "tw_bulk_security_identifier_audit_v0.90.json": {
+      "bytes": 215,
+      "sha256": "6bf60ea318c21c444eb52c2d205efba38b7c1a9034cfaf365bc393810894bd92"
+    },
+    "tw_current_official_page_source_audit_v0.90.json": {
+      "bytes": 1213,
+      "sha256": "2fd0ff1404054f288f4f6df0af989a88726d57fab6c1d4b566b4a5127e037533"
+    },
+    "tw_direct_http_replay_audit_v0.90.json": {
+      "bytes": 672,
+      "sha256": "84ce23f433dc510e6aa0990dcca6d70e641cb261ab2f6d8025d91695220e1741"
+    },
+    "tw_gate_b_predecessor_authority_v0.90.json": {
+      "bytes": 434,
+      "sha256": "2060801341f2dea2daaeaae560509768f400c1d08f38ce4153b3aa845e1f9a68"
+    },
+    "tw_inherited_taxonomy_field_authority_v0.90.json": {
+      "bytes": 598,
+      "sha256": "5e3b16c3cac9bede3897769eca0da7403d0302df160f461d2224ae8cfd297388"
+    },
+    "tw_official_sector_bulk_source_gate_b_decision_v0.90.json": {
+      "bytes": 469,
+      "sha256": "490cc5900b880a16b69f4b60ebac05085272f1e1bab3fcc95d9954ad475e907f"
+    },
+    "tw_official_source_candidate_inventory_v0.90.csv": {
+      "bytes": 598,
+      "sha256": "5c5c21ec3f942806802f8254dfda47abb12ba1da6a68830702ab81947c6ac0ee"
+    },
+    "tw_runtime_capture_environment_v0.90.json": {
+      "bytes": 194,
+      "sha256": "5aaa739dbd5b20cb66b2ba32bf31a24c95527b7f591456d56f93e98603600233"
+    },
+    "tw_runtime_interaction_audit_v0.90.json": {
+      "bytes": 76,
+      "sha256": "0a1bb3c5c3fa1a43bb24a730b3e902c370aa4de1cd8894e83d8c4ce1cff2a98f"
+    },
+    "tw_runtime_network_candidate_inventory_v0.90.csv": {
+      "bytes": 75,
+      "sha256": "9299ffde2bc60ce661b177e6c305c6657ee9299f3db01f4374c88902b36e0672"
+    },
+    "tw_selected_bulk_source_contract_v0.90.json": {
+      "bytes": 686,
+      "sha256": "e93335f60023f315aa3da2738a3890c8a2564923e91cad476ba45150ca89dbd8"
+    },
+    "tw_source_composition_decision_v0.90.json": {
+      "bytes": 113,
+      "sha256": "3392f9f30a6ebba0f2045579cb1c3117214b5c34703780fbbeb3c46891c7c90c"
+    },
+    "tw_static_bulk_route_discovery_audit_v0.90.json": {
+      "bytes": 446,
+      "sha256": "daf8400ecb216654cf5006c7d1375bceb4951ea6bdcb3ae453052b65cfe7cc56"
+    }
+  },
+  "next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "repository_sha": "6c8a6f589251c5ac271c1f98ea2db756cb5ccd45",
+  "required_start_head": "ef6029b3660b1f2a8bc29c016dc78d0188a775b1",
+  "sector_rs_runs": 0,
+  "selected_cohort": "TW_TW50",
+  "stage": "AU_SP_ASX200_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_TW_TW50_GATE_B",
+  "tw_gate_e_runs": 0,
+  "tw_gate_f_runs": 0,
+  "tw_gate_h_runs": 0,
+  "tw_official_sector_bulk_source_ready": false,
+  "verdict": "BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B",
+  "version": "v0.90"
+}

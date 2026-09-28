@@ -1,0 +1,16 @@
+{
+  "Bulk_Route_Type": "OFFICIAL_STATIC_LINKED_BULK_DOWNLOAD",
+  "DIRECT_HTTP_REPLAY": "FAIL",
+  "Frozen_49_Linkage_Runs": "0",
+  "ICB_Industry_Group_Code_Field": "NOT_AVAILABLE",
+  "ICB_Industry_Group_Name_Field": "NOT_AVAILABLE",
+  "ICB_Level_Binding": "NOT_VERIFIED",
+  "Official_Source": "https://research.ftserussell.com/analytics/factsheets/Home/DownloadConstituentsWeights/?indexdetails=TW50",
+  "Per_Security_Fanout": "0",
+  "Public_Reproducible": "YES",
+  "Row_Level_Security_Records": "NO",
+  "Security_Identifier_Field": "NOT_AVAILABLE",
+  "Security_Identifier_Type": "NOT_AVAILABLE",
+  "Source_Composition": "NONE_VERIFIED",
+  "TW_OFFICIAL_SECTOR_BULK_SOURCE_READY": "NO"
+}

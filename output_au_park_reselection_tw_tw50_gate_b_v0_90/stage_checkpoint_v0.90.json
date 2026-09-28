@@ -1,0 +1,17 @@
+{
+  "artifact_binding": "PASS",
+  "artifact_digest": "sha256:91d535cce36d6e8f0f3b0e314b721c366751ff62962773b6ae9fac5db42242f9",
+  "artifact_id": 10966961769,
+  "au_park_state": "PARKED_EXTERNAL_AUTHORIZATION",
+  "blocker": "TWSE_TAIWAN50_BULK_CONSTITUENT_ROUTE_NOT_REPRODUCIBLE",
+  "canonical_ready_rows": 37,
+  "canonical_total_rows": 1425,
+  "next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "selected_cohort": "TW_TW50",
+  "stage": "AU_SP_ASX200_EXTERNAL_AUTHORIZATION_PARK_POST_PARK_RESELECTION_TW_TW50_GATE_B",
+  "tw_official_sector_bulk_source_ready": false,
+  "verdict": "BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B",
+  "version": "v0.90",
+  "workflow_head_sha": "6c8a6f589251c5ac271c1f98ea2db756cb5ccd45",
+  "workflow_run_id": 36414129933
+}

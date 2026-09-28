@@ -1,0 +1,15 @@
+{
+  "C_Taxonomy_Identity": "PASS_INHERITED",
+  "Cross_Taxonomy_Substitution": "NO",
+  "D_Sector_Fields_Codes": "PASS_INHERITED",
+  "Formal_Level": "INDUSTRY_GROUP",
+  "G_Provenance": "PASS_INHERITED",
+  "Gate_B_Does_Not_Reopen_C_or_D": "YES",
+  "Historical_Official_Sources": [
+    "https://www.twse.com.tw/downloads/en/products/indices/IndexSen19.pdf",
+    "https://wwwc.twse.com.tw/en/indices/indices/series.html",
+    "https://www.twse.com.tw/downloads/zh/about/company/factbook/2026/2.08.html"
+  ],
+  "Source_Native_Candidate": "ICB within FTSE TWSE Taiwan Index Series",
+  "Taxonomy": "ICB"
+}

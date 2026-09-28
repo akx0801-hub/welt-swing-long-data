@@ -1,0 +1,14 @@
+{
+  "A": "PASS_INHERITED",
+  "B": "TARGET_THIS_STAGE",
+  "C": "PASS_INHERITED",
+  "Cohort": "TW_TW50",
+  "D": "PASS_INHERITED",
+  "E": "NOT_EVALUATED",
+  "F": "NOT_EVALUATED",
+  "Frozen_Rows": 49,
+  "G": "PASS_INHERITED",
+  "H": "NOT_EVALUATED",
+  "Historical_Blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+  "Source_v062": "output_frozen_1425_source_native_sector_coverage_v0_62/cohort_sector_source_route_ledger_v0.62.csv"
+}

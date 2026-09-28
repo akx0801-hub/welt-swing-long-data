@@ -1,0 +1,8 @@
+{
+  "artifact_digest": "sha256:91d535cce36d6e8f0f3b0e314b721c366751ff62962773b6ae9fac5db42242f9",
+  "artifact_id": 10966961769,
+  "artifact_name": "au-park-reselection-tw50-gate-b-v0.90-36414129933",
+  "artifact_verified": "PASS",
+  "workflow_head_sha": "6c8a6f589251c5ac271c1f98ea2db756cb5ccd45",
+  "workflow_run_id": 36414129933
+}

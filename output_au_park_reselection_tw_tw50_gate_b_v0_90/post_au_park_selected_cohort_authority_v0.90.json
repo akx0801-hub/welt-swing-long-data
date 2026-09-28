@@ -1,0 +1,20 @@
+{
+  "Calculation_Not_Hard_Coded": true,
+  "Consecutive_Resolved_Gates": 1,
+  "Earliest_Unresolved_Gate": "B",
+  "Eligible_Cohorts": [
+    "TW_TW50",
+    "CN_CSI300"
+  ],
+  "Expected_Competition": [
+    "TW_TW50",
+    "CN_CSI300"
+  ],
+  "Frozen_Rows": 49,
+  "Selected_Cohort": "TW_TW50",
+  "Selection_Rule": {
+    "primary": "greatest consecutive resolved A-H gates from A",
+    "tie_break_1": "smaller Frozen cohort row count",
+    "tie_break_2": "lexicographically ascending Cohort ID"
+  }
+}
