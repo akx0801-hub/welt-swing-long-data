@@ -1,0 +1,16 @@
+{
+  "version": "v0.91",
+  "required_start_head": "90f796612937089ec9ac115c2a77a72d2a66c2a1",
+  "tw_gate_b_repair_authorized": true,
+  "tw_gate_e_allowed": false,
+  "tw_gate_f_allowed": false,
+  "tw_gate_h_allowed": false,
+  "tw_parking_allowed": false,
+  "reselection_allowed": false,
+  "cn_csi300_execution_allowed": false,
+  "canonical_materialization_allowed": false,
+  "sector_rs_allowed": false,
+  "p0_p1_p2_allowed": false,
+  "alpha_vantage_allowed": false,
+  "productive": false
+}
