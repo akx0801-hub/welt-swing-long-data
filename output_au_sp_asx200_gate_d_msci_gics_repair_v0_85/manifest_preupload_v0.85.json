@@ -1,8 +1,8 @@
 {
   "au_gate_e_runs": 0,
   "au_gate_f_runs": 0,
-  "au_sector_field_code_feasibility_ready": false,
-  "blocker": "MSCI_GICS_CURRENTNESS_NOT_VERIFIED",
+  "au_sector_field_code_feasibility_ready": true,
+  "blocker": "",
   "canonical_materialization_runs": 0,
   "canonical_ready_rows": 37,
   "canonical_total_rows": 1425,
@@ -24,36 +24,36 @@
       "sha256": "682b7025c1acdc715305aaba40e6a308d9c2bc9a0fbb2bb6e10e2c381a9150db"
     },
     "au_pdsc_fallback_necessity_audit_v0_85.json": {
-      "bytes": 176,
-      "sha256": "c9877c93bd126256465a7d94913484aa6cf7d9d2bca992579bf9f9a42adac99f"
+      "bytes": 139,
+      "sha256": "0b54e139e432b808826ad83012afb4e40012a56b7b3a885ca13aee578459fc05"
     },
     "au_sector_field_code_feasibility_decision_v0_85.json": {
-      "bytes": 667,
-      "sha256": "133659367ccb9351fecfb8f548d4ada267f395da0b1c5c25dd4996f60148cce2"
+      "bytes": 671,
+      "sha256": "b0739c0246c355e3822a9446181cf96e4ec7f7bf686707e6b90f2c86f2a0119e"
     },
     "au_source_native_code_feasibility_decision_v0_85.json": {
-      "bytes": 440,
-      "sha256": "fc4a309d48ff39478ac319dfcaa3c489a737a2167876f9432ae832e59c2ccc40"
+      "bytes": 505,
+      "sha256": "042d81f8ac6455cee771b48ba2f1657efced9b9af9584fb98aecc05bb7f98530"
     },
     "external_request_ledger_v0.85.csv": {
       "bytes": 382,
       "sha256": "72f96df1d822d7b421faef96c9cd53e839dd0907e0a47781c9bc3f3199fdd1dd"
     },
     "gics_current_hierarchy_contract_v0.85.json": {
-      "bytes": 744,
-      "sha256": "ac832b8dce27c7f87b79fee64da12115fb04bb2edfded91b9f08479394cafc33"
+      "bytes": 824,
+      "sha256": "983d69c3b1b0c6de201a9b2b70861fd45d00de1c42dd8307cdfe478707f2af6d"
     },
     "gics_current_level_count_audit_v0.85.json": {
-      "bytes": 213,
-      "sha256": "e3a07c4a804b6f68e5f1a6ef1a566fa6d3dd9ffaf7b41d20671b735b3560d5c8"
+      "bytes": 167,
+      "sha256": "93fc70092f2d5e589a878b027b9a795b87ed2a6681ff5b57fd3c577790d0e862"
     },
     "gics_industry_group_code_uniqueness_audit_v0_85.csv": {
       "bytes": 1198,
       "sha256": "9b410d6983d8e8b7ae9756a88dbb60bf7236220056ef301923542baf15fad4f5"
     },
     "gics_industry_group_inventory_completeness_audit_v0.85.json": {
-      "bytes": 212,
-      "sha256": "e59c392301fe75fa32c9d8514f0d5e64707248f08556a80a31678e01e0532dd0"
+      "bytes": 201,
+      "sha256": "dabbbe3126adf48a50c1fca2a572a03390b0d429ccf6a51364d9276f15a8fa8b"
     },
     "gics_industry_group_official_label_code_inventory_v0.85.csv": {
       "bytes": 6707,
@@ -68,28 +68,28 @@
       "sha256": "48a8893b90cd4bb84d25c53cf593741a286817103870180cee6b0248ab321626"
     },
     "msci_current_gics_methodology_source_audit_v0.85.json": {
-      "bytes": 794,
-      "sha256": "3f20647743231b95c204f05a9cf9b67da31a3f0673f2c7c52aa3389645f73dc2"
+      "bytes": 842,
+      "sha256": "6a92c7b34c205b740290f1e4c8e46af741ec174fcca66df9d7793e9bcfc483eb"
     },
     "msci_gics_currentness_effective_status_audit_v0.85.json": {
-      "bytes": 233,
-      "sha256": "22a619ee68e6239c62a671bb3b8a02428332893e6a5bb8dcc2adeca1f4b07b11"
+      "bytes": 234,
+      "sha256": "e8a70729b2028eaaba8609c9c24a20d2dcc21989bc5be4c70bfc9192b1478dd4"
     },
     "provider_call_audit_v0.85.json": {
       "bytes": 594,
       "sha256": "551efec14fe0ec0594468a041fed9fea43f1a5c9ca2a894931f795b1e9f9cd84"
     },
     "stage_checkpoint_preupload_v0.85.json": {
-      "bytes": 518,
-      "sha256": "fc2d01492a1733875f2151801e8dba909ff0998daf8f687277bc84950475066c"
+      "bytes": 476,
+      "sha256": "155d87a00c07d6a694476f390b04ae231fbf68b54989066667f58b9128ce9a3b"
     },
     "summary_preupload_v0.85.json": {
-      "bytes": 1242,
-      "sha256": "d65be8289893e858fed9f0242d749a11542b0fec063e8edb114c1f1331015f32"
+      "bytes": 1272,
+      "sha256": "f5a573f8aef6fc5ca01aa80c6acbc8bba945a385a6b2ac2c9bf45527eb80b886"
     },
     "test_results_v0.85.csv": {
-      "bytes": 989,
-      "sha256": "d50f46922ef2ecd098326c455870b31ac58881fc454fe762d769def20026013d"
+      "bytes": 1057,
+      "sha256": "e8445bfbb5954fe4d22af60688b71067988d35beff39cacd9d58420faa70c0b6"
     },
     "v084_blocker_authority_v0.85.json": {
       "bytes": 682,
@@ -98,16 +98,16 @@
   },
   "frozen_63_linkage_runs": 0,
   "gate_h_runs": 0,
-  "next_gate": "AU_SP_ASX200 GATE-D SOURCE-AUTHORITY PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "next_gate": "AU_SP_ASX200 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E",
   "other_cohort_runs": 0,
   "p0_runs": 0,
   "p1_runs": 0,
   "p2_runs": 0,
-  "repository_sha": "323706fdfbdfe10c7d64b91c66f10765eaed0fe2",
+  "repository_sha": "62e94722a291be45f3b2e5c51b453e489fb742b8",
   "required_start_head": "c02fda68b5a377faafb75ef9304e120e271cb118",
   "sector_rs_runs": 0,
-  "selected_code_strategy": "NONE",
+  "selected_code_strategy": "SOURCE_NATIVE_GICS_CODE",
   "stage": "AU_SP_ASX200_GATE_D_OFFICIAL_GICS_CO_OWNER_SOURCE_REPAIR",
-  "verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "verdict": "PASS_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
   "version": "v0.85"
 }

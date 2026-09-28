@@ -1,12 +1,12 @@
 {
   "artifact_binding": "PENDING_UPLOAD",
-  "au_sector_field_code_feasibility_ready": false,
-  "blocker": "MSCI_GICS_CURRENTNESS_NOT_VERIFIED",
+  "au_sector_field_code_feasibility_ready": true,
+  "blocker": "",
   "canonical_ready_rows": 37,
   "canonical_total_rows": 1425,
-  "next_gate": "AU_SP_ASX200 GATE-D SOURCE-AUTHORITY PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
-  "selected_code_strategy": "NONE",
+  "next_gate": "AU_SP_ASX200 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E",
+  "selected_code_strategy": "SOURCE_NATIVE_GICS_CODE",
   "stage": "AU_SP_ASX200_GATE_D_OFFICIAL_GICS_CO_OWNER_SOURCE_REPAIR",
-  "verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+  "verdict": "PASS_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
   "version": "v0.85"
 }

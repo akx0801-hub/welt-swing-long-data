@@ -6,9 +6,9 @@
   "Formal_Level": "INDUSTRY_GROUP",
   "Nonformal_Value_Count": 2,
   "Official_Code_Source": "MSCI CURRENT GICS METHODOLOGY",
-  "SOURCE_NATIVE_GICS_CODE_READY": "NO",
-  "Sector_Code_Method": "NOT_SELECTED",
-  "Sector_Code_Origin": "NOT_SELECTED",
-  "Source_Sector_Code_Contract": "NOT_VERIFIED",
+  "SOURCE_NATIVE_GICS_CODE_READY": "YES",
+  "Sector_Code_Method": "GICS_OFFICIAL_INDUSTRY_GROUP_CODE",
+  "Sector_Code_Origin": "SOURCE_NATIVE",
+  "Source_Sector_Code_Contract": "exact official MSCI GICS Industry Group code as string",
   "Taxonomy": "GICS"
 }

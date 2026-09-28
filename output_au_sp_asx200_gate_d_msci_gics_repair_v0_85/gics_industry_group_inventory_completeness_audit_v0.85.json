@@ -1,9 +1,9 @@
 {
-  "Declared_Industry_Group_Count": "NOT_VERIFIED",
+  "Declared_Industry_Group_Count": 25,
   "Duplicate_Codes": 0,
   "Duplicate_Labels": 0,
   "Extracted_Inventory_Rows": 25,
-  "Inventory_Complete": "NO",
+  "Inventory_Complete": "YES",
   "Unique_Codes": 25,
   "Unique_Labels": 25
 }

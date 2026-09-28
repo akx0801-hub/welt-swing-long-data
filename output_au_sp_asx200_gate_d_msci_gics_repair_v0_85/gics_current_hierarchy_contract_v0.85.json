@@ -6,8 +6,13 @@
     "SUB_INDUSTRY": "8-digit string"
   },
   "Codes_Numeric_Cast": "NO",
-  "Declared_Level_Counts": "NOT_VERIFIED",
-  "Hierarchy_Ready": "NO",
+  "Declared_Level_Counts": {
+    "INDUSTRY": 74,
+    "INDUSTRY_GROUP": 25,
+    "SECTOR": 11,
+    "SUB_INDUSTRY": 163
+  },
+  "Hierarchy_Ready": "YES",
   "Leading_Zeros_Preserved": "YES",
   "Levels": [
     "SECTOR",
