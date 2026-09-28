@@ -1,0 +1,126 @@
+{
+  "version": "v0.85",
+  "stage": "AU_SP_ASX200_GATE_D_OFFICIAL_GICS_CO_OWNER_SOURCE_REPAIR",
+  "required_start_head": "c02fda68b5a377faafb75ef9304e120e271cb118",
+  "role": "DEV_RESEARCH_SHADOW_NOT_PRODUCTIVE",
+  "fail_closed": true,
+  "predecessor": {
+    "final_commit": "c02fda68b5a377faafb75ef9304e120e271cb118",
+    "verdict": "BLOCKED_AU_SP_ASX200_GICS_INDUSTRY_GROUP_CODE_FEASIBILITY_GATE_D",
+    "ready": false,
+    "taxonomy": "GICS",
+    "formal_level": "INDUSTRY_GROUP",
+    "current_asx_raw_values": 27,
+    "official_gics_structure_ready": false,
+    "source_native_codes_ready": false,
+    "code_strategy": "NONE",
+    "blocker": "GICS_OFFICIAL_CLASSIFICATION_STRUCTURE_NOT_REPRODUCIBLE",
+    "workflow_run_id": 36349188738,
+    "artifact_id": 10941761588,
+    "artifact_digest": "sha256:2c1dbb7bb0767b25bfde36b4fc1dd61af7ec8174775114b10a1aa099b53dd8a5",
+    "tests": "20/20 PASS"
+  },
+  "fixed_gate_c_authority": {
+    "taxonomy": "GICS",
+    "formal_level": "INDUSTRY_GROUP",
+    "current_asx_field": "industry",
+    "current_asx_csv_header": "GICs industry group",
+    "field_taxonomy_binding": "PASS_CURRENT_RUNTIME_AND_OFFICIAL_ASX_SEMANTICS",
+    "taxonomy_owner": "S&P Dow Jones Indices / MSCI"
+  },
+  "primary_source": {
+    "requested_url": "https://www.msci.com/indexes/documents/methodology/1_MSCI_Global_Industry_Classification_Standard_GICS_Methodology_20250220.pdf",
+    "required_owner": "MSCI",
+    "joint_authority": "MSCI / S&P Dow Jones Indices",
+    "currentness_must_come_from_document": true
+  },
+  "matching_contract": {
+    "normalization": [
+      "Unicode NFC",
+      "surrounding whitespace removal"
+    ],
+    "fuzzy_matching": false,
+    "semantic_synonym_matching": false,
+    "punctuation_rewrite": false,
+    "cross_taxonomy_mapping": false
+  },
+  "nonformal_contract": {
+    "candidates": [
+      "Class Pend",
+      "Not Applic"
+    ],
+    "exact_match_only": true,
+    "semantic_expansion": false,
+    "canonical_code_eligibility": "NO_IF_NOT_EXACT_FORMAL_GICS_MEMBER",
+    "pdsc_eligibility": "NO",
+    "future_gate_f_treatment": "ROW_NOT_PROVABLY_CLASSIFIED_IF_FROZEN_SECURITY_HAS_THIS_VALUE"
+  },
+  "source_native_contract": {
+    "Sector_Code_Origin": "SOURCE_NATIVE",
+    "Sector_Code_Method": "GICS_OFFICIAL_INDUSTRY_GROUP_CODE",
+    "codes_as_strings": true,
+    "preserve_leading_zeros": true
+  },
+  "pdsc": {
+    "fallback_required_on_source_native_success": false,
+    "generation_forbidden_this_repair": true
+  },
+  "scope": {
+    "repair_v084_blocker_only": true,
+    "gate_d_completion_if_source_ready": true,
+    "gate_e_allowed": false,
+    "gate_f_allowed": false,
+    "gate_h_allowed": false,
+    "frozen_63_linkage_allowed": false,
+    "canonical_materialization_allowed": false,
+    "other_cohort_allowed": false,
+    "parking_allowed": false,
+    "reselection_allowed": false,
+    "sector_rs_allowed": false,
+    "p0_p1_p2_allowed": false,
+    "productive": false
+  },
+  "forbidden": {
+    "alpha_vantage": true,
+    "yahoo_yfinance": true,
+    "eodhd": true,
+    "scalable": true,
+    "tradingview": true,
+    "wikipedia": true,
+    "etf_holdings": true,
+    "third_party_gics_tables": true,
+    "third_party_classification_databases": true,
+    "fuzzy_matching": true,
+    "semantic_classification_inference": true,
+    "cross_taxonomy_mapping": true,
+    "pdsc": true,
+    "frozen_63_linkage": true,
+    "per_security_fanout": true,
+    "au_gate_e": true,
+    "au_gate_f": true,
+    "gate_h": true,
+    "canonical_materialization": true,
+    "sector_rs": true,
+    "p0": true,
+    "p1": true,
+    "p2": true
+  },
+  "immutability": {
+    "frozen_sha256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v057_semantic_sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9",
+    "v058_semantic_sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32",
+    "br_canonical_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+    "in_gate_f": "45/45",
+    "jp_gate_f": "197/197",
+    "canonical_ready": "37/1425",
+    "sector_rs": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0
+  },
+  "terminal": {
+    "pass_next_gate": "AU_SP_ASX200 DETERMINISTIC SECURITY IDENTITY LINKAGE GATE E",
+    "blocked_owner_source_next_gate": "AU_SP_ASX200 GATE-D SOURCE-AUTHORITY PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+    "execute_next_automatically": false
+  }
+}
