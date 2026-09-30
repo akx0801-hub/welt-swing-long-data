@@ -1,0 +1,28 @@
+{
+  "authority_id": "G-FHR-01",
+  "version": "v0.93",
+  "required_evidence": [
+    "g_fhr_01_manager_authority_binding_v0.93.json",
+    "accepted_external_payload_binding_v0.93.json",
+    "adjustment_contract_binding_v0.93.json",
+    "feature_v0.93_external_member_binding.json",
+    "home_market_rs_v0.93_external_member_binding.json",
+    "atomic_promotion_audit_v0.93.json",
+    "historical_v057_v058_immutability_audit_v0.93.json",
+    "reproduction_input_manifest_v0.93.json",
+    "external_payload_resolution_audit_v0.93.json",
+    "current_foundation_pointer_audit_v0.93.json",
+    "scope_exclusion_audit_v0.93.json",
+    "provider_call_audit_v0.93.json",
+    "test_results_v0.93.csv",
+    "summary_v0.93.json",
+    "stage_checkpoint_v0.93.json"
+  ],
+  "payload_not_stored_in_git": [
+    "features_candidate.csv",
+    "home_rs_candidate.csv",
+    "WELT-SWING_Split-Shadow_Candidate_R1-R4_Corrected_2026-09-29.zip"
+  ],
+  "payload_drive_file_id": "1i23Px03EGdEP_nradocgHpFdhaAf8rzO",
+  "payload_sha256": "45d85da89ec288d9bc75164666eb745856f400a995d3e44b85d20e721a494574"
+}

@@ -1,0 +1,11 @@
+{
+  "required_start_head": "529a4409b8211ecea53e639f661120448621b937",
+  "branch": "dev/g-fhr-01-v0.93-promotion",
+  "pre_activation_validation": "PASS",
+  "package_raw_fetch": "PASS",
+  "package_sha256": "PASS",
+  "zip_integrity": "PASS",
+  "member_hashes": "PASS",
+  "current_pointer_written_in_same_atomic_commit_as_authority_and_evidence": "YES",
+  "promotion_pair_status": "ACTIVE"
+}

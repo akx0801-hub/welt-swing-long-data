@@ -1,0 +1,42 @@
+{
+  "steps": [
+    "read current pointer",
+    "read authority",
+    "fetch exact Drive File ID",
+    "verify package bytes and SHA256",
+    "verify ZIP integrity",
+    "extract requested member",
+    "verify member SHA256",
+    "consume"
+  ],
+  "package_preflight": {
+    "raw_fetch": "PASS",
+    "bytes": 1761847,
+    "sha256": "45d85da89ec288d9bc75164666eb745856f400a995d3e44b85d20e721a494574",
+    "zip_members": 18,
+    "zip_integrity": "PASS"
+  },
+  "members": {
+    "feature": {
+      "member": "features_candidate.csv",
+      "sha256": "04608872250c482c630ef682825f869d70f7bd3e6cddf70e27e993f83e6625c9",
+      "rows": 1425
+    },
+    "home_rs": {
+      "member": "home_rs_candidate.csv",
+      "sha256": "490091b57a9efd900343f5552b7b67eb1a8340df3ca24dce751791ccd4bd3f9f",
+      "rows": 1425
+    },
+    "diff": {
+      "member": "before_after_all_values.csv",
+      "sha256": "1880b13dd1af45b5a4bd543382c6208ebf384c131ad732ad6bac7892787253df",
+      "rows": 57000
+    },
+    "adjustment_contract": {
+      "member": "config/split_adjustment_shadow_candidate_v1.json",
+      "sha256": "b5da1eaf2ce519febc80d0f76630aa305be51b4fadafa1b5744e0a83f582ddb7"
+    }
+  },
+  "mismatch_policy": "FAIL_CLOSED",
+  "fallback_without_rollback_authority": "FORBIDDEN"
+}

@@ -1,0 +1,24 @@
+{
+  "verdict": "PASS",
+  "authority_id": "G-FHR-01",
+  "state": "ACTIVE",
+  "feature_current": "v0.93",
+  "home_rs_current": "v0.93",
+  "payload": {
+    "drive_file_id": "1i23Px03EGdEP_nradocgHpFdhaAf8rzO",
+    "name": "WELT-SWING_Split-Shadow_Candidate_R1-R4_Corrected_2026-09-29.zip",
+    "bytes": 1761847,
+    "sha256": "45d85da89ec288d9bc75164666eb745856f400a995d3e44b85d20e721a494574"
+  },
+  "historical": {
+    "v057": {
+      "status": "HISTORICAL_SUPERSEDED_FOUNDATION",
+      "sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+    },
+    "v058": {
+      "status": "HISTORICAL_SUPERSEDED_FOUNDATION",
+      "sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+    }
+  },
+  "hard_stop": "STOP_AFTER_ATOMIC_V0.93_ACTIVATION_NO_SECTOR_RS_OR_P0"
+}

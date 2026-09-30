@@ -1,0 +1,52 @@
+{
+  "Authority_ID": "G-FHR-01",
+  "Authority_Version": "v0.93",
+  "Governance_Class": "B",
+  "Decision": "APPROVED_LIMITED_SCOPE",
+  "Payload_Storage_Mode": "EXTERNAL_CONTENT_ADDRESSED_GOOGLE_DRIVE_PACKAGE",
+  "Accepted_Package_Drive_File_ID": "1i23Px03EGdEP_nradocgHpFdhaAf8rzO",
+  "Accepted_Package_Name": "WELT-SWING_Split-Shadow_Candidate_R1-R4_Corrected_2026-09-29.zip",
+  "Accepted_Package_Bytes": 1761847,
+  "Accepted_Package_SHA256": "45d85da89ec288d9bc75164666eb745856f400a995d3e44b85d20e721a494574",
+  "Feature_Member": "features_candidate.csv",
+  "Feature_SHA256": "04608872250c482c630ef682825f869d70f7bd3e6cddf70e27e993f83e6625c9",
+  "Feature_Rows": 1425,
+  "Home_RS_Member": "home_rs_candidate.csv",
+  "Home_RS_SHA256": "490091b57a9efd900343f5552b7b67eb1a8340df3ca24dce751791ccd4bd3f9f",
+  "Home_RS_Rows": 1425,
+  "Diff_Member": "before_after_all_values.csv",
+  "Diff_SHA256": "1880b13dd1af45b5a4bd543382c6208ebf384c131ad732ad6bac7892787253df",
+  "Input_Cache_Version": "v0.53",
+  "Input_Cache_SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "Adjustment_Contract_ID": "SPLIT_ADJUSTMENT_SHADOW_V1",
+  "Adjustment_Contract_Member": "config/split_adjustment_shadow_candidate_v1.json",
+  "Adjustment_Contract_SHA256": "b5da1eaf2ce519febc80d0f76630aa305be51b4fadafa1b5744e0a83f582ddb7",
+  "Volume_Adjustment_Scope": "REVIEWED_V053_LINEAGE_ONLY",
+  "GENERAL_PROVIDER_VOLUME_RULE_CREATED": "NO",
+  "PROVIDER_GLOBAL_VOLUME_SEMANTICS_CHANGED": "NO",
+  "FUTURE_PROVIDER_INHERITANCE": "NO",
+  "Historical_v0_57": {
+    "status": "HISTORICAL_SUPERSEDED_FOUNDATION",
+    "sha256": "177cff93408fe4c00c45ed4c9772f2a88321f6d8df43b6e67216c3f383834be9"
+  },
+  "Historical_v0_58": {
+    "status": "HISTORICAL_SUPERSEDED_FOUNDATION",
+    "sha256": "2fef5b0ce4d030008282f9421f818d42dae6bc8d39c20d21a336ce998622fd32"
+  },
+  "Promotion_Pair_Status": "ACTIVE",
+  "Historical_Evidence_Preserved": "YES",
+  "FEATURE_CSV_GIT_PERSISTENCE_REQUIRED": "NO",
+  "HOME_RS_CSV_GIT_PERSISTENCE_REQUIRED": "NO",
+  "Resolution_Contract": [
+    "READ_CURRENT_POINTER",
+    "READ_AUTHORITY",
+    "FETCH_EXACT_DRIVE_FILE_ID",
+    "VERIFY_PACKAGE_BYTES_AND_SHA256",
+    "VERIFY_ZIP_INTEGRITY",
+    "EXTRACT_REQUESTED_MEMBER",
+    "VERIFY_MEMBER_SHA256",
+    "CONSUME_MEMBER"
+  ],
+  "Mismatch_Policy": "FAIL_CLOSED",
+  "Rollback_Policy": "NO_FALLBACK_WITHOUT_SEPARATE_ROLLBACK_AUTHORITY"
+}

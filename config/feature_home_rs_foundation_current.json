@@ -1,0 +1,13 @@
+{
+  "Authority_ID": "G-FHR-01",
+  "Version": "v0.93",
+  "CURRENT_FEATURE_FOUNDATION": "v0.93",
+  "CURRENT_HOME_MARKET_RS_FOUNDATION": "v0.93",
+  "Payload_Drive_File_ID": "1i23Px03EGdEP_nradocgHpFdhaAf8rzO",
+  "Feature_Member": "features_candidate.csv",
+  "Feature_SHA256": "04608872250c482c630ef682825f869d70f7bd3e6cddf70e27e993f83e6625c9",
+  "Home_RS_Member": "home_rs_candidate.csv",
+  "Home_RS_SHA256": "490091b57a9efd900343f5552b7b67eb1a8340df3ca24dce751791ccd4bd3f9f",
+  "Resolution": "EXPLICIT_POINTER_ONLY_NO_HIGHEST_VERSION_INFERENCE",
+  "Mismatch_Policy": "FAIL_CLOSED"
+}

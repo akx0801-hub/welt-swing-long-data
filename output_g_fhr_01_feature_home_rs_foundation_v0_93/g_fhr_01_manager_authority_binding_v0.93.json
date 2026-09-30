@@ -1,0 +1,10 @@
+{
+  "authority_id": "G-FHR-01",
+  "version": "v0.93",
+  "decision": "APPROVED_LIMITED_SCOPE",
+  "governance_class": "B",
+  "manager_authority_drive_file_id": "1qpZN-iBCbWugyuD7IEOxcCgNJDdRmu_z",
+  "precheck_manifest_drive_file_id": "1l_gyNniKCBF16f1fXssqW1IUIyWWEZem",
+  "independent_review_drive_file_id": "1H8Pf84pAIcq017768tbxdCjOmtgrEMKM",
+  "repository_base_head": "529a4409b8211ecea53e639f661120448621b937"
+}

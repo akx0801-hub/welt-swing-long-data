@@ -1,0 +1,9 @@
+{
+  "authority_id": "G-FHR-01",
+  "version": "v0.93",
+  "package_drive_file_id": "1i23Px03EGdEP_nradocgHpFdhaAf8rzO",
+  "member": "home_rs_candidate.csv",
+  "sha256": "490091b57a9efd900343f5552b7b67eb1a8340df3ca24dce751791ccd4bd3f9f",
+  "rows": 1425,
+  "git_payload_duplicate_required": "NO"
+}

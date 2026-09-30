@@ -1,0 +1,9 @@
+{
+  "authority_id": "G-FHR-01",
+  "version": "v0.93",
+  "current_feature_foundation": "v0.93",
+  "current_home_market_rs_foundation": "v0.93",
+  "payload_drive_file_id": "1i23Px03EGdEP_nradocgHpFdhaAf8rzO",
+  "pointer_mode": "EXPLICIT_NO_VERSION_INFERENCE",
+  "atomic_pair": "PASS"
+}

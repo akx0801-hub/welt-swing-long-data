@@ -1,0 +1,19 @@
+{
+  "id": "SPLIT_ADJUSTMENT_SHADOW_V1",
+  "member": "config/split_adjustment_shadow_candidate_v1.json",
+  "sha256": "b5da1eaf2ce519febc80d0f76630aa305be51b4fadafa1b5744e0a83f582ddb7",
+  "scope": "REVIEWED_V053_LINEAGE_ONLY",
+  "price_basis": "split_adjusted_dividend_unadjusted_OHLC",
+  "volume_basis": "split_adjusted_share_basis",
+  "unknown_mode": "FAIL_CLOSED",
+  "input_sqlite_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "source_modes": [
+    "YFINANCE_FREE",
+    "YFINANCE_FREE_REUSED_MARKET_EVIDENCE_522"
+  ],
+  "dividend_adjustment": "NO",
+  "turnover_rule": "Close_Tech * Volume_Tech",
+  "GENERAL_PROVIDER_VOLUME_RULE_CREATED": "NO",
+  "PROVIDER_GLOBAL_VOLUME_SEMANTICS_CHANGED": "NO",
+  "FUTURE_PROVIDER_INHERITANCE": "NO"
+}

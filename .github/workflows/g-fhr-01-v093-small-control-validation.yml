@@ -1,0 +1,38 @@
+name: G-FHR-01 v0.93 small control validation
+on:
+  push:
+    branches: [ dev/g-fhr-01-v0.93-promotion ]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate bounded authority and pointer
+        shell: python
+        run: |
+          import json, pathlib
+          a=json.load(open("config/feature_home_rs_foundation_authority_v0.93.json"))
+          p=json.load(open("config/feature_home_rs_foundation_current.json"))
+          assert a["Authority_ID"]=="G-FHR-01" and a["Authority_Version"]=="v0.93"
+          assert a["Decision"]=="APPROVED_LIMITED_SCOPE" and a["Promotion_Pair_Status"]=="ACTIVE"
+          assert p["CURRENT_FEATURE_FOUNDATION"]=="v0.93" and p["CURRENT_HOME_MARKET_RS_FOUNDATION"]=="v0.93"
+          assert p["Payload_Drive_File_ID"]=="1i23Px03EGdEP_nradocgHpFdhaAf8rzO"
+          assert a["Accepted_Package_SHA256"]=="45d85da89ec288d9bc75164666eb745856f400a995d3e44b85d20e721a494574"
+          assert p["Feature_SHA256"]=="04608872250c482c630ef682825f869d70f7bd3e6cddf70e27e993f83e6625c9" and p["Home_RS_SHA256"]=="490091b57a9efd900343f5552b7b67eb1a8340df3ca24dce751791ccd4bd3f9f"
+          assert a["GENERAL_PROVIDER_VOLUME_RULE_CREATED"]=="NO" and a["PROVIDER_GLOBAL_VOLUME_SEMANTICS_CHANGED"]=="NO" and a["FUTURE_PROVIDER_INHERITANCE"]=="NO"
+          assert not pathlib.Path("features_candidate.csv").exists()
+          assert not pathlib.Path("home_rs_candidate.csv").exists()
+          assert not pathlib.Path("WELT-SWING_Split-Shadow_Candidate_R1-R4_Corrected_2026-09-29.zip").exists()
+          print("PASS")
+      - name: Package small evidence artifact
+        run: |
+          mkdir -p artifact
+          cp config/feature_home_rs_foundation_authority_v0.93.json artifact/
+          cp config/feature_home_rs_foundation_current.json artifact/
+          cp -r output_g_fhr_01_feature_home_rs_foundation_v0_93 artifact/
+          cp docs/validation/Feature_Home_RS_Foundation_Promotion_G-FHR-01_v0.93.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-fhr-01-v0.93-small-control-evidence
+          path: artifact

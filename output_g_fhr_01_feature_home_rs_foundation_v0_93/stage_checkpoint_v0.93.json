@@ -1,0 +1,8 @@
+{
+  "stage": "G-FHR-01_v0.93_EXTERNAL_PAYLOAD_PROMOTION_PERSISTENCE",
+  "required_start_head": "529a4409b8211ecea53e639f661120448621b937",
+  "branch": "dev/g-fhr-01-v0.93-promotion",
+  "preflight": "PASS",
+  "activation": "ACTIVE",
+  "next": "VERIFY_WORKFLOW_ARTIFACT_FINAL_COMMIT_THEN_STOP"
+}
