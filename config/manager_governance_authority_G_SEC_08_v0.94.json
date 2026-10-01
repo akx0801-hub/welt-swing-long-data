@@ -1,0 +1,35 @@
+{
+  "Authority_ID": "G-SEC-08",
+  "Version": "v0.94",
+  "Title": "Official Source-Route Exhaustion Parking",
+  "Authority_Type": "MANAGER_GOVERNANCE",
+  "Purpose": "Permit parking of a cohort when a bounded official-source route search has been explicitly closed by an authoritative prior stage and required deterministic source fields remain unavailable.",
+  "Distinct_From": [
+    "G-SEC-06 External Authorization Blocker Parking",
+    "G-SEC-07 Shared Source-Access Dependency Parking"
+  ],
+  "official_source_hunt_must_be_explicitly_closed": true,
+  "technical_blocker_must_be_preserved": true,
+  "parking_does_not_convert_blocked_gate_to_pass": true,
+  "parking_does_not_create_canonical_metadata": true,
+  "parking_rows_do_not_count_toward_global_canonical_coverage": true,
+  "parked_cohort_excluded_from_automatic_next_cohort_selection": true,
+  "historical_evidence_rewritten": false,
+  "automatic_reopen": false,
+  "reopen_conditions": [
+    "manager-authorized genuinely new official source architecture",
+    "official source materially changes and now exposes required deterministic identity/classification fields",
+    "manager supplies a captured authoritative official artifact that closes the missing Gate-B requirements"
+  ],
+  "forbidden_route_arounds": [
+    "unofficial mirrors",
+    "scraped copies",
+    "search-result snippets",
+    "ETF holdings as substitute authority",
+    "fuzzy matching",
+    "semantic inference",
+    "cross-taxonomy substitution",
+    "per-security fanout merely to bypass the failed bulk-source contract"
+  ],
+  "TW_Blocker_Type": "TECHNICAL_SOURCE_FIELD_UNAVAILABILITY_NOT_LICENSING_OR_HTTP_ACCESS"
+}

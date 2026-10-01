@@ -1,0 +1,16 @@
+{
+  "Alpha_Vantage": 0,
+  "Yahoo/yfinance": 0,
+  "EODHD": 0,
+  "Scalable": 0,
+  "TradingView": 0,
+  "Wikipedia": 0,
+  "TWSE_requests": 0,
+  "FTSE/LSEG_requests": 0,
+  "CSI_requests": 0,
+  "SSE_requests": 0,
+  "SZSE_requests": 0,
+  "CNI_requests": 0,
+  "per_security_web_fanout": 0,
+  "new_market_data_acquisition": 0
+}

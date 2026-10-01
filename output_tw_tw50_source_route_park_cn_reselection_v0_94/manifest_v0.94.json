@@ -1,0 +1,22 @@
+{
+  "version": "v0.94",
+  "required_start_head": "24c00c55eef2e489a8041fc27f79284cd9f0c83a",
+  "output_directory": "output_tw_tw50_source_route_park_cn_reselection_v0_94",
+  "required_outputs": [
+    "manager_governance_authority_binding_G_SEC_08_v0.94.json",
+    "tw_v092_predecessor_binding_v0.94.json",
+    "tw_source_route_exhaustion_park_decision_v0.94.json",
+    "parked_cohort_registry_audit_v0.94.json",
+    "post_tw_park_active_cohort_gate_matrix_v0.94.csv",
+    "active_cohort_reselection_v0.94.json",
+    "canonical_coverage_immutability_audit_v0.94.json",
+    "feature_home_rs_v093_immutability_audit_v0.94.json",
+    "scope_exclusion_audit_v0.94.json",
+    "provider_call_audit_v0.94.json",
+    "test_results_v0.94.csv",
+    "summary_v0.94.json",
+    "stage_checkpoint_v0.94.json"
+  ],
+  "authority": "config/manager_governance_authority_G_SEC_08_v0.94.json",
+  "registry": "sector_metadata/governance/parked_cohort_registry_v1.csv"
+}

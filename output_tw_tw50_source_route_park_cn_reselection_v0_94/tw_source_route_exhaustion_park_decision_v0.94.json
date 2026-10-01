@@ -1,0 +1,20 @@
+{
+  "Cohort": "TW_TW50",
+  "Execution_State": "PARKED_SOURCE_ROUTE_EXHAUSTED",
+  "Authority": "G-SEC-08",
+  "Effective_From": "v0.94",
+  "Canonical_Readiness": "NO",
+  "Canonical_Rows": 0,
+  "Reopen_Automatically": "NO",
+  "Technical_Gates": {
+    "A": "PASS",
+    "B": "BLOCKED",
+    "C": "PASS",
+    "D": "PASS",
+    "E": "NOT_EVALUATED",
+    "F": "NOT_EVALUATED",
+    "G": "PASS",
+    "H": "NOT_EVALUATED"
+  },
+  "Gate_B_Blocker": "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE"
+}

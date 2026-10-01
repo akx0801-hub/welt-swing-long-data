@@ -1,0 +1,38 @@
+name: G-SEC-08 v0.94 bounded validation
+on:
+  push:
+    branches: [ dev/g-sec-08-v0.94-tw-park-cn-reselection ]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate v0.94 governance state
+        shell: python
+        run: |
+          import csv,json
+          a=json.load(open("config/manager_governance_authority_G_SEC_08_v0.94.json"))
+          s=json.load(open("output_tw_tw50_source_route_park_cn_reselection_v0_94/summary_v0.94.json"))
+          p=json.load(open("config/feature_home_rs_foundation_current.json"))
+          assert a["Authority_ID"]=="G-SEC-08" and a["automatic_reopen"] is False
+          assert s["TW_TW50"]=="PARKED_SOURCE_ROUTE_EXHAUSTED" and s["Selected_active_cohort"]=="CN_CSI300"
+          assert s["CN_next_gate"]=="B" and s["Global_canonical_ready"]=="37/1425" and s["CN_execution"]=="NOT_STARTED"
+          assert p["CURRENT_FEATURE_FOUNDATION"]=="v0.93" and p["CURRENT_HOME_MARKET_RS_FOUNDATION"]=="v0.93"
+          rows=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv")))
+          tw=[r for r in rows if r["Cohort"]=="TW_TW50"][0]
+          assert tw["Execution_State"]=="PARKED_SOURCE_ROUTE_EXHAUSTED" and tw["Authority"]=="G-SEC-08" and tw["Canonical_Rows"]=="0"
+          tr=list(csv.DictReader(open("output_tw_tw50_source_route_park_cn_reselection_v0_94/test_results_v0.94.csv")))
+          assert len(tr)==25 and all(r["Result"]=="PASS" for r in tr)
+          print("PASS")
+      - name: Package bounded evidence
+        run: |
+          mkdir -p artifact/config artifact/sector_metadata/governance artifact/docs/validation
+          cp config/manager_governance_authority_G_SEC_08_v0.94.json artifact/config/
+          cp sector_metadata/governance/parked_cohort_registry_v1.csv artifact/sector_metadata/governance/
+          cp -r output_tw_tw50_source_route_park_cn_reselection_v0_94 artifact/
+          cp docs/validation/TW_TW50_Source_Route_Park_CN_CSI300_Reselection_v0.94.md artifact/docs/validation/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-sec-08-v0.94-tw-park-cn-reselection
+          path: artifact

@@ -1,0 +1,9 @@
+{
+  "BR_IBRX100": {
+    "canonical_ready": "YES",
+    "rows": "37/37",
+    "semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed"
+  },
+  "global_canonical_ready": "37/1425",
+  "new_canonical_rows": 0
+}

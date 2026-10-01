@@ -1,0 +1,10 @@
+{
+  "Authority_ID": "G-SEC-08",
+  "Version": "v0.94",
+  "repository_start_head": "24c00c55eef2e489a8041fc27f79284cd9f0c83a",
+  "authority_path": "config/manager_governance_authority_G_SEC_08_v0.94.json",
+  "distinct_from": [
+    "G-SEC-06",
+    "G-SEC-07"
+  ]
+}

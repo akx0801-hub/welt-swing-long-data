@@ -1,0 +1,22 @@
+{
+  "verdict": "BLOCKED_TW_TW50_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B_FINAL",
+  "tw_gate_b_ready": false,
+  "blocker": "TWSE_BULK_SECURITY_IDENTIFIER_NOT_AVAILABLE",
+  "next_gate": "TW_TW50 SOURCE-ROUTE PARK / ACTIVE-COHORT RESELECTION MANAGER GATE",
+  "Cohort": "TW_TW50",
+  "A": "PASS_INHERITED",
+  "B": "BLOCKED",
+  "C": "PASS_INHERITED",
+  "D": "PASS_INHERITED",
+  "E": "NOT_EVALUATED",
+  "F": "NOT_EVALUATED",
+  "G": "PASS_INHERITED",
+  "H": "NOT_EVALUATED",
+  "Final_TW_Gate_B_Source_Hunt_Status": "CLOSED_BY_V0.92",
+  "Candidates_Checked": 5,
+  "Security_Identifier_Field": "NOT_AVAILABLE",
+  "ICB_Industry_Group_Code_Field": "NOT_AVAILABLE",
+  "ICB_Industry_Group_Name_Field": "NOT_AVAILABLE",
+  "Source_Composition": "NONE_VERIFIED",
+  "reinterpretation": "NO"
+}

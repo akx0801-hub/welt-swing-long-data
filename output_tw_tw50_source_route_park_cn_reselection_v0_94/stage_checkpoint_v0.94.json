@@ -1,0 +1,11 @@
+{
+  "stage": "TW_TW50_SOURCE_ROUTE_PARK_ACTIVE_COHORT_RESELECTION",
+  "version": "v0.94",
+  "verdict": "PASS",
+  "tw_state": "PARKED_SOURCE_ROUTE_EXHAUSTED",
+  "authority": "G-SEC-08",
+  "selected_active_cohort": "CN_CSI300",
+  "next_gate": "B",
+  "cn_execution": "NOT_STARTED",
+  "hard_stop": "STOP_DO_NOT_START_CN_GATE_B"
+}

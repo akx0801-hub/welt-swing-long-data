@@ -1,0 +1,32 @@
+{
+  "existing_rows_preserved_unchanged": "YES",
+  "existing_cohorts": {
+    "IN_NIFTY50": [
+      "PARKED_EXTERNAL_AUTHORIZATION",
+      "G-SEC-06"
+    ],
+    "JP_N225": [
+      "PARKED_EXTERNAL_AUTHORIZATION",
+      "G-SEC-06"
+    ],
+    "AU_SP_ASX200": [
+      "PARKED_EXTERNAL_AUTHORIZATION",
+      "G-SEC-06"
+    ],
+    "US_SP400": [
+      "PARKED_SOURCE_ACCESS",
+      "G-SEC-07"
+    ],
+    "US_SP500": [
+      "PARKED_SHARED_SOURCE_PREREQUISITE",
+      "G-SEC-07"
+    ]
+  },
+  "added_only": {
+    "TW_TW50": [
+      "PARKED_SOURCE_ROUTE_EXHAUSTED",
+      "G-SEC-08"
+    ]
+  },
+  "reopened": []
+}

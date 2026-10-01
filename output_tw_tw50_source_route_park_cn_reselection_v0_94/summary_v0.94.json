@@ -1,0 +1,12 @@
+{
+  "verdict": "PASS",
+  "TW_TW50": "PARKED_SOURCE_ROUTE_EXHAUSTED",
+  "Authority": "G-SEC-08",
+  "TW_canonical_rows": 0,
+  "Global_canonical_ready": "37/1425",
+  "Selected_active_cohort": "CN_CSI300",
+  "CN_next_gate": "B",
+  "CN_execution": "NOT_STARTED",
+  "Sector_RS": "NOT_STARTED",
+  "P0_P1_P2": "NOT_STARTED"
+}

@@ -1,0 +1,31 @@
+{
+  "selection_rule": "Persisted v0.69 rule: exclude canonical READY and parked; greatest consecutive resolved gates from A; then smaller Frozen row count; then lexicographic cohort ID.",
+  "excluded_canonical_ready": [
+    "BR_IBRX100"
+  ],
+  "excluded_parked": [
+    "IN_NIFTY50",
+    "JP_N225",
+    "AU_SP_ASX200",
+    "US_SP400",
+    "US_SP500",
+    "TW_TW50"
+  ],
+  "eligible_unresolved": [
+    "CN_CSI300"
+  ],
+  "Selected_Active_Cohort": "CN_CSI300",
+  "Frozen_Rows": 294,
+  "Exact_Stored_Gate_State": {
+    "A": "PASS_INHERITED",
+    "B": "NOT_VERIFIED",
+    "C": "PASS_INHERITED",
+    "D": "PASS_INHERITED",
+    "E": "NOT_EVALUATED",
+    "F": "NOT_EVALUATED",
+    "G": "NOT_EVALUATED",
+    "H": "NOT_EVALUATED"
+  },
+  "Earliest_Unresolved_Gate": "B",
+  "CN_Execution": "NOT_STARTED"
+}
