@@ -1,0 +1,4 @@
+{
+  "purpose": "Trigger bounded v0.96 validation after workflow definition exists",
+  "predecessor_commit": "e8051dd657755b932c7f4e0bac49eadc6d834a1d"
+}
