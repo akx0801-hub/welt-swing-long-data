@@ -1,0 +1,18 @@
+{
+  "CSI": 0,
+  "SSE": 0,
+  "SZSE": 0,
+  "TWSE": 0,
+  "SEC": 0,
+  "NSE": 0,
+  "Nikkei": 0,
+  "ASX": 0,
+  "B3": 0,
+  "Alpha_Vantage": 0,
+  "Yahoo/yfinance": 0,
+  "EODHD": 0,
+  "Scalable": 0,
+  "TradingView": 0,
+  "Wikipedia": 0,
+  "total_external_provider_requests": 0
+}

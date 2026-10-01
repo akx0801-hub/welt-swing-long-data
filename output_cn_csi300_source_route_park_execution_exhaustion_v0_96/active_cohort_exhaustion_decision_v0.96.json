@@ -1,0 +1,20 @@
+{
+  "selection_rule": "Persisted v0.69 rule: exclude canonical READY and parked; greatest consecutive resolved gates from A; then smaller Frozen row count; then lexicographic cohort ID.",
+  "excluded_canonical_ready": [
+    "BR_IBRX100"
+  ],
+  "excluded_parked": [
+    "AU_SP_ASX200",
+    "CN_CSI300",
+    "IN_NIFTY50",
+    "JP_N225",
+    "TW_TW50",
+    "US_SP400",
+    "US_SP500"
+  ],
+  "eligible_unresolved": [],
+  "eligible_unresolved_count": 0,
+  "ACTIVE_SECTOR_METADATA_COHORT": "NONE",
+  "ACTIVE_COHORT_SELECTION_STATUS": "EXHAUSTED",
+  "SECTOR_METADATA_EXECUTION_QUEUE": "EMPTY"
+}

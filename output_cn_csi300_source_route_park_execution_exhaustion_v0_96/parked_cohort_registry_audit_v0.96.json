@@ -1,0 +1,24 @@
+{
+  "parked_cohort_count": 7,
+  "added": [
+    "CN_CSI300"
+  ],
+  "preserved_unchanged": [
+    "IN_NIFTY50",
+    "JP_N225",
+    "AU_SP_ASX200",
+    "US_SP400",
+    "US_SP500",
+    "TW_TW50"
+  ],
+  "parked": [
+    "AU_SP_ASX200",
+    "CN_CSI300",
+    "IN_NIFTY50",
+    "JP_N225",
+    "TW_TW50",
+    "US_SP400",
+    "US_SP500"
+  ],
+  "no_reopen": true
+}

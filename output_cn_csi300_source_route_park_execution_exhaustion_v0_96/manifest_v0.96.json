@@ -1,0 +1,23 @@
+{
+  "version": "v0.96",
+  "required_start_head": "3dae2f1d3faeaa2e541aa948602d7da200c046eb",
+  "output_directory": "output_cn_csi300_source_route_park_execution_exhaustion_v0_96",
+  "files": [
+    "cn_v095_predecessor_binding_v0.96.json",
+    "g_sec_08_cn_applicability_audit_v0.96.json",
+    "cn_source_route_exhaustion_park_decision_v0.96.json",
+    "parked_cohort_registry_audit_v0.96.json",
+    "post_cn_park_active_cohort_gate_matrix_v0.96.csv",
+    "active_cohort_exhaustion_decision_v0.96.json",
+    "canonical_coverage_terminal_state_v0.96.json",
+    "sector_rs_authorization_state_v0.96.json",
+    "feature_home_rs_v093_immutability_audit_v0.96.json",
+    "frozen_immutability_audit_v0.96.json",
+    "scope_exclusion_audit_v0.96.json",
+    "provider_call_audit_v0.96.json",
+    "test_results_v0.96.csv",
+    "summary_v0.96.json",
+    "stage_checkpoint_v0.96.json"
+  ],
+  "validation_doc": "docs/validation/CN_CSI300_Source_Route_Park_Active_Cohort_Exhaustion_v0.96.md"
+}

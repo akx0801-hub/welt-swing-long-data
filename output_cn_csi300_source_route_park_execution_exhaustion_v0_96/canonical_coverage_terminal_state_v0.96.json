@@ -1,0 +1,8 @@
+{
+  "BR_IBRX100": "37/37 canonical READY",
+  "BR_semantic_sha256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+  "CANONICAL_READY_ROWS": 37,
+  "CANONICAL_TOTAL_ROWS": 1425,
+  "remaining_noncanonical_rows": 1388,
+  "GLOBAL_CANONICAL_SECTOR_METADATA_READY": "NO"
+}

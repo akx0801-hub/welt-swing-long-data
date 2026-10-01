@@ -1,0 +1,10 @@
+{
+  "G_SEC_02_preserved": true,
+  "G_SEC_04_preserved": true,
+  "sector_rs_authorized": false,
+  "sector_mapping_population_authorized": false,
+  "SECTOR_RS_READY": "NO",
+  "SECTOR_RS_AUTHORIZED": "NO",
+  "SECTOR_RS_RUNS": 0,
+  "next_manager_gate": "SECTOR METADATA TERMINAL COVERAGE / SECTOR-RS AUTHORIZATION MANAGER GATE"
+}

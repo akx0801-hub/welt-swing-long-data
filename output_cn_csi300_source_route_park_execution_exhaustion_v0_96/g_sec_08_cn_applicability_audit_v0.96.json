@@ -1,0 +1,13 @@
+{
+  "Authority": "G-SEC-08",
+  "Authority_Version": "v0.94",
+  "authority_modified": "NO",
+  "official_source_hunt_explicitly_closed": true,
+  "technical_blocker_preserved": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+  "Gate_B_remains": "BLOCKED",
+  "qualifying_PASS_routes": 0,
+  "reclassified_as_licensing_blocker": false,
+  "reclassified_as_shared_HTTP_access_failure": false,
+  "applicable_to_CN_CSI300": true,
+  "automatic_reopen": false
+}

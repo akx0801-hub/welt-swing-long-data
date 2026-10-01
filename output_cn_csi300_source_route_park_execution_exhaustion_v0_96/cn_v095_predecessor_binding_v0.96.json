@@ -1,0 +1,23 @@
+{
+  "verdict": "BLOCKED_CN_CSI300_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B",
+  "gate_b_ready": false,
+  "blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+  "source_hunt": "CLOSED",
+  "next_gate": "CN_CSI300 SOURCE-ROUTE PARK / MANAGER DECISION",
+  "hard_stop": "STOP_NO_GATE_E_NO_AUTO_PARK",
+  "Decision": "BLOCKED",
+  "candidates_evaluated": 7,
+  "Gate_B_PASS_route_count": 0,
+  "G_SEC_08_auto_applied": "NO",
+  "Gate_State_A_H": {
+    "A": "PASS_INHERITED",
+    "B": "BLOCKED",
+    "C": "PASS_INHERITED",
+    "D": "PASS_INHERITED",
+    "E": "NOT_EVALUATED",
+    "F": "NOT_EVALUATED",
+    "G": "NOT_EVALUATED",
+    "H": "NOT_EVALUATED"
+  },
+  "required_start_head": "3dae2f1d3faeaa2e541aa948602d7da200c046eb"
+}

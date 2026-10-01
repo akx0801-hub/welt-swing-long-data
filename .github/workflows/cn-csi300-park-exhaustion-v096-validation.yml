@@ -1,0 +1,36 @@
+name: CN_CSI300 park exhaustion v0.96 validation
+on:
+  push:
+    branches: [ dev/cn-csi300-park-exhaustion-v0.96 ]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate v0.96 state
+        shell: python
+        run: |
+          import csv,json,os
+          o="output_cn_csi300_source_route_park_execution_exhaustion_v0_96"
+          d=json.load(open(f"{o}/cn_source_route_exhaustion_park_decision_v0.96.json"))
+          a=json.load(open(f"{o}/active_cohort_exhaustion_decision_v0.96.json"))
+          s=json.load(open(f"{o}/sector_rs_authorization_state_v0.96.json"))
+          p=json.load(open(f"{o}/provider_call_audit_v0.96.json"))
+          assert d["Execution_State"]=="PARKED_SOURCE_ROUTE_EXHAUSTED" and d["Authority"]=="G-SEC-08" and d["Technical_State"]["B"]=="BLOCKED"
+          assert a["eligible_unresolved_count"]==0 and a["ACTIVE_SECTOR_METADATA_COHORT"]=="NONE" and a["SECTOR_METADATA_EXECUTION_QUEUE"]=="EMPTY"
+          assert s["sector_rs_authorized"] is False and s["sector_mapping_population_authorized"] is False and s["SECTOR_RS_RUNS"]==0
+          assert p["total_external_provider_requests"]==0
+          reg=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv"))); assert len(reg)==7 and sum(r["Cohort"]=="CN_CSI300" for r in reg)==1
+          assert not os.path.exists("sector_metadata/canonical/cohorts/CN_CSI300_sector_metadata_v1.csv")
+          t=list(csv.DictReader(open(f"{o}/test_results_v0.96.csv"))); assert len(t)==30 and all(r["Result"]=="PASS" for r in t)
+          print("PASS")
+      - name: Package evidence
+        run: |
+          mkdir -p artifact/docs/validation
+          cp -r output_cn_csi300_source_route_park_execution_exhaustion_v0_96 artifact/
+          cp docs/validation/CN_CSI300_Source_Route_Park_Active_Cohort_Exhaustion_v0.96.md artifact/docs/validation/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cn-csi300-park-exhaustion-v0.96-evidence
+          path: artifact
