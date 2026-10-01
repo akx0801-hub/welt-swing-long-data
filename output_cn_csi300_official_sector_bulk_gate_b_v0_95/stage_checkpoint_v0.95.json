@@ -1,0 +1,10 @@
+{
+  "stage": "CN_CSI300_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B",
+  "version": "v0.95",
+  "verdict": "BLOCKED_CN_CSI300_OFFICIAL_SECTOR_BULK_SOURCE_GATE_B",
+  "gate_b_ready": false,
+  "blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+  "source_hunt": "CLOSED",
+  "next_gate": "CN_CSI300 SOURCE-ROUTE PARK / MANAGER DECISION",
+  "hard_stop": "STOP_NO_GATE_E_NO_AUTO_PARK"
+}

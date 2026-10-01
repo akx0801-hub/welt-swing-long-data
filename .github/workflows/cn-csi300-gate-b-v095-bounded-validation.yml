@@ -1,0 +1,36 @@
+name: CN_CSI300 Gate B v0.95 bounded validation
+on:
+  push:
+    branches: [ dev/cn-csi300-gate-b-v0.95 ]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate bounded Gate B persistence
+        shell: python
+        run: |
+          import csv,json,os
+          o="output_cn_csi300_official_sector_bulk_gate_b_v0_95"
+          d=json.load(open(f"{o}/cn_gate_b_decision_v0.95.json"))
+          s=json.load(open(f"{o}/scope_exclusion_audit_v0.95.json"))
+          p=json.load(open(f"{o}/provider_call_audit_v0.95.json"))
+          cur=json.load(open("config/feature_home_rs_foundation_current.json"))
+          assert d["Decision"]=="BLOCKED" and d["Blocker"]=="OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED"
+          assert d["Gate_State_A_H"]["B"]=="BLOCKED" and d["Gate_State_A_H"]["E"]=="NOT_EVALUATED"
+          assert all(s[k]==0 for k in ["Frozen_294_Linkage_Runs","Gate_E_Runs","Gate_F_Runs","Gate_G_Runs","Gate_H_Runs","Canonical_CN_File_Created","Sector_RS_Runs","P0_Runs","P1_Runs","P2_Runs"])
+          assert p["CSI_official_requests"]==7 and p["SSE_official_requests"]==0 and p["SZSE_official_requests"]==0 and p["per_security_requests"]==0
+          assert cur["CURRENT_FEATURE_FOUNDATION"]=="v0.93" and cur["CURRENT_HOME_MARKET_RS_FOUNDATION"]=="v0.93"
+          assert not os.path.exists("sector_metadata/canonical/cohorts/CN_CSI300_sector_metadata_v1.csv")
+          t=list(csv.DictReader(open(f"{o}/test_results_v0.95.csv"))); assert len(t)==34 and all(r["Result"]=="PASS" for r in t)
+          print("PASS")
+      - name: Package evidence
+        run: |
+          mkdir -p artifact/docs/validation
+          cp -r output_cn_csi300_official_sector_bulk_gate_b_v0_95 artifact/
+          cp docs/validation/CN_CSI300_Official_Sector_Bulk_Source_Gate_B_v0.95.md artifact/docs/validation/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cn-csi300-gate-b-v0.95-evidence
+          path: artifact

@@ -1,0 +1,17 @@
+{
+  "Selected_Active_Cohort": "CN_CSI300",
+  "Frozen_Rows": 294,
+  "Earliest_Unresolved_Gate": "B",
+  "CN_Execution": "NOT_STARTED",
+  "Exact_Stored_Gate_State": {
+    "A": "PASS_INHERITED",
+    "B": "NOT_VERIFIED",
+    "C": "PASS_INHERITED",
+    "D": "PASS_INHERITED",
+    "E": "NOT_EVALUATED",
+    "F": "NOT_EVALUATED",
+    "G": "NOT_EVALUATED",
+    "H": "NOT_EVALUATED"
+  },
+  "required_start_head": "0a9c1ffede67c4226cdaf0628ac0691ec2cad67d"
+}

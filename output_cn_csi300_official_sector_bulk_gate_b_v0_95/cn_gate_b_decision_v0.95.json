@@ -1,0 +1,21 @@
+{
+  "Cohort": "CN_CSI300",
+  "Gate": "B",
+  "Decision": "BLOCKED",
+  "Blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+  "Gate_State_A_H": {
+    "A": "PASS_INHERITED",
+    "B": "BLOCKED",
+    "C": "PASS_INHERITED",
+    "D": "PASS_INHERITED",
+    "E": "NOT_EVALUATED",
+    "F": "NOT_EVALUATED",
+    "G": "NOT_EVALUATED",
+    "H": "NOT_EVALUATED"
+  },
+  "bounded_source_hunt": "CLOSED",
+  "candidates_evaluated": 7,
+  "Gate_B_PASS_route_count": 0,
+  "Next_Manager_Gate": "CN_CSI300 SOURCE-ROUTE PARK / MANAGER DECISION",
+  "G_SEC_08_auto_applied": "NO"
+}

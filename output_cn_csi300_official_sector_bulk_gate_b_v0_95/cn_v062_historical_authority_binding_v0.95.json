@@ -1,0 +1,14 @@
+{
+  "source": "config/source_native_sector_research_v0.62.json",
+  "source_native_candidate": "CSI Industry Classification",
+  "taxonomy_identity": "CSI_INDUSTRY_CLASSIFICATION",
+  "historical_gate_state": {
+    "A": "PASS",
+    "B": "NOT_VERIFIED",
+    "C": "PASS",
+    "D": "PASS"
+  },
+  "historical_blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+  "historical_rationale": "CSI publishes a coded multi-level industry-classification standard and official CSI 300 sector information. Official index methodology says the CSI data-service platform publishes index data daily, but bounded evidence did not verify a bulk row-level constituent/reference route that includes the source-native industry code/name for the exact Frozen cohort.",
+  "C_and_D_redone": "NO"
+}

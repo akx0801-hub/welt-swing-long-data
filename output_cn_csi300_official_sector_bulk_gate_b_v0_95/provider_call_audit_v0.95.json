@@ -1,0 +1,17 @@
+{
+  "CSI_official_requests": 7,
+  "SSE_official_requests": 0,
+  "SZSE_official_requests": 0,
+  "Alpha_Vantage": 0,
+  "Yahoo/yfinance": 0,
+  "EODHD": 0,
+  "Scalable": 0,
+  "TradingView": 0,
+  "Wikipedia": 0,
+  "ETF_holdings": 0,
+  "screeners": 0,
+  "third_party_sector_databases": 0,
+  "unofficial_mirrors": 0,
+  "per_security_requests": 0,
+  "market_data_acquisition": 0
+}

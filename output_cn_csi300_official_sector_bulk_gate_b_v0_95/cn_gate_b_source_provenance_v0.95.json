@@ -1,0 +1,16 @@
+{
+  "primary_authority": "China Securities Index Co. / CSI",
+  "taxonomy": "CSI_INDUSTRY_CLASSIFICATION",
+  "candidate_count": 7,
+  "official_only": true,
+  "SSE_requests": 0,
+  "SZSE_requests": 0,
+  "conclusion": "No currently reproducible inspected official bulk/reference route was verified to jointly expose deterministic security identity and source-native CSI Industry Classification fields.",
+  "evidence_notes": [
+    "CSI classification standard exposes coded hierarchy but no security rows.",
+    "CSI300 factsheet exposes security codes and industry names only for top constituents, not full bulk rows.",
+    "CSI300 methodology names CSI data-service platform and website as official dissemination channels but does not itself expose a row-level classification schema.",
+    "Official 000300 constituent XLS route is a concrete bulk candidate, but the audit transport could not inspect its XLS response schema; it therefore cannot be promoted to PASS.",
+    "No concrete public CSI data-service endpoint with the required joint schema was verified."
+  ]
+}

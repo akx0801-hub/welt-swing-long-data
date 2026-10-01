@@ -1,0 +1,24 @@
+{
+  "version": "v0.95",
+  "required_start_head": "0a9c1ffede67c4226cdaf0628ac0691ec2cad67d",
+  "output_directory": "output_cn_csi300_official_sector_bulk_gate_b_v0_95",
+  "files": [
+    "cn_v094_predecessor_binding_v0.95.json",
+    "cn_v062_historical_authority_binding_v0.95.json",
+    "cn_gate_b_candidate_inventory_v0.95.csv",
+    "cn_gate_b_request_audit_v0.95.csv",
+    "cn_gate_b_schema_field_audit_v0.95.csv",
+    "cn_gate_b_source_provenance_v0.95.json",
+    "cn_gate_b_decision_v0.95.json",
+    "bounded_evidence_persistence_audit_v0.95.json",
+    "parked_cohort_immutability_audit_v0.95.json",
+    "canonical_coverage_immutability_audit_v0.95.json",
+    "feature_home_rs_v093_immutability_audit_v0.95.json",
+    "scope_exclusion_audit_v0.95.json",
+    "provider_call_audit_v0.95.json",
+    "test_results_v0.95.csv",
+    "summary_v0.95.json",
+    "stage_checkpoint_v0.95.json"
+  ],
+  "validation_doc": "docs/validation/CN_CSI300_Official_Sector_Bulk_Source_Gate_B_v0.95.md"
+}

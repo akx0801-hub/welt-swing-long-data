@@ -1,0 +1,17 @@
+{
+  "G_SEC_05_applied": true,
+  "raw_provider_dataset_committed": false,
+  "raw_persistence_rights": "NOT_VERIFIED",
+  "unknown_redistribution_rights_used_as_gate_failure": false,
+  "persisted": [
+    "official URLs",
+    "authority",
+    "retrieval timestamp",
+    "schema metadata",
+    "response hash availability classification",
+    "bounded derived evidence",
+    "relevant field classifications",
+    "reproducibility result"
+  ],
+  "note": "Raw response byte counts/SHA256 are unavailable from the bounded web audit transport and are explicitly NOT_AVAILABLE_IN_WEB_AUDIT_TRANSPORT rather than fabricated."
+}

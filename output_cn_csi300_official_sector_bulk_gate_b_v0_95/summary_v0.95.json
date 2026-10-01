@@ -1,0 +1,10 @@
+{
+  "verdict": "PASS_BLOCKED_PATH",
+  "CN_CSI300_Gate_B": "BLOCKED",
+  "blocker": "OFFICIAL_SECTOR_BULK_SOURCE_NOT_VERIFIED",
+  "source_route": "NO_PASS_ROUTE_VERIFIED",
+  "security_identifier": "NOT_VERIFIED_IN_JOINT_BULK_ARCHITECTURE",
+  "CSI_industry_fields": "NOT_VERIFIED_IN_JOINT_BULK_ARCHITECTURE",
+  "next_gate": "CN_CSI300 SOURCE-ROUTE PARK / MANAGER DECISION",
+  "Gate_E": "NOT_STARTED"
+}
