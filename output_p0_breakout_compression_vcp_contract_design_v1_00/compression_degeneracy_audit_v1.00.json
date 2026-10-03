@@ -1,0 +1,40 @@
+{
+  "population": 1425,
+  "feature_authority": "G-FHR-01 / v0.93",
+  "observations": [
+    {
+      "candidate": "RangeCompression_5_20 < 1",
+      "coverage": 1425,
+      "true_count": 1416,
+      "false_count": 9,
+      "null_count": 0,
+      "assessment": "NEAR_TAUTOLOGICAL_DUE_TO_NESTED_RANGES; INSUFFICIENTLY_DISCRIMINATIVE_ALONE"
+    },
+    {
+      "candidate": "RangeCompression_10_20 < 1",
+      "coverage": 1425,
+      "true_count": 1270,
+      "false_count": 155,
+      "null_count": 0,
+      "assessment": "STRUCTURALLY_BIASED_BY_NESTING; INSUFFICIENT_ALONE"
+    },
+    {
+      "candidate": "Range5_Pct < Range10_Pct < Range20_Pct",
+      "coverage": 1425,
+      "true_count": 1177,
+      "false_count": 248,
+      "null_count": 0,
+      "assessment": "NON_DEGENERATE_BUT_BROAD; THRESHOLD_FREE_FEASIBILITY_OBSERVATION_ONLY"
+    },
+    {
+      "candidate": "Range5_Pct <= Range10_Pct <= Range20_Pct",
+      "coverage": 1425,
+      "true_count": 1425,
+      "false_count": 0,
+      "null_count": 0,
+      "assessment": "TAUTOLOGICAL_FROM_NESTED_WINDOWS"
+    }
+  ],
+  "useful_definition": "structurally discriminative only, not predictive alpha",
+  "promoted": false
+}
