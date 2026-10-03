@@ -1,0 +1,40 @@
+{
+  "schema": "WELT_SWING_LANE1_PARAMETER_VALIDATION_PROTOCOL_V1_02",
+  "required_start_head": "2f3c1f3e3e195de2192ff1d6eb1c6b200dadae20",
+  "authority": "G-P0-04 / v1.02",
+  "predecessor": "G-P0-03 / v1.01",
+  "governed_inputs": {
+    "v053_SQLite_SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+    "v053_Archive_SHA256": "f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95",
+    "Frozen_SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v093_Feature_SHA256": "04608872250c482c630ef682825f869d70f7bd3e6cddf70e27e993f83e6625c9"
+  },
+  "candidate_values": [],
+  "holdout_outcomes_read": "NO",
+  "files": [
+    "g_p0_04_authority_binding_v1.02.json",
+    "g_p0_03_predecessor_binding_v1.02.json",
+    "validation_population_contract_v1.02.json",
+    "causality_and_information_set_contract_v1.02.json",
+    "chronological_partition_protocol_v1.02.json",
+    "chronological_partition_feasibility_v1.02.csv",
+    "forward_window_purge_audit_v1.02.csv",
+    "holdout_seal_contract_v1.02.json",
+    "forward_diagnostic_contract_v1.02.json",
+    "parameter_candidate_spec_schema_v1.02.csv",
+    "base_candidate_schema_gap_audit_v1.02.csv",
+    "climax_boolean_contract_requirement_v1.02.json",
+    "runup_boolean_contract_requirement_v1.02.json",
+    "sensitivity_protocol_v1.02.json",
+    "survivorship_and_data_limitations_v1.02.json",
+    "future_validation_gate_sequence_v1.02.json",
+    "p0_current_pointer_immutability_audit_v1.02.json",
+    "scope_exclusion_audit_v1.02.json",
+    "provider_call_audit_v1.02.json",
+    "market_coverage_feasibility_v1.02.csv",
+    "test_results_v1.02.csv",
+    "summary_v1.02.json",
+    "stage_checkpoint_v1.02.json",
+    "manifest_v1.02.json"
+  ]
+}
