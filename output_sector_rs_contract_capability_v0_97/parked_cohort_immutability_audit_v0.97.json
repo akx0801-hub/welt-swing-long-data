@@ -1,0 +1,14 @@
+{
+  "parked_count": 7,
+  "unchanged": [
+    "AU_SP_ASX200",
+    "CN_CSI300",
+    "IN_NIFTY50",
+    "JP_N225",
+    "TW_TW50",
+    "US_SP400",
+    "US_SP500"
+  ],
+  "reopened": [],
+  "registry_modified": "NO"
+}

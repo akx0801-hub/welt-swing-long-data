@@ -1,0 +1,19 @@
+{
+  "Peer_Key": [
+    "Sector_Taxonomy",
+    "Sector_Code"
+  ],
+  "SECTOR_RS_REFERENCE_METHOD": "LEAVE_ONE_OUT_SECTOR_PEER_MEDIAN",
+  "formula_R20": "R20_i - median(R20 of valid synchronized OTHER securities with identical Sector_Taxonomy + Sector_Code)",
+  "formula_R60": "R60_i - median(R60 of valid synchronized OTHER securities with identical Sector_Taxonomy + Sector_Code)",
+  "subject_excluded_from_reference": true,
+  "exact_asof_required": true,
+  "finite_horizon_required": true,
+  "MIN_SYNCHRONIZED_OTHER_PEERS": 2,
+  "decision_status": "NEW_G_SRS_01_MANAGER_CONTRACT_DECISION",
+  "below_minimum_status": "RS_NOT_VERIFIED_INSUFFICIENT_SECTOR_PEERS",
+  "no_zero_fill": true,
+  "no_fallback": true,
+  "no_single_peer_reference": true,
+  "values_materialized": false
+}

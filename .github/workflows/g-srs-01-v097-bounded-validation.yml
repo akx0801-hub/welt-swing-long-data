@@ -1,0 +1,36 @@
+name: G-SRS-01 v0.97 bounded validation
+on:
+  push:
+    branches: [ dev/g-srs-01-v0.97 ]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate contract and capability persistence
+        shell: python
+        run: |
+          import csv,json
+          o="output_sector_rs_contract_capability_v0_97"
+          a=json.load(open("config/manager_governance_authority_G_SRS_01_v0.97.json"))
+          s=json.load(open(f"{o}/sector_rs_capability_summary_v0.97.json"))
+          p=json.load(open(f"{o}/partial_coverage_governance_v0.97.json"))
+          assert a["Authority_ID"]=="G-SRS-01" and a["SECTOR_RS_REFERENCE_METHOD"]=="LEAVE_ONE_OUT_SECTOR_PEER_MEDIAN"
+          assert a["MIN_SYNCHRONIZED_OTHER_PEERS"]==2 and a["SECTOR_RS_MATERIALIZATION_AUTHORIZED"]=="NO"
+          assert s["static_group_sizes"]==[7,6,6,5,4,2,2,2,2,1] and s["combined_capable_rows"]==28 and s["insufficient_peer_rows"]==9
+          assert s["RS_values_generated"]==0 and p["noncanonical_frozen_rows"]==1388 and p["GLOBAL_SECTOR_RS_READY"]=="NO"
+          rows=list(csv.DictReader(open(f"{o}/sector_rs_capability_br_37_v0.97.csv"))); assert len(rows)==37
+          assert not any("Excess" in k for k in rows[0])
+          t=list(csv.DictReader(open(f"{o}/test_results_v0.97.csv"))); assert len(t)==31 and all(x["Result"]=="PASS" for x in t)
+          print("PASS")
+      - name: Package evidence
+        run: |
+          mkdir -p artifact/docs/validation artifact/config
+          cp -r output_sector_rs_contract_capability_v0_97 artifact/
+          cp config/manager_governance_authority_G_SRS_01_v0.97.json artifact/config/
+          cp docs/validation/Sector_RS_Contract_Capability_G-SRS-01_v0.97.md artifact/docs/validation/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-srs-01-v0.97-contract-capability-evidence
+          path: artifact

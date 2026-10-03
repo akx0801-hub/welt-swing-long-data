@@ -1,0 +1,11 @@
+{
+  "source": "output_p0_frozen_1425_sector_authority_v0_59/peer_group_audit_v0.59.csv",
+  "historical_unresolved_acknowledged": [
+    "aggregation mean vs median",
+    "Sector-specific leave-one-out",
+    "numeric minimum peer-group size",
+    "temporal/as-of alignment"
+  ],
+  "previously_resolved_claim": "NO",
+  "resolution_basis": "NEW_FORWARD_G_SRS_01_CONTRACT"
+}

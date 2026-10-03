@@ -1,0 +1,25 @@
+{
+  "version": "v0.97",
+  "required_start_head": "468a888f82a7f6c11e847b772b6ae08a5dd250a8",
+  "authority": "config/manager_governance_authority_G_SRS_01_v0.97.json",
+  "output_directory": "output_sector_rs_contract_capability_v0_97",
+  "files": [
+    "g_srs_01_manager_authority_binding_v0.97.json",
+    "v096_terminal_metadata_binding_v0.97.json",
+    "v059_contract_gap_binding_v0.97.json",
+    "v093_feature_authority_binding_v0.97.json",
+    "canonical_sector_metadata_binding_v0.97.json",
+    "sector_peer_group_distribution_v0.97.csv",
+    "sector_rs_contract_v0.97.json",
+    "sector_rs_capability_br_37_v0.97.csv",
+    "sector_rs_capability_summary_v0.97.json",
+    "partial_coverage_governance_v0.97.json",
+    "parked_cohort_immutability_audit_v0.97.json",
+    "scope_exclusion_audit_v0.97.json",
+    "provider_call_audit_v0.97.json",
+    "test_results_v0.97.csv",
+    "summary_v0.97.json",
+    "stage_checkpoint_v0.97.json"
+  ],
+  "validation_doc": "docs/validation/Sector_RS_Contract_Capability_G-SRS-01_v0.97.md"
+}

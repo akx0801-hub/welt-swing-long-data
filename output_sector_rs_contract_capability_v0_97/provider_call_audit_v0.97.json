@@ -1,0 +1,10 @@
+{
+  "external_provider_requests": 0,
+  "market_data_refresh": 0,
+  "sector_source_research": 0,
+  "inputs": [
+    "persisted GitHub authorities/evidence",
+    "canonical BR metadata",
+    "governed v0.93 Drive payload"
+  ]
+}

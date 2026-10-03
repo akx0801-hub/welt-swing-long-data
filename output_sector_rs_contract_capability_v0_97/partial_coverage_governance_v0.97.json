@@ -1,0 +1,11 @@
+{
+  "SECTOR_RS_CONTRACT_AUTHORIZED": "YES",
+  "SECTOR_RS_MATERIALIZATION_AUTHORIZED": "NO",
+  "GLOBAL_SECTOR_RS_READY": "NO",
+  "GLOBAL_CANONICAL_SECTOR_METADATA_READY": "NO",
+  "canonical_rows": 37,
+  "noncanonical_frozen_rows": 1388,
+  "noncanonical_status": "SECTOR_RS_NOT_VERIFIED_NO_CANONICAL_METADATA",
+  "noncanonical_classified_as_FAIL": "NO",
+  "bounded_capability_only": true
+}

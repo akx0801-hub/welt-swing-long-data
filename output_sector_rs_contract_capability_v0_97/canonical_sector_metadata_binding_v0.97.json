@@ -1,0 +1,12 @@
+{
+  "registry": "sector_metadata/canonical/canonical_sector_metadata_cohort_registry_v1.csv",
+  "cohort": "BR_IBRX100",
+  "canonical_rows": 37,
+  "frozen_rows": 37,
+  "status": "READY",
+  "Taxonomy": "B3_CLASSIFICACAO_SETORIAL",
+  "Sector_Level": "SETOR_ECONOMICO",
+  "Semantic_SHA256": "bd975af67f46d6961f50480fe3eea391bd807d6c65c1a376717fbd0c07d19aed",
+  "partition": "sector_metadata/canonical/cohorts/BR_IBRX100_sector_metadata_v1.csv",
+  "parked_metadata_allowed": false
+}

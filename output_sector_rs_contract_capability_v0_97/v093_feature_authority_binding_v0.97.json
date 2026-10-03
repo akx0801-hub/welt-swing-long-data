@@ -1,0 +1,19 @@
+{
+  "Authority": "G-FHR-01 / v0.93",
+  "Drive_File_ID": "1i23Px03EGdEP_nradocgHpFdhaAf8rzO",
+  "Package_Name": "WELT-SWING_Split-Shadow_Candidate_R1-R4_Corrected_2026-09-29.zip",
+  "Package_Bytes": 1761847,
+  "Package_SHA256": "45d85da89ec288d9bc75164666eb745856f400a995d3e44b85d20e721a494574",
+  "ZIP_Integrity": "PASS",
+  "Feature_Member": "features_candidate.csv",
+  "Feature_SHA256": "04608872250c482c630ef682825f869d70f7bd3e6cddf70e27e993f83e6625c9",
+  "Feature_Rows": 1425,
+  "required_inputs_actual_schema": {
+    "WS_ID": "Source_WS_ID",
+    "feature_as_of_date": "feature_as_of_date",
+    "R20": "R20",
+    "R60": "R60"
+  },
+  "schema_note": "Canonical v0.93 identifier spelling is Source_WS_ID; it is used directly and not reinterpreted from another field.",
+  "package_and_member_verified_before_capability": true
+}

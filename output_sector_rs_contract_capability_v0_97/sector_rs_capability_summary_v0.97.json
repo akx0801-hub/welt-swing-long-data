@@ -1,0 +1,28 @@
+{
+  "BR_rows": 37,
+  "feature_rows_present": 37,
+  "feature_as_of_date_present": 37,
+  "R20_finite_rows": 37,
+  "R60_finite_rows": 37,
+  "all_feature_as_of_date": "2026-09-24",
+  "static_group_sizes": [
+    7,
+    6,
+    6,
+    5,
+    4,
+    2,
+    2,
+    2,
+    2,
+    1
+  ],
+  "static_max_potentially_capable_rows": 28,
+  "static_groups_too_small_rows": 9,
+  "Sector_RS20_capable_rows": 28,
+  "Sector_RS60_capable_rows": 28,
+  "combined_capable_rows": 28,
+  "insufficient_peer_rows": 9,
+  "RS_values_generated": 0,
+  "status": "MEASURED BUT NOT MATERIALIZED"
+}

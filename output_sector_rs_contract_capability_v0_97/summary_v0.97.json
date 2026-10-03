@@ -1,0 +1,13 @@
+{
+  "verdict": "PASS",
+  "G_SRS_01": "CONTRACT ACTIVE",
+  "Sector_RS_contract": "BOUND",
+  "BR_capability": "MEASURED BUT NOT MATERIALIZED",
+  "BR_capable_rows": 28,
+  "BR_insufficient_peer_rows": 9,
+  "Sector_RS_values": "NOT GENERATED",
+  "GLOBAL_SECTOR_RS_READY": "NO",
+  "SECTOR_RS_MATERIALIZATION_AUTHORIZED": "NO",
+  "P0_RUNS": 0,
+  "next_gate": "BR_IBRX100 SECTOR-RS MATERIALIZATION AUTHORIZATION MANAGER GATE"
+}
