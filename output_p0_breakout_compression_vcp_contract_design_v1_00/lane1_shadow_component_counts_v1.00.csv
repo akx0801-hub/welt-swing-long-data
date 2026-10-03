@@ -1,0 +1,7 @@
+Shadow_Component,Coverage,True_Count,False_Count,Null_Count,Decision_Label
+"RangeCompression_5_20 < 1","1425","1416","9","0","SHADOW_NOT_P0_DECISION"
+"RangeCompression_10_20 < 1","1425","1270","155","0","SHADOW_NOT_P0_DECISION"
+"Range5_Pct < Range10_Pct < Range20_Pct","1425","1177","248","0","SHADOW_NOT_P0_DECISION"
+"Range5_Pct <= Range10_Pct <= Range20_Pct","1425","1425","0","0","SHADOW_NOT_P0_DECISION"
+"PriorHigh20_excl_t available","1425","1425","0","0","SHADOW_NOT_P0_DECISION"
+"PriorHigh60_excl_t available","1425","1425","0","0","SHADOW_NOT_P0_DECISION"
