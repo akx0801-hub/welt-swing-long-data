@@ -1,0 +1,46 @@
+name: G-P0-03 v1.01 bounded validation
+on:
+  push:
+    branches: [dev/g-p0-03-v1.01]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate architecture authority
+        shell: python
+        run: |
+          import csv,json,pathlib
+          d=pathlib.Path("output_p0_breakout_compression_vcp_architecture_v1_01")
+          a=json.load(open("config/manager_governance_authority_G_P0_03_v1.01.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          s=json.load(open(d/"summary_v1.01.json"))
+          x=json.load(open(d/"scope_exclusion_audit_v1.01.json"))
+          t=list(csv.DictReader(open(d/"test_results_v1.01.csv")))
+          m=list(csv.DictReader(open(d/"manager_decision_resolution_v1.01.csv")))
+          n=list(csv.DictReader(open(d/"lane1_open_parameter_inventory_v1.01.csv")))
+          pr=list(csv.DictReader(open(d/"lane1_new_primitive_contracts_v1.01.csv")))
+          assert a["Authority_ID"]=="G-P0-03" and a["Decision"]=="APPROVED_ARCHITECTURE_PENDING_PARAMETER_VALIDATION"
+          assert a["Overall_Architecture"]=="CLASS_C_HISTORY_DERIVED_WITH_VALIDATED_PARAMETERS"
+          assert a["AUTOMATED_CONTRACT_READY"]=="NO" and a["P0_RUN_AUTHORIZED"]=="NO"
+          assert a["NUMERIC_PARAMETER_VALUES_AUTHORIZED"]=="NO" and a["NEW_PRIMITIVE_IMPLEMENTATION_AUTHORIZED"]=="NO"
+          assert len(m)==8 and len(n)==10 and all(r["Current_Status"]=="UNBOUND_PENDING_VALIDATION" for r in n)
+          assert len(pr)==4 and all(r["Status"]=="CONTRACT_DEFINED_NOT_CANONICALLY_MATERIALIZED" for r in pr)
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
+          assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          assert x["P0_RUNS"]==x["P1_RUNS"]==x["P2_RUNS"]==0 and x["Feature_Foundation_mutated"]=="NO"
+          assert s["Lane1_numeric_parameters"]=="UNBOUND" and s["P0"]=="NOT_AUTHORIZED"
+          assert len(t)>=31 and all(r["Result"]=="PASS" for r in t)
+          print("PASS")
+      - name: Package evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_03_v1.01.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_breakout_compression_vcp_architecture_v1_01 artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_Architecture_G-P0-03_v1.01.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-03-v1.01-lane1-architecture-evidence
+          path: artifact/
