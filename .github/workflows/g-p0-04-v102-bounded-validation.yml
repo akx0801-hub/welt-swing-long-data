@@ -1,0 +1,45 @@
+name: G-P0-04 v1.02 bounded validation
+on:
+  push:
+    branches: [dev/g-p0-04-v1.02]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate parameter-validation protocol
+        shell: python
+        run: |
+          import csv,json,pathlib
+          d=pathlib.Path("output_p0_breakout_compression_vcp_validation_protocol_v1_02")
+          a=json.load(open("config/manager_governance_authority_G_P0_04_v1.02.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          cp=json.load(open(d/"chronological_partition_protocol_v1.02.json"))
+          hs=json.load(open(d/"holdout_seal_contract_v1.02.json"))
+          fd=json.load(open(d/"forward_diagnostic_contract_v1.02.json"))
+          sc=json.load(open(d/"scope_exclusion_audit_v1.02.json"))
+          t=list(csv.DictReader(open(d/"test_results_v1.02.csv")))
+          assert a["Decision"]=="APPROVED_VALIDATION_PROTOCOL_NO_PARAMETER_VALUES"
+          assert a["PARAMETER_CANDIDATE_VALUES_AUTHORIZED"]=="NO"
+          assert a["DESIGN_SCORING_AUTHORIZED"]==a["VALIDATION_SCORING_AUTHORIZED"]=="NO"
+          assert a["HOLDOUT_OPENED"]==a["HOLDOUT_SCORING_AUTHORIZED"]=="NO"
+          assert cp["N"]==252 and cp["DESIGN"]["date_count"]==126 and cp["VALIDATION"]["date_count"]==63 and cp["HOLDOUT"]["date_count"]==63
+          assert hs["outcome_values_read"]=="NO"
+          assert set(fd["horizons_valid_sessions"])=={5,10,15} and len(fd["families"])==4
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
+          assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          assert sc["candidate_values_introduced"]==0 and sc["P0_RUNS"]==sc["P1_RUNS"]==sc["P2_RUNS"]==0
+          assert len(t)>=40 and all(r["Result"]=="PASS" for r in t)
+          print("PASS")
+      - name: Package evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_04_v1.02.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_breakout_compression_vcp_validation_protocol_v1_02 artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_Parameter_Validation_Protocol_G-P0-04_v1.02.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-04-v1.02-validation-protocol-evidence
+          path: artifact/
