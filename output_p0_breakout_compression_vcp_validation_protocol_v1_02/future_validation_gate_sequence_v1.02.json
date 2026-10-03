@@ -1,0 +1,22 @@
+{
+  "sequence": [
+    "protocol authority",
+    "candidate-set Manager authorization",
+    "DESIGN execution",
+    "DESIGN persistence",
+    "VALIDATION execution",
+    "Manager finalist decision",
+    "finalist freeze",
+    "HOLDOUT execution once",
+    "Manager parameter-promotion decision",
+    "primitive implementation/promotion if still required",
+    "Lane-1 executable-contract validation",
+    "only then possible P0 authority update"
+  ],
+  "candidate_freeze_before_design_scoring": "YES",
+  "validation_no_retuning": "YES",
+  "changed_candidate_after_validation": "NEW_CANDIDATE_SET_REQUIRES_NEW_UNTOUCHED_VALIDATION_PARTITION",
+  "LANE1_FINALIST_FROZEN_before_holdout": "YES",
+  "holdout_single_use": "YES",
+  "post_holdout_change": "NEW_HOLDOUT_REQUIRED_OR_DEV_UNCONFIRMED"
+}
