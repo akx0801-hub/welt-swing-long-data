@@ -1,0 +1,14 @@
+{
+  "large_payload_committed_to_git": "NO",
+  "BR_materialization_csv_in_git": "NO",
+  "peer_reference_csv_in_git": "NO",
+  "P0_PASS": 0,
+  "P0_FAIL": 0,
+  "lane_selection": 0,
+  "shortlist": 0,
+  "rank": 0,
+  "score": 0,
+  "trade_signal": 0,
+  "Frozen_modified": "NO",
+  "Frozen_SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+}
