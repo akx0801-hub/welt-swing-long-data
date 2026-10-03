@@ -1,0 +1,54 @@
+{
+  "verified_against_v093_feature_rows": 1425,
+  "High20_includes_t": true,
+  "High60_includes_t": true,
+  "Dist_High20_formula": "Close_Tech[t] / High20[t] - 1",
+  "Dist_High60_formula": "Close_Tech[t] / High60[t] - 1",
+  "formula_matches": {
+    "High20": 1425,
+    "High60": 1425,
+    "Dist_High20": 1425,
+    "Dist_High60": 1425
+  },
+  "CURRENT_HIGH_DISTANCE_IS_NOT_PRIOR_EXCLUSIVE_PIVOT_IDENTITY": "YES",
+  "PIVOT_IDENTITY_REQUIRES_HISTORY_DERIVED_PRIMITIVE": "YES",
+  "architectures": [
+    {
+      "Class": "CURRENT_ROLLING_HIGH",
+      "deterministic": "YES",
+      "endpoint_available": "YES",
+      "history_derivable": "YES",
+      "numeric_decision": "NO_FOR_VALUE_BUT_YES_FOR_PIVOT_SEMANTIC",
+      "sequence_semantics": "NO",
+      "look_ahead_free": "YES",
+      "P0_candidate_suitability": "INSUFFICIENT_FOR_PRIOR_PIVOT_IDENTITY"
+    },
+    {
+      "Class": "PRIOR_EXCLUSIVE_ROLLING_HIGH",
+      "deterministic": "YES_ONCE_WINDOW_CHOSEN",
+      "endpoint_available": "NO",
+      "history_derivable": "YES",
+      "numeric_decision": "YES_WINDOW_SEMANTIC_20_OR_60_NOT_AUTHORIZED_AS_BASE_PIVOT_RULE",
+      "sequence_semantics": "NO",
+      "look_ahead_free": "YES",
+      "P0_candidate_suitability": "CANDIDATE_ONLY"
+    },
+    {
+      "Class": "STRUCTURAL_SWING_HIGH",
+      "deterministic": "NO_UNTIL_SEQUENCE_CONTRACT_BOUND",
+      "endpoint_available": "NO",
+      "history_derivable": "YES",
+      "numeric_decision": "POSSIBLE",
+      "sequence_semantics": "YES",
+      "look_ahead_free": "YES_IF_CAUSAL_CONTRACT",
+      "P0_candidate_suitability": "CANDIDATE_ONLY"
+    }
+  ],
+  "PIVOT_PROXIMITY_THRESHOLD_AUTHORIZED": "NO",
+  "possible_future_dimensions": [
+    "distance / ATR",
+    "percent distance",
+    "distance relative to base range"
+  ],
+  "selected_architecture": "NONE"
+}
