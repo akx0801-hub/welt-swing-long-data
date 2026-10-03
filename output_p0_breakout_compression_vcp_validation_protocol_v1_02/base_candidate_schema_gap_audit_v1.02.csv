@@ -1,0 +1,7 @@
+Required_Field,Status,Semantic_Gap
+"Base_Window","UNBOUND","duration not selected"
+"Base_Width_Metric","UNBOUND","metric form not selected"
+"Base_Width_Boundary","UNBOUND","numeric boundary not selected"
+"Structural_Breakdown_Definition","UNBOUND","exact causal boolean/sequence semantics not selected"
+"Base_to_Pivot_Relation","UNBOUND","exact relation not selected"
+"Range20_as_base","NOT_AUTHORIZED","Range20 alone is not a base detector"
