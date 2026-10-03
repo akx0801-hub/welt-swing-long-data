@@ -1,0 +1,19 @@
+{
+  "verdict": "PASS",
+  "G_P0_01": "ACTIVE_PARAMETER_READINESS_AUTHORITY",
+  "Current_P0_parameter_state": "EXPLICITLY_RESOLVED",
+  "AUTOMATED_P0_READY": "NO",
+  "P0_RUN_AUTHORIZED": "NO",
+  "p0_numeric_pass_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "READY_LANES": [],
+  "BLOCKED_LANES": [
+    "BREAKOUT_COMPRESSION_VCP",
+    "PULLBACK_RETEST",
+    "RECLAIM",
+    "QUIET_STRENGTH_RELATIVE_STRENGTH",
+    "POST_EVENT_DRIFT",
+    "CONTROLLED_MEAN_REVERSION"
+  ],
+  "Next_Contract_Gate": "BREAKOUT_COMPRESSION_VCP_CONTRACT"
+}
