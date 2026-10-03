@@ -1,0 +1,16 @@
+{
+  "P0_RUNS": 0,
+  "P0_PASS": 0,
+  "P0_FAIL": 0,
+  "P0_MULTI_LANE": 0,
+  "P0_SURVIVORS": 0,
+  "P1_RUNS": 0,
+  "P2_RUNS": 0,
+  "shortlist_created": "NO",
+  "Lane1_security_assignments": 0,
+  "Lane2_started": "NO",
+  "Feature_Foundation_mutated": "NO",
+  "Sector_Metadata_reopened": "NO",
+  "Sector_RS_recomputed": "NO",
+  "Frozen_SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+}
