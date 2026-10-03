@@ -1,0 +1,16 @@
+{
+  "P0_RUNS": 0,
+  "P0_PASS": 0,
+  "P0_FAIL": 0,
+  "P0_MULTI_LANE": 0,
+  "P0_SURVIVORS": 0,
+  "P1_RUNS": 0,
+  "P2_RUNS": 0,
+  "security_lane_assignments": 0,
+  "securities_selected": 0,
+  "survivors_created": 0,
+  "ranking_created": 0,
+  "Lane2_started": "NO",
+  "Sector_Metadata_reopened": "NO",
+  "Sector_RS_recomputed": "NO"
+}
