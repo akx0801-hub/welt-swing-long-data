@@ -1,0 +1,18 @@
+{
+  "Materialization_File_SHA256": "991df87fa070fd4a36d6caa4fdbbe2a1632b0d13b189f764c8554edb1c2386ab",
+  "Semantic_SHA256": "de1640a560a9f71d3fe364e0ac9812e40ddcdf330de4bc85c92779fc84e419ca",
+  "Semantic_Sort": "WS_ID ascending",
+  "Semantic_Fields": [
+    "WS_ID",
+    "feature_as_of_date",
+    "Sector_Taxonomy",
+    "Sector_Code",
+    "Sector_RS20_Excess",
+    "Sector_RS60_Excess",
+    "Sector_RS_Status"
+  ],
+  "Null_Serialization": "empty CSV field",
+  "Encoding": "UTF-8",
+  "Line_Ending": "LF",
+  "Header_Included": true
+}
