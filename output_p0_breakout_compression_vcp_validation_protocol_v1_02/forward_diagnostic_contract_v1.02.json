@@ -1,0 +1,21 @@
+{
+  "horizons_valid_sessions": [
+    5,
+    10,
+    15
+  ],
+  "purpose": "structural Lane-1 parameter validation only",
+  "not_trading_outcomes": "YES",
+  "families": {
+    "FWD_CLOSE_RETURN_h": "Close_Tech[t+h]/Close_Tech[t]-1",
+    "FWD_MAX_PIVOT_EXTENSION_ATR_h": "(max High_Tech over t+1..t+h - PriorHigh20_excl_t at anchor t)/ATR14[t]",
+    "FWD_MAX_DRAWDOWN_ATR_h": "(min Low_Tech over t+1..t+h - Close_Tech[t])/ATR14[t]",
+    "FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_h": "any Close_Tech in t+1..t+h strictly greater than anchor-date PriorHigh20_excl_t"
+  },
+  "anchor_pivot": "frozen at t; never rolled inside outcome window",
+  "transaction_simulation": "NO",
+  "stop_loss": "NO",
+  "CRV": "NO",
+  "execution_assumptions": "NO",
+  "scalar_optimization_objective": "NONE"
+}
