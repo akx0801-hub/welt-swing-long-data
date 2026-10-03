@@ -1,0 +1,25 @@
+{
+  "HOLDOUT_OPENED": "NO",
+  "HOLDOUT_SCORING_AUTHORIZED": "NO",
+  "date_start": "2026-06-09",
+  "date_end": "2026-09-03",
+  "unique_dates": 63,
+  "raw_eligible_anchor_count": 84925,
+  "purge_count": 18777,
+  "retained_population_count_without_outcome_read": 66148,
+  "allowed_v1_02": [
+    "date boundaries",
+    "raw eligible anchor count",
+    "coverage by market",
+    "purge count"
+  ],
+  "forbidden": [
+    "forward returns",
+    "MFE/MAE",
+    "pivot-cross rates",
+    "parameter-dependent hit counts",
+    "candidate rankings"
+  ],
+  "outcome_values_read": "NO",
+  "later_use": "exactly once only after LANE1_FINALIST_FROZEN=YES"
+}
