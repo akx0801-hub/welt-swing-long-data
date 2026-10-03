@@ -1,0 +1,51 @@
+name: G-P0-02 v1.00 bounded validation
+on:
+  push:
+    branches: [dev/g-p0-02-v1.00]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Lane 1 contract-design evidence
+        shell: python
+        run: |
+          import csv,json,pathlib
+          d=pathlib.Path("output_p0_breakout_compression_vcp_contract_design_v1_00")
+          a=json.load(open("config/manager_governance_authority_G_P0_02_v1.00.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          s=json.load(open(d/"summary_v1.00.json"))
+          x=json.load(open(d/"scope_exclusion_audit_v1.00.json"))
+          q=json.load(open(d/"pivot_feature_semantics_audit_v1.00.json"))
+          c=json.load(open(d/"compression_degeneracy_audit_v1.00.json"))
+          t=list(csv.DictReader(open(d/"test_results_v1.00.csv")))
+          m=list(csv.DictReader(open(d/"lane1_irreducible_manager_decisions_v1.00.csv")))
+          arch=list(csv.DictReader(open(d/"lane1_contract_architecture_comparison_v1.00.csv")))
+          assert a["Authority_ID"]=="G-P0-02" and a["Decision"]=="CONTRACT_DESIGN_EVIDENCE_ONLY"
+          assert a["AUTOMATED_CONTRACT_READY"]=="NO" and a["P0_RUN_AUTHORIZED"]=="NO"
+          assert a["NUMERIC_THRESHOLD_PROMOTION_AUTHORIZED"]=="NO" and a["LANE_RULE_PROMOTION_AUTHORIZED"]=="NO"
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
+          assert p["P0_RUN_AUTHORIZED"]=="NO" and p["AUTOMATED_P0_READY"]=="NO"
+          assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          assert q["High20_includes_t"] and q["High60_includes_t"]
+          assert q["CURRENT_HIGH_DISTANCE_IS_NOT_PRIOR_EXCLUSIVE_PIVOT_IDENTITY"]=="YES"
+          assert q["PIVOT_PROXIMITY_THRESHOLD_AUTHORIZED"]=="NO"
+          assert len(c["observations"])==4 and c["observations"][3]["true_count"]==1425
+          assert len(arch)==3 and len(m)==8
+          assert s["numeric_thresholds_promoted"]==[] and s["lane_rules_promoted"]==[]
+          assert x["P0_RUNS"]==x["P1_RUNS"]==x["P2_RUNS"]==0
+          assert x["security_lane_assignments"]==0 and x["Lane2_started"]=="NO"
+          assert len(t)>=30 and all(r["Result"]=="PASS" for r in t)
+          print("PASS")
+      - name: Package bounded evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_02_v1.00.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_breakout_compression_vcp_contract_design_v1_00 artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_Contract_Design_G-P0-02_v1.00.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-02-v1.00-breakout-contract-design-evidence
+          path: artifact/
