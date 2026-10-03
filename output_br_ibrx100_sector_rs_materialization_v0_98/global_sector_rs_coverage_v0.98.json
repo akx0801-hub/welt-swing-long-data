@@ -1,0 +1,11 @@
+{
+  "Frozen_Total": 1425,
+  "Global_Verified_Sector_RS_Rows": 28,
+  "Global_Not_Verified_Sector_RS_Rows": 1397,
+  "breakdown": {
+    "BR_insufficient_peer_group": 9,
+    "no_canonical_sector_metadata": 1388
+  },
+  "GLOBAL_SECTOR_RS_READY": "NO",
+  "GLOBAL_CANONICAL_SECTOR_METADATA_READY": "NO"
+}
