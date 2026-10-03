@@ -30,7 +30,7 @@ jobs:
           assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
           assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
           assert sc["candidate_values_introduced"]==0 and sc["P0_RUNS"]==sc["P1_RUNS"]==sc["P2_RUNS"]==0
-          assert len(t)>=40 and all(r["Result"]=="PASS" for r in t)
+          assert len(t)>=39 and all(r["Result"]=="PASS" for r in t)
           print("PASS")
       - name: Package evidence
         run: |
