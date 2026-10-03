@@ -1,0 +1,11 @@
+{
+  "Authority_ID": "G-P0-01",
+  "Version": "v0.99",
+  "AUTOMATED_P0_READY": "NO",
+  "P0_RUN_AUTHORIZED": "NO",
+  "p0_numeric_pass_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "Lane1_Automated_Contract_Ready": "NO",
+  "Next_Gate": "BREAKOUT_COMPRESSION_VCP_CONTRACT",
+  "Queue_Order_1": "BREAKOUT_COMPRESSION_VCP"
+}
