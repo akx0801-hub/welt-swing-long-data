@@ -1,0 +1,18 @@
+{
+  "Authority_ID": "G-SRS-02",
+  "Authority_Version": "v0.98",
+  "Authority_Class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "Decision": "APPROVED_BOUNDED_MATERIALIZATION",
+  "Scope_Cohort": "BR_IBRX100",
+  "Contract_Authority": "G-SRS-01",
+  "Contract_Version": "v0.97",
+  "Materialization_Authorized": "YES",
+  "Global_Sector_RS_Ready": "NO",
+  "P0_Authorized": "NO",
+  "P1_P2_Authorized": "NO",
+  "Complete_Cohort_Output_Required": "YES",
+  "Verified_Value_Rows_Expected": 28,
+  "Not_Verified_Rows_Expected": 9,
+  "Cohort_Total": 37,
+  "Historical_Evidence_Rewritten": "NO"
+}
