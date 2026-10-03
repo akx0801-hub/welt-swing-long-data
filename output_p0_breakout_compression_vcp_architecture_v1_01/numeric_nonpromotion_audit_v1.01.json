@@ -1,0 +1,26 @@
+{
+  "numeric_parameter_values_authorized": "NO",
+  "promoted_numeric_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "warning_only": [
+    "18% / 20d",
+    "30% / 60d"
+  ],
+  "later_stage_not_promoted": [
+    "~1 ATR pivot",
+    "~1.3 RVOL",
+    "~2 ATR climax"
+  ],
+  "snapshot_percentile_promotion": "NOT_PERFORMED",
+  "future_validation_principles": [
+    "historical",
+    "causal",
+    "time-separated",
+    "frozen-before-evaluation",
+    "no look-ahead",
+    "no current-snapshot percentile promotion",
+    "candidate parameters declared before evaluation-set scoring",
+    "sensitivity/stability reported",
+    "zero-hit and high-hit outcomes allowed"
+  ]
+}
