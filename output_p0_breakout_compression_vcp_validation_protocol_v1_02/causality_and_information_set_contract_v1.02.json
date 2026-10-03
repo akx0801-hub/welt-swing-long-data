@@ -1,0 +1,17 @@
+{
+  "ANCHOR_FEATURE_INFORMATION": "CAUSAL_T_OR_EARLIER",
+  "PriorHigh20_excl_t": "excludes t; immediately preceding 20 valid technical observations",
+  "prohibited": [
+    "future High/Low/Close",
+    "future volume",
+    "future split/event knowledge if it changes detector information set",
+    "centered windows",
+    "future-confirmed swing highs",
+    "retrospective local extrema requiring t+1 or later"
+  ],
+  "FORWARD_OUTCOME_NORMALIZATION": "TECHNICALLY_CONTINUOUS_ONLY",
+  "corporate_action_rule": "future corporate-action information may maintain economic continuity of forward outcome measurement only; it may not alter detector information at anchor t",
+  "dividend_total_return_model": "NO",
+  "G_FHR_01": "v0.93 semantics preserved",
+  "new_primitives": "SHADOW_ONLY_CONTRACT_DEFINED_NOT_CANONICALLY_MATERIALIZED"
+}
