@@ -1,0 +1,9 @@
+Primitive,Source,Coverage,Null_Count,Status,Notes
+"PriorHigh20_excl_t","v0.53 read-only history","1425","0","HISTORY_DERIVABLE_NOT_BOUND","prior 20 valid observations excluding t; 20 as candidate horizon only"
+"PriorHigh60_excl_t","v0.53 read-only history","1425","0","HISTORY_DERIVABLE_NOT_BOUND","prior 60 valid observations excluding t; 60 as candidate horizon only"
+"PriorLow20_excl_t","v0.53 read-only history","1425","0","HISTORY_DERIVABLE_NOT_BOUND","candidate primitive only"
+"PriorLow60_excl_t","v0.53 read-only history","1425","0","HISTORY_DERIVABLE_NOT_BOUND","candidate primitive only"
+"Range20_prior","v0.53 read-only history","1425","0","HISTORY_DERIVABLE_NOT_BOUND","candidate primitive only"
+"Range60_prior","v0.53 read-only history","1425","0","HISTORY_DERIVABLE_NOT_BOUND","candidate primitive only"
+"Recent_20bar_OHLC_sequence","v0.53 read-only history","1425","0","HISTORY_DERIVABLE_NOT_BOUND","sequence semantics not selected"
+"Recent_60bar_OHLC_sequence","v0.53 read-only history","1425","0","HISTORY_DERIVABLE_NOT_BOUND","sequence semantics not selected"
