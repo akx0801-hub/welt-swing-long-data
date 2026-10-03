@@ -1,0 +1,28 @@
+{
+  "schema": "WELT_SWING_P0_PARAMETER_LANE_AUTHORITY_MANIFEST_V0_99",
+  "files": [
+    "config/manager_governance_authority_G_P0_01_v0.99.json",
+    "config/p0_parameter_authority_current.json",
+    "output_p0_parameter_lane_authority_v0_99/master_p0_contract_binding_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/historical_v021_parameter_binding_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/current_feature_home_rs_binding_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/current_sector_rs_binding_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/p0_lane_requirement_decomposition_v0.99.csv",
+    "output_p0_parameter_lane_authority_v0_99/p0_lane_current_readiness_matrix_v0.99.csv",
+    "output_p0_parameter_lane_authority_v0_99/p0_numeric_threshold_authority_audit_v0.99.csv",
+    "output_p0_parameter_lane_authority_v0_99/p0_promoted_lane_rule_audit_v0.99.csv",
+    "output_p0_parameter_lane_authority_v0_99/p0_contract_gap_queue_v0.99.csv",
+    "output_p0_parameter_lane_authority_v0_99/partial_sector_rs_p0_semantics_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/p0_execution_authorization_decision_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/immutability_audit_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/scope_exclusion_audit_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/provider_call_audit_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/test_results_v0.99.csv",
+    "output_p0_parameter_lane_authority_v0_99/summary_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/stage_checkpoint_v0.99.json",
+    "output_p0_parameter_lane_authority_v0_99/manifest_v0.99.json",
+    "docs/validation/P0_Parameter_Lane_Authority_G-P0-01_v0.99.md",
+    ".github/workflows/g-p0-01-v099-bounded-validation.yml"
+  ],
+  "note": "small Git authority/control evidence only"
+}
