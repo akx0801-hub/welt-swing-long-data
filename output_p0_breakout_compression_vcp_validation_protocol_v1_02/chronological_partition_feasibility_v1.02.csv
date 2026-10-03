@@ -1,0 +1,4 @@
+Partition,Start_Date,End_Date,Unique_Date_Count,Raw_Eligible_Anchors,Purged_Anchors,Scored_Eligible_After_Purge
+"DESIGN","2025-09-17","2026-03-11","126","161811","21360","140451"
+"VALIDATION","2026-03-12","2026-06-08","63","85410","21360","64050"
+"HOLDOUT","2026-06-09","2026-09-03","63","84925","18777","66148"
