@@ -1,0 +1,4 @@
+Partition,Raw_Eligible_Anchors,Purged_Forward15_CrossBoundary,Retained_Scored_Population,Rule
+"DESIGN","161811","21360","140451","t+1..t+15 valid-session window must remain inside DESIGN"
+"VALIDATION","85410","21360","64050","t+1..t+15 valid-session window must remain inside VALIDATION"
+"HOLDOUT","84925","18777","66148","t+1..t+15 valid-session window must remain inside HOLDOUT and governed cache"
