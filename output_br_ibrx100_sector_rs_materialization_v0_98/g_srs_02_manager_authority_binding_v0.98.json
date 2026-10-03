@@ -1,0 +1,8 @@
+{
+  "Authority_ID": "G-SRS-02",
+  "Authority_Version": "v0.98",
+  "state": "ACTIVE_BOUNDED_BR_MATERIALIZATION",
+  "scope": "BR_IBRX100",
+  "payload_drive_file_id": "14rihggjcfiywzhph7HjPhwFE4jHTCl-a",
+  "payload_package_sha256": "de6cf0268cb1354d16ea663f8f6be4d27d16aa6ed8e628985456bee2189f02eb"
+}
