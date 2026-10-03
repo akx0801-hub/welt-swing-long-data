@@ -1,0 +1,9 @@
+Family,Classification,Current_Evidence,Unresolved_Contract
+"TREND_STRUCTURE","CURRENTLY_MEASURABLE_NOT_BOUND","Close/EMA50/SMA200, EMA50/SMA200 relation and EMA50 slope are measurable","Master does not bind one exact boolean combination; governance decision required"
+"BASE_STAGE2_STRUCTURE","SEQUENCE_DETECTOR_REQUIRED","endpoint trend/range descriptors exist","multi-week base identity/duration and Stage-2 sequence definition unbound"
+"COMPRESSION","VALIDATION_REQUIRED","Range5/10/20 and ratios measurable; threshold-free nesting relations audited","exact compression contract and sufficiency unbound"
+"PIVOT_IDENTITY","HISTORY_DERIVABLE_NOT_BOUND","prior-exclusive highs derivable from v0.53 history","current High20/60 include t; pivot architecture/window/sequence unbound"
+"PIVOT_PROXIMITY","NUMERIC_DECISION_REQUIRED","distance dimensions can be derived after pivot identity","no exact current P0 proximity boundary"
+"CLIMAX_EXCLUSION","NUMERIC_DECISION_REQUIRED","DailyMove/ATR, RVOL, Gap/ATR, returns measurable","climax numeric or sequence decision absent"
+"EXCESSIVE_RUNUP_EXCLUSION","NUMERIC_DECISION_REQUIRED","R5/R20/R60 measurable; 18%/20d and 30%/60d are warnings only","no exact P0 exclusion contract"
+"COMPLETE_LANE_COMPOSITION","SEQUENCE_DETECTOR_REQUIRED","component measurements partially available","exact boolean composition and missing-input behavior beyond fail-closed principle unbound"
