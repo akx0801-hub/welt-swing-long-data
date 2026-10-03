@@ -1,6 +1,7 @@
 {
   "Authority_ID": "G-SRS-02",
   "Authority_Version": "v0.98",
+  "Title": "BR_IBRX100 Bounded Sector-RS Materialization Authorization",
   "Authority_Class": "EXPLICIT_MANAGER_GOVERNANCE",
   "Decision": "APPROVED_BOUNDED_MATERIALIZATION",
   "Scope_Cohort": "BR_IBRX100",
@@ -14,5 +15,18 @@
   "Verified_Value_Rows_Expected": 28,
   "Not_Verified_Rows_Expected": 9,
   "Cohort_Total": 37,
-  "Historical_Evidence_Rewritten": "NO"
+  "Historical_Evidence_Rewritten": "NO",
+  "Payload_Storage_Mode": "EXTERNAL_CONTENT_ADDRESSED_GOOGLE_DRIVE_PACKAGE",
+  "Payload_Drive_Folder_ID": "1uSIFSPiF5IzfOwretpp3Gl_jb6K2sZ--",
+  "Payload_Drive_File_ID": "14rihggjcfiywzhph7HjPhwFE4jHTCl-a",
+  "Payload_Package_Name": "WELT-SWING_BR_IBRX100_Sector-RS_v0.98_Payload.zip",
+  "Payload_Package_Bytes": 8516,
+  "Payload_Package_SHA256": "de6cf0268cb1354d16ea663f8f6be4d27d16aa6ed8e628985456bee2189f02eb",
+  "Materialization_Member": "BR_IBRX100_sector_rs_v1.csv",
+  "Materialization_Member_SHA256": "991df87fa070fd4a36d6caa4fdbbe2a1632b0d13b189f764c8554edb1c2386ab",
+  "Semantic_SHA256": "de1640a560a9f71d3fe364e0ac9812e40ddcdf330de4bc85c92779fc84e419ca",
+  "Materialization_Rows": 37,
+  "Verified_RS_Rows": 28,
+  "Not_Verified_RS_Rows": 9,
+  "SECTOR_RS_CSV_GIT_PERSISTENCE_REQUIRED": "NO"
 }
