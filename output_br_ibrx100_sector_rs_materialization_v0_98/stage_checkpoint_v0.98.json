@@ -1,0 +1,18 @@
+{
+  "stage": "BR_IBRX100_BOUNDED_SECTOR_RS_MATERIALIZATION_EXTERNAL_PAYLOAD",
+  "version": "v0.98",
+  "verdict": "PASS",
+  "G_SRS_02": "ACTIVE_BOUNDED_BR_MATERIALIZATION",
+  "BR_materialized_rows": 37,
+  "verified_rows": 28,
+  "not_verified_rows": 9,
+  "GLOBAL_VERIFIED_SECTOR_RS_ROWS": 28,
+  "GLOBAL_FROZEN_ROWS": 1425,
+  "GLOBAL_SECTOR_RS_READY": "NO",
+  "P0": "NOT STARTED",
+  "P0_RUNS": 0,
+  "P1_RUNS": 0,
+  "P2_RUNS": 0,
+  "next_manager_gate": "P0 PARAMETER / LANE AUTHORITY WITH PARTIAL SECTOR-RS CAPABILITY",
+  "hard_stop": "STOP_DO_NOT_START_P0"
+}
