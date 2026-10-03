@@ -1,0 +1,57 @@
+name: G-SRS-02 v0.98 external payload validation
+on:
+  push:
+    branches:
+      - dev/g-srs-02-v0.98
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate persisted v0.98 control plane
+        shell: python
+        run: |
+          import csv,json,pathlib,sys
+          def J(p): return json.loads(pathlib.Path(p).read_text())
+          a=J("config/manager_governance_authority_G_SRS_02_v0.98.json")
+          p=J("config/sector_rs_current.json")
+          s=J("output_br_ibrx100_sector_rs_materialization_v0_98/summary_v0.98.json")
+          c=J("output_br_ibrx100_sector_rs_materialization_v0_98/stage_checkpoint_v0.98.json")
+          h=J("output_br_ibrx100_sector_rs_materialization_v0_98/br_sector_rs_materialization_hashes_v0.98.json")
+          d=J("output_br_ibrx100_sector_rs_materialization_v0_98/drive_roundtrip_verification_v0.98.json")
+          p0=J("output_p0_lane_shadow_validation_v0_21/p0_lane_parameter_registry_v0.21.json")
+          park=list(csv.DictReader(open("sector_metadata/governance/parked_cohort_registry_v1.csv")))
+          reg=list(csv.DictReader(open("sector_rs/materialized/sector_rs_cohort_registry_v1.csv")))
+          assert a["Authority_ID"]=="G-SRS-02" and a["Decision"]=="APPROVED_BOUNDED_MATERIALIZATION"
+          assert a["Contract_Authority"]=="G-SRS-01" and a["Contract_Version"]=="v0.97"
+          assert a["Payload_Drive_File_ID"] and len(a["Payload_Package_SHA256"])==64 and len(a["Materialization_Member_SHA256"])==64 and len(a["Semantic_SHA256"])==64
+          assert a["Materialization_Rows"]==37 and a["Verified_RS_Rows"]==28 and a["Not_Verified_RS_Rows"]==9
+          assert p["BR_Materialized_Rows"]==37 and p["BR_Verified_Rows"]==28 and p["BR_Not_Verified_Rows"]==9
+          assert p["Payload_Drive_File_ID"]==a["Payload_Drive_File_ID"] and p["Payload_Package_SHA256"]==a["Payload_Package_SHA256"]
+          assert p["Materialization_Member_SHA256"]==a["Materialization_Member_SHA256"] and p["Semantic_SHA256"]==a["Semantic_SHA256"]
+          assert d["result"]=="PASS" and d["roundtrip_rows"]==37 and d["roundtrip_verified"]==28 and d["roundtrip_not_verified"]==9
+          assert h["Materialization_File_SHA256"]==a["Materialization_Member_SHA256"] and h["Semantic_SHA256"]==a["Semantic_SHA256"]
+          assert len(reg)==1 and reg[0]["Cohort"]=="BR_IBRX100" and reg[0]["Materialized_Row_Count"]=="37" and reg[0]["Verified_RS_Row_Count"]=="28" and reg[0]["Not_Verified_RS_Row_Count"]=="9"
+          assert reg[0]["Payload_Drive_File_ID"]==a["Payload_Drive_File_ID"] and reg[0]["Semantic_SHA256"]==a["Semantic_SHA256"]
+          assert s["GLOBAL_VERIFIED_SECTOR_RS"]=="28 / 1425" and s["GLOBAL_SECTOR_RS_READY"]=="NO" and s["P0"]=="NOT STARTED"
+          assert c["P0_RUNS"]==0 and c["P1_RUNS"]==0 and c["P2_RUNS"]==0
+          assert p0["p0_numeric_pass_thresholds"]==[] and p0["promoted_lane_pass_rules"]==[]
+          assert len(park)==7
+          assert not pathlib.Path("sector_rs/materialized/cohorts/BR_IBRX100_sector_rs_v1.csv").exists()
+          assert not pathlib.Path("output_br_ibrx100_sector_rs_materialization_v0_98/br_sector_rs_peer_reference_audit_v0.98.csv").exists()
+          prov=J("output_br_ibrx100_sector_rs_materialization_v0_98/provider_call_audit_v0.98.json")
+          assert prov["external_market_reference_requests"]==0
+          print("PASS G-SRS-02 v0.98 persisted control plane")
+      - name: Package bounded evidence
+        run: |
+          mkdir -p artifact
+          cp config/manager_governance_authority_G_SRS_02_v0.98.json artifact/
+          cp config/sector_rs_current.json artifact/
+          cp sector_rs/materialized/sector_rs_cohort_registry_v1.csv artifact/
+          cp -r output_br_ibrx100_sector_rs_materialization_v0_98 artifact/
+          cp docs/validation/BR_IBRX100_Bounded_Sector_RS_Materialization_G-SRS-02_v0.98.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-srs-02-v0.98-control-evidence
+          path: artifact
