@@ -1,0 +1,25 @@
+{
+  "ordered_numeric_parameter_rule": "where semantically valid, frozen candidate set should include at least one less-strict and one more-strict candidate around any proposed finalist",
+  "exact_spacing": "NOT_DEFINED",
+  "stability_rule": "no parameter is stable merely because one exact value looks best",
+  "report_partitions": [
+    "DESIGN",
+    "VALIDATION",
+    "HOLDOUT only when eventually authorized"
+  ],
+  "report_grouping": "existing Frozen cohort/regional grouping without hidden reweighting",
+  "required_counts": [
+    "observation count",
+    "candidate-hit count",
+    "candidate-hit share",
+    "missing/not-verified count"
+  ],
+  "evidence_states": [
+    "EVIDENCE_AVAILABLE",
+    "EVIDENCE_SPARSE",
+    "ZERO_HIT",
+    "NOT_VERIFIED_INPUT"
+  ],
+  "minimum_hit_count": "NOT_DEFINED",
+  "target_survivor_count": "NONE"
+}
