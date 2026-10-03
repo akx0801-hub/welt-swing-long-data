@@ -1,0 +1,15 @@
+{
+  "Authority_ID": "G-P0-02",
+  "Authority_Version": "v1.00",
+  "Title": "Breakout Compression VCP Contract Remediation Authority",
+  "Authority_Class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "Decision": "CONTRACT_DESIGN_EVIDENCE_ONLY",
+  "Lane": "BREAKOUT_COMPRESSION_VCP",
+  "Predecessor": "G-P0-01 / v0.99",
+  "AUTOMATED_CONTRACT_READY": "NO",
+  "P0_RUN_AUTHORIZED": "NO",
+  "NUMERIC_THRESHOLD_PROMOTION_AUTHORIZED": "NO",
+  "LANE_RULE_PROMOTION_AUTHORIZED": "NO",
+  "Supersedes_Current_P0_Parameter_Authority": "NO",
+  "Historical_Evidence_Rewritten": "NO"
+}
