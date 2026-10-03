@@ -1,0 +1,12 @@
+{
+  "dimensions": [
+    "abs(DailyMove_Over_ATR14)",
+    "RVOL20",
+    "Close_Location_Value"
+  ],
+  "numeric_boundaries": "UNBOUND",
+  "boolean_composition": "UNBOUND",
+  "implicit_AND_OR": "PROHIBITED",
+  "inherit_2ATR": "NO",
+  "inherit_1_3_RVOL": "NO"
+}
