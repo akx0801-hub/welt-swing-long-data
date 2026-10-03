@@ -1,0 +1,10 @@
+Field,Requirement,v1.02_Value
+"Candidate_Set_ID","required future identifier","NONE"
+"parameter names","exact names required before DESIGN scoring","NONE"
+"exact values","finite exact candidate values required later","NONE"
+"exact units","required","SCHEMA_ONLY"
+"exact boolean composition","required where applicable","UNBOUND"
+"exact detector formulas","required","SCHEMA_ONLY"
+"strictness ordering","required where meaningful","SCHEMA_ONLY"
+"freeze timing","before any DESIGN forward diagnostic","BOUND_PROTOCOL"
+"percentile generation","prohibited from current/DESIGN/VALIDATION/HOLDOUT distributions","PROHIBITED"
