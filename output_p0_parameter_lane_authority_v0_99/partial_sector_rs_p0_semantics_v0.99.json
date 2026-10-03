@@ -1,0 +1,11 @@
+{
+  "Sector_RS": "AVAILABLE_WHERE_VERIFIED_ONLY",
+  "verified_rows": 28,
+  "global_frozen_rows": 1425,
+  "GLOBAL_SECTOR_RS_READY": "NO",
+  "missing_behavior": "RS_NOT_VERIFIED; distinguish from negative Sector RS",
+  "zero_fill": "NO",
+  "negative_inference_from_missing": "NO",
+  "standalone_fail_due_to_missing": "NO_UNLESS_FUTURE_EXPLICIT_AUTHORITY_REQUIRES_IT",
+  "master_basis": "soweit valide: zum Sektor"
+}
