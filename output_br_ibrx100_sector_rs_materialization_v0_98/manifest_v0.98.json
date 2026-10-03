@@ -1,0 +1,18 @@
+{
+  "version": "v0.98",
+  "payload_plane": {
+    "Drive_File_ID": "14rihggjcfiywzhph7HjPhwFE4jHTCl-a",
+    "Package_SHA256": "de6cf0268cb1354d16ea663f8f6be4d27d16aa6ed8e628985456bee2189f02eb",
+    "Materialization_Member": "BR_IBRX100_sector_rs_v1.csv",
+    "Materialization_Member_SHA256": "991df87fa070fd4a36d6caa4fdbbe2a1632b0d13b189f764c8554edb1c2386ab",
+    "Semantic_SHA256": "de1640a560a9f71d3fe364e0ac9812e40ddcdf330de4bc85c92779fc84e419ca"
+  },
+  "control_plane_required": [
+    "G-SRS-02 authority",
+    "sector_rs_current pointer",
+    "sector_rs cohort registry",
+    "bounded output evidence",
+    "validation document"
+  ],
+  "large_payload_git_required": "NO"
+}
