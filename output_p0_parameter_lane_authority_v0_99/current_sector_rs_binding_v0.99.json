@@ -1,0 +1,9 @@
+{
+  "Contract_Authority": "G-SRS-01 / v0.97",
+  "Materialization_Authority": "G-SRS-02 / v0.98",
+  "BR_materialized": 37,
+  "BR_verified": 28,
+  "BR_not_verified": 9,
+  "GLOBAL_VERIFIED_SECTOR_RS": "28 / 1425",
+  "GLOBAL_SECTOR_RS_READY": "NO"
+}
