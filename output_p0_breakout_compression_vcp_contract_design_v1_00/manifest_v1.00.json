@@ -1,0 +1,33 @@
+{
+  "schema": "WELT_SWING_P0_LANE1_CONTRACT_DESIGN_MANIFEST_V1_00",
+  "required_start_head": "d5baed847f1db8ccd7310a5c7da846e7d315187d",
+  "authority": "G-P0-02 / v1.00",
+  "files": [
+    "g_p0_02_authority_binding_v1.00.json",
+    "g_p0_01_predecessor_binding_v1.00.json",
+    "master_lane1_binding_v1.00.json",
+    "current_feature_semantics_audit_v1.00.csv",
+    "pivot_feature_semantics_audit_v1.00.json",
+    "history_derived_primitive_feasibility_v1.00.csv",
+    "compression_degeneracy_audit_v1.00.json",
+    "lane1_requirement_decomposition_v1.00.csv",
+    "lane1_contract_architecture_comparison_v1.00.csv",
+    "lane1_shadow_component_counts_v1.00.csv",
+    "lane1_irreducible_manager_decisions_v1.00.csv",
+    "numeric_threshold_nonpromotion_audit_v1.00.json",
+    "p0_current_pointer_immutability_audit_v1.00.json",
+    "scope_exclusion_audit_v1.00.json",
+    "provider_call_audit_v1.00.json",
+    "test_results_v1.00.csv",
+    "summary_v1.00.json",
+    "stage_checkpoint_v1.00.json",
+    "manifest_v1.00.json"
+  ],
+  "governed_inputs": {
+    "v093_package_sha256": "45d85da89ec288d9bc75164666eb745856f400a995d3e44b85d20e721a494574",
+    "v093_feature_sha256": "04608872250c482c630ef682825f869d70f7bd3e6cddf70e27e993f83e6625c9",
+    "v053_archive_sha256": "f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95",
+    "v053_sqlite_sha256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+  },
+  "decision_rows": "NO_PER_SECURITY_P0_DECISIONS"
+}
