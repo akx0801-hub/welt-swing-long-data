@@ -1,0 +1,15 @@
+{
+  "LANE1_CANDIDATE": "(BASE_BRANCH OR STAGE2_BRANCH) AND TREND_CONTEXT AND COMPRESSION AND PIVOT_PROXIMITY AND NOT_CLIMAX AND NOT_EXCESSIVE_RUNUP",
+  "TREND_CONTEXT": "Close_Tech>SMA200 AND EMA50>SMA200 AND EMA50_Slope_10>0",
+  "COMPRESSION": "Range5_Pct<Range10_Pct<Range20_Pct",
+  "PIVOT": "PriorHigh20_excl_t",
+  "parameter_dependent": [
+    "BASE_BRANCH",
+    "STAGE2 persistence if later required",
+    "PIVOT_PROXIMITY",
+    "CLIMAX",
+    "EXCESSIVE_RUNUP"
+  ],
+  "missing_input": "LANE1_NOT_VERIFIED_INPUT",
+  "executable_lane_pass_logic": "NO"
+}
