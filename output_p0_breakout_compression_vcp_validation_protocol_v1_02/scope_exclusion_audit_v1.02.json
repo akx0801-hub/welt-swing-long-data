@@ -1,0 +1,18 @@
+{
+  "candidate_values_introduced": 0,
+  "candidate_scoring_runs": 0,
+  "DESIGN_scoring": "NOT_STARTED",
+  "VALIDATION_scoring": "NOT_STARTED",
+  "HOLDOUT_OPENED": "NO",
+  "P0_RUNS": 0,
+  "P0_PASS": 0,
+  "P0_FAIL": 0,
+  "P0_MULTI_LANE": 0,
+  "P0_SURVIVORS": 0,
+  "P1_RUNS": 0,
+  "P2_RUNS": 0,
+  "Lane2_started": "NO",
+  "other_lanes": "UNCHANGED",
+  "G_FHR_01_mutated": "NO",
+  "Frozen_mutated": "NO"
+}
