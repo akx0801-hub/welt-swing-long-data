@@ -1,0 +1,15 @@
+{
+  "Authority": "G-P0-02 / v1.00",
+  "Decision": "CONTRACT_DESIGN_EVIDENCE_ONLY",
+  "Lane": "BREAKOUT_COMPRESSION_VCP",
+  "irreducible_decision_count": 8,
+  "High20_60_include_t": "YES",
+  "Prior_exclusive_pivot_requires_history": "YES",
+  "Strict_5_10_20_true": 1177,
+  "Frozen_population": 1425,
+  "numeric_thresholds_promoted": [],
+  "P0_RUNS": 0,
+  "P1_RUNS": 0,
+  "P2_RUNS": 0,
+  "Next_Manager_Gate": "BREAKOUT_COMPRESSION_VCP MANAGER CONTRACT DECISION"
+}
