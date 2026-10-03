@@ -1,0 +1,12 @@
+{
+  "dimensions": [
+    "R20",
+    "R60",
+    "Pivot_Extension_ATR"
+  ],
+  "numeric_boundaries": "UNBOUND",
+  "boolean_composition": "UNBOUND",
+  "implicit_AND_OR": "PROHIBITED",
+  "warning_18pct_20d_auto_exclusion": "NO",
+  "warning_30pct_60d_auto_exclusion": "NO"
+}
