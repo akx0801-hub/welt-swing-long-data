@@ -1,0 +1,13 @@
+{
+  "external_market_provider_requests": 0,
+  "Alpha_Vantage": 0,
+  "Yahoo_yfinance": 0,
+  "EODHD": 0,
+  "Scalable": 0,
+  "TradingView": 0,
+  "news": 0,
+  "IR": 0,
+  "market_refresh": 0,
+  "Google_Drive_governed_v053_payload_read": 1,
+  "note": "Drive read retrieves persisted governed v0.53 evidence; it is not a market/provider refresh"
+}
