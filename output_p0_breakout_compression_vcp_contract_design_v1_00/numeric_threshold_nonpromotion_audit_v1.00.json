@@ -1,0 +1,30 @@
+{
+  "promoted_numeric_thresholds": [],
+  "promoted_lane_rules": [],
+  "excluded": [
+    {
+      "reference": "~1 ATR above pivot",
+      "reason": "later real breakout handling"
+    },
+    {
+      "reference": "~1.3 RVOL",
+      "reason": "later A confirmation"
+    },
+    {
+      "reference": "~2 ATR climax",
+      "reason": "later climax reference, not P0 threshold"
+    },
+    {
+      "reference": "18% / 20d",
+      "reason": "Master warning value only"
+    },
+    {
+      "reference": "30% / 60d",
+      "reason": "Master warning value only"
+    }
+  ],
+  "empirical_percentile_threshold_discovery": "NOT_PERFORMED",
+  "PIVOT_PROXIMITY_THRESHOLD_AUTHORIZED": "NO",
+  "CLIMAX_DETECTOR": "NUMERIC_OR_SEQUENCE_DECISION_REQUIRED",
+  "EXCESSIVE_RUNUP_EXCLUSION": "CONTRACT_DECISION_REQUIRED"
+}
