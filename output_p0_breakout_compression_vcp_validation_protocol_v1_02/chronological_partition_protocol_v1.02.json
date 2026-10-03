@@ -1,0 +1,25 @@
+{
+  "algorithm": "sorted unique eligible ANCHOR_DATE values",
+  "N": 252,
+  "DESIGN": {
+    "date_count": 126,
+    "fraction_rule": "first floor(0.50*N)",
+    "start": "2025-09-17",
+    "end": "2026-03-11"
+  },
+  "VALIDATION": {
+    "date_count": 63,
+    "fraction_rule": "next floor(0.25*N)",
+    "start": "2026-03-12",
+    "end": "2026-06-08"
+  },
+  "HOLDOUT": {
+    "date_count": 63,
+    "fraction_rule": "all remaining dates",
+    "start": "2026-06-09",
+    "end": "2026-09-03"
+  },
+  "random_split": "NO",
+  "overlap": "NO",
+  "partition_fractions_are_P0_thresholds": "NO"
+}
