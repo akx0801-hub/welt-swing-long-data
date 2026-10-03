@@ -1,0 +1,18 @@
+{
+  "VALIDATION_MEMBERSHIP": "CURRENT_FROZEN_1425_BACKHISTORY",
+  "required_wording": "VALIDATED_WITHIN_CURRENT_FROZEN_1425_LINEAGE_ONLY",
+  "limitations": [
+    "current-membership survivorship limitation",
+    "different market calendars",
+    "different security history lengths",
+    "regional coverage imbalance",
+    "v0.53 fixed historical endpoint",
+    "split-adjustment information-set distinction"
+  ],
+  "claims_not_made": [
+    "historically unbiased global universe",
+    "historical constituent reconstruction",
+    "production-generalized alpha"
+  ],
+  "market_coverage_basis": "Primary_MIC from immutable Frozen/v0.93 identity; detailed counts persisted in feasibility coverage rows"
+}
