@@ -1,0 +1,42 @@
+name: G-P0-01 v0.99 bounded validation
+on:
+  push:
+    branches: [dev/g-p0-01-v0.99]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate bounded P0 authority
+        shell: python
+        run: |
+          import csv,json,pathlib
+          d=pathlib.Path("output_p0_parameter_lane_authority_v0_99")
+          a=json.load(open("config/manager_governance_authority_G_P0_01_v0.99.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          s=json.load(open(d/"summary_v0.99.json"))
+          t=list(csv.DictReader(open(d/"test_results_v0.99.csv")))
+          m=list(csv.DictReader(open(d/"p0_lane_current_readiness_matrix_v0.99.csv")))
+          assert a["Authority_ID"]=="G-P0-01" and a["AUTOMATED_P0_READY"]=="NO" and a["P0_RUN_AUTHORIZED"]=="NO"
+          assert a["p0_numeric_pass_thresholds"]==[] and a["promoted_lane_pass_rules"]==[]
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
+          assert len(m)==6 and all(x["Automated_Contract_Ready"]=="NO" for x in m)
+          assert all(x["Result"]=="PASS" for x in t) and len(t)>=33
+          assert s["READY_LANES"]==[] and len(s["BLOCKED_LANES"])==6
+          ex=json.load(open(d/"scope_exclusion_audit_v0.99.json"))
+          assert ex["P0_runs"]==ex["P1_runs"]==ex["P2_runs"]==0 and ex["P0_security_classifications"]==0
+          pr=json.load(open(d/"provider_call_audit_v0.99.json")); assert pr["external_requests"]==0
+          forbidden=["output_p0_parameter_lane_authority_v0_99/p0_classification_1425.csv"]
+          assert all(not pathlib.Path(x).exists() for x in forbidden)
+          print("PASS")
+      - name: Package bounded evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_01_v0.99.json config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_parameter_lane_authority_v0_99 artifact/
+          cp docs/validation/P0_Parameter_Lane_Authority_G-P0-01_v0.99.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-01-v0.99-parameter-lane-authority-evidence
+          path: artifact/
