@@ -1,0 +1,27 @@
+{
+  "AUTOMATED_P0_READY": "NO",
+  "P0_RUN_AUTHORIZED": "NO",
+  "p0_numeric_pass_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "READY_LANES": [],
+  "BLOCKED_LANES": [
+    "BREAKOUT_COMPRESSION_VCP",
+    "PULLBACK_RETEST",
+    "RECLAIM",
+    "QUIET_STRENGTH_RELATIVE_STRENGTH",
+    "POST_EVENT_DRIFT",
+    "CONTROLLED_MEAN_REVERSION"
+  ],
+  "P0_RUNS": 0,
+  "P0_PASS": 0,
+  "P0_FAIL": 0,
+  "P0_MULTI_LANE": 0,
+  "P0_DATA_ERROR": 0,
+  "P0_SURVIVORS": 0,
+  "P1_RUNS": 0,
+  "P2_RUNS": 0,
+  "SHORTLIST_FREEZE": "NOT_STARTED",
+  "P3": "NOT_STARTED",
+  "P4": "NOT_STARTED",
+  "P5": "NOT_STARTED"
+}
