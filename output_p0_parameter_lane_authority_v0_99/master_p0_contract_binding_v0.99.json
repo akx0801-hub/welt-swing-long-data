@@ -1,0 +1,17 @@
+{
+  "source": "docs/spec/WELT-SWING-LONG-DEV-v0.1-MASTER-2026-08-23.md",
+  "sections": [
+    29,
+    30,
+    31
+  ],
+  "P0_inputs": [
+    "Daily OHLCV",
+    "local features",
+    "benchmark/RS data",
+    "static Universe data"
+  ],
+  "per_security_web_research": "PROHIBITED",
+  "parameter_discipline": "NO_INVENTED_PRECISE_NUMBER_WHERE_NO_VALIDATED_THRESHOLD",
+  "qualitative_structural_DEV_classification": "ALLOWED_WITHOUT_FULLY_VALIDATED_AUTOMATED_U3K_CLAIM"
+}
