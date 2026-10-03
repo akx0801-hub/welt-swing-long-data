@@ -1,0 +1,19 @@
+{
+  "Authority_ID": "G-P0-04",
+  "Authority_Version": "v1.02",
+  "Title": "Breakout Compression VCP Parameter Validation Protocol Authority",
+  "Authority_Class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "Decision": "APPROVED_VALIDATION_PROTOCOL_NO_PARAMETER_VALUES",
+  "Lane": "BREAKOUT_COMPRESSION_VCP",
+  "Predecessor": "G-P0-03 / v1.01",
+  "VALIDATION_PROTOCOL_READY": "YES",
+  "PARAMETER_CANDIDATE_VALUES_AUTHORIZED": "NO",
+  "DESIGN_SCORING_AUTHORIZED": "NO",
+  "VALIDATION_SCORING_AUTHORIZED": "NO",
+  "HOLDOUT_OPENED": "NO",
+  "HOLDOUT_SCORING_AUTHORIZED": "NO",
+  "P0_RUN_AUTHORIZED": "NO",
+  "LANE1_AUTOMATED_CONTRACT_READY": "NO",
+  "Historical_Evidence_Rewritten": "NO",
+  "Validation_Membership": "VALIDATED_WITHIN_CURRENT_FROZEN_1425_LINEAGE_ONLY"
+}
