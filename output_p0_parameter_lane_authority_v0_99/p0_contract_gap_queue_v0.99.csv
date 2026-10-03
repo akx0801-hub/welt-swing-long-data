@@ -1,0 +1,7 @@
+Queue_Order,Lane,Unresolved_Contract_Items,Gate,Execute_In_v0_99
+"1","BREAKOUT_COMPRESSION_VCP","multi-week base/Stage-2 detector; pivot identity and pivot-proximity contract; P0 climax detector; P0 excessive-run-up semantic; complete lane decision rule","BREAKOUT_COMPRESSION_VCP_CONTRACT","NO"
+"2","PULLBACK_RETEST","controlled-pullback sequence; former-breakout-zone detector; horizontal-support identity; trend-destruction semantic; EMA proximity decision contract","PULLBACK_RETEST_CONTRACT","NO"
+"3","RECLAIM","relevant-zone identity; reclaim recency definition; multi-day confirmation rule; higher-low detector; climax detector","RECLAIM_CONTRACT","NO"
+"4","QUIET_STRENGTH_RELATIVE_STRENGTH","vertical-momentum-excess definition; deterministic coupling rule to another technical lane; coupled lanes themselves unresolved","QUIET_STRENGTH_RELATIVE_STRENGTH_CONTRACT","NO"
+"5","POST_EVENT_DRIFT","validated impulse detector; held-level identity/hold contract; tight-consolidation decision contract; drift detector; orderly-retest detector","POST_EVENT_DRIFT_CONTRACT","NO"
+"6","CONTROLLED_MEAN_REVERSION","controlled-decline semantic; stabilization sequence; accelerating-fall/falling-knife detector; P0 decision contract. Actual invalidation/target construction is later-stage only","CONTROLLED_MEAN_REVERSION_CONTRACT","NO"
