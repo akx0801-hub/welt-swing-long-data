@@ -1,0 +1,7 @@
+Component,Coverage,True,False,Null,Label
+"Trend_Context","1425","388","1037","0","SHADOW_NOT_P0_DECISION"
+"STRICT_NESTED_RANGE_COMPRESSION_5_10_20","1425","1177","248","0","SHADOW_NOT_P0_DECISION"
+"PriorHigh20_excl_t availability","1425","1425","0","0","SHADOW_NOT_P0_DECISION"
+"P0_Pivot_Distance_ATR finite","1425","1425","0","0","SHADOW_NOT_P0_DECISION"
+"Pivot_Extension_ATR finite","1425","1425","0","0","SHADOW_NOT_P0_DECISION"
+"Close_Location_Value finite","1425","1424","0","1","SHADOW_NOT_P0_DECISION"
