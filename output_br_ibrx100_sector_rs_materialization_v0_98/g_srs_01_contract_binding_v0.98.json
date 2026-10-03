@@ -1,0 +1,13 @@
+{
+  "Authority_ID": "G-SRS-01",
+  "version": "v0.97",
+  "state": "CONTRACT ACTIVE",
+  "method": "LEAVE_ONE_OUT_SECTOR_PEER_MEDIAN",
+  "Peer_Key": [
+    "Sector_Taxonomy",
+    "Sector_Code"
+  ],
+  "MIN_SYNCHRONIZED_OTHER_PEERS": 2,
+  "exact_feature_as_of_date": true,
+  "modified": "NO"
+}
