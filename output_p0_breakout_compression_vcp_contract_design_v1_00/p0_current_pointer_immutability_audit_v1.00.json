@@ -1,0 +1,10 @@
+{
+  "path": "config/p0_parameter_authority_current.json",
+  "expected_authority": "G-P0-01",
+  "expected_version": "v0.99",
+  "P0_RUN_AUTHORIZED": "NO",
+  "AUTOMATED_P0_READY": "NO",
+  "p0_numeric_pass_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "changed_by_v1_00": "NO"
+}
