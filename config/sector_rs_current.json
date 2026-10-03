@@ -1,0 +1,30 @@
+{
+  "Authority_ID": "G-SRS-02",
+  "Authority_Version": "v0.98",
+  "Scope": "BR_IBRX100_BOUNDED_ONLY",
+  "Payload_Storage_Mode": "EXTERNAL_CONTENT_ADDRESSED_GOOGLE_DRIVE_PACKAGE",
+  "Payload_Drive_File_ID": "14rihggjcfiywzhph7HjPhwFE4jHTCl-a",
+  "Payload_Package_SHA256": "de6cf0268cb1354d16ea663f8f6be4d27d16aa6ed8e628985456bee2189f02eb",
+  "Materialization_Member": "BR_IBRX100_sector_rs_v1.csv",
+  "Materialization_Member_SHA256": "991df87fa070fd4a36d6caa4fdbbe2a1632b0d13b189f764c8554edb1c2386ab",
+  "Semantic_SHA256": "de1640a560a9f71d3fe364e0ac9812e40ddcdf330de4bc85c92779fc84e419ca",
+  "BR_Materialized_Rows": 37,
+  "BR_Verified_Rows": 28,
+  "BR_Not_Verified_Rows": 9,
+  "GLOBAL_VERIFIED_SECTOR_RS_ROWS": 28,
+  "GLOBAL_FROZEN_ROWS": 1425,
+  "GLOBAL_SECTOR_RS_READY": "NO",
+  "Resolution_Contract": [
+    "read config/sector_rs_current.json",
+    "read G-SRS-02 authority",
+    "fetch exact Drive File ID",
+    "verify package SHA256",
+    "verify ZIP integrity",
+    "extract exact materialization member",
+    "verify member SHA256",
+    "verify semantic SHA256",
+    "consume only then"
+  ],
+  "Mismatch_Policy": "FAIL_CLOSED",
+  "Fallback": "NONE"
+}
