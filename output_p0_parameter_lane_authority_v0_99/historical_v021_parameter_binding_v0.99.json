@@ -1,0 +1,8 @@
+{
+  "source": "output_p0_lane_shadow_validation_v0_21/p0_lane_parameter_registry_v0.21.json",
+  "validation_status": "SHADOW_COMPONENT_VALIDATION_ONLY",
+  "historical_only": true,
+  "p0_numeric_pass_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "Frozen_1425_current_authority": false
+}
