@@ -1,0 +1,11 @@
+{
+  "verdict": "PASS",
+  "G_SRS_02": "ACTIVE_BOUNDED_BR_MATERIALIZATION",
+  "BR_materialized": 37,
+  "verified": 28,
+  "not_verified": 9,
+  "GLOBAL_VERIFIED_SECTOR_RS": "28 / 1425",
+  "GLOBAL_SECTOR_RS_READY": "NO",
+  "P0": "NOT STARTED",
+  "next": "P0 PARAMETER / LANE AUTHORITY WITH PARTIAL SECTOR-RS CAPABILITY"
+}
