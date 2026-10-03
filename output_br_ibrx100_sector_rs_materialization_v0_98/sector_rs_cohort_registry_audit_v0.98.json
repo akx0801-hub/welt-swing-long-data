@@ -1,0 +1,9 @@
+{
+  "Cohort": "BR_IBRX100",
+  "Materialized_Row_Count": 37,
+  "Verified_RS_Row_Count": 28,
+  "Not_Verified_RS_Row_Count": 9,
+  "Status": "BOUNDED_MATERIALIZED_WITH_NOT_VERIFIED_ROWS",
+  "registry_pointer_consistent": "YES",
+  "nonexistent_repository_csv_referenced": "NO"
+}
