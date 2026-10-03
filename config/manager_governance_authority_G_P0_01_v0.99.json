@@ -1,0 +1,42 @@
+{
+  "Authority_ID": "G-P0-01",
+  "Authority_Version": "v0.99",
+  "Title": "P0 Lane Contract and Parameter Readiness Authority",
+  "Authority_Class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "Forward_Only": true,
+  "Current_Feature_Authority": "G-FHR-01 / v0.93",
+  "Current_Home_RS_Authority": "G-FHR-01 / v0.93",
+  "Current_Sector_RS_Authority": "G-SRS-01 / v0.97 + G-SRS-02 / v0.98",
+  "Frozen_SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "p0_numeric_pass_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "lane_readiness_summary": {
+    "BREAKOUT_COMPRESSION_VCP": {
+      "AUTOMATED_CONTRACT_READY": "NO",
+      "Blocking_Reason": "required structural detectors and validated lane contract absent"
+    },
+    "PULLBACK_RETEST": {
+      "AUTOMATED_CONTRACT_READY": "NO",
+      "Blocking_Reason": "support/zone/sequence semantics not deterministically bound"
+    },
+    "RECLAIM": {
+      "AUTOMATED_CONTRACT_READY": "NO",
+      "Blocking_Reason": "recency/confirmation and structural detectors unbound"
+    },
+    "QUIET_STRENGTH_RELATIVE_STRENGTH": {
+      "AUTOMATED_CONTRACT_READY": "NO",
+      "Blocking_Reason": "vertical-excess and coupling contract absent; coupled lane contracts unresolved"
+    },
+    "POST_EVENT_DRIFT": {
+      "AUTOMATED_CONTRACT_READY": "NO",
+      "Blocking_Reason": "sequence/detector semantics unbound"
+    },
+    "CONTROLLED_MEAN_REVERSION": {
+      "AUTOMATED_CONTRACT_READY": "NO",
+      "Blocking_Reason": "stabilization/falling-knife/decline contract absent"
+    }
+  },
+  "AUTOMATED_P0_READY": "NO",
+  "P0_RUN_AUTHORIZED": "NO",
+  "Historical_Evidence_Rewritten": "NO"
+}
