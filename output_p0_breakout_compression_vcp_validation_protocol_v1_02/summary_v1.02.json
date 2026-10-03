@@ -1,0 +1,43 @@
+{
+  "verdict": "PASS",
+  "G_P0_04": "APPROVED_VALIDATION_PROTOCOL_NO_PARAMETER_VALUES",
+  "Lane1_validation_protocol": "BOUND",
+  "Candidate_parameter_values": "NONE",
+  "Design_scoring": "NOT_STARTED",
+  "Validation_scoring": "NOT_STARTED",
+  "Holdout": "SEALED_NOT_OPENED",
+  "P0": "NOT_AUTHORIZED",
+  "population": {
+    "eligible_anchor_rows": 332146,
+    "unique_dates": 252,
+    "date_range": [
+      "2025-09-17",
+      "2026-09-03"
+    ],
+    "membership": "VALIDATED_WITHIN_CURRENT_FROZEN_1425_LINEAGE_ONLY"
+  },
+  "partitions": {
+    "DESIGN": [
+      "2025-09-17",
+      "2026-03-11",
+      161811,
+      21360,
+      140451
+    ],
+    "VALIDATION": [
+      "2026-03-12",
+      "2026-06-08",
+      85410,
+      21360,
+      64050
+    ],
+    "HOLDOUT": [
+      "2026-06-09",
+      "2026-09-03",
+      84925,
+      18777,
+      66148
+    ]
+  },
+  "Next_Gate": "BREAKOUT_COMPRESSION_VCP PARAMETER CANDIDATE SET AUTHORIZATION"
+}
