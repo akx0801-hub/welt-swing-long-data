@@ -1,0 +1,31 @@
+{
+  "schema": "WELT_SWING_LANE1_ARCHITECTURE_V1_01",
+  "required_start_head": "fa2073c95e401fb1e41c09b9d366e5dfbd9dc004",
+  "authority": "G-P0-03 / v1.01",
+  "predecessor": "G-P0-02 / v1.00",
+  "output_files": [
+    "g_p0_03_authority_binding_v1.01.json",
+    "g_p0_02_predecessor_binding_v1.01.json",
+    "manager_decision_resolution_v1.01.csv",
+    "lane1_architecture_contract_v1.01.json",
+    "lane1_new_primitive_contracts_v1.01.csv",
+    "lane1_structural_composition_v1.01.json",
+    "lane1_shadow_architecture_feasibility_v1.01.csv",
+    "lane1_open_parameter_inventory_v1.01.csv",
+    "numeric_nonpromotion_audit_v1.01.json",
+    "p0_current_pointer_immutability_audit_v1.01.json",
+    "other_lane_immutability_audit_v1.01.json",
+    "scope_exclusion_audit_v1.01.json",
+    "provider_call_audit_v1.01.json",
+    "test_results_v1.01.csv",
+    "summary_v1.01.json",
+    "stage_checkpoint_v1.01.json",
+    "manifest_v1.01.json"
+  ],
+  "governed_inputs": {
+    "Frozen_SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "v093_Feature_SHA256": "04608872250c482c630ef682825f869d70f7bd3e6cddf70e27e993f83e6625c9",
+    "v053_SQLite_SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+  },
+  "external_provider_requests": 0
+}
