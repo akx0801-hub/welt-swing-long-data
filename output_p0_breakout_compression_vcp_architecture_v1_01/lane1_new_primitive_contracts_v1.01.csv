@@ -1,0 +1,5 @@
+Primitive,Definition,Status,Null_Behavior
+"PriorHigh20_excl_t","max High_Tech of immediately preceding 20 valid technical observations excluding t","CONTRACT_DEFINED_NOT_CANONICALLY_MATERIALIZED","NULL if insufficient valid history"
+"P0_Pivot_Distance_ATR","abs(Close_Tech[t]-PriorHigh20_excl_t)/ATR14[t]","CONTRACT_DEFINED_NOT_CANONICALLY_MATERIALIZED","NULL if required input nonfinite/undefined or ATR14=0"
+"Pivot_Extension_ATR","(Close_Tech[t]-PriorHigh20_excl_t)/ATR14[t]","CONTRACT_DEFINED_NOT_CANONICALLY_MATERIALIZED","NULL if required input nonfinite/undefined or ATR14=0"
+"Close_Location_Value","(Close_Tech-Low_Tech)/(High_Tech-Low_Tech)","CONTRACT_DEFINED_NOT_CANONICALLY_MATERIALIZED","NULL / NOT_VERIFIED if High_Tech=Low_Tech or required input nonfinite; no epsilon; no zero-fill"
