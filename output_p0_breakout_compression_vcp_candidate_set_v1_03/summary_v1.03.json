@@ -1,0 +1,14 @@
+{
+  "verdict": "PASS",
+  "G_P0_05": "APPROVED_FROZEN_CANDIDATE_SET_NO_SCORING",
+  "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+  "Candidate_Count": 21,
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "Candidate_values": "FROZEN",
+  "Parameter_values": "NOT_PROMOTED",
+  "DESIGN_scoring": "AUTHORIZED_BUT_NOT_STARTED",
+  "VALIDATION": "NOT_AUTHORIZED",
+  "HOLDOUT": "SEALED",
+  "P0": "NOT_AUTHORIZED",
+  "Next_Gate": "BREAKOUT_COMPRESSION_VCP DESIGN EXECUTION"
+}
