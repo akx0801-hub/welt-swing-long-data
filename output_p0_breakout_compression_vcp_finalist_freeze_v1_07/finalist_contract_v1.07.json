@@ -1,0 +1,18 @@
+{
+  "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "Candidate_ID": "L1-C07-PIVOT_PROXIMITY_STRICT",
+  "Base_Window": 30,
+  "Base_Width_Boundary": 0.18,
+  "Stage2_Persistence": 3,
+  "Pivot_Proximity_Cutoff_ATR": 0.75,
+  "Climax_Move_ATR": 2.25,
+  "Climax_RVOL": 2.25,
+  "Climax_Close_Location": 0.5,
+  "Runup_R20": 0.2,
+  "Runup_R60": 0.35,
+  "Runup_Pivot_Extension_ATR": 1.25,
+  "Climax_Boolean_Contract": "abs(DailyMove_Over_ATR14)>=Climax_Move_ATR AND RVOL20>=Climax_RVOL AND Close_Location_Value<=Climax_Close_Location",
+  "Runup_Boolean_Contract": "(R20>=Runup_R20 AND R60>=Runup_R60) OR (Pivot_Extension_ATR>=Runup_Pivot_Extension_ATR)",
+  "Complete_Lane_Composition": "(BASE_BRANCH OR STAGE2_BRANCH) AND TREND_CONTEXT AND COMPRESSION AND PIVOT_PROXIMITY_PASS AND NOT CLIMAX AND NOT EXCESSIVE_RUNUP"
+}
