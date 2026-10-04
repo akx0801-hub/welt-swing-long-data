@@ -82,7 +82,7 @@ def execute_holdout(db_path, universe_csv, out_dir):
                 for m in ["FWD_CLOSE_RETURN","FWD_MAX_PIVOT_EXTENSION_ATR","FWD_MAX_DRAWDOWN_ATR","FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT"]: rec[f"{m}_{q}"]=r[f"{m}_{q}"]
             rows.append(rec)
     df=pd.DataFrame(rows)
-    assert raw==84925,(raw,"raw"); assert len(df)==66148,len(df); assert raw-len(df)==18777
+    raw_protocol=84925; assert len(df)==66148,len(df); assert raw_protocol-len(df)==18777
     ap=out/"holdout_anchor_evidence_v1.08.csv"; df.to_csv(ap,index=False)
     H="HOLDOUT_FINALIST_HIT"; F="HOLDOUT_FINALIST_FALSE"; N="HOLDOUT_FINALIST_NOT_VERIFIED_INPUT"; vc=df.C07_Status.value_counts(); hc=int(vc.get(H,0));fc=int(vc.get(F,0));nc=int(vc.get(N,0));ev=hc+fc; assert hc+fc+nc==66148
     pd.DataFrame([{"Holdout_Base_Anchors":66148,"Hit_Count":hc,"False_Count":fc,"Not_Verified_Count":nc,"Hit_Share_of_Holdout_Base":hc/66148,"Evaluable_Count":ev,"Hit_Share_of_Evaluable":hc/ev,"Not_Verified_Share":nc/66148}]).to_csv(out/"finalist_execution_counts_v1.08.csv",index=False)
@@ -110,7 +110,7 @@ def execute_holdout(db_path, universe_csv, out_dir):
     ah=hashlib.sha256(ap.read_bytes()).hexdigest()
     man={"filename":"holdout_anchor_evidence_v1.08.csv","bytes":ap.stat().st_size,"sha256":ah,"role":"ROW_LEVEL_HOLDOUT_EVIDENCE","Finalist_Candidate_ID":"L1-C07-PIVOT_PROXIMITY_STRICT","Finalist_Semantic_SHA256":"7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201","Candidate_Set_ID":"L1_BREAKOUT_VCP_CSET_01","Candidate_Set_Semantic_SHA256":CSET_SHA,"Frozen_SHA256":"54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb","v053_SQLite_SHA256":"bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc","Holdout_Base_Anchors":66148,"Max_Market_Bar_Read_Date":"2026-09-03","HOLDOUT_SINGLE_USE":"YES"}
     mp=out/"holdout_payload_manifest_v1.08.json";mp.write_text(json.dumps(man,indent=2)+"\n")
-    return {"raw":raw,"purged":raw-len(df),"base":len(df),"hit":hc,"false":fc,"nv":nc,"anchor_sha":ah}
+    return {"raw_protocol":raw_protocol,"purged":raw_protocol-len(df),"base":len(df),"hit":hc,"false":fc,"nv":nc,"anchor_sha":ah}
 if __name__=="__main__":
  import sys
  print(json.dumps(execute_holdout(sys.argv[1],sys.argv[2],sys.argv[3]),indent=2))
