@@ -1,0 +1,46 @@
+{
+  "Decision_Basis": [
+    "EXACT_OAT_ISOLATION",
+    "IMPLEMENTATION_VALID_BOTH_PARTITIONS",
+    "UNCHANGED_MISSING_INPUT_BEHAVIOR",
+    "CONSISTENT_PIVOT_EXTENSION_IMPROVEMENT",
+    "CONSISTENT_PIVOT_CROSS_IMPROVEMENT",
+    "NO_TARGET_HIT_RATE",
+    "NO_SCALAR_RETURN_OPTIMIZATION",
+    "NO_POST_VALIDATION_RETUNING"
+  ],
+  "DESIGN": {
+    "C00_Hit_Share": 0.15512437740043752,
+    "C07_Hit_Share": 0.09280385352610465,
+    "Pivot_Extension_Delta_5": 0.226297,
+    "Pivot_Extension_Delta_10": 0.204705,
+    "Pivot_Extension_Delta_15": 0.189771,
+    "Pivot_Cross_Delta_5": 0.086365,
+    "Pivot_Cross_Delta_10": 0.06435,
+    "Pivot_Cross_Delta_15": 0.051604
+  },
+  "VALIDATION": {
+    "C00_Hit_Share": 0.1006267682,
+    "C07_Hit_Share": 0.05953515997,
+    "C00_Pivot_Extension": [
+      0.6191067149,
+      1.066109877,
+      1.427670745
+    ],
+    "C07_Pivot_Extension": [
+      0.8752153025,
+      1.318070467,
+      1.727222922
+    ],
+    "C00_Pivot_Cross": [
+      0.5549860205,
+      0.6674433054,
+      0.7339235788
+    ],
+    "C07_Pivot_Cross": [
+      0.6537148858,
+      0.7492780257,
+      0.8049356787
+    ]
+  }
+}
