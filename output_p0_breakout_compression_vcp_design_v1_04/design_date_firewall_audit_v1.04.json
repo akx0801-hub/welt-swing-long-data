@@ -1,0 +1,9 @@
+{
+  "Market_Data_Query_Max_Date": "2026-03-11",
+  "MAX_MARKET_BAR_READ_DATE": "2026-03-11",
+  "Max_Scored_Anchor_Date": "2026-02-18",
+  "Earlier_History_Allowed": "YES",
+  "VALIDATION_MARKET_OUTCOMES_READ": "NO",
+  "HOLDOUT_MARKET_OUTCOMES_READ": "NO",
+  "status": "PASS"
+}
