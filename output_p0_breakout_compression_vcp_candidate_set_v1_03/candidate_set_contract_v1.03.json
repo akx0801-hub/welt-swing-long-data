@@ -1,0 +1,17 @@
+{
+  "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+  "Version": "v1.03",
+  "Candidate_Count": 21,
+  "Structure": "1 REFERENCE + 20 ONE_PARAMETER_AT_A_TIME sensitivity candidates",
+  "Cartesian_Grid": "PROHIBITED",
+  "Additional_Combinations": "NEW_MANAGER_AUTHORITY_REQUIRED_BEFORE_EVALUATION",
+  "Candidate_Values_Source": "NEW_G_P0_05_MANAGER_DEV_CANDIDATE_VALUES",
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "complete_rows": "YES",
+  "trend_context": "Close_Tech>SMA200 AND EMA50>SMA200 AND EMA50_Slope_10>0",
+  "compression": "Range5_Pct<Range10_Pct AND Range10_Pct<Range20_Pct",
+  "pivot": "PriorHigh20_excl_t",
+  "pivot_proximity_metric": "P0_Pivot_Distance_ATR",
+  "complete_lane_composition": "(BASE_BRANCH OR STAGE2_BRANCH) AND TREND_CONTEXT AND COMPRESSION AND PIVOT_PROXIMITY_PASS AND NOT CLIMAX AND NOT EXCESSIVE_RUNUP",
+  "missing_required_input": "LANE1_NOT_VERIFIED_INPUT_NO_FALLBACK"
+}
