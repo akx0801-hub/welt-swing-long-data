@@ -1,0 +1,6 @@
+{
+  "Finalist_Semantic_SHA256": "7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201",
+  "Algorithm": "SHA-256",
+  "Serialization": "canonical JSON UTF-8; keys sorted; compact separators; exact complete finalist semantic fields",
+  "Deterministic": "YES"
+}
