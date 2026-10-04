@@ -1,0 +1,46 @@
+name: G-P0-09 v1.07 bounded governance validation
+on:
+  push:
+    branches: [dev/g-p0-09-v1.07]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate finalist freeze
+        shell: python
+        run: |
+          import csv,json,hashlib,pathlib
+          D=pathlib.Path("output_p0_breakout_compression_vcp_finalist_freeze_v1_07")
+          C="8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235"
+          H="7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201"
+          a=json.load(open("config/manager_governance_authority_G_P0_09_v1.07.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          f=json.load(open(D/"finalist_contract_v1.07.json"))
+          t=list(csv.DictReader(open(D/"test_results_v1.07.csv")))
+          candidates=pathlib.Path("output_p0_breakout_compression_vcp_candidate_set_v1_03/lane1_candidate_set_v1.03.csv").read_bytes()
+          assert hashlib.sha256(candidates).hexdigest()==C
+          s=json.dumps(f,sort_keys=True,separators=(",",":"))
+          assert hashlib.sha256(s.encode()).hexdigest()==H
+          assert a["Decision"]=="FINALIST_FROZEN_C07_HOLDOUT_AUTHORIZED_NOT_STARTED"
+          assert a["Finalist_Candidate_ID"]=="L1-C07-PIVOT_PROXIMITY_STRICT" and a["Finalist_Semantic_SHA256"]==H
+          assert f["Pivot_Proximity_Cutoff_ATR"]==0.75
+          assert a["LANE1_FINALIST_FROZEN"]=="YES"
+          assert a["HOLDOUT_SCORING_AUTHORIZED"]=="YES" and a["HOLDOUT_SCORING_STARTED"]=="NO" and a["HOLDOUT_OPENED"]=="NO"
+          assert a["AUTHORIZED_HOLDOUT_CANDIDATE_COUNT"]==1
+          assert a["PARAMETER_PROMOTION_AUTHORIZED"]=="NO" and a["P0_RUN_AUTHORIZED"]=="NO"
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99" and p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          assert len(t)>=41 and all(x["Result"]=="PASS" for x in t)
+          print("PASS")
+      - name: Package evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_09_v1.07.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_breakout_compression_vcp_finalist_freeze_v1_07 artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_Finalist_Freeze_G-P0-09_v1.07.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-09-v1.07-finalist-freeze-evidence
+          path: artifact/
