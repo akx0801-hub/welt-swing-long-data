@@ -1,5 +1,7 @@
 name: G-P0-10 v1.08 holdout execution
 on:
+  push:
+    branches: [dev/g-p0-10-v1.08]
   workflow_dispatch:
 jobs:
   execute:
