@@ -1,0 +1,11 @@
+Parameter,Lower_or_Alternate,Reference,Upper_or_Alternate,Flanks_Present
+Base_Window,20,30,40,YES
+Base_Width_Boundary,0.12,0.18,0.24,YES
+Stage2_Persistence,1,3,5,YES
+Pivot_Proximity_Cutoff_ATR,0.75,1.25,1.75,YES
+Climax_Move_ATR,1.5,2.25,3,YES
+Climax_RVOL,1.5,2.25,3,YES
+Climax_Close_Location,0.35,0.5,0.65,YES
+Runup_R20,0.12,0.2,0.28,YES
+Runup_R60,0.2,0.35,0.5,YES
+Runup_Pivot_Extension_ATR,0.75,1.25,1.75,YES
