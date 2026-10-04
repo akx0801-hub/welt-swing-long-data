@@ -1,0 +1,40 @@
+name: G-P0-08 v1.06 bounded validation evidence
+on:
+  push:
+    branches: [dev/g-p0-08-v1.06]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate persisted evidence
+        shell: python
+        run: |
+          import csv,json,pathlib
+          d=pathlib.Path("output_p0_breakout_compression_vcp_validation_v1_06")
+          a=json.load(open("config/manager_governance_authority_G_P0_08_v1.06.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          x=list(csv.DictReader(open(d/"candidate_validation_execution_counts_v1.06.csv")))
+          t=list(csv.DictReader(open(d/"test_results_v1.06.csv")))
+          assert a["Decision"]=="VALIDATION_EVIDENCE_COMPLETE_NO_FINALIST_NO_PARAMETER_PROMOTION"
+          assert a["VALIDATION_BASE_ANCHORS"]==64050 and len(x)==21
+          assert all(int(r["Hit_Count"])+int(r["False_Count"])+int(r["Not_Verified_Count"])==64050 for r in x)
+          assert a["Candidate_Set_Semantic_SHA256"]=="8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235"
+          assert a["FINALIST"]=="NONE" and a["HOLDOUT_OPENED"]=="NO" and a["HOLDOUT_SCORING_AUTHORIZED"]=="NO"
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99" and p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          assert len(t)>=51 and all(r["Result"]=="PASS" for r in t)
+          assert json.load(open(d/"drive_roundtrip_verification_v1.06.json"))["Roundtrip"]=="PASS"
+          print("PASS")
+      - name: Package control-plane evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_08_v1.06.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_breakout_compression_vcp_validation_v1_06 artifact/
+          cp scripts/g_p0_08_validation_execution_v1_06.py artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_VALIDATION_Execution_G-P0-08_v1.06.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-08-v1.06-validation-evidence
+          path: artifact/
