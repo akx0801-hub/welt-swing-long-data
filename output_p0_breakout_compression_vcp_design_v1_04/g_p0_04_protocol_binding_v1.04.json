@@ -1,0 +1,17 @@
+{
+  "Authority": "G-P0-04 / v1.02",
+  "DESIGN": [
+    "2025-09-17",
+    "2026-03-11"
+  ],
+  "Raw_Eligible_Anchors": 161811,
+  "Forward_Window_Purged": 21360,
+  "Scored_Base_Anchors": 140451,
+  "Forward_Horizons": [
+    5,
+    10,
+    15
+  ],
+  "VALIDATION_SCORING_AUTHORIZED": "NO",
+  "HOLDOUT_OPENED": "NO"
+}

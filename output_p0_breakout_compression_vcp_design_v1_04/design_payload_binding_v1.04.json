@@ -1,0 +1,10 @@
+{
+  "filename": "WELT-SWING_L1_BREAKOUT_VCP_DESIGN_v1.04_Payload.zip",
+  "Drive_File_ID": "1-fxXthFiOFSR9psiksmpaxXCPuNTV6vZ",
+  "bytes": 9571105,
+  "sha256": "c10a137e42701fd08680954767c064371e4b15845525b14a704dcbbfe79dceec",
+  "row_member_sha256": "6888cf9db59f8858870b6bb2a6384dd73112ee85acbc8b475c1f2b4d52d26597",
+  "rows": 140451,
+  "candidate_status_columns": 21,
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235"
+}
