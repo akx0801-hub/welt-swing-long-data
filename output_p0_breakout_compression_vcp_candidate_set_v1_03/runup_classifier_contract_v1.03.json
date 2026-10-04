@@ -1,0 +1,23 @@
+{
+  "EXCESSIVE_RUNUP": "(R20>=Runup_R20 AND R60>=Runup_R60) OR (Pivot_Extension_ATR>=Runup_Pivot_Extension_ATR)",
+  "boolean": "(R20 AND R60) OR Pivot_Extension",
+  "R20": [
+    0.12,
+    0.2,
+    0.28
+  ],
+  "R60": [
+    0.2,
+    0.35,
+    0.5
+  ],
+  "Pivot_Extension_ATR": [
+    0.75,
+    1.25,
+    1.75
+  ],
+  "Pivot_Extension_ATR_formula": "(Close_Tech[t]-PriorHigh20_excl_t)/ATR14[t]",
+  "legacy_18pct_20d_used": "NO",
+  "legacy_30pct_60d_used": "NO",
+  "entry_distance_rule": "NO"
+}
