@@ -1,0 +1,12 @@
+{
+  "Authority": "G-P0-06 / v1.04",
+  "Raw": 161811,
+  "Purged": 21360,
+  "Scored": 140451,
+  "Hit_Range": [
+    13024,
+    29428
+  ],
+  "Not_Verified_Per_Candidate": 112,
+  "Implementation_Defect": "NO"
+}
