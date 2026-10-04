@@ -1,0 +1,7 @@
+{
+  "HOLDOUT_START": "2026-06-09",
+  "HOLDOUT_END": "2026-09-03",
+  "MAX_MARKET_BAR_READ_DATE": "2026-09-03",
+  "Bars_After_Firewall_Read": 0,
+  "Full_15_Session_Window_Inside_Holdout": "YES"
+}
