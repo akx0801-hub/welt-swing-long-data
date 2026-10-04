@@ -1,0 +1,12 @@
+{
+  "schema": "WELT_SWING_LANE1_HOLDOUT_V1_08",
+  "required_start_head": "67b6de580c542656660840b98f2483d581981ce8",
+  "authority": "G-P0-10 / v1.08",
+  "Finalist_SHA256": "7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201",
+  "Candidate_Set_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "Frozen_SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "v053_SQLite_SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "Payload_Drive_ID": "1dJImdpnpmjkNEqkRjxO6fn1ma0WUr6Oi",
+  "Payload_SHA256": "d90ba32035ac62f09a710a0094b0905ee8ba4a7c51ac76049a4fe5565c1fbbc6",
+  "Provider_Calls": 0
+}
