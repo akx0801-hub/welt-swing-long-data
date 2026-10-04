@@ -1,0 +1,14 @@
+{
+  "Drive_File_ID": "1qk7RWG4aYagYerDxUzXDIi9e5mOmB1Sh",
+  "Roundtrip": "PASS",
+  "Package_Bytes": 5443044,
+  "Package_SHA256": "fdaba4dd32083790c6ec73252fa07efd5d6b982289ca19cd7536223daf4ab058",
+  "ZIP_Integrity": "PASS",
+  "Exact_Member_Set": [
+    "validation_anchor_evidence_v1.06.csv",
+    "validation_payload_manifest_v1.06.json"
+  ],
+  "Anchor_Rows": 64050,
+  "Candidate_Status_Columns": 21,
+  "Candidate_Set_SHA_Binding": "PASS"
+}
