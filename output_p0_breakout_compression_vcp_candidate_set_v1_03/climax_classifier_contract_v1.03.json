@@ -1,0 +1,23 @@
+{
+  "CLIMAX": "abs(DailyMove_Over_ATR14)>=Climax_Move_ATR AND RVOL20>=Climax_RVOL AND Close_Location_Value<=Climax_Close_Location",
+  "boolean": "AND_ALL_THREE_REQUIRED",
+  "Move_ATR": [
+    1.5,
+    2.25,
+    3
+  ],
+  "RVOL": [
+    1.5,
+    2.25,
+    3
+  ],
+  "Close_Location": [
+    0.35,
+    0.5,
+    0.65
+  ],
+  "Close_Location_Value": "(Close_Tech-Low_Tech)/(High_Tech-Low_Tech)",
+  "High_equals_Low": "NOT_VERIFIED_INPUT",
+  "legacy_2_ATR_inherited": "NO",
+  "legacy_1_3_RVOL_inherited": "NO"
+}
