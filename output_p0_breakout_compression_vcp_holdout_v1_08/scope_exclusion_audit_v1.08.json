@@ -1,0 +1,10 @@
+{
+  "P0_RUNS": 0,
+  "P1_RUNS": 0,
+  "P2_RUNS": 0,
+  "OTHER_LANES_UNCHANGED": "YES",
+  "LANE2_STARTED": "NO",
+  "Trade_Simulation": "NO",
+  "Scalar_Objective": "NO",
+  "Performance_Pass_Gate": "NO"
+}
