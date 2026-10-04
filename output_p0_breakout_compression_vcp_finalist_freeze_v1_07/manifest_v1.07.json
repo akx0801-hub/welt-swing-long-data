@@ -1,0 +1,9 @@
+{
+  "schema": "WELT_SWING_LANE1_FINALIST_FREEZE_V1_07",
+  "required_start_head": "b6f62844c971546a36af281aa828de85b52e0061",
+  "authority": "G-P0-09 / v1.07",
+  "Candidate_Set_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "Finalist_SHA256": "7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201",
+  "Market_Data_Reads": 0,
+  "Provider_Calls": 0
+}
