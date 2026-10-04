@@ -1,0 +1,35 @@
+{
+  "Raw_DESIGN_Anchors": 161811,
+  "Purged_Anchors": 21360,
+  "Scored_DESIGN_Base": 140451,
+  "All_21_Row_Conservation": "PASS",
+  "Evidence_State_All_21": "EVIDENCE_AVAILABLE",
+  "Implementation_Defect": "NONE",
+  "Not_Verified_Count_Each": 112,
+  "Hit_Range": [
+    13024,
+    29428
+  ],
+  "MAX_MARKET_BAR_READ_DATE": "2026-03-11",
+  "VALIDATION_MARKET_OUTCOMES_READ": "NO",
+  "HOLDOUT_MARKET_OUTCOMES_READ": "NO",
+  "HOLDOUT_OPENED": "NO",
+  "diagnostic_families": [
+    "FWD_CLOSE_RETURN_h",
+    "FWD_MAX_PIVOT_EXTENSION_ATR_h",
+    "FWD_MAX_DRAWDOWN_ATR_h",
+    "FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_h"
+  ],
+  "horizons": [
+    5,
+    10,
+    15
+  ],
+  "subsets": [
+    "HIT",
+    "FALSE",
+    "ALL_EVALUABLE"
+  ],
+  "scalar_objective": "NONE",
+  "candidate_ranking": "NONE"
+}
