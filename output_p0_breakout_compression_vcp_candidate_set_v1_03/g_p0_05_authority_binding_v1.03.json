@@ -1,0 +1,23 @@
+{
+  "Authority_ID": "G-P0-05",
+  "Authority_Version": "v1.03",
+  "Title": "Breakout Compression VCP Frozen Candidate Set Authority",
+  "Authority_Class": "EXPLICIT_MANAGER_GOVERNANCE",
+  "Decision": "APPROVED_FROZEN_CANDIDATE_SET_NO_SCORING",
+  "Lane": "BREAKOUT_COMPRESSION_VCP",
+  "Predecessor": "G-P0-04 / v1.02",
+  "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+  "Candidate_Count": 21,
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "Candidate_Values_Source": "NEW_G_P0_05_MANAGER_DEV_CANDIDATE_VALUES",
+  "Candidate_Set_Frozen": "YES",
+  "Candidate_Changes_Require_New_Authority": "YES",
+  "DESIGN_SCORING_AUTHORIZED": "YES",
+  "DESIGN_SCORING_STARTED": "NO",
+  "VALIDATION_SCORING_AUTHORIZED": "NO",
+  "HOLDOUT_OPENED": "NO",
+  "HOLDOUT_SCORING_AUTHORIZED": "NO",
+  "PARAMETER_PROMOTION_AUTHORIZED": "NO",
+  "LANE1_AUTOMATED_CONTRACT_READY": "NO",
+  "P0_RUN_AUTHORIZED": "NO"
+}
