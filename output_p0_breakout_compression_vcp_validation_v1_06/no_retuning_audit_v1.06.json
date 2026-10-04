@@ -1,0 +1,9 @@
+{
+  "threshold_changes": 0,
+  "boolean_composition_changes": 0,
+  "base_window_changes": 0,
+  "persistence_changes": 0,
+  "new_candidates": 0,
+  "candidate_deletions": 0,
+  "ranking_objective": "NONE"
+}
