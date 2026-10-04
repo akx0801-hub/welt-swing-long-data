@@ -1,0 +1,9 @@
+{
+  "Validation_Start": "2026-03-12",
+  "Validation_End": "2026-06-08",
+  "Unique_Raw_Dates": 63,
+  "MAX_MARKET_BAR_READ_DATE": "2026-06-08",
+  "HOLDOUT_START": "2026-06-09",
+  "HOLDOUT_MARKET_BARS_READ": "NO",
+  "HOLDOUT_OUTCOMES_READ": "NO"
+}
