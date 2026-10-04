@@ -1,0 +1,13 @@
+{
+  "Authority": "G-P0-06 / v1.04",
+  "Decision": "DESIGN_EVIDENCE_COMPLETE_NO_PARAMETER_PROMOTION",
+  "Workflow_Run_ID": 37183315198,
+  "Workflow_Conclusion": "success",
+  "Artifact_ID": 11295807057,
+  "Artifact_Digest": "sha256:a4e4adfd9ac4e1a6825af3a60b3637e083e7b5adf12f5bc48e814b4d97ca4e38",
+  "Drive_Payload_ID": "1-fxXthFiOFSR9psiksmpaxXCPuNTV6vZ",
+  "Drive_Payload_SHA256": "c10a137e42701fd08680954767c064371e4b15845525b14a704dcbbfe79dceec",
+  "Roundtrip": "PASS",
+  "Payload_Rows": 140451,
+  "Candidate_Status_Columns": 21
+}
