@@ -1,0 +1,11 @@
+{
+  "schema": "WELT_SWING_LANE1_DESIGN_REVIEW_VALIDATION_AUTHORIZATION_V1_05",
+  "required_start_head": "d025e2940b149b17178c0fb66fb207ef020aaa11",
+  "authority": "G-P0-07 / v1.05",
+  "predecessor": "G-P0-06 / v1.04",
+  "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+  "Candidate_Count": 21,
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "validation_execution": "NOT_STARTED",
+  "holdout": "SEALED"
+}
