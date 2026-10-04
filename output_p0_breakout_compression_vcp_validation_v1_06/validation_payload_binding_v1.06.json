@@ -1,0 +1,10 @@
+{
+  "Drive_File_ID": "1qk7RWG4aYagYerDxUzXDIi9e5mOmB1Sh",
+  "Filename": "WELT-SWING_L1_BREAKOUT_VCP_VALIDATION_v1.06_Payload.zip",
+  "Bytes": 5443044,
+  "SHA256": "fdaba4dd32083790c6ec73252fa07efd5d6b982289ca19cd7536223daf4ab058",
+  "Anchor_Rows": 64050,
+  "Candidate_Status_Columns": 21,
+  "CSV_SHA256": "c325435042086156861209a0899b75809066690da1ea732fc755dcb1da2e3978",
+  "Manifest_SHA256": "87fa6232e58b254491d6280ccff31dc194cea02445b3f94c42665b5a4aeb2adf"
+}
