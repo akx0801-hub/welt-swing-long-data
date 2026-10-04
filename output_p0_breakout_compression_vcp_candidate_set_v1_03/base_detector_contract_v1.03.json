@@ -1,0 +1,13 @@
+{
+  "Base_Window": "N in {20,30,40}; immediately preceding N valid technical observations t-N..t-1; anchor t excluded",
+  "Base_High_N": "max High_Tech over t-N..t-1",
+  "Base_Low_N": "min Low_Tech over t-N..t-1",
+  "Base_Min_Close_N": "min Close_Tech over t-N..t-1",
+  "Base_Drawdown_Pct_N": "1-(Base_Low_N/Base_High_N)",
+  "Structural_Breakdown": "for every valid j in base window Close_Tech[j]>SMA200[j]",
+  "SMA200_missing": "BASE_BRANCH=NOT_VERIFIED_INPUT",
+  "Base_to_Pivot_Relation": "Base_High_N == PriorHigh20_excl_t",
+  "float_tolerance": "NONE",
+  "series": "same governed split-normalized technical series",
+  "BASE_BRANCH_TRUE": "Base_Drawdown_Pct_N<=Base_Width_Boundary AND all base-window closes above contemporaneous SMA200 AND Base_High_N==PriorHigh20_excl_t"
+}
