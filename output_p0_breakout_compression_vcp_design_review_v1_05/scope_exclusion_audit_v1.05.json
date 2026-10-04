@@ -1,0 +1,13 @@
+{
+  "governance_only": "YES",
+  "new_market_outcomes_calculated": "NO",
+  "VALIDATION_executed": "NO",
+  "HOLDOUT_opened": "NO",
+  "candidate_pruning": "NO",
+  "finalist_selected": "NO",
+  "parameters_promoted": "NO",
+  "P0_RUNS": 0,
+  "P1_RUNS": 0,
+  "P2_RUNS": 0,
+  "other_lanes": "UNCHANGED"
+}
