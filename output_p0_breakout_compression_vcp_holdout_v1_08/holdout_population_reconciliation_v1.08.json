@@ -1,0 +1,12 @@
+{
+  "Raw_Eligible_Anchors_Bound_From_Protocol": 84925,
+  "Purged_Anchors": 18777,
+  "HOLDOUT_BASE_ANCHORS": 66148,
+  "Row_Conservation": "4290 + 61717 + 141 = 66148",
+  "Partition_Unique_Dates": 63,
+  "Scored_Anchor_Date_Range": [
+    "2026-06-09",
+    "2026-08-13"
+  ],
+  "Purge_Note": "15-valid-session forward window must remain within HOLDOUT; protocol raw count is predecessor-bound because firewall prohibits reading post-2026-09-03 bars."
+}
