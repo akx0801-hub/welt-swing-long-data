@@ -1,0 +1,11 @@
+{
+  "DESIGN_forward_outcomes_read": "NO",
+  "VALIDATION_forward_outcomes_read": "NO",
+  "HOLDOUT_forward_outcomes_read": "NO",
+  "forward_outcomes_calculated": "NO",
+  "candidate_hit_counts": "NO",
+  "candidate_selection_rates": "NO",
+  "outcome_distributions": "NO",
+  "ranking": "NO",
+  "stage": "FREEZE_ONLY"
+}
