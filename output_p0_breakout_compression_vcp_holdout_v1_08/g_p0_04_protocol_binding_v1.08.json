@@ -1,0 +1,9 @@
+{
+  "Authority": "G-P0-04 / v1.02",
+  "HOLDOUT_START": "2026-06-09",
+  "HOLDOUT_END": "2026-09-03",
+  "Unique_Dates": 63,
+  "Raw_Eligible_Anchors": 84925,
+  "Purged_Anchors": 18777,
+  "Expected_Scored_Base": 66148
+}
