@@ -1,0 +1,15 @@
+{
+  "Drive_File_ID": "1-fxXthFiOFSR9psiksmpaxXCPuNTV6vZ",
+  "downloaded_bytes": 9571105,
+  "downloaded_sha256": "c10a137e42701fd08680954767c064371e4b15845525b14a704dcbbfe79dceec",
+  "expected_sha256": "c10a137e42701fd08680954767c064371e4b15845525b14a704dcbbfe79dceec",
+  "ZIP_integrity": "PASS",
+  "exact_member_set": [
+    "design_anchor_evidence_v1.04.csv",
+    "design_payload_manifest_v1.04.json"
+  ],
+  "anchor_rows": 140451,
+  "candidate_status_columns": 21,
+  "candidate_set_sha_binding": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "result": "PASS"
+}
