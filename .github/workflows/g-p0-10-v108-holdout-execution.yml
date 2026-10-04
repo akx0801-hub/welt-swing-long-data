@@ -16,6 +16,8 @@ jobs:
           run-id: 36225840648
           artifact-ids: 10900287789
           path: v053
+      - name: Install execution dependencies
+        run: python -m pip install --disable-pip-version-check pandas numpy
       - name: Verify governed inputs
         run: |
           sha256sum $(find v053 -name p0_frozen_1425_v0_53.sqlite -print -quit)
