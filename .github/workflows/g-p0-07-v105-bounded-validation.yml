@@ -1,0 +1,40 @@
+name: G-P0-07 v1.05 bounded governance validation
+on:
+  push:
+    branches: [dev/g-p0-07-v1.05]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate governance transition
+        shell: python
+        run: |
+          import csv,json,pathlib
+          d=pathlib.Path("output_p0_breakout_compression_vcp_design_review_v1_05")
+          a=json.load(open("config/manager_governance_authority_G_P0_07_v1.05.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          c=list(csv.DictReader(open(d/"design_candidate_review_v1.05.csv")))
+          t=list(csv.DictReader(open(d/"test_results_v1.05.csv")))
+          assert a["Decision"]=="APPROVED_VALIDATION_ALL_21_UNCHANGED"
+          assert a["Candidate_Count"]==21 and len(c)==21
+          assert all(int(x["Hit_Count"])+int(x["False_Count"])+int(x["Not_Verified_Count"])==140451 for x in c)
+          assert all(x["Evidence_State"]=="EVIDENCE_AVAILABLE" and x["Retention_Decision"]=="RETAIN_UNCHANGED" for x in c)
+          assert a["VALIDATION_SCORING_AUTHORIZED"]=="YES" and a["VALIDATION_SCORING_STARTED"]=="NO"
+          assert a["FINALIST_SELECTION_AUTHORIZED"]=="NO" and a["PARAMETER_PROMOTION_AUTHORIZED"]=="NO"
+          assert a["HOLDOUT_OPENED"]=="NO" and a["HOLDOUT_SCORING_AUTHORIZED"]=="NO"
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
+          assert len(t)==30 and all(x["Result"]=="PASS" for x in t)
+          print("PASS")
+      - name: Package evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_07_v1.05.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_breakout_compression_vcp_design_review_v1_05 artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_DESIGN_Review_G-P0-07_v1.05.md artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-07-v1.05-design-review-evidence
+          path: artifact/
