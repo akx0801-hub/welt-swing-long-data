@@ -1,0 +1,10 @@
+{
+  "LANE1_FINALIST_FROZEN": "YES",
+  "Finalist": "L1-C07-PIVOT_PROXIMITY_STRICT",
+  "Candidate_Changes": "PROHIBITED_BEFORE_HOLDOUT",
+  "Change_Requires": [
+    "NEW_CANDIDATE_SET",
+    "NEW_UNTOUCHED_VALIDATION",
+    "NEW_FINALIST_GATE"
+  ]
+}
