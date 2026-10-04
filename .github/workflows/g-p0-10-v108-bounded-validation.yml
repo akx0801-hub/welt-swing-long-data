@@ -1,0 +1,45 @@
+name: G-P0-10 v1.08 bounded persistence validation
+on:
+  push:
+    branches: [dev/g-p0-10-v1.08]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate persisted single-use holdout evidence
+        shell: python
+        run: |
+          import csv,json,pathlib
+          D=pathlib.Path("output_p0_breakout_compression_vcp_holdout_v1_08")
+          a=json.load(open("config/manager_governance_authority_G_P0_10_v1.08.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          t=list(csv.DictReader(open(D/"test_results_v1.08.csv")))
+          e=next(csv.DictReader(open(D/"finalist_execution_counts_v1.08.csv")))
+          r=json.load(open(D/"drive_roundtrip_verification_v1.08.json"))
+          assert a["Decision"]=="HOLDOUT_EVIDENCE_COMPLETE_NO_PARAMETER_PROMOTION"
+          assert a["Finalist"]=="L1-C07-PIVOT_PROXIMITY_STRICT"
+          assert a["Finalist_Semantic_SHA256"]=="7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201"
+          assert a["HOLDOUT_OPENED"]=="YES" and a["HOLDOUT_SINGLE_USE_CONSUMED"]=="YES" and a["HOLDOUT_REUSE_AUTHORIZED"]=="NO"
+          assert a["HOLDOUT_BASE_ANCHORS"]==66148
+          assert a["HOLDOUT_PAYLOAD_DRIVE_ID"]=="1dJImdpnpmjkNEqkRjxO6fn1ma0WUr6Oi"
+          assert a["HOLDOUT_PAYLOAD_SHA256"]=="d90ba32035ac62f09a710a0094b0905ee8ba4a7c51ac76049a4fe5565c1fbbc6"
+          assert int(e["Hit_Count"])+int(e["False_Count"])+int(e["Not_Verified_Count"])==66148
+          assert r["Roundtrip"]=="PASS" and r["Anchor_Rows"]==66148
+          assert a["PARAMETER_PROMOTION_AUTHORIZED"]=="NO" and a["P0_RUN_AUTHORIZED"]=="NO"
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99" and p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          assert len(t)>=40 and all(x["Result"]=="PASS" for x in t)
+          print("PASS")
+      - name: Package control-plane evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_10_v1.08.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_breakout_compression_vcp_holdout_v1_08 artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_HOLDOUT_Execution_G-P0-10_v1.08.md artifact/
+          cp scripts/g_p0_10_holdout_execution_v108.py artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-10-v1.08-holdout-control-evidence
+          path: artifact/
