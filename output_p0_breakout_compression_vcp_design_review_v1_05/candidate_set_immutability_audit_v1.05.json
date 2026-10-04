@@ -1,0 +1,9 @@
+{
+  "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+  "Candidate_Count": 21,
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "CANDIDATE_PRUNING_AUTHORIZED": "NO",
+  "CANDIDATE_CHANGES_AUTHORIZED": "NO",
+  "all_21_retained": "YES",
+  "new_combinations": 0
+}
