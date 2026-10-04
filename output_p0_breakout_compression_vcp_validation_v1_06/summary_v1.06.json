@@ -1,0 +1,29 @@
+{
+  "verdict": "PASS",
+  "G_P0_08": "VALIDATION_EVIDENCE_COMPLETE_NO_FINALIST_NO_PARAMETER_PROMOTION",
+  "VALIDATION_POPULATION": {
+    "raw": 85410,
+    "purged": 21360,
+    "scored": 64050
+  },
+  "Candidate_Set": "UNCHANGED_21",
+  "Hit_Range": [
+    3809,
+    8783
+  ],
+  "Not_Verified_Range": [
+    71,
+    71
+  ],
+  "DESIGN": "COMPLETE",
+  "VALIDATION": "COMPLETE",
+  "HOLDOUT": "SEALED_NOT_AUTHORIZED",
+  "Finalist": "NONE",
+  "Parameters": "NOT_PROMOTED",
+  "P0": "NOT_AUTHORIZED",
+  "Zero_Delta_Controls": {
+    "C11_validation_hit_delta_vs_C00": -3,
+    "C20_validation_hit_delta_vs_C00": 0
+  },
+  "Next_Manager_Gate": "BREAKOUT_COMPRESSION_VCP DESIGN + VALIDATION EVIDENCE REVIEW / FINALIST DECISION"
+}
