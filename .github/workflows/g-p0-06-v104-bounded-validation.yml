@@ -1,0 +1,42 @@
+name: G-P0-06 v1.04 bounded DESIGN validation
+on:
+  push:
+    branches: [dev/g-p0-06-v1.04]
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Validate persisted DESIGN control plane
+        run: python tests/test_g_p0_06_design_v104.py
+      - name: Validate required tests and boundaries
+        shell: python
+        run: |
+          import csv,json,pathlib
+          d=pathlib.Path("output_p0_breakout_compression_vcp_design_v1_04")
+          t=list(csv.DictReader(open(d/"test_results_v1.04.csv")))
+          assert len(t)>=40 and all(x["Result"]=="PASS" for x in t)
+          s=json.load(open(d/"summary_v1.04.json"))
+          assert s["Finalist"]=="NONE" and s["Parameters"]=="CANDIDATE_VALUES_FROZEN_NOT_PROMOTED"
+          assert s["VALIDATION"]=="NOT_AUTHORIZED_NOT_STARTED" and s["HOLDOUT"]=="SEALED"
+          f=json.load(open(d/"design_date_firewall_audit_v1.04.json"))
+          assert f["MAX_MARKET_BAR_READ_DATE"]=="2026-03-11"
+          n=json.load(open(d/"no_validation_holdout_access_audit_v1.04.json"))
+          assert n["VALIDATION_OUTCOMES_READ"]==n["HOLDOUT_OUTCOMES_READ"]=="NO"
+          print("PASS")
+      - name: Package Git control-plane evidence
+        run: |
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_06_v1.04.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp -r output_p0_breakout_compression_vcp_design_v1_04 artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_DESIGN_Execution_G-P0-06_v1.04.md artifact/
+          cp scripts/g_p0_06_design_execution_v104.py artifact/
+          cp tests/test_g_p0_06_design_v104.py artifact/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-06-v1.04-design-evidence-control-plane
+          path: artifact/
