@@ -1,0 +1,13 @@
+{
+  "verdict": "PASS",
+  "G_P0_07": "APPROVED_VALIDATION_ALL_21_UNCHANGED",
+  "DESIGN": "REVIEWED_ACCEPTED",
+  "Candidates_Retained": "21/21",
+  "Candidate_Set": "UNCHANGED",
+  "VALIDATION": "AUTHORIZED_BUT_NOT_STARTED",
+  "Finalist": "NONE",
+  "Parameters": "NOT_PROMOTED",
+  "HOLDOUT": "SEALED",
+  "P0": "NOT_AUTHORIZED",
+  "Next_Gate": "BREAKOUT_COMPRESSION_VCP VALIDATION EXECUTION"
+}
