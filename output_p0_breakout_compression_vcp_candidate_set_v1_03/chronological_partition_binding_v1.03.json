@@ -1,0 +1,13 @@
+{
+  "source": "G-P0-04 / v1.02",
+  "DESIGN": [
+    "2025-09-17",
+    "2026-03-11"
+  ],
+  "VALIDATION": [
+    "2026-03-12",
+    "2026-06-08"
+  ],
+  "HOLDOUT": "SEALED",
+  "outcome_access": "NONE"
+}
