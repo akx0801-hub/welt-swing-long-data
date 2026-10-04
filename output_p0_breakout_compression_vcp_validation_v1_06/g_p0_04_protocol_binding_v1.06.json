@@ -1,0 +1,8 @@
+{
+  "Authority": "G-P0-04 / v1.02",
+  "Validation_Start": "2026-03-12",
+  "Validation_End": "2026-06-08",
+  "Raw_Eligible_Anchors": 85410,
+  "Purged_Anchors": 21360,
+  "Expected_Scored_Base": 64050
+}
