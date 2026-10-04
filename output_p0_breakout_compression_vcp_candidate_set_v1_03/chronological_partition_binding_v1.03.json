@@ -1,13 +1,17 @@
 {
   "source": "G-P0-04 / v1.02",
-  "DESIGN": [
-    "2025-09-17",
-    "2026-03-11"
-  ],
-  "VALIDATION": [
-    "2026-03-12",
-    "2026-06-08"
-  ],
-  "HOLDOUT": "SEALED",
+  "DESIGN": {
+    "start": "2025-09-17",
+    "end": "2026-03-11"
+  },
+  "VALIDATION": {
+    "start": "2026-03-12",
+    "end": "2026-06-08"
+  },
+  "HOLDOUT": {
+    "start": "2026-06-09",
+    "end": "2026-09-03",
+    "state": "SEALED"
+  },
   "outcome_access": "NONE"
 }
