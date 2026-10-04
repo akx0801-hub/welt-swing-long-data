@@ -1,0 +1,8 @@
+{
+  "Authorized_Candidate_Count": 1,
+  "Evaluated_Candidates": [
+    "L1-C07-PIVOT_PROXIMITY_STRICT"
+  ],
+  "Comparator_Holdout_Evaluation": "NO",
+  "C07_minus_C00_Holdout_Delta": "NOT_CALCULATED"
+}
