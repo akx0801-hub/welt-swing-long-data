@@ -1,0 +1,11 @@
+{
+  "schema": "WELT_SWING_L1_VALIDATION_EVIDENCE_V1_06",
+  "required_start_head": "c551ec26a2760c3d57ad2832214b49de6c57eaad",
+  "authority": "G-P0-08 / v1.06",
+  "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "Drive_Payload_ID": "1qk7RWG4aYagYerDxUzXDIi9e5mOmB1Sh",
+  "Drive_Payload_SHA256": "fdaba4dd32083790c6ec73252fa07efd5d6b982289ca19cd7536223daf4ab058",
+  "row_level_payload_in_git": "NO",
+  "aggregate_evidence_in_git": "YES"
+}
