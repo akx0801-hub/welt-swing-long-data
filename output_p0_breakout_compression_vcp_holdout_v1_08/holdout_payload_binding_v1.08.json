@@ -1,0 +1,15 @@
+{
+  "Drive_File_ID": "1dJImdpnpmjkNEqkRjxO6fn1ma0WUr6Oi",
+  "Filename": "WELT-SWING_L1_BREAKOUT_VCP_HOLDOUT_v1.08_Payload.zip",
+  "Bytes": 5061518,
+  "SHA256": "d90ba32035ac62f09a710a0094b0905ee8ba4a7c51ac76049a4fe5565c1fbbc6",
+  "Exact_Members": [
+    "holdout_anchor_evidence_v1.08.csv",
+    "holdout_payload_manifest_v1.08.json"
+  ],
+  "Anchor_CSV_Bytes": 21004654,
+  "Anchor_CSV_SHA256": "04391db495f67251da0b098aa2ec013579727980f688b4ae6a9e5e37e1ece8b8",
+  "Anchor_Rows": 66148,
+  "Manifest_Bytes": 792,
+  "Manifest_SHA256": "91087d4842beb0e0c165d0b9d06330cb5779ae56c6f5ba3a5b097acc9ea072d0"
+}
