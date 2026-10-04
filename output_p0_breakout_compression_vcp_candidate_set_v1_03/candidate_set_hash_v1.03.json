@@ -1,0 +1,7 @@
+{
+  "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "algorithm": "SHA-256",
+  "serialization": "UTF-8 CSV with LF; header included; Candidate_ID ascending; numeric canonical compact decimal; semantic fields exactly candidate-set CSV columns",
+  "row_count": 21
+}
