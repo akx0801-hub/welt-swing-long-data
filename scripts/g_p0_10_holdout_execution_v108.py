@@ -3,7 +3,7 @@
 Input is immutable v0.53 SQLite; caller must supply Frozen WS_ID->Primary_MIC mapping.
 Never query market bars after 2026-03-11. No provider calls.
 """
-import sqlite3, pandas as pd, numpy as np
+import sqlite3, pandas as pd, numpy as np, json
 HOLDOUT_START="2026-06-09"; FIREWALL="2026-09-03"; BASE_ANCHORS=66148
 CSET_SHA="8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235"
 def valid_bars(x):
