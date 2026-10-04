@@ -1,0 +1,9 @@
+{
+  "Drive_Recovery_Artifact": "1lrp_9V0KlWedKYoK7KBNa4zyVqBj1iPg",
+  "Archive_SHA256": "f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95",
+  "SQLite_SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "Frozen_Count": 1425,
+  "Frozen_SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "mode": "READ_ONLY",
+  "technical_scale": "G-FHR-01/v0.93 reviewed v0.53 lineage; cached OHLC and volume preserved as already split-adjusted"
+}
