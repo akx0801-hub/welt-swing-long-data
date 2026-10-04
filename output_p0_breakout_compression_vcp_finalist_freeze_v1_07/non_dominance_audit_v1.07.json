@@ -1,0 +1,7 @@
+{
+  "RETURN_DOMINANCE": "NO",
+  "DRAWDOWN_DOMINANCE": "NO",
+  "Return_Observation": "DESIGN C07 median FWD_CLOSE_RETURN slightly below C00 at all three horizons; VALIDATION slightly above C00 at all three horizons.",
+  "Drawdown_Observation": "mixed; no superior drawdown-control claim",
+  "Automatic_Winner_Language": "PROHIBITED"
+}
