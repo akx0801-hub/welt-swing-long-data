@@ -1,0 +1,9 @@
+{
+  "Authority_ID": "G-P0-01",
+  "Version": "v0.99",
+  "P0_RUN_AUTHORIZED": "NO",
+  "AUTOMATED_P0_READY": "NO",
+  "p0_numeric_pass_thresholds": [],
+  "promoted_lane_pass_rules": [],
+  "changed": "NO"
+}
