@@ -1,0 +1,103 @@
+name: G-P0-10-CORR v1.09 single-use correction validation
+
+on:
+  push:
+    branches: [dev/g-p0-10-v1.09-single-use-correction]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate sealed rule and corrected control plane
+        shell: python
+        run: |
+          import csv,json,pathlib
+          root=pathlib.Path(".")
+          seal=json.load(open(root/"output_p0_breakout_compression_vcp_validation_protocol_v1_02/holdout_seal_contract_v1.02.json"))
+          assert seal["later_use"]=="exactly once only after LANE1_FINALIST_FROZEN=YES"
+          corr=json.load(open(root/"config/g_p0_10_holdout_single_use_correction_v1.09.json"))
+          assert corr["Verdict"]=="FAIL_CLOSED_HOLDOUT_SINGLE_USE_PROTOCOL_BREACH"
+          assert corr["First_Actual_Holdout_Scoring"]["Workflow_Run_ID"]==37237024056
+          assert corr["First_Actual_Holdout_Scoring"]["C07_Status_Evaluation_Performed_Before_Failure"]=="YES"
+          assert corr["First_Actual_Holdout_Scoring"]["Row_Level_Evidence_Persisted"]=="NO"
+          assert corr["Second_Holdout_Scoring"]["Workflow_Run_ID"]==37237147539
+          assert corr["Second_Holdout_Scoring"]["Run4_To_Run5_Score_Logic_Changed"]=="NO"
+          assert corr["Second_Holdout_Scoring"]["Governance_Authorization_For_Reuse"]=="NO"
+          assert corr["Corrected_Holdout_State"]["HOLDOUT_SINGLE_USE_CONSUMED"]=="YES"
+          assert corr["Corrected_Holdout_State"]["VALID_SINGLE_USE_HOLDOUT_EVIDENCE_AVAILABLE"]=="NO"
+          assert corr["Corrected_Holdout_State"]["ORIGINAL_HOLDOUT_REUSABLE"]=="NO"
+          a=json.load(open(root/"config/manager_governance_authority_G_P0_10_v1.08.json"))
+          assert a["Decision"]=="INVALIDATED_HOLDOUT_SINGLE_USE_PROTOCOL_BREACH"
+          assert a["Authority_Status"]=="SUPERSEDED_FAIL_CLOSED"
+          assert a["HOLDOUT_EVIDENCE_VALID"]=="NO"
+          assert a["PARAMETER_PROMOTION_AUTHORIZED"]=="NO"
+          assert a["P0_RUN_AUTHORIZED"]=="NO"
+          p=json.load(open(root/"config/p0_parameter_authority_current.json"))
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
+          assert p["P0_RUN_AUTHORIZED"]=="NO" and p["AUTOMATED_P0_READY"]=="NO"
+          assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          d=root/"output_p0_breakout_compression_vcp_holdout_v1_08"
+          s=json.load(open(d/"summary_v1.08.json"))
+          assert s["VERDICT"]=="FAIL_CLOSED"
+          c=json.load(open(d/"stage_checkpoint_v1.08.json"))
+          assert c["VALID_SINGLE_USE_HOLDOUT_EVIDENCE_AVAILABLE"]=="NO"
+          u=json.load(open(d/"holdout_single_use_audit_v1.08.json"))
+          assert u["First_Actual_Scoring_Run_ID"]==37237024056
+          assert u["Second_Scoring_Run_ID"]==37237147539
+          assert u["Second_Run_Reuse_Authorized"]=="NO"
+          r=json.load(open(d/"drive_roundtrip_verification_v1.08.json"))
+          assert r["Roundtrip"]=="PASS_TECHNICAL_ONLY"
+          assert r["Fetched_SHA256"]=="d90ba32035ac62f09a710a0094b0905ee8ba4a7c51ac76049a4fe5565c1fbbc6"
+          assert r["Anchor_Rows"]==66148 and r["HOLDOUT_EVIDENCE_VALID"]=="NO"
+          t=list(csv.DictReader(open(d/"test_results_correction_v1.09.csv")))
+          assert len(t)>=20 and all(x["Result"]=="PASS" for x in t)
+
+      - name: Verify historical workflow facts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/37237024056 --jq .conclusion)" = "failure"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/37237147539 --jq .conclusion)" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/37237024056/artifacts --jq .total_count)" = "0"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/37237147539/artifacts --jq '.artifacts[] | select(.id==11316550633) | .digest')" = "sha256:d90ba32035ac62f09a710a0094b0905ee8ba4a7c51ac76049a4fe5565c1fbbc6"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/37237147539/artifacts --jq '.artifacts[] | select(.id==11316550633) | .size_in_bytes')" = "5061518"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/37237024056/jobs --jq '.jobs[0].steps[] | select(.name=="Verify governed inputs") | .conclusion')" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/37237024056/jobs --jq '.jobs[0].steps[] | select(.name=="Execute frozen C07 holdout") | .conclusion')" = "failure"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/37237147539/jobs --jq '.jobs[0].steps[] | select(.name=="Execute frozen C07 holdout") | .conclusion')" = "success"
+
+      - name: Verify run4 to run5 bounded code delta
+        run: |
+          set -euo pipefail
+          test "$(git diff --name-only 2e278d4539bde3ea3d1d71d240e4507f241cd29b 1c9dfea9034a38ac237d7d3109db0b0e4adcc3f7)" = "scripts/g_p0_10_holdout_execution_v108.py"
+          test "$(git diff --numstat 2e278d4539bde3ea3d1d71d240e4507f241cd29b 1c9dfea9034a38ac237d7d3109db0b0e4adcc3f7)" = $'2\t2\tscripts/g_p0_10_holdout_execution_v108.py'
+          git diff 2e278d4539bde3ea3d1d71d240e4507f241cd29b 1c9dfea9034a38ac237d7d3109db0b0e4adcc3f7 -- scripts/g_p0_10_holdout_execution_v108.py | grep -q 'raw_protocol=84925'
+          ! git diff 2e278d4539bde3ea3d1d71d240e4507f241cd29b 1c9dfea9034a38ac237d7d3109db0b0e4adcc3f7 -- scripts/g_p0_10_holdout_execution_v108.py | grep -E '^[+-].*(candidate_status|Pivot_Proximity|Climax|Runup|FWD_)'
+
+      - name: Package correction evidence
+        run: |
+          mkdir artifact
+          cp config/g_p0_10_holdout_single_use_correction_v1.09.json artifact/
+          cp config/manager_governance_authority_G_P0_10_v1.08.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_HOLDOUT_Single_Use_Correction_G-P0-10-CORR_v1.09.md artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_HOLDOUT_Execution_G-P0-10_v1.08.md artifact/
+          cp output_p0_breakout_compression_vcp_holdout_v1_08/summary_v1.08.json artifact/
+          cp output_p0_breakout_compression_vcp_holdout_v1_08/stage_checkpoint_v1.08.json artifact/
+          cp output_p0_breakout_compression_vcp_holdout_v1_08/holdout_single_use_audit_v1.08.json artifact/
+          cp output_p0_breakout_compression_vcp_holdout_v1_08/drive_roundtrip_verification_v1.08.json artifact/
+          cp output_p0_breakout_compression_vcp_holdout_v1_08/test_results_correction_v1.09.csv artifact/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-10-corr-v1.09-single-use-correction
+          path: artifact/
