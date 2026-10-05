@@ -1,14 +1,21 @@
 {
-  "VERDICT": "PASS",
-  "G_P0_10": "HOLDOUT_EVIDENCE_COMPLETE_NO_PARAMETER_PROMOTION",
+  "VERDICT": "FAIL_CLOSED",
+  "G_P0_10": "INVALIDATED_HOLDOUT_SINGLE_USE_PROTOCOL_BREACH",
+  "Corrective_Binding": "G-P0-10-CORR / v1.09",
   "Finalist": "L1-C07-PIVOT_PROXIMITY_STRICT",
-  "HOLDOUT": "COMPLETED_SINGLE_USE_CONSUMED",
-  "HOLDOUT_BASE_ANCHORS": 66148,
-  "Hit_Count": 4290,
-  "False_Count": 61717,
-  "Not_Verified_Count": 141,
+  "HOLDOUT": "OPENED_AND_SINGLE_USE_CONSUMED_WITHOUT_VALID_PERSISTED_FIRST_USE_EVIDENCE",
+  "First_Holdout_Scoring_Run_ID": 37237024056,
+  "First_Run_Evidence_Persisted": "NO",
+  "Reuse_Run_ID": 37237147539,
+  "Reuse_Run_Status": "NONAUTHORITATIVE_UNAUTHORIZED_REUSE",
+  "Historical_Reuse_Run_Diagnostics": {
+    "Anchor_Rows": 66148,
+    "Hit_Count": 4290,
+    "False_Count": 61717,
+    "Not_Verified_Count": 141
+  },
   "Parameters": "NOT_PROMOTED",
-  "Lane1_Automated_Contract": "NOT_YET_PROMOTED",
+  "Lane1_Automated_Contract": "NOT_READY",
   "P0": "NOT_AUTHORIZED",
-  "Next_Manager_Gate": "BREAKOUT_COMPRESSION_VCP HOLDOUT EVIDENCE REVIEW / PARAMETER PROMOTION DECISION"
+  "Next_Manager_Gate": "MANAGER_GOVERNANCE_NEW_INDEPENDENT_HOLDOUT_OR_LANE_REMAINS_DEV_UNCONFIRMED"
 }
