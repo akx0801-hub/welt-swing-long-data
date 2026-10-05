@@ -1,6 +1,6 @@
 {
   "Drive_File_ID": "1dJImdpnpmjkNEqkRjxO6fn1ma0WUr6Oi",
-  "Roundtrip": "PASS",
+  "Roundtrip": "PASS_TECHNICAL_ONLY",
   "Fetched_Bytes": 5061518,
   "Fetched_SHA256": "d90ba32035ac62f09a710a0094b0905ee8ba4a7c51ac76049a4fe5565c1fbbc6",
   "ZIP_Integrity": "PASS",
@@ -8,5 +8,9 @@
   "Anchor_Rows": 66148,
   "Finalist_Binding": "PASS",
   "Candidate_Set_SHA_Binding": "PASS",
-  "Finalist_SHA_Binding": "PASS"
+  "Finalist_SHA_Binding": "PASS",
+  "Source_Workflow_Run_ID": 37237147539,
+  "Governance_Use_Status": "NONAUTHORITATIVE_UNAUTHORIZED_SECOND_HOLDOUT_SCORING",
+  "HOLDOUT_EVIDENCE_VALID": "NO",
+  "Preservation_Status": "FORENSIC_EVIDENCE_PRESERVED_DO_NOT_PROMOTE"
 }
