@@ -1,0 +1,114 @@
+{
+  "Lineage_ID": "L1_BREAKOUT_VCP_HOLDOUT_DATA_LINEAGE_v1.11",
+  "Version": "v1.11",
+  "Authority": "G-P0-12 / v1.11",
+  "Predecessor_Protocol": "G-P0-11 / v1.10",
+  "Predecessor_Protocol_File": "config/lane1_new_independent_holdout_protocol_v1.10.json",
+  "Source_v053": {
+    "Canonical_Drive_File_ID": "1lrp_9V0KlWedKYoK7KBNa4zyVqBj1iPg",
+    "Archive_SHA256": "f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95",
+    "SQLite_Member": "runtime_cache/p0_frozen_1425_v0_53.sqlite",
+    "SQLite_SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+    "State": "READ_ONLY",
+    "Mutation_Authorized": "NO",
+    "Runner_Restore_Transport": "GITHUB_ACTIONS_ARTIFACT_BYTE_IDENTICAL_MIRROR",
+    "Runner_Restore_Artifact_ID": 10900287789,
+    "Runner_Restore_Run_ID": 36225840648,
+    "Runner_Restore_Artifact_Digest": "sha256:f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95"
+  },
+  "Frozen_Universe": {
+    "Path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+    "Rows": 1425,
+    "SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "Membership_Change_Authorized": "NO"
+  },
+  "Finalist_Binding": {
+    "Candidate_ID": "L1-C07-PIVOT_PROXIMITY_STRICT",
+    "Semantic_SHA256": "7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201",
+    "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+    "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+    "Pivot_Proximity_Cutoff_ATR": 0.75,
+    "Scoring_Authorized": "NO",
+    "Comparator_Evaluation_Authorized": "NO",
+    "Retuning_Authorized": "NO"
+  },
+  "Provider": {
+    "Source_ID": "YFINANCE_FREE",
+    "Library": "yfinance",
+    "Version": "1.6.0",
+    "Implementation": "scripts/price_cache.py",
+    "Reuse": [
+      "build_yahoo_symbol_map",
+      "YFinanceBatchClient",
+      "SQLitePriceCache",
+      "normalize_symbol_frame",
+      "technical_valid_mask",
+      "qa_symbol_frame"
+    ],
+    "Batch_Max": 100,
+    "Rescue": "ONE_BOUNDED_BATCH_RESCUE_SAME_DATE_RANGE",
+    "Repair": "TARGETED_REPAIR_TRUE_SAME_DATE_RANGE_ONLY",
+    "Max_Identical_Retries": 1,
+    "Alpha_Vantage": "PROHIBITED",
+    "EODHD": "PROHIBITED",
+    "Scalable": "PROHIBITED",
+    "TradingView": "PROHIBITED",
+    "News": "PROHIBITED",
+    "Fundamentals": "PROHIBITED"
+  },
+  "Date_Boundary": {
+    "Historical_Immutability_End": "2026-09-03",
+    "Fresh_Data_Start": "2026-09-04",
+    "Data_Lineage_Cutoff": "2026-10-05",
+    "Provider_End_Exclusive": "2026-10-06",
+    "Persist_Filter": "day > 2026-09-03 AND day <= 2026-10-05",
+    "No_Later_Extension_In_This_Gate": "YES"
+  },
+  "Foundation_Copy_Policy": {
+    "Original_v053": "READ_ONLY_UNCHANGED",
+    "New_Lineage_Copy": "COPY_THEN_TRUNCATE_POST_BOUNDARY_BEFORE_FETCH",
+    "Truncate_Copied_Price_Rows_After": "2026-09-03",
+    "Reason": "v0.53 physically contains later cache rows; v1.11 independence requires the post-2026-09-03 partition to be freshly acquired under this prospective cutoff.",
+    "Historical_Rows_LE_Boundary_Must_Match_v053": "YES",
+    "Fresh_Provider_Reconciliation_Into_Historical_Partition": "PROHIBITED"
+  },
+  "Mapping_Policy": {
+    "Freeze_Before_First_Price_Call": "YES",
+    "Builder": "build_yahoo_symbol_map()",
+    "Explicit_Overrides": "config/yahoo_symbol_overrides.csv",
+    "Historical_Comparison": "cache_state.ws_id/yahoo_symbol from verified v0.53",
+    "Unexpected_Symbol_Change": "FAIL_CLOSED_BEFORE_FETCH",
+    "Name_Search": "PROHIBITED",
+    "Fuzzy_Mapping": "PROHIBITED",
+    "ADR_Substitution": "PROHIBITED",
+    "Secondary_Listing_Substitution": "PROHIBITED",
+    "Identity_Change": "PROHIBITED",
+    "reset_changed_symbols": "PROHIBITED"
+  },
+  "QA_Policy": {
+    "technical_valid_mask": "scripts/price_cache.py",
+    "qa_symbol_frame": "scripts/price_cache.py",
+    "Imputation": "PROHIBITED",
+    "Zero_Fill": "PROHIBITED",
+    "Price_Forward_Fill": "PROHIBITED",
+    "Synthetic_Sessions": "PROHIBITED",
+    "Missing_Nonfinite_Required_Input": "NOT_VERIFIED_INPUT"
+  },
+  "Anchor_Population": {
+    "Candidate_Independent": "YES",
+    "Rule": "Anchor_Date > 2026-09-03 AND technical_anchor_valid = YES AND valid_history_count_through_t >= 252 AND required_input_availability = FINITE AND future_valid_sessions_available >= 15 within v1.11 snapshot",
+    "Required_History": 252,
+    "Complete_5_Valid_Session_Window": "REPORTED_AVAILABILITY_ONLY",
+    "Complete_10_Valid_Session_Window": "REPORTED_AVAILABILITY_ONLY",
+    "Complete_15_Valid_Session_Window": "REQUIRED",
+    "Partial_Forward_Windows": "PROHIBITED",
+    "C07_Score": "PROHIBITED",
+    "Forward_Outcome_Values": "PROHIBITED"
+  },
+  "Output_SQLite_Member": "runtime_cache/lane1_breakout_vcp_holdout_lineage_v1_11.sqlite",
+  "Drive_Folder_ID": "1uSIFSPiF5IzfOwretpp3Gl_jb6K2sZ--",
+  "Drive_Package_Name": "WELT-SWING_L1_BREAKOUT_VCP_NEW_HOLDOUT_LINEAGE_v1.11_Payload.zip",
+  "Holdout_State": "SEALED_NOT_OPENED",
+  "C07_Scoring_Authorized": "NO",
+  "Forward_Outcome_Generation_Authorized": "NO"
+}
