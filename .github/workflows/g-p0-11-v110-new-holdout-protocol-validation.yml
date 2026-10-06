@@ -1,0 +1,282 @@
+name: G-P0-11 v1.10 new independent holdout protocol validation
+
+on:
+  push:
+    branches: [dev/g-p0-11-v1.10-new-independent-holdout-protocol]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify bounded lineage and changed scope
+        run: |
+          set -euo pipefail
+          START="caabd22b9b1ad90cc8aa5b7de1f9ec2552139184"
+          git merge-base --is-ancestor "$START" HEAD
+          CHANGED="$(git diff --name-only "$START"..HEAD)"
+          test -n "$CHANGED"
+          BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(config/manager_governance_authority_G_P0_11_v1\.10\.json|config/lane1_new_independent_holdout_protocol_v1\.10\.json|output_p0_breakout_compression_vcp_new_holdout_protocol_v1_10/.*|docs/validation/P0_Breakout_Compression_VCP_New_Independent_HOLDOUT_Protocol_G-P0-11_v1\.10\.md|\.github/workflows/g-p0-11-v110-new-holdout-protocol-validation\.yml)$' || true)"
+          test -z "$BAD"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^scripts/' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^universe/' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^config/p0_parameter_authority_current.json$' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^output_p0_breakout_compression_vcp_holdout_v1_08/' || true)" = "0"
+          ! git diff "$START"..HEAD | grep -Fq '1dJImdpnpmjkNEqkRjxO6fn1ma0WUr6Oi'
+
+      - name: Validate predecessor correction and frozen bindings
+        shell: python
+        run: |
+          import csv,hashlib,json,pathlib
+          root=pathlib.Path(".")
+          corr=json.load(open(root/"config/g_p0_10_holdout_single_use_correction_v1.09.json"))
+          old=json.load(open(root/"config/manager_governance_authority_G_P0_10_v1.08.json"))
+          p0=json.load(open(root/"config/p0_parameter_authority_current.json"))
+          finalist=json.load(open(root/"output_p0_breakout_compression_vcp_finalist_freeze_v1_07/finalist_contract_v1.07.json"))
+          pop=json.load(open(root/"output_p0_breakout_compression_vcp_validation_protocol_v1_02/validation_population_contract_v1.02.json"))
+          diag=json.load(open(root/"output_p0_breakout_compression_vcp_validation_protocol_v1_02/forward_diagnostic_contract_v1.02.json"))
+
+          assert corr["Correction_ID"]=="G-P0-10-CORR" and corr["Correction_Version"]=="v1.09"
+          assert corr["Verdict"]=="FAIL_CLOSED_HOLDOUT_SINGLE_USE_PROTOCOL_BREACH"
+          st=corr["Corrected_Holdout_State"]
+          assert st["HOLDOUT_OPENED"]=="YES" and st["HOLDOUT_SINGLE_USE_CONSUMED"]=="YES"
+          assert st["HOLDOUT_REUSE_AUTHORIZED"]=="NO" and st["VALID_SINGLE_USE_HOLDOUT_EVIDENCE_AVAILABLE"]=="NO"
+          assert st["ORIGINAL_HOLDOUT_REUSABLE"]=="NO"
+
+          assert old["Authority_Status"]=="SUPERSEDED_FAIL_CLOSED"
+          assert old["Decision"]=="INVALIDATED_HOLDOUT_SINGLE_USE_PROTOCOL_BREACH"
+          assert old["HOLDOUT_REUSE_AUTHORIZED"]=="NO"
+          assert old["HOLDOUT_EVIDENCE_VALID"]=="NO"
+
+          C="8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235"
+          H="7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201"
+          candidate_bytes=(root/"output_p0_breakout_compression_vcp_candidate_set_v1_03/lane1_candidate_set_v1.03.csv").read_bytes()
+          assert hashlib.sha256(candidate_bytes).hexdigest()==C
+          semantic=json.dumps(finalist,sort_keys=True,separators=(",",":"))
+          assert hashlib.sha256(semantic.encode()).hexdigest()==H
+          assert finalist["Candidate_ID"]=="L1-C07-PIVOT_PROXIMITY_STRICT"
+          assert finalist["Candidate_Set_ID"]=="L1_BREAKOUT_VCP_CSET_01"
+          assert finalist["Candidate_Set_Semantic_SHA256"]==C
+          assert finalist["Pivot_Proximity_Cutoff_ATR"]==0.75
+
+          assert pop["v053_SQLite_SHA256"]=="bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          assert pop["Frozen_SHA256"]=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          elig=pop["eligibility"]
+          assert "at least 252 valid technical observations exist through t" in elig
+          assert "at least 15 subsequent valid technical observations exist for forward diagnostics" in elig
+          assert diag["horizons_valid_sessions"]==[5,10,15]
+          assert list(diag["families"].keys())==[
+            "FWD_CLOSE_RETURN_h",
+            "FWD_MAX_PIVOT_EXTENSION_ATR_h",
+            "FWD_MAX_DRAWDOWN_ATR_h",
+            "FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_h"
+          ]
+          assert diag["transaction_simulation"]=="NO" and diag["stop_loss"]=="NO"
+          assert diag["CRV"]=="NO" and diag["scalar_optimization_objective"]=="NONE"
+
+          assert p0["Authority_ID"]=="G-P0-01" and p0["Version"]=="v0.99"
+          assert p0["Resolution"]=="EXPLICIT_POINTER_ONLY_NO_HIGHEST_VERSION_INFERENCE"
+          assert p0["P0_RUN_AUTHORIZED"]=="NO" and p0["AUTOMATED_P0_READY"]=="NO"
+          assert p0["p0_numeric_pass_thresholds"]==[] and p0["promoted_lane_pass_rules"]==[]
+
+          frozen=root/"universe/SWING_U3K_FROZEN_v0.5.csv"
+          assert hashlib.sha256(frozen.read_bytes()).hexdigest()=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert sum(1 for _ in csv.DictReader(open(frozen,encoding="utf-8-sig")))==1425
+
+      - name: Validate G-P0-11 authority and sealed protocol
+        shell: python
+        run: |
+          import json,pathlib
+          root=pathlib.Path(".")
+          D=root/"output_p0_breakout_compression_vcp_new_holdout_protocol_v1_10"
+          a=json.load(open(root/"config/manager_governance_authority_G_P0_11_v1.10.json"))
+          pr=json.load(open(root/"config/lane1_new_independent_holdout_protocol_v1.10.json"))
+          ab=json.load(open(D/"g_p0_11_authority_binding_v1.10.json"))
+          pb=json.load(open(D/"new_holdout_protocol_binding_v1.10.json"))
+          ia=json.load(open(D/"independence_audit_v1.10.json"))
+          sm=json.load(open(D/"single_use_state_machine_v1.10.json"))
+          pv=json.load(open(D/"pre_scoring_validation_requirements_v1.10.json"))
+          dl=json.load(open(D/"data_lineage_requirements_v1.10.json"))
+          cp=json.load(open(D/"stage_checkpoint_v1.10.json"))
+          su=json.load(open(D/"summary_v1.10.json"))
+          mf=json.load(open(D/"manifest_v1.10.json"))
+
+          DEC="NEW_INDEPENDENT_HOLDOUT_PROTOCOL_AUTHORIZED_EXECUTION_NOT_STARTED"
+          NEXT="BREAKOUT_COMPRESSION_VCP NEW INDEPENDENT HOLDOUT DATA-LINEAGE / PRE-SCORING AUTHORIZATION"
+          H="7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201"
+          C="8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235"
+
+          assert a["Authority_ID"]=="G-P0-11" and a["Authority_Version"]=="v1.10"
+          assert a["Authority_Class"]=="EXPLICIT_MANAGER_GOVERNANCE"
+          assert a["Lane"]=="BREAKOUT_COMPRESSION_VCP" and a["Predecessor"]=="G-P0-10-CORR / v1.09"
+          assert a["Decision"]==DEC and a["Required_Start_HEAD"]=="caabd22b9b1ad90cc8aa5b7de1f9ec2552139184"
+          assert a["Finalist"]=="L1-C07-PIVOT_PROXIMITY_STRICT" and a["Finalist_Semantic_SHA256"]==H
+          assert a["Candidate_Set_Semantic_SHA256"]==C and a["Finalist_Contract_Change_Authorized"]=="NO"
+          assert a["Prior_Holdout_Reusable"]=="NO" and a["Prior_Holdout_Authoritative"]=="NO"
+          assert a["Prior_Holdout_Payload_Access_Authorized"]=="NO"
+          assert a["New_Holdout_Independent"]=="REQUIRED" and a["New_Holdout_Start_After"]=="2026-09-03"
+          assert a["New_Holdout_State"]=="SEALED_NOT_OPENED"
+          assert a["HOLDOUT_OPENED"]=="NO" and a["HOLDOUT_SCORING_STARTED"]=="NO" and a["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          assert a["HOLDOUT_RETRY_AFTER_SCORING_FAILURE"]=="NO" and a["HOLDOUT_REEXECUTION_AUTHORIZED"]=="NO"
+          assert a["PROVIDER_CALLS_AUTHORIZED"]=="NO" and a["PROVIDER_CALLS"]==0
+          assert a["NEW_MARKET_DATA_FETCH_AUTHORIZED"]=="NO" and a["ALPHA_VANTAGE_AUTHORIZED"]=="NO"
+          assert a["PARAMETER_PROMOTION_AUTHORIZED"]=="NO" and a["LANE1_AUTOMATED_CONTRACT_READY"]=="NO"
+          assert a["P0_RUN_AUTHORIZED"]=="NO" and a["LANE2_AUTHORIZED"]=="NO"
+          assert a["Execution_Authorized"]=="NO" and a["Next_Manager_Gate"]==NEXT and a["Automatic_Next_Gate"]=="NO"
+
+          assert pr["Protocol_ID"]=="L1_BREAKOUT_VCP_NEW_INDEPENDENT_HOLDOUT_PROTOCOL"
+          assert pr["Protocol_Version"]=="v1.10" and pr["Authority"]=="G-P0-11 / v1.10"
+          assert pr["Frozen_Finalist"]["Candidate_ID"]=="L1-C07-PIVOT_PROXIMITY_STRICT"
+          assert pr["Frozen_Finalist"]["Semantic_SHA256"]==H and pr["Frozen_Finalist"]["Pivot_Proximity_Cutoff_ATR"]==0.75
+          assert pr["Frozen_Finalist"]["Contract_Change_Authorized"]=="NO"
+          assert pr["Frozen_Candidate_Set"]["Semantic_SHA256"]==C
+          assert pr["Frozen_Candidate_Set"]["Candidate_Reselection_Authorized"]=="NO"
+          assert pr["Frozen_Universe"]["Rows"]==1425
+          assert pr["Frozen_Universe"]["SHA256"]=="54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb"
+          assert pr["Historical_Data_Lineage"]["State"]=="HISTORICAL_READ_ONLY"
+          assert pr["Historical_Data_Lineage"]["SHA256"]=="bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          assert pr["Historical_Data_Lineage"]["Append_Mutation_Authorized"]=="NO"
+          assert pr["New_Data_Lineage"]["Create_In_This_Gate"]=="NO"
+          assert pr["New_Data_Lineage"]["Data_Fetch_In_This_Gate"]=="NO"
+          assert pr["New_Data_Lineage"]["Future_Data_Cutoff_Binding"]=="REQUIRED_AT_NEXT_MANAGER_GATE_BEFORE_ANY_NEW_MARKET_DATA_FETCH_AND_BEFORE_SCORING"
+
+          ind=pr["Independence"]
+          assert ind["Prior_Maximum_Market_Day"]=="2026-09-03"
+          assert ind["Anchor_Date_Rule"]=="Anchor_Date > 2026-09-03"
+          assert all(ind[x]=="PROHIBITED" for x in ["Design_Overlap","Validation_Overlap","Historical_Holdout_Overlap","Old_Anchor_Row_Reuse","Historical_Holdout_Payload_Reuse","Historical_Holdout_Payload_Access","Historical_v1_08_Outcomes_For_Design"])
+
+          win=pr["Prospective_Window"]
+          assert win["Fixed_End_Date_In_v1_10"]=="NOT_SET"
+          assert "Anchor_Date > 2026-09-03" in win["Deterministic_Anchor_Inclusion_Rule"]
+          assert "15 subsequent valid technical observations" in win["Deterministic_Anchor_Inclusion_Rule"]
+          assert win["Partial_Forward_Windows"]=="PROHIBITED"
+          assert win["Window_Trials"]=="PROHIBITED" and win["Multiple_Window_Scoring"]=="PROHIBITED"
+          assert win["Outcome_Based_Window_Selection"]=="PROHIBITED"
+
+          cal=pr["Calendar_And_Eligibility"]
+          assert cal["Required_History"]=="at least 252 valid technical observations through t"
+          assert cal["Required_Forward_Completeness"]=="at least 15 subsequent valid technical observations"
+          assert cal["Partial_Forward_Windows"]=="PROHIBITED"
+          assert cal["Silent_Semantic_Deviation"]=="PROHIBITED"
+
+          dg=pr["Diagnostics"]
+          assert dg["Horizons_Valid_Sessions"]==[5,10,15]
+          assert dg["Fields"]==["FWD_CLOSE_RETURN_h","FWD_MAX_PIVOT_EXTENSION_ATR_h","FWD_MAX_DRAWDOWN_ATR_h","FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_h"]
+          assert dg["Trade_Simulation"]=="NO" and dg["Stop"]=="NO" and dg["Target"]=="NO" and dg["CRV"]=="NO"
+          assert dg["Scalar_Objective"]=="NONE" and dg["Post_Hoc_Performance_Gate"]=="PROHIBITED"
+
+          tv=pr["Three_Valued_Logic"]
+          assert tv["Required"]=="YES" and tv["States"]==["TRUE","FALSE","NOT_VERIFIED_INPUT"]
+          assert tv["Imputation"]=="PROHIBITED" and tv["Fallback"]=="PROHIBITED"
+
+          state=pr["Single_Use_State_Machine"]
+          assert state["Initial_State"]=="SEALED_NOT_OPENED"
+          assert state["Consume_Event"]=="FIRST_ACTUAL_ACCESS_THAT_SCORES_C07_AGAINST_NEW_HOLDOUT_POPULATION_OR_GENERATES_FORWARD_OUTCOMES"
+          assert state["At_Consume_Event"]["HOLDOUT_OPENED"]=="YES"
+          assert state["At_Consume_Event"]["HOLDOUT_SCORING_STARTED"]=="YES"
+          assert state["At_Consume_Event"]["HOLDOUT_SINGLE_USE_CONSUMED"]=="YES"
+          assert state["At_Consume_Event"]["HOLDOUT_REEXECUTION_AUTHORIZED"]=="NO"
+          for x in ["Retry_After_Assert_Failure","Retry_After_Upload_Failure","Retry_After_Workflow_Failure","Retry_After_Persistence_Failure","Retry_After_Packaging_Failure"]:
+              assert state[x]=="NO"
+
+          pre=pr["Pre_Scoring_Validation"]
+          assert pre["Required"]=="YES" and pre["Must_Complete_While_State"]=="SEALED_NOT_OPENED"
+          assert pre["May_Compute_C07_Outcomes"]=="NO" and pre["May_Generate_Forward_Outcomes"]=="NO"
+          required_checks={
+            "date-window binding","population construction code","raw-count derivation logic","purge logic",
+            "market-calendar logic","required-history availability","complete-forward-window determination",
+            "frozen-universe binding","finalist-contract binding","candidate-set SHA","code integrity","schema",
+            "Drive destination readiness","packaging logic","row-conservation logic"
+          }
+          assert set(pre["Checks"])==required_checks
+          assert pre["Failure_State"]=="SEALED_NOT_OPENED"
+
+          assert ab["Decision"]==DEC and ab["New_Holdout_State"]=="SEALED_NOT_OPENED"
+          assert pb["Deterministic_Anchor_Inclusion_Rule"].startswith("Anchor_Date > 2026-09-03")
+          assert ia["Historical_Holdout_Payload_Access_Performed_In_This_Gate"]=="NO"
+          assert ia["Invalidated_v1_08_Outcomes_Used_For_Window_Design"]=="NO"
+          assert ia["New_Sample_Size_Threshold"]=="NONE" and ia["Power_Target"]=="NONE" and ia["Performance_Gate"]=="NONE"
+          assert sm["First_Consumption_Event"]==state["Consume_Event"] and sm["Automatic_Retry"]=="NO" and sm["Manual_Retry"]=="NO"
+          assert pv["May_Read_Holdout_C07_Outcomes"]=="NO" and pv["May_Generate_Forward_Outcomes"]=="NO"
+          assert dl["Historical_Lineage"]["State"]=="HISTORICAL_READ_ONLY" and dl["Historical_Lineage"]["Append_Mutation"]=="PROHIBITED"
+          assert dl["New_Lineage"]["Create_Authorized_In_v1_10"]=="NO" and dl["New_Lineage"]["Fetch_Authorized_In_v1_10"]=="NO"
+          assert dl["New_Lineage"]["Alpha_Vantage"]=="PROHIBITED"
+
+          assert cp["stage"]=="BREAKOUT_COMPRESSION_VCP_NEW_INDEPENDENT_HOLDOUT_PROTOCOL"
+          assert cp["version"]=="v1.10" and cp["Decision"]==DEC
+          assert cp["New_Holdout_State"]=="SEALED_NOT_OPENED"
+          assert cp["HOLDOUT_OPENED"]=="NO" and cp["HOLDOUT_SCORING_STARTED"]=="NO" and cp["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          assert cp["PROVIDER_CALLS_AUTHORIZED"]=="NO" and cp["NEW_MARKET_DATA_FETCH_AUTHORIZED"]=="NO"
+          assert cp["PARAMETER_PROMOTION_AUTHORIZED"]=="NO" and cp["P0_RUN_AUTHORIZED"]=="NO"
+          assert cp["Next_Gate"]==NEXT and cp["hard_stop"]=="STOP_NO_DATA_FETCH_NO_HOLDOUT_EXECUTION_NO_PROMOTION_NO_P0_NO_LANE2"
+
+          assert su["VERDICT"]=="PASS" and su["G_P0_11"]==DEC
+          assert su["Previous_Holdout"]=="INVALIDATED_AND_CONSUMED"
+          assert su["Previous_Holdout_Reuse"]=="NOT_AUTHORIZED"
+          assert su["New_Holdout"]=="SEALED_NOT_OPENED" and su["New_Holdout_Independent"]=="REQUIRED"
+          assert su["Execution"]=="NOT_AUTHORIZED" and su["Provider_Calls"]=="NOT_AUTHORIZED" and su["Provider_Call_Count"]==0
+          assert su["Parameter_Promotion"]=="NOT_AUTHORIZED" and su["Lane1_Automated_Contract"]=="NOT_READY"
+          assert su["P0"]=="NOT_AUTHORIZED" and su["P0_Pointer"]=="G-P0-01 / v0.99"
+          assert su["Next_Manager_Gate"]==NEXT and su["Automatic_Authorization"]=="NO"
+
+          assert mf["content_scope"]=="CONTROL_PLANE_GOVERNANCE_ONLY"
+          assert mf["no_row_level_market_data"] is True and mf["no_holdout_outcomes"] is True
+          assert mf["provider_calls"]==0 and mf["new_market_data_fetches"]==0
+          assert mf["p0_runs"]==0 and mf["p1_runs"]==0 and mf["p2_runs"]==0
+          assert mf["changed_productive_parameters"]==0
+          assert len(mf["required_members"])==10
+          assert sorted(x.name for x in D.iterdir())==sorted(mf["required_members"])
+
+      - name: Validate test ledger and hard-stop state
+        shell: python
+        run: |
+          import csv,json,pathlib
+          D=pathlib.Path("output_p0_breakout_compression_vcp_new_holdout_protocol_v1_10")
+          rows=list(csv.DictReader(open(D/"test_results_v1.10.csv")))
+          required={
+            "REQUIRED_START_HEAD","G_P0_10_CORR_ACTIVE","PRIOR_HOLDOUT_INVALIDATED","PRIOR_HOLDOUT_CONSUMED",
+            "PRIOR_HOLDOUT_REUSE_NOT_AUTHORIZED","PRIOR_HOLDOUT_PAYLOAD_NOT_ACCESSED","FINALIST_C07_EXACT",
+            "FINALIST_SHA_EXACT","CANDIDATE_SET_SHA_EXACT","FINALIST_CONTRACT_UNCHANGED",
+            "NEW_HOLDOUT_START_STRICTLY_AFTER_2026_09_03","NO_WINDOW_SELECTION_FROM_OUTCOMES",
+            "DETERMINISTIC_ANCHOR_INCLUSION_RULE_DEFINED","COMPLETE_15_SESSION_FORWARD_REQUIRED",
+            "NO_PARTIAL_FORWARD_WINDOWS","SINGLE_USE_CONSUMED_AT_FIRST_SCORING_ACCESS_DEFINED",
+            "NO_RETRY_AFTER_SCORING_FAILURE_DEFINED","PRE_SCORING_VALIDATION_DEFINED","NO_NEW_MARKET_DATA_FETCH",
+            "PROVIDER_CALLS_ZERO","ALPHA_VANTAGE_ZERO","V053_READ_ONLY_UNCHANGED","FROZEN_UNIVERSE_UNCHANGED",
+            "NO_PARAMETER_RETUNING","NO_NEW_THRESHOLD","NO_SCALAR_OBJECTIVE","NO_HOLDOUT_SCORING",
+            "NO_FORWARD_OUTCOME_CALCULATION","PARAMETER_PROMOTION_AUTHORIZED_NO",
+            "LANE1_AUTOMATED_CONTRACT_NOT_READY","P0_POINTER_UNCHANGED","P0_RUN_AUTHORIZED_NO",
+            "AUTOMATED_P0_READY_NO","P0_RUNS_ZERO","P1_RUNS_ZERO","P2_RUNS_ZERO","OTHER_LANES_UNCHANGED"
+          }
+          by={r["Test"]:r["Result"] for r in rows}
+          assert required.issubset(by)
+          assert all(v=="PASS" for v in by.values())
+          assert len(rows)>=len(required)
+          print("PASS",len(rows))
+
+      - name: Package bounded control-plane evidence
+        run: |
+          set -euo pipefail
+          mkdir artifact
+          cp config/manager_governance_authority_G_P0_11_v1.10.json artifact/
+          cp config/lane1_new_independent_holdout_protocol_v1.10.json artifact/
+          cp config/g_p0_10_holdout_single_use_correction_v1.09.json artifact/
+          cp config/manager_governance_authority_G_P0_10_v1.08.json artifact/
+          cp config/p0_parameter_authority_current.json artifact/
+          cp output_p0_breakout_compression_vcp_finalist_freeze_v1_07/finalist_contract_v1.07.json artifact/
+          cp output_p0_breakout_compression_vcp_validation_protocol_v1_02/validation_population_contract_v1.02.json artifact/
+          cp output_p0_breakout_compression_vcp_validation_protocol_v1_02/forward_diagnostic_contract_v1.02.json artifact/
+          cp -r output_p0_breakout_compression_vcp_new_holdout_protocol_v1_10 artifact/
+          cp docs/validation/P0_Breakout_Compression_VCP_New_Independent_HOLDOUT_Protocol_G-P0-11_v1.10.md artifact/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-11-v1.10-new-independent-holdout-protocol-control-plane
+          path: artifact/
