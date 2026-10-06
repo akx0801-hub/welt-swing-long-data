@@ -1,0 +1,40 @@
+{
+  "schema": "WELT_SWING_G_P0_11_NEW_INDEPENDENT_HOLDOUT_PROTOCOL_V1_10",
+  "Authority": "G-P0-11 / v1.10",
+  "required_start_head": "caabd22b9b1ad90cc8aa5b7de1f9ec2552139184",
+  "content_scope": "CONTROL_PLANE_GOVERNANCE_ONLY",
+  "no_row_level_market_data": true,
+  "no_holdout_outcomes": true,
+  "provider_calls": 0,
+  "new_market_data_fetches": 0,
+  "p0_runs": 0,
+  "p1_runs": 0,
+  "p2_runs": 0,
+  "changed_productive_parameters": 0,
+  "output_directory": "output_p0_breakout_compression_vcp_new_holdout_protocol_v1_10",
+  "required_members": [
+    "g_p0_11_authority_binding_v1.10.json",
+    "new_holdout_protocol_binding_v1.10.json",
+    "independence_audit_v1.10.json",
+    "single_use_state_machine_v1.10.json",
+    "pre_scoring_validation_requirements_v1.10.json",
+    "data_lineage_requirements_v1.10.json",
+    "stage_checkpoint_v1.10.json",
+    "summary_v1.10.json",
+    "test_results_v1.10.csv",
+    "manifest_v1.10.json"
+  ],
+  "source_bindings": {
+    "correction": "config/g_p0_10_holdout_single_use_correction_v1.09.json",
+    "corrected_g_p0_10": "config/manager_governance_authority_G_P0_10_v1.08.json",
+    "finalist_contract": "output_p0_breakout_compression_vcp_finalist_freeze_v1_07/finalist_contract_v1.07.json",
+    "validation_population_contract": "output_p0_breakout_compression_vcp_validation_protocol_v1_02/validation_population_contract_v1.02.json",
+    "forward_diagnostic_contract": "output_p0_breakout_compression_vcp_validation_protocol_v1_02/forward_diagnostic_contract_v1.02.json",
+    "p0_pointer": "config/p0_parameter_authority_current.json"
+  },
+  "forbidden_source_access": {
+    "historical_holdout_payload": "NO_ACCESS",
+    "invalidated_v1_08_outcome_rows": "NO_USE_FOR_DESIGN",
+    "provider_market_data": "NO_ACCESS"
+  }
+}
