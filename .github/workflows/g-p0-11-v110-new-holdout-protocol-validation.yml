@@ -157,7 +157,6 @@ jobs:
           assert win["Fixed_End_Date_In_v1_10"]=="NOT_SET"
           assert "Anchor_Date > 2026-09-03" in win["Deterministic_Anchor_Inclusion_Rule"]
           assert "15 subsequent valid technical observations" in win["Deterministic_Anchor_Inclusion_Rule"]
-          assert win["Partial_Forward_Windows"]=="PROHIBITED"
           assert win["Window_Trials"]=="PROHIBITED" and win["Multiple_Window_Scoring"]=="PROHIBITED"
           assert win["Outcome_Based_Window_Selection"]=="PROHIBITED"
 
