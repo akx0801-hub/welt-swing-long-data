@@ -6,7 +6,6 @@ on:
     paths:
       - config/manager_governance_authority_G_P0_12_v1.11.json
       - config/lane1_new_holdout_data_lineage_v1.11.json
-      - config/g_p0_12_drive_roundtrip_binding_v1.11.json
       - scripts/lane1_new_holdout_data_lineage_prescoring_v1_11.py
       - scripts/g_p0_12_blocked_finalizer_v1_11.py
       - .github/workflows/g-p0-12-v111-new-holdout-lineage-prescoring.yml
@@ -318,7 +317,7 @@ jobs:
           assert p["P0_RUN_AUTHORIZED"]=="NO" and p["AUTOMATED_P0_READY"]=="NO"
           assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
           assert a["C07_Scoring_Authorized"]=="NO" and a["Forward_Outcome_Generation_Authorized"]=="NO"
-          assert b["Drive_Roundtrip"]=="PASS" and b["Pre_Scoring_Gate"]=="BLOCKED_MANAGER_REVIEW_REQUIRED"
+          assert b["Drive_Roundtrip"]=="PASS" and b["Pre_Scoring_Gate"]=="PRE_SCORING_BLOCKED_MANAGER_REVIEW_REQUIRED"
           assert by["PRE_SCORING_QA_READINESS"]=="FAIL"
           assert all(r["Result"]=="PASS" for r in t if r["Test"]!="PRE_SCORING_QA_READINESS")
           blockers=list(csv.DictReader(open(D/"pre_scoring_blockers_v1.11.csv",encoding="utf-8")))
