@@ -1,0 +1,30 @@
+{
+  "State_Machine_ID": "G-P0-11-NEW-HOLDOUT-SINGLE-USE",
+  "Version": "v1.10",
+  "Initial_State": "SEALED_NOT_OPENED",
+  "Initial_Flags": {
+    "HOLDOUT_OPENED": "NO",
+    "HOLDOUT_SCORING_STARTED": "NO",
+    "HOLDOUT_SINGLE_USE_CONSUMED": "NO",
+    "HOLDOUT_REEXECUTION_AUTHORIZED": "NO"
+  },
+  "First_Consumption_Event": "FIRST_ACTUAL_ACCESS_THAT_SCORES_C07_AGAINST_NEW_HOLDOUT_POPULATION_OR_GENERATES_FORWARD_OUTCOMES",
+  "Transition_At_First_Consumption": {
+    "New_Holdout_State": "OPENED_SINGLE_USE_CONSUMED",
+    "HOLDOUT_OPENED": "YES",
+    "HOLDOUT_SCORING_STARTED": "YES",
+    "HOLDOUT_SINGLE_USE_CONSUMED": "YES",
+    "HOLDOUT_REEXECUTION_AUTHORIZED": "NO"
+  },
+  "Consumption_Requires_Successful_Run": "NO",
+  "Consumption_Requires_Persistence": "NO",
+  "Assert_Failure_Retry": "NO",
+  "Upload_Failure_Retry": "NO",
+  "Workflow_Failure_Retry": "NO",
+  "Persistence_Failure_Retry": "NO",
+  "Packaging_Failure_Retry": "NO",
+  "Automatic_Retry": "NO",
+  "Manual_Retry": "NO",
+  "Any_Second_Scoring_Without_New_Independent_Holdout": "PROTOCOL_BREACH",
+  "Failure_After_Opening": "MANAGER_REVIEW_REQUIRED"
+}
