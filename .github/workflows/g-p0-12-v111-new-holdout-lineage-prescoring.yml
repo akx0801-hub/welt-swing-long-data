@@ -8,6 +8,7 @@ on:
       - config/lane1_new_holdout_data_lineage_v1.11.json
       - config/g_p0_12_drive_roundtrip_binding_v1.11.json
       - scripts/lane1_new_holdout_data_lineage_prescoring_v1_11.py
+      - scripts/g_p0_12_blocked_finalizer_v1_11.py
       - .github/workflows/g-p0-12-v111-new-holdout-lineage-prescoring.yml
   workflow_dispatch:
 
