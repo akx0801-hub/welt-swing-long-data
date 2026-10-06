@@ -1,0 +1,33 @@
+{
+  "Protocol_ID": "L1_BREAKOUT_VCP_NEW_INDEPENDENT_HOLDOUT_PROTOCOL",
+  "Protocol_Version": "v1.10",
+  "Authority": "G-P0-11 / v1.10",
+  "Protocol_Source": "config/lane1_new_independent_holdout_protocol_v1.10.json",
+  "Lane": "BREAKOUT_COMPRESSION_VCP",
+  "Finalist": "L1-C07-PIVOT_PROXIMITY_STRICT",
+  "Finalist_Semantic_SHA256": "7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201",
+  "Candidate_Set_Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+  "Frozen_Universe_SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+  "Historical_v053_SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "Earliest_Anchor_Boundary_Exclusive": "2026-09-03",
+  "Exact_Future_End_Date": "NOT_SET_IN_THIS_GATE",
+  "Future_Data_Cutoff_Binding": "REQUIRED_AT_NEXT_MANAGER_GATE_BEFORE_ANY_NEW_MARKET_DATA_FETCH_AND_BEFORE_SCORING",
+  "Deterministic_Anchor_Inclusion_Rule": "Anchor_Date > 2026-09-03 AND anchor_bar_technically_valid = YES AND valid_technical_observations_through_t >= 252 AND all_required_non_parameter_lane1_inputs_finite = YES AND subsequent_valid_technical_observations >= 15 within prospectively frozen new-data lineage snapshot",
+  "Complete_15_Valid_Session_Forward_Window_Required": "YES",
+  "Partial_Forward_Windows": "PROHIBITED",
+  "Diagnostics": [
+    "FWD_CLOSE_RETURN_h",
+    "FWD_MAX_PIVOT_EXTENSION_ATR_h",
+    "FWD_MAX_DRAWDOWN_ATR_h",
+    "FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_h"
+  ],
+  "Horizons_Valid_Sessions": [
+    5,
+    10,
+    15
+  ],
+  "Three_Valued_Logic": "TRUE_FALSE_NOT_VERIFIED_INPUT",
+  "New_Holdout_State": "SEALED_NOT_OPENED",
+  "Execution_Authorized": "NO",
+  "Provider_Calls_Authorized": "NO"
+}
