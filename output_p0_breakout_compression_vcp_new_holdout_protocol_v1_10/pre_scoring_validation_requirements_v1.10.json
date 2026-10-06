@@ -1,0 +1,41 @@
+{
+  "Requirement_ID": "G-P0-11-PRE-SCORING-VALIDATION",
+  "Version": "v1.10",
+  "Required": "YES",
+  "Required_State": "SEALED_NOT_OPENED",
+  "Must_Finish_Before_First_Scoring_Access": "YES",
+  "Must_Finish_Before_Forward_Outcome_Generation": "YES",
+  "May_Read_Holdout_C07_Outcomes": "NO",
+  "May_Generate_Forward_Outcomes": "NO",
+  "Checks": [
+    "Date-Window Binding",
+    "Population Construction Code",
+    "Raw-Count Derivation Logic",
+    "Purge Logic",
+    "Market Calendar Logic",
+    "Required History Availability",
+    "Complete 15-Valid-Session Forward-Window Determination",
+    "Frozen Universe Binding",
+    "Finalist Contract Binding",
+    "Candidate-Set SHA",
+    "Code Integrity",
+    "Schema",
+    "Drive Destination Readiness",
+    "Packaging Logic",
+    "Row-Conservation Logic"
+  ],
+  "Failure_Before_Scoring": {
+    "New_Holdout_State": "SEALED_NOT_OPENED",
+    "Repair_Allowed": "YES",
+    "Revalidation_Allowed": "YES",
+    "Scoring_Allowed": "NO"
+  },
+  "Validation_May_Not_Inspect": [
+    "C07 hit rate",
+    "forward return",
+    "pivot extension outcome",
+    "drawdown outcome",
+    "candidate ranking"
+  ],
+  "Separate_Manager_Authorization_Required_After_Pass": "YES"
+}
