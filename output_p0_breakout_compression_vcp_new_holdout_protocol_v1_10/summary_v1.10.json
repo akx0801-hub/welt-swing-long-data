@@ -1,0 +1,23 @@
+{
+  "VERDICT": "PASS",
+  "G_P0_11": "NEW_INDEPENDENT_HOLDOUT_PROTOCOL_AUTHORIZED_EXECUTION_NOT_STARTED",
+  "Lane": "BREAKOUT_COMPRESSION_VCP",
+  "Finalist": "L1-C07-PIVOT_PROXIMITY_STRICT",
+  "Previous_Holdout": "INVALIDATED_AND_CONSUMED",
+  "Previous_Holdout_Reuse": "NOT_AUTHORIZED",
+  "New_Holdout": "SEALED_NOT_OPENED",
+  "New_Holdout_Independent": "REQUIRED",
+  "New_Holdout_Start_After": "2026-09-03",
+  "Window_End": "MECHANICAL_FROM_FUTURE_PROSPECTIVELY_FROZEN_DATA_LINEAGE_CUTOFF_NOT_SET_IN_THIS_GATE",
+  "Execution": "NOT_AUTHORIZED",
+  "Provider_Calls": "NOT_AUTHORIZED",
+  "Provider_Call_Count": 0,
+  "New_Market_Data_Fetch": "NOT_AUTHORIZED",
+  "Parameter_Promotion": "NOT_AUTHORIZED",
+  "Lane1_Automated_Contract": "NOT_READY",
+  "P0": "NOT_AUTHORIZED",
+  "P0_Pointer": "G-P0-01 / v0.99",
+  "Lane2": "NOT_AUTHORIZED",
+  "Next_Manager_Gate": "BREAKOUT_COMPRESSION_VCP NEW INDEPENDENT HOLDOUT DATA-LINEAGE / PRE-SCORING AUTHORIZATION",
+  "Automatic_Authorization": "NO"
+}
