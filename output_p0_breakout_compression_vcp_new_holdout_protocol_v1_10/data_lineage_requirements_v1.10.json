@@ -1,0 +1,30 @@
+{
+  "Requirement_ID": "G-P0-11-DATA-LINEAGE",
+  "Version": "v1.10",
+  "Historical_Lineage": {
+    "Name": "v0.53",
+    "SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+    "State": "HISTORICAL_READ_ONLY",
+    "Mutation": "PROHIBITED",
+    "Append_Mutation": "PROHIBITED"
+  },
+  "New_Lineage": {
+    "Required": "YES",
+    "Scope": "fresh post-2026-09-03 market data",
+    "Explicit_Content_Addressed_Lineage": "REQUIRED",
+    "Create_Authorized_In_v1_10": "NO",
+    "Fetch_Authorized_In_v1_10": "NO",
+    "Provider_Calls_Authorized_In_v1_10": "NO",
+    "Alpha_Vantage": "PROHIBITED",
+    "Data_Cutoff_Must_Be_Bound_Before_Fetch": "YES",
+    "Data_Cutoff_Must_Be_Bound_Before_Scoring": "YES"
+  },
+  "Frozen_Universe": {
+    "Path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+    "Rows": 1425,
+    "SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "Membership_Change": "PROHIBITED"
+  },
+  "Membership_Eligibility_Scan_Execution": "DISTINCT_CONCEPTS",
+  "Next_Manager_Gate": "BREAKOUT_COMPRESSION_VCP NEW INDEPENDENT HOLDOUT DATA-LINEAGE / PRE-SCORING AUTHORIZATION"
+}
