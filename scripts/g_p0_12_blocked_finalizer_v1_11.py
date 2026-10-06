@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Persist G-P0-12/v1.11 blocked pre-scoring control evidence without any provider access."""
 from __future__ import annotations
-import argparse,csv,hashlib,json,sqlite3
+import argparse,csv,hashlib,json,sqlite3,math
 from pathlib import Path
-import pandas as pd
 
 ROOT=Path(__file__).resolve().parents[1]
 DEC="NEW_INDEPENDENT_HOLDOUT_DATA_LINEAGE_AND_PRE_SCORING_AUTHORIZED_HOLDOUT_NOT_OPENED"
@@ -25,25 +24,42 @@ def wc(p:Path,rows,fields):
 
 def blocker_rows(db:Path):
     con=sqlite3.connect(db)
-    q=pd.read_sql_query("""SELECT ws_id,yahoo_symbol,status,reason_code,unique_bars,valid_bars,
+    rows=con.execute("""SELECT ws_id,yahoo_symbol,status,reason_code,unique_bars,valid_bars,
         repaired_rows,suspicious_returns,first_bar_date,last_bar_date
-        FROM cache_state WHERE status!='READY' ORDER BY ws_id""",con)
+        FROM cache_state WHERE status!='READY' ORDER BY ws_id""").fetchall()
     out=[]
-    for _,r in q.iterrows():
-        df=pd.read_sql_query("SELECT day,close,stock_splits FROM price_daily WHERE ws_id=? ORDER BY day",con,params=[r.ws_id])
-        df["day"]=pd.to_datetime(df["day"],errors="coerce")
-        df["close"]=pd.to_numeric(df["close"],errors="coerce")
-        df["stock_splits"]=pd.to_numeric(df["stock_splits"],errors="coerce").fillna(0)
-        ret=df["close"].pct_change(fill_method=None).abs()
-        split=df["stock_splits"].abs()>0
-        near=split|split.shift(1,fill_value=False)|split.shift(-1,fill_value=False)
-        bad=df.loc[(ret>0.50)&~near,"day"].dropna().dt.date.astype(str).tolist()
+    for ws,sym,status,reason,unique_bars,valid_bars,repaired_rows,suspicious_returns,first_bar,last_bar in rows:
+        px=con.execute(
+            "SELECT day,close,stock_splits FROM price_daily WHERE ws_id=? ORDER BY day",(ws,)
+        ).fetchall()
+        bad=[]
+        for i in range(1,len(px)):
+            day,close,split=px[i]
+            _,prev_close,_=px[i-1]
+            if close is None or prev_close is None or prev_close==0:
+                continue
+            try:
+                ret=abs(float(close)/float(prev_close)-1.0)
+            except Exception:
+                continue
+            if not math.isfinite(ret) or ret<=0.50:
+                continue
+            near=False
+            for j in (i-1,i,i+1):
+                if 0<=j<len(px):
+                    sp=px[j][2]
+                    try:
+                        near=near or (sp is not None and math.isfinite(float(sp)) and abs(float(sp))>0)
+                    except Exception:
+                        pass
+            if not near:
+                bad.append(str(day))
         fresh=[d for d in bad if d>"2026-09-03"]
         hist=[d for d in bad if d<="2026-09-03"]
         out.append({
-          "WS_ID":r.ws_id,"Yahoo_Symbol":r.yahoo_symbol,"Status":r.status,"Reason_Code":r.reason_code,
-          "Unique_Bars":int(r.unique_bars),"Valid_Bars":int(r.valid_bars),"Repaired_Rows":int(r.repaired_rows),
-          "Suspicious_Returns":int(r.suspicious_returns),
+          "WS_ID":ws,"Yahoo_Symbol":sym,"Status":status,"Reason_Code":reason,
+          "Unique_Bars":int(unique_bars),"Valid_Bars":int(valid_bars),"Repaired_Rows":int(repaired_rows),
+          "Suspicious_Returns":int(suspicious_returns),
           "Suspicious_Dates":";".join(bad),"Fresh_Suspicious_Dates":";".join(fresh),
           "Historical_Suspicious_Dates":";".join(hist),
           "Blocker_Class":"FRESH_QA_BLOCKER" if fresh else "INHERITED_FOUNDATION_QA_FLAG"
