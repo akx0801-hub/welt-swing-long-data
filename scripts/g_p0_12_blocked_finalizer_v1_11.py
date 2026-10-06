@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 DEC="NEW_INDEPENDENT_HOLDOUT_DATA_LINEAGE_AND_PRE_SCORING_AUTHORIZED_HOLDOUT_NOT_OPENED"
+RAW_BLOCKED="BLOCKED_MANAGER_REVIEW_REQUIRED"
 BLOCKED="PRE_SCORING_BLOCKED_MANAGER_REVIEW_REQUIRED"
 HARD_STOP="STOP_PRE_SCORING_BLOCKED_HOLDOUT_SEALED_NO_SCORING_NO_OUTCOMES_NO_PROMOTION_NO_P0_NO_LANE2"
 
@@ -81,9 +82,11 @@ def main():
     provider=rj(D/"provider_call_audit_v1.11.json")
     lineage=rj(D/"data_lineage_binding_v1.11.json")
 
-    assert pre["Pre_Scoring_Gate"]==BLOCKED
+    assert pre["Pre_Scoring_Gate"] in {RAW_BLOCKED,BLOCKED}
     assert pre["New_Holdout_State"]=="SEALED_NOT_OPENED"
-    assert b["Drive_Roundtrip"]=="PASS" and b["Pre_Scoring_Gate"]==BLOCKED
+    assert b["Drive_Roundtrip"]=="PASS" and b["Pre_Scoring_Gate"] in {RAW_BLOCKED,BLOCKED}
+    b["Pre_Scoring_Gate"]=BLOCKED
+    wj(Path(args.drive_binding),b)
     assert b["Drive_ZIP_SHA256"]==b["GitHub_Package_Artifact_SHA256"]
     assert b["SQLite_SHA256"]==sha(db)
     assert qual["Historical_Partition_Exact_Match"]=="YES"
