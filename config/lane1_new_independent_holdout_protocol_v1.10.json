@@ -1,0 +1,182 @@
+{
+  "Protocol_ID": "L1_BREAKOUT_VCP_NEW_INDEPENDENT_HOLDOUT_PROTOCOL",
+  "Protocol_Version": "v1.10",
+  "Authority": "G-P0-11 / v1.10",
+  "Lane": "BREAKOUT_COMPRESSION_VCP",
+  "Purpose": "GOVERNANCE_ONLY_PROSPECTIVE_INDEPENDENT_SINGLE_USE_HOLDOUT_PROTOCOL",
+  "Execution_Authorized": "NO",
+  "Provider_Calls_Authorized": "NO",
+  "New_Market_Data_Fetch_Authorized": "NO",
+  "Frozen_Finalist": {
+    "Candidate_ID": "L1-C07-PIVOT_PROXIMITY_STRICT",
+    "Semantic_SHA256": "7aabed14feb3ab902223f981619864b24aecc25b51c3d67f4026e4a8e357c201",
+    "Contract_Source": "output_p0_breakout_compression_vcp_finalist_freeze_v1_07/finalist_contract_v1.07.json",
+    "Contract_Change_Authorized": "NO",
+    "Pivot_Proximity_Cutoff_ATR": 0.75
+  },
+  "Frozen_Candidate_Set": {
+    "Candidate_Set_ID": "L1_BREAKOUT_VCP_CSET_01",
+    "Semantic_SHA256": "8148c0bd2294bece39908d84394dda4fb0835210e83822997df12b9fbd0d6235",
+    "Comparator_Holdout_Evaluation_Authorized": "NO",
+    "Candidate_Reselection_Authorized": "NO"
+  },
+  "Frozen_Universe": {
+    "Path": "universe/SWING_U3K_FROZEN_v0.5.csv",
+    "Rows": 1425,
+    "SHA256": "54b7a7dacf95b832176c2069ca11c787ce47bed522e2153caf2607bc52804ceb",
+    "Membership_Change_Authorized": "NO"
+  },
+  "Historical_Data_Lineage": {
+    "Lineage": "v0.53",
+    "State": "HISTORICAL_READ_ONLY",
+    "SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+    "Mutation_Authorized": "NO",
+    "Append_Mutation_Authorized": "NO"
+  },
+  "New_Data_Lineage": {
+    "Required": "YES",
+    "Scope": "POST_2026_09_03_FRESH_DATA_IN_NEW_EXPLICIT_LINEAGE",
+    "Create_In_This_Gate": "NO",
+    "Data_Fetch_In_This_Gate": "NO",
+    "Append_To_v0_53": "PROHIBITED",
+    "Future_Data_Cutoff_Binding": "REQUIRED_AT_NEXT_MANAGER_GATE_BEFORE_ANY_NEW_MARKET_DATA_FETCH_AND_BEFORE_SCORING"
+  },
+  "Independence": {
+    "Prior_Maximum_Market_Day": "2026-09-03",
+    "Anchor_Date_Rule": "Anchor_Date > 2026-09-03",
+    "Design_Overlap": "PROHIBITED",
+    "Validation_Overlap": "PROHIBITED",
+    "Historical_Holdout_Overlap": "PROHIBITED",
+    "Old_Anchor_Row_Reuse": "PROHIBITED",
+    "Historical_Holdout_Payload_Reuse": "PROHIBITED",
+    "Historical_Holdout_Payload_Access": "PROHIBITED",
+    "Historical_v1_08_Outcomes_For_Design": "PROHIBITED"
+  },
+  "Prospective_Window": {
+    "Fixed_End_Date_In_v1_10": "NOT_SET",
+    "Reason": "Do not invent an arbitrary end date before the separately authorized data-lineage gate.",
+    "Future_Cutoff_Selection": "Manager must bind one data-lineage acquisition cutoff prospectively at the next gate before any new market-data fetch and before any scoring; it may not be selected from observed prices, C07 hits, returns, pivot extension, drawdown, or any candidate outcome.",
+    "Deterministic_Anchor_Inclusion_Rule": "Include every WS_ID x Anchor_Date row from the frozen 1425 universe for which Anchor_Date > 2026-09-03, anchor bar is technically valid, at least 252 valid technical observations exist through t, all non-parameter Lane-1 inputs required by the frozen architecture are finite, and at least 15 subsequent valid technical observations exist within the prospectively frozen new-data lineage snapshot; exclude all other rows.",
+    "Mechanical_End_Rule": "For each WS_ID, the latest eligible anchor is mechanically the latest Anchor_Date within the prospectively frozen lineage snapshot that still has 15 subsequent valid technical observations; no partially censored forward window is admitted.",
+    "Random_Split": "PROHIBITED",
+    "Window_Trials": "PROHIBITED",
+    "Multiple_Window_Scoring": "PROHIBITED",
+    "Outcome_Based_Window_Selection": "PROHIBITED"
+  },
+  "Calendar_And_Eligibility": {
+    "Validation_Unit": "WS_ID × ANCHOR_DATE",
+    "Valid_Session_Semantics": "Per-WS_ID valid technical observation sequence, identical to the frozen v1.02 protocol unless a later Manager gate explicitly authorizes a technically necessary deviation.",
+    "Required_History": "at least 252 valid technical observations through t",
+    "Required_Inputs": "all non-parameter Lane-1 inputs required for the frozen architecture are finite",
+    "Required_Forward_Completeness": "at least 15 subsequent valid technical observations",
+    "Partition_Containment": "t+1..t+15 valid-session window must remain fully inside the new HOLDOUT partition / frozen lineage snapshot",
+    "Partial_Forward_Windows": "PROHIBITED",
+    "Silent_Semantic_Deviation": "PROHIBITED"
+  },
+  "Diagnostics": {
+    "Horizons_Valid_Sessions": [
+      5,
+      10,
+      15
+    ],
+    "Fields": [
+      "FWD_CLOSE_RETURN_h",
+      "FWD_MAX_PIVOT_EXTENSION_ATR_h",
+      "FWD_MAX_DRAWDOWN_ATR_h",
+      "FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_h"
+    ],
+    "Forward_Diagnostic_Contract_Source": "output_p0_breakout_compression_vcp_validation_protocol_v1_02/forward_diagnostic_contract_v1.02.json",
+    "Anchor_Pivot": "frozen at t; never rolled inside outcome window",
+    "Trade_Simulation": "NO",
+    "Stop": "NO",
+    "Target": "NO",
+    "CRV": "NO",
+    "Scalar_Objective": "NONE",
+    "Post_Hoc_Performance_Gate": "PROHIBITED"
+  },
+  "Three_Valued_Logic": {
+    "Required": "YES",
+    "States": [
+      "TRUE",
+      "FALSE",
+      "NOT_VERIFIED_INPUT"
+    ],
+    "Missing_Nonfinite_Undefined_Required_Input": "NOT_VERIFIED_INPUT",
+    "Imputation": "PROHIBITED",
+    "Fallback": "PROHIBITED"
+  },
+  "Single_Use_State_Machine": {
+    "Initial_State": "SEALED_NOT_OPENED",
+    "Initial": {
+      "HOLDOUT_OPENED": "NO",
+      "HOLDOUT_SCORING_STARTED": "NO",
+      "HOLDOUT_SINGLE_USE_CONSUMED": "NO",
+      "HOLDOUT_REEXECUTION_AUTHORIZED": "NO"
+    },
+    "Consume_Event": "FIRST_ACTUAL_ACCESS_THAT_SCORES_C07_AGAINST_NEW_HOLDOUT_POPULATION_OR_GENERATES_FORWARD_OUTCOMES",
+    "At_Consume_Event": {
+      "New_Holdout_State": "OPENED_SINGLE_USE_CONSUMED",
+      "HOLDOUT_OPENED": "YES",
+      "HOLDOUT_SCORING_STARTED": "YES",
+      "HOLDOUT_SINGLE_USE_CONSUMED": "YES",
+      "HOLDOUT_REEXECUTION_AUTHORIZED": "NO"
+    },
+    "Consumption_Depends_On_Successful_Persistence": "NO",
+    "Retry_After_Assert_Failure": "NO",
+    "Retry_After_Upload_Failure": "NO",
+    "Retry_After_Workflow_Failure": "NO",
+    "Retry_After_Persistence_Failure": "NO",
+    "Retry_After_Packaging_Failure": "NO",
+    "Any_Second_Scoring_Without_New_Independent_Holdout": "PROTOCOL_BREACH_MANAGER_REVIEW_REQUIRED"
+  },
+  "Pre_Scoring_Validation": {
+    "Required": "YES",
+    "Must_Complete_While_State": "SEALED_NOT_OPENED",
+    "May_Compute_C07_Outcomes": "NO",
+    "May_Generate_Forward_Outcomes": "NO",
+    "Checks": [
+      "date-window binding",
+      "population construction code",
+      "raw-count derivation logic",
+      "purge logic",
+      "market-calendar logic",
+      "required-history availability",
+      "complete-forward-window determination",
+      "frozen-universe binding",
+      "finalist-contract binding",
+      "candidate-set SHA",
+      "code integrity",
+      "schema",
+      "Drive destination readiness",
+      "packaging logic",
+      "row-conservation logic"
+    ],
+    "Failure_State": "SEALED_NOT_OPENED",
+    "Repair_And_Revalidate_PreScoring": "ALLOWED_BEFORE_ANY_SCORING_ACCESS"
+  },
+  "Failure_And_Review": {
+    "First_Scoring_Failure_State": "OPENED_SINGLE_USE_CONSUMED",
+    "HOLDOUT_SINGLE_USE_CONSUMED": "YES",
+    "HOLDOUT_REEXECUTION_AUTHORIZED": "NO",
+    "Automatic_Retry": "NO",
+    "Manual_Retry": "NO",
+    "Required_Action": "MANAGER_REVIEW",
+    "Post_Execution_Manager_Review": "REQUIRED"
+  },
+  "Forbidden_Design_Inputs": [
+    "historical v1.08 HIT/FALSE counts",
+    "historical v1.08 forward returns",
+    "historical v1.08 pivot-extension outcomes",
+    "historical v1.08 drawdown outcomes",
+    "expected hit rate",
+    "minimum hit count",
+    "return threshold",
+    "pivot-extension threshold",
+    "drawdown threshold",
+    "new sample-size threshold",
+    "power target",
+    "performance gate",
+    "candidate reselection"
+  ],
+  "Next_Manager_Gate": "BREAKOUT_COMPRESSION_VCP NEW INDEPENDENT HOLDOUT DATA-LINEAGE / PRE-SCORING AUTHORIZATION"
+}
