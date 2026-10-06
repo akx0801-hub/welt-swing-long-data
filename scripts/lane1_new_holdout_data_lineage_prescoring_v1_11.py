@@ -301,8 +301,12 @@ def verify_frozen_universe() -> pd.DataFrame:
     if sha_file(FROZEN_PATH) != FROZEN_SHA:
         raise RuntimeError("Frozen-1425 SHA mismatch")
     uni = pd.read_csv(FROZEN_PATH, dtype=str)
+    if "WS_ID" not in uni.columns and "Source_WS_ID" in uni.columns:
+        uni = uni.rename(columns={"Source_WS_ID": "WS_ID"})
     if len(uni) != FROZEN_ROWS:
         raise RuntimeError(f"Frozen-1425 row mismatch: {len(uni)}")
+    if "WS_ID" not in uni.columns:
+        raise RuntimeError("Frozen-1425 lacks canonical Source_WS_ID/WS_ID")
     if uni["WS_ID"].astype(str).duplicated().any():
         raise RuntimeError("duplicate WS_ID in Frozen-1425")
     return uni
