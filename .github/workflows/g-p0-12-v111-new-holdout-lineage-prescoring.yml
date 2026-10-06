@@ -227,7 +227,13 @@ jobs:
           RUN_ID="$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["Acquisition_Workflow_Run_ID"])')"
           PAYLOAD_ID="$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_Package_Artifact_ID"])')"
           CONTROL_ID="$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_PreDrive_Control_Artifact_ID"])')"
-          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID --jq .conclusion)" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID --jq .conclusion)" = "failure"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs --jq '.jobs[] | select(.name=="acquire") | .steps[] | select(.name=="Preflight bindings and freeze provider mapping") | .conclusion')" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs --jq '.jobs[] | select(.name=="acquire") | .steps[] | select(.name=="Bounded Yahoo acquisition and pre-scoring population") | .conclusion')" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs --jq '.jobs[] | select(.name=="acquire") | .steps[] | select(.name=="Static no-score / no-outcome output guard") | .conclusion')" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs --jq '.jobs[] | select(.name=="acquire") | .steps[] | select(.name=="Upload exact Drive payload candidate") | .conclusion')" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs --jq '.jobs[] | select(.name=="acquire") | .steps[] | select(.name=="Upload pre-Drive control evidence") | .conclusion')" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs --jq '.jobs[] | select(.name=="acquire") | .steps[] | select(.name=="Assert pre-scoring PASS after evidence persistence") | .conclusion')" = "failure"
           test "$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/$PAYLOAD_ID --jq .digest)" = "$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_Package_Artifact_Digest"])')"
           test "$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/$CONTROL_ID --jq .digest)" = "$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_PreDrive_Control_Artifact_Digest"])')"
 
@@ -269,46 +275,55 @@ jobs:
           assert mx<="2026-10-05"
           PY
 
-      - name: Finalize Git control plane from verified Drive binding
+      - name: Finalize blocked Git control plane from verified Drive binding
         run: |
           set -euo pipefail
-          python scripts/lane1_new_holdout_data_lineage_prescoring_v1_11.py \
-            --phase finalize-control \
-            --repository-sha "$GITHUB_SHA" \
+          PRE="$(python -c 'import json;print(json.load(open("output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/pre_drive_state_v1.11.json"))["Pre_Scoring_Gate"])')"
+          test "$PRE" = "BLOCKED_MANAGER_REVIEW_REQUIRED"
+          python scripts/g_p0_12_blocked_finalizer_v1_11.py \
             --output-dir output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11 \
-            --drive-binding config/g_p0_12_drive_roundtrip_binding_v1.11.json
+            --drive-binding config/g_p0_12_drive_roundtrip_binding_v1.11.json \
+            --sqlite /tmp/v111.sqlite
 
-      - name: Final fail-closed validation
+      - name: Final blocked fail-closed validation
         run: |
           set -euo pipefail
           python - <<'PY'
-          import csv,hashlib,json,pathlib
+          import csv,json,pathlib
           D=pathlib.Path("output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11")
           s=json.load(open(D/"summary_v1.11.json"))
           c=json.load(open(D/"stage_checkpoint_v1.11.json"))
           p=json.load(open("config/p0_parameter_authority_current.json"))
           a=json.load(open("config/manager_governance_authority_G_P0_12_v1.11.json"))
+          b=json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))
           t=list(csv.DictReader(open(D/"test_results_v1.11.csv")))
-          assert s["VERDICT"]=="PASS"
-          assert s["G_P0_12"]=="DATA_LINEAGE_MATERIALIZED_PRE_SCORING_COMPLETE_HOLDOUT_NOT_OPENED"
-          assert s["Data_Lineage_Cutoff"]=="2026-10-05"
-          assert s["Fresh_Data_Start"]=="2026-09-04"
-          assert s["Provider"]=="YFINANCE_FREE"
+          by={r["Test"]:r["Result"] for r in t}
+          assert s["VERDICT"]=="BLOCKED"
+          assert s["G_P0_12"]=="NEW_INDEPENDENT_HOLDOUT_DATA_LINEAGE_AND_PRE_SCORING_AUTHORIZED_HOLDOUT_NOT_OPENED"
+          assert s["Pre_Scoring_Status"]=="PRE_SCORING_BLOCKED_MANAGER_REVIEW_REQUIRED"
+          assert s["Data_Lineage_Cutoff"]=="2026-10-05" and s["Fresh_Data_Start"]=="2026-09-04"
+          assert s["Provider"]=="YFINANCE_FREE" and s["Provider_Mapped_Count"]==1425 and s["Provider_Unmapped_Count"]==0
+          assert s["QA_READY_Securities"]==1410 and s["QA_QUARANTINE_Securities"]==15
+          assert s["Fresh_QA_Blockers"]==9 and s["Inherited_Foundation_QA_Flags"]==6
           assert s["New_Holdout"]=="SEALED_NOT_OPENED"
-          assert s["HOLDOUT_OPENED"]=="NO"
-          assert s["HOLDOUT_SCORING_STARTED"]=="NO"
-          assert s["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
-          assert s["Forward_Outcomes"]=="NOT_GENERATED"
-          assert c["Decision"]=="DATA_LINEAGE_MATERIALIZED_PRE_SCORING_COMPLETE_HOLDOUT_NOT_OPENED"
+          assert s["HOLDOUT_OPENED"]=="NO" and s["HOLDOUT_SCORING_STARTED"]=="NO" and s["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          assert s["C07_Scoring"]=="NOT_AUTHORIZED_NOT_PERFORMED" and s["Forward_Outcomes"]=="NOT_GENERATED"
+          assert c["Decision"]=="PRE_SCORING_BLOCKED_MANAGER_REVIEW_REQUIRED"
           assert c["New_Holdout_State"]=="SEALED_NOT_OPENED"
-          assert c["C07_SCORING_AUTHORIZED"]=="NO"
-          assert c["FORWARD_OUTCOME_GENERATION_AUTHORIZED"]=="NO"
+          assert c["C07_SCORING_AUTHORIZED"]=="NO" and c["FORWARD_OUTCOME_GENERATION_AUTHORIZED"]=="NO"
           assert c["P0_RUN_AUTHORIZED"]=="NO" and c["LANE2_AUTHORIZED"]=="NO"
+          assert c["QA_Blocker_Count"]==15 and c["Fresh_QA_Blocker_Count"]==9 and c["Inherited_Foundation_QA_Flag_Count"]==6
           assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
           assert p["P0_RUN_AUTHORIZED"]=="NO" and p["AUTOMATED_P0_READY"]=="NO"
           assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
           assert a["C07_Scoring_Authorized"]=="NO" and a["Forward_Outcome_Generation_Authorized"]=="NO"
-          assert len(t)>=58 and all(r["Result"]=="PASS" for r in t)
+          assert b["Drive_Roundtrip"]=="PASS" and b["Pre_Scoring_Gate"]=="BLOCKED_MANAGER_REVIEW_REQUIRED"
+          assert by["PRE_SCORING_QA_READINESS"]=="FAIL"
+          assert all(r["Result"]=="PASS" for r in t if r["Test"]!="PRE_SCORING_QA_READINESS")
+          blockers=list(csv.DictReader(open(D/"pre_scoring_blockers_v1.11.csv",encoding="utf-8")))
+          assert len(blockers)==15
+          assert sum(r["Blocker_Class"]=="FRESH_QA_BLOCKER" for r in blockers)==9
+          assert sum(r["Blocker_Class"]=="INHERITED_FOUNDATION_QA_FLAG" for r in blockers)==6
           cols=set(next(csv.DictReader(open(D/"anchor_population_manifest_v1.11.csv",encoding="utf-8"))).keys())
           forbidden={"C07","C07_Status","HIT","FALSE","COMPLETE_FINALIST","PIVOT_PROXIMITY_PASS",
                      "FWD_CLOSE_RETURN_5","FWD_CLOSE_RETURN_10","FWD_CLOSE_RETURN_15",
@@ -335,7 +350,7 @@ jobs:
           test -n "$CHANGED"
           BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(config/g_p0_12_drive_roundtrip_binding_v1\.11\.json|output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/.*|docs/validation/P0_Breakout_Compression_VCP_New_HOLDOUT_Data_Lineage_Pre_Scoring_G-P0-12_v1\.11\.md)$' || true)"
           test -z "$BAD"
-          git commit -m "Persist G-P0-12 v1.11 lineage pre-scoring evidence"
+          git commit -m "Persist G-P0-12 v1.11 blocked pre-scoring evidence"
           git push origin HEAD:dev/g-p0-12-v1.11-new-holdout-lineage-prescoring
 
       - name: Upload final bounded control-plane artifact
