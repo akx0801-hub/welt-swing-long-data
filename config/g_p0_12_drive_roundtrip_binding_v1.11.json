@@ -38,7 +38,7 @@
   "Provider_Unmapped_Count": 0,
   "Anchor_Population_Rows": 28699,
   "Anchor_Eligible_Rows": 7288,
-  "Pre_Scoring_Gate": "BLOCKED_MANAGER_REVIEW_REQUIRED",
+  "Pre_Scoring_Gate": "PRE_SCORING_BLOCKED_MANAGER_REVIEW_REQUIRED",
   "Pre_Scoring_Blocker": "15_QA_QUARANTINE_SECURITIES",
   "QA_Status_Counts": {
     "READY": 1410,

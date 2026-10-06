@@ -1,0 +1,14 @@
+{
+  "Canonical_Drive_File_ID": "1lrp_9V0KlWedKYoK7KBNa4zyVqBj1iPg",
+  "Drive_Archive_SHA256": "f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95",
+  "Runner_Restore_Artifact_ID": 10900287789,
+  "Runner_Restore_Run_ID": 36225840648,
+  "Runner_Restore_Artifact_SHA256": "f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95",
+  "SQLite_Member": "runtime_cache/p0_frozen_1425_v0_53.sqlite",
+  "SQLite_SHA256": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "Original_State": "READ_ONLY_UNCHANGED",
+  "Original_SHA_After": "bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc",
+  "Historical_Immutability_End": "2026-09-03",
+  "Historical_Partition_Exact_Match": "YES",
+  "Source_Post_Boundary_Rows_Not_Carried_Into_Fresh_Partition": 18777
+}

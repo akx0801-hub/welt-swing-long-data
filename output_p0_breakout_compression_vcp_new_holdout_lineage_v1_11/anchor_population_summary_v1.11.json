@@ -1,0 +1,29 @@
+{
+  "Anchor_Population_Rows": 28699,
+  "Anchor_Eligible_Rows": 7288,
+  "Anchor_Date_Min": "2026-09-04",
+  "Anchor_Date_Max": "2026-10-05",
+  "Exclusion_Reason_Counts": {
+    "ELIGIBLE": 7288,
+    "INCOMPLETE_15_VALID_SESSION_FORWARD_WINDOW": 21313,
+    "REQUIRED_INPUT_NOT_AVAILABLE": 98
+  },
+  "Manifest_SHA256": "3afd04a51468f8e394010e505fc23ed4d0ef651bf8b7a66428991c60cbc53bdf",
+  "Manifest_Columns": [
+    "WS_ID",
+    "Anchor_Date",
+    "technical_anchor_valid",
+    "valid_history_count_through_t",
+    "required_history_ready",
+    "required_input_availability",
+    "future_valid_sessions_available",
+    "complete_5_session_window",
+    "complete_10_session_window",
+    "complete_15_session_window",
+    "anchor_eligible",
+    "exclusion_reason"
+  ],
+  "C07_Columns_Present": [],
+  "Forward_Outcome_Columns_Present": [],
+  "Forward_Availability_Only": "YES"
+}
