@@ -1,0 +1,352 @@
+name: G-P0-12 v1.11 new holdout lineage prescoring
+
+on:
+  push:
+    branches: [dev/g-p0-12-v1.11-new-holdout-lineage-prescoring]
+    paths:
+      - config/manager_governance_authority_G_P0_12_v1.11.json
+      - config/lane1_new_holdout_data_lineage_v1.11.json
+      - config/g_p0_12_drive_roundtrip_binding_v1.11.json
+      - scripts/lane1_new_holdout_data_lineage_prescoring_v1_11.py
+      - .github/workflows/g-p0-12-v111-new-holdout-lineage-prescoring.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  route:
+    runs-on: ubuntu-latest
+    outputs:
+      mode: ${{ steps.route.outputs.mode }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: route
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -f config/g_p0_12_drive_roundtrip_binding_v1.11.json; then
+            echo "mode=FINALIZE" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=ACQUIRE" >> "$GITHUB_OUTPUT"
+          fi
+
+  acquire:
+    needs: route
+    if: needs.route.outputs.mode == 'ACQUIRE'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify start lineage and bounded scope before provider access
+        run: |
+          set -euo pipefail
+          START="b433af12667cb4843653b1d14127b59054adf7d4"
+          git merge-base --is-ancestor "$START" HEAD
+          CHANGED="$(git diff --name-only "$START"..HEAD)"
+          test -n "$CHANGED"
+          BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(config/manager_governance_authority_G_P0_12_v1\.11\.json|config/lane1_new_holdout_data_lineage_v1\.11\.json|scripts/lane1_new_holdout_data_lineage_prescoring_v1_11\.py|\.github/workflows/g-p0-12-v111-new-holdout-lineage-prescoring\.yml)$' || true)"
+          test -z "$BAD"
+          test ! -f config/g_p0_12_drive_roundtrip_binding_v1.11.json
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^config/p0_parameter_authority_current.json$' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^universe/' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^output_p0_breakout_compression_vcp_holdout_v1_08/' || true)" = "0"
+          ! git diff "$START"..HEAD | grep -Fq '1dJImdpnpmjkNEqkRjxO6fn1ma0WUr6Oi'
+
+      - name: Install exact established price dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install "yfinance==1.6.0" "pandas==2.2.3" "numpy==2.1.3"
+
+      - name: Compile bounded builder
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/lane1_new_holdout_data_lineage_prescoring_v1_11.py
+          python - <<'PY'
+          import json
+          a=json.load(open("config/manager_governance_authority_G_P0_12_v1.11.json"))
+          assert a["Decision"]=="NEW_INDEPENDENT_HOLDOUT_DATA_LINEAGE_AND_PRE_SCORING_AUTHORIZED_HOLDOUT_NOT_OPENED"
+          assert a["Data_Lineage_Cutoff"]=="2026-10-05"
+          assert a["Fresh_Data_Start"]=="2026-09-04"
+          assert a["Price_Provider"]=="YFINANCE_FREE"
+          assert a["Provider_Calls_Authorized"]=="YES_BOUNDED_PRICE_DATA_ONLY"
+          assert a["Alpha_Vantage_Authorized"]=="NO"
+          assert a["C07_Scoring_Authorized"]=="NO"
+          assert a["Forward_Outcome_Generation_Authorized"]=="NO"
+          assert a["HOLDOUT_OPENED"]=="NO"
+          assert a["HOLDOUT_SCORING_STARTED"]=="NO"
+          assert a["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          PY
+
+      - name: Restore byte-identical v0.53 recovery mirror
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p runtime_v111
+          DIGEST="$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10900287789 --jq .digest)"
+          test "$DIGEST" = "sha256:f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95"
+          gh api repos/$GITHUB_REPOSITORY/actions/artifacts/10900287789/zip > runtime_v111/v053.zip
+          test "$(sha256sum runtime_v111/v053.zip | awk '{print $1}')" = "f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95"
+
+      - name: Preflight bindings and freeze provider mapping
+        run: |
+          set -euo pipefail
+          python scripts/lane1_new_holdout_data_lineage_prescoring_v1_11.py \
+            --phase preflight \
+            --repository-sha "$GITHUB_SHA" \
+            --source-zip runtime_v111/v053.zip \
+            --output-dir output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11 \
+            --package-dir runtime_v111/package_stage \
+            --work-dir runtime_v111/work
+          python - <<'PY'
+          import json
+          p=json.load(open("runtime_v111/work/preflight_state_v1.11.json"))
+          assert p["phase"]=="PREFLIGHT_PASS"
+          assert p["provider_calls"]==0
+          assert p["mapping"]["rows"]==1425
+          assert p["mapping"]["mapped_count"]==1425
+          assert p["mapping"]["unmapped_count"]==0
+          assert p["mapping"]["unexpected_symbol_change_count"]==0
+          assert p["mapping"]["mapping_frozen_before_fetch"]=="YES"
+          assert p["v053"]["archive_sha256"]=="f54f1520e6cfcefbca043bc782ccf71ddd0e70538722ee1c3857551396761e95"
+          assert p["v053"]["sqlite_sha256"]=="bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          assert p["new_holdout_state"]=="SEALED_NOT_OPENED"
+          PY
+
+      - name: Bounded Yahoo acquisition and pre-scoring population
+        run: |
+          set -euo pipefail
+          python scripts/lane1_new_holdout_data_lineage_prescoring_v1_11.py \
+            --phase acquire \
+            --repository-sha "$GITHUB_SHA" \
+            --output-dir output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11 \
+            --package-dir runtime_v111/package_stage \
+            --work-dir runtime_v111/work
+
+      - name: Static no-score / no-outcome output guard
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,json,pathlib
+          D=pathlib.Path("output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11")
+          a=list(csv.DictReader(open(D/"anchor_population_manifest_v1.11.csv",encoding="utf-8")))
+          cols=set(a[0]) if a else set()
+          forbidden={
+            "C07","C07_Status","HIT","FALSE","COMPLETE_FINALIST","PIVOT_PROXIMITY_PASS",
+            "FWD_CLOSE_RETURN_5","FWD_CLOSE_RETURN_10","FWD_CLOSE_RETURN_15",
+            "FWD_MAX_PIVOT_EXTENSION_ATR_5","FWD_MAX_PIVOT_EXTENSION_ATR_10","FWD_MAX_PIVOT_EXTENSION_ATR_15",
+            "FWD_MAX_DRAWDOWN_ATR_5","FWD_MAX_DRAWDOWN_ATR_10","FWD_MAX_DRAWDOWN_ATR_15",
+            "FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_5","FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_10","FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_15",
+          }
+          assert not (cols & forbidden), sorted(cols & forbidden)
+          s=json.load(open(D/"acquisition_summary_v1.11.json"))
+          assert s["C07_Scoring"]=="NOT_PERFORMED"
+          assert s["HIT_FALSE_Counts"]=="NOT_COMPUTED"
+          assert s["Forward_Outcomes"]=="NOT_GENERATED"
+          assert s["New_Holdout_State"]=="SEALED_NOT_OPENED"
+          assert s["HOLDOUT_OPENED"]=="NO"
+          assert s["HOLDOUT_SCORING_STARTED"]=="NO"
+          assert s["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          q=json.load(open(D/"data_quality_summary_v1.11.json"))
+          assert q["Rows_After_Cutoff"]==0
+          assert q["Historical_Partition_Exact_Match"]=="YES"
+          assert q["v053_Source_SHA_After_Acquisition"]=="bccca4f168eb5fbd68822d5ebd96419066c69400014b8525a0bec60df0b07afc"
+          PY
+
+      - name: Upload exact Drive payload candidate
+        id: payload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WELT-SWING_L1_BREAKOUT_VCP_NEW_HOLDOUT_LINEAGE_v1.11_Payload
+          path: runtime_v111/package_stage/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 6
+
+      - name: Upload pre-Drive control evidence
+        id: control
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-12-v1.11-pre-drive-control
+          path: output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Assert pre-scoring PASS after evidence persistence
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          p=json.load(open("output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/pre_drive_state_v1.11.json"))
+          assert p["Pre_Scoring_Gate"]=="PASS", p
+          assert p["New_Holdout_State"]=="SEALED_NOT_OPENED"
+          assert p["HOLDOUT_OPENED"]=="NO"
+          assert p["HOLDOUT_SCORING_STARTED"]=="NO"
+          assert p["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          PY
+
+  finalize:
+    needs: route
+    if: needs.route.outputs.mode == 'FINALIZE'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify finalization binding and no provider re-entry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          b=json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))
+          assert b["Binding_ID"]=="G-P0-12-DRIVE-ROUNDTRIP"
+          assert b["Version"]=="v1.11"
+          assert b["Drive_Roundtrip"]=="PASS"
+          assert b["Drive_Folder_ID"]=="1uSIFSPiF5IzfOwretpp3Gl_jb6K2sZ--"
+          assert b["Package_Name"]=="WELT-SWING_L1_BREAKOUT_VCP_NEW_HOLDOUT_LINEAGE_v1.11_Payload.zip"
+          assert b["Drive_ZIP_SHA256"]==b["GitHub_Package_Artifact_SHA256"]
+          assert b["HOLDOUT_State"]=="SEALED_NOT_OPENED"
+          assert b["C07_Scoring"]=="NOT_PERFORMED"
+          assert b["Forward_Outcomes"]=="NOT_GENERATED"
+          PY
+          RUN_ID="$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["Acquisition_Workflow_Run_ID"])')"
+          PAYLOAD_ID="$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_Package_Artifact_ID"])')"
+          CONTROL_ID="$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_PreDrive_Control_Artifact_ID"])')"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID --jq .conclusion)" = "success"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/$PAYLOAD_ID --jq .digest)" = "$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_Package_Artifact_Digest"])')"
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/$CONTROL_ID --jq .digest)" = "$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_PreDrive_Control_Artifact_Digest"])')"
+
+      - name: Restore pre-Drive control evidence and package audit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/v111-control /tmp/v111-package
+          mkdir -p /tmp/v111-control /tmp/v111-package
+          CONTROL_ID="$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_PreDrive_Control_Artifact_ID"])')"
+          PAYLOAD_ID="$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_Package_Artifact_ID"])')"
+          gh api repos/$GITHUB_REPOSITORY/actions/artifacts/$CONTROL_ID/zip > /tmp/control.zip
+          gh api repos/$GITHUB_REPOSITORY/actions/artifacts/$PAYLOAD_ID/zip > /tmp/package.zip
+          test "$(sha256sum /tmp/package.zip | awk '{print $1}')" = "$(python -c 'import json;print(json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))["GitHub_Package_Artifact_SHA256"])')"
+          unzip -q /tmp/control.zip -d /tmp/v111-control
+          unzip -q /tmp/package.zip -d /tmp/v111-package
+          rm -rf output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11
+          mkdir output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11
+          cp -a /tmp/v111-control/. output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/
+          python - <<'PY'
+          import hashlib,json,sqlite3,zipfile
+          from pathlib import Path
+          b=json.load(open("config/g_p0_12_drive_roundtrip_binding_v1.11.json"))
+          p=Path("/tmp/package.zip")
+          assert hashlib.sha256(p.read_bytes()).hexdigest()==b["GitHub_Package_Artifact_SHA256"]
+          with zipfile.ZipFile(p) as z:
+              names=sorted(z.namelist())
+              assert names==sorted(b["Package_Members"])
+              data=z.read("runtime_cache/lane1_breakout_vcp_holdout_lineage_v1_11.sqlite")
+              assert hashlib.sha256(data).hexdigest()==b["SQLite_SHA256"]
+              db=Path("/tmp/v111.sqlite"); db.write_bytes(data)
+          con=sqlite3.connect("/tmp/v111.sqlite")
+          mn,mx,n=con.execute("SELECT MIN(day),MAX(day),COUNT(*) FROM price_daily").fetchone()
+          con.close()
+          assert n==b["SQLite_Row_Count"]
+          assert mn==b["SQLite_Earliest_Date"]
+          assert mx==b["SQLite_Latest_Date"]
+          assert mx<="2026-10-05"
+          PY
+
+      - name: Finalize Git control plane from verified Drive binding
+        run: |
+          set -euo pipefail
+          python scripts/lane1_new_holdout_data_lineage_prescoring_v1_11.py \
+            --phase finalize-control \
+            --repository-sha "$GITHUB_SHA" \
+            --output-dir output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11 \
+            --drive-binding config/g_p0_12_drive_roundtrip_binding_v1.11.json
+
+      - name: Final fail-closed validation
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,hashlib,json,pathlib
+          D=pathlib.Path("output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11")
+          s=json.load(open(D/"summary_v1.11.json"))
+          c=json.load(open(D/"stage_checkpoint_v1.11.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          a=json.load(open("config/manager_governance_authority_G_P0_12_v1.11.json"))
+          t=list(csv.DictReader(open(D/"test_results_v1.11.csv")))
+          assert s["VERDICT"]=="PASS"
+          assert s["G_P0_12"]=="DATA_LINEAGE_MATERIALIZED_PRE_SCORING_COMPLETE_HOLDOUT_NOT_OPENED"
+          assert s["Data_Lineage_Cutoff"]=="2026-10-05"
+          assert s["Fresh_Data_Start"]=="2026-09-04"
+          assert s["Provider"]=="YFINANCE_FREE"
+          assert s["New_Holdout"]=="SEALED_NOT_OPENED"
+          assert s["HOLDOUT_OPENED"]=="NO"
+          assert s["HOLDOUT_SCORING_STARTED"]=="NO"
+          assert s["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          assert s["Forward_Outcomes"]=="NOT_GENERATED"
+          assert c["Decision"]=="DATA_LINEAGE_MATERIALIZED_PRE_SCORING_COMPLETE_HOLDOUT_NOT_OPENED"
+          assert c["New_Holdout_State"]=="SEALED_NOT_OPENED"
+          assert c["C07_SCORING_AUTHORIZED"]=="NO"
+          assert c["FORWARD_OUTCOME_GENERATION_AUTHORIZED"]=="NO"
+          assert c["P0_RUN_AUTHORIZED"]=="NO" and c["LANE2_AUTHORIZED"]=="NO"
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
+          assert p["P0_RUN_AUTHORIZED"]=="NO" and p["AUTOMATED_P0_READY"]=="NO"
+          assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          assert a["C07_Scoring_Authorized"]=="NO" and a["Forward_Outcome_Generation_Authorized"]=="NO"
+          assert len(t)>=58 and all(r["Result"]=="PASS" for r in t)
+          cols=set(next(csv.DictReader(open(D/"anchor_population_manifest_v1.11.csv",encoding="utf-8"))).keys())
+          forbidden={"C07","C07_Status","HIT","FALSE","COMPLETE_FINALIST","PIVOT_PROXIMITY_PASS",
+                     "FWD_CLOSE_RETURN_5","FWD_CLOSE_RETURN_10","FWD_CLOSE_RETURN_15",
+                     "FWD_MAX_PIVOT_EXTENSION_ATR_5","FWD_MAX_DRAWDOWN_ATR_5",
+                     "FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT_5"}
+          assert not (cols & forbidden)
+          PY
+          START="b433af12667cb4843653b1d14127b59054adf7d4"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^config/p0_parameter_authority_current.json$' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^config/feature_home_rs_foundation_authority_v0.93.json$' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^universe/' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^output_p0_breakout_compression_vcp_holdout_v1_08/' || true)" = "0"
+
+      - name: Persist bounded v1.11 control plane
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add \
+            config/g_p0_12_drive_roundtrip_binding_v1.11.json \
+            output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/ \
+            docs/validation/P0_Breakout_Compression_VCP_New_HOLDOUT_Data_Lineage_Pre_Scoring_G-P0-12_v1.11.md
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(config/g_p0_12_drive_roundtrip_binding_v1\.11\.json|output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/.*|docs/validation/P0_Breakout_Compression_VCP_New_HOLDOUT_Data_Lineage_Pre_Scoring_G-P0-12_v1\.11\.md)$' || true)"
+          test -z "$BAD"
+          git commit -m "Persist G-P0-12 v1.11 lineage pre-scoring evidence"
+          git push origin HEAD:dev/g-p0-12-v1.11-new-holdout-lineage-prescoring
+
+      - name: Upload final bounded control-plane artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-12-v1.11-final-control-plane
+          path: |
+            config/manager_governance_authority_G_P0_12_v1.11.json
+            config/lane1_new_holdout_data_lineage_v1.11.json
+            config/g_p0_12_drive_roundtrip_binding_v1.11.json
+            output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/
+            docs/validation/P0_Breakout_Compression_VCP_New_HOLDOUT_Data_Lineage_Pre_Scoring_G-P0-12_v1.11.md
+          if-no-files-found: error
+          retention-days: 90
