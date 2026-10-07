@@ -1,0 +1,168 @@
+name: G-P0-13 v1.12 quarantine root cause
+
+on:
+  push:
+    branches: [dev/g-p0-13-v1.12-quarantine-root-cause]
+    paths:
+      - config/manager_governance_authority_G_P0_13_v1.12.json
+      - scripts/lane1_prescoring_quarantine_root_cause_v1_12.py
+      - .github/workflows/g-p0-13-v112-quarantine-root-cause.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Verify exact governed start and bounded diff
+        run: |
+          set -euo pipefail
+          START="2ab52ea5baebfaa278ab579c924009748431926b"
+          git fetch origin main --no-tags
+          test "$(git rev-parse origin/main)" = "$START"
+          test "$(git show -s --format=%s "$START")" = "Persist G-P0-12 v1.11 blocked pre-scoring evidence"
+          git merge-base --is-ancestor "$START" HEAD
+          CHANGED="$(git diff --name-only "$START"..HEAD)"
+          BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(config/manager_governance_authority_G_P0_13_v1\.12\.json|scripts/lane1_prescoring_quarantine_root_cause_v1_12\.py|\.github/workflows/g-p0-13-v112-quarantine-root-cause\.yml)$' || true)"
+          test -z "$BAD"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^config/p0_parameter_authority_current.json$' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^config/feature_home_rs_foundation_authority_v0.93.json$' || true)" = "0"
+          test "$(git diff --name-only "$START"..HEAD | grep -c '^universe/' || true)" = "0"
+          ! git diff "$START"..HEAD | grep -Fq '1dJImdpnpmjkNEqkRjxO6fn1ma0WUr6Oi'
+
+      - name: Verify predecessor blocked state
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          a=json.load(open("config/manager_governance_authority_G_P0_12_v1.11.json"))
+          s=json.load(open("output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/summary_v1.11.json"))
+          c=json.load(open("output_p0_breakout_compression_vcp_new_holdout_lineage_v1_11/stage_checkpoint_v1.11.json"))
+          p=json.load(open("config/p0_parameter_authority_current.json"))
+          n=json.load(open("config/manager_governance_authority_G_P0_13_v1.12.json"))
+          assert a["Authority_ID"]=="G-P0-12" and a["Authority_Version"]=="v1.11"
+          assert s["Pre_Scoring_Status"]=="PRE_SCORING_BLOCKED_MANAGER_REVIEW_REQUIRED"
+          assert c["Decision"]=="PRE_SCORING_BLOCKED_MANAGER_REVIEW_REQUIRED"
+          assert n["Decision"]=="PRE_SCORING_QUARANTINE_ROOT_CAUSE_AND_REMEDIATION_DESIGN_AUTHORIZED_NO_PROVIDER_REENTRY"
+          assert n["Provider_Calls_Authorized"]=="NO" and n["Repair_Execution_Authorized"]=="NO"
+          assert n["Dependency_Change_Authorized"]=="NO" and n["Lineage_Mutation_Authorized"]=="NO"
+          assert n["HOLDOUT_OPENED"]=="NO" and n["HOLDOUT_SCORING_STARTED"]=="NO" and n["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          assert p["Authority_ID"]=="G-P0-01" and p["Version"]=="v0.99"
+          assert p["P0_RUN_AUTHORIZED"]=="NO" and p["AUTOMATED_P0_READY"]=="NO"
+          assert p["p0_numeric_pass_thresholds"]==[] and p["promoted_lane_pass_rules"]==[]
+          PY
+
+      - name: Restore exact v1.11 immutable lineage package
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p runtime_v112
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/artifacts/11435984873 --jq .digest)" = "sha256:3c305545c3243616cfdf21597d0cbbda6755b5649211ee112d3c9d4a44400fb2"
+          gh api repos/$GITHUB_REPOSITORY/actions/artifacts/11435984873/zip > runtime_v112/v111.zip
+          test "$(sha256sum runtime_v112/v111.zip | awk '{print $1}')" = "3c305545c3243616cfdf21597d0cbbda6755b5649211ee112d3c9d4a44400fb2"
+          test "$(stat -c '%s' runtime_v112/v111.zip)" = "28778386"
+
+      - name: Retrieve original v1.11 runtime evidence
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh run view 37515761972 --repo "$GITHUB_REPOSITORY" --log > runtime_v112/v111_run.log
+          grep -Fq "15 Failed downloads:" runtime_v112/v111_run.log
+          grep -Fq "ModuleNotFoundError(\"No module named 'scipy'\")" runtime_v112/v111_run.log
+
+      - name: Compile local-only diagnostic
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/lane1_prescoring_quarantine_root_cause_v1_12.py
+          ! grep -Eq '(^|[[:space:]])(pip|pip3)[[:space:]]+install' .github/workflows/g-p0-13-v112-quarantine-root-cause.yml
+          ! grep -Eq 'import[[:space:]]+yfinance|from[[:space:]]+yfinance|YFinanceBatchClient\(' scripts/lane1_prescoring_quarantine_root_cause_v1_12.py
+
+      - name: Execute bounded read-only root-cause diagnostic
+        run: |
+          set -euo pipefail
+          rm -rf output_p0_breakout_compression_vcp_quarantine_root_cause_v1_12
+          python scripts/lane1_prescoring_quarantine_root_cause_v1_12.py \
+            --package-zip runtime_v112/v111.zip \
+            --runtime-log runtime_v112/v111_run.log \
+            --output-dir output_p0_breakout_compression_vcp_quarantine_root_cause_v1_12 \
+            --work-dir runtime_v112/work \
+            --workflow-file .github/workflows/g-p0-13-v112-quarantine-root-cause.yml \
+            --start-head-verified YES
+
+      - name: Validate exact v1.12 control evidence
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv,json,pathlib
+          D=pathlib.Path("output_p0_breakout_compression_vcp_quarantine_root_cause_v1_12")
+          s=json.load(open(D/"summary_v1.12.json"))
+          c=json.load(open(D/"stage_checkpoint_v1.12.json"))
+          l=json.load(open(D/"v111_lineage_binding_v1.12.json"))
+          r=json.load(open(D/"repair_runtime_dependency_diagnostic_v1.12.json"))
+          p=json.load(open(D/"provider_call_audit_v1.12.json"))
+          q=list(csv.DictReader(open(D/"quarantine_root_cause_v1.12.csv",encoding="utf-8")))
+          t=list(csv.DictReader(open(D/"test_results_v1.12.csv",encoding="utf-8")))
+          assert s["VERDICT"]=="PASS" and s["Diagnostic_Scope"]==15
+          assert s["Fresh_Blockers"]==9 and s["Inherited_Blockers"]==6
+          assert s["Root_Cause_Class_Counts"]=={
+            "FRESH_BOUNDARY_DISCONTINUITY_VERIFIED":8,
+            "INHERITED_FOUNDATION_QA_FLAG_UNRESOLVED":6,
+            "LOCAL_PRICE_SERIES_ANOMALY_VERIFIED":1
+          }
+          assert s["Runtime_Dependency_Diagnosis_Status"]=="RUNTIME_DEPENDENCY_FAILURE_VERIFIED"
+          assert s["New_Provider_Calls"]==0 and s["Lineage_Mutated"]=="NO"
+          assert s["New_Holdout"]=="SEALED_NOT_OPENED"
+          assert s["HOLDOUT_OPENED"]=="NO" and s["HOLDOUT_SCORING_STARTED"]=="NO" and s["HOLDOUT_SINGLE_USE_CONSUMED"]=="NO"
+          assert s["C07_Scoring"]=="NOT_PERFORMED" and s["Forward_Outcomes"]=="NOT_GENERATED"
+          assert c["Decision"]=="PRE_SCORING_QUARANTINE_ROOT_CAUSE_REVIEW_COMPLETE_NO_REMEDIATION_EXECUTED"
+          assert c["Pre_Scoring_Status"]=="BLOCKED_PENDING_MANAGER_REVIEW"
+          assert l["ZIP_SHA256_Before"]==l["ZIP_SHA256_After"]=="3c305545c3243616cfdf21597d0cbbda6755b5649211ee112d3c9d4a44400fb2"
+          assert l["SQLite_SHA256_Before"]==l["SQLite_SHA256_After"]=="245793920911e318ad8b16ad08e35321677a72e8006c64a597b725d92fd7c251"
+          assert l["SQLite_Open_Mode"]=="mode=ro" and l["PRAGMA_query_only"]=="ON" and l["Write_Probe"]=="BLOCKED_AS_EXPECTED"
+          assert r["Diagnosis_Status"]=="RUNTIME_DEPENDENCY_FAILURE_VERIFIED"
+          assert r["Call_16_Batch_Log"]["received_count"]==0 and r["Call_16_Batch_Log"]["missing_count"]==15
+          assert p["New_Provider_Calls"]==0 and all(p[k]==0 for k in ["Yahoo_yfinance","Alpha_Vantage","EODHD","Scalable","TradingView","News","Web_Search_Price_Data"])
+          assert len(q)==15 and all(x["Automatic_State_Change"]=="NO" for x in q)
+          assert len(t)>=50 and all(x["Result"]=="PASS" for x in t)
+          PY
+          test "$(sha256sum runtime_v112/v111.zip | awk '{print $1}')" = "3c305545c3243616cfdf21597d0cbbda6755b5649211ee112d3c9d4a44400fb2"
+          test "$(sha256sum runtime_v112/work/lane1_breakout_vcp_holdout_lineage_v1_11.sqlite | awk '{print $1}')" = "245793920911e318ad8b16ad08e35321677a72e8006c64a597b725d92fd7c251"
+          ! grep -R -Fq "1dJImdpnpmjkNEqkRjxO6fn1ma0WUr6Oi" output_p0_breakout_compression_vcp_quarantine_root_cause_v1_12 docs/validation/P0_Breakout_Compression_VCP_Pre_Scoring_Quarantine_Root_Cause_G-P0-13_v1.12.md
+          ! grep -R -Eq 'FWD_CLOSE_RETURN|FWD_MAX_PIVOT_EXTENSION|FWD_MAX_DRAWDOWN|FWD_ANY_CLOSE_ABOVE_ANCHOR_PIVOT' output_p0_breakout_compression_vcp_quarantine_root_cause_v1_12
+
+      - name: Persist bounded v1.12 control plane
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git add \
+            output_p0_breakout_compression_vcp_quarantine_root_cause_v1_12/ \
+            docs/validation/P0_Breakout_Compression_VCP_Pre_Scoring_Quarantine_Root_Cause_G-P0-13_v1.12.md
+          CHANGED="$(git diff --cached --name-only)"
+          test -n "$CHANGED"
+          BAD="$(printf '%s\n' "$CHANGED" | grep -Ev '^(output_p0_breakout_compression_vcp_quarantine_root_cause_v1_12/.*|docs/validation/P0_Breakout_Compression_VCP_Pre_Scoring_Quarantine_Root_Cause_G-P0-13_v1\.12\.md)$' || true)"
+          test -z "$BAD"
+          git commit -m "Persist G-P0-13 v1.12 quarantine root-cause evidence"
+          git push origin HEAD:dev/g-p0-13-v1.12-quarantine-root-cause
+
+      - name: Upload bounded v1.12 control-plane artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: g-p0-13-v1.12-quarantine-root-cause-control
+          path: |
+            config/manager_governance_authority_G_P0_13_v1.12.json
+            output_p0_breakout_compression_vcp_quarantine_root_cause_v1_12/
+            docs/validation/P0_Breakout_Compression_VCP_Pre_Scoring_Quarantine_Root_Cause_G-P0-13_v1.12.md
+          if-no-files-found: error
+          retention-days: 90
