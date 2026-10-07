@@ -1,0 +1,73 @@
+{
+  "schema": "WELT_SWING_G_P0_13_V1_12_QUARANTINE_ROOT_CAUSE",
+  "Authority": "G-P0-13 / v1.12",
+  "Decision": "PRE_SCORING_QUARANTINE_ROOT_CAUSE_AND_REMEDIATION_DESIGN_AUTHORIZED_NO_PROVIDER_REENTRY",
+  "VERDICT": "PASS",
+  "Diagnostic_Scope_Count": 15,
+  "New_Provider_Calls": 0,
+  "Lineage_Mutated": "NO",
+  "New_Holdout_State": "SEALED_NOT_OPENED",
+  "C07_Scoring_Runs": 0,
+  "Forward_Outcome_Generation_Runs": 0,
+  "P0_Runs": 0,
+  "P1_Runs": 0,
+  "P2_Runs": 0,
+  "members": {
+    "ctva_diagnostic_v1.12.json": {
+      "bytes": 1601,
+      "sha256": "72816480b66c5826b7b3bcc495f6ad80e27bc094914cdf8702353d21eca279f4"
+    },
+    "g_p0_13_authority_binding_v1.12.json": {
+      "bytes": 928,
+      "sha256": "5245b1a0d4da88e5177ea6017c8d62ee717861c0b20e6642b4abdec5294f6d34"
+    },
+    "inherited_foundation_flags_diagnostic_v1.12.json": {
+      "bytes": 8539,
+      "sha256": "31c7f2a0a50c2d05afd05ea0f6f8008767323085b45ec6b96f955438e20244b6"
+    },
+    "japan_2026_09_04_boundary_diagnostic_v1.12.json": {
+      "bytes": 4823,
+      "sha256": "38d5a5681af2edb5c55ea58cb81296bbfa7dd84a2541c2e758f90bc0995923fa"
+    },
+    "provider_call_audit_v1.12.json": {
+      "bytes": 310,
+      "sha256": "61f22558a8e342ae32d35ea4435ec9167d7d1a617bdd98df086f0bd1c955710c"
+    },
+    "quarantine_input_binding_v1.12.json": {
+      "bytes": 1212,
+      "sha256": "5de0066599fb8b94575136cf5512234b5686bb17c6e9360defd4c40739858000"
+    },
+    "quarantine_root_cause_v1.12.csv": {
+      "bytes": 8578,
+      "sha256": "371c0d14dd337f6b3fae74d6356a2193c8bb728176af7c647afdac057f9027e4"
+    },
+    "remediation_design_v1.12.csv": {
+      "bytes": 1893,
+      "sha256": "40f0efd03a4033baec5719df98a780e1469c8dc42a7e67002ce47340bc10585d"
+    },
+    "repair_runtime_dependency_diagnostic_v1.12.json": {
+      "bytes": 1864,
+      "sha256": "f6d00f323996fd99d1733e7df738859909b406e59529cb6e5a85f37b812c9451"
+    },
+    "stage_checkpoint_v1.12.json": {
+      "bytes": 858,
+      "sha256": "8a6b2481444aefb59c62353ccc75f9c3fff87b2130a63ca821283352b938260c"
+    },
+    "summary_v1.12.json": {
+      "bytes": 1691,
+      "sha256": "9b4787b9964fa87559206341c8e90223693905b15c62c628e0d1da3c81cec892"
+    },
+    "test_results_v1.12.csv": {
+      "bytes": 1622,
+      "sha256": "dc84948fbe730422ed51c0ce790d71903500707647a915468905df869f8d9b7b"
+    },
+    "v111_lineage_binding_v1.12.json": {
+      "bytes": 1014,
+      "sha256": "fe4a3976110dcf329ec1a082dc905ebfcd42482775196f53e35053e5d0c89703"
+    },
+    "docs/validation/P0_Breakout_Compression_VCP_Pre_Scoring_Quarantine_Root_Cause_G-P0-13_v1.12.md": {
+      "bytes": 1971,
+      "sha256": "d143e8a00231de57e6799f3ed14bf5591b71c3322aefd7e663eeb6fad8e04f55"
+    }
+  }
+}

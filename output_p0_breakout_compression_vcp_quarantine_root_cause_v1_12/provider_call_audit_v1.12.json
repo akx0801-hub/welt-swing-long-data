@@ -1,0 +1,12 @@
+{
+  "New_Provider_Calls": 0,
+  "Yahoo_yfinance": 0,
+  "Alpha_Vantage": 0,
+  "EODHD": 0,
+  "Scalable": 0,
+  "TradingView": 0,
+  "News": 0,
+  "Web_Search_Price_Data": 0,
+  "Historical_v1_11_Provider_Calls_Referenced_As_Predecessor_Evidence": 16,
+  "Historical_v1_11_Calls_Mislabelled_As_New_v1_12_Calls": "NO"
+}

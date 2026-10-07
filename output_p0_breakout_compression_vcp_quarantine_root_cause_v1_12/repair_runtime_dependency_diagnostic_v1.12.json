@@ -1,0 +1,45 @@
+{
+  "Diagnosis_Status": "RUNTIME_DEPENDENCY_FAILURE_VERIFIED",
+  "Call_16_Persisted_Audit_Facts": {
+    "call_index": 16,
+    "provider": "YFINANCE_FREE",
+    "phase": "REPAIR",
+    "attempt": 1,
+    "repair": true,
+    "symbol_count": 15,
+    "request_start": "2026-09-04",
+    "request_end_exclusive": "2026-10-06",
+    "persisted_cutoff": "2026-10-05",
+    "started_utc": "2026-10-06T19:03:55+00:00",
+    "finished_utc": "2026-10-06T19:03:56+00:00",
+    "status": "SUCCESS",
+    "error": null
+  },
+  "Call_16_Batch_Log": {
+    "batch_id": "V111-REPAIR-0016-64dd7ef7be",
+    "repair_pass": 1,
+    "status": "PARTIAL",
+    "symbol_count": 15,
+    "received_count": 0,
+    "missing_count": 15,
+    "error_text": null
+  },
+  "Audit_SUCCESS_Semantics": "download_with_retry records SUCCESS when client.download returns without raising; it does not prove all requested repair symbols produced usable frames",
+  "Post_Download_Stages": [
+    "split_download_frame",
+    "per-symbol empty/missing-frame detection",
+    "normalize_symbol_frame",
+    "bounded date filter",
+    "SQLite persistence for received frames",
+    "final qa_symbol_frame"
+  ],
+  "Original_Error_Log_Evidence": "ModuleNotFoundError(\"No module named 'scipy'\")",
+  "Original_Error_Directly_Retrieved": "YES",
+  "Requirements_txt_Contains_scipy": "NO",
+  "G_P0_12_Workflow_Installed_scipy": "NO",
+  "Repository_Local_Corroboration_That_Repair_Path_Needs_scipy": "YES",
+  "SUCCESS_vs_Exception_Reconciliation": "yfinance emitted per-symbol repair failures and returned control without raising through the wrapper; wrapper audit therefore recorded SUCCESS while downstream batch interpretation recorded 0 received / 15 missing and PARTIAL",
+  "Future_Remediation_Requires_Environment_Fix_Before_Provider_Reentry": "YES",
+  "Dependency_Change_Executed_v1_12": "NO",
+  "Repair_Executed_v1_12": "NO"
+}

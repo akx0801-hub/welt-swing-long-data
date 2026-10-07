@@ -1,0 +1,22 @@
+{
+  "Lineage_ID": "L1_BREAKOUT_VCP_HOLDOUT_DATA_LINEAGE_v1.11",
+  "Drive_File_ID": "1UnfEKgQQiXbKXa1hiYD_Fn2liBVr2IqD",
+  "ZIP_SHA256_Before": "3c305545c3243616cfdf21597d0cbbda6755b5649211ee112d3c9d4a44400fb2",
+  "ZIP_SHA256_After": "3c305545c3243616cfdf21597d0cbbda6755b5649211ee112d3c9d4a44400fb2",
+  "ZIP_Bytes": 28778386,
+  "SQLite_Member": "runtime_cache/lane1_breakout_vcp_holdout_lineage_v1_11.sqlite",
+  "SQLite_SHA256_Before": "245793920911e318ad8b16ad08e35321677a72e8006c64a597b725d92fd7c251",
+  "SQLite_SHA256_After": "245793920911e318ad8b16ad08e35321677a72e8006c64a597b725d92fd7c251",
+  "SQLite_Bytes": 140656640,
+  "SQLite_Rows": 721126,
+  "Historical_Rows": 692427,
+  "Fresh_Rows": 28699,
+  "Earliest_Date": "2024-09-16",
+  "Latest_Date": "2026-10-05",
+  "Rows_After_Cutoff": 0,
+  "SQLite_Open_Mode": "mode=ro",
+  "PRAGMA_query_only": "ON",
+  "Write_Probe": "BLOCKED_AS_EXPECTED",
+  "Lineage_Mutated": "NO",
+  "Package_Transport": "GITHUB_ACTIONS_ARTIFACT_BYTE_IDENTICAL_TO_VERIFIED_DRIVE_PACKAGE"
+}
