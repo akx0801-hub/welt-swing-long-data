@@ -63,7 +63,7 @@ jobs:
 
       - name: Restore exact v1.11 immutable lineage package
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p runtime_v112
@@ -74,7 +74,7 @@ jobs:
 
       - name: Retrieve original v1.11 runtime evidence
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           gh run view 37515761972 --repo "$GITHUB_REPOSITORY" --log > runtime_v112/v111_run.log
